@@ -38,7 +38,7 @@ namespace Elmah.XamarinForms
 
             // 2. AppVM Initialize
             DependencyService.Register<Elmah.XamarinForms.ViewModels.AppVM>();
-            AppVM.Initialize();
+            AppVM.Initialize(false);
 
             InitializeComponent();
 

@@ -533,6 +533,7 @@
     </EmbeddedResource>
     <Compile Include="Pages\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <EmbeddedResource Include="Pages\MapPageXaml.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -554,6 +555,7 @@
     </EmbeddedResource>
     <Compile Include="Pages\SystemDashboard.xaml.cs">
       <DependentUpon>SystemDashboard.xaml</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <EmbeddedResource Include="Themes\DarkTheme.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -836,6 +838,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Pages\AboutPage.xaml" />
+    <None Remove="Pages\CalendarPage.xaml" />
+    <None Remove="Pages\LogInPage.xaml" />
+    <None Remove="Pages\MapPage.xaml" />
+    <None Remove="Pages\SystemDashboard.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />

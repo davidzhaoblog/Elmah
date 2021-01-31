@@ -122,7 +122,6 @@ namespace Elmah.MVVMLightViewModels
             public void DefaultItem(long entityID)
             {
                 ItemVM.DefaultItem = new Elmah.DataSourceEntities.ELMAH_Error.Default {
-                    some values are here
                 };
             }
 
@@ -203,7 +202,7 @@ namespace Elmah.MVVMLightViewModels
                 PopupVM.HidePopup();
 
                 var criteria = new Elmah.DataSourceEntities.ELMAH_ErrorIdentifier {
-                    ErrorId = item.ErrorId, Sequence = item.Sequence
+                    ErrorId = item.ErrorId
                 };
                 var request = GetLoadDataRequest_ShowPopupCommand_Details<Elmah.DataSourceEntities.ELMAH_ErrorIdentifier>(criteria);
                 DetailsFormActionSheetWhenReadOnly = GetDetailsFormActionSheetWhenReadOnly(ItemVM);
@@ -246,7 +245,7 @@ namespace Elmah.MVVMLightViewModels
                 PopupVM.HidePopup();
 
                 var criteria = new Elmah.DataSourceEntities.ELMAH_ErrorIdentifier {
-                    ErrorId = item.ErrorId, Sequence = item.Sequence
+                    ErrorId = item.ErrorId
                 };
                 var request = GetLoadDataRequest_ShowPopupCommand_Edit<Elmah.DataSourceEntities.ELMAH_ErrorIdentifier>(criteria);
                 DetailsFormActionSheetWhenEdit = GetDetailsFormActionSheetWhenEdit(ItemVM);
@@ -466,7 +465,7 @@ namespace Elmah.MVVMLightViewModels
                     Title = Elmah.Resx.UIStringResourcePerApp.ELMAH_Error, // some localized text here, e.g. Framework.Resx.UIStringResource. or NTierOnTime.Resx.UIStringResourcePerApp, or NTierOnTime.Resx.UIStringResourcePerEntity
                     FontIconSettings = new Framework.Xaml.FontIconSettings
                     {
-                        MasterFontIcon = Framework.Xaml.FontAwesomeIcons. // Search, open CommonSearchView
+                        MasterFontIcon = Framework.Xaml.FontAwesomeIcons.Question // Search, open CommonSearchView
                         , MasterFontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString()
                     },
                     NavigationCommand = NavigationVM.NavigationCommand,
@@ -512,7 +511,7 @@ namespace Elmah.MVVMLightViewModels
                         , OrderByPropertyName = orderByPropertyName
                         , OrderByDirection = orderByDirection
                         , Parameters = new Dictionary<string, object> {
-                                    { nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.oneCondition), oneCondition },
+                                    // { nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.oneCondition), oneCondition },
                                     // { nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.BusinessEntityID), businessEntityID }, // can be more
                         }
                         , ActionWhenLaunch = () => { DefaultItem(oneCondition); ListFooterActionSheet = GetListFooterActionSheet(vm); }

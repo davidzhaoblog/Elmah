@@ -9,7 +9,7 @@
              xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
              xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
              mc:Ignorable="d"
-             Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
              Shell.TabBarIsVisible="{Binding IsContentVisible}"
              x:Class="Elmah.XamarinForms.Pages.MapPageXaml">
     <ContentPage.Content>

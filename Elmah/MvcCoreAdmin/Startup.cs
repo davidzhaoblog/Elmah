@@ -327,7 +327,7 @@ namespace Elmah.MvcCore
             services.AddScoped<UISharedViewModel>();
             services.AddScoped<DashboardVM>();
 
-            ViewModelsHelper.RegisterExtendedViewModels(services);
+            //ViewModelsHelper.RegisterExtendedViewModels(services);
 
             //services.AddControllersWithViews().AddJsonOptions(
             //    options => { options.JsonSerializerOptions.IgnoreNullValues = true;
@@ -404,8 +404,8 @@ namespace Elmah.MvcCore
             app.UseRouting();
             app.UseSession();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

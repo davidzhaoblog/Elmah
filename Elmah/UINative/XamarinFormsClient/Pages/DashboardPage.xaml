@@ -11,7 +11,7 @@
              xmlns:ffs="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              mc:Ignorable="d"
-             Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
              Shell.TabBarIsVisible="{Binding IsContentVisible}"
              Title="{i18n:Translate Text=Application_Title, ResourceId=Elmah.Resx.UIStringResourcePerApp}"
              x:Class="Elmah.XamarinForms.Pages.DashboardPage"
