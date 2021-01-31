@@ -1,0 +1,37 @@
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerEntity> localizer_UIStringResourcePerEntity;
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerApp> localizer_UIStringResourcePerApp;
+@inject IStringLocalizer<Framework.Resx.UIStringResource> localizer_UIStringResource;
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>@ViewBag.Title</h2>
+                <h4>@localizer_UIStringResource["Data_Import_DescriptionText"]</h4>
+                <h3>@ViewBag.Message</h3>
+            </div>
+            <form asp-controller="ElmahStatusCode" asp-action="Import" id="thisform" method="post" class="form" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="panel-body">
+                    <input type="file" name="file" id="file" />
+                </div>
+                <div class="panel-footer nopadding">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" role="button" type="submit">
+                                <span class="fa fa-upload"></span>
+                                <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizer_UIStringResource["Import"]</span>
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizer_UIStringResource["Back"]">
+                                <span class="fa times-circle"></span><span class="hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizer_UIStringResource["Back"]</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

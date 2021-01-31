@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+        x:Class="Elmah.XamarinForms.Pages.MapPage"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        NavigationPage.HasBackButton="False"
+        BackgroundColor="{DynamicResource Background}"
+        Visual="Material">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding NavigationVM.ShellBackButtonBehaviorCommand, Source={StaticResource LocatorClient}}">
+            <BackButtonBehavior.IconOverride>
+                <FontImageSource Glyph="{x:Static fxam:FontAwesomeIcons.ArrowCircleLeft}"
+                         FontFamily="{StaticResource FontAwesomeSolid}"
+                         Size="44" />
+            </BackButtonBehavior.IconOverride>
+        </BackButtonBehavior>
+    </Shell.BackButtonBehavior>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="Back"
+            Command="{Binding Path=Main.GoBackCommand, Source={StaticResource Locator}}"
+            Order="Primary"
+            Text="{i18n:Translate Text=Back,
+                                  ResourceId=Framework.Resx.UIStringResource}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android">@drawable/Back.png</On>
+                    <On Platform="iOS">Assets/Back.png</On>
+                    <On Platform="Windows">Assets/Back.png</On>
+                    <On Platform="WinPhone">Assets/Back.png</On>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem
+            x:Name="GoHome"
+            Command="{Binding Path=Main.GoHomeCommand, Source={StaticResource Locator}}"
+            Order="Primary"
+            Text="{i18n:Translate Text=Home,
+                                  ResourceId=Framework.Resx.UIStringResource}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android">@drawable/Home.png</On>
+                    <On Platform="iOS">Assets/Home.png</On>
+                    <On Platform="Windows">Assets/Home.png</On>
+                    <On Platform="WinPhone">Assets/Home.png</On>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+</ContentPage>

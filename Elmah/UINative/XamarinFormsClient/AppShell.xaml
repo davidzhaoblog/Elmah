@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+       xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+       xmlns:pp="clr-namespace:Elmah.XamarinForms.Pages"
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       Navigating="OnNavigating"
+       Navigated="OnNavigated"
+       x:Class="Elmah.XamarinForms.AppShell"
+       x:Name="self"
+       FlyoutBackgroundColor="{DynamicResource PrimaryColor}"
+       Visual="Material">
+    <!--<Shell.FlyoutHeader>
+        <fxc:FlyoutHeader />
+    </Shell.FlyoutHeader>-->
+    <!-- Template for FlyoutHeader -->
+    <!-- Not required, as the FlyoutHeader is set above -->
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="200">
+                <Image Aspect="AspectFit" Source="splashscreen.jpg" Opacity="0.2" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <!-- Template each FlyoutItem -->
+    <!--<Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="{DynamicResource PrimaryColor}"  Padding="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="0.1*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Icon}"
+                       Margin="5"
+                       HeightRequest="24" />
+                <Label Grid.Column="1" TextColor="{DynamicResource SecondaryColor}"  FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                       Text="{Binding Title}" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>-->
+    <!-- Template each MenuItem -->
+    <!--<Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="{DynamicResource PrimaryColor}" Padding="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="0.1*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Icon}"
+                       Margin="5"
+                       HeightRequest="24" />
+                <Label Grid.Column="1"
+                       Text="{Binding Text}"
+                       FontAttributes="Italic" TextColor="{DynamicResource SecondaryColor}"  FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                       />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>-->
+    <FlyoutItem Route="home"
+                Title="Home"
+                FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Dashboard">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf200;"/>
+            </Tab.Icon>
+            <ShellContent Route="dashboard"
+                        Style="{StaticResource ShellStyle}"
+                        Title="Dashboard"
+                        ContentTemplate="{DataTemplate pp:DashboardPage}" />
+        </Tab>
+        <!--<Tab Title="Calendar">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf073;"/>
+            </Tab.Icon>
+            <ShellContent Route="dailycalendar"
+                        Style="{StaticResource ShellStyle}"
+                        Title="Daily Calendar"
+                        ContentTemplate="{DataTemplate ppc:DailyCalendarPage}" />
+        </Tab>-->
+        <!--<Tab Title="Calendar" Icon="calendar.png">
+            <ShellContent Route="calendar"
+                        Style="{StaticResource NTierOnTimeShell}"
+                        Title="Calendar"
+                        Icon="calendar.png"
+                        ContentTemplate="{DataTemplate pp:CalendarPage}" />
+        </Tab>-->
+        <!--<Tab Title="Calendar" Icon="calendar.png">
+            <ShellContent Route="calendar"
+                        Style="{StaticResource NTierOnTimeShell}"
+                        Title="Calendar"
+                        Icon="calendar.png"
+                        ContentTemplate="{DataTemplate pp:CalendarPage}" />
+        </Tab>-->
+        <Tab Title="Map">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf3c5;"/>
+            </Tab.Icon>
+            <ShellContent Route="map"
+                        Style="{StaticResource ShellStyle}"
+                        Title="Map"
+                        ContentTemplate="{DataTemplate pp:MapPageXaml}" />
+        </Tab>
+        <!--<Tab Title="System Dashboard" Icon="barchart.png">
+            <ShellContent Route="systemdashboard"
+                        Style="{StaticResource NTierOnTimeShell}"
+                        Title="System Dashboard"
+                        Icon="barchart.png"
+                        ContentTemplate="{DataTemplate pp:SystemDashboard}" />
+        </Tab>-->
+        <!--<Tab Title="Profile">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf085;"/>
+            </Tab.Icon>
+            <ShellContent Route="userprofile"
+                        Style="{StaticResource ShellStyle}"
+                        Title="Profile"
+                        ContentTemplate="{DataTemplate ppm:SettingsNavigation}" >
+            </ShellContent>
+        </Tab>-->
+    </FlyoutItem>
+    <!--<ShellContent Route="about"
+                  Style="{StaticResource AboutShell}"
+                  Title="About"
+                  Icon="about.png"
+                  ContentTemplate="{DataTemplate pp:AboutPage}" />-->
+    <MenuItem Text="Log out" AutomationId="LogoutButton"
+                Icon="exit.png"
+                BindingContext="{x:Reference self}"
+                Command="{Binding NavigationVM.LogoutCommand, Source={StaticResource LocatorClient}}" />
+    <!--<MenuItem Text="Help"
+                Icon="help.png"
+                BindingContext="{x:Reference self}"
+                Command="{Binding HelpCommand}"
+                CommandParameter="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell" />-->
+</Shell>

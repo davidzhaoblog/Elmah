@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Elmah.EntityFrameworkContext</RootNamespace>
+    <AssemblyName>Elmah.EFCoreContext</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;XAMARIN;NETSTANDARD2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ConnectionStringOption.cs" />
+    <Compile Include="EFEntityDataModel.Companion.cs" />
+    <Compile Include="EFEntityDataModel.Context.cs" />
+    <Compile Include="ELMAH_Error.cs" />
+    <Compile Include="ElmahApplication.cs" />
+    <Compile Include="ElmahHost.cs" />
+    <Compile Include="ElmahSource.cs" />
+    <Compile Include="ElmahStatusCode.cs" />
+    <Compile Include="ElmahType.cs" />
+    <Compile Include="ElmahUser.cs" />
+    <Compile Include="IGeometryHelper.cs" />
+    <None Include="map.2.A.1.vsd" />
+    <None Include="map.2.A.1.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\EntityContracts\Elmah.EntityContracts.csproj">
+      <Project>{7a295516-06eb-49dc-82d8-de07bf4081ca}</Project>
+      <Name>Elmah.EntityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="1.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Spatial" Version="7.6.1" />
+    <PackageReference Include="NetTopologySuite.IO.GeoJSON" Version="2.0.1" />  </ItemGroup>
+</Project>

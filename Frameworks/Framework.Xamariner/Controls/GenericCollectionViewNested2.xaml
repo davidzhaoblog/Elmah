@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:i18n="clr-namespace:Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fe="clr-namespace:Framework;assembly=Framework"
+        xmlns:ctrl="clr-namespace:Framework.Xamariner.Controls"
+        xmlns:ctrla="clr-namespace:Framework.Xamariner.Controls.ActionForm"
+        x:Class="Framework.Xamariner.Controls.GenericCollectionViewNested2"
+        x:Name="self" 
+        Visual="Material">
+    <ContentView.Content>
+        <CollectionView ItemsSource="{Binding}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout HeightRequest="{Binding InnerHeightRequest, Source={x:Reference self}}" MinimumHeightRequest="{Binding InnerMinimumHeightRequest, Source={x:Reference self}}">
+                        <Grid BindableLayout.ItemTemplate="{StaticResource CollectionViewGroupHeaderTemplate}"/>
+                        <CollectionView ItemsLayout="{Binding InnerItemsLayout, Source={x:Reference self}}"
+                            ItemsSource="{Binding}"
+                            ItemTemplate="{Binding ItemTemplate, Source={x:Reference self}}" >
+                        </CollectionView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TypeDeclarationContext xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityReferenceSettingCollection />
+  <EntityReferenceSettingCollectionReferencedBy />
+  <PivotTableSettingCollection />
+  <PivotTableRowLableSettingCollection />
+  <PivotTableColumnLableSettingCollection />
+  <PivotTableValueColumnSettingCollection />
+  <UIDataSourceMethodSettingGroupCollection />
+  <UIDataSourceMethodSettingCollection />
+  <DataQueryPerQuerySettingCollection />
+  <ChainedDataQuerySettingCollection />
+  <DataViewContextCollection />
+  <EntityIdentifierSetting>
+    <Name />
+    <PropertyList>Type</PropertyList>
+    <PropertyTypeList>Type</PropertyTypeList>
+    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
+  </EntityIdentifierSetting>
+  <PropertyContextCollection>
+    <PropertyContext>
+      <Setting>
+        <KnownPropertyName>Unknown</KnownPropertyName>
+        <Name>Type</Name>
+        <DefaultOrder>0</DefaultOrder>
+        <PropertyType>
+          <IsValueType>true</IsValueType>
+          <IsKnownType>false</IsKnownType>
+          <CanBeNull>false</CanBeNull>
+          <DotNetValueType>SystemString</DotNetValueType>
+          <KnownType>Unknown</KnownType>
+          <Type>System.String</Type>
+          <FriendlyType>string</FriendlyType>
+        </PropertyType>
+        <IsNullable>false</IsNullable>
+        <IsDbGenerated>false</IsDbGenerated>
+        <PropertyCategory>Identifier</PropertyCategory>
+        <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
+      </Setting>
+      <DBColumnSetting>
+        <Name>Type</Name>
+        <DbType>NVarChar(100)</DbType>
+        <CanBeNull>false</CanBeNull>
+        <IsIdentity>false</IsIdentity>
+        <IsDbGenerated>false</IsDbGenerated>
+        <IsDiscriminator>false</IsDiscriminator>
+        <IsPrimaryKey>true</IsPrimaryKey>
+        <IsVersion>false</IsVersion>
+        <Length>0</Length>
+        <DbTypePrimary_DATA_TYPE>NVarChar</DbTypePrimary_DATA_TYPE>
+        <DbTypeMaxLength>100</DbTypeMaxLength>
+        <DbTypeFixedLength>false</DbTypeFixedLength>
+        <DbUniCode>true</DbUniCode>
+        <UpdateCheck>Always</UpdateCheck>
+      </DBColumnSetting>
+      <PropertyUISetting>
+        <CanUIDisplay>true</CanUIDisplay>
+        <CanUIEdit>true</CanUIEdit>
+        <CanUIInsert>true</CanUIInsert>
+        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
+        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
+        <CanUIHidden>false</CanUIHidden>
+        <PropertyUIType>Unknown</PropertyUIType>
+        <DisplayOrder>-1</DisplayOrder>
+      </PropertyUISetting>
+      <ValidatorContainer>
+        <StringLengthValidator>
+          <ErrorMessage>The length of Type should be 1 to 100</ErrorMessage>
+          <ErrorMessageResourceName>The_length_of_Type_should_be_1_to_100</ErrorMessageResourceName>
+          <MaximumLength>100</MaximumLength>
+          <MinimumLength>1</MinimumLength>
+        </StringLengthValidator>
+      </ValidatorContainer>
+    </PropertyContext>
+  </PropertyContextCollection>
+  <UniqueConstraintSettingCollection />
+  <PropertyNameListSettingCollection />
+  <TableSetting>
+    <Schema>dbo</Schema>
+    <Name>ElmahType</Name>
+    <MemberFieldNameOfDBML>ElmahType</MemberFieldNameOfDBML>
+    <TypeNameOfDBML>ElmahType</TypeNameOfDBML>
+  </TableSetting>
+  <ValidatorContainer />
+  <Setting>
+    <Name>ElmahType</Name>
+    <Alias>E6</Alias>
+    <IsEnum>false</IsEnum>
+    <Namespace>ElmahModel</Namespace>
+    <NamespaceSetting>
+      <Namespace>ElmahModel</Namespace>
+    </NamespaceSetting>
+  </Setting>
+</TypeDeclarationContext>

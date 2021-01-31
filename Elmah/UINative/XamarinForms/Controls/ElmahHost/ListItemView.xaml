@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:Elmah.MVVMLightViewModels;assembly=Elmah.MVVMLightViewModels"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        x:Name="self"
+        x:Class="Elmah.XamarinForms.Controls.ElmahHost.ListItemView">
+  <ContentView.Content>
+        <fxc:FrameExt Style="{StaticResource CollectionViewItemFrame}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!-- ItemAction 4. you can click ... to inline action sheet, will display on left side of ... -->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!-- 1. Selected Icon Column -->
+                        <!-- Collection SelectedItem #1: Select an Item -->
+                        <!--<ColumnDefinition Width="30" />-->
+                        <!-- 2. Image Column if any, can be removed -->
+                        <ColumnDefinition Width="50" />
+                        <!-- 3. Information Column -->
+                        <ColumnDefinition Width="*" />
+                        <!-- 4. Deselect Column -->
+                        <!--<ColumnDefinition Width="50" />-->
+                    </Grid.ColumnDefinitions>
+                    <!-- Collection SelectedItem #1: Select an Item -->
+                    <!--<i class="fas fa-check"></i>-->
+                    <!--<Label AutomationId="CollectionViewSelectedItem" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" VerticalTextAlignment="Center" FontSize="18" Text="&#xf00c;" TextColor="Red" FontFamily="{StaticResource FontAwesomeSolid}"
+                        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type fxc:FrameExt}}, Path=IsSelected}"/>-->
+                    <fxc:FontIcon Grid.Column="0" Style="{StaticResource ListItemFontIcon}" MasterFontIcon="{x:Static fxam:FontAwesomeIcons.Book}" MasterFontIconFamily="{StaticResource FontAwesomeSolid}" />
+                    <!--<Image Grid.Column="1"
+                                Source="{Binding ImageUrl}"
+                                Aspect="AspectFill"
+                                HeightRequest="60"
+                                WidthRequest="60" />-->
+                    <StackLayout Grid.Column="1">
+                        <Label AutomationId="NameLabel" Text="{Binding Path=??, Mode=OneWay}" Style="{StaticResource RegularLabelStyle}" />
+                        <Label AutomationId="CodeLabel">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Path=??, Mode=OneWay}" />
+                                    <Span Text=", " />
+                                    <Span Text="{Binding Path=Code, Mode=OneWay}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <!-- fas fa-chevron-right &#xf054; -->
+                    <!-- ItemAction 2. you can click right arrow to a item form -->
+                    <!--<Label Grid.Column="2" FontSize="24" Text="{x:Static fxam:FontAwesomeIcons.ChevronRight}" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource FontAwesomeSolid}" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=NavigationVM.ElmahHost.NavigateToCommand_Details, Source={StaticResource LocatorClient}}" CommandParameter="{Binding}" />
+                                </Label.GestureRecognizers>
+                            </Label>-->
+                    <!-- fas fa-chevron-right &#xf054; -->
+                    <!-- ItemAction 3. you can click right arrow to show bottom-up/IOs style action sheet, code changes in Control.xaml and Page.xaml -->
+                    <!--<Label Grid.Column="2" FontSize="24" Text="{x:Static fxam:FontAwesomeIcons.ChevronRight}" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource FontAwesomeSolid}" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=NavigationVM.ElmahHost.ShowItemBottomUpActionSheetCommand, Source={StaticResource LocatorClient}}" CommandParameter="{Binding}" />
+                                </Label.GestureRecognizers>
+                            </Label>-->
+                    <!-- ItemAction 1. you can click an item to navigate to a item form -->
+                    <!--<Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=NavigationVM.ElmahHost.ShowItemBottomUpActionSheetCommand, Source={StaticResource LocatorClient}}" CommandParameter="{Binding}" />
+                            </Grid.GestureRecognizers>-->
+                    <!-- Collection SelectedItem #2: Deselect an Item, not implemented, need a TapGestureRecognizer and Command -->
+                    <!--<Label Grid.Column="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" FontSize="24" Text="&#xf00d;" FontFamily="{StaticResource FontAwesomeSolid}"
+                                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type fxc:FrameExt}}, Path=IsSelected}"/>-->
+                </Grid>
+                <!-- ItemAction 4. you can click ... to inline action sheet, will display on left side of ... -->
+                <!--<fxca:InlineActionSheetTrigger Grid.Row="1" OnTapped="OnShowInlineActionSheet_Tapped" />-->
+            </Grid>
+            <fxc:FrameExt.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Path=NavigationVM.ElmahHost.ShowPopupCommand_Details, Source={StaticResource LocatorClient}}" CommandParameter="{Binding}" />
+            </fxc:FrameExt.GestureRecognizers>
+        </fxc:FrameExt>
+    </ContentView.Content>
+</ContentView>
+<!--
+Host
+-->

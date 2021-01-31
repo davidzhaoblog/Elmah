@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:i18n="clr-namespace:Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fe="clr-namespace:Framework;assembly=Framework"
+        xmlns:ctrl="clr-namespace:Framework.Xamariner.Controls"
+        xmlns:ctrla="clr-namespace:Framework.Xamariner.Controls.ActionForm"
+        x:Class="Framework.Xamariner.Controls.GenericCollectionView"
+        x:Name="self" 
+        Visual="Material">
+    <ContentView.Content>
+        <Grid>
+            <StackLayout x:Name="Wrapper" Style="{StaticResource ListWrapper}" IsEnabled="{Binding PopupVM.EnableMasterContent, Source={StaticResource Locator}}">
+                <Grid Style="{StaticResource ListHeader}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0" Style="{StaticResource ListHeaderCountLabelWrapper}">
+                        <Label AutomationId="CountLabel" Text="{Binding Count, StringFormat='{0:D}'}" Style="{StaticResource ListHeaderCountLabel}"/>
+                    </Frame>
+                    <SearchBar AutomationId="SearchBar" Grid.Column="1" x:Name="searchBar" Placeholder="{Binding SearchBarPlaceHolder}" Style="{StaticResource ListHeaderSearchBar}"
+                        SearchCommand="{Binding TextFilterCommand}"
+                        SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"/>
+                </Grid>
+                <!-- 1. Not Grouped -->
+                <RefreshView 
+                    IsVisible="{Binding BindToGroupedResults, Converter={StaticResource BooleanInverter}}"
+                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" 
+                    Command="{Binding SearchCommand}">
+                    <CollectionView AutomationId="CollectionView" x:Name="ResultView" SelectionMode="{Binding ListItemViewMode, Converter={StaticResource LSMConverter}}"
+                        ItemsSource="{Binding Path=Result}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" EmptyView="{Binding Source={x:Reference searchBar}, Path=Text}"
+                        RemainingItemsThreshold ="{Binding RemainingItemsThreshold}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                        ItemTemplate="{Binding ItemTemplate, Source={x:Reference self}}" />
+                </RefreshView>
+                <!-- 2. Grouped -->
+                <RefreshView 
+                    IsVisible="{Binding BindToGroupedResults}"
+                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" 
+                    Command="{Binding SearchCommand}">
+                    <CollectionView AutomationId="GroupedCollectionView" x:Name="GroupedResultView" SelectionMode="{Binding ListItemViewMode, Converter={StaticResource LSMConverter}}"
+                        ItemsSource="{Binding Path=GroupedResults}"  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" EmptyView="{Binding Source={x:Reference searchBar}, Path=Text}"
+                        RemainingItemsThreshold ="{Binding RemainingItemsThreshold}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                        ItemTemplate="{Binding ItemTemplate, Source={x:Reference self}}" IsGrouped="True" GroupHeaderTemplate="{StaticResource CollectionViewGroupHeaderTemplate}">
+                    </CollectionView>
+                </RefreshView>
+                <!-- ItemAction 4. you can click ... to inline action sheet, will display on left side of ... TODO: you should change WidthRequest="275" to position InlineActionSheet properly. -->
+                <!--<ctrla:InlineActionSheet x:Name="InlineActionSheet" HorizontalOptions="End"
+                    VerticalOptions="FillAndExpand" HeightRequest="30" WidthRequest="275"
+                    IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=InlineActionSheet}"
+                    BindingContext="{Binding PopupVM.ActionSheetVM, Source={StaticResource Locator}}" />-->
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopupVM.Command_Close, Source={StaticResource Locator}}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <ctrla:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationContainer.ListFooterActionSheet}" IsVisible="{Binding BindingContext.IsRegularList, Source={x:Reference self}}"/>
+            <!-- Close/Navigate back button -->
+            <ctrla:CloseButtonNavBack Style="{StaticResource CloseButtonNavBack}" IsVisible="{Binding IsRegularList}"/>
+            <ctrla:DoneSelection Style="{StaticResource DoneSelection}" IsVisible="{Binding IsSelectionList}"/>
+            <ctrla:ClearSelection Style="{StaticResource ClearSelection}" IsVisible="{Binding IsSelectionList}"/>
+            <ContentView x:Name="ItemContentView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding PopupVM.IsItemControlPopupVisible, Source={StaticResource Locator}}"/>
+            <!-- The following is RightSidePopup, which usually for filter/advanced search of this page -->
+            <ContentView x:Name="RightSidePopupView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=RightSidePopup}"/>
+            <Grid Style="{StaticResource PopupVerticalActionSheetWrapper}"
+                    IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=VerticalActionSheet}">
+                <!-- HeightRequest="275" can have 5 ActionItems, each ActionItem +50, 25 + 50 * Count -->
+                <ctrla:VerticalActionSheet HeightRequest="{Binding Path=PopupVM.ActionSheetVM, Source={StaticResource Locator}, Converter={StaticResource VASHeightConverter}}"
+                    BindingContext="{Binding Path=PopupVM.ActionSheetVM, Source={StaticResource Locator}}"
+                    HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+            <!-- The following is PopupMessage -->
+            <Grid Style="{StaticResource PopupMessageWrapper}"
+                IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=RegularPopup}">
+                <ctrl:PopupMessage  />
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

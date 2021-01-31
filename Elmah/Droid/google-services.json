@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "59029375461",
+    "firebase_url": "https://ntierontime-1171.firebaseio.com",
+    "project_id": "ntierontime-1171",
+    "storage_bucket": "ntierontime-1171.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59029375461:android:0f356174c5d2e22e1d070c",
+        "android_client_info": {
+          "package_name": "com.elmah.elmah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59029375461-5b0725pcbo6hpbn13cr5rre5hbrj15bu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxFJTGt8UUULx2_2MIS2Or_7VOG8pXVZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59029375461-5b0725pcbo6hpbn13cr5rre5hbrj15bu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+

@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Elmah.EntityFrameworkDAL</RootNamespace>
+    <AssemblyName>Elmah.EFCoreDAL</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;XAMARIN;NETSTANDARD2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ELMAH_ErrorRepository.cs" />
+    <Compile Include="ElmahApplicationRepository.cs" />
+    <Compile Include="ElmahHostRepository.cs" />
+    <Compile Include="ElmahSourceRepository.cs" />
+    <Compile Include="ElmahStatusCodeRepository.cs" />
+    <Compile Include="ElmahTypeRepository.cs" />
+    <Compile Include="ElmahUserRepository.cs" />
+    <Compile Include="EFCoreDALFactory.cs" />
+    <Compile Include="IQueryableHelper.cs" />
+    <Compile Include="MapRepository.cs" />
+    <None Include="map.2.A.1.vsd" />
+    <None Include="map.2.A.1.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DAL\DALContracts\Elmah.DALContracts.csproj">
+      <Project>{c96e5b5f-c2ca-4db8-8e6f-396e95ca06cb}</Project>
+      <Name>Elmah.DALContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\DataSourceEntities\Elmah.DataSourceEntities.csproj">
+      <Project>{7e182204-32e9-49f7-945c-e1b6356809e5}</Project>
+      <Name>Elmah.DataSourceEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\EntityContracts\Elmah.EntityContracts.csproj">
+      <Project>{7a295516-06eb-49dc-82d8-de07bf4081ca}</Project>
+      <Name>Elmah.EntityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFCoreContext\Elmah.EFCoreContext.csproj">
+      <Project>{2a9dcd56-985b-437e-b0aa-1d0195323f2c}</Project>
+      <Name>Elmah.EFCoreContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="1.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Spatial" Version="7.6.1" />
+    <PackageReference Include="NetTopologySuite.IO.GeoJSON" Version="2.0.1" />  </ItemGroup>
+</Project>

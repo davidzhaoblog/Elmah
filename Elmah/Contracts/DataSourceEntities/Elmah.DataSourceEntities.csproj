@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Elmah.DataSourceEntities</RootNamespace>
+    <AssemblyName>Elmah.DataSourceEntities</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;XAMARIN;NETSTANDARD2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DataSourceEntity_\ELMAH_Error.cs" />
+    <Compile Include="DataSourceEntity_\ElmahApplication.cs" />
+    <Compile Include="DataSourceEntity_\ElmahHost.cs" />
+    <Compile Include="DataSourceEntity_\ElmahSource.cs" />
+    <Compile Include="DataSourceEntity_\ElmahStatusCode.cs" />
+    <Compile Include="DataSourceEntity_\ElmahType.cs" />
+    <Compile Include="DataSourceEntity_\ElmahUser.cs" />
+    <Compile Include="DataSourceIdentifiers\ELMAH_ErrorIdentifier.cs" />
+    <Compile Include="DataSourceIdentifiers\ElmahApplicationIdentifier.cs" />
+    <Compile Include="DataSourceIdentifiers\ElmahHostIdentifier.cs" />
+    <Compile Include="DataSourceIdentifiers\ElmahSourceIdentifier.cs" />
+    <Compile Include="DataSourceIdentifiers\ElmahStatusCodeIdentifier.cs" />
+    <Compile Include="DataSourceIdentifiers\ElmahTypeIdentifier.cs" />
+    <Compile Include="DataSourceIdentifiers\ElmahUserIdentifier.cs" />
+    <Compile Include="MapItem.cs" />
+    <None Include="map.2.B.3.vsd" />
+    <None Include="map.2.B.3.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityContracts\Elmah.EntityContracts.csproj">
+      <Project>{7a295516-06eb-49dc-82d8-de07bf4081ca}</Project>
+      <Name>Elmah.EntityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resx\Elmah.Resx.csproj">
+      <Project>{57e586a4-7e99-4c52-b22b-a41f78a40f2a}</Project>
+      <Name>Elmah.Resx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
