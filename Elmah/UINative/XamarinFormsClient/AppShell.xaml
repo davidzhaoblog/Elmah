@@ -126,6 +126,13 @@
                   Title="About"
                   Icon="about.png"
                   ContentTemplate="{DataTemplate pp:AboutPage}" />-->
+    <MenuItem Text="{i18n:Translate Text=ELMAH_Error, ResourceId=Elmah.Resx.UIStringResourcePerApp}" AutomationId="LogoutButton"
+                BindingContext="{x:Reference self}"
+                Command="{Binding NavigationVM.NavigationCommand, Source={StaticResource LocatorClient}}" CommandParameter="{Binding BindingContext.ELMAH_Error_NavigateToCommandParam_CommonResultView}" >
+        <MenuItem.IconImageSource>
+            <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf200;"/>
+        </MenuItem.IconImageSource>
+    </MenuItem>
     <MenuItem Text="Log out" AutomationId="LogoutButton"
                 Icon="exit.png"
                 BindingContext="{x:Reference self}"

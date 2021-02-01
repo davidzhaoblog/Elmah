@@ -10,7 +10,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>  
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controls\ELMAH_Error\CommonResultView.xaml" />
+    <None Remove="Controls\ELMAH_Error\CommonSearchView.xaml" />
+    <None Remove="Controls\ELMAH_Error\Create.xaml" />
+    <None Remove="Controls\ELMAH_Error\Delete.xaml" />
+    <None Remove="Controls\ELMAH_Error\Details.xaml" />
+    <None Remove="Controls\ELMAH_Error\Edit.xaml" />
+    <None Remove="Pages\ELMAH_Error\CommonResultView.xaml" />
+    <None Remove="Pages\ELMAH_Error\CommonSearchView.xaml" />
+    <None Remove="Pages\ELMAH_Error\Create.xaml" />
+    <None Remove="Pages\ELMAH_Error\Delete.xaml" />
+    <None Remove="Pages\ELMAH_Error\Details.xaml" />
+    <None Remove="Pages\ELMAH_Error\Edit.xaml" />
+  </ItemGroup>  
   <ItemGroup>
     <EmbeddedResource Include="AppShell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -23,6 +37,20 @@
     <Compile Include="Authentication\GoogleAuthenticationConstants.cs" />
     <Compile Include="Authentication\GoogleUser.cs" />
     <Compile Include="Controls\CommonSearchHandler.cs" />
+    <Compile Include="Controls\ELMAH_Error\CommonResultView.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\CommonSearchView.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Create.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Delete.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Details.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Edit.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\CommonResultView.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\CommonSearchView.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\Create.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\Delete.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\Details.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\DomainManager.cs" />
+    <Compile Include="Pages\ELMAH_Error\Edit.xaml.cs" />
+    <Compile Include="ViewModels\AppShellVM.cs" />
     <EmbeddedResource Include="Controls\DailyCalendar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -30,6 +58,24 @@
     <Compile Include="Controls\DailyCalendar.xaml.cs">
       <DependentUpon>DailyCalendar.xaml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\ELMAH_Error\CommonResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\CommonSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Create.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Delete.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlyoutHeader.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +118,24 @@
     <Compile Include="Pages\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Pages\ELMAH_Error\CommonResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\CommonSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Create.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Delete.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\LogInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -192,8 +256,6 @@
       <Project>{a301a867-9c5d-4757-b806-27b2332476ea}</Project>
       <Name>Elmah.WebApiClient</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />
