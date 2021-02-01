@@ -27,7 +27,7 @@ The template comes with responsive modern charts, analytics, tables that are eas
 ### Local development
 * Clone the project and cd into project
 * npm install
-* npm start and go to [link](*http://localhost:3000*)
+* npm start and go to [link](*http://localhost:3456*)
 
 ### Deployment
 * npm install
