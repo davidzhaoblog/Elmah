@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Elmah.MVVMLightViewModels;assembly=Elmah.MVVMLightViewModels"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        mc:Ignorable="d"
+        x:Name="self"
+        x:Class="Elmah.XamarinForms.Controls.ElmahHost.Details"
+        Visual="Material">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--
+            <Grid>
+                <fxca:HeaderActionSheet IsVisible="{Binding Path=BindingContext.IsContentEnable, Source={Reference self}, Mode=OneWay, Converter={StaticResource BooleanInverter}}" BindingContext="{Binding NavigationVM.ElmahHost.DetailsFormActionSheetWhenReadOnly, Source={StaticResource LocatorClient}}" HorizontalOptions="FillAndExpand" Margin="-10,-30,-10,0" BackgroundColor="{StaticResource Secondary}"/>
+                <fxca:HeaderActionSheet IsVisible="{Binding Path=BindingContext.IsContentEnable, Source={Reference self}, Mode=OneWay}" BindingContext="{Binding NavigationVM.ElmahHost.DetailsFormActionSheetWhenEdit, Source={StaticResource LocatorClient}}" HorizontalOptions="FillAndExpand" Margin="-10,-30,-10,0" BackgroundColor="{StaticResource Secondary}"/>
+            </Grid>
+            -->
+            <ScrollView Grid.Row="1">
+                <Grid Style="{StaticResource GridToggleIsEnabled}">
+                    <StackLayout BindingContext="{Binding Item}" IsEnabled="{Binding Path=BindingContext.IsContentEnable, Source={Reference self}, Mode=OneWay}">
+                <Label AutomationId="Host" Text="{i18n:Translate Text=Host, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />
+            <Label AutomationId="HostLabel" Text="{Binding Path=Host, Mode=OneWay}" Style="{StaticResource DataLabelStyle}" />
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+            <!--
+            <fxca:ItemFormActionSheet Grid.Row="2"
+                BindingContext="{Binding NavigationVM.ElmahHost.DetailsFormActionSheet, Source={StaticResource LocatorClient}}" HorizontalOptions="CenterAndExpand"/>
+            -->
+        </Grid>
+    </ContentView.Content>
+</ContentView>
+<!--
+            <Label AutomationId="Host" Text="{i18n:Translate Text=Host, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />
+            <Label AutomationId="HostLabel" Text="{Binding Path=Host, Mode=OneWay}" Style="{StaticResource DataLabelStyle}" />
+-->
