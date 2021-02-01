@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Elmah.DALContracts</RootNamespace>
+    <AssemblyName>Elmah.DALContracts</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;XAMARIN;NETSTANDARD2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="IMapRepository.cs" />
+    <Compile Include="IELMAH_ErrorRepository.cs" />
+    <Compile Include="IElmahApplicationRepository.cs" />
+    <Compile Include="IElmahHostRepository.cs" />
+    <Compile Include="IElmahSourceRepository.cs" />
+    <Compile Include="IElmahStatusCodeRepository.cs" />
+    <Compile Include="IElmahTypeRepository.cs" />
+    <Compile Include="IElmahUserRepository.cs" />
+    <Compile Include="DataAccessLayerFactoryContract.cs" />
+    <None Include="map.2.A.1.vsd" />
+    <None Include="map.2.A.1.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\DataSourceEntities\Elmah.DataSourceEntities.csproj">
+      <Project>{7e182204-32e9-49f7-945c-e1b6356809e5}</Project>
+      <Name>Elmah.DataSourceEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\EntityContracts\Elmah.EntityContracts.csproj">
+      <Project>{7a295516-06eb-49dc-82d8-de07bf4081ca}</Project>
+      <Name>Elmah.EntityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

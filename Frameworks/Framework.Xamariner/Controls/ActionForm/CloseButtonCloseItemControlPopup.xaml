@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i18n="clr-namespace:Framework.Xamariner"
+    xmlns:ctrl="clr-namespace:Framework.Xamariner.Controls" 
+    xmlns:ctrla="clr-namespace:Framework.Xamariner.Controls.ActionForm"
+    xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffs="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    mc:Ignorable="d"
+    x:Class="Framework.Xamariner.Controls.ActionForm.CloseButtonCloseItemControlPopup">
+  <ContentView.Content>
+        <Frame BackgroundColor="{StaticResource Secondary}" HorizontalOptions="Center" VerticalOptions="End" Margin="20,20,20,20" CornerRadius="20" HeightRequest="40" WidthRequest="40">
+            <Label FontSize="40" Text="{x:Static fxam:FontAwesomeIcons.TimesCircle}" FontFamily="{StaticResource FontAwesomeSolid}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopupVM.Command_CloseItemControlPopup, Source={StaticResource Locator}}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

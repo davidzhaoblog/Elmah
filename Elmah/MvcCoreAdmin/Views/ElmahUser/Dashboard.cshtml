@@ -1,0 +1,136 @@
+@using Microsoft.Extensions.Localization;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerEntity> localizer_UIStringResourcePerEntity;
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerApp> localizer_UIStringResourcePerApp;
+@inject IStringLocalizer<Framework.Resx.UIStringResource> localizer_UIStringResource;
+@model Elmah.AspNetMvcCoreViewModel.ElmahUser.DashboardVM
+@{
+}
+ <div class="row">
+ <div class="col-12 col-sm-8 col-md-8 col-lg-8 nopadding">
+         <div class="card">
+             <div class="card-header">
+                 <h3 class="card-title" style="padding-top:7.5px;display:inline;"><a class="nav-link text-dark" asp-area="" asp-controller="ELMAH_Error" asp-action="Index">@localizer_UIStringResourcePerApp["ELMAH_Error"]</a></h3>
+                 <div class="float-right row"><div class="btn-group">
+    <a asp-area="" asp-controller="ELMAH_Error" asp-action="AddNew" class="btn btn-secondary" role="button" name="AddNewInCoreTableToolBarUp" title="@localizer_UIStringResource["AddNew"]">
+        <span class="fa fa-plus"></span>
+    </a>
+                </div></div>
+            </div>
+            <div class="card-body table-responsive">
+<table id="MasterDataControl0" name="MasterDataControl0" class="table table-hover table-bordered table-striped">
+<thead>
+    <tr class="pt-0 pb-0">
+<th class="p-0"></th>
+<th class="pt-0 pb-0">@localizer_UIStringResourcePerEntity["Application"]</th>
+<th class="pt-0 pb-0">@localizer_UIStringResourcePerEntity["Host"]</th>
+<th class="pt-0 pb-0">@localizer_UIStringResourcePerEntity["Type"]</th>
+<th class="pt-0 pb-0">@localizer_UIStringResourcePerEntity["Source"]</th>
+<th class="hidden-xs pt-0 pb-0">@localizer_UIStringResourcePerEntity["Message"]</th>
+<th class="hidden-xs pt-0 pb-0">@localizer_UIStringResourcePerEntity["User"]</th>
+<th class="hidden-sm pt-0 pb-0">@localizer_UIStringResourcePerEntity["StatusCode"]</th>
+<th class="hidden-sm pt-0 pb-0">@localizer_UIStringResourcePerEntity["TimeUtc"]</th>
+<th class="hidden-md pt-0 pb-0">@localizer_UIStringResourcePerEntity["Sequence"]</th>
+<th class="hidden-md pt-0 pb-0">@localizer_UIStringResourcePerEntity["AllXml"]</th>
+    </tr>
+</thead>
+<tbody>
+    @if (Model != null && Model.StatusOfELMAH_Error == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+    {
+        for (var i = 0; i < Model.ELMAH_Error.Count; i ++)
+        {
+            <tr class="pt-0 pb-0">
+<td class="p-0"><div class="btn-group">
+    <a asp-area="" asp-controller="ELMAH_Error" asp-action="Dashboard" asp-route-errorId= "@Model.ELMAH_Error[i].ErrorId" class="btn btn-secondary" role="button" name="FullDetailsToolBarRightInList" title="@localizer_UIStringResource["FullDetails"]">
+        <span class="fa fa-briefcase"></span>
+    </a>
+    <a asp-area="" asp-controller="ELMAH_Error" asp-action="Edit" asp-route-errorId= "@Model.ELMAH_Error[i].ErrorId" class="btn btn-secondary" role="button" name="EditToolBarRightInList" title="@localizer_UIStringResource["Edit"]">
+        <span class="fa fa-edit"></span>
+    </a>
+</div></td>
+<td><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ELMAH_Error[i].ElmahApplication_Name">@Model.ELMAH_Error[i].ElmahApplication_Name</a></td>
+<td><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ELMAH_Error[i].ElmahHost_Name">@Model.ELMAH_Error[i].ElmahHost_Name</a></td>
+<td><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ELMAH_Error[i].ElmahType_Name">@Model.ELMAH_Error[i].ElmahType_Name</a></td>
+<td><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ELMAH_Error[i].ElmahSource_Name">@Model.ELMAH_Error[i].ElmahSource_Name</a></td>
+<td class="hidden-xs pt-0 pb-0">@Model.ELMAH_Error[i].Message</td>
+<td class="hidden-xs pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ELMAH_Error[i].ElmahUser_Name">@Model.ELMAH_Error[i].ElmahUser_Name</a></td>
+<td class="hidden-sm pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statusCode="@Model.ELMAH_Error[i].StatusCode">@Model.ELMAH_Error[i].ElmahStatusCode_Name</a></td>
+<td class="hidden-sm pt-0 pb-0">@Model.ELMAH_Error[i].TimeUtc</td>
+<td class="hidden-md pt-0 pb-0">@Model.ELMAH_Error[i].Sequence</td>
+<td class="hidden-md pt-0 pb-0">@Model.ELMAH_Error[i].AllXml</td>
+            </tr>
+        }
+    }
+    else
+    {
+<tr><td colspan="50" ><div class="text-danger">@Model.StatusMessageOfELMAH_Error</div>
+</td></tr>
+    }
+</tbody>
+</table>
+            </div>
+            @Model.QueryPagingSetting.GetPagingInformationString()
+            <div class="card-footer">
+            </div>
+        </div>
+ </div>
+ <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+<!-- Aside.01.Start. ElmahModel.ElmahUser => MasterViewAsideKeyInformation -->
+<div class="card-group">
+    <div class="card">
+        <div class="card-header">
+            <h3 style="display: inline;">
+                @localizer_UIStringResourcePerApp["ElmahUser"]
+            </h3>
+        </div>
+@if (Model.StatusOfMasterEntity == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+{ // Item
+        <div class="card-header"><div class="btn-group">
+    <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model.MasterEntity.User" class="btn btn-secondary" role="button" name="EditToolBarUp" title="@localizer_UIStringResource["Edit"]">
+        <span class="fa fa-edit"></span>
+    </a>
+    <a asp-area="" asp-controller="ElmahUser" asp-action="AddNew" class="btn btn-secondary" role="button" name="AddNewToolBarUp" title="@localizer_UIStringResource["AddNew"]">
+        <span class="fa fa-plus"></span>
+    </a>
+    <a asp-area="" asp-controller="ElmahUser" asp-action="Copy" asp-route-user="@Model.MasterEntity.User" class="btn btn-secondary" role="button" name="CopyToolBarUp" title="@localizer_UIStringResource["Copy"]">
+        <span class="fa fa-copy"></span>
+    </a>
+    <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model.MasterEntity.User" class="btn btn-secondary" role="button" name="DetailsToolBarUp" title="@localizer_UIStringResource["Details"]">
+        <span class="fa fa-file"></span>
+    </a>
+    <a asp-area="" asp-controller="ElmahUser" asp-action="Index" class="btn btn-secondary" role="button" name="GotoSearchToolBarUp" title="@localizer_UIStringResource["GotoSearch"]">
+        <span class="fa fa-search"></span>
+    </a>
+        </div></div>
+        <div class="card-body">
+                <div class="form-group" >
+                    <label asp-for="MasterEntity.User" class="control-label"></label>
+                        <div class="form-control">
+                            @Model.MasterEntity.User
+                            <input type="hidden" asp-for="MasterEntity.User" />
+                        </div>
+                </div>
+        </div>
+        <div class="card-footer"><div class="btn-group">
+        </div></div>
+}
+@if (Model.StatusOfMasterEntity != Framework.Services.BusinessLogicLayerResponseStatus.UIProcessReady && Model.StatusOfMasterEntity != Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+{
+<div class="btn-group">
+    <a asp-area="" asp-controller="ElmahUser" asp-action="AddNew" class="btn btn-secondary" role="button" name="AddNewToolBarUp" title="@localizer_UIStringResource["AddNew"]">
+        <span class="fa fa-plus"></span>
+    </a>
+    <a asp-area="" asp-controller="ElmahUser" asp-action="Index" class="btn btn-secondary" role="button" name="GotoSearchToolBarUp" title="@localizer_UIStringResource["GotoSearch"]">
+        <span class="fa fa-search"></span>
+    </a>
+</div>
+<div class="text-danger">@Model.StatusMessageOfMasterEntity</div>
+<div class="btn-group">
+</div>
+}
+    </div>
+</div>
+<!-- Aside.01.End. ElmahModel.ElmahUser => MasterViewAsideKeyInformation -->
+ </div>
+ </div>

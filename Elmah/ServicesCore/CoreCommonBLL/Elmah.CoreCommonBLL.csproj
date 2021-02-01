@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk" >
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Elmah.CoreCommonBLL</RootNamespace>
+    <AssemblyName>Elmah.CoreCommonBLL</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCORE</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Services\ELMAH_ErrorService.cs" />
+    <Compile Include="Services\ElmahApplicationService.cs" />
+    <Compile Include="Services\ElmahHostService.cs" />
+    <Compile Include="Services\ElmahSourceService.cs" />
+    <Compile Include="Services\ElmahStatusCodeService.cs" />
+    <Compile Include="Services\ElmahTypeService.cs" />
+    <Compile Include="Services\ElmahUserService.cs" />
+    <Compile Include="BusinessLogicLayerFactory.cs" />
+    <Compile Include="DataStreamServiceProviders\ELMAH_ErrorDataStreamService.cs" />
+    <Compile Include="DataStreamServiceProviders\ElmahApplicationDataStreamService.cs" />
+    <Compile Include="DataStreamServiceProviders\ElmahHostDataStreamService.cs" />
+    <Compile Include="DataStreamServiceProviders\ElmahSourceDataStreamService.cs" />
+    <Compile Include="DataStreamServiceProviders\ElmahStatusCodeDataStreamService.cs" />
+    <Compile Include="DataStreamServiceProviders\ElmahTypeDataStreamService.cs" />
+    <Compile Include="DataStreamServiceProviders\ElmahUserDataStreamService.cs" />
+    <Compile Include="MapDataStreamService.cs" />
+    <Compile Include="MapService.cs" />
+    <None Include="map.2.B.2.vsd" />
+    <None Include="map.2.B.2.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\CommonBLLEntities\Elmah.CommonBLLEntities.csproj">
+      <Project>{b7d68f23-2115-4425-a457-9b098fec0dd5}</Project>
+      <Name>Elmah.CommonBLLEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DALContracts\Elmah.DALContracts.csproj">
+      <Project>{c96e5b5f-c2ca-4db8-8e6f-396e95ca06cb}</Project>
+      <Name>Elmah.DALContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\DataSourceEntities\Elmah.DataSourceEntities.csproj">
+      <Project>{7e182204-32e9-49f7-945c-e1b6356809e5}</Project>
+      <Name>Elmah.DataSourceEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\EntityContracts\Elmah.EntityContracts.csproj">
+      <Project>{7a295516-06eb-49dc-82d8-de07bf4081ca}</Project>
+      <Name>Elmah.EntityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\FrameworkCore.Services\FrameworkCore.Services.csproj">
+      <Project>{4aa0ce4f-22a7-4202-ba5e-4fcb38096d03}</Project>
+      <Name>FrameworkCore.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\Resx\Elmah.Resx.csproj">
+      <Project>{57e586a4-7e99-4c52-b22b-a41f78a40f2a}</Project>
+      <Name>Elmah.Resx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\WcfContracts\Elmah.WcfContracts.csproj">
+      <Project>{2cc2798d-c0cc-4343-8849-94c90c541bca}</Project>
+      <Name>Elmah.WcfContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.94.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
+    <PackageReference Include="MiniGuid" Version="1.1.2" />  </ItemGroup>
+</Project>

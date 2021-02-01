@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "Chart.js@2.7.3",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "provider": "filesystem",
+      "library": "../../packages/Moment.js.2.23.0/Content/Scripts/",
+      "destination": "wwwroot/lib/Moment.js/",
+      "files": [
+        "moment-with-locales.js",
+        "moment-with-locales.min.js",
+        "moment.js",
+        "moment.min.js"
+      ]
+    },
+    {
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/font-awesome/"
+    },
+    {
+      "library": "knockout@3.4.2",
+      "destination": "wwwroot/lib/knockout/"
+    },
+    {
+      "library": "dropzone@5.5.1",
+      "destination": "wwwroot/lib/dropzone/"
+    }
+  ]
+}

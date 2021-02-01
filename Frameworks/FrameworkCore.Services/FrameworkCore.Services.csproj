@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk" >
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>FrameworkCore.Services</RootNamespace>
+    <AssemblyName>FrameworkCore.Services</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCORE</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DataStreamServiceProviderBase.cs" />
+    <Compile Include="GoogleMapHelper.cs" />
+    <None Include="map.1.A.1.vsd" />
+    <None Include="map.1.A.1.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Resx\Framework.Resx.csproj">
+      <Project>{c72b898b-b53b-42d5-9f4f-673f84bb485b}</Project>
+      <Name>Framework.Resx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.94.2" />
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Spatial" Version="7.6.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />  </ItemGroup>
+</Project>

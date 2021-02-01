@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Elmah.CommonBLLEntities</RootNamespace>
+    <AssemblyName>Elmah.CommonBLLEntities</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;XAMARIN;NETSTANDARD2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ChainedQueryCriteria\ELMAH_ErrorChainedQueryCriteria.cs" />
+    <Compile Include="ChainedQueryCriteria\ElmahApplicationChainedQueryCriteria.cs" />
+    <Compile Include="ChainedQueryCriteria\ElmahHostChainedQueryCriteria.cs" />
+    <Compile Include="ChainedQueryCriteria\ElmahSourceChainedQueryCriteria.cs" />
+    <Compile Include="ChainedQueryCriteria\ElmahStatusCodeChainedQueryCriteria.cs" />
+    <Compile Include="ChainedQueryCriteria\ElmahTypeChainedQueryCriteria.cs" />
+    <Compile Include="ChainedQueryCriteria\ElmahUserChainedQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ELMAH_ErrorQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ElmahApplicationQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ElmahHostQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ElmahSourceQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ElmahStatusCodeQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ElmahTypeQueryCriteria.cs" />
+    <Compile Include="QueryCriteria\ElmahUserQueryCriteria.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ELMAH_ErrorRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ElmahApplicationRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ElmahHostRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ElmahSourceRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ElmahStatusCodeRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ElmahTypeRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesBuiltIn\ElmahUserRequestMessageBuiltIn.cs" />
+    <Compile Include="RequestMessagesUserDefined\ELMAH_ErrorRequestMessageUserDefined.cs" />
+    <Compile Include="RequestMessagesUserDefined\ElmahApplicationRequestMessageUserDefined.cs" />
+    <Compile Include="RequestMessagesUserDefined\ElmahHostRequestMessageUserDefined.cs" />
+    <Compile Include="RequestMessagesUserDefined\ElmahSourceRequestMessageUserDefined.cs" />
+    <Compile Include="RequestMessagesUserDefined\ElmahStatusCodeRequestMessageUserDefined.cs" />
+    <Compile Include="RequestMessagesUserDefined\ElmahTypeRequestMessageUserDefined.cs" />
+    <Compile Include="RequestMessagesUserDefined\ElmahUserRequestMessageUserDefined.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ELMAH_ErrorResponseMessageBuiltIn.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ElmahApplicationResponseMessageBuiltIn.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ElmahHostResponseMessageBuiltIn.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ElmahSourceResponseMessageBuiltIn.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ElmahStatusCodeResponseMessageBuiltIn.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ElmahTypeResponseMessageBuiltIn.cs" />
+    <Compile Include="ResponseMessagesBuiltIn\ElmahUserResponseMessageBuiltIn.cs" />
+    <Compile Include="GeoSearchCriteria.cs" />
+    <None Include="map.2.B.3.vsd" />
+    <None Include="map.2.B.3.vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataSourceEntities\Elmah.DataSourceEntities.csproj">
+      <Project>{7e182204-32e9-49f7-945c-e1b6356809e5}</Project>
+      <Name>Elmah.DataSourceEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityContracts\Elmah.EntityContracts.csproj">
+      <Project>{7a295516-06eb-49dc-82d8-de07bf4081ca}</Project>
+      <Name>Elmah.EntityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

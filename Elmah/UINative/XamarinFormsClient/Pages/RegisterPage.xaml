@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Elmah.XamarinForms.Pages.RegisterPage"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+             xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+             xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+             xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             Title="{i18n:Translate Text=Register, ResourceId=Framework.Resx.UIStringResource}"
+             BackgroundColor="{DynamicResource Background}" Visual="Material">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout VerticalOptions="StartAndExpand" Margin="5" IsEnabled="{Binding PopupVM.EnableMasterContent}">
+                <!--<Label Text="{i18n:Translate Text=Email, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Entry x:Name="usernameEntry" AutomationId="UsernameEntryField" Placeholder="{i18n:Translate Text=Email, ResourceId=Framework.Resx.UIStringResource}" Text="{Binding Email}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" >
+                    <Entry.Behaviors>
+                        <fx:EntryValidationBehavior PropertyName="Email" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{Binding Path=Errors, Converter={StaticResource ValidationErrorConverter}, ConverterParameter=Email}" IsVisible="{Binding Path=Errors, Converter={StaticResource ValidationErrorToIsVisibleConverter}, ConverterParameter=Email}" Style="{StaticResource DataErrorLabelStyle}" />
+                <!--<Label Text="{i18n:Translate Text=Password, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Entry AutomationId="PasswordEntryField" x:Name="passwordEntry" IsPassword="true" Placeholder="{i18n:Translate Text=Password, ResourceId=Framework.Resx.UIStringResource}" Text="{Binding Password}" Style="{StaticResource RegularEntryStyle}" >
+                    <Entry.Behaviors>
+                        <fx:EntryValidationBehavior PropertyName="Password" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{Binding Path=Errors, Converter={StaticResource ValidationErrorConverter}, ConverterParameter=Password}" IsVisible="{Binding Path=Errors, Converter={StaticResource ValidationErrorToIsVisibleConverter}, ConverterParameter=Password}" Style="{StaticResource DataErrorLabelStyle}" />
+                <!--<Label Text="{i18n:Translate Text=Common_ConfirmPasswordLabelText, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Entry AutomationId="ConfirmPasswordEntryField" x:Name="confirmPasswordEntry" IsPassword="true" Placeholder="{i18n:Translate Text=Common_ConfirmPasswordLabelText, ResourceId=Framework.Resx.UIStringResource}" Text="{Binding ConfirmPassword}" Style="{StaticResource RegularEntryStyle}" >
+                    <Entry.Behaviors>
+                        <fx:EntryValidationBehavior PropertyName="ConfirmPassword" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="{Binding Path=Errors, Converter={StaticResource ValidationErrorConverter}, ConverterParameter=ConfirmPassword}" IsVisible="{Binding Path=Errors, Converter={StaticResource ValidationErrorToIsVisibleConverter}, ConverterParameter=ConfirmPassword}" Style="{StaticResource DataErrorLabelStyle}" />
+                <Button AutomationId="RegisterButton" Command="{Binding RegisterCommand}"
+                    Text="{i18n:Translate Text=Account_Register_SubmitValue, ResourceId=Framework.Resx.UIStringResource}" IsEnabled="{Binding Path=HasErrors, Converter={StaticResource BooleanInverter}}" />
+                <Label x:Name="messageLabel" Text="{Binding Message}" Style="{StaticResource DataErrorLabelStyle}" IsVisible="{Binding Message, Converter={StaticResource StringNullOrEmptyBoolConverter}}" Margin="30" />
+                <Button AutomationId="GotoLoginButton" Text="Go to Login"
+                    Clicked="GotoLoginButton_OnClicked"/>
+            </StackLayout>
+            <fxc:PopupMessage IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=RegularPopup}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:controls="clr-namespace:Elmah.XamarinForms.Controls"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:xfc="clr-namespace:XamForms.Controls;assembly=Framework.Xamariner"
+        x:Class="Elmah.XamarinForms.Pages.CalendarPage"
+        BackgroundColor="{DynamicResource Background}"
+        Visual="Material">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding NavigationVM.ShellBackButtonBehaviorCommand, Source={StaticResource LocatorClient}}">
+            <BackButtonBehavior.IconOverride>
+                <FontImageSource Glyph="{x:Static fxam:FontAwesomeIcons.ArrowCircleLeft}"
+                         FontFamily="{StaticResource FontAwesomeSolid}"
+                         Size="44" />
+            </BackButtonBehavior.IconOverride>
+        </BackButtonBehavior>
+    </Shell.BackButtonBehavior>
+    <ContentPage.Content>
+        <Grid>
+            <controls:WeeklyCalendar x:Name="weelyCalendar" IsVisible="False"
+                NonOfficeHourMorningStart="1.5" NonOfficeHourMorningEnd="7.5" NonOfficeHourAfternoonStart="19.5" NonOfficeHourAfternoonEnd="23.5"
+                NonOfficeHourColor="LightGray" OfficeHourColor="Brown"
+                LunchHourColor="LightYellow" LunchHourStart="12.5" LunchHourEnd="14" HourHeight="120" >
+            </controls:WeeklyCalendar>
+            <controls:DailyCalendar x:Name="dailyCalendar"
+                NonOfficeHourMorningStart="1.5" NonOfficeHourMorningEnd="7.5" NonOfficeHourAfternoonStart="19.5" NonOfficeHourAfternoonEnd="23.5"
+                NonOfficeHourColor="LightGray" OfficeHourColor="Brown"
+                LunchHourColor="LightYellow" LunchHourStart="12.5" LunchHourEnd="14" HourHeight="120" >
+            </controls:DailyCalendar>
+            <xfc:Calendar
+                IsVisible="False"
+                x:Name="calendar"
+                Padding="10,0,10,0"
+                SelectedBorderWidth="4"
+                DisabledBorderColor="Black"
+                ShowNumberOfWeek="false"
+                StartDay="Monday"
+                TitleLabelTextColor="Purple"
+                TitleLeftArrowTextColor="Blue"
+                SelectedDate="{Binding Date}"
+                SpecialDates="{Binding Attendances}"
+                DateCommand="{Binding DateChosen}" >
+            </xfc:Calendar>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

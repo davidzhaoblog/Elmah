@@ -1,0 +1,670 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
+namespace Framework.Models
+{
+    //[DataContract]
+    public class NameValuePair<T>
+    {
+        public NameValuePair() { }
+
+        public NameValuePair(
+            T value, string name
+            )
+        {
+            this.Value = value;
+            this.Name = name;
+        }
+
+        //[DataMember]
+        public T Value { get; set; }
+
+        //[DataMember]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", this.Value, this.Name);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                if (obj is NameValuePair<T>)
+                {
+                    return obj != null && ((NameValuePair<T>)obj).Value.Equals(this.Value);
+                }
+                else if (obj is T)
+                {
+                    return obj != null && ((T)obj).Equals(this.Value);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            try
+            {
+                return this.Value.GetHashCode();
+            }
+            catch
+            {
+                return base.GetHashCode();
+            }
+        }
+    }
+
+    //[DataContract]
+    public class NameValuePair : NameValuePair<string>
+    {
+        public NameValuePair() { }
+
+        public NameValuePair(
+            long value, string name
+            )
+            : this(value.ToString(), name)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NameValuePair"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        public NameValuePair(
+            Guid value, string name
+            )
+            : this(value.ToString(), name)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NameValuePair"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        public NameValuePair(
+            string value, string name
+            )
+        {
+            this.Name = name;
+            this.Value = value;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NameValuePair"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        public NameValuePair(
+            decimal value, string name
+            )
+            : this(value.ToString(), name)
+        {
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                if (obj is NameValuePair)
+                {
+                    return obj != null && ((NameValuePair)obj).Value == this.Value;
+                }
+                else
+                {
+                    return obj != null && string.IsNullOrWhiteSpace(this.Value) && this.Value == obj.ToString();
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            if (string.IsNullOrWhiteSpace(this.Value))
+            {
+                return base.GetHashCode();
+            }
+            else
+            {
+                return this.Value.GetHashCode();
+            }
+        }
+
+        #region Parse value to .net value
+
+        public System.Boolean ParseToSystemBoolean(string defaultValueString)
+        {
+            System.Boolean retValue;
+            if (!System.Boolean.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Boolean.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = false;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Byte ParseToSystemByte(string defaultValueString)
+        {
+            System.Byte retValue;
+            if (!System.Byte.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Byte.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Char ParseToSystemChar(string defaultValueString)
+        {
+            return string.IsNullOrWhiteSpace(this.Value) || this.Value.Length == 0 ? ' ' : this.Value.ToCharArray()[0];
+        }
+
+        public System.DateTime ParseToSystemDateTime(string defaultValueString)
+        {
+            System.DateTime retValue;
+            if (!System.DateTime.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.DateTime.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = System.DateTime.Now;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Decimal ParseToSystemDecimal(string defaultValueString)
+        {
+            System.Decimal retValue;
+            if (!System.Decimal.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Decimal.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Double ParseToSystemDouble(string defaultValueString)
+        {
+            System.Double retValue;
+            if (!System.Double.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Double.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Guid ParseToSystemGuid(string defaultValueString)
+        {
+            System.Guid retValue;
+            if (!System.Guid.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Guid.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = System.Guid.NewGuid();
+                }
+            }
+            return retValue;
+        }
+
+        public System.Int16 ParseToSystemInt16(string defaultValueString)
+        {
+            System.Int16 retValue;
+            if (!System.Int16.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Int16.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Int32 ParseToSystemInt32(string defaultValueString)
+        {
+            System.Int32 retValue;
+            if (!System.Int32.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Int32.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Int64 ParseToSystemInt64(string defaultValueString)
+        {
+            System.Int64 retValue;
+            if (!System.Int64.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Int64.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.Single ParseToSystemSingle(string defaultValueString)
+        {
+            System.Single retValue;
+            if (!System.Single.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.Single.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.String ParseToSystemString(string defaultValueString)
+        {
+            return this.Value;
+        }
+
+        public System.SByte ParseToSystemSByte(string defaultValueString)
+        {
+            System.SByte retValue;
+            if (!System.SByte.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.SByte.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.UInt16 ParseToSystemUInt16(string defaultValueString)
+        {
+            System.UInt16 retValue;
+            if (!System.UInt16.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.UInt16.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.UInt32 ParseToSystemUInt32(string defaultValueString)
+        {
+            System.UInt32 retValue;
+            if (!System.UInt32.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.UInt32.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        public System.UInt64 ParseToSystemUInt64(string defaultValueString)
+        {
+            System.UInt64 retValue;
+            if (!System.UInt64.TryParse(this.Value, out retValue))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValueString))
+                {
+                    retValue = System.UInt64.Parse(defaultValueString);
+                }
+                else
+                {
+                    retValue = 0;
+                }
+            }
+            return retValue;
+        }
+
+        #endregion Parse value to .net value
+    }
+
+    #region class NameValueCollection<T> and NameValueCollection TO-BE-REMOVED
+/*
+    /// <summary>
+    /// Generic NameValueCollection
+    /// </summary>
+    /// <typeparam name="T">entity class implements <see cref="INameValuePair"/></typeparam>
+    public class NameValueCollection<T, TItem> : List<T>
+        where T : NameValuePair<TItem>, new()
+    {
+        public NameValueCollection()
+            : base()
+        {
+        }
+
+        public NameValueCollection(IEnumerable<T> input)
+            : base(input)
+        {
+        }
+
+        #region PrediacteByName
+
+        /// <summary>
+        /// Prediacte By Name
+        /// </summary>
+        private class PrediacteByName
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="NameValueCollection&lt;T&gt;.PrediacteByName"/> class.
+            /// </summary>
+            /// <param name="comparedToName">Name of the compared to.</param>
+            public PrediacteByName(string comparedToName)
+            {
+                this.ComparedToName = comparedToName;
+            }
+
+            /// <summary>
+            /// Gets or sets the name of the compared to.
+            /// </summary>
+            /// <value>
+            /// The name of the compared to.
+            /// </value>
+            private string ComparedToName { get; set; }
+
+            /// <summary>
+            /// Predicates the specified input.
+            /// </summary>
+            /// <param name="input">The input.</param>
+            /// <returns>true if meets criteria, otherwise false</returns>
+            public bool Predicate(T input)
+            {
+                return input != null && input.Name == ComparedToName;
+            }
+        }
+
+        /// <summary>
+        /// Exists the name of the by.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>true if meets criteria, otherwise false</returns>
+        public bool ExistsByName(string name)
+        {
+            return this.Any(t => t.Name == name);
+        }
+
+        /// <summary>
+        /// Gets the name of the by.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>the 1st instance if meets criteria, otherwise null</returns>
+        public T GetByName(string name)
+        {
+            return this.Single(t => t.Name == name);
+        }
+
+        /// <summary>
+        /// Gets the name of the collection by.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>the collection which each item meets criteria, otherwise null</returns>
+        public NameValueCollection<T, TItem> GetCollectionByName(string name)
+        {
+            NameValueCollection<T, TItem> _retval = new NameValueCollection<T, TItem>();
+            _retval.AddRange(this.Where(t => t.Name == name));
+            return _retval;
+        }
+
+        #endregion PrediacteByName
+
+        #region PrediacteByValue
+
+        /// <summary>
+        /// Prediacte by Value
+        /// </summary>
+        private class PrediacteByValue
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="NameValueCollection&lt;T&gt;.PrediacteByValue"/> class.
+            /// </summary>
+            /// <param name="comparedToValue">The compared to value.</param>
+            public PrediacteByValue(string comparedToValue)
+            {
+                this.ComparedToValue = comparedToValue;
+            }
+
+            /// <summary>
+            /// Gets or sets the compared to value.
+            /// </summary>
+            /// <value>
+            /// The compared to value.
+            /// </value>
+            private string ComparedToValue { get; set; }
+
+            /// <summary>
+            /// Predicates the specified input.
+            /// </summary>
+            /// <param name="input">The input.</param>
+            /// <returns>true if meets criteria, otherwise false</returns>
+            public bool Predicate(T input)
+            {
+                return input != null && input.Value.Equals(ComparedToValue);
+            }
+        }
+
+        /// <summary>
+        /// Exists the by value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>true if meets criteria, otherwise false</returns>
+        public bool ExistsByValue(string value)
+        {
+            return this.Any(t => t.Value.Equals(value));
+        }
+
+        /// <summary>
+        /// Gets the by value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>the 1st instance if meets criteria, otherwise null</returns>
+        public T GetByValue(string value)
+        {
+            return this.Single(t => t.Value.Equals(value));
+        }
+
+        /// <summary>
+        /// Gets the collection by value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>the collection which each item meets criteria, otherwise null</returns>
+        public NameValueCollection<T, TItem> GetCollectionByValue(string value)
+        {
+            NameValueCollection<T, TItem> _retval = new NameValueCollection<T, TItem>();
+            _retval.AddRange(this.Where(t => t.Value.Equals(value)));
+            return _retval;
+        }
+
+        #endregion PrediacteByValue
+
+        #region Add(value, name)
+
+        /// <summary>
+        /// Adds the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        public void Add(TItem value, string name)
+        {
+            T _NewItem = new T();
+            _NewItem.Name = name;
+            _NewItem.Value = value;
+            this.Add(_NewItem);
+        }
+
+        #endregion Add(value, name)
+
+    }
+
+    /// <summary>
+    /// Concrete NameValueCollection
+    /// </summary>
+    public class NameValueCollection : NameValueCollection<NameValuePair, string>
+    {
+        public NameValueCollection()
+            : base()
+        {
+        }
+
+        public NameValueCollection(IEnumerable<NameValuePair> input)
+            : base(input)
+        {
+        }
+
+        public NameValueCollection(string input, string delimiter, string nameValueSparator)
+        {
+            string[] _Split = input.Split(delimiter.ToCharArray());
+            if (_Split != null)
+            {
+                foreach (string _NameValuePair in _Split)
+                {
+                    string[] _SplitNameValue = _NameValuePair.Split(nameValueSparator.ToCharArray());
+                    if (_SplitNameValue.Length == 2)
+                    {
+                        this.Add(_SplitNameValue[1], _SplitNameValue[0]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// string indexer by name
+        /// </summary>
+        /// <param name="name">the name</param>
+        /// <returns>the value</returns>
+        public string this[string name]
+        {
+            get
+            {
+                NameValuePair<string> _Item = this.GetByName(name);
+                if (_Item != null)
+                {
+                    return _Item.Value;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                NameValuePair<string> _Item;
+
+                if(this.ExistsByName(name))
+                {
+                    _Item = this.GetByName(name);
+                    _Item.Value = value;
+                }
+                else
+                {
+                    this.Add(new NameValuePair(value, name));
+                }
+            }
+        }
+    }
+
+*/
+    #endregion class NameValueCollection<T> and NameValueCollection
+}
+

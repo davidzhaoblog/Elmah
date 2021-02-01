@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i18n="clr-namespace:Framework.Xamariner"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"             
+             mc:Ignorable="d"
+             x:Class="Framework.Xamariner.Controls.ImageCapture">
+    <ContentView.Content>
+        <StackLayout Padding="0" Margin="0">
+            <Grid Padding="0" Margin="0">
+                <Grid Opacity="0.5" />
+                <StackLayout VerticalOptions="Center" Padding="0" Margin="0">
+                    <!--  cancel  -->
+                    <!--<Label
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            HorizontalOptions="End"
+                            HorizontalTextAlignment="End"
+                            Text="&#10006;"
+                            TextColor="#10CFC9"
+                            VerticalOptions="Start">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Command_HideChoosePictureMenu}" />
+                        </Label.GestureRecognizers>
+                    </Label>-->
+                    <!--  choose picture label  -->
+                    <Label
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="{i18n:Translate Text=ChooseAPicture, ResourceId=Framework.Resx.UIStringResource}"
+                            VerticalTextAlignment="Center" />
+                    <!--  image cropper  -->
+                    <Frame CornerRadius="100" 
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       IsClippedToBounds="True">
+                        <Image IsVisible="True" HorizontalOptions="Fill" Margin="0">
+                            <Image.Source>
+                                <UriImageSource
+                                Uri="{Binding UriImageSource, TargetNullValue='http://10.0.2.2:5000/Home/GetTestImage?id=0'}"
+                                CacheValidity="10:00:00.0" />
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+                    <!--  accept  -->
+                    <Button
+
+                            Command="{Binding Command_Accept}"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsAcceptVisible}"
+                            Text="{i18n:Translate Text=Accept, ResourceId=Framework.Resx.UIStringResource}" >
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="&#xf00c;" FontFamily="{DynamicResource FontAwesomeSolid}" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <!--  take a photo  -->
+                    <Button
+                            Command="{Binding Command_TakeAPhoto}"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsAcceptVisible, Converter={StaticResource BooleanInverter}}"
+                            Text="{i18n:Translate Text=TakeAPhoto, ResourceId=Framework.Resx.UIStringResource}" >
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="&#xf030;" FontFamily="{DynamicResource FontAwesomeSolid}" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <!--  choose from library  -->
+                    <Button
+                            Command="{Binding Command_ChooseFromLibrary}"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsAcceptVisible, Converter={StaticResource BooleanInverter}}"
+                            Text="{i18n:Translate Text=SelectAPhoto, ResourceId=Framework.Resx.UIStringResource}" >
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="&#xf1c5;" FontFamily="{DynamicResource FontAwesomeSolid}" />
+                        </Button.ImageSource>
+                    </Button>
+
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

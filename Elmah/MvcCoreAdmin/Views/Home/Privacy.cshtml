@@ -1,0 +1,6 @@
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<Framework.Resx.UIStringResource> localizer_UIStringResource;
+@{
+    ViewData["Title"] = localizer_UIStringResource["Privacy Policy"];
+}
+<h1>@ViewData["Title"]</h1>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+             xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+             xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+             xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+             mc:Ignorable="d"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="{Binding IsContentVisible}"
+             x:Class="Elmah.XamarinForms.Pages.MapPageXaml">
+    <ContentPage.Content>
+        <AbsoluteLayout x:Name="absLayout">
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <maps:Map x:Name="map" MeasureInvalidated="Map_MeasureInvalidated" SizeChanged="Map_SizeChanged" PropertyChanged="Map_PropertyChanged">
+                <x:Arguments>
+                    <maps:MapSpan>
+                        <x:Arguments>
+                            <maps:Position>
+                                <x:Arguments>
+                                    <x:Double>36.9628066</x:Double>
+                                    <x:Double>-122.0194722</x:Double>
+                                </x:Arguments>
+                            </maps:Position>
+                            <x:Double>0.01</x:Double>
+                            <x:Double>0.01</x:Double>
+                        </x:Arguments>
+                    </maps:MapSpan>
+                </x:Arguments>
+                <maps:Map.Pins>
+                    <maps:Pin Label="Santa Cruz"
+                          Address="The city with a boardwalk"
+                          Type="Place">
+                        <maps:Pin.Position>
+                            <maps:Position>
+                                <x:Arguments>
+                                    <x:Double>36.9628066</x:Double>
+                                    <x:Double>-122.0194722</x:Double>
+                                </x:Arguments>
+                            </maps:Position>
+                        </maps:Pin.Position>
+                    </maps:Pin>
+                </maps:Map.Pins>
+            </maps:Map>
+            <Frame Padding="0" Margin="0,20,20,0" CornerRadius="25" HeightRequest="50" MinimumWidthRequest="50" WidthRequest="50" HorizontalOptions="End" VerticalOptions="Start" BackgroundColor="{StaticResource Secondary}" BorderColor="{StaticResource Secondary}"  >
+                <fxc:FontIcon HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                            HeightRequest="30" WidthRequest="30"
+                            MasterFontIcon="{x:Static fxam:FontAwesomeIcons.Search}" MasterFontIconFamily="FontAwesomeSolid"
+                            MasterFontIconSize="25"  />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding PopupVM.Command_ShowRightSidePopup, Source={StaticResource Locator}}" />
+                    </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+            <!-- TODO: add map search/setting -->
+            <!-- The following is RightSidePopup, which usually for filter/search of this page -->
+            <Grid
+                IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=RightSidePopup}"
+                BackgroundColor="{StaticResource Background}"
+                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,0,.75,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Text="aa bb cc dd"/>
+            </Grid>
+            <!-- The following is PopupMessage -->
+            <Grid
+                IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=RegularPopup}"
+                BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <fxc:PopupMessage  />
+            </Grid>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

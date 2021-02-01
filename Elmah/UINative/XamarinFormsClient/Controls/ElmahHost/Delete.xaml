@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Elmah.MVVMLightViewModels;assembly=Elmah.MVVMLightViewModels"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        mc:Ignorable="d"
+        x:Name="self"
+        x:Class="Elmah.XamarinForms.Controls.ElmahHost.Delete"
+        Visual="Material">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0">
+                <StackLayout BindingContext="{Binding Item}">
+                <Label Text="{i18n:Translate Text=Warning_Areyousureyouwanttodeletethis, ResourceId=Framework.Resx.UIStringResource}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Label AutomationId="Host" Text="{i18n:Translate Text=Host, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />
+            <Label AutomationId="HostLabel" Text="{Binding Path=Host, Mode=OneWay}" Style="{StaticResource DataLabelStyle}" />
+                </StackLayout>
+            </ScrollView>
+            <fxca:ItemFormActionSheet Grid.Row="1" BindingContext="{Binding NavigationVM.ElmahHost.DeleteFormActionSheet, Source={StaticResource LocatorClient}}" HorizontalOptions="Center"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

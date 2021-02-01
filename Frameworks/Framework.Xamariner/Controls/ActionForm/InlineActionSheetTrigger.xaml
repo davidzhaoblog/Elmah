@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+             xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+             mc:Ignorable="d"
+             x:Class="Framework.Xamariner.Controls.ActionForm.InlineActionSheetTrigger"
+             x:Name="self">
+  <ContentView.Content>
+        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="42"/>
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Column="1" CornerRadius="5" BackgroundColor="{StaticResource Secondary}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" Margin="0">
+                <Label Text="{x:Static fxam:FontAwesomeIcons.EllipsisH}" FontFamily="{StaticResource FontAwesomeSolid}" WidthRequest="30" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
