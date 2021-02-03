@@ -1,12 +1,12 @@
 import * as React from 'react';
 import './App.css';
-import AppNavBar from './navigation/App.Bar';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './store/Store';
+import store from './store/Store';
 import blue from '@material-ui/core/colors/blue';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { pink } from '@material-ui/core/colors';
+import MasterLayout from './layout/MasterLayout';
 
 const theme = createMuiTheme({
   palette: {
@@ -14,14 +14,15 @@ const theme = createMuiTheme({
     secondary: pink
   }
 })
+
 class App extends React.Component {
   public render() {
     return (
       <Provider store={store}>
         <Router>
-          <MuiThemeProvider theme={theme}>
-            <AppNavBar />
-          </MuiThemeProvider>
+          <ThemeProvider theme={theme}>
+            <MasterLayout theme={theme} />
+          </ThemeProvider>
         </Router>
       </Provider>
     );

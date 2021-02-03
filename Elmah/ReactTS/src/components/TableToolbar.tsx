@@ -22,11 +22,11 @@ class EnhancedTableToolbar extends React.Component<IEnhancedTableToolbarProps, {
             >
                 <div className={classes.title}>
                     {selected > 0 ? (
-                        <Typography color="inherit" variant="subheading">
+                        <Typography color="inherit">
                             {selected} selected
             </Typography>
                     ) : (
-                            <Typography variant="title" id="tableTitle">
+                            <Typography id="tableTitle">
                                 Nutrition
             </Typography>
                         )}
@@ -54,7 +54,7 @@ class EnhancedTableToolbar extends React.Component<IEnhancedTableToolbarProps, {
 
 const toolbarStyles = (theme: Theme) => ({
     root: {
-        paddingRight: theme.spacing.unit,
+        paddingRight: theme.spacing,
     },
     highlight:
         theme.palette.type === 'light'

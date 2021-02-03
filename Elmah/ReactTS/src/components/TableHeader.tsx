@@ -40,7 +40,6 @@ export class EnhancedTableHead extends React.Component<IEnhancedTableHeadProps, 
                         return (
                             <TableCell
                                 key={column.id}
-                                numeric={column.numeric}
                                 padding={column.disablePadding ? 'none' : 'default'}
                                 sortDirection={orderBy === column.id ? order : false}
                             >
