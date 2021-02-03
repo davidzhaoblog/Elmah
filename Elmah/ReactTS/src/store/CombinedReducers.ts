@@ -1,13 +1,16 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import visibilityFilter from 'src/features/visibilityFilter/visibilityFilterSlice';
+import app from "src/layout/appSlice";
 import auth from "src/features/Authentication/authenticationSlice";
 
-import app from "src/layout/appSlice";
+import todos from 'src/features/TodoList/todoSlice';
+import visibilityFilter from 'src/features/visibilityFilter/visibilityFilterSlice';
 
 export const reducers = combineReducers({
     app: app,
     auth: auth,
+    
+    todos: todos,
 
     visibilityFilter: visibilityFilter,
 });

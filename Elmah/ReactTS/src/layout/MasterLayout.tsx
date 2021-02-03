@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Route, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { AppBar, Backdrop, CircularProgress, Hidden, IconButton, Menu, MenuItem, Theme, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Backdrop, Badge, CircularProgress, Hidden, IconButton, ListItemText, Menu, MenuItem, Theme, Toolbar, Typography } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuIcon from '@material-ui/icons/Menu';
+import NotificationIcon from '@material-ui/icons/Notifications';
 
 const classNames = require('classnames');
 
@@ -18,6 +19,8 @@ import { RootState } from "src/store/CombinedReducers";
 import { logout } from "src/features/Authentication/authenticationSlice";
 import Account from "src/features/Authentication/Account";
 import DashboardPage from "src/features/DashboardPage";
+import { todosSelectors } from "src/features/TodoList/todoSlice";
+import TodoList from "src/features/TodoList/TodoList";
 
 interface IMasterLayoutProps {
     theme: Theme;
@@ -32,7 +35,13 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const app = useSelector((state: RootState) => state.app);
     const auth = useSelector((state: RootState) => state.auth);
 
+    // TODO: use todo list as notification for now.
+    const unreadMessages = useSelector(
+        (state: RootState) => todosSelectors.selectAll(state)
+    );
+    
     const [anchorEl, setAnchorEl] = useState()
+    const [notificationEl, setNotificationEl] = useState()
 
     // 2.1. Drawer
     const handleDrawerOpen = () => {
@@ -49,13 +58,22 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         navigate(path);
     };
 
+    // 2.3. Notification
+    const handleNotificationMenu = (event: any) => {
+        setNotificationEl(event.currentTarget);
+    };
+
+    const handleNotificationMenuClose = () => {
+        setNotificationEl(null);
+    };
+
     const navigate = (path?: string) => {
         if (path) {
             history.push(path);
         }
     }
 
-    // 2.3. Logout
+    // 2.4. Logout
     const confirmLogout = () => {
         dispatch(logout());
         handleMenuClose();
@@ -75,7 +93,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const renderAppBar = () => {
         if (auth && auth.isAuthenticated) {
             const open = Boolean(anchorEl);
-
+            const notificationsOpen = Boolean(notificationEl);
+            
             return (
                 <AppBar
                     position="fixed"
@@ -92,8 +111,19 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                         </IconButton>
                         <Typography className={classes.fillSpace} color="inherit" noWrap={true}>
                             TechThunk
-                </Typography>
+                        </Typography>
                         <div>
+                        <IconButton
+                                aria-owns={notificationsOpen ? 'notifications' : null}
+                                aria-haspopup="true"
+                                color="inherit"
+                                onClick={handleNotificationMenu}
+                            >
+                                <Badge badgeContent={unreadMessages.length} color="secondary">
+                                    <NotificationIcon />
+                                </Badge>
+                            </IconButton>
+                            {renderNotifications(unreadMessages)}
                             <IconButton
                                 aria-owns={open ? 'menu-appbar' : null}
                                 aria-haspopup="true"
@@ -151,6 +181,33 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         return null
     }
 
+    const renderNotifications = (notifications: any[]) => {
+        return (
+            <Menu
+                id="notifications"
+                anchorEl={notificationEl}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                className={classes.notifications}
+                open={Boolean(notificationEl)}
+                onClose={handleNotificationMenuClose}
+            >
+                {notifications.map((n: any) => (
+                    <MenuItem key={n.id} onClick={handleNotificationMenuClose} dense={true} button={true}>
+                        {/* <Avatar src={n.avatar} /> */}
+                        <ListItemText primary={n.text} />
+                    </MenuItem>
+                ))}
+            </Menu>
+        );
+    }
+
     const renderAccount = () => {
         return (
             <Account />
@@ -167,6 +224,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <PrivateRoute path='/' exact={true} component={DashboardPage} />
+                <PrivateRoute path='/todolist' component={TodoList} />
                 <Route path='/account' component={renderAccount} />
                 {renderAlert()}
                 <Backdrop className={classes.backdrop} open={app.loading}>
