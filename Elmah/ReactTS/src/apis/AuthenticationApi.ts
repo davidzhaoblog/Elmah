@@ -1,10 +1,10 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { LoginViewModel, AuthenticationResponse } from 'src/models/AccountModels';
-import { apiClientConfig } from 'src/framework/apiClientConfig';
-import { ApiClientBase } from 'src/framework/ApiClientBase';
+import { apiConfig } from 'src/framework/apiConfig';
+import { ApiBase } from 'src/framework/ApiBase';
 
 
-export class AuthenticationApiClient extends ApiClientBase
+export class AuthenticationApi extends ApiBase
 {
   public constructor(conf?: AxiosRequestConfig) {
     super(conf);
@@ -32,4 +32,4 @@ export class AuthenticationApiClient extends ApiClientBase
   }
 }
 
-export const authenticationApiClient = new AuthenticationApiClient(apiClientConfig);
+export const authenticationApi = new AuthenticationApi(apiConfig);

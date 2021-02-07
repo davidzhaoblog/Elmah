@@ -40,9 +40,6 @@ export default function LoginPage(): JSX.Element {
         history.replace(from);
     }
     
-    // TODO: should remove this line when user is loaded when loggedin.
-    localStorage.removeItem('user');
-
     return (
 
         <div className={classes.container}>

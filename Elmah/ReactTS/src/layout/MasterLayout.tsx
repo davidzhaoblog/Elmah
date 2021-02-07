@@ -19,8 +19,8 @@ import { RootState } from "src/store/CombinedReducers";
 import { logout } from "src/features/Authentication/authenticationSlice";
 import Account from "src/features/Authentication/Account";
 import DashboardPage from "src/features/DashboardPage";
-import { todosSelectors } from "src/features/TodoList/todoSlice";
-import TodoList from "src/features/TodoList/TodoList";
+import { todosSelectors } from "src/features/Todo/todoSlice";
+import TodoList from "src/features/Todo/ListPage";
 
 interface IMasterLayoutProps {
     theme: Theme;

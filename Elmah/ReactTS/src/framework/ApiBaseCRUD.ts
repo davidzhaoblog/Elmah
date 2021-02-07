@@ -3,9 +3,9 @@
 
 
 import { AxiosResponse, AxiosRequestConfig } from 'axios';
-import { ApiClientBase } from './ApiClientBase';
+import { ApiBase } from './ApiBase';
 
-export class ApiClientBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest, TIndexVMResponse> extends ApiClientBase {
+export class ApiBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest, TIndexVMResponse> extends ApiBase {
 
     protected url_Upsert: string;
     protected url_GetByIdentifier: string;

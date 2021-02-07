@@ -8,7 +8,7 @@
 import { Axios } from './Axios'
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-export class ApiClientBase extends Axios {
+export class ApiBase extends Axios {
     private token: string;
 
     /**

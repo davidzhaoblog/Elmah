@@ -4,7 +4,7 @@
 import * as qs from "qs";
 import { PathLike } from "fs";
 
-export const apiClientConfig = {
+export const apiConfig = {
     returnRejectedPromiseOnError: true,
     withCredentials: true,
     timeout: 30000,
