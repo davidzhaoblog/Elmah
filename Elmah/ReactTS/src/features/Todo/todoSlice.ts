@@ -5,20 +5,21 @@ import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetti
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { AppDispatch, AppThunk } from 'src/store/Store';
-import { Todo } from './types';
+import { orderBys, Todo } from './types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Todo>({
     // Assume IDs are stored in a field other than `book.id`
     selectId: (todo) => todo.id,
     // Keep the "all IDs" array sorted based on book titles
-    sortComparer: (a, b) => a.text.localeCompare(b.text), 
+    // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
   
 
 // 1. initialState 
 const initialState = entityAdapter.getInitialState({
     criteria: null,
+    orderBy: orderBys.find(x=>x.displayName),
     queryPagingSetting: createQueryPagingSetting(10, 1)
 });
 
@@ -53,8 +54,8 @@ export const getByIdentifier = createAsyncThunk(
 export const getIndexVM = createAsyncThunk(
     'getIndexVM',
     async (payload: IListRequest<Todo>, {dispatch}) => {
-        dispatch(closeSpinner());
         const response = await todoApi.GetIndexVM(payload);
+        dispatch(closeSpinner());
         return response;
     }
 )
@@ -114,6 +115,7 @@ const todoSlice = createSlice({
             entityAdapter.removeAll(state);
             entityAdapter.upsertMany(state, payload.result);
             state.queryPagingSetting = payload.queryPagingSetting;
+            state.orderBy = payload.orderBy;
             // console.log("getIndexVM.fulfilled");
         });
         builder.addCase(getIndexVM.rejected, (state, action) => {

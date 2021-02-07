@@ -39,7 +39,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const unreadMessages = useSelector(
         (state: RootState) => todosSelectors.selectAll(state)
     );
-    
+
     const [anchorEl, setAnchorEl] = useState()
     const [notificationEl, setNotificationEl] = useState()
 
@@ -83,7 +83,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const handleAlertClose = () => {
         dispatch(closeAlert());
     }
-    const logoutAlertDialog = { title: 'You are logging out', message: 'You are logging out', buttons: [ { label: 'Log out', handler: confirmLogout }, { label: 'Cancel', handler: handleAlertClose } ] };
+    const logoutAlertDialog = { title: 'You are logging out', message: 'You are logging out', buttons: [{ label: 'Log out', handler: confirmLogout }, { label: 'Cancel', handler: handleAlertClose }] };
     const handleLogout = () => {
         dispatch(showAlert(logoutAlertDialog));
     };
@@ -94,7 +94,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         if (auth && auth.isAuthenticated) {
             const open = Boolean(anchorEl);
             const notificationsOpen = Boolean(notificationEl);
-            
+
             return (
                 <AppBar
                     position="fixed"
@@ -113,7 +113,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                             TechThunk
                         </Typography>
                         <div>
-                        <IconButton
+                            <IconButton
                                 aria-owns={notificationsOpen ? 'notifications' : null}
                                 aria-haspopup="true"
                                 color="inherit"
@@ -174,7 +174,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const renderAlert = () => {
         if (app.alert) {
             return (
-                <AlertDialog/>
+                <AlertDialog />
             );
         }
 

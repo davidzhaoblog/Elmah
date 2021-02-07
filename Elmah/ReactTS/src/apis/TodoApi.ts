@@ -1,9 +1,10 @@
 import { Todo } from "src/features/Todo/types";
 import { IListRequest, IListResponse } from "src/framework/IndexComponentBase";
+import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
 
 export class TodoApi {
   public GetIndexVM = (payload: IListRequest<Todo>): Promise<IListResponse<Todo[]>> => {
-    const result1 = [
+    let result1 = [
       { id: '1', completed: true, text: 'todo 001' },
       { id: '2', completed: true, text: 'todo 002' },
       { id: '3', completed: true, text: 'todo 003' },
@@ -34,6 +35,13 @@ export class TodoApi {
       { id: '28', completed: true, text: 'todo 028' },
       { id: '29', completed: true, text: 'todo 029' },
     ];
+    if(payload.orderBy.propertyName === 'text')
+    {
+      if(payload.orderBy.direction === QueryOrderDirections.Ascending)
+        result1 = result1.sort((a, b) => (a.text < b.text ? -1 : 1 ));
+      else
+      result1 = result1.sort((a, b) => (a.text > b.text ? -1 : 1 ));
+    }
     const result = result1.slice((payload.queryPagingSetting.currentPage - 1) * payload.queryPagingSetting.pageSize, payload.queryPagingSetting.currentPage * payload.queryPagingSetting.pageSize);
     const queryPagingSetting = {
       currentPage: payload.queryPagingSetting.currentPage,
@@ -41,9 +49,10 @@ export class TodoApi {
       recordCountOfCurrentPage: result.length,
       countOfRecords: result1.length,
       countOfPages: Math.ceil(result1.length / payload.queryPagingSetting.pageSize)
-    }
+    };
+
     return new Promise<IListResponse<Todo[]>>((resolve) => {
-      resolve({ result, queryPagingSetting } as IListResponse<Todo[]>);
+      resolve({ result, orderBy: payload.orderBy, queryPagingSetting } as IListResponse<Todo[]>);
     });
   }
 }

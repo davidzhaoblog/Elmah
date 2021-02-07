@@ -4,6 +4,17 @@ export const useStyles = makeStyles((theme: Theme) => ({
   root: {
       width: '100%',
   },
+  rightToolbarItem: {
+    marginLeft: "auto",
+    marginRight: -12
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },  
   boxHeader: {
       width: '100%',
       display: 'flex',
