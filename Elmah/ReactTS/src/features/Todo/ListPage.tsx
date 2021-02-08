@@ -4,7 +4,7 @@ import { Button, Paper, Toolbar, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 
 import store from 'src/store/Store';
-import { useStyles } from './styles';
+import { useStyles } from '../listStyles';
 import { showSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { getIndexVM, todosSelectors } from './todoSlice';
