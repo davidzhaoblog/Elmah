@@ -26,6 +26,7 @@ export default function AppDrawer(props: IAppDrawerProps): JSX.Element {
     }
 
     const routes = [
+        { path: '/', title: 'Dashboard', icon: () => <AccountCircleIcon /> },
         { path: '/account', title: 'Profile', icon: () => <AccountCircleIcon /> },
         { path: '/todolist', title: 'ToDo', icon: () => <AccountCircleIcon /> },
     ]

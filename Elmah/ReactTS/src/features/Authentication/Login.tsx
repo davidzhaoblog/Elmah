@@ -1,6 +1,6 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect, useLocation } from 'react-router-dom';
 import { Avatar, Button, Container, CssBaseline, Link, Grid, Paper, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
 import { AccountCircle as AccountCircleIcon } from '@material-ui/icons';
 import { useForm, Controller } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { login } from './authenticationSlice';
 import { showSpinner } from 'src/layout/appSlice';
 import { CssTextField, useStyles } from './styles';
 import { LoginViewModel } from 'src/models/AccountModels';
+import { RootState } from 'src/store/CombinedReducers';
 
 interface stateType {
     from: { pathname: string }
@@ -18,13 +19,11 @@ interface stateType {
 
 export default function LoginPage(): JSX.Element {
     const dispatch = useDispatch();
-    const history = useHistory();
     const classes = useStyles();
-    // const [email,setEmail] = useState("");
-    // const [password,setPassword] = useState("");
     const location = useLocation<stateType>();
     const { search } = useLocation();
     const values = queryString.parse(search)
+    const auth = useSelector((state: RootState) => state.auth);
     // console.log(values) // "top"
 
     const { register, handleSubmit, control, errors } = useForm({
@@ -39,22 +38,16 @@ export default function LoginPage(): JSX.Element {
 
     const { from } = location.state || { from: { pathname: values.redirect || "/" } };
 
-    // const handleEmailAddressChange = (event: any) => {
-    //     setEmail(event.target.value)
-    // }
-
-    // const handlePasswordChange = (event: any) => {
-    //     setPassword(event.target.value)
-    // }
-
     const onSubmit = (data: LoginViewModel) => {
-        // e.preventDefault();
         dispatch(showSpinner());
         dispatch(login(data));
-        history.replace(from);
     }
 
     return (
+        <>
+        {(auth && auth.isAuthenticated) &&
+            <Redirect to={from} />
+        }
         <Container component='main' maxWidth='xs'>
             <DevTool control={control} />
             <CssBaseline />
@@ -169,5 +162,6 @@ export default function LoginPage(): JSX.Element {
                 </form>
             </Paper>
         </Container>
+        </>
     );
 }
