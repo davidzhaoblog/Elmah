@@ -71,3 +71,13 @@ https://github.com/Bradleykingz/react-filters-pagination
 
 How to Use Axios/Typescript like a pro! (axios-es6-class)
 https://enetoolveda.medium.com/how-to-use-axios-typescript-like-a-pro-7c882f71e34a
+
+Popup
+https://github.com/CodAffection/React-Material-UI-Dialog-Modal-Popup
+
+react-hook-form@6.5.3
+Ultimate Form Validation in React with the awesome React Hook Form and Material-UI Libraries!
+https://dev.to/sergiosanchezs/ultimate-form-validation-in-react-with-the-awesome-react-hook-form-and-material-ui-libraries-26ii
+https://github.com/sergiosanchezs/react-validation
+4 ways to use Material UI Select with React Hook Form
+https://dev.to/raduan/4-ways-to-use-material-ui-select-with-react-hook-form-41b2

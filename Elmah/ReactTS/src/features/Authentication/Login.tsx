@@ -1,120 +1,173 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom';
-import { createStyles, makeStyles, Theme, } from '@material-ui/core/styles';
-import { Button, FormControl, Icon, Input, InputAdornment, InputLabel, Paper } from '@material-ui/core';
+import { Avatar, Button, Container, CssBaseline, Link, Grid, Paper, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
+import { AccountCircle as AccountCircleIcon } from '@material-ui/icons';
+import { useForm, Controller } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 const queryString = require('query-string');
 
 import { login } from './authenticationSlice';
 import { showSpinner } from 'src/layout/appSlice';
+import { CssTextField, useStyles } from './styles';
+import { LoginViewModel } from 'src/models/AccountModels';
 
 interface stateType {
     from: { pathname: string }
- }
- 
+}
+
 export default function LoginPage(): JSX.Element {
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
+    // const [email,setEmail] = useState("");
+    // const [password,setPassword] = useState("");
     const location = useLocation<stateType>();
     const { search } = useLocation();
     const values = queryString.parse(search)
     // console.log(values) // "top"
 
+    const { register, handleSubmit, control, errors } = useForm({
+        mode: 'onChange',
+        reValidateMode: 'onChange',
+        defaultValues: {
+            email: '',
+            password: '',
+            remember: true,
+        },
+    });
+
     const { from } = location.state || { from: { pathname: values.redirect || "/" } };
 
-    const handleEmailAddressChange = (event: any) => {
-        setEmail(event.target.value)
-    }
+    // const handleEmailAddressChange = (event: any) => {
+    //     setEmail(event.target.value)
+    // }
 
-    const handlePasswordChange = (event: any) => {
-        setPassword(event.target.value)
-    }
+    // const handlePasswordChange = (event: any) => {
+    //     setPassword(event.target.value)
+    // }
 
-    const handleSubmit = (e:any) => {
-        e.preventDefault();
+    const onSubmit = (data: LoginViewModel) => {
+        // e.preventDefault();
         dispatch(showSpinner());
-        dispatch(login({email, password, from, rememberMe: true}));
+        dispatch(login(data));
         history.replace(from);
     }
-    
-    return (
 
-        <div className={classes.container}>
-        <Paper className={classes.paper}>
-            <h2>{'Login'}</h2>
-            <FormControl required={true} fullWidth={true} className={classes.field}>
-                <InputLabel htmlFor="email">Email Address</InputLabel>
-                <Input
-                    value={email}
-                    onChange={handleEmailAddressChange}
-                    id="email"
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <Icon>email</Icon>
-                        </InputAdornment>}
-                />
-            </FormControl>
-            <FormControl required={true} fullWidth={true} className={classes.field}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                    value={password}
-                    onChange={handlePasswordChange}
-                    type="password"
-                    id="password"
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <Icon>lock</Icon>
-                        </InputAdornment>}
-                />
-            </FormControl>
-            <div className={classes.actions}>
-                <Button className={classes.button}>
-                    Cancel
-                </Button>
-                <Button
-                    onClick={handleSubmit}
-                    color="primary"
-                    className={classes.button}>
-                    Submit
-                </Button>
-            </div>
-        </Paper>
-    </div>      
+    return (
+        <Container component='main' maxWidth='xs'>
+            <DevTool control={control} />
+            <CssBaseline />
+            <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <AccountCircleIcon style={{ fontSize: 45 }} />
+                </Avatar>
+                <Typography component='h1' variant='h4'>
+                    Sign in
+                </Typography>
+                <form
+                    className={classes.form}
+                    noValidate
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <CssTextField
+                        name='email'
+                        label='Email Address'
+                        variant='outlined'
+                        margin='normal'
+                        inputRef={register({
+                            required: 'You must provide the email address!',
+                            pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'You must provide a valid email address!',
+                            },
+                        })}
+                        autoComplete='email'
+                        error={!!errors.email}
+                        fullWidth
+                        autoFocus
+                    />
+                    {errors.email && (
+                        <span className={classes.error}>{errors.email.message}</span>
+                    )}
+                    <CssTextField
+                        name='password'
+                        label='Password'
+                        type='password'
+                        variant='outlined'
+                        margin='normal'
+                        inputRef={register({
+                            required: 'You must provide a password.',
+                            minLength: {
+                                value: 6,
+                                message: 'Your password must be greater than 6 characters',
+                            },
+                        })}
+                        error={!!errors.password}
+                        fullWidth
+                        autoComplete='current-password'
+                    />
+                    {errors.password && (
+                        <span className={classes.error}>{errors.password.message}</span>
+                    )}
+
+                    <Grid container>
+                        <Grid item xs>
+                            <Link href='#' variant='body2' className={classes.link}>
+                                Forgot password?
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <FormControlLabel
+                                label='Remember me'
+                                name='remember'
+                                control={
+                                    <Checkbox
+                                        className={classes.checkBox}
+                                        inputRef={register()}
+                                    />
+                                }
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        <FormControlLabel
+                            control={
+                                <Controller
+                                    control={control}
+                                    name='checkTest'
+                                    defaultValue={true}
+                                    render={({ onChange, value }) => (
+                                        <Checkbox
+                                            className={classes.checkBox}
+                                            onChange={e => onChange(e.target.checked)}
+                                            checked={value}
+                                        />
+                                    )}
+                                />
+                            }
+                            label='Remember Me'
+                        />
+                    </Grid>
+
+                    <Button
+                        type='submit'
+                        fullWidth
+                        variant='contained'
+                        disabled={!!errors.email || !!errors.password}
+                        className={classes.submit}
+                    >
+                        Sign In
+          </Button>
+                    <Grid container>
+                        <Grid item>
+                            <Link href='#' variant='body2' className={classes.link}>
+                                {'New to this platform? Create an Acount.'}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+            </Paper>
+        </Container>
     );
 }
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-    container: {
-        display: 'flex',
-        justifyContent: 'center'
-    },
-    paper: theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-        marginTop: theme.spacing.length * 3,
-        width: '30%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignContent: 'center',
-        [theme.breakpoints.down('md')]: {
-            width: '100%',
-        },
-    }),
-    field: {
-        marginTop: theme.spacing.length * 3
-    },
-    actions: theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-        marginTop: theme.spacing.length * 3,
-        display: 'flex',
-        flexDirection: 'row',
-        alignContent: 'center'
-    }),
-    button: {
-        marginRight: theme.spacing.length
-    },
-  }));
