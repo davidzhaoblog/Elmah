@@ -1,5 +1,5 @@
-export interface IListProps
+export interface IListProps<TItem>
 {
   classes?: any;
-  items: any[];
+  items: TItem[];
 }

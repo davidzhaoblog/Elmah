@@ -151,7 +151,7 @@ export default function LoginPage(): JSX.Element {
                         className={classes.submit}
                     >
                         Sign In
-          </Button>
+                    </Button>
                     <Grid container>
                         <Grid item>
                             <Link href='#' variant='body2' className={classes.link}>

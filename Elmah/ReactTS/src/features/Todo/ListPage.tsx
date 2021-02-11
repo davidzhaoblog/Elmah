@@ -14,6 +14,7 @@ import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { orderBys } from './types';
 import Popup from 'src/components/Popup';
+import Edit from 'src/components/Todo/Edit';
 
 export default function TodoList(): JSX.Element {
   const classes = useStyles();
@@ -100,7 +101,7 @@ export default function TodoList(): JSX.Element {
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
-        <Typography className={classes.boxHeaderTitle}>Todos</Typography>
+        <Edit />
       </Popup>
     </>
   );

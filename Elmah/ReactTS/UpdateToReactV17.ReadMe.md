@@ -81,3 +81,7 @@ https://dev.to/sergiosanchezs/ultimate-form-validation-in-react-with-the-awesome
 https://github.com/sergiosanchezs/react-validation
 4 ways to use Material UI Select with React Hook Form
 https://dev.to/raduan/4-ways-to-use-material-ui-select-with-react-hook-form-41b2
+
+This section covers more advanced usage of @material-ui/core/styles.
+Theming, Overriding styles - classes prop, JSS plugins, CSS injection order, Class names, Global CSS, 
+https://material-ui.com/styles/advanced/#makestyles-withstyles-styled

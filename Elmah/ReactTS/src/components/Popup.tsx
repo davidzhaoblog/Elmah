@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@material-ui/core';
+import { Button, Dialog, DialogTitle, DialogContent, makeStyles, Typography, DialogActions } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 interface IPopupProps {
@@ -30,6 +30,11 @@ export default function Popup(props: IPopupProps) {
             <DialogContent dividers>
                 {children}
             </DialogContent>
+            <DialogActions>
+                <Button color="primary">
+                        Confirm
+                </Button>
+            </DialogActions>
         </Dialog>
     )
 }

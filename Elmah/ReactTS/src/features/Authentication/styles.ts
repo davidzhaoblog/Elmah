@@ -13,9 +13,6 @@ export const CssTextField = withStyles({
     '& .MuiInput-underline:after': {
       borderBottomColor: dartmouthGreenColor,
     },
-    '&$checked': {
-      color: '#3D70B2',
-    },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: dartmouthGreenColor,
