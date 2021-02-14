@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { DevTool } from '@hookform/devtools';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { CssTextField } from 'src/features/Authentication/styles';
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
 import { createTodoDefault, Todo } from 'src/features/Todo/types';
@@ -10,6 +10,7 @@ import { upsert } from 'src/features/Todo/todoSlice';
 import FormPopup from '../FormPopup';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+import { useStyles } from 'src/features/formStyles';
 
 export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     const dispatch = useDispatch();
@@ -33,7 +34,8 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
         if (!data.text.trim()) {
             return
         }
-        dispatch(upsert({ ...props.item, ...data, id: 0, completed: false }))
+        const dataToUpsert = { id: 0, completed: false, ...props.item, ...data };
+        dispatch(upsert(dataToUpsert))
 
         setValue('text', '');
         setOpenPopup(false);
@@ -82,51 +84,3 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
         </FormPopup>
     );
 }
-
-const mingColor = '#387780';
-const emeraldGreenColor = '#62C370';
-export const useStyles = makeStyles(theme => {
-    return {
-        paper: {
-            margin: theme.spacing(4, 0),
-            display: 'flex',
-            color: '#387780',
-            flexDirection: 'column',
-            alignItems: 'center',
-            border: `1px solid ${emeraldGreenColor}`,
-            borderRadius: '2rem',
-            padding: '1.5rem 2.5rem',
-        },
-        avatar: {
-            margin: theme.spacing(3),
-            backgroundColor: emeraldGreenColor,
-            fontSize: 50,
-        },
-        form: {
-            marginTop: theme.spacing(4),
-            width: '100%',
-        },
-        gridLeft: {
-            paddingRight: theme.spacing(1),
-        },
-        gridRight: {
-            paddingLeft: theme.spacing(1),
-        },
-        submit: {
-            margin: theme.spacing(3, 0, 2),
-            backgroundColor: emeraldGreenColor,
-            color: 'white',
-            padding: '50 50',
-        },
-        link: {
-            color: mingColor,
-            textDecoration: 'none !important',
-        },
-        checkBox: {
-            color: `${emeraldGreenColor} !important`,
-        },
-        error: {
-            color: 'red',
-        },
-    };
-});
