@@ -21,6 +21,7 @@ import Account from "src/features/Authentication/Account";
 import DashboardPage from "src/features/DashboardPage";
 import { todosSelectors } from "src/features/Todo/todoSlice";
 import TodoList from "src/features/Todo/ListPage";
+import { createLogoutAlertButtonsOptions } from "src/framework/ViewModels/IButtonOptions";
 
 interface IMasterLayoutProps {
     theme: Theme;
@@ -83,7 +84,12 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const handleAlertClose = () => {
         dispatch(closeAlert());
     }
-    const logoutAlertDialog = { title: 'You are logging out', message: 'You are logging out', buttons: [{ label: 'Log out', handler: confirmLogout }, { label: 'Cancel', handler: handleAlertClose }] };
+    const logoutAlertDialog = {
+        title: 'You are logging out',
+        message: 'You are logging out',
+        buttons: createLogoutAlertButtonsOptions(confirmLogout, handleAlertClose)
+    };
+
     const handleLogout = () => {
         dispatch(showAlert(logoutAlertDialog));
     };
@@ -174,7 +180,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const renderAlert = () => {
         if (app.alert) {
             return (
-                <AlertDialog />
+                <AlertDialog title={app.alert.title} message={app.alert.message} buttons={app.alert.buttons} />
             );
         }
 

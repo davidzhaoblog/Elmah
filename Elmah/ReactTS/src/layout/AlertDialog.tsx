@@ -5,27 +5,24 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/CombinedReducers';
+import { IAlert } from 'src/framework/ViewModels/IAlert';
 
-export default function AlertDialog(): JSX.Element {
-    const app = useSelector((state: RootState) => state.app);
-
+export default function AlertDialog(props: IAlert): JSX.Element {
     return (
         <Dialog
-            open={app.alert !== null}
+            open={props !== null}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{app.alert.title}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    {app.alert.message}
+                    {props.message}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                {app.alert.buttons.map((button: any) => {
-                    return (<Button onClick={button.handler} color="primary" key={button.label}>
+                {props.buttons.map((button: any) => {
+                    return (<Button onClick={button.handler} color={button.color} key={button.label}>
                         {button.label}
                     </Button>
                     );

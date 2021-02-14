@@ -1,126 +1,83 @@
 import * as React from 'react'
-import { FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Radio, RadioGroup } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { DevTool } from '@hookform/devtools';
+import { Grid, makeStyles } from '@material-ui/core';
 import { CssTextField } from 'src/features/Authentication/styles';
+import { IFormProps } from 'src/framework/ViewModels/IFormProps';
+import { Todo } from 'src/features/Todo/types';
+import { upsert } from 'src/features/Todo/todoSlice';
+import FormPopup from '../FormPopup';
+import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
+import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 
-export default function Edit() {
+export default function Edit(props: IFormProps<Todo> & IPopupProps) {
+    const dispatch = useDispatch();
     const classes = useStyles();
+    const { openPopup, setOpenPopup } = props;
 
-    const { register, handleSubmit, control, errors } = useForm({
+    const { register, setValue, handleSubmit, control, errors, formState } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
         defaultValues: {
-            email: '',
-            password: '',
-            remember: true,
-        },
+            id: 0,
+            text: '',
+            completed: false,
+        }
     });
 
-    const onSubmit = (data: any) => {
+    const closePopup = () => {
+        // setRecordForEdit(item)
+        setOpenPopup(false)
+    }
 
+    const popupButtonsOptions = createEditFormButtonsOptions(closePopup);
+
+    const onSubmit = (data: any) => {
+        if (!data.text.trim()) {
+            return
+        }
+        dispatch(upsert({ ...props.item, ...data, id: 0, completed: false }))
+
+        setValue('text', '');
+        setOpenPopup(false);
     }
 
     return (
-        <div>
-            <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-                <Grid container>
-                    <DevTool control={control} />
-                    <Grid item xs={6} className={classes.gridLeft}>
-                        <CssTextField
-                            name='email'
-                            label='Email Address'
-                            variant='outlined'
-                            margin='normal'
-                            inputRef={register({
-                                required: 'You must provide the email address!',
-                                pattern: {
-                                    value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                    message: 'You must provide a valid email address!',
-                                },
-                            })}
-                            autoComplete='email'
-                            error={!!errors.email}
-                            fullWidth
-                            autoFocus
-                        />
-                        {errors.email && (
-                            <span className={classes.error}>{errors.email.message}</span>
-                        )}
-                        <CssTextField
-                            name='password'
-                            label='Password'
-                            type='password'
-                            variant='outlined'
-                            margin='normal'
-                            inputRef={register({
-                                required: 'You must provide a password.',
-                                minLength: {
-                                    value: 6,
-                                    message: 'Your password must be greater than 6 characters',
-                                },
-                            })}
-                            error={!!errors.password}
-                            fullWidth
-                            autoComplete='current-password'
-                        />
-                        {errors.password && (
-                            <span className={classes.error}>{errors.password.message}</span>
-                        )}
-                    </Grid>
-                    <Grid item xs={6} className={classes.gridRight}>
+        <FormPopup
+            title="Todo Form"
+            openPopup={openPopup}
+            setOpenPopup={setOpenPopup}
+            submitDisabled={!formState.isValid}
+            handleSubmit={handleSubmit(onSubmit)}
+            buttons={popupButtonsOptions}
+        >
+            <Grid container>
+                <DevTool control={control} />
+                <Grid item xs={6} className={classes.gridLeft}>
                     <CssTextField
-                            name='email'
-                            label='Email Address'
-                            variant='outlined'
-                            margin='normal'
-                            inputRef={register({
-                                required: 'You must provide the email address!',
-                                pattern: {
-                                    value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                    message: 'You must provide a valid email address!',
-                                },
-                            })}
-                            autoComplete='email'
-                            error={!!errors.email}
-                            fullWidth
-                            autoFocus
-                        />
-                        {errors.email && (
-                            <span className={classes.error}>{errors.email.message}</span>
-                        )}
-                        <CssTextField
-                            name='password'
-                            label='Password'
-                            type='password'
-                            variant='outlined'
-                            margin='normal'
-                            inputRef={register({
-                                required: 'You must provide a password.',
-                                minLength: {
-                                    value: 6,
-                                    message: 'Your password must be greater than 6 characters',
-                                },
-                            })}
-                            error={!!errors.password}
-                            fullWidth
-                            autoComplete='current-password'
-                        />
-                        {errors.password && (
-                            <span className={classes.error}>{errors.password.message}</span>
-                        )}
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">Gender</FormLabel>
-                            <RadioGroup row aria-label="gender" name="gender1">
-                                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                <FormControlLabel value="other" control={<Radio />} label="Other" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
+                        name='text'
+                        label='text'
+                        variant='outlined'
+                        margin='normal'
+                        inputRef={register({
+                            required: 'You must provide the text!',
+                            minLength: {
+                                value: 6,
+                                message: 'Text must be greater than 6 characters',
+                            },
+                        })}
+                        error={!!errors.text}
+                        fullWidth
+                        autoFocus
+                    />
+                    {errors.text && (
+                        <span className={classes.error}>{errors.text.message}</span>
+                    )}
                 </Grid>
-            </form>
-        </div>
+            </Grid>
+
+        </FormPopup>
     );
 }
 

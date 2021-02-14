@@ -13,8 +13,8 @@ import PageSizePicker from 'src/components/PageSizePicker';
 import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { orderBys } from './types';
-import Popup from 'src/components/Popup';
 import Edit from 'src/components/Todo/Edit';
+import { FormTypes } from 'src/framework/ViewModels/IFormProps';
 
 export default function TodoList(): JSX.Element {
   const classes = useStyles();
@@ -40,16 +40,14 @@ export default function TodoList(): JSX.Element {
     dispatch(getIndexVM({ criteria: null, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
 
-
   const openInPopup = () => {
     // setRecordForEdit(item)
     setOpenPopup(true)
-}
+  }
 
   const listItems = useSelector(
     (state: RootState) => todosSelectors.selectAll(state)
   );
-
 
   useEffect(() => {
     dispatch(showSpinner());
@@ -64,7 +62,7 @@ export default function TodoList(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>Todos</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openInPopup() }}>Delete all</Button>
+          <Button onClick={() => { openInPopup() }}>Add</Button>
         </div>
         <div>
           <Toolbar>
@@ -96,13 +94,10 @@ export default function TodoList(): JSX.Element {
           <List items={listItems} classes={classes} />
         </div>
       </Paper>
-      <Popup
-        title="Todo Form"
+      <Edit type={FormTypes.Create}
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
-      >
-        <Edit />
-      </Popup>
+      />
     </>
   );
 }

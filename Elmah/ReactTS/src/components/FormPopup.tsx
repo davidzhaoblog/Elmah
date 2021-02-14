@@ -4,9 +4,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import DialogButtonList from './DialogButtonList';
 
-export default function Popup(props: IPopupProps) {
+export default function FormPopup(props: IPopupProps) {
 
-    const { title, children, openPopup, setOpenPopup, buttons } = props;
+    const { title, children, openPopup, setOpenPopup, buttons, handleSubmit } = props;
     const classes = useStyles();
 
     return (
@@ -22,12 +22,14 @@ export default function Popup(props: IPopupProps) {
                     </Button>
                 </div>
             </DialogTitle>
-            <DialogContent dividers>
-                {children}
-            </DialogContent>
-            <DialogActions>
-                <DialogButtonList buttons={buttons} />
-            </DialogActions>
+            <form noValidate onSubmit={handleSubmit}>
+                <DialogContent dividers>
+                    {children}
+                </DialogContent>
+                <DialogActions>
+                    <DialogButtonList buttons={buttons} submitDisabled={props.submitDisabled} />
+                </DialogActions>
+            </form>
         </Dialog>
     )
 }

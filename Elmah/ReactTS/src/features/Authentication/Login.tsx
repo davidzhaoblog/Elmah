@@ -10,7 +10,6 @@ const queryString = require('query-string');
 import { login } from './authenticationSlice';
 import { showSpinner } from 'src/layout/appSlice';
 import { CssTextField, useStyles } from './styles';
-import { LoginViewModel } from 'src/models/AccountModels';
 import { RootState } from 'src/store/CombinedReducers';
 
 interface stateType {
@@ -26,7 +25,7 @@ export default function LoginPage(): JSX.Element {
     const auth = useSelector((state: RootState) => state.auth);
     // console.log(values) // "top"
 
-    const { register, handleSubmit, control, errors } = useForm({
+    const { register, setValue, handleSubmit, control, errors, formState } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
         defaultValues: {
@@ -38,9 +37,10 @@ export default function LoginPage(): JSX.Element {
 
     const { from } = location.state || { from: { pathname: values.redirect || "/" } };
 
-    const onSubmit = (data: LoginViewModel) => {
+    const onSubmit = (data: any) => {
         dispatch(showSpinner());
         dispatch(login(data));
+        setValue('password', '');
     }
 
     return (
@@ -147,7 +147,7 @@ export default function LoginPage(): JSX.Element {
                         type='submit'
                         fullWidth
                         variant='contained'
-                        disabled={!!errors.email || !!errors.password}
+                        disabled={!formState.isValid}
                         className={classes.submit}
                     >
                         Sign In

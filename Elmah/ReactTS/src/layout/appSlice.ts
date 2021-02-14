@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAlert, IAppState } from './types';
+import { IAlert } from 'src/framework/ViewModels/IAlert';
+import { IAppState } from 'src/framework/ViewModels/IAppState';
 
 const initialState : IAppState = {
     drawerOpen: true,

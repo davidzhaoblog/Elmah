@@ -1,5 +1,12 @@
 export interface IFormProps<TItem>
 {
   classes?: any;
-  items: TItem;
+  type: FormTypes;
+  item?: TItem;
+}
+
+export enum FormTypes {
+  Create,
+  Edit,
+  View,
 }
