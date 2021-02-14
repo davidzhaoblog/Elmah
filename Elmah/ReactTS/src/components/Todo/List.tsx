@@ -8,7 +8,7 @@ export default function List(props: IListProps<Todo>) {
         <div>
             {props.items.map((item: any) => {
                 return (
-                    <ListItem key={item.id} item={item} classes={props.classes} />
+                    <ListItem key={item.id} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
                 );
             })}
         </div>

@@ -12,7 +12,7 @@ import List from 'src/components/Todo/List';
 import PageSizePicker from 'src/components/PageSizePicker';
 import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
-import { orderBys } from './types';
+import { orderBys, Todo } from './types';
 import Edit from 'src/components/Todo/Edit';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
 
@@ -23,7 +23,8 @@ export default function TodoList(): JSX.Element {
   const { orderBy, queryPagingSetting } = store.getState().todos;
 
   const [openPopup, setOpenPopup] = useState(false);
-  const [formType, setFormTypes] = useState(FormTypes.Create);
+  const [formType, setFormType] = useState(FormTypes.Create);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
@@ -41,9 +42,10 @@ export default function TodoList(): JSX.Element {
     dispatch(getIndexVM({ criteria: null, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
 
-  const openFormInPopup = (type: FormTypes) => {
-    setFormTypes(type);
+  const openFormInPopup = (type: FormTypes, item: Todo) => {
+    setFormType(type);
     setOpenPopup(true);
+    setSelectedItem(item);
   }
 
   const listItems = useSelector(
@@ -63,7 +65,7 @@ export default function TodoList(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>Todos</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openFormInPopup(FormTypes.Create) }}>Add</Button>
+          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>Add</Button>
         </div>
         <div>
           <Toolbar>
@@ -92,13 +94,14 @@ export default function TodoList(): JSX.Element {
               />
             </div>
           </Toolbar>
-          <List items={listItems} classes={classes} />
+          <List items={listItems} classes={classes} openFormInPopup={openFormInPopup} />
         </div>
       </Paper>
-      <Edit type={formType}
+      {openPopup ? <Edit type={formType}
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
-      />
+        item={selectedItem}
+      /> : null}
     </>
   );
 }

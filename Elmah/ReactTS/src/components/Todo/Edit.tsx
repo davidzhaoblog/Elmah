@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { DevTool } from '@hookform/devtools';
 import { Grid, makeStyles } from '@material-ui/core';
 import { CssTextField } from 'src/features/Authentication/styles';
-import { IFormProps } from 'src/framework/ViewModels/IFormProps';
-import { Todo } from 'src/features/Todo/types';
+import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
+import { createTodoDefault, Todo } from 'src/features/Todo/types';
 import { upsert } from 'src/features/Todo/todoSlice';
 import FormPopup from '../FormPopup';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
@@ -16,14 +16,10 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     const classes = useStyles();
     const { openPopup, setOpenPopup } = props;
 
-    const { register, setValue, handleSubmit, control, errors, formState } = useForm({
+    const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
-        defaultValues: {
-            id: 0,
-            text: '',
-            completed: false,
-        }
+        defaultValues: createTodoDefault()
     });
 
     const closePopup = () => {
@@ -42,6 +38,12 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
         setValue('text', '');
         setOpenPopup(false);
     }
+
+    useEffect(() => {
+        const data = props.type === FormTypes.Edit ? props.item : createTodoDefault()
+        // you can do async server request and fill up form
+        reset(data);
+    }, []);
 
     return (
         <FormPopup
