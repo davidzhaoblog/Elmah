@@ -22,7 +22,8 @@ export default function TodoList(): JSX.Element {
 
   const { orderBy, queryPagingSetting } = store.getState().todos;
 
-  const [openPopup, setOpenPopup] = useState(false)
+  const [openPopup, setOpenPopup] = useState(false);
+  const [formType, setFormTypes] = useState(FormTypes.Create);
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
@@ -40,9 +41,9 @@ export default function TodoList(): JSX.Element {
     dispatch(getIndexVM({ criteria: null, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
 
-  const openInPopup = () => {
-    // setRecordForEdit(item)
-    setOpenPopup(true)
+  const openFormInPopup = (type: FormTypes) => {
+    setFormTypes(type);
+    setOpenPopup(true);
   }
 
   const listItems = useSelector(
@@ -62,7 +63,7 @@ export default function TodoList(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>Todos</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openInPopup() }}>Add</Button>
+          <Button onClick={() => { openFormInPopup(FormTypes.Create) }}>Add</Button>
         </div>
         <div>
           <Toolbar>
@@ -94,7 +95,7 @@ export default function TodoList(): JSX.Element {
           <List items={listItems} classes={classes} />
         </div>
       </Paper>
-      <Edit type={FormTypes.Create}
+      <Edit type={formType}
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       />

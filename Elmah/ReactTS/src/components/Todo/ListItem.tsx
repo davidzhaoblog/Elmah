@@ -20,7 +20,7 @@ export default function ListItem(props: IListItemProps) {
             </AccordionDetails> */}
             <Divider />
             <AccordionActions>
-                <Button size="small">Cancel</Button>
+                <Button size="small">Edit</Button>
                 <Button size="small" color="primary">
                     Delete
                             </Button>

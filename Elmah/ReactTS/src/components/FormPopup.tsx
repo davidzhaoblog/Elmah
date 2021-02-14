@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Dialog, DialogTitle, DialogContent, makeStyles, Typography, DialogActions } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
-import DialogButtonList from './DialogButtonList';
+import ButtonList from './ButtonList';
 
 export default function FormPopup(props: IPopupProps) {
 
@@ -27,7 +27,7 @@ export default function FormPopup(props: IPopupProps) {
                     {children}
                 </DialogContent>
                 <DialogActions>
-                    <DialogButtonList buttons={buttons} submitDisabled={props.submitDisabled} />
+                    <ButtonList buttons={buttons} submitDisabled={props.submitDisabled} />
                 </DialogActions>
             </form>
         </Dialog>
