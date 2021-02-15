@@ -39,6 +39,7 @@ export const del = createAsyncThunk(
     async (payload: Todo) => {
         // const response = await entityStatusCodeApiClient.Delete();
         // return response;
+        return payload;
     }
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
@@ -83,6 +84,7 @@ const todoSlice = createSlice({
             // console.log("delete.pending");
         });
         builder.addCase(del.fulfilled, (state, { payload }) => {
+            entityAdapter.removeOne(state, payload.id);
             // console.log("delete.fulfilled");
         });
         builder.addCase(del.rejected, (state, action) => {

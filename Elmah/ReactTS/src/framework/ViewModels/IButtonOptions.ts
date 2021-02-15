@@ -29,3 +29,9 @@ export function createLogoutAlertButtonsOptions(confirmHandler: () => void, canc
     { label: "Log out", color: 'primary', handler: confirmHandler },
     { label: "Cancel", color: 'default', handler: cancelhandler }];  
 }
+
+export function createDeleteAlertButtonsOptions(confirmHandler: () => void, cancelhandler: () => void): IButtonOptions[] {
+  return [
+    { label: "Delete", color: 'primary', handler: confirmHandler },
+    { label: "Cancel", color: 'default', handler: cancelhandler }];  
+}
