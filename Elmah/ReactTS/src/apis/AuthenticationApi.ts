@@ -3,7 +3,6 @@ import { LoginViewModel, AuthenticationResponse } from 'src/models/AccountModels
 import { apiConfig } from 'src/framework/apiConfig';
 import { ApiBase } from 'src/framework/ApiBase';
 
-
 export class AuthenticationApi extends ApiBase
 {
   public constructor(conf?: AxiosRequestConfig) {
