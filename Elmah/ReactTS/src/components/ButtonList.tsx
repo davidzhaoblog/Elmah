@@ -11,11 +11,11 @@ export default function ButtonList(props: { buttons: IButtonOptions[], submitDis
             {props.buttons.map((button: IButtonOptions) => {
                 return (
                     <>
-                        {button.type === 'submit'
-                            ? (<Button type='submit' color={button.color} disabled={submitDisabled} key={button.label}>
+                        {(button.type === 'submit')
+                            ? (<Button type={button.type} color={button.color} disabled={submitDisabled} key={button.label}>
                                 {button.label}
                             </Button>)
-                            : (<Button onClick={button.handler} color={button.color} key={button.label}>
+                            : (<Button type={button.type} onClick={button.handler} color={button.color} key={button.label}>
                                 {button.label}
                             </Button>)
                         }

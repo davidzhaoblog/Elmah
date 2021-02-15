@@ -20,7 +20,7 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
-        defaultValues: createTodoDefault()
+        defaultValues: props.type === FormTypes.Edit ? props.item : createTodoDefault()
     });
 
     const closePopup = () => {
@@ -28,7 +28,8 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const popupButtonsOptions = createEditFormButtonsOptions(closePopup);
+    const inputData = props.type === FormTypes.Edit ? props.item : createTodoDefault()
+    const popupButtonsOptions = createEditFormButtonsOptions(()=>{reset({...inputData})}, closePopup);
 
     const onSubmit = (data: any) => {
         if (!data.text.trim()) {
@@ -42,9 +43,8 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     }
 
     useEffect(() => {
-        const data = props.type === FormTypes.Edit ? props.item : createTodoDefault()
         // you can do async server request and fill up form
-        reset(data);
+        reset(inputData);
     }, []);
 
     return (

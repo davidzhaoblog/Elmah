@@ -1,24 +1,27 @@
 import { PropTypes } from "@material-ui/core";
 
+export type ButtonType = JSX.IntrinsicElements['button']['type']
+
 export interface IButtonOptions {
   label: string;
   color: PropTypes.Color;
-  type?: string;
+  type?: ButtonType;
   handler?: () => void;
 }
 
-function createSubmitFormButtonsOptions(submitLabel: string, cancelLabel: string, cancelhandler: () => void): IButtonOptions[] {
+function createSubmitFormButtonsOptions(submitLabel: string, resetLabel: string, resetHandler: () => void, cancelLabel: string, cancelHandler: () => void): IButtonOptions[] {
   return [
-    { label: submitLabel, color: 'primary', type: 'submit' },
-    { label: cancelLabel, color: 'default', handler: cancelhandler }];
+    { label: submitLabel, color: 'primary', type: "submit" },
+    { label: resetLabel, color: 'default', type: "button", handler: resetHandler },
+    { label: cancelLabel, color: 'default', type: "button", handler: cancelHandler }];
 }
 
-export function createEditFormButtonsOptions(cancelhandler: () => void): IButtonOptions[] {
-  return createSubmitFormButtonsOptions("Save", "Cancel", cancelhandler);
+export function createEditFormButtonsOptions(resetHandler: () => void, cancelhandler: () => void): IButtonOptions[] {
+  return createSubmitFormButtonsOptions("Save", 'Reset', resetHandler, "Cancel", cancelhandler);
 }
 
-export function createCreateFormButtonsOptions(cancelhandler: () => void): IButtonOptions[] {
-  return createSubmitFormButtonsOptions("Create", "Cancel", cancelhandler);
+export function createCreateFormButtonsOptions(resetHandler: () => void, cancelhandler: () => void): IButtonOptions[] {
+  return createSubmitFormButtonsOptions("Create", 'Reset', resetHandler, "Cancel", cancelhandler);
 }
 
 export function createLogoutAlertButtonsOptions(confirmHandler: () => void, cancelhandler: () => void): IButtonOptions[] {
