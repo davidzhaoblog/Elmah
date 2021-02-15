@@ -56,9 +56,9 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
             handleSubmit={handleSubmit(onSubmit)}
             buttons={popupButtonsOptions}
         >
-            <Grid container>
+            <Grid container={true}>
                 <DevTool control={control} />
-                <Grid item xs={6} className={classes.gridLeft}>
+                <Grid item lg={12}>
                     <CssTextField
                         name='text'
                         label='text'
@@ -80,7 +80,6 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
                     )}
                 </Grid>
             </Grid>
-
         </FormPopup>
     );
 }

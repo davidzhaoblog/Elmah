@@ -5,12 +5,11 @@ import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import ButtonList from './ButtonList';
 
 export default function FormPopup(props: IPopupProps) {
-
     const { title, children, openPopup, setOpenPopup, buttons, handleSubmit } = props;
     const classes = useStyles();
 
     return (
-        <Dialog open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+        <Dialog open={openPopup} maxWidth="md" fullWidth={true} classes={{ paper: classes.dialogWrapper }}>
             <DialogTitle className={classes.dialogTitle}>
                 <div style={{ display: 'flex' }}>
                     <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>

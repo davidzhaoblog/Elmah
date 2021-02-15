@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dialog, DialogTitle, DialogContent, makeStyles, Typography, DialogActions } from '@material-ui/core';
+import { Button, Dialog, DialogTitle, DialogContent, makeStyles, Typography, DialogActions, useTheme, useMediaQuery } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import ButtonList from './ButtonList';
@@ -8,9 +8,11 @@ export default function Popup(props: IPopupProps) {
 
     const { title, children, openPopup, setOpenPopup, buttons } = props;
     const classes = useStyles();
-
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    
     return (
-        <Dialog open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+        <Dialog open={openPopup} maxWidth="lg" fullWidth={true} fullScreen={fullScreen} classes={{ paper: classes.dialogWrapper }}>
             <DialogTitle className={classes.dialogTitle}>
                 <div style={{ display: 'flex' }}>
                     <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
