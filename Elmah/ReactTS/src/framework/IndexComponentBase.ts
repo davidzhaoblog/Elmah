@@ -1,6 +1,6 @@
 import { QueryOrderBySetting } from './Queries/QueryOrderBySetting';
 import { QueryPagingSetting } from './Queries/QueryPagingSetting';
-import { BusinessLogicLayerResponseStatus } from './Services/BusinessLogicLayerResponseStatus';
+import { ResponseStatus } from './Services/ResponseStatus';
 
 export interface IListRequest<TSearchCriteria> {
     criteria: TSearchCriteria;
@@ -12,7 +12,7 @@ export interface IListResponse<TSearchResult> {
     criteria: any;
     result: TSearchResult;
     orderBy: QueryOrderBySetting;
-    statusOfResult: BusinessLogicLayerResponseStatus;
+    statusOfResult: ResponseStatus;
     queryPagingSetting: QueryPagingSetting;
     
     error: any;

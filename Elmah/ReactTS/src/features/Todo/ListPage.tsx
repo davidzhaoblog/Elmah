@@ -88,7 +88,7 @@ export default function TodoList(): JSX.Element {
               />
               <OrderByPicker
                 classes={classes}
-                orderBy={orderBy.displayName}
+                orderBy={orderBy?.displayName}
                 orderBys={orderBys}
                 handleOrderByChange={handleOrderByChange}
               />

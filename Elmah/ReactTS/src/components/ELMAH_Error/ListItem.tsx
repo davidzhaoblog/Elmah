@@ -25,7 +25,7 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
 
         const deleteAlertDialog = {
             title: 'Delete',
-            message: 'You are deleting ' + props.item.text,
+            message: 'You are deleting ' + props.item.user,
             buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
         };
 
@@ -33,11 +33,11 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
     };
 
     return (
-        <Accordion key={props.item.id} expanded={true}>
+        <Accordion key={props.item.errorId.toString()} expanded={true}>
             <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
                 <Avatar className={classes.avatar} />
-                <Typography className={classes.heading}>{props.item.id}</Typography>
-                <Typography className={classes.secondaryHeading}>{props.item.text}</Typography>
+                <Typography className={classes.heading}>{props.item.errorId}</Typography>
+                <Typography className={classes.secondaryHeading}>{props.item.user}</Typography>
             </AccordionSummary>
             {/* <AccordionDetails>
                 <Typography>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { AppBar, Backdrop, Badge, CircularProgress, Hidden, IconButton, ListItemText, Menu, MenuItem, Theme, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Backdrop, Badge, CircularProgress, Hidden, IconButton, Menu, MenuItem, Theme, Toolbar, Typography } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationIcon from '@material-ui/icons/Notifications';
@@ -65,10 +65,6 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         setNotificationEl(event.currentTarget);
     };
 
-    const handleNotificationMenuClose = () => {
-        setNotificationEl(null);
-    };
-
     const navigate = (path?: string) => {
         if (path) {
             history.push(path);
@@ -130,7 +126,6 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                                     <NotificationIcon />
                                 </Badge>
                             </IconButton>
-                            {renderNotifications(unreadMessages)}
                             <IconButton
                                 aria-owns={open ? 'menu-appbar' : null}
                                 aria-haspopup="true"
@@ -188,32 +183,6 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         return null
     }
 
-    const renderNotifications = (notifications: any[]) => {
-        return (
-            <Menu
-                id="notifications"
-                anchorEl={notificationEl}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                className={classes.notifications}
-                open={Boolean(notificationEl)}
-                onClose={handleNotificationMenuClose}
-            >
-                {notifications.map((n: any) => (
-                    <MenuItem key={n.id} onClick={handleNotificationMenuClose} dense={true} button={true}>
-                        {/* <Avatar src={n.avatar} /> */}
-                        <ListItemText primary={n.text} />
-                    </MenuItem>
-                ))}
-            </Menu>
-        );
-    }
 
     const renderAccount = () => {
         return (

@@ -1,12 +1,12 @@
 import { NameValuePair } from "./Models/NameValuePair";
 import { QueryPagingSetting } from "./Queries/QueryPagingSetting";
-import { BusinessLogicLayerResponseStatus } from "./Services/BusinessLogicLayerResponseStatus";
+import { ResponseStatus } from "./Services/ResponseStatus";
 
 export interface IListState {
     criteria: any;
     // result: any[];
     orderByList: Array<NameValuePair<number>>;
-    statusOfResult: BusinessLogicLayerResponseStatus;
+    statusOfResult: ResponseStatus;
     queryPagingSetting: QueryPagingSetting;
 
     error: any;

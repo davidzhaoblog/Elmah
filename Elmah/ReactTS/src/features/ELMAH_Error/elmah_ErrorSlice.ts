@@ -1,31 +1,23 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { todoApi } from 'src/apis/TodoApi';
+import { eLMAH_ErrorApi } from 'src/apis/ELMAH_ErrorApi';
 import { IListRequest } from 'src/framework/IndexComponentBase';
 import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
-import { orderBys, ELMAH_Error } from './types';
+import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, createELMAH_ErrorCommonCriteria, convertELMAH_ErrorCommonCriteria } from './types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ELMAH_Error>({
     // Assume IDs are stored in a field other than `book.id`
-    selectId: (todo) => todo.id,
+    selectId: (eLMAH_Error: ELMAH_Error) => eLMAH_Error.errorId,
     // Keep the "all IDs" array sorted based on book titles
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
-  
-
-// 1. initialState 
-const initialState = entityAdapter.getInitialState({
-    criteria: null,
-    orderBy: orderBys.find(x=>x.displayName),
-    queryPagingSetting: createQueryPagingSetting(10, 1)
-});
 
 // 2. actions can dispatch
 // 2.upsert upsert action can dispatch
 export const upsert = createAsyncThunk(
-    'upsert',
+    'ELMAH_Error.upsert',
     async (payload: ELMAH_Error) => {
         // const response = await entityStatusCodeApiClient.Upsert();
         // return response;
@@ -35,7 +27,7 @@ export const upsert = createAsyncThunk(
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
-    'del',
+    'ELMAH_Error.del',
     async (payload: ELMAH_Error) => {
         // const response = await entityStatusCodeApiClient.Delete();
         // return response;
@@ -44,7 +36,7 @@ export const del = createAsyncThunk(
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
-    'getByIdentifier',
+    'ELMAH_Error.getByIdentifier',
     async (payload: ELMAH_Error) => {
         // const response = await entityStatusCodeApiClient.GetByIdentifier();
         // return response;
@@ -52,18 +44,23 @@ export const getByIdentifier = createAsyncThunk(
 )
 // 2.getIndexVM getIndexVM action can dispatch
 export const getIndexVM = createAsyncThunk(
-    'getIndexVM',
-    async (payload: IListRequest<ELMAH_Error>, {dispatch}) => {
-        const response = await todoApi.GetIndexVM(payload);
+    'ELMAH_Error.getIndexVM',
+    async (payload: IListRequest<ELMAH_ErrorCommonCriteria>, {dispatch}) => {
+        
+        const response = await eLMAH_ErrorApi.GetIndexVM({criteria: convertELMAH_ErrorCommonCriteria(payload.criteria), ...payload });
         dispatch(closeSpinner());
         return response;
     }
 )
 
 // 3. slice
-const todoSlice = createSlice({
-    name: 'todos',
-    initialState, // createEntityAdapter Usage #1
+const eLMAH_ErrorSlice = createSlice({
+    name: 'eLMAH_Errors',
+    initialState: entityAdapter.getInitialState({
+        criteria: createELMAH_ErrorCommonCriteria(),
+        orderBy: orderBys.find(x=>x.displayName),
+        queryPagingSetting: createQueryPagingSetting(10, 1)
+    }), // createEntityAdapter Usage #1
     reducers: {
     },
     // 3.2. extraReducers
@@ -84,7 +81,7 @@ const todoSlice = createSlice({
             // console.log("delete.pending");
         });
         builder.addCase(del.fulfilled, (state, { payload }) => {
-            entityAdapter.removeOne(state, payload.id);
+            entityAdapter.removeOne(state, payload.errorId);
             // console.log("delete.fulfilled");
         });
         builder.addCase(del.rejected, (state, action) => {
@@ -105,11 +102,15 @@ const todoSlice = createSlice({
             // console.log("getIndexVM.pending");
         });
         builder.addCase(getIndexVM.fulfilled, (state, { payload }) => {
-            entityAdapter.removeAll(state);
-            entityAdapter.upsertMany(state, payload.result);
-            state.queryPagingSetting = payload.queryPagingSetting;
-            state.orderBy = payload.orderBy;
-            // console.log("getIndexVM.fulfilled");
+            var { statusOfResult, result } = payload;
+            if(statusOfResult === 'MessageOK')
+            {
+                entityAdapter.removeAll(state);
+                entityAdapter.upsertMany(state, result);
+                state.queryPagingSetting = payload.queryPagingSetting;
+                state.orderBy = payload.orderBy;
+                // console.log("getIndexVM.fulfilled");
+            }
         });
         builder.addCase(getIndexVM.rejected, (state, action) => {
             // console.log("getIndexVM.rejected");
@@ -118,7 +119,7 @@ const todoSlice = createSlice({
 });
 
  // createEntityAdapter Usage #4, used in ToDoList.tsx
-export const todosSelectors = entityAdapter.getSelectors<RootState>(
-    state => state.todos
+export const eLMAH_ErrorSelectors = entityAdapter.getSelectors<RootState>(
+    state => state.eLMAH_Errors
   )
-export default todoSlice.reducer;
+export default eLMAH_ErrorSlice.reducer;

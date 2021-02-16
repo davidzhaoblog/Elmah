@@ -8,7 +8,7 @@ export default function List(props: IListProps<ELMAH_Error>) {
         <div>
             {props.items.map((item: any) => {
                 return (
-                    <ListItem key={item.id} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
+                    <ListItem key={item.errorId} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
                 );
             })}
         </div>

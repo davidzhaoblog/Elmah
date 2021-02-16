@@ -32,13 +32,13 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const popupButtonsOptions = createEditFormButtonsOptions(()=>{reset({...inputData})}, closePopup);
 
     const onSubmit = (data: any) => {
-        if (!data.text.trim()) {
+        if (!data.user.trim()) {
             return
         }
-        const dataToUpsert = { id: 0, completed: false, ...props.item, ...data };
+        const dataToUpsert = { errorId: 0, ...props.item, ...data };
         dispatch(upsert(dataToUpsert))
 
-        setValue('text', '');
+        setValue('user', '');
         setOpenPopup(false);
     }
 
@@ -60,23 +60,23 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                 <DevTool control={control} />
                 <Grid item lg={12}>
                     <CssTextField
-                        name='text'
-                        label='text'
+                        name='user'
+                        label='user'
                         variant='outlined'
                         margin='normal'
                         inputRef={register({
-                            required: 'You must provide the text!',
+                            required: 'You must provide the user!',
                             minLength: {
                                 value: 6,
-                                message: 'Text must be greater than 6 characters',
+                                message: 'user must be greater than 6 characters',
                             },
                         })}
-                        error={!!errors.text}
+                        error={!!errors.user}
                         fullWidth
                         autoFocus
                     />
-                    {errors.text && (
-                        <span className={classes.error}>{errors.text.message}</span>
+                    {errors.user && (
+                        <span className={classes.error}>{errors.user.message}</span>
                     )}
                 </Grid>
             </Grid>
