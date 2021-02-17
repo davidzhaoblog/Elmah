@@ -13,6 +13,7 @@ export class ELMAH_ErrorApi extends ApiBaseCRUD<
     super(conf);
 
 	  this.url_Upsert = "api/ELMAH_ErrorApi/UpsertEntity";
+    this.url_Delete = "api/ELMAH_ErrorApi/DeleteEntity";
     this.url_GetByIdentifier = "api/ELMAH_ErrorApi/GetMessageOfDefaultByIdentifier";
     this.url_GetIndexVM = "api/ELMAH_ErrorApi/GetIndexVM";
 	

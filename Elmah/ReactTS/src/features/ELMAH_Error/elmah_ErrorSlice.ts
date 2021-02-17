@@ -4,7 +4,7 @@ import { IListRequest } from 'src/framework/IndexComponentBase';
 import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
-import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, createELMAH_ErrorCommonCriteria, convertELMAH_ErrorCommonCriteria } from './types';
+import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, createELMAH_ErrorCommonCriteria, convertELMAH_ErrorCommonCriteria, ELMAH_ErrorIdentifier } from './types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ELMAH_Error>({
@@ -19,27 +19,24 @@ const entityAdapter = createEntityAdapter<ELMAH_Error>({
 export const upsert = createAsyncThunk(
     'ELMAH_Error.upsert',
     async (payload: ELMAH_Error) => {
-        // const response = await entityStatusCodeApiClient.Upsert();
-        // return response;
-
-        return payload;
+        const response = await eLMAH_ErrorApi.Upsert(payload);
+        return response;
     }
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
     'ELMAH_Error.del',
     async (payload: ELMAH_Error) => {
-        // const response = await entityStatusCodeApiClient.Delete();
-        // return response;
-        return payload;
+        const response = await eLMAH_ErrorApi.Delete(payload);
+        return response;
     }
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
     'ELMAH_Error.getByIdentifier',
-    async (payload: ELMAH_Error) => {
-        // const response = await entityStatusCodeApiClient.GetByIdentifier();
-        // return response;
+    async (payload: ELMAH_ErrorIdentifier) => {
+        const response = await eLMAH_ErrorApi.GetByIdentifier(payload);
+        return response;
     }
 )
 // 2.getIndexVM getIndexVM action can dispatch
@@ -70,7 +67,11 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("upsert.pending");
         });
         builder.addCase(upsert.fulfilled, (state, { payload }) => {
-            entityAdapter.upsertOne(state, payload);
+            var { businessLogicLayerResponseStatus, message } = payload;
+            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
+            {
+                entityAdapter.upsertOne(state, message[0]);
+            }
             // console.log("upsert.fulfilled");
         });
         builder.addCase(upsert.rejected, (state, action) => {
@@ -81,7 +82,11 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("delete.pending");
         });
         builder.addCase(del.fulfilled, (state, { payload }) => {
-            entityAdapter.removeOne(state, payload.errorId);
+            var { businessLogicLayerResponseStatus, message } = payload;
+            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
+            {
+                entityAdapter.removeOne(state, message[0].errorId);
+            }
             // console.log("delete.fulfilled");
         });
         builder.addCase(del.rejected, (state, action) => {
@@ -92,6 +97,11 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getByIdentifier.pending");
         });
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
+            var { businessLogicLayerResponseStatus, message } = payload;
+            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
+            {
+                entityAdapter.removeOne(state, message[0].errorId);
+            }
             // console.log("getByIdentifier.fulfilled");
         });
         builder.addCase(getByIdentifier.rejected, (state, action) => {
@@ -103,7 +113,7 @@ const eLMAH_ErrorSlice = createSlice({
         });
         builder.addCase(getIndexVM.fulfilled, (state, { payload }) => {
             var { statusOfResult, result } = payload;
-            if(statusOfResult === 'MessageOK')
+            if(statusOfResult && statusOfResult === 'MessageOK')
             {
                 entityAdapter.removeAll(state);
                 entityAdapter.upsertMany(state, result);
