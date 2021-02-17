@@ -25,7 +25,7 @@ const initialState = entityAdapter.getInitialState({
 // 2. actions can dispatch
 // 2.upsert upsert action can dispatch
 export const upsert = createAsyncThunk(
-    'upsert',
+    'todo.upsert',
     async (payload: Todo) => {
         // const response = await entityStatusCodeApiClient.Upsert();
         // return response;
@@ -35,7 +35,7 @@ export const upsert = createAsyncThunk(
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
-    'del',
+    'todo.del',
     async (payload: Todo) => {
         // const response = await entityStatusCodeApiClient.Delete();
         // return response;
@@ -44,7 +44,7 @@ export const del = createAsyncThunk(
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
-    'getByIdentifier',
+    'todo.getByIdentifier',
     async (payload: Todo) => {
         // const response = await entityStatusCodeApiClient.GetByIdentifier();
         // return response;
@@ -52,7 +52,7 @@ export const getByIdentifier = createAsyncThunk(
 )
 // 2.getIndexVM getIndexVM action can dispatch
 export const getIndexVM = createAsyncThunk(
-    'getIndexVM',
+    'todo.getIndexVM',
     async (payload: IListRequest<Todo>, {dispatch}) => {
         const response = await todoApi.GetIndexVM(payload);
         dispatch(closeSpinner());
