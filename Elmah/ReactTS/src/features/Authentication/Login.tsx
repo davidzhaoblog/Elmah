@@ -9,8 +9,9 @@ const queryString = require('query-string');
 
 import { login } from './authenticationSlice';
 import { showSpinner } from 'src/layout/appSlice';
-import { CssTextField, useStyles } from './styles';
+import { useStyles } from './styles';
 import { RootState } from 'src/store/CombinedReducers';
+import { CssTextField } from 'src/components/controls/CssTextField';
 
 interface stateType {
     from: { pathname: string }

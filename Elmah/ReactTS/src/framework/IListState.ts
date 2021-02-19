@@ -1,11 +1,11 @@
-import { NameValuePair } from "./Models/NameValuePair";
+import { NameNumberValue } from "./Models/NameValuePair";
 import { QueryPagingSetting } from "./Queries/QueryPagingSetting";
 import { ResponseStatus } from "./Services/ResponseStatus";
 
 export interface IListState {
     criteria: any;
     // result: any[];
-    orderByList: Array<NameValuePair<number>>;
+    orderByList: Array<NameNumberValue>;
     statusOfResult: ResponseStatus;
     queryPagingSetting: QueryPagingSetting;
 

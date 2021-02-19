@@ -82,6 +82,8 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("delete.pending");
         });
         builder.addCase(del.fulfilled, (state, { payload }) => {
+            if(!payload)
+                return;
             var { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
@@ -97,6 +99,8 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getByIdentifier.pending");
         });
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
+            if(!payload)
+                return;
             var { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
@@ -112,6 +116,8 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getIndexVM.pending");
         });
         builder.addCase(getIndexVM.fulfilled, (state, { payload }) => {
+            if(!payload)
+                return;
             var { statusOfResult, result } = payload;
             if(statusOfResult && statusOfResult === 'MessageOK')
             {

@@ -15,6 +15,7 @@ import OrderByPicker from 'src/components/OrderByPicker';
 import { orderBys, ELMAH_Error } from './types';
 import Edit from 'src/components/ELMAH_Error/Edit';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
+import { getElmahHostList } from '../listSlices';
 
 export default function ELMAH_ErrorList(): JSX.Element {
   const classes = useStyles();
@@ -55,6 +56,7 @@ export default function ELMAH_ErrorList(): JSX.Element {
   useEffect(() => {
     dispatch(showSpinner());
     dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting }));
+    dispatch(getElmahHostList());
 
     // console.log('component mounted!')
   }, []) // notice the empty array here  

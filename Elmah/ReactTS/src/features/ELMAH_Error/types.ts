@@ -14,6 +14,7 @@ export interface ELMAH_Error {
     timeUtc: Date, 
     sequence: number, 
     allXml: string, 
+    testCheckBox: boolean,
 }
 
 export function createELMAH_ErrorDefault(): ELMAH_Error {
@@ -29,6 +30,7 @@ export function createELMAH_ErrorDefault(): ELMAH_Error {
         timeUtc: new Date(), 
         sequence: 0, 
         allXml: '',
+        testCheckBox: true,
     } as unknown as ELMAH_Error;
 }
 

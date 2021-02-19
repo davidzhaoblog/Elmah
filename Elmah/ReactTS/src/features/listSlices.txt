@@ -1,0 +1,58 @@
+// import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+// import { listsApi } from 'src/apis/ListsApi';
+// import { NameValuePair as NameStringValue } from 'src/framework/Models/NameValuePair';
+// import { RootState } from 'src/store/CombinedReducers';
+
+// // 2. AsyncThunk
+// // 2.1. ElmahHost List
+// export const getElmahHostList = createAsyncThunk(
+//     'elmahhost.getList',
+//     async () => {
+//         const response = await listsApi.GetElmahHostList(null);
+//         return response;
+//     }
+// )
+
+// const entityAdapter = createEntityAdapter<NameStringValue>({
+//     // Assume IDs are stored in a field other than `book.id`
+//     selectId: (item) => item.value,
+//     // Keep the "all IDs" array sorted based on book titles
+//     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
+// })
+
+// // 1. initialState 
+// const _initialState = entityAdapter.getInitialState();
+
+// // 3. slice
+// const slice = createSlice({
+//     name: 'elmahhostaaaList',
+//     initialState: _initialState, // createEntityAdapter Usage #1
+//     reducers: {
+//     },
+//     // 3.2. extraReducers
+//     extraReducers: builder => {
+//         // 3.2.getList. getList
+//         builder.addCase(getElmahHostList.pending, (state) => {
+//             // console.log("key + getList.pending");
+//         });
+//         builder.addCase(getElmahHostList.fulfilled, (state, { payload }) => {
+//             if (payload) {
+//                 entityAdapter.removeAll(state);
+//                 entityAdapter.upsertMany(state, payload);
+//                 console.log("key + getList.fulfilled");
+//                 console.log(payload);
+//             }
+//             console.log(payload);
+//         });
+//         builder.addCase(getElmahHostList.rejected, (state, action) => {
+//             // console.log(key + ".getList.rejected");
+//         });
+//     }
+// });
+
+// // const elmahHostListSlice = createElmahHostListSlice(null, null);
+// export const elmahHostList = slice.reducer;
+
+// export const elmahHostListSelector = entityAdapter.getSelectors<RootState>(
+//     state => state.elmahHostList
+// )

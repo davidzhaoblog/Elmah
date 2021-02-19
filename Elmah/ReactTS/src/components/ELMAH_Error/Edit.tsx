@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { Controller, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { DevTool } from '@hookform/devtools';
-import { Grid } from '@material-ui/core';
-import { CssTextField } from 'src/features/Authentication/styles';
+import { Checkbox, FormControl, Grid, InputLabel, Select, TextField } from '@material-ui/core';
+import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
 import FormPopup from '../FormPopup';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
@@ -11,11 +11,16 @@ import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOp
 import { useStyles } from 'src/features/formStyles';
 import { createELMAH_ErrorDefault, ELMAH_Error } from 'src/features/ELMAH_Error/types';
 import { upsert } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
+import { elmahHostListSelector, getElmahHostList } from 'src/features/listSlices';
 
 export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
     const { openPopup, setOpenPopup } = props;
+
+    const elmahHostList = useSelector(
+        (state: RootState) => elmahHostListSelector.selectAll(state)
+    );
 
     const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
@@ -24,20 +29,17 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     });
 
     const closePopup = () => {
-        // setRecordForEdit(item)
         setOpenPopup(false)
     }
 
     const inputData = props.type === FormTypes.Edit ? props.item : createELMAH_ErrorDefault()
-    const popupButtonsOptions = createEditFormButtonsOptions(()=>{reset({...inputData})}, closePopup);
+    const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
 
     const onSubmit = (data: any) => {
-        if (!data.user.trim()) {
-            return
-        }
         const dataToUpsert = { errorId: 0, ...props.item, ...data };
         dispatch(upsert(dataToUpsert))
-
+        console.log(data);
+        
         setValue('user', '');
         setOpenPopup(false);
     }
@@ -45,6 +47,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     useEffect(() => {
         // you can do async server request and fill up form
         reset(inputData);
+        dispatch(getElmahHostList());
     }, []);
 
     return (
@@ -59,25 +62,48 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
             <Grid container={true}>
                 <DevTool control={control} />
                 <Grid item lg={12}>
-                    <CssTextField
-                        name='user'
-                        label='user'
-                        variant='outlined'
-                        margin='normal'
-                        inputRef={register({
-                            required: 'You must provide the user!',
-                            minLength: {
-                                value: 6,
-                                message: 'user must be greater than 6 characters',
-                            },
-                        })}
-                        error={!!errors.user}
-                        fullWidth
-                        autoFocus
-                    />
-                    {errors.user && (
-                        <span className={classes.error}>{errors.user.message}</span>
-                    )}
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <TextField
+                            name='user'
+                            label='user'
+                            variant='outlined'
+                            margin='normal'
+                            inputRef={register({
+                                required: 'You must provide the user!',
+                                minLength: {
+                                    value: 6,
+                                    message: 'user must be greater than 6 characters',
+                                },
+                            })}
+                            error={!!errors.user}
+                            fullWidth
+                            autoFocus
+                        />
+                        {errors.user && (
+                            <span className={classes.error}>{errors.user.message}</span>
+                        )}
+                    </FormControl>
+
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel htmlFor="outlined-age-native-simple">Host</InputLabel>
+                        <Select
+                            native
+                            label="host"
+                            name='host'
+                            inputRef={register}
+                        >
+                            <option aria-label="None" value="" />
+                            {elmahHostList.map((item: any) => {
+                                return (
+                                    <option value={item.value} key={item.value}>{item.name}</option>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <Controller as={<Checkbox />} name="testCheckBox" control={control} type="checkbox" inputRef={register} defaultValue="True" />
+                    </FormControl>
                 </Grid>
             </Grid>
         </FormPopup>

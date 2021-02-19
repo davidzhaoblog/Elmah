@@ -1,5 +1,11 @@
-export interface NameValuePair<T>
+export interface NameStringValue
 {
-  value: T;
+  value: string;
+  name: string;
+}
+
+export interface NameNumberValue
+{
+  value: number;
   name: string;
 }

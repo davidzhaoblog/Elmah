@@ -33,6 +33,8 @@ export class ApiBase extends Axios {
         this.success = this.success.bind(this);
         this.error = this.error.bind(this);
 
+        this.Get = this.Get.bind(this);
+
         this.interceptors.request.use((param) => {
             return {
                 ...param,
@@ -84,7 +86,7 @@ export class ApiBase extends Axios {
      * @returns {string}
      * @memberof Api
      */
-    public getUri = (config?: AxiosRequestConfig): string  => {
+    public getUri = (config?: AxiosRequestConfig): string => {
         return this.getUri(config);
     }
     /**
@@ -249,7 +251,7 @@ export class ApiBase extends Axios {
      * @memberof Api
      */
     public success = <T>(response: AxiosResponse<T>): T => {
-        // console.log(response);
+        console.log(response);
         return response.data;
     }
     /**
@@ -261,5 +263,26 @@ export class ApiBase extends Axios {
      */
     public error = <T>(error: AxiosError<T>): void => {
         throw error;
+    }
+
+    public Get = <TRequest, TResponse>(url: string, params: TRequest): Promise<TResponse> => {
+        const queryString = this.ConvertIdentifierCriteriaToQueryString(params)
+        const urlWithQueryString = !queryString ? url + "?" + queryString :  url;
+        return this.get<TResponse, AxiosResponse<TResponse>>(urlWithQueryString)
+            .then(this.success);
+    }
+
+    protected ConvertIdentifierCriteriaToQueryString = <TRequest>(params: TRequest): string => {
+        // https://morioh.com/p/480aef8e92cd
+        // Exclude empty or null or undefined properties or fields.
+        // ES 6
+        if(!params)
+            return null;
+        return Object.keys(params).filter(key => params[key]).map(key => key + '=' + params[key]).join('&');
+
+        // // ES 5
+        // return Object.keys(params).filter(function(key){ return params[key]; }).map(function(key) {
+        //   return key + '=' + params[key]
+        // }).join('&');
     }
 }

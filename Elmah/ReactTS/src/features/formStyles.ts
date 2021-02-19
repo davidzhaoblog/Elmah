@@ -29,6 +29,10 @@ export const useStyles = makeStyles((theme: Theme) => {
         gridRight: {
             paddingLeft: theme.spacing(1),
         },
+        formControl: {
+            margin: theme.spacing(1),
+            width: '100%',
+          },
         submit: {
             margin: theme.spacing(3, 0, 2),
             backgroundColor: emeraldGreenColor,
