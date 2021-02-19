@@ -29,7 +29,6 @@ export default function AppDrawer(props: IAppDrawerProps): JSX.Element {
         { path: '/', title: 'Dashboard', icon: () => <AccountCircleIcon /> },
         { path: '/account', title: 'Profile', icon: () => <AccountCircleIcon /> },
         { path: '/todolist', title: 'ToDo', icon: () => <AccountCircleIcon /> },
-        { path: '/ELMAH_Error', title: 'ELMAH_Error', icon: () => <AccountCircleIcon /> },
     ]
     
     return (
