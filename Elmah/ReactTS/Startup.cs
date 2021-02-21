@@ -32,6 +32,7 @@ using Elmah.WcfContracts;
 using Elmah.CoreCommonBLL;
 using Elmah.AspNetMvcCoreViewModel;
 using Elmah.AspNetMvcCoreApiController;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace Elmah.MvcCore
 {
@@ -384,15 +385,15 @@ namespace Elmah.MvcCore
                 endpoints.MapRazorPages();
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseReactDevelopmentServer(npmScript: "start");
+            //    }
+            //});
 
         }
     }
