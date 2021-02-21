@@ -62,18 +62,18 @@ namespace Elmah.AspNetMvcCoreApiController
                 return retval;
             }
         }
-/*
+
         /// <summary>
         /// HearBeat.
         /// http://[host]/api/HomeApi/HearBeat
         /// </summary>
         /// <returns></returns>
-        [HttpGet, ActionName("HeartBeat")]
+        [HttpGet("/api/HomeApi/HeartBeat", Name = "HeartBeat")]
         public bool HeartBeat()
         {
             return true;
         }
-*/
+
     }
 }
 

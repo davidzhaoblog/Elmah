@@ -5,7 +5,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-    <RootNamespace>Elmah.ReactTS</RootNamespace>
+    <RootNamespace>Elmah.MvcCore</RootNamespace>
     <AssemblyName>Elmah.ReactTS</AssemblyName>
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
@@ -59,30 +59,34 @@
       <Project>{352ba655-9a8e-49c1-88af-d08de3c4213e}</Project>
       <Name>Elmah.ViewModelData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServicesCore\CoreCommonBLL\Elmah.CoreCommonBLL.csproj" />
     <ProjectReference Include="..\Services\WcfContracts\Elmah.WcfContracts.csproj">
       <Project>{2cc2798d-c0cc-4343-8849-94c90c541bca}</Project>
       <Name>Elmah.WcfContracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Google.Apis.Auth" />
-    <PackageReference Include="GoogleMaps.LocationServices" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
-    <PackageReference Include="Microsoft.Extensions.Options" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
-    <PackageReference Include="MiniGuid" />
-    <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="Swashbuckle.AspNetCore" />
-    <PackageReference Include="X.PagedList.Mvc.Core" />  </ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.44.1" />
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="MiniGuid" Version="1.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="5.6.3" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />  </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientApp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UIWebCore\AspNetMvcCoreApiController\Elmah.AspNetMvcCoreApiController.csproj" />
+    <ProjectReference Include="..\UIWebCore\AspNetMvcCoreViewModel\Elmah.AspNetMvcCoreViewModel.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
