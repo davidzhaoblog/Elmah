@@ -19,9 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UIWebCore\AspNetMvcCoreApiController\Elmah.AspNetMvcCoreApiController.csproj">
+      <Project>{22b730c2-7b0e-4e7c-8257-7aac06fc58d0}</Project>
+      <Name>Elmah.AspNetMvcCoreApiController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UIWebCore\AspNetMvcCoreViewModel\Elmah.AspNetMvcCoreViewModel.csproj">
+      <Project>{c664fd41-5040-40ae-bca0-8b761a0d0d9f}</Project>
+      <Name>Elmah.AspNetMvcCoreViewModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\CommonBLLEntities\Elmah.CommonBLLEntities.csproj">
       <Project>{b7d68f23-2115-4425-a457-9b098fec0dd5}</Project>
       <Name>Elmah.CommonBLLEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicesCore\CoreCommonBLL\Elmah.CoreCommonBLL.csproj">
+      <Project>{df8d6b20-e185-4a3f-97f1-5ebb0209afdc}</Project>
+      <Name>Elmah.CoreCommonBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DALContracts\Elmah.DALContracts.csproj">
       <Project>{c96e5b5f-c2ca-4db8-8e6f-396e95ca06cb}</Project>
@@ -47,6 +59,10 @@
       <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
       <Name>Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Frameworks\FrameworkCore.Services\FrameworkCore.Services.csproj">
+      <Project>{4aa0ce4f-22a7-4202-ba5e-4fcb38096d03}</Project>
+      <Name>FrameworkCore.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Frameworks\Framework.Resx\Framework.Resx.csproj">
       <Project>{c72b898b-b53b-42d5-9f4f-673f84bb485b}</Project>
       <Name>Framework.Resx</Name>
@@ -59,11 +75,12 @@
       <Project>{352ba655-9a8e-49c1-88af-d08de3c4213e}</Project>
       <Name>Elmah.ViewModelData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServicesCore\CoreCommonBLL\Elmah.CoreCommonBLL.csproj" />
     <ProjectReference Include="..\Services\WcfContracts\Elmah.WcfContracts.csproj">
       <Project>{2cc2798d-c0cc-4343-8849-94c90c541bca}</Project>
       <Name>Elmah.WcfContracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.44.1" />
@@ -83,10 +100,6 @@
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />  </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientApp\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UIWebCore\AspNetMvcCoreApiController\Elmah.AspNetMvcCoreApiController.csproj" />
-    <ProjectReference Include="..\UIWebCore\AspNetMvcCoreViewModel\Elmah.AspNetMvcCoreViewModel.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
