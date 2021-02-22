@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.UWPAdmin", "Elmah\UWP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.UnitTests", "Elmah\UnitTests\Elmah.UnitTests.csproj", "{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.ReactTS", "Elmah\ReactTS\Elmah.ReactTS.csproj", "{DFCF1C6F-FF7C-4D3A-A5EE-378FA5E9D38A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.ReactTS", "Elmah\ReactTS\Elmah.ReactTS.csproj", "{63B447F6-7725-4126-9D7C-D7EB48657D56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.CommonBLLEntities", "Elmah\Contracts\CommonBLLEntities\Elmah.CommonBLLEntities.csproj", "{B7D68F23-2115-4425-A457-9B098FEC0DD5}"
 EndProject
@@ -146,10 +146,10 @@ Global
 		{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFCF1C6F-FF7C-4D3A-A5EE-378FA5E9D38A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFCF1C6F-FF7C-4D3A-A5EE-378FA5E9D38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFCF1C6F-FF7C-4D3A-A5EE-378FA5E9D38A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFCF1C6F-FF7C-4D3A-A5EE-378FA5E9D38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B447F6-7725-4126-9D7C-D7EB48657D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B447F6-7725-4126-9D7C-D7EB48657D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B447F6-7725-4126-9D7C-D7EB48657D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B447F6-7725-4126-9D7C-D7EB48657D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D68F23-2115-4425-A457-9B098FEC0DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7D68F23-2115-4425-A457-9B098FEC0DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D68F23-2115-4425-A457-9B098FEC0DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -252,6 +252,7 @@ Global
 		{2a9dcd56-985b-437e-b0aa-1d0195323f2c} = {d2ea2239-f0ba-4750-8750-37cd9c231af7}
 		{756ca332-b393-48b8-9dad-9ab6d6fbe76f} = {d2ea2239-f0ba-4750-8750-37cd9c231af7}
 		{57e586a4-7e99-4c52-b22b-a41f78a40f2a} = {c12033db-cc34-4950-a0fb-4e368a350d23}
+		{63b447f6-7725-4126-9d7c-d7eb48657d56} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
 		{352ba655-9a8e-49c1-88af-d08de3c4213e} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
 		{2cc2798d-c0cc-4343-8849-94c90c541bca} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
 		{df8d6b20-e185-4a3f-97f1-5ebb0209afdc} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}

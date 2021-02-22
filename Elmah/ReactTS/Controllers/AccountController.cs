@@ -245,9 +245,10 @@ namespace Elmah.MvcCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return View();
+            //await _signInManager.SignOutAsync();
+            //_logger.LogInformation("User logged out.");
+            //return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [HttpPost]
@@ -333,17 +334,18 @@ namespace Elmah.MvcCore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-            }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View();
+            //if (userId == null || code == null)
+            //{
+            //    return RedirectToAction(nameof(HomeController.Index), "Home");
+            //}
+            //var user = await _userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //{
+            //    throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+            //}
+            //var result = await _userManager.ConfirmEmailAsync(user, code);
+            //return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         [HttpGet]
@@ -448,14 +450,16 @@ namespace Elmah.MvcCore.Controllers
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
+            return View();
+
+            //if (Url.IsLocalUrl(returnUrl))
+            //{
+            //    return Redirect(returnUrl);
+            //}
+            //else
+            //{
+            //    return RedirectToAction(nameof(HomeController.Index), "Home");
+            //}
         }
 
         #endregion

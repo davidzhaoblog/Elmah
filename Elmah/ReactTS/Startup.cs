@@ -25,6 +25,8 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+
 using Elmah.EntityFrameworkContext;
 using Elmah.DALContracts;
 using Elmah.EntityFrameworkDAL;
@@ -32,7 +34,6 @@ using Elmah.WcfContracts;
 using Elmah.CoreCommonBLL;
 using Elmah.AspNetMvcCoreViewModel;
 using Elmah.AspNetMvcCoreApiController;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace Elmah.MvcCore
 {
@@ -385,15 +386,15 @@ namespace Elmah.MvcCore
                 endpoints.MapRazorPages();
             });
 
-            //app.UseSpa(spa =>
-            //{
-            //    spa.Options.SourcePath = "ClientApp";
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
 
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseReactDevelopmentServer(npmScript: "start");
-            //    }
-            //});
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
 
         }
     }
