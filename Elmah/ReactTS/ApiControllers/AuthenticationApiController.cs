@@ -186,7 +186,8 @@ namespace Elmah.MvcCore.ApiControllers
             {
                 // This is a copy from Register method in AccountController.
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                // var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                var callbackUrl = "EmailConfirmationLink";
                 await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                 /*
