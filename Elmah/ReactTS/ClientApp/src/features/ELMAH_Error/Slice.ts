@@ -136,7 +136,7 @@ const eLMAH_ErrorSlice = createSlice({
 
  // createEntityAdapter Usage #4, used in ToDoList.tsx
 export const eLMAH_ErrorSelectors = entityAdapter.getSelectors<RootState>(
-    state => state.eLMAH_Errors
+    state => state.eLMAH_Error
   )
 export default eLMAH_ErrorSlice.reducer;
 

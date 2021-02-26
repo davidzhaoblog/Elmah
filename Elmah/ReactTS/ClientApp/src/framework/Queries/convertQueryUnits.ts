@@ -1,3 +1,4 @@
+import { Range } from "../Models/Range";
 import { QueryUnitContains, QueryUnitEquals, QueryUnitRange, QueryUnitSelectedList } from "./QueryUnits";
 
 export const convertQueryUnitContains = <T>(input: T): QueryUnitContains<T> => {
@@ -14,15 +15,15 @@ export const convertQueryUnitEquals = <T>(input: T): QueryUnitEquals<T> => {
   };
 }
 
-export const convertQueryUnitRange = <T>(lower: T, upper: T): QueryUnitRange<T> => {
+export const convertQueryUnitRange = <T>(input: Range<T>): QueryUnitRange<T> => {
   return {
-    isToCompare: Boolean(lower) && Boolean(upper),
-    isToCompareLowerBound: Boolean(lower),
+    isToCompare: Boolean(input.lower) && Boolean(input.upper),
+    isToCompareLowerBound: Boolean(input.lower),
     isToIncludeLowerBound: true,
-    lowerBound: lower,
-    isToCompareUpperBound: Boolean(upper),
+    lowerBound: input.lower,
+    isToCompareUpperBound: Boolean(input.upper),
     isToIncludeUpperBound: false,
-    upperBound: upper,
+    upperBound: input.upper,
   };
 }
 
