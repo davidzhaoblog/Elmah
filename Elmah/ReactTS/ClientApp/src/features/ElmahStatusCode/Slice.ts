@@ -4,7 +4,7 @@ import { IListRequest } from 'src/framework/Services/IListRequest';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { elmahStatusCodeApi } from 'src/apis/ElmahStatusCodeApi';
-import { orderBys, ElmahStatusCode, ElmahStatusCodeCommonCriteria, createElmahStatusCodeCommonCriteria, convertElmahStatusCodeCommonCriteria, ElmahStatusCodeIdentifier } from './types';
+import { orderBys, ElmahStatusCode, ElmahStatusCodeCommonCriteria, defaultElmahStatusCodeCommonCriteria, convertElmahStatusCodeCommonCriteria, ElmahStatusCodeIdentifier } from './Types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ElmahStatusCode>({
@@ -54,7 +54,7 @@ export const getIndexVM = createAsyncThunk(
 const elmahStatusCodeSlice = createSlice({
     name: 'elmahStatusCodes',
     initialState: entityAdapter.getInitialState({
-        criteria: createElmahStatusCodeCommonCriteria(),
+        criteria: defaultElmahStatusCodeCommonCriteria(),
         orderBy: orderBys.find(x=>x.displayName),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1

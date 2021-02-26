@@ -4,7 +4,7 @@ import { apiConfig } from 'src/framework/apiConfig';
 import { IResponse } from 'src/framework/Services/IResponse';
 import { IListRequest } from 'src/framework/Services/IListRequest';
 import { IListResponse } from 'src/framework/Services/IListResponse';
-import { ElmahHost, ElmahHostCommonCriteria, ElmahHostIdentifier } from 'src/features/ElmahHost/types';
+import { ElmahHost, ElmahHostCommonCriteria, ElmahHostIdentifier } from 'src/features/ElmahHost/Types';
 
 export class ElmahHostApi extends ApiBaseCRUD<
   ElmahHost, IResponse<ElmahHost>, ElmahHostIdentifier, IListRequest<ElmahHostCommonCriteria>, IListResponse<ElmahHost[]>>

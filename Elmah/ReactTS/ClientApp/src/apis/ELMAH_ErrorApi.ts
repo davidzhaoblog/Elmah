@@ -4,7 +4,7 @@ import { apiConfig } from 'src/framework/apiConfig';
 import { IResponse } from 'src/framework/Services/IResponse';
 import { IListRequest } from 'src/framework/Services/IListRequest';
 import { IListResponse } from 'src/framework/Services/IListResponse';
-import { ELMAH_Error, ELMAH_ErrorCommonCriteria, ELMAH_ErrorIdentifier } from 'src/features/ELMAH_Error/types';
+import { ELMAH_Error, ELMAH_ErrorCommonCriteria, ELMAH_ErrorIdentifier } from 'src/features/ELMAH_Error/Types';
 
 export class ELMAH_ErrorApi extends ApiBaseCRUD<
   ELMAH_Error, IResponse<ELMAH_Error>, ELMAH_ErrorIdentifier, IListRequest<ELMAH_ErrorCommonCriteria>, IListResponse<ELMAH_Error[]>>

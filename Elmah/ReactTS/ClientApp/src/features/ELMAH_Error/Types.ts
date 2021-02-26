@@ -48,33 +48,33 @@ export function createELMAH_ErrorDefault(): ELMAH_Error {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name Ascending' },
-	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name Descending' }
+	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name Descending' },
 	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name Ascending' },
-	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name Descending' }
+	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name Descending' },
 	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahSource_Name Ascending' },
-	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahSource_Name Descending' }
+	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahSource_Name Descending' },
 	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahStatusCode_Name Ascending' },
-	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahStatusCode_Name Descending' }
+	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahStatusCode_Name Descending' },
 	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahType_Name Ascending' },
-	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahType_Name Descending' }
+	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahType_Name Descending' },
 	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahUser_Name Ascending' },
-	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahUser_Name Descending' }
+	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahUser_Name Descending' },
 	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application Ascending' },
-	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application Descending' }
+	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application Descending' },
 	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host Ascending' },
-	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host Descending' }
+	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host Descending' },
 	{ propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type Ascending' },
-	{ propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type Descending' }
+	{ propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type Descending' },
 	{ propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source Ascending' },
-	{ propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source Descending' }
+	{ propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source Descending' },
 	{ propertyName: 'message', direction: QueryOrderDirections.Ascending, displayName: 'Message Ascending' },
-	{ propertyName: 'message', direction: QueryOrderDirections.Ascending, displayName: 'Message Descending' }
+	{ propertyName: 'message', direction: QueryOrderDirections.Ascending, displayName: 'Message Descending' },
 	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User Ascending' },
-	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User Descending' }
+	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User Descending' },
 	{ propertyName: 'timeUtc', direction: QueryOrderDirections.Ascending, displayName: 'TimeUtc Ascending' },
-	{ propertyName: 'timeUtc', direction: QueryOrderDirections.Ascending, displayName: 'TimeUtc Descending' }
+	{ propertyName: 'timeUtc', direction: QueryOrderDirections.Ascending, displayName: 'TimeUtc Descending' },
 	{ propertyName: 'allXml', direction: QueryOrderDirections.Ascending, displayName: 'AllXml Ascending' },
-	{ propertyName: 'allXml', direction: QueryOrderDirections.Ascending, displayName: 'AllXml Descending' }
+	{ propertyName: 'allXml', direction: QueryOrderDirections.Ascending, displayName: 'AllXml Descending' },
 ];
 
 // Identifier

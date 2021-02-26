@@ -4,7 +4,7 @@ import { IListRequest } from 'src/framework/Services/IListRequest';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { elmahTypeApi } from 'src/apis/ElmahTypeApi';
-import { orderBys, ElmahType, ElmahTypeCommonCriteria, createElmahTypeCommonCriteria, convertElmahTypeCommonCriteria, ElmahTypeIdentifier } from './types';
+import { orderBys, ElmahType, ElmahTypeCommonCriteria, defaultElmahTypeCommonCriteria, convertElmahTypeCommonCriteria, ElmahTypeIdentifier } from './Types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ElmahType>({
@@ -54,7 +54,7 @@ export const getIndexVM = createAsyncThunk(
 const elmahTypeSlice = createSlice({
     name: 'elmahTypes',
     initialState: entityAdapter.getInitialState({
-        criteria: createElmahTypeCommonCriteria(),
+        criteria: defaultElmahTypeCommonCriteria(),
         orderBy: orderBys.find(x=>x.displayName),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1

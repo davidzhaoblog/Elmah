@@ -4,7 +4,7 @@ import { apiConfig } from 'src/framework/apiConfig';
 import { IResponse } from 'src/framework/Services/IResponse';
 import { IListRequest } from 'src/framework/Services/IListRequest';
 import { IListResponse } from 'src/framework/Services/IListResponse';
-import { ElmahType, ElmahTypeCommonCriteria, ElmahTypeIdentifier } from 'src/features/ElmahType/types';
+import { ElmahType, ElmahTypeCommonCriteria, ElmahTypeIdentifier } from 'src/features/ElmahType/Types';
 
 export class ElmahTypeApi extends ApiBaseCRUD<
   ElmahType, IResponse<ElmahType>, ElmahTypeIdentifier, IListRequest<ElmahTypeCommonCriteria>, IListResponse<ElmahType[]>>

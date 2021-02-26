@@ -4,7 +4,7 @@ import { IListRequest } from 'src/framework/Services/IListRequest';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { elmahHostApi } from 'src/apis/ElmahHostApi';
-import { orderBys, ElmahHost, ElmahHostCommonCriteria, createElmahHostCommonCriteria, convertElmahHostCommonCriteria, ElmahHostIdentifier } from './types';
+import { orderBys, ElmahHost, ElmahHostCommonCriteria, defaultElmahHostCommonCriteria, convertElmahHostCommonCriteria, ElmahHostIdentifier } from './Types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ElmahHost>({
@@ -54,7 +54,7 @@ export const getIndexVM = createAsyncThunk(
 const elmahHostSlice = createSlice({
     name: 'elmahHosts',
     initialState: entityAdapter.getInitialState({
-        criteria: createElmahHostCommonCriteria(),
+        criteria: defaultElmahHostCommonCriteria(),
         orderBy: orderBys.find(x=>x.displayName),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1

@@ -4,7 +4,7 @@ import { apiConfig } from 'src/framework/apiConfig';
 import { IResponse } from 'src/framework/Services/IResponse';
 import { IListRequest } from 'src/framework/Services/IListRequest';
 import { IListResponse } from 'src/framework/Services/IListResponse';
-import { ElmahStatusCode, ElmahStatusCodeCommonCriteria, ElmahStatusCodeIdentifier } from 'src/features/ElmahStatusCode/types';
+import { ElmahStatusCode, ElmahStatusCodeCommonCriteria, ElmahStatusCodeIdentifier } from 'src/features/ElmahStatusCode/Types';
 
 export class ElmahStatusCodeApi extends ApiBaseCRUD<
   ElmahStatusCode, IResponse<ElmahStatusCode>, ElmahStatusCodeIdentifier, IListRequest<ElmahStatusCodeCommonCriteria>, IListResponse<ElmahStatusCode[]>>

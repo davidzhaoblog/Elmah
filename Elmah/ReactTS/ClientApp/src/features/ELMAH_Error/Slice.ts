@@ -4,7 +4,7 @@ import { IListRequest } from 'src/framework/Services/IListRequest';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { eLMAH_ErrorApi } from 'src/apis/ELMAH_ErrorApi';
-import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, createELMAH_ErrorCommonCriteria, convertELMAH_ErrorCommonCriteria, ELMAH_ErrorIdentifier } from './types';
+import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, defaultELMAH_ErrorCommonCriteria, convertELMAH_ErrorCommonCriteria, ELMAH_ErrorIdentifier } from './Types';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ELMAH_Error>({
@@ -54,7 +54,7 @@ export const getIndexVM = createAsyncThunk(
 const eLMAH_ErrorSlice = createSlice({
     name: 'eLMAH_Errors',
     initialState: entityAdapter.getInitialState({
-        criteria: createELMAH_ErrorCommonCriteria(),
+        criteria: defaultELMAH_ErrorCommonCriteria(),
         orderBy: orderBys.find(x=>x.displayName),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1

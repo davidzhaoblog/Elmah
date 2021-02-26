@@ -4,7 +4,7 @@ import { apiConfig } from 'src/framework/apiConfig';
 import { IResponse } from 'src/framework/Services/IResponse';
 import { IListRequest } from 'src/framework/Services/IListRequest';
 import { IListResponse } from 'src/framework/Services/IListResponse';
-import { ElmahApplication, ElmahApplicationCommonCriteria, ElmahApplicationIdentifier } from 'src/features/ElmahApplication/types';
+import { ElmahApplication, ElmahApplicationCommonCriteria, ElmahApplicationIdentifier } from 'src/features/ElmahApplication/Types';
 
 export class ElmahApplicationApi extends ApiBaseCRUD<
   ElmahApplication, IResponse<ElmahApplication>, ElmahApplicationIdentifier, IListRequest<ElmahApplicationCommonCriteria>, IListResponse<ElmahApplication[]>>

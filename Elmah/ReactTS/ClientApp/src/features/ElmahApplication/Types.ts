@@ -14,7 +14,7 @@ export function createElmahApplicationDefault(): ElmahApplication {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application Ascending' },
-	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application Descending' }
+	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application Descending' },
 ];
 
 // Identifier
