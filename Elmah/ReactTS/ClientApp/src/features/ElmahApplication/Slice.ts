@@ -9,7 +9,7 @@ import { orderBys, ElmahApplication, ElmahApplicationCommonCriteria, defaultElma
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ElmahApplication>({
     // Assume IDs are stored in a field other than `book.id`
-    selectId: (item: ElmahApplication) => item.errorId,
+    selectId: (item: ElmahApplication) => item.application,
     // Keep the "all IDs" array sorted based on book titles
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
@@ -136,7 +136,7 @@ const elmahApplicationSlice = createSlice({
 
  // createEntityAdapter Usage #4, used in ToDoList.tsx
 export const elmahApplicationSelectors = entityAdapter.getSelectors<RootState>(
-    state => state.elmahApplications
+    state => state.elmahApplication
   )
 export default elmahApplicationSlice.reducer;
 

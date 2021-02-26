@@ -9,7 +9,7 @@ import { orderBys, ElmahHost, ElmahHostCommonCriteria, defaultElmahHostCommonCri
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ElmahHost>({
     // Assume IDs are stored in a field other than `book.id`
-    selectId: (item: ElmahHost) => item.errorId,
+    selectId: (item: ElmahHost) => item.host,
     // Keep the "all IDs" array sorted based on book titles
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
@@ -136,7 +136,7 @@ const elmahHostSlice = createSlice({
 
  // createEntityAdapter Usage #4, used in ToDoList.tsx
 export const elmahHostSelectors = entityAdapter.getSelectors<RootState>(
-    state => state.elmahHosts
+    state => state.elmahHost
   )
 export default elmahHostSlice.reducer;
 

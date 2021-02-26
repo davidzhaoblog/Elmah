@@ -9,7 +9,7 @@ import { orderBys, ElmahStatusCode, ElmahStatusCodeCommonCriteria, defaultElmahS
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ElmahStatusCode>({
     // Assume IDs are stored in a field other than `book.id`
-    selectId: (item: ElmahStatusCode) => item.errorId,
+    selectId: (item: ElmahStatusCode) => item.statusCode,
     // Keep the "all IDs" array sorted based on book titles
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
@@ -136,7 +136,7 @@ const elmahStatusCodeSlice = createSlice({
 
  // createEntityAdapter Usage #4, used in ToDoList.tsx
 export const elmahStatusCodeSelectors = entityAdapter.getSelectors<RootState>(
-    state => state.elmahStatusCodes
+    state => state.elmahStatusCode
   )
 export default elmahStatusCodeSlice.reducer;
 
