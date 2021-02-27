@@ -1,9 +1,9 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { eLMAH_ErrorApi } from 'src/apis/ELMAH_ErrorApi';
-import { IListRequest } from 'src/framework/IndexComponentBase';
 import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
+import { IListRequest } from 'src/framework/Services/IListRequest';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
+import { eLMAH_ErrorApi } from 'src/apis/ELMAH_ErrorApi';
 import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, createELMAH_ErrorCommonCriteria, convertELMAH_ErrorCommonCriteria, ELMAH_ErrorIdentifier } from './types';
 
 // 1. createEntityAdapter

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions } from '@material-ui/core';
+import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, FormControlLabel, Checkbox } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
@@ -38,6 +38,17 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
                 <Avatar className={classes.avatar} />
                 <Typography className={classes.heading}>{props.item.errorId}</Typography>
                 <Typography className={classes.secondaryHeading}>{props.item.user}</Typography>
+                <FormControlLabel
+                    control={
+                    <Checkbox
+                        checked={props.item.testCheckBox}
+                        name="testCheckBox"
+                        color="primary"
+                        disabled
+                    />
+                    }
+                    label="testCheckBox"
+                />
             </AccordionSummary>
             {/* <AccordionDetails>
                 <Typography>

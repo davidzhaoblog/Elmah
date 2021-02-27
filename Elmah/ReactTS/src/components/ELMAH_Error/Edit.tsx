@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { DevTool } from '@hookform/devtools';
-import { Checkbox, FormControl, Grid, InputLabel, Select, TextField } from '@material-ui/core';
+import { Checkbox, FormControl, FormControlLabel, Grid, InputLabel, Select, TextField } from '@material-ui/core';
 import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
 import FormPopup from '../FormPopup';
@@ -10,7 +10,7 @@ import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
 import { createELMAH_ErrorDefault, ELMAH_Error } from 'src/features/ELMAH_Error/types';
-import { upsert } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
+// import { upsert } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
 import { elmahHostListSelector, getElmahHostList } from 'src/features/listSlices';
 
 export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
@@ -32,14 +32,14 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const inputData = props.type === FormTypes.Edit ? props.item : createELMAH_ErrorDefault()
+    const inputData = props.type === FormTypes.Edit ? { ...props.item, testCheckBox: true} : createELMAH_ErrorDefault()
     const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
 
     const onSubmit = (data: any) => {
-        const dataToUpsert = { errorId: 0, ...props.item, ...data };
-        dispatch(upsert(dataToUpsert))
+        // const dataToUpsert = { errorId: 0, ...props.item, ...data };
+        // dispatch(upsert(dataToUpsert))
         console.log(data);
-        
+
         setValue('user', '');
         setOpenPopup(false);
     }
@@ -102,8 +102,41 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                     </FormControl>
 
                     <FormControl variant="outlined" className={classes.formControl}>
-                        <Controller as={<Checkbox />} name="testCheckBox" control={control} type="checkbox" inputRef={register} defaultValue="True" />
+                        <FormControlLabel
+                            control={
+                                <Controller
+                                    control={control}
+                                    name='testCheckBox'
+                                    defaultValue={true}
+                                    render={({ onChange, value }) => (
+                                        <Checkbox
+                                            className={classes.checkBox}
+                                            onChange={e => onChange(e.target.checked)}
+                                            checked={value}
+                                            disabled
+                                        />
+                                    )}
+                                />
+                            }
+                            label='testCheckBox'
+                        />
                     </FormControl>
+{/* 
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <FormControlLabel
+                            label='testCheckBox'
+                            name='testCheckBox'
+                            control={
+                                <Checkbox
+                                    className={classes.checkBox}
+                                    inputRef={register()}
+                                />
+                            }
+                        />
+                    </FormControl> */}
+                    {/* <FormControl variant="outlined" className={classes.formControl}>
+                        <Controller as={<Checkbox />} name="testCheckBox" control={control} type="checkbox" inputRef={register} defaultValue="True" />
+                    </FormControl> */}
                 </Grid>
             </Grid>
         </FormPopup>

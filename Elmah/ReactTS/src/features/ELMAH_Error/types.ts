@@ -1,3 +1,4 @@
+import { defaultDateRange } from "src/framework/Models/defaultRanges";
 import { Range } from "src/framework/Models/Range";
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
@@ -30,7 +31,7 @@ export function createELMAH_ErrorDefault(): ELMAH_Error {
         timeUtc: new Date(), 
         sequence: 0, 
         allXml: '',
-        testCheckBox: true,
+        testCheckBox: false,
     } as unknown as ELMAH_Error;
 }
 
@@ -45,23 +46,18 @@ export interface ELMAH_ErrorIdentifier {
 
 // Criteria.1 EntityStatusCodeCommonCriteria
 export interface ELMAH_ErrorCommonCriteria {
-	common: {
 		name: string;
 		modifiedDateRange: Range<string>;
 		stringContains_AllColumns: string;
-	}
 	canQueryWhenNoQuery: boolean;
 }
 
 export const createELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria => {
-    var yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
+
 	return {
-		common: {
 			name: '',
-			modifiedDateRange: {lower: yesterday.toString(), upper: (new Date()).toString()},
-			stringContains_AllColumns: ''
-		},
+			modifiedDateRange: defaultDateRange(),
+			stringContains_AllColumns: '',
 		canQueryWhenNoQuery: true
 	};
 }
@@ -70,20 +66,20 @@ export const convertELMAH_ErrorCommonCriteria = (criteria: ELMAH_ErrorCommonCrit
 	return {
 		common: {
 			name: {
-                valueToBeContained: criteria?.common?.name,
-				isToCompare: !criteria?.common?.name
+                valueToBeContained: criteria?.name,
+				isToCompare: !criteria?.name
             },
 			modifiedDateRange: {
-                isToCompareLowerBound: !criteria?.common?.modifiedDateRange?.lower,
+                isToCompareLowerBound: !criteria?.modifiedDateRange?.lower,
                 isToIncludeLowerBound: true,
-                lowerBound: criteria?.common?.modifiedDateRange?.lower,
-                isToCompareUpperBound: !criteria?.common?.modifiedDateRange.upper,
+                lowerBound: criteria?.modifiedDateRange?.lower,
+                isToCompareUpperBound: !criteria?.modifiedDateRange.upper,
                 isToIncludeUpperBound: false,
-                upperBound: criteria?.common?.modifiedDateRange?.upper
+                upperBound: criteria?.modifiedDateRange?.upper
             },
 			stringContains_AllColumns: {
-                valueToBeContained: criteria?.common?.stringContains_AllColumns,
-				isToCompare: !criteria?.common?.stringContains_AllColumns
+                valueToBeContained: criteria?.stringContains_AllColumns,
+				isToCompare: !criteria?.stringContains_AllColumns
             },
 		},
 		canQueryWhenNoQuery: true

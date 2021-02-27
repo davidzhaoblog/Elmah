@@ -1,6 +1,7 @@
 import { Todo } from "src/features/Todo/types";
-import { IListRequest, IListResponse } from "src/framework/IndexComponentBase";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
+import { IListRequest } from "src/framework/Services/IListRequest";
+import { IListResponse } from "src/framework/Services/IListResponse";
 
 export class TodoApi {
   public GetIndexVM = (payload: IListRequest<Todo>): Promise<IListResponse<Todo[]>> => {

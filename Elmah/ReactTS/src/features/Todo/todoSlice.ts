@@ -1,7 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { todoApi } from 'src/apis/TodoApi';
-import { IListRequest } from 'src/framework/IndexComponentBase';
 import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
+import { IListRequest } from 'src/framework/Services/IListRequest';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { orderBys, Todo } from './types';
