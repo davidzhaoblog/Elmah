@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { DevTool } from '@hookform/devtools';
-import { Checkbox, FormControl, FormControlLabel, Grid, InputLabel, Select, TextField } from '@material-ui/core';
+import { FormControl, FormControlLabel, Grid, InputLabel, Select } from '@material-ui/core';
 import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
 import FormPopup from '../FormPopup';
@@ -12,6 +12,8 @@ import { useStyles } from 'src/features/formStyles';
 import { createELMAH_ErrorDefault, ELMAH_Error } from 'src/features/ELMAH_Error/types';
 // import { upsert } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
 import { elmahHostListSelector, getElmahHostList } from 'src/features/listSlices';
+import { StyledCheckbox } from '../controls/StyledCheckbox';
+import { StyledTextField } from '../controls/StyledTextField';
 
 export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const dispatch = useDispatch();
@@ -63,7 +65,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                 <DevTool control={control} />
                 <Grid item lg={12}>
                     <FormControl variant="outlined" className={classes.formControl}>
-                        <TextField
+                        <StyledTextField
                             name='user'
                             label='user'
                             variant='outlined'
@@ -109,7 +111,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                     name='testCheckBox'
                                     defaultValue={true}
                                     render={({ onChange, value }) => (
-                                        <Checkbox
+                                        <StyledCheckbox
                                             className={classes.checkBox}
                                             onChange={e => onChange(e.target.checked)}
                                             checked={value}

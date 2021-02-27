@@ -1,17 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useLocation } from 'react-router-dom';
-import { Avatar, Button, Container, CssBaseline, Link, Grid, Paper, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
+import { Avatar, Button, Container, CssBaseline, Link, Grid, Paper, Typography, FormControlLabel } from '@material-ui/core';
 import { AccountCircle as AccountCircleIcon } from '@material-ui/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 const queryString = require('query-string');
 
+import { StyledTextField } from 'src/components/controls/StyledTextField';
+import { StyledCheckbox } from 'src/components/controls/StyledCheckbox';
+
 import { login } from './authenticationSlice';
 import { showSpinner } from 'src/layout/appSlice';
 import { useStyles } from './styles';
 import { RootState } from 'src/store/CombinedReducers';
-import { CssTextField } from 'src/components/controls/CssTextField';
 
 interface stateType {
     from: { pathname: string }
@@ -64,7 +66,7 @@ export default function LoginPage(): JSX.Element {
                     noValidate
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <CssTextField
+                    <StyledTextField
                         name='email'
                         label='Email Address'
                         variant='outlined'
@@ -84,7 +86,7 @@ export default function LoginPage(): JSX.Element {
                     {errors.email && (
                         <span className={classes.error}>{errors.email.message}</span>
                     )}
-                    <CssTextField
+                    <StyledTextField
                         name='password'
                         label='Password'
                         type='password'
@@ -116,7 +118,7 @@ export default function LoginPage(): JSX.Element {
                                 label='Remember me'
                                 name='remember'
                                 control={
-                                    <Checkbox
+                                    <StyledCheckbox
                                         className={classes.checkBox}
                                         inputRef={register()}
                                     />
@@ -132,7 +134,7 @@ export default function LoginPage(): JSX.Element {
                                     name='checkTest'
                                     defaultValue={true}
                                     render={({ onChange, value }) => (
-                                        <Checkbox
+                                        <StyledCheckbox
                                             className={classes.checkBox}
                                             onChange={e => onChange(e.target.checked)}
                                             checked={value}
