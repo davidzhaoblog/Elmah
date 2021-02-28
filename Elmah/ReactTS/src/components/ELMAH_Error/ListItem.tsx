@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, FormControlLabel, Checkbox } from '@material-ui/core';
+import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails, TextField, TextFieldProps } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
@@ -8,10 +8,24 @@ import { closeAlert, showAlert } from 'src/layout/appSlice';
 import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { ELMAH_Error } from 'src/features/ELMAH_Error/types';
 import { del } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
+import { StyledCheckbox } from '../controls/StyledCheckbox';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import clsx from 'clsx';
+
+const TextFieldComponent = (props: TextFieldProps) => {
+    return <TextField {...props}                      inputProps={{
+        readOnly: true,
+    }} />
+  }
 
 export default function ListItem(props: IListItemProps<ELMAH_Error>) {
     const classes = props.classes;
     const dispatch = useDispatch();
+    const [expanded, setExpanded] = React.useState<string | false>(false);
+
+    const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+        setExpanded(isExpanded ? panel : false);
+    };
 
     // 2.1. Delete
     const handleDelete = () => {
@@ -33,28 +47,35 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
     };
 
     return (
-        <Accordion key={props.item.errorId.toString()} expanded={true}>
+        <Accordion key={props.item.errorId.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
             <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
                 <Avatar className={classes.avatar} />
-                <Typography className={classes.heading}>{props.item.errorId}</Typography>
-                <Typography className={classes.secondaryHeading}>{props.item.user}</Typography>
-                <FormControlLabel
-                    control={
-                    <Checkbox
-                        checked={props.item.testCheckBox}
-                        name="testCheckBox"
-                        color="primary"
-                        disabled
-                    />
-                    }
-                    label="testCheckBox"
-                />
+                <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography>
+                <Typography className={classes.secondaryHeading} variant="h2" component="h3">{props.item.user}</Typography>
             </AccordionSummary>
-            {/* <AccordionDetails>
-                <Typography>
-                    {props.item.completed}
-                </Typography>
-            </AccordionDetails> */}
+            <AccordionDetails>
+                <div className={classes.column} />
+                <div className={classes.column}>
+                    <KeyboardDatePicker
+                        inputProps={{
+                            readOnly: true,
+                        }}
+                        disableToolbar
+                        variant="inline"
+                        format="MMM DD, yyyy"
+                        margin="normal"
+                        id="date-picker-inline"
+                        label="timeUtc"
+                        value={props.item.timeUtc}
+                        onChange={e => { }}
+                        readOnly={true}
+                        TextFieldComponent={TextFieldComponent}
+                    />
+                </div>
+                <div className={clsx(classes.column, classes.helper)}>
+                    <StyledCheckbox checked={props.item.testCheckBox} name="testCheckBox" disabled />
+                </div>
+            </AccordionDetails>
             <Divider />
             <AccordionActions>
                 <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>Edit</Button>

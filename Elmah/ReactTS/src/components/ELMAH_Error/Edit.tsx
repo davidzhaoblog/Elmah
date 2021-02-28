@@ -14,6 +14,7 @@ import { createELMAH_ErrorDefault, ELMAH_Error } from 'src/features/ELMAH_Error/
 import { elmahHostListSelector, getElmahHostList } from 'src/features/listSlices';
 import { StyledCheckbox } from '../controls/StyledCheckbox';
 import { StyledTextField } from '../controls/StyledTextField';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const inputData = props.type === FormTypes.Edit ? { ...props.item, testCheckBox: true} : createELMAH_ErrorDefault()
+    const inputData = props.type === FormTypes.Edit ? { ...props.item, testCheckBox: true } : createELMAH_ErrorDefault()
     const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
 
     const onSubmit = (data: any) => {
@@ -102,7 +103,39 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             })}
                         </Select>
                     </FormControl>
-
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <Controller
+                            as={
+                                <KeyboardDatePicker
+                                    clearable
+                                    autoOk
+                                    format="MMM DD, yyyy"
+                                    views={["year", "month", "date"]}
+                                    inputVariant="outlined"
+                                    margin="dense"
+                                    InputAdornmentProps={{ position: "start" }}
+                                    error={!!errors?.timeUtc}
+                                    value=""
+                                    onChange={() => {}}
+                                />
+                            }
+                            name="timeUtc"
+                            defaultValue={props.item.timeUtc}
+                            rules={{ required: "Field Required" }}
+                            control={control}
+                        />
+                        {/* <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="MMM DD, yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="timeUtc"
+                            value={props.item.timeUtc}
+                            onChange={e => { }}
+                            name='timeUtc'
+                        /> */}
+                    </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <FormControlLabel
                             control={
@@ -123,7 +156,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             label='testCheckBox'
                         />
                     </FormControl>
-{/* 
+                    {/* 
                     <FormControl variant="outlined" className={classes.formControl}>
                         <FormControlLabel
                             label='testCheckBox'
