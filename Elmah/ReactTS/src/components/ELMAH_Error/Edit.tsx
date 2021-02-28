@@ -86,7 +86,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             <span className={classes.error}>{errors.user.message}</span>
                         )}
                     </FormControl>
-
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel htmlFor="outlined-age-native-simple">Host</InputLabel>
                         <Select
@@ -124,17 +123,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             rules={{ required: "Field Required" }}
                             control={control}
                         />
-                        {/* <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="MMM DD, yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="timeUtc"
-                            value={props.item.timeUtc}
-                            onChange={e => { }}
-                            name='timeUtc'
-                        /> */}
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <FormControlLabel
@@ -156,22 +144,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             label='testCheckBox'
                         />
                     </FormControl>
-                    {/* 
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <FormControlLabel
-                            label='testCheckBox'
-                            name='testCheckBox'
-                            control={
-                                <Checkbox
-                                    className={classes.checkBox}
-                                    inputRef={register()}
-                                />
-                            }
-                        />
-                    </FormControl> */}
-                    {/* <FormControl variant="outlined" className={classes.formControl}>
-                        <Controller as={<Checkbox />} name="testCheckBox" control={control} type="checkbox" inputRef={register} defaultValue="True" />
-                    </FormControl> */}
                 </Grid>
             </Grid>
         </FormPopup>

@@ -7,9 +7,9 @@ import blue from '@material-ui/core/colors/blue';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { pink } from '@material-ui/core/colors';
 import MasterLayout from './layout/MasterLayout';
-// import DateFnsUtils from '@date-io/date-fns';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import "./i18n"
 
 const theme = createMuiTheme({
   palette: {

@@ -87,6 +87,7 @@ Theming, Overriding styles - classes prop, JSS plugins, CSS injection order, Cla
 https://material-ui.com/styles/advanced/#makestyles-withstyles-styled
 
 React i18n — How to Internationalize your React Application
+https://react.i18next.com/
 https://blog.bitsrc.io/react-i18n-how-to-internationalize-your-react-application-3a12bba5a980
 React i18n: A step-by-step guide to React-intl
 https://lokalise.com/blog/react-i18n-intl/?utm_source=google&utm_medium=cpc&utm_campaign=GENERIC_i18n-reactintl&gclid=Cj0KCQiA-OeBBhDiARIsADyBcE76mYGK5Bx2TmXsTvFAQcWtXZhmwp_hsI0b5lk03twX5MumHl9KZ1MaAvoaEALw_wcB

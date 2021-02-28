@@ -6,6 +6,8 @@ import { AccountCircle as AccountCircleIcon } from '@material-ui/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 const queryString = require('query-string');
+import { useTranslation } from 'react-i18next';
+import "src/i18n"
 
 import { StyledTextField } from 'src/components/controls/StyledTextField';
 import { StyledCheckbox } from 'src/components/controls/StyledCheckbox';
@@ -20,6 +22,8 @@ interface stateType {
 }
 
 export default function LoginPage(): JSX.Element {
+    // const { t } = useTranslation();
+    const { t  } = useTranslation(["translation", "UIStringResource"]);
     const dispatch = useDispatch();
     const classes = useStyles();
     const location = useLocation<stateType>();
@@ -59,7 +63,7 @@ export default function LoginPage(): JSX.Element {
                     <AccountCircleIcon style={{ fontSize: 45 }} />
                 </Avatar>
                 <Typography component='h1' variant='h4'>
-                    Sign in
+                    {t('UIStringResource:Account_LogIn_TitleText')}
                 </Typography>
                 <form
                     className={classes.form}
@@ -68,7 +72,7 @@ export default function LoginPage(): JSX.Element {
                 >
                     <StyledTextField
                         name='email'
-                        label='Email Address'
+                        label={t('UIStringResource:Account_ChangePassword_TitleText')}
                         variant='outlined'
                         margin='normal'
                         inputRef={register({
