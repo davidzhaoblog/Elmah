@@ -10,6 +10,7 @@ import MasterLayout from './layout/MasterLayout';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import "./i18n"
+import { useTranslation } from 'react-i18next';
 
 const theme = createMuiTheme({
   palette: {
@@ -18,10 +19,29 @@ const theme = createMuiTheme({
   }
 })
 
-class App extends React.Component {
-  public render() {
-    return (
-      <MuiPickersUtilsProvider utils={MomentUtils}>
+// class App extends React.Component {
+//   public render() {
+//     document.title = t("UIStringResourcePerApp:Application_Title");
+//     return (
+//       <MuiPickersUtilsProvider utils={MomentUtils}>
+//       <Provider store={store}>
+//         <Router>
+//           <ThemeProvider theme={theme}>
+//             <MasterLayout theme={theme} />
+//           </ThemeProvider>
+//         </Router>
+//       </Provider>
+//       </MuiPickersUtilsProvider>
+//     );
+//   }
+// }
+
+function App() {
+  const { t } = useTranslation(["UIStringResourcePerApp"]);
+  document.title = t("UIStringResourcePerApp:Application_Title");
+  
+  return (
+    <MuiPickersUtilsProvider utils={MomentUtils}>
       <Provider store={store}>
         <Router>
           <ThemeProvider theme={theme}>
@@ -29,9 +49,8 @@ class App extends React.Component {
           </ThemeProvider>
         </Router>
       </Provider>
-      </MuiPickersUtilsProvider>
-    );
-  }
+    </MuiPickersUtilsProvider>
+  );
 }
 
 export default App;

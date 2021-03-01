@@ -119,7 +119,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                 />
                             }
                             name="timeUtc"
-                            defaultValue={props.item.timeUtc}
+                            defaultValue={new Date()}
                             rules={{ required: "Field Required" }}
                             control={control}
                         />
@@ -136,7 +136,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                             className={classes.checkBox}
                                             onChange={e => onChange(e.target.checked)}
                                             checked={value}
-                                            disabled
                                         />
                                     )}
                                 />

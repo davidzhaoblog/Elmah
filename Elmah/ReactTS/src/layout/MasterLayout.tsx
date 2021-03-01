@@ -134,6 +134,14 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                             >
                                 <AccountCircle />
                             </IconButton>
+                            <IconButton
+                                aria-owns={open ? 'menu-appbar' : null}
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
                             <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorEl}
