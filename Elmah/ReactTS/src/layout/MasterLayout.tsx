@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Backdrop, Badge, CircularProgress, Hidden, IconButton, Menu, MenuItem, Theme, Toolbar, Typography } from "@material-ui/core";
@@ -7,6 +7,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationIcon from '@material-ui/icons/Notifications';
 
 const classNames = require('classnames');
+
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
+// import {
+//     Icon_Flag_EN,
+//     Icon_Flag_ES
+//   } from 'material-ui-country-flags';
 
 import { PrivateRoute } from "src/features/Authentication/PrivateRoute";
 
@@ -42,8 +49,25 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         (state: RootState) => todosSelectors.selectAll(state)
     );
 
-    const [anchorEl, setAnchorEl] = useState()
+    const [anchorElLanguage, setAnchorLanguage] = useState()
+    const [anchorElMenu, setAnchorElMenu] = useState()
     const [notificationEl, setNotificationEl] = useState()
+
+    const { t, i18n } = useTranslation(["UIStringResourcePerApp"]);
+    const [language, setLanguage] = useState('')
+    const [languages, setLanguages] = useState([])
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
+        setLanguage(i18next.language);
+        setAnchorLanguage(null);
+    }
+
+    useEffect(() => {
+        // you can do async server request and fill up form
+        setLanguages(i18next.languages);
+        i18n.changeLanguage(language);
+        setLanguage(i18next.language);
+    }, []);
 
     // 2.1. Drawer
     const handleDrawerOpen = () => {
@@ -52,12 +76,21 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
     // 2.2. Menu
     const handleMenu = (event: any) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElMenu(event.currentTarget);
     };
 
     const handleMenuClose = (path?: string) => {
-        setAnchorEl(null);
+        setAnchorElMenu(null);
         navigate(path);
+    };
+
+    // 2.3. Menu
+    const handleLanguage = (event: any) => {
+        setAnchorLanguage(event.currentTarget);
+    };
+
+    const handleLanguageClose = (lang?: string) => {
+        setAnchorLanguage(null);
     };
 
     // 2.3. Notification
@@ -95,7 +128,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     // 3.1. renderAppBar
     const renderAppBar = () => {
         if (auth && auth.isAuthenticated) {
-            const open = Boolean(anchorEl);
+            const openMenu = Boolean(anchorElMenu);
+            const openLanguage = Boolean(anchorElLanguage);
             const notificationsOpen = Boolean(notificationEl);
 
             return (
@@ -113,7 +147,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                             <MenuIcon />
                         </IconButton>
                         <Typography className={classes.fillSpace} color="inherit" noWrap={true}>
-                            TechThunk
+                            {t('UIStringResourcePerApp:Application_Title')}
                         </Typography>
                         <div>
                             <IconButton
@@ -127,24 +161,16 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                                 </Badge>
                             </IconButton>
                             <IconButton
-                                aria-owns={open ? 'menu-appbar' : null}
+                                aria-owns={openLanguage ? 'menu-appbar' : null}
                                 aria-haspopup="true"
-                                onClick={handleMenu}
+                                onClick={handleLanguage}
                                 color="inherit"
                             >
-                                <AccountCircle />
-                            </IconButton>
-                            <IconButton
-                                aria-owns={open ? 'menu-appbar' : null}
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle />
+                                {language}
                             </IconButton>
                             <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
+                                id="language-appbar"
+                                anchorEl={anchorElLanguage}
                                 anchorOrigin={{
                                     vertical: 'top',
                                     horizontal: 'right',
@@ -153,7 +179,35 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                                     vertical: 'top',
                                     horizontal: 'right',
                                 }}
-                                open={open}
+                                open={openLanguage}
+                                onClose={(e) => handleLanguageClose(null)}
+                            >
+                                {languages.map((lang: string) => {
+                                    return (
+                                        <MenuItem key={lang} onClick={(e) => changeLanguage(lang)}>{lang}</MenuItem>
+                                    );
+                                })}
+                            </Menu>
+                            <IconButton
+                                aria-owns={openMenu ? 'menu-appbar' : null}
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorElMenu}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={openMenu}
                                 onClose={(e) => handleMenuClose(null)}
                             >
                                 {/* <MenuItem onClick={this.handleMenuClose.bind(this, '/account')}>{this.props.authentication.name}</MenuItem> */}

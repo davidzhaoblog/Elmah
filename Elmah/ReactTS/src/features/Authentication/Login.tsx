@@ -17,8 +17,6 @@ import { showSpinner } from 'src/layout/appSlice';
 import { useStyles } from './styles';
 import { RootState } from 'src/store/CombinedReducers';
 
-import i18next from 'i18next';
-
 interface stateType {
     from: { pathname: string }
 }
@@ -33,7 +31,7 @@ export default function LoginPage(): JSX.Element {
     const values = queryString.parse(search)
     const auth = useSelector((state: RootState) => state.auth);
     // console.log(values) // "top"
-    console.log(i18next.languages);
+    
     const { register, setValue, handleSubmit, control, errors, formState } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
