@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 import { FormControl, FormHelperText, Select, MenuItem, ListItemIcon, Typography } from "@material-ui/core";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 
 interface IOrderByPickerProps {
@@ -26,11 +27,16 @@ export default function OrderByPicker(props: IOrderByPickerProps): JSX.Element {
                     return (
                         <MenuItem key={orderBy.expression} value={orderBy.expression}>
                             <Typography variant="inherit">{orderBy.displayName}</Typography>
-                            <ListItemIcon className={props.classes.selectEmpty1}>
-                                <ArrowUpwardIcon fontSize="small" className={props.classes.selectEmpty1}/>
+                            <ListItemIcon>
+                                {
+                                    (orderBy.direction==="Up"
+                                        ? <ArrowUpwardIcon fontSize="small" />
+                                        : <ArrowDownwardIcon fontSize="small" />)
+                                }
                             </ListItemIcon>
                         </MenuItem>
-                    );
+                    )
+                        ;
                 })}
             </Select>
             <FormHelperText>{t('UIStringResource:SortBy')}</FormHelperText>
