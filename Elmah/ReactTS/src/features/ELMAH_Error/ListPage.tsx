@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Paper, Toolbar, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
+import { useTranslation } from 'react-i18next';
 
 import store from 'src/store/Store';
 import { useStyles } from '../listStyles';
@@ -21,6 +22,7 @@ import Edit from 'src/components/ELMAH_Error/Edit';
 export default function ELMAH_ErrorList(): JSX.Element {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
 
   const { criteria, orderBy, queryPagingSetting } = store.getState().eLMAH_Errors;
 
@@ -40,7 +42,7 @@ export default function ELMAH_ErrorList(): JSX.Element {
 
   const handleOrderByChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
-    var orderByHere = orderBys.find(o => o.displayName === (event.target.value as string));
+    var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
     dispatch(getIndexVM({ criteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
 
@@ -66,9 +68,9 @@ export default function ELMAH_ErrorList(): JSX.Element {
     <>
       <Paper className={classes.root}>
         <div className={classes.boxHeader}>
-          <Typography className={classes.boxHeaderTitle}>ELMAH Error</Typography>
+          <Typography className={classes.boxHeaderTitle}>{t('UIStringResourcePerApp:ELMAH_Error')}</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>Add</Button>
+          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>
           <Toolbar>
@@ -91,7 +93,7 @@ export default function ELMAH_ErrorList(): JSX.Element {
               />
               <OrderByPicker
                 classes={classes}
-                orderBy={orderBy?.displayName}
+                orderBy={orderBy?.expression}
                 orderBys={orderBys}
                 handleOrderByChange={handleOrderByChange}
               />

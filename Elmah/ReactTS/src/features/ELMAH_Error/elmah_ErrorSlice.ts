@@ -55,7 +55,7 @@ const eLMAH_ErrorSlice = createSlice({
     name: 'eLMAH_Errors',
     initialState: entityAdapter.getInitialState({
         criteria: createELMAH_ErrorCommonCriteria(),
-        orderBy: orderBys.find(x=>x.displayName),
+        orderBy: orderBys.find(x=>x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1
     reducers: {
@@ -124,7 +124,7 @@ const eLMAH_ErrorSlice = createSlice({
                 entityAdapter.removeAll(state);
                 entityAdapter.upsertMany(state, result);
                 state.queryPagingSetting = payload.queryPagingSetting;
-                state.orderBy = payload.orderBy;
+                // state.orderBy = payload.orderBy;
                 // console.log("getIndexVM.fulfilled");
             }
         });

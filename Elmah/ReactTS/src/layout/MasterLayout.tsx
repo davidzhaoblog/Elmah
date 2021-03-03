@@ -115,8 +115,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         dispatch(closeAlert());
     }
     const logoutAlertDialog = {
-        title: 'You are logging out',
-        message: 'You are logging out',
+        title: t('UIStringResource:Account_LogInStatus_LogoutText'),
+        message: t('UIStringResource:Account_LogInStatus_LogoutText'),
         buttons: createLogoutAlertButtonsOptions(confirmLogout, handleAlertClose)
     };
 
@@ -211,8 +211,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                                 onClose={(e) => handleMenuClose(null)}
                             >
                                 {/* <MenuItem onClick={this.handleMenuClose.bind(this, '/account')}>{this.props.authentication.name}</MenuItem> */}
-                                <MenuItem onClick={(e) => handleMenuClose('/account')}>Whatever</MenuItem>
-                                <MenuItem onClick={(e) => handleLogout()}>Logout</MenuItem>
+                                {/* <MenuItem onClick={(e) => handleMenuClose('/account')}>Whatever</MenuItem> */}
+                                <MenuItem onClick={(e) => handleLogout()}>{t('UIStringResource:Account_LogInStatus_LogoutText')}</MenuItem>
                             </Menu>
                         </div>
                     </Toolbar>

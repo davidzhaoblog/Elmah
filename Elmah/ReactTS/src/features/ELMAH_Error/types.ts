@@ -5,39 +5,39 @@ import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections
 
 export interface ELMAH_Error {
     errorId: string,
-    application: string, 
-    host: string, 
-    type: string, 
-    source: string, 
-    message: string, 
-    user: string, 
-    statusCode: number, 
-    timeUtc: Date, 
-    sequence: number, 
-    allXml: string, 
+    application: string,
+    host: string,
+    type: string,
+    source: string,
+    message: string,
+    user: string,
+    statusCode: number,
+    timeUtc: Date,
+    sequence: number,
+    allXml: string,
     testCheckBox: boolean,
 }
 
 export function createELMAH_ErrorDefault(): ELMAH_Error {
     return {
         errorId: 0,
-        application: '', 
+        application: '',
         host: '',
         type: '',
         source: '',
         message: '',
         user: '',
         statusCode: '',
-        timeUtc: new Date(), 
-        sequence: 0, 
+        timeUtc: new Date(),
+        sequence: 0,
         allXml: '',
         testCheckBox: false,
     } as unknown as ELMAH_Error;
 }
 
-export const orderBys : QueryOrderBySetting[] = [
-    { propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type Ascending' },
-    { propertyName: 'type', direction: QueryOrderDirections.Descending, displayName: 'Type Descending' },
+export const orderBys: QueryOrderBySetting[] = [
+    { propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type', expression: 'Type~ASC' },
+    { propertyName: 'type', direction: QueryOrderDirections.Descending, displayName: 'Type', expression: 'Type~DESC' },
 ];
 
 export interface ELMAH_ErrorIdentifier {
@@ -46,30 +46,30 @@ export interface ELMAH_ErrorIdentifier {
 
 // Criteria.1 EntityStatusCodeCommonCriteria
 export interface ELMAH_ErrorCommonCriteria {
-		name: string;
-		modifiedDateRange: Range<string>;
-		stringContains_AllColumns: string;
-	canQueryWhenNoQuery: boolean;
+    name: string;
+    modifiedDateRange: Range<string>;
+    stringContains_AllColumns: string;
+    canQueryWhenNoQuery: boolean;
 }
 
 export const createELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria => {
 
-	return {
-			name: '',
-			modifiedDateRange: defaultDateRange(),
-			stringContains_AllColumns: '',
-		canQueryWhenNoQuery: true
-	};
+    return {
+        name: '',
+        modifiedDateRange: defaultDateRange(),
+        stringContains_AllColumns: '',
+        canQueryWhenNoQuery: true
+    };
 }
 
 export const convertELMAH_ErrorCommonCriteria = (criteria: ELMAH_ErrorCommonCriteria): any => {
-	return {
-		common: {
-			name: {
+    return {
+        common: {
+            name: {
                 valueToBeContained: criteria?.name,
-				isToCompare: !criteria?.name
+                isToCompare: !criteria?.name
             },
-			modifiedDateRange: {
+            modifiedDateRange: {
                 isToCompareLowerBound: !criteria?.modifiedDateRange?.lower,
                 isToIncludeLowerBound: true,
                 lowerBound: criteria?.modifiedDateRange?.lower,
@@ -77,11 +77,11 @@ export const convertELMAH_ErrorCommonCriteria = (criteria: ELMAH_ErrorCommonCrit
                 isToIncludeUpperBound: false,
                 upperBound: criteria?.modifiedDateRange?.upper
             },
-			stringContains_AllColumns: {
+            stringContains_AllColumns: {
                 valueToBeContained: criteria?.stringContains_AllColumns,
-				isToCompare: !criteria?.stringContains_AllColumns
+                isToCompare: !criteria?.stringContains_AllColumns
             },
-		},
-		canQueryWhenNoQuery: true
-	};
+        },
+        canQueryWhenNoQuery: true
+    };
 }

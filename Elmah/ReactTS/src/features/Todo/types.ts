@@ -16,6 +16,6 @@ export function createTodoDefault(): Todo {
 }
 
 export const orderBys : QueryOrderBySetting[] = [
-    { propertyName: 'text', direction: QueryOrderDirections.Ascending, displayName: 'Text Ascending' },
-    { propertyName: 'text', direction: QueryOrderDirections.Descending, displayName: 'Text Descending' },
+    { propertyName: 'text', direction: QueryOrderDirections.Ascending, displayName: 'Text Ascending', expression: 'Text~ASC'  },
+    { propertyName: 'text', direction: QueryOrderDirections.Descending, displayName: 'Text Descending', expression: 'Text~DESC' },
 ];

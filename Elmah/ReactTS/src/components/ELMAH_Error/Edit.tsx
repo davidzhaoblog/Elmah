@@ -1,25 +1,39 @@
 import React, { useEffect } from 'react'
-import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { Controller, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { FormControl, FormControlLabel, Grid, InputLabel, Select } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import { useTranslation } from 'react-i18next';
+
 import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
-import FormPopup from '../FormPopup';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
 import { createELMAH_ErrorDefault, ELMAH_Error } from 'src/features/ELMAH_Error/types';
-// import { upsert } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
+import { upsert } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
 import { elmahHostListSelector, getElmahHostList } from 'src/features/listSlices';
+import FormPopup from '../FormPopup';
 import { StyledCheckbox } from '../controls/StyledCheckbox';
 import { StyledTextField } from '../controls/StyledTextField';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 
 export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
+    const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
+
     const { openPopup, setOpenPopup } = props;
+
+    const formValidations = {
+        user: {
+            required: true,
+            maxLength: {
+                value: 50,
+                message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
+            }
+        }
+    };
 
     const elmahHostList = useSelector(
         (state: RootState) => elmahHostListSelector.selectAll(state)
@@ -39,8 +53,8 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
 
     const onSubmit = (data: any) => {
-        // const dataToUpsert = { errorId: 0, ...props.item, ...data };
-        // dispatch(upsert(dataToUpsert))
+        const dataToUpsert = { errorId: 0, ...props.item, ...data };
+        dispatch(upsert(dataToUpsert))
         console.log(data);
 
         setValue('user', '');
@@ -55,7 +69,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
 
     return (
         <FormPopup
-            title="ELMAH Error Form"
+            title={t('UIStringResourcePerApp:ELMAH_Error')}
             openPopup={openPopup}
             setOpenPopup={setOpenPopup}
             submitDisabled={!formState.isValid}
@@ -68,16 +82,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='user'
-                            label='user'
+                            label={t('UIStringResourcePerEntity:User')}
                             variant='outlined'
                             margin='normal'
-                            inputRef={register({
-                                required: 'You must provide the user!',
-                                minLength: {
-                                    value: 6,
-                                    message: 'user must be greater than 6 characters',
-                                },
-                            })}
+                            inputRef={register(formValidations.user)}
                             error={!!errors.user}
                             fullWidth
                             autoFocus
@@ -90,7 +98,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         <InputLabel htmlFor="outlined-age-native-simple">Host</InputLabel>
                         <Select
                             native
-                            label="host"
+                            label={t('UIStringResourcePerEntity:Host')}
                             name='host'
                             inputRef={register}
                         >
@@ -107,7 +115,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             as={
                                 <KeyboardDatePicker
                                     clearable
-                                    autoOk
                                     format="MMM DD, yyyy"
                                     views={["year", "month", "date"]}
                                     inputVariant="outlined"
@@ -118,7 +125,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                     onChange={() => {}}
                                 />
                             }
-                            name="timeUtc"
+                            name={t('UIStringResourcePerEntity:TimeUtc')}
                             defaultValue={new Date()}
                             rules={{ required: "Field Required" }}
                             control={control}
@@ -140,7 +147,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                     )}
                                 />
                             }
-                            label='testCheckBox'
+                            label={t('UIStringResourcePerEntity:testCheckBox')}
                         />
                     </FormControl>
                 </Grid>

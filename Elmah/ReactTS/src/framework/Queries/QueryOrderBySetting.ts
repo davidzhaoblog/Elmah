@@ -5,6 +5,7 @@ export interface QueryOrderBySetting
   propertyName: string;
   direction: QueryOrderDirections;
   displayName: string;
+  expression: string;
   // fontIcon: string;
   // fontIconFamily: string;
   // isSelected: boolean;
