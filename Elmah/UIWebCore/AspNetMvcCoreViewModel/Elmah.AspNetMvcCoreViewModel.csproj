@@ -3,7 +3,7 @@
   <PropertyGroup>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Elmah.AspNetMvcCoreViewModel</RootNamespace>
     <AssemblyName>Elmah.AspNetMvcCoreViewModel</AssemblyName>
   </PropertyGroup>

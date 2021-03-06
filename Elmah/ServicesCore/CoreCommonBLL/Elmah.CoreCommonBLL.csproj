@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk" >
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Elmah.CoreCommonBLL</RootNamespace>
     <AssemblyName>Elmah.CoreCommonBLL</AssemblyName>
   </PropertyGroup>
