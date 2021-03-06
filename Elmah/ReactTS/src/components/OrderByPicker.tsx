@@ -1,5 +1,8 @@
 import React from "react";
-import { FormControl, FormHelperText, NativeSelect } from "@material-ui/core";
+import { useTranslation } from 'react-i18next';
+import { FormControl, FormHelperText, Select, MenuItem, ListItemIcon, Typography } from "@material-ui/core";
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 
 interface IOrderByPickerProps {
@@ -10,22 +13,33 @@ interface IOrderByPickerProps {
 }
 
 export default function OrderByPicker(props: IOrderByPickerProps): JSX.Element {
+    const { t } = useTranslation(["UIStringResource", "UIStringResourcePerEntity"]);
     return (
         <FormControl className={props.classes.formControl}>
-            <NativeSelect
+            <Select
                 className={props.classes.selectEmpty}
                 value={props.orderBy}
-                name="age"
+                name="orderBy"
                 onChange={props.handleOrderByChange}
-                inputProps={{ 'aria-label': 'Order By' }}
+                inputProps={{ 'aria-label': t('UIStringResource:SortBy') }}
             >
-			{props.orderBys.map((orderBy) => {
-                return (
-                    <option key={orderBy.displayName} value={orderBy.displayName} >{orderBy.displayName}</option>
-                );
-            })}
-            </NativeSelect>
-            <FormHelperText>Order By</FormHelperText>
+                {props.orderBys.map((orderBy) => {
+                    return (
+                        <MenuItem key={orderBy.expression} value={orderBy.expression}>
+                            <Typography variant="inherit">{orderBy.displayName}</Typography>
+                            <ListItemIcon>
+                                {
+                                    (orderBy.direction==="Up"
+                                        ? <ArrowUpwardIcon fontSize="small" />
+                                        : <ArrowDownwardIcon fontSize="small" />)
+                                }
+                            </ListItemIcon>
+                        </MenuItem>
+                    )
+                        ;
+                })}
+            </Select>
+            <FormHelperText>{t('UIStringResource:SortBy')}</FormHelperText>
         </FormControl>
     );
 }
