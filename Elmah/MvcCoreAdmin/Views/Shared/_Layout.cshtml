@@ -1,0 +1,117 @@
+@using Microsoft.Extensions.Localization;
+@using Microsoft.AspNetCore.Identity
+@using Elmah.MvcCore
+@using Elmah.MvcCore.Models
+@using Elmah.MvcCore.Models.ManageViewModels
+@using Elmah.MvcCore.Models.AccountViewModels
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerApp> localizer_UIStringResourcePerApp;
+@inject IStringLocalizer<Framework.Resx.UIStringResource> localizer_UIStringResource;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>@localizer_UIStringResourcePerApp["Application_Title"] | @ViewBag.Title</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/PagedList.css" />
+        <link rel="stylesheet" href="~/lib/dropzone/dropzone.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@localizer_UIStringResourcePerApp["Application_Title"]</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @await Html.PartialAsync("_LoginPartial")
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@localizer_UIStringResource["Home"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Map">@localizer_UIStringResource["Map"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SystemDashboard">@localizer_UIStringResource["SystemDashboard"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">@localizer_UIStringResource["Common_AboutPageTitle"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">@localizer_UIStringResource["Common_ContactPageTitle"]</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - @localizer_UIStringResourcePerApp["Application_Title"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@localizer_UIStringResource["Privacy"]</a>
+        </div>
+    </footer>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/Moment.js/Moment.js"></script>
+        <script src="~/lib/Chart.js/Chart.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/knockout/knockout-min.js"></script>
+        <script src="~/lib/dropzone/dropzone.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="~/lib/Moment.js/Moment.js"></script>
+        <script src="~/lib/Chart.js/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+        <script src="~/lib/knockout/knockout-min.js"></script>
+        <script src="~/lib/dropzone/dropzone.js"></script>
+    </environment>
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArlHQrmPayhiioSBJXmzaCSbM0ErHiktQ&libraries=places" type="text/javascript"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers : {
+                'Authorization' : 'Bearer ' + '@(Elmah.MvcCore.Security.CustomizedClaimTypes.GetJwtToken(User).Item2)'
+              }
+            });
+    </script>
+    }
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

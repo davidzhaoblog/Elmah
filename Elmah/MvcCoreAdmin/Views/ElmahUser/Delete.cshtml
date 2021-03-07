@@ -1,0 +1,50 @@
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerEntity> localizer_UIStringResourcePerEntity;
+@inject IStringLocalizer<Elmah.Resx.UIStringResourcePerApp> localizer_UIStringResourcePerApp;
+@inject IStringLocalizer<Framework.Resx.UIStringResource> localizer_UIStringResource;
+@model Elmah.AspNetMvcCoreViewModel.ElmahUser.ItemVM
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>@Model.ContentData.Title.</h4>
+                @*<h4>@Model.ContentData.Summary</h4>*@
+        <h3>@Framework.Resx.UIStringResource.Warning_Areyousureyouwanttodeletethis</h3>
+            </div>
+@if (Model.StatusOfResult != Framework.Services.BusinessLogicLayerResponseStatus.MessageOK && Model.StatusOfResult != Framework.Services.BusinessLogicLayerResponseStatus.UIProcessReady)
+{
+            <div class="card-body">
+                <div class="text-danger">@Model.StatusMessageOfResult</div>
+            </div>
+}
+            <form asp-controller="UrlStringsAlias.ControllerName_ElmahUser" asp-action="Delete" id="thisform" method="post" class="form">
+            @Html.AntiForgeryToken()
+                <div class="card-body">
+                <div class="form-group" >
+                    <label asp-for="Item.User" class="control-label"></label>
+                        <div class="form-control">
+                            @Model.Item.User
+                            <input type="hidden" asp-for="Item.User" />
+                        </div>
+                </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" role="button" type="submit">
+                                <span class="fa fa-check-circle"></span>
+                                <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@Framework.Resx.UIStringResource.Delete</span>
+                            </button>
+                            <a asp-area="" asp-controller="UrlStringsAlias.ControllerName_ElmahUser" asp-action="Delete" asp-route-user="@Model.Item.User" class="btn btn-secondary" role="button" title="@Framework.Resx.UIStringResource.Refresh">
+                                <span class="fa fa-refresh"></span>
+                            </a>
+                            <a asp-area="" asp-controller="UrlStringsAlias.ControllerName_ElmahUser" asp-action="Index" class="btn btn-secondary" role="button" title="@Framework.Resx.UIStringResource.Back">
+                                <span class="fa fa-refresh"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
