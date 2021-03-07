@@ -29,7 +29,7 @@ namespace Elmah.Droid
             Uri uri_netfx = new Uri(uri_android.ToString());
 
             // load redirect_url Page
-            Elmah.XamarinForms.Authentication.AuthenticationState.Authenticator.OnPageLoading(uri_netfx);
+            //Elmah.XamarinForms.Authentication.AuthenticationState.Authenticator.OnPageLoading(uri_netfx);
 
             var intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
