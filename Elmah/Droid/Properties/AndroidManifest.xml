@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.elmah.elmah" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="29" />
+	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="30" />
 	<!-- Permission to receive remote notifications from Google Play Services -->
 	<!-- Notice here that we have the package name of our application as a prefix on the permissions. -->
 	<uses-permission android:name="com.elmah.elmah.permission.MAPS_RECEIVE" />

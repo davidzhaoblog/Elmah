@@ -37,7 +37,7 @@ namespace Elmah.Droid
             Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.Forms.FormsMaterial.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
-            Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
+            //Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
 
             // TODO: Xam.PlugIn.Media, looks like no initialization required.
