@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  elmah.mvccoreadmin:
+    image: ${DOCKER_REGISTRY-}elmahmvccoreadmin
+    build:
+      context: .
+      dockerfile: Elmah/MvcCoreAdmin/Dockerfile
