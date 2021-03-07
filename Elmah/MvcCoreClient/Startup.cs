@@ -285,7 +285,7 @@ namespace Elmah.MvcCore
             services.AddScoped<UISharedViewModel>();
             services.AddScoped<DashboardVM>();
 
-            ViewModelsHelper.RegisterExtendedViewModels(services);
+            // ViewModelsHelper.RegisterExtendedViewModels(services);
 
             //services.AddControllersWithViews().AddJsonOptions(
             //    options => { options.JsonSerializerOptions.IgnoreNullValues = true;

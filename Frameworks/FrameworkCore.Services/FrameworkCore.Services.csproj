@@ -30,9 +30,9 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Spatial" Version="7.6.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />  </ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Spatial" Version="7.8.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />  </ItemGroup>
 </Project>

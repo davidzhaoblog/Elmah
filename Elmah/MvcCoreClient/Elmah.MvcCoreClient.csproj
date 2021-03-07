@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <RootNamespace>Elmah.MvcCore</RootNamespace>
@@ -16,6 +16,15 @@
   <PropertyGroup>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\ElmahApplication\**" />
+    <None Remove="Views\ElmahHost\**" />
+    <None Remove="Views\ElmahSource\**" />
+    <None Remove="Views\ElmahStatusCode\**" />
+    <None Remove="Views\ElmahType\**" />
+    <None Remove="Views\ElmahUser\**" />
+    <None Remove="Views\ELMAH_Error\**" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationApiController.cs" />
@@ -44,6 +53,9 @@
     <Compile Include="Security\CustomizedClaimTypes.cs" />
     <Compile Include="Security\Roles.cs" />
     <Compile Include="Services\EmailSender.cs" />
+    <Compile Include="Services\FacebookAuthService.cs" />
+    <Compile Include="Services\GoogleAuthService.cs" />
+    <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IEmailSender.cs" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
@@ -88,20 +100,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
-    <Content Include="Views\ELMAH_Error\Index.cshtml" />
-    <Content Include="Views\ELMAH_Error\Dashboard.cshtml" />
-    <Content Include="Views\ElmahApplication\Index.cshtml" />
-    <Content Include="Views\ElmahApplication\Dashboard.cshtml" />
-    <Content Include="Views\ElmahHost\Index.cshtml" />
-    <Content Include="Views\ElmahHost\Dashboard.cshtml" />
-    <Content Include="Views\ElmahSource\Index.cshtml" />
-    <Content Include="Views\ElmahSource\Dashboard.cshtml" />
-    <Content Include="Views\ElmahStatusCode\Index.cshtml" />
-    <Content Include="Views\ElmahStatusCode\Dashboard.cshtml" />
-    <Content Include="Views\ElmahType\Index.cshtml" />
-    <Content Include="Views\ElmahType\Dashboard.cshtml" />
-    <Content Include="Views\ElmahUser\Index.cshtml" />
-    <Content Include="Views\ElmahUser\Dashboard.cshtml" />
     <None Include="map.2.D.2.vsd" />
     <None Include="map.2.D.2.vsd.png" />
   </ItemGroup>
@@ -168,8 +166,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.44.1" />
     <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
@@ -180,6 +177,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <PackageReference Include="MiniGuid" Version="1.1.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />  </ItemGroup>
 </Project>
