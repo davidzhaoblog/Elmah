@@ -37,7 +37,7 @@ namespace Elmah.SQLite
         protected override Expression<Func<Elmah.SQLite.TableModels.ELMAH_Error, bool>> GetSQLiteTableQueryPredicate_Common(Elmah.CommonBLLEntities.ELMAH_ErrorChainedQueryCriteriaCommon criteria)
         {
             return
-                    ?;
+                    t => true;
             /*
             return t =>
                         (

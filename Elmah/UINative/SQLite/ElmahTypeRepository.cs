@@ -37,7 +37,7 @@ namespace Elmah.SQLite
         protected override Expression<Func<Elmah.SQLite.TableModels.ElmahType, bool>> GetSQLiteTableQueryPredicate_Common(Elmah.CommonBLLEntities.ElmahTypeChainedQueryCriteriaCommon criteria)
         {
             return
-                    ?;
+                    t => true;
             /*
             return t =>
                         (

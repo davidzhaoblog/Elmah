@@ -18,11 +18,11 @@
     "Elmah.MvcCoreAdmin": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7809/",
+      "launchUrl": "https://localhost:7806/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://0.0.0.0:7809/;http://0.0.0.0:7808/"
+      "applicationUrl": "https://0.0.0.0:7806/;http://0.0.0.0:7805/"
     }
   }
 }

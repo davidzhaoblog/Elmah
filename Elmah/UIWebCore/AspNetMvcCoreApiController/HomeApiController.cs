@@ -62,7 +62,7 @@ namespace Elmah.AspNetMvcCoreApiController
                 return retval;
             }
         }
-/*
+
         /// <summary>
         /// HearBeat.
         /// http://[host]/api/HomeApi/HearBeat
@@ -73,7 +73,6 @@ namespace Elmah.AspNetMvcCoreApiController
         {
             return true;
         }
-*/
     }
 }
 

@@ -69,6 +69,7 @@ namespace Elmah.XamarinForms.ViewModels
             DependencyService.Register<Elmah.MVVMLightViewModels.NavigationVM, Elmah.XamarinForms.ViewModels.NavigationVM>();
             DependencyService.Register<Elmah.XamarinForms.ViewModels.AppLoadingVM>();
             DependencyService.Register<Framework.Xaml.AppShellVM>();
+            DependencyService.Register<Elmah.XamarinForms.ViewModels.AppShellVM>();
             // Already registered in {SolutionName}.XamarinForms.App.xaml.cs
             //DependencyService.Register<Framework.Xaml.Themes.ThemeSelectorVM>();
             DependencyService.Register<Elmah.XamarinForms.ViewModels.LogInViewModel>();

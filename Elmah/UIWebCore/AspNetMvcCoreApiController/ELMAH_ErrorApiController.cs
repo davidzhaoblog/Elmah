@@ -14,7 +14,7 @@ using Elmah.EntityFrameworkDAL;
 
 namespace Elmah.AspNetMvcCoreApiController
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("/api/[controller]/[action]")]
     public partial class ELMAH_ErrorApiController : Controller
     {
@@ -93,26 +93,26 @@ namespace Elmah.AspNetMvcCoreApiController
             return await this.ThisService.GetCollectionOfDefaultByIdentifier(request1);
         }
 
-/*
-        /// <summary>
-        /// delete an entity of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/> by identifier.
-        /// </summary>
-        /// <param name="identifier">input identifier of an entity</param>
-        // [Authorize]
-        [HttpDelete, ActionName("DeleteByIdentifierEntity")]
-        public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> DeleteByIdentifierEntity(
-            [FromBody] Elmah.DataSourceEntities.ELMAH_ErrorIdentifier identifier)
-        {
-            var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltInOfIdentifier();
-            request.Criteria = identifier;
+        /*
+                /// <summary>
+                /// delete an entity of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/> by identifier.
+                /// </summary>
+                /// <param name="identifier">input identifier of an entity</param>
+                // [Authorize]
+                [HttpDelete, ActionName("DeleteByIdentifierEntity")]
+                public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> DeleteByIdentifierEntity(
+                    [FromBody] Elmah.DataSourceEntities.ELMAH_ErrorIdentifier identifier)
+                {
+                    var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltInOfIdentifier();
+                    request.Criteria = identifier;
 
-            Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.DeleteByIdentifierEntity(request);
+                    Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.DeleteByIdentifierEntity(request);
 
-            return responseMessage;
-        }
-*/
+                    return responseMessage;
+                }
+        */
 
-/*
+
         /// <summary>
         /// delete an entity of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/> using .net value types.
         /// Can't use HttpDelete, because body is ignored.
@@ -123,7 +123,8 @@ namespace Elmah.AspNetMvcCoreApiController
         public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> DeleteEntity(
             [FromBody] Elmah.DataSourceEntities.ELMAH_Error input)
         {
-            var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn(){
+            var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn()
+            {
                 BusinessLogicLayerRequestTypes = Framework.Services.BusinessLogicLayerRequestTypes.DeleteWithParent
             };
 
@@ -132,74 +133,74 @@ namespace Elmah.AspNetMvcCoreApiController
 
             return responseMessage;
         }
-*/
+
         #endregion insert, update and delete in an entity
 
         #region delete using .Net value types
-/*
-        /// <summary>
-        /// delete an entity of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/> by identifier using .net value types.
-        /// </summary>
-        /// <param name="errorId">property value of System.Guid</param>
-        // [Authorize]
-        [HttpDelete, ActionName("DeleteByIdentifier")]
-        public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> DeleteByIdentifier(
-            System.Guid errorId
-            )
-        {
-            return await this.DeleteByIdentifierEntity(new Elmah.DataSourceEntities.ELMAH_ErrorIdentifier{
-                ErrorId = errorId});
-        }
-*/
+        /*
+                /// <summary>
+                /// delete an entity of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/> by identifier using .net value types.
+                /// </summary>
+                /// <param name="errorId">property value of System.Guid</param>
+                // [Authorize]
+                [HttpDelete, ActionName("DeleteByIdentifier")]
+                public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> DeleteByIdentifier(
+                    System.Guid errorId
+                    )
+                {
+                    return await this.DeleteByIdentifierEntity(new Elmah.DataSourceEntities.ELMAH_ErrorIdentifier{
+                        ErrorId = errorId});
+                }
+        */
 
         #endregion delete using .Net value types
 
         #region batch insert, update and delete in an entity collection
-/*
-        /// <summary>
-        /// batch update a collection of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/>.
-        /// </summary>
-        // [Authorize]
-        [HttpPut, ActionName("BatchUpdate")]
-        public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> BatchUpdate([FromBody] Elmah.DataSourceEntities.ELMAH_ErrorCollection input)
-        {
-            var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn();
-            request.Criteria.AddRange(input);
-            Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.BatchUpdate(request);
+        /*
+                /// <summary>
+                /// batch update a collection of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/>.
+                /// </summary>
+                // [Authorize]
+                [HttpPut, ActionName("BatchUpdate")]
+                public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> BatchUpdate([FromBody] Elmah.DataSourceEntities.ELMAH_ErrorCollection input)
+                {
+                    var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn();
+                    request.Criteria.AddRange(input);
+                    Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.BatchUpdate(request);
 
-            return responseMessage;
-        }
+                    return responseMessage;
+                }
 
-        /// <summary>
-        /// batch insert a collection of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/>.
-        /// </summary>
-        /// <param name="input">The input collection.</param>
-        // [Authorize]
-        [HttpPost, ActionName("BatchInsert")]
-        public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> BatchInsert([FromBody] Elmah.DataSourceEntities.ELMAH_ErrorCollection input)
-        {
-            var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn();
-            request.Criteria.AddRange(input);
-            Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.BatchInsert(request);
+                /// <summary>
+                /// batch insert a collection of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/>.
+                /// </summary>
+                /// <param name="input">The input collection.</param>
+                // [Authorize]
+                [HttpPost, ActionName("BatchInsert")]
+                public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> BatchInsert([FromBody] Elmah.DataSourceEntities.ELMAH_ErrorCollection input)
+                {
+                    var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn();
+                    request.Criteria.AddRange(input);
+                    Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.BatchInsert(request);
 
-            return responseMessage;
-        }
+                    return responseMessage;
+                }
 
-        /// <summary>
-        /// batch delete a collection of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/>.
-        /// </summary>
-        /// <param name="input">The input collection.</param>
-        // [Authorize]
-        [HttpDelete, ActionName("BatchDelete")]
-        public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> BatchDelete([FromBody] Elmah.DataSourceEntities.ELMAH_ErrorCollection input)
-        {
-            var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn();
-            request.Criteria.AddRange(input);
-            Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.BatchDelete(request);
+                /// <summary>
+                /// batch delete a collection of <see cref=" Elmah.DataSourceEntities.ELMAH_Error"/>.
+                /// </summary>
+                /// <param name="input">The input collection.</param>
+                // [Authorize]
+                [HttpDelete, ActionName("BatchDelete")]
+                public async Task<Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn> BatchDelete([FromBody] Elmah.DataSourceEntities.ELMAH_ErrorCollection input)
+                {
+                    var request = new Elmah.CommonBLLEntities.ELMAH_ErrorRequestMessageBuiltIn();
+                    request.Criteria.AddRange(input);
+                    Elmah.CommonBLLEntities.ELMAH_ErrorResponseMessageBuiltIn responseMessage = await this.ThisService.BatchDelete(request);
 
-            return responseMessage;
-        }
-*/
+                    return responseMessage;
+                }
+        */
         #endregion batch insert, update and delete in an entity collection
 
         // DataQueryPerQuerySettingCollection -- MethodDataQuery -- Start

@@ -148,7 +148,7 @@ namespace Elmah.MVVMLightViewModels.ELMAH_Error
 
         public override string GetDisplayString(Elmah.DataSourceEntities.ELMAH_Error.Default item)
         {
-            return item != null ? string.Format("{0}({1})", item. ?? ): string.Empty;
+            return item != null ? string.Format("{0}", item.Message ): string.Empty;
         }
 
         /*
