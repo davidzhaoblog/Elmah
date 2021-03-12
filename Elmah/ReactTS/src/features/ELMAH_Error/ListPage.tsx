@@ -19,7 +19,7 @@ import List from 'src/components/ELMAH_Error/List';
 import { orderBys, ELMAH_Error } from './types';
 import Edit from 'src/components/ELMAH_Error/Edit';
 
-export default function ELMAH_ErrorList(): JSX.Element {
+export default function ListPage(): JSX.Element {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);

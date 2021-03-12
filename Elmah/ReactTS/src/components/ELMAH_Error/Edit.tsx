@@ -114,6 +114,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         <Controller
                             as={
                                 <KeyboardDatePicker
+                                    label={t('UIStringResourcePerEntity:timeUtc')}
                                     clearable
                                     format="MMM DD, yyyy"
                                     views={["year", "month", "date"]}
@@ -125,7 +126,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                     onChange={() => {}}
                                 />
                             }
-                            name={t('UIStringResourcePerEntity:TimeUtc')}
+                            name='timeUtc'
                             defaultValue={new Date()}
                             rules={{ required: "Field Required" }}
                             control={control}

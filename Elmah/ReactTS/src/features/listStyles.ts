@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
       alignItems: 'center',
   },
   heading: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(20),
       height: '100%',
       verticalAlign: 'middle',
       flexBasis: '33.33%',
@@ -51,7 +51,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.text.secondary,
   },
   secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(20),
+  },
+  labelData: {
+    fontSize: theme.typography.pxToRem(15),
   },
   column: {
     flexBasis: '33.33%',

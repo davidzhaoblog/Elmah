@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useDispatch } from 'react-redux';
-import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails } from '@material-ui/core';
+import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails, InputLabel } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +15,7 @@ import { del } from 'src/features/ELMAH_Error/elmah_ErrorSlice';
 import { StyledCheckbox } from '../controls/StyledCheckbox';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { ReadOnlyTextField } from '../controls/ReadOnlyTextField';
-
+import { StyledTextField } from '../controls/StyledTextField';
 
 export default function ListItem(props: IListItemProps<ELMAH_Error>) {
     const classes = props.classes;
@@ -54,7 +55,21 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
                 <Typography className={classes.secondaryHeading} variant="h2" component="h3">{props.item.user}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div className={classes.column} />
+                <div className={classes.column} >
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:user')}</InputLabel>
+                    <Typography className={classes.labelData}>{props.item.user}</Typography>
+
+
+                    <StyledTextField
+                        label={t('UIStringResourcePerEntity:User')}
+                        value={props.item.user}
+                        variant='standard'
+                        margin='normal'
+                        fullWidth
+                        autoFocus
+                    />
+
+                </div>
                 <div className={classes.column}>
                     <KeyboardDatePicker
                         inputProps={{
@@ -72,10 +87,14 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
                         TextFieldComponent={ReadOnlyTextField}
                     />
                 </div>
-                <div className={clsx(classes.column, classes.helper)}>
+                <div className={clsx(classes.column)}>
                     <div>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:user')}</InputLabel>
                         <StyledCheckbox checked={props.item.testCheckBox} name="testCheckBox" disabled />
-                        <Typography className={classes.heading} variant="h1" component="h1">{t('UIStringResourcePerEntity:timeUtc')}</Typography>
+                    </div>
+                    <div>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahApplication')}</InputLabel>
+                        <Link to={{ pathname: '/elmahapplication/details', state: {application: "aaaa"} }}>{t('UIStringResourcePerApp:ElmahApplication')}</Link>
                     </div>
                 </div>
             </AccordionDetails>
