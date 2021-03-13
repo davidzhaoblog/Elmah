@@ -94,7 +94,8 @@ export default function ListItem(props: IListItemProps<ELMAH_Error>) {
                     </div>
                     <div>
                         <InputLabel shrink>{t('UIStringResourcePerApp:ElmahApplication')}</InputLabel>
-                        <Link to={{ pathname: '/elmahapplication/details', state: {application: "aaaa"} }}>{t('UIStringResourcePerApp:ElmahApplication')}</Link>
+                        <Link to={{ pathname: '/elmah_error/details/4b090093-ffaa-4ee9-a891-83cb0a1019cc'}} >{t('UIStringResourcePerApp:ElmahApplication')}</Link>
+                        {/* <Link to={{ pathname: '/elmah_error/details?errorid=4B090093-FFAA-4EE9-A891-83CB0A1019CC', state: {application: props.item.application} }}>{t('UIStringResourcePerApp:ElmahApplication')}</Link> */}
                     </div>
                 </div>
             </AccordionDetails>

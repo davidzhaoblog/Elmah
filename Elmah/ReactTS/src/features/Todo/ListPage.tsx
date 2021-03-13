@@ -14,7 +14,7 @@ import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { orderBys, Todo } from './types';
 import Edit from 'src/components/Todo/Edit';
-import { FormTypes } from 'src/framework/ViewModels/IFormProps';
+import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 export default function TodoList(): JSX.Element {
   const classes = useStyles();
@@ -97,7 +97,7 @@ export default function TodoList(): JSX.Element {
           <List items={listItems} classes={classes} openFormInPopup={openFormInPopup} />
         </div>
       </Paper>
-      {openPopup ? <Edit type={formType}
+      {openPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
         item={selectedItem}

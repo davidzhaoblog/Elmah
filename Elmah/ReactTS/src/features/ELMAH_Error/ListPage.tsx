@@ -11,7 +11,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import PageSizePicker from 'src/components/PageSizePicker';
 import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
-import { FormTypes } from 'src/framework/ViewModels/IFormProps';
+import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { getElmahHostList } from '../listSlices';
 
 import { getIndexVM, eLMAH_ErrorSelectors } from './elmah_ErrorSlice';
@@ -102,7 +102,7 @@ export default function ListPage(): JSX.Element {
           <List items={listItems} classes={classes} openFormInPopup={openFormInPopup} />
         </div>
       </Paper>
-      {openPopup ? <Edit type={formType}
+      {openPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
         item={selectedItem}

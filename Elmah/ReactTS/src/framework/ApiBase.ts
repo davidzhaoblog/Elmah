@@ -267,7 +267,7 @@ export class ApiBase extends Axios {
 
     public Get = <TRequest, TResponse>(url: string, params: TRequest): Promise<TResponse> => {
         const queryString = this.ConvertIdentifierCriteriaToQueryString(params)
-        const urlWithQueryString = !queryString ? url + "?" + queryString :  url;
+        const urlWithQueryString = queryString ? url + "?" + queryString :  url;
         return this.get<TResponse, AxiosResponse<TResponse>>(urlWithQueryString)
             .then(this.success);
     }

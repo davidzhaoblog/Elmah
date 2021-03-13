@@ -49,20 +49,27 @@ export default function LoginPage(): JSX.Element {
         setValue('password', '');
     }
 
+    // const formValidations = {
+    //     email: {
+    //         required: t('UIStringResource:Common_EmailRequiredErrorMessage'),
+    //         pattern: {
+    //             value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    //             message: t('UIStringResource:Common_EmailFormatErrorMessage'),
+    //         }
+    //     },
+    //     password: {
+    //         required: t('UIStringResource:Common_PasswordRequiredErrorMessage'),
+    //         pattern: {
+    //             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    //             message: t('UIStringResource:Common_PasswordErrorMessage'),
+    //         }
+    //     }
+    // };
+
     const formValidations = {
         email: {
-            required: t('UIStringResource:Common_EmailRequiredErrorMessage'),
-            pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: t('UIStringResource:Common_EmailFormatErrorMessage'),
-            }
         },
         password: {
-            required: t('UIStringResource:Common_PasswordRequiredErrorMessage'),
-            pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                message: t('UIStringResource:Common_PasswordErrorMessage'),
-            }
         }
     };
 

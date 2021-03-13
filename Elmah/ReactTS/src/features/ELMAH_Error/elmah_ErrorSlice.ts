@@ -9,42 +9,45 @@ import { orderBys, ELMAH_Error, ELMAH_ErrorCommonCriteria, createELMAH_ErrorComm
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<ELMAH_Error>({
     // Assume IDs are stored in a field other than `book.id`
-    selectId: (eLMAH_Error: ELMAH_Error) => eLMAH_Error.errorId,
+    selectId: eLMAH_Error => eLMAH_Error.errorId,
     // Keep the "all IDs" array sorted based on book titles
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
-  })
+})
 
 // 2. actions can dispatch
 // 2.upsert upsert action can dispatch
 export const upsert = createAsyncThunk(
     'ELMAH_Error.upsert',
-    async (payload: ELMAH_Error) => {
+    async (payload: ELMAH_Error, { dispatch }) => {
         const response = await eLMAH_ErrorApi.Upsert(payload);
+        dispatch(closeSpinner());
         return response;
     }
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
     'ELMAH_Error.del',
-    async (payload: ELMAH_Error) => {
+    async (payload: ELMAH_Error, { dispatch }) => {
         const response = await eLMAH_ErrorApi.Delete(payload);
+        dispatch(closeSpinner());
         return response;
     }
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
     'ELMAH_Error.getByIdentifier',
-    async (payload: ELMAH_ErrorIdentifier) => {
+    async (payload: ELMAH_ErrorIdentifier, { dispatch }) => {
         const response = await eLMAH_ErrorApi.GetByIdentifier(payload);
+        dispatch(closeSpinner());
         return response;
     }
 )
 // 2.getIndexVM getIndexVM action can dispatch
 export const getIndexVM = createAsyncThunk(
     'ELMAH_Error.getIndexVM',
-    async (payload: IListRequest<ELMAH_ErrorCommonCriteria>, {dispatch}) => {
-        
-        const response = await eLMAH_ErrorApi.GetIndexVM({criteria: convertELMAH_ErrorCommonCriteria(payload.criteria), ...payload });
+    async (payload: IListRequest<ELMAH_ErrorCommonCriteria>, { dispatch }) => {
+
+        const response = await eLMAH_ErrorApi.GetIndexVM({ criteria: convertELMAH_ErrorCommonCriteria(payload.criteria), ...payload });
         dispatch(closeSpinner());
         return response;
     }
@@ -55,7 +58,7 @@ const eLMAH_ErrorSlice = createSlice({
     name: 'eLMAH_Errors',
     initialState: entityAdapter.getInitialState({
         criteria: createELMAH_ErrorCommonCriteria(),
-        orderBy: orderBys.find(x=>x.expression),
+        orderBy: orderBys.find(x => x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1
     reducers: {
@@ -68,8 +71,7 @@ const eLMAH_ErrorSlice = createSlice({
         });
         builder.addCase(upsert.fulfilled, (state, { payload }) => {
             var { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
+            if (businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK') {
                 entityAdapter.upsertOne(state, message[0]);
             }
             // console.log("upsert.fulfilled");
@@ -82,11 +84,10 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("delete.pending");
         });
         builder.addCase(del.fulfilled, (state, { payload }) => {
-            if(!payload)
+            if (!payload)
                 return;
             var { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
+            if (businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK') {
                 entityAdapter.removeOne(state, message[0].errorId);
             }
             // console.log("delete.fulfilled");
@@ -99,12 +100,11 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getByIdentifier.pending");
         });
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
-            if(!payload)
+            if (!payload)
                 return;
             var { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
-                entityAdapter.removeOne(state, message[0].errorId);
+            if (businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK') {
+                entityAdapter.upsertMany(state, message);
             }
             // console.log("getByIdentifier.fulfilled");
         });
@@ -116,11 +116,10 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getIndexVM.pending");
         });
         builder.addCase(getIndexVM.fulfilled, (state, { payload }) => {
-            if(!payload)
+            if (!payload)
                 return;
             var { statusOfResult, result } = payload;
-            if(statusOfResult && statusOfResult === 'MessageOK')
-            {
+            if (statusOfResult && statusOfResult === 'MessageOK') {
                 entityAdapter.removeAll(state);
                 entityAdapter.upsertMany(state, result);
                 state.queryPagingSetting = payload.queryPagingSetting;
@@ -134,8 +133,9 @@ const eLMAH_ErrorSlice = createSlice({
     }
 });
 
- // createEntityAdapter Usage #4, used in ToDoList.tsx
+// createEntityAdapter Usage #4.1
 export const eLMAH_ErrorSelectors = entityAdapter.getSelectors<RootState>(
     state => state.eLMAH_Errors
-  )
+)
+
 export default eLMAH_ErrorSlice.reducer;
