@@ -10,7 +10,7 @@ import { eLMAH_ErrorSelectors, getByIdentifier } from './elmah_ErrorSlice';
 import { ELMAH_ErrorIdentifier } from './types';
 
 export default function DetailsPage(): JSX.Element {
-  const { errorId } : ELMAH_ErrorIdentifier = useParams()
+  const { errorId }: ELMAH_ErrorIdentifier = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,10 +25,14 @@ export default function DetailsPage(): JSX.Element {
   );
 
   return (
-    <Details type={FormTypes.Create} wrapperType={WrapperTypes.RegularPage}
-      openPopup={false}
-      setOpenPopup={()=>{}}
-      item={item}
-  />
+    <>
+      {item &&
+        <Details type={FormTypes.Create} wrapperType={WrapperTypes.RegularPage}
+          openPopup={false}
+          setOpenPopup={() => { }}
+          item={item}
+        />
+      }
+    </>
   );
 }
