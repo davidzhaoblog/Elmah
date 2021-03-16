@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card, CardActions, CardContent, Grid, InputLabel, Typography } from '@material-ui/core';
+import { Card, CardContent, Grid, InputLabel, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -43,9 +43,9 @@ export default function Details(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         <StyledCheckbox checked={props.item.testCheckBox} name="testCheckBox" disabled />
                     </Grid>
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                     <Button size="small">Learn More</Button>
-                </CardActions>
+                </CardActions> */}
             </Card>
         );
     };
