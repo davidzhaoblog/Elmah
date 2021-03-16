@@ -4,6 +4,9 @@ const mingColor = '#387780';
 const emeraldGreenColor = '#62C370';
 export const useStyles = makeStyles((theme: Theme) => {
     return {
+        root: {
+            width: '100%',
+        },        
         paper: {
             margin: theme.spacing(4, 0),
             display: 'flex',
