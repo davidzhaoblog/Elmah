@@ -146,7 +146,7 @@ namespace Elmah.MvcCore
             // Add Cors
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
-                builder.WithOrigins("http://localhost", "https://localhost")
+                builder.WithOrigins("http://localhost:7813", "https://localhost:7814", "http://localhost:3456")
                        //.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader()
@@ -272,7 +272,50 @@ namespace Elmah.MvcCore
 
             #endregion 3. DI/IoC AspNetMvcCoreViewModel.ItemViewModels
 
+
             #region 4. DI/IoC AspNetMvcCoreViewModel.WorkspaceViewModels
+
+            // 4.1.1 ElmahModel.ELMAH_Error.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ELMAH_Error.IndexVM>();
+
+            // 4.1.2 ElmahModel.ELMAH_Error.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ELMAH_Error.DashboardVM>();
+
+            // 4.2.1 ElmahModel.ElmahApplication.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahApplication.IndexVM>();
+
+            // 4.2.2 ElmahModel.ElmahApplication.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahApplication.DashboardVM>();
+
+            // 4.3.1 ElmahModel.ElmahHost.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahHost.IndexVM>();
+
+            // 4.3.2 ElmahModel.ElmahHost.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahHost.DashboardVM>();
+
+            // 4.4.1 ElmahModel.ElmahSource.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahSource.IndexVM>();
+
+            // 4.4.2 ElmahModel.ElmahSource.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahSource.DashboardVM>();
+
+            // 4.5.1 ElmahModel.ElmahStatusCode.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahStatusCode.IndexVM>();
+
+            // 4.5.2 ElmahModel.ElmahStatusCode.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahStatusCode.DashboardVM>();
+
+            // 4.6.1 ElmahModel.ElmahType.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahType.IndexVM>();
+
+            // 4.6.2 ElmahModel.ElmahType.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahType.DashboardVM>();
+
+            // 4.7.1 ElmahModel.ElmahUser.SearchResult
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahUser.IndexVM>();
+
+            // 4.7.2 ElmahModel.ElmahUser.FullDetails
+            services.AddScoped<Elmah.AspNetMvcCoreViewModel.ElmahUser.DashboardVM>();
 
             #endregion 4. DI/IoC AspNetMvcCoreViewModel.WorkspaceViewModels
 
