@@ -26,7 +26,7 @@ import elmahType from 'src/features/ElmahType/Slice';
 
 import elmahUser from 'src/features/ElmahUser/Slice';
 
-
+import { elmahHostList } from 'src/features/listSlices';
 
 export const reducers = combineReducers({
     app: app,
@@ -55,6 +55,8 @@ export const reducers = combineReducers({
 
 
     elmahUser: elmahUser,
+
+    elmahHostList,
 
 
 });

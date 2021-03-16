@@ -30,6 +30,8 @@ import { todosSelectors } from "src/features/Todo/todoSlice";
 import TodoList from "src/features/Todo/ListPage";
 import { createLogoutAlertButtonsOptions } from "src/framework/ViewModels/IButtonOptions";
 
+import ELMAH_ErrorRoute from "src/features/ELMAH_Error/Route";
+
 interface IMasterLayoutProps {
     theme: Theme;
 }
@@ -262,6 +264,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                 <div className={classes.toolbar} />
                 <PrivateRoute path='/' exact={true} component={DashboardPage} />
                 <PrivateRoute path='/todolist' component={TodoList} />
+                <PrivateRoute path='/ELMAH_Error' exact={false} component={ELMAH_ErrorRoute} />
                 <Route path='/account' component={renderAccount} />
                 {renderAlert()}
                 <Backdrop className={classes.backdrop} open={app.loading}>

@@ -48,7 +48,7 @@ export function createELMAH_ErrorDefault(): ELMAH_Error {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~ASC' },
-	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~DESC' },
+	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~DESC' },
 	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name', expression: 'ElmahHost_Name~ASC' },
 	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name', expression: 'ElmahHost_Name~DESC' },
 	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahSource_Name', expression: 'ElmahSource_Name~ASC' },
