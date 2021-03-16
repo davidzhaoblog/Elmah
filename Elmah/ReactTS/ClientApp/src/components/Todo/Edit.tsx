@@ -10,7 +10,7 @@ import FormPopup from '../FormPopup';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
-import { CssTextField } from '../controls/CssTextField';
+import { StyledTextField } from '../controls/StyledTextField';
 
 export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     const dispatch = useDispatch();
@@ -59,7 +59,7 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
             <Grid container={true}>
                 <DevTool control={control} />
                 <Grid item lg={12}>
-                    <CssTextField
+                    <StyledTextField
                         name='text'
                         label='text'
                         variant='outlined'

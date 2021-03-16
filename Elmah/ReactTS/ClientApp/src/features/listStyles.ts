@@ -14,6 +14,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+    minWidth: 120,
+    height: 24,
   },  
   boxHeader: {
       width: '100%',
@@ -50,5 +52,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   secondaryHeading: {
       fontSize: theme.typography.pxToRem(15),
+  },
+  column: {
+    flexBasis: '33.33%',
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2),
   },
 }));

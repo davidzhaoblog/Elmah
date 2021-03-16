@@ -1,5 +1,5 @@
 export enum QueryOrderDirections
 {
-	Ascending,
-	Descending,
+	Ascending = 'Up',
+	Descending = 'Down',
 }

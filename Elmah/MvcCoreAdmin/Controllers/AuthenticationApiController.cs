@@ -155,7 +155,7 @@ namespace Elmah.MvcCore.Controllers
             return loginResponse;
         }
 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<Framework.WebApi.AuthenticationResponse> Logout([FromBody] Elmah.MvcCore.Models.AccountViewModels.LoginViewModel model)
         {

@@ -13,8 +13,8 @@ export function createElmahUserDefault(): ElmahUser {
 }
 
 export const orderBys : QueryOrderBySetting[] = [
-	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User Ascending' },
-	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User Descending' },
+	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User', expression: 'User~ASC' },
+	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User', expression: 'User~DESC' },
 ];
 
 // Identifier

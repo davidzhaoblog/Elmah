@@ -17,7 +17,7 @@ namespace Elmah.MvcCore.Controllers
     /// <summary>
     /// Mvc Controller of  <see cref="ElmahModel.ELMAH_Error"/>
     /// </summary>
-    //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+    [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
     public partial class ELMAH_ErrorController : Controller
     {
         private readonly IServiceProvider _serviceProvider;
@@ -34,7 +34,7 @@ namespace Elmah.MvcCore.Controllers
         /// Controller Method of View Index
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Index(int currentPage = 1, Elmah.AspNetMvcCoreViewModel.ELMAH_Error.IndexVM viewModel = null)
         {
             //log.Info(string.Format("{0}: Index", Framework.Models.LoggingOptions.UI_Process_Started.ToString()));
@@ -71,7 +71,7 @@ namespace Elmah.MvcCore.Controllers
         /// </summary>
         /// <param name="dataServiceType">Type of the data service.</param>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Index_Export(Framework.Models.DataServiceTypes dataServiceType)
         {
             //log.Info(string.Format("{0}: Index_Export", Framework.Models.LoggingOptions.UI_Process_Started.ToString()));
@@ -105,7 +105,7 @@ namespace Elmah.MvcCore.Controllers
         /// Display one entity and all related entities if any, either single item or a list, based on foreign keys
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Dashboard(System.Guid? errorId = default(System.Guid?))
         {
             var criteria = new Elmah.CommonBLLEntities.ELMAH_ErrorChainedQueryCriteriaIdentifier();
@@ -132,7 +132,7 @@ namespace Elmah.MvcCore.Controllers
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         [HttpGet()]
         public ActionResult Import()
         {
@@ -140,7 +140,7 @@ namespace Elmah.MvcCore.Controllers
             return View();
         }
 
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         [HttpPost()]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Await.Warning", "CS1998:Await.Warning")]
         public async Task<ActionResult> Import(IFormFile file)
@@ -184,7 +184,7 @@ namespace Elmah.MvcCore.Controllers
         /// GET: /ELMAH_Error/Details/5
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Details(System.Guid? errorId = default(System.Guid?))
         {
             Framework.ViewModels.UIAction uiAction = Framework.ViewModels.UIAction.ViewDetails;
@@ -207,7 +207,7 @@ namespace Elmah.MvcCore.Controllers
         /// GET: /ELMAH_Error/AddNew
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> AddNew()
         {
             var entity = CreateEmptyEntityOrGetFromTempData(TempDataKey_ELMAH_ErrorController_Copy);
@@ -225,7 +225,7 @@ namespace Elmah.MvcCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> AddNew(Elmah.AspNetMvcCoreViewModel.ELMAH_Error.ItemVM vm)
         {
             try
@@ -279,7 +279,7 @@ namespace Elmah.MvcCore.Controllers
         /// Copies current <see cref="ElmahModel.ELMAH_Error"/>, without identifier
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Copy(System.Guid? errorId = default(System.Guid?))
         {
             using (var scope = _serviceProvider.CreateScope())
@@ -306,7 +306,7 @@ namespace Elmah.MvcCore.Controllers
         /// GET: /ELMAH_Error/Edit/5
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Edit(System.Guid? errorId = default(System.Guid?))
         {
             Framework.ViewModels.UIAction uiAction = Framework.ViewModels.UIAction.Update;
@@ -329,7 +329,7 @@ namespace Elmah.MvcCore.Controllers
         /// POST: /ELMAH_Error/Edit/5
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         [HttpPost]
         public async Task<ActionResult> Edit(Elmah.AspNetMvcCoreViewModel.ELMAH_Error.ItemVM vm)
         {
@@ -399,7 +399,7 @@ namespace Elmah.MvcCore.Controllers
         /// GET: /ELMAH_Error/Delete/5
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<ActionResult> Delete(System.Guid? errorId = default(System.Guid?))
         {
             Framework.ViewModels.UIAction uiAction = Framework.ViewModels.UIAction.Delete;
@@ -421,7 +421,7 @@ namespace Elmah.MvcCore.Controllers
         /// POST: /ELMAH_Error/Delete/5
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         [HttpPost]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Await.Warning", "CS1998:Await.Warning")]
         public async Task<ActionResult> Delete(System.Guid? errorId = default(System.Guid?), Elmah.AspNetMvcCoreViewModel.ELMAH_Error.ItemVM vm = null)

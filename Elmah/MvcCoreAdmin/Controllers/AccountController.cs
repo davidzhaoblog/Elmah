@@ -16,7 +16,7 @@ using Elmah.MvcCore.Services;
 
 namespace Elmah.MvcCore.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {

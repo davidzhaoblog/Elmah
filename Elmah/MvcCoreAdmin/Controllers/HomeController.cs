@@ -43,13 +43,13 @@ namespace Elmah.MvcCore.Controllers
             return View();
         }
 
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public ActionResult Map()
         {
             return View();
         }
 
-        //[Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
+        [Authorize(Roles = Elmah.MvcCore.Security.RolesCombination.AllRoles)]
         public async Task<IActionResult> SystemDashboard()
         {
             using (var scope = _serviceProvider.CreateScope())

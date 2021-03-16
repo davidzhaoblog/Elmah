@@ -1,5 +1,6 @@
-import { FormControl, FormHelperText, NativeSelect } from "@material-ui/core";
 import React from "react";
+import { useTranslation } from 'react-i18next';
+import { FormControl, FormHelperText, MenuItem, Select, Typography } from "@material-ui/core";
 
 interface IPageSizePickerProps {
     classes: any;
@@ -9,22 +10,30 @@ interface IPageSizePickerProps {
 }
 
 export default function PageSizePicker(props: IPageSizePickerProps): JSX.Element {
+    const { t } = useTranslation(["UIStringResource"]);
+
     return (
         <FormControl className={props.classes.formControl}>
-            <NativeSelect
+            <Select
                 className={props.classes.selectEmpty}
                 value={props.pageSize}
                 name="age"
                 onChange={props.handlePageSizeChange}
-                inputProps={{ 'aria-label': 'Page Size' }}
+                inputProps={{ 'aria-label': t('UIStringResource:PageSize') }}
             >
                 {props.pageSizes.map((pageSize: any) => {
                     return (
-                        <option key={pageSize} value={pageSize} >{pageSize}</option>
+                        <MenuItem key={pageSize} value={pageSize}>
+                            <Typography variant="inherit">{pageSize}</Typography>
+                            {/* <ListItemIcon>
+                                <ArrowUpwardIcon fontSize="small" />
+                            </ListItemIcon> */}
+                        </MenuItem>                        
+                        // <option key={pageSize} value={pageSize} >{pageSize}</option>
                     );
                 })}
-            </NativeSelect>
-            <FormHelperText>Page Size</FormHelperText>
+            </Select>
+            <FormHelperText>{t('UIStringResource:PageSize')}</FormHelperText>
         </FormControl>
     );
 }

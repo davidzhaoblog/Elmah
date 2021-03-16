@@ -5,7 +5,7 @@ const mingColor = '#387780';
 const dartmouthGreenColor = '#2D7638';
 const emeraldGreenColor = '#62C370';
 
-export const CssTextField = withStyles({
+export const StyledTextField = withStyles({
   root: {
     '& label.Mui-focused': {
       color: mingColor,
