@@ -18,24 +18,27 @@ const entityAdapter = createEntityAdapter<ELMAH_Error>({
 // 2.upsert upsert action can dispatch
 export const upsert = createAsyncThunk(
     'ELMAH_Error.upsert',
-    async (payload: ELMAH_Error) => {
+    async (payload: ELMAH_Error, {dispatch}) => {
         const response = await eLMAH_ErrorApi.Upsert(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
     'ELMAH_Error.del',
-    async (payload: ELMAH_Error) => {
+    async (payload: ELMAH_Error, {dispatch}) => {
         const response = await eLMAH_ErrorApi.Delete(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
     'ELMAH_Error.getByIdentifier',
-    async (payload: ELMAH_ErrorIdentifier) => {
+    async (payload: ELMAH_ErrorIdentifier, {dispatch}) => {
         const response = await eLMAH_ErrorApi.GetByIdentifier(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
@@ -55,7 +58,7 @@ const eLMAH_ErrorSlice = createSlice({
     name: 'eLMAH_Errors',
     initialState: entityAdapter.getInitialState({
         criteria: defaultELMAH_ErrorCommonCriteria(),
-        orderBy: orderBys.find(x=>x.displayName),
+        orderBy: orderBys.find(x=>x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1
     reducers: {
@@ -124,7 +127,7 @@ const eLMAH_ErrorSlice = createSlice({
                 entityAdapter.removeAll(state);
                 entityAdapter.upsertMany(state, result);
                 state.queryPagingSetting = payload.queryPagingSetting;
-                state.orderBy = payload.orderBy;
+                // state.orderBy = payload.orderBy;
                 // console.log("getIndexVM.fulfilled");
             }
         });

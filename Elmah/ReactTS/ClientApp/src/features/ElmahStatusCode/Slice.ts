@@ -18,24 +18,27 @@ const entityAdapter = createEntityAdapter<ElmahStatusCode>({
 // 2.upsert upsert action can dispatch
 export const upsert = createAsyncThunk(
     'ElmahStatusCode.upsert',
-    async (payload: ElmahStatusCode) => {
+    async (payload: ElmahStatusCode, {dispatch}) => {
         const response = await elmahStatusCodeApi.Upsert(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
     'ElmahStatusCode.del',
-    async (payload: ElmahStatusCode) => {
+    async (payload: ElmahStatusCode, {dispatch}) => {
         const response = await elmahStatusCodeApi.Delete(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
     'ElmahStatusCode.getByIdentifier',
-    async (payload: ElmahStatusCodeIdentifier) => {
+    async (payload: ElmahStatusCodeIdentifier, {dispatch}) => {
         const response = await elmahStatusCodeApi.GetByIdentifier(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
@@ -55,7 +58,7 @@ const elmahStatusCodeSlice = createSlice({
     name: 'elmahStatusCodes',
     initialState: entityAdapter.getInitialState({
         criteria: defaultElmahStatusCodeCommonCriteria(),
-        orderBy: orderBys.find(x=>x.displayName),
+        orderBy: orderBys.find(x=>x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1
     reducers: {
@@ -124,7 +127,7 @@ const elmahStatusCodeSlice = createSlice({
                 entityAdapter.removeAll(state);
                 entityAdapter.upsertMany(state, result);
                 state.queryPagingSetting = payload.queryPagingSetting;
-                state.orderBy = payload.orderBy;
+                // state.orderBy = payload.orderBy;
                 // console.log("getIndexVM.fulfilled");
             }
         });
