@@ -102,10 +102,11 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getByIdentifier.pending");
         });
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
-            if (!payload)
+            if(!payload)
                 return;
             const { businessLogicLayerResponseStatus, message } = payload;
-            if (businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK') {
+            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
+            {
                 entityAdapter.upsertMany(state, message);
             }
             // console.log("getByIdentifier.fulfilled");
