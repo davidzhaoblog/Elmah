@@ -14,7 +14,7 @@ using Elmah.EntityFrameworkDAL;
 
 namespace Elmah.AspNetMvcCoreApiController
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public partial class ExtensionApiController : Controller
     {
         private readonly IServiceProvider _serviceProvider;
