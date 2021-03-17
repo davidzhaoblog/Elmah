@@ -1,18 +1,18 @@
 import React from 'react'
-import { Card, CardContent, Grid, InputLabel, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Card, CardContent, Grid, InputLabel } from '@material-ui/core';
+
 import { useTranslation } from 'react-i18next';
 
 import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { useStyles } from 'src/features/formStyles';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
-import { ElmahUser } from 'src/features/ElmahUser/Types';
 import FormPopup from '../FormPopup';
+import { ElmahUser } from 'src/features/ElmahUser/Types';
 
 export default function Details(props: IFormProps<ElmahUser> & IPopupProps) {
-    console.log(props);
-    console.log(props.item);
+    // console.log(props);
+    // console.log(props.item);
 
     const classes = useStyles();
     const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
