@@ -30,6 +30,29 @@ import { todosSelectors } from "src/features/Todo/todoSlice";
 import TodoList from "src/features/Todo/ListPage";
 import { createLogoutAlertButtonsOptions } from "src/framework/ViewModels/IButtonOptions";
 
+
+import ELMAH_ErrorRoute from "src/features/ELMAH_Error/Route";
+
+
+import ElmahApplicationRoute from "src/features/ElmahApplication/Route";
+
+
+import ElmahHostRoute from "src/features/ElmahHost/Route";
+
+
+import ElmahSourceRoute from "src/features/ElmahSource/Route";
+
+
+import ElmahStatusCodeRoute from "src/features/ElmahStatusCode/Route";
+
+
+import ElmahTypeRoute from "src/features/ElmahType/Route";
+
+
+import ElmahUserRoute from "src/features/ElmahUser/Route";
+
+
+
 interface IMasterLayoutProps {
     theme: Theme;
 }
@@ -262,6 +285,30 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
                 <div className={classes.toolbar} />
                 <PrivateRoute path='/' exact={true} component={DashboardPage} />
                 <PrivateRoute path='/todolist' component={TodoList} />
+
+
+                <PrivateRoute path='/ELMAH_Error' exact={false} component={ ELMAH_ErrorRoute } />
+
+
+                <PrivateRoute path='/ElmahApplication' exact={false} component={ ElmahApplicationRoute } />
+
+
+                <PrivateRoute path='/ElmahHost' exact={false} component={ ElmahHostRoute } />
+
+
+                <PrivateRoute path='/ElmahSource' exact={false} component={ ElmahSourceRoute } />
+
+
+                <PrivateRoute path='/ElmahStatusCode' exact={false} component={ ElmahStatusCodeRoute } />
+
+
+                <PrivateRoute path='/ElmahType' exact={false} component={ ElmahTypeRoute } />
+
+
+                <PrivateRoute path='/ElmahUser' exact={false} component={ ElmahUserRoute } />
+
+
+
                 <Route path='/account' component={renderAccount} />
                 {renderAlert()}
                 <Backdrop className={classes.backdrop} open={app.loading}>

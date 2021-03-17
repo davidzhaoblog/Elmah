@@ -29,6 +29,29 @@ export default function AppDrawer(props: IAppDrawerProps): JSX.Element {
         { path: '/', title: 'Dashboard', icon: () => <AccountCircleIcon /> },
         { path: '/account', title: 'Profile', icon: () => <AccountCircleIcon /> },
         { path: '/todolist', title: 'ToDo', icon: () => <AccountCircleIcon /> },
+
+        { path: '/ELMAH_Error', title: 'ELMAH_Error', icon: () => <AccountCircleIcon /> },
+
+
+        { path: '/ElmahApplication', title: 'ElmahApplication', icon: () => <AccountCircleIcon /> },
+
+
+        { path: '/ElmahHost', title: 'ElmahHost', icon: () => <AccountCircleIcon /> },
+
+
+        { path: '/ElmahSource', title: 'ElmahSource', icon: () => <AccountCircleIcon /> },
+
+
+        { path: '/ElmahStatusCode', title: 'ElmahStatusCode', icon: () => <AccountCircleIcon /> },
+
+
+        { path: '/ElmahType', title: 'ElmahType', icon: () => <AccountCircleIcon /> },
+
+
+        { path: '/ElmahUser', title: 'ElmahUser', icon: () => <AccountCircleIcon /> },
+
+
+
     ]
     
     return (

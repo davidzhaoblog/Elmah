@@ -8,7 +8,7 @@ export const apiConfig = {
     returnRejectedPromiseOnError: true,
     withCredentials: true,
     timeout: 30000,
-    baseURL: "https://localhost:7806/",
+    baseURL: "https://localhost:7814/",
     headers: {
         common: {
             "Cache-Control": "no-cache, no-store, must-revalidate",

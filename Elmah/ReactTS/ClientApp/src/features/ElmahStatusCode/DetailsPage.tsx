@@ -7,22 +7,21 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { elmahStatusCodeSelectors, getByIdentifier } from './Slice';
-import { ElmahStatusCodeIdentifier } from './Types';
 import Details from 'src/components/ElmahStatusCode/Details';
 
 export default function DetailsPage(): JSX.Element {
-  const { statusCode }: ElmahStatusCodeIdentifier = useParams()
+  const { statusCode }: {statusCode: string} = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getByIdentifier({ statusCode }));
+    dispatch(getByIdentifier({ statusCode: parseInt(statusCode) }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 
 
   const item = useSelector(
-    (state: RootState) => elmahStatusCodeSelectors.selectById(state, statusCode)
+    (state: RootState) => elmahStatusCodeSelectors.selectById(state, parseInt(statusCode))
   );
 
   return (

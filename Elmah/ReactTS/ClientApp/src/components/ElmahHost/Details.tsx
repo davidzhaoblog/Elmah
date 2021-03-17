@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardContent, Grid, InputLabel } from '@material-ui/core';
-
+import { Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';

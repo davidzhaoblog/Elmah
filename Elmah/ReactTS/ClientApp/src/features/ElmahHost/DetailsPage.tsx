@@ -7,16 +7,15 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { elmahHostSelectors, getByIdentifier } from './Slice';
-import { ElmahHostIdentifier } from './Types';
 import Details from 'src/components/ElmahHost/Details';
 
 export default function DetailsPage(): JSX.Element {
-  const { host }: ElmahHostIdentifier = useParams()
+  const { host }: {host: string} = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getByIdentifier({ host }));
+    dispatch(getByIdentifier({ host: host }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 

@@ -70,7 +70,7 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("upsert.pending");
         });
         builder.addCase(upsert.fulfilled, (state, { payload }) => {
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
                 entityAdapter.upsertOne(state, message[0]);
@@ -87,7 +87,7 @@ const eLMAH_ErrorSlice = createSlice({
         builder.addCase(del.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
                 entityAdapter.removeOne(state, message[0].errorId);
@@ -102,12 +102,11 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("getByIdentifier.pending");
         });
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
-            if(!payload)
+            if (!payload)
                 return;
-            var { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
-                entityAdapter.removeOne(state, message[0].errorId);
+            const { businessLogicLayerResponseStatus, message } = payload;
+            if (businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK') {
+                entityAdapter.upsertMany(state, message);
             }
             // console.log("getByIdentifier.fulfilled");
         });

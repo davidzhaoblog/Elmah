@@ -7,16 +7,15 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { eLMAH_ErrorSelectors, getByIdentifier } from './Slice';
-import { ELMAH_ErrorIdentifier } from './Types';
 import Details from 'src/components/ELMAH_Error/Details';
 
 export default function DetailsPage(): JSX.Element {
-  const { errorId }: ELMAH_ErrorIdentifier = useParams()
+  const { errorId }: {errorId: string} = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getByIdentifier({ errorId }));
+    dispatch(getByIdentifier({ errorId: errorId }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 

@@ -7,16 +7,15 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { elmahSourceSelectors, getByIdentifier } from './Slice';
-import { ElmahSourceIdentifier } from './Types';
 import Details from 'src/components/ElmahSource/Details';
 
 export default function DetailsPage(): JSX.Element {
-  const { source }: ElmahSourceIdentifier = useParams()
+  const { source }: {source: string} = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getByIdentifier({ source }));
+    dispatch(getByIdentifier({ source: source }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 
