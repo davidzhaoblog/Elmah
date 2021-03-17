@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { FormControl, FormControlLabel, Grid, InputLabel, Select } from '@material-ui/core';
+import { FormControl, FormControlLabel, Grid, Select } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { useTranslation } from 'react-i18next';
 
@@ -95,7 +95,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         )}
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="outlined-age-native-simple">Host</InputLabel>
                         <Select
                             native
                             label={t('UIStringResourcePerEntity:Host')}
@@ -114,7 +113,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         <Controller
                             as={
                                 <KeyboardDatePicker
-                                    label={t('UIStringResourcePerEntity:timeUtc')}
+                                    label={t('UIStringResourcePerEntity:TimeUtc')}
                                     clearable
                                     format="MMM DD, yyyy"
                                     views={["year", "month", "date"]}
