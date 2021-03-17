@@ -14,7 +14,7 @@ export function createElmahHostDefault(): ElmahHost {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host', expression: 'Host~ASC' },
-	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host', expression: 'Host~DESC' },
+	{ propertyName: 'host', direction: QueryOrderDirections.Descending, displayName: 'Host', expression: 'Host~DESC' },
 ];
 
 // Identifier

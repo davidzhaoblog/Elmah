@@ -16,7 +16,7 @@ export function createElmahStatusCodeDefault(): ElmahStatusCode {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'name', direction: QueryOrderDirections.Ascending, displayName: 'Name', expression: 'Name~ASC' },
-	{ propertyName: 'name', direction: QueryOrderDirections.Ascending, displayName: 'Name', expression: 'Name~DESC' },
+	{ propertyName: 'name', direction: QueryOrderDirections.Descending, displayName: 'Name', expression: 'Name~DESC' },
 ];
 
 // Identifier

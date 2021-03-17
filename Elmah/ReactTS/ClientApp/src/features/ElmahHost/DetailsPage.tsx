@@ -6,22 +6,22 @@ import { showSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
-import { eLMAH_ErrorSelectors, getByIdentifier } from './Slice';
-import Details from 'src/components/ELMAH_Error/Details';
+import { elmahHostSelectors, getByIdentifier } from './Slice';
+import Details from 'src/components/ElmahHost/Details';
 
 export default function DetailsPage(): JSX.Element {
-  const { errorId }: {errorId: string} = useParams()
+  const { host }: {host: string} = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getByIdentifier({ errorId: errorId }));
+    dispatch(getByIdentifier({ host: host }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 
 
   const item = useSelector(
-    (state: RootState) => eLMAH_ErrorSelectors.selectById(state, errorId)
+    (state: RootState) => elmahHostSelectors.selectById(state, host)
   );
 
   return (

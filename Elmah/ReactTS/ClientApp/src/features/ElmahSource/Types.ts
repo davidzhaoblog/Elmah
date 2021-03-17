@@ -14,7 +14,7 @@ export function createElmahSourceDefault(): ElmahSource {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source', expression: 'Source~ASC' },
-	{ propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source', expression: 'Source~DESC' },
+	{ propertyName: 'source', direction: QueryOrderDirections.Descending, displayName: 'Source', expression: 'Source~DESC' },
 ];
 
 // Identifier

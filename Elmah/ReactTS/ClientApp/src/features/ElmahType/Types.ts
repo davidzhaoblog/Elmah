@@ -14,7 +14,7 @@ export function createElmahTypeDefault(): ElmahType {
 
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type', expression: 'Type~ASC' },
-	{ propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type', expression: 'Type~DESC' },
+	{ propertyName: 'type', direction: QueryOrderDirections.Descending, displayName: 'Type', expression: 'Type~DESC' },
 ];
 
 // Identifier

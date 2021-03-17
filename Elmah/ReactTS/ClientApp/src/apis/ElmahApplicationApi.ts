@@ -14,7 +14,7 @@ export class ElmahApplicationApi extends ApiBaseCRUD<
 
 	this.url_Upsert = "api/ElmahApplicationApi/UpsertEntity";
     this.url_Delete = "api/ElmahApplicationApi/DeleteEntity";
-    this.url_GetByIdentifier = "api/ElmahApplicationApi/GetMessageOfDefaultByIdentifier";
+    this.url_GetByIdentifier = "api/ElmahApplicationApi/GetMessageOfEntityByIdentifier";
     this.url_GetIndexVM = "api/ElmahApplicationApi/GetIndexVM";
 	
     // // this middleware is been called right before the http request is made.

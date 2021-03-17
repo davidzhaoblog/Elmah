@@ -18,24 +18,27 @@ const entityAdapter = createEntityAdapter<ElmahApplication>({
 // 2.upsert upsert action can dispatch
 export const upsert = createAsyncThunk(
     'ElmahApplication.upsert',
-    async (payload: ElmahApplication) => {
+    async (payload: ElmahApplication, {dispatch}) => {
         const response = await elmahApplicationApi.Upsert(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
 // 2.delete delete action can dispatch
 export const del = createAsyncThunk(
     'ElmahApplication.del',
-    async (payload: ElmahApplication) => {
+    async (payload: ElmahApplication, {dispatch}) => {
         const response = await elmahApplicationApi.Delete(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
 // 2.getByIdentifier getByIdentifier action can dispatch
 export const getByIdentifier = createAsyncThunk(
     'ElmahApplication.getByIdentifier',
-    async (payload: ElmahApplicationIdentifier) => {
+    async (payload: ElmahApplicationIdentifier, {dispatch}) => {
         const response = await elmahApplicationApi.GetByIdentifier(payload);
+		dispatch(closeSpinner());
         return response;
     }
 )
@@ -55,7 +58,7 @@ const elmahApplicationSlice = createSlice({
     name: 'elmahApplications',
     initialState: entityAdapter.getInitialState({
         criteria: defaultElmahApplicationCommonCriteria(),
-        orderBy: orderBys.find(x=>x.displayName),
+        orderBy: orderBys.find(x=>x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1
     reducers: {
@@ -67,7 +70,7 @@ const elmahApplicationSlice = createSlice({
             // console.log("upsert.pending");
         });
         builder.addCase(upsert.fulfilled, (state, { payload }) => {
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
                 entityAdapter.upsertOne(state, message[0]);
@@ -84,10 +87,10 @@ const elmahApplicationSlice = createSlice({
         builder.addCase(del.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
-                entityAdapter.removeOne(state, message[0].errorId);
+                entityAdapter.removeOne(state, message[0].application);
             }
             // console.log("delete.fulfilled");
         });
@@ -101,10 +104,10 @@ const elmahApplicationSlice = createSlice({
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
-                entityAdapter.removeOne(state, message[0].errorId);
+                entityAdapter.upsertMany(state, message);
             }
             // console.log("getByIdentifier.fulfilled");
         });
@@ -124,7 +127,7 @@ const elmahApplicationSlice = createSlice({
                 entityAdapter.removeAll(state);
                 entityAdapter.upsertMany(state, result);
                 state.queryPagingSetting = payload.queryPagingSetting;
-                state.orderBy = payload.orderBy;
+                // state.orderBy = payload.orderBy;
                 // console.log("getIndexVM.fulfilled");
             }
         });

@@ -41,8 +41,7 @@ export class ApiBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest,
   }
 
   public GetByIdentifier = (params: TIdentifierCriteria): Promise<TResponse> => {
-    return this.Get<TIdentifierCriteria, AxiosResponse<TResponse>>(this.url_GetByIdentifier, params)
-      .then(this.success);
+    return this.Get<TIdentifierCriteria, TResponse>(this.url_GetByIdentifier, params);
   }
 
   public GetIndexVM = (params: TIndexVMRequest): Promise<TIndexVMResponse> => {

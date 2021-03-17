@@ -20,7 +20,7 @@ export const upsert = createAsyncThunk(
     'ELMAH_Error.upsert',
     async (payload: ELMAH_Error, {dispatch}) => {
         const response = await eLMAH_ErrorApi.Upsert(payload);
-        dispatch(closeSpinner());
+		dispatch(closeSpinner());
         return response;
     }
 )
@@ -29,7 +29,7 @@ export const del = createAsyncThunk(
     'ELMAH_Error.del',
     async (payload: ELMAH_Error, {dispatch}) => {
         const response = await eLMAH_ErrorApi.Delete(payload);
-        dispatch(closeSpinner());
+		dispatch(closeSpinner());
         return response;
     }
 )
@@ -38,7 +38,7 @@ export const getByIdentifier = createAsyncThunk(
     'ELMAH_Error.getByIdentifier',
     async (payload: ELMAH_ErrorIdentifier, {dispatch}) => {
         const response = await eLMAH_ErrorApi.GetByIdentifier(payload);
-        dispatch(closeSpinner());
+		dispatch(closeSpinner());
         return response;
     }
 )
@@ -70,7 +70,7 @@ const eLMAH_ErrorSlice = createSlice({
             // console.log("upsert.pending");
         });
         builder.addCase(upsert.fulfilled, (state, { payload }) => {
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
                 entityAdapter.upsertOne(state, message[0]);
@@ -87,7 +87,7 @@ const eLMAH_ErrorSlice = createSlice({
         builder.addCase(del.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
                 entityAdapter.removeOne(state, message[0].errorId);
@@ -104,10 +104,10 @@ const eLMAH_ErrorSlice = createSlice({
         builder.addCase(getByIdentifier.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            var { businessLogicLayerResponseStatus, message } = payload;
+            const { businessLogicLayerResponseStatus, message } = payload;
             if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
             {
-                entityAdapter.removeOne(state, message[0].errorId);
+                entityAdapter.upsertMany(state, message);
             }
             // console.log("getByIdentifier.fulfilled");
         });
