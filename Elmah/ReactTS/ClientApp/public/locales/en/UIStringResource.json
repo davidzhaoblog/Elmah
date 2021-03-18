@@ -63,7 +63,7 @@
     "Account__ChangePasswordPartial_Description": "Change Password Form ",
     "Account__ChangePasswordPartial_SubmitValue": "Change password",
     "Account__ExternalLoginsListPartial_Useanotherservicetologin": "Use another service to log in.",
-    "Account__ExternalLoginsListPartial_Description": "There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a> for details on setting up this ASP.NET application to support logging in via external services.",
+    "Account__ExternalLoginsListPartial_Description": "There are no external authentication services configured. See <a href=\\"http://go.microsoft.com/fwlink/?LinkId=313242\\">this article</a> for details on setting up this ASP.NET application to support logging in via external services.",
     "Account__ExternalLoginsListPartial_Loginusingyouraccountas": "Log in using your account as .",
     "Account__RemoveAccountPartial_Title": "Registered Logins",
     "Account__RemoveAccountPartial_ButtonText": "Remove login from your account:",
@@ -314,10 +314,8 @@
     "SelectAPhoto": "Select  a Photo",
     "TakeAPhoto": "Take a Photo",
     "Skip": "Skip",
-    "WelcomeWizardFirstStep": "A flexible solution for all your booking and payment needs.
-Free for individuals. Affordable for teams.",
-    "WelcomeWizardLastStep": "A flexible solution for all your booking and payment needs.
-Free for individuals. Affordable for teams.",
+    "WelcomeWizardFirstStep": "A flexible solution for all your booking and payment needs.\nFree for individuals. Affordable for teams.",
+    "WelcomeWizardLastStep": "A flexible solution for all your booking and payment needs.\nFree for individuals. Affordable for teams.",
     "AutoSignIn": "Auto LogIn",
     "Email": "Email",
     "Password": "Password",
