@@ -28,13 +28,15 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
-        user: {
-            required: true,
-            maxLength: {
-                value: 50,
-                message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
-            }
-        }
+
+        statusCode: {
+            },
+
+
+        name: {
+            },
+
+
     };
 
 
@@ -82,7 +84,7 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='statusCode'
-                            label={t('Elmah.Resx.UIStringResourcePerEntity:StatusCode')}
+                            label={t('UIStringResourcePerEntity:StatusCode')}
                             variant='outlined'
                             margin='normal'
                             inputRef={register(formValidations.statusCode)}
@@ -97,7 +99,7 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='name'
-                            label={t('Elmah.Resx.UIStringResourcePerEntity:Name')}
+                            label={t('UIStringResourcePerEntity:Name')}
                             variant='outlined'
                             margin='normal'
                             inputRef={register(formValidations.name)}

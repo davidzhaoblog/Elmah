@@ -28,13 +28,11 @@ export default function Edit(props: IFormProps<ElmahType> & IPopupProps) {
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
-        user: {
-            required: true,
-            maxLength: {
-                value: 50,
-                message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
-            }
-        }
+
+        type: {
+            },
+
+
     };
 
 
@@ -82,7 +80,7 @@ export default function Edit(props: IFormProps<ElmahType> & IPopupProps) {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='type'
-                            label={t('Elmah.Resx.UIStringResourcePerEntity:Type')}
+                            label={t('UIStringResourcePerEntity:Type')}
                             variant='outlined'
                             margin='normal'
                             inputRef={register(formValidations.type)}

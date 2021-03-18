@@ -2,10 +2,13 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { FormControl, Grid, Typography } from '@material-ui/core';
+import { FormControl, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { InputLabel, Select } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
+import { Select } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { Controller } from 'react-hook-form';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { StyledTextField } from '../controls/StyledTextField';
 import { useSelector } from 'react-redux';
@@ -37,14 +40,75 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
+
+        elmahApplication_Name: {
+            },
+
+
+        errorId: {
+            },
+
+
+        elmahHost_Name: {
+            },
+
+
+        elmahSource_Name: {
+            },
+
+
+        elmahStatusCode_Name: {
+            },
+
+
+        elmahType_Name: {
+            },
+
+
+        elmahUser_Name: {
+            },
+
+
+        application: {
+            },
+
+
+        host: {
+            },
+
+
+        type: {
+            },
+
+
+        source: {
+            },
+
+
+        message: {
+            },
+
+
         user: {
-            required: true,
-            maxLength: {
-                value: 50,
-                message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
-            }
-        },
-        message: {}
+            },
+
+
+        statusCode: {
+            },
+
+
+        timeUtc: {
+            },
+
+
+        sequence: {
+            },
+
+
+        allXml: {
+            },
+
+
     };
 
     const elmahApplicationList = useSelector(
@@ -178,7 +242,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='message'
-                            label={t('Elmah.Resx.UIStringResourcePerEntity:Message')}
+                            label={t('UIStringResourcePerEntity:Message')}
                             variant='outlined'
                             margin='normal'
                             inputRef={register(formValidations.message)}
@@ -224,7 +288,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         <Controller
                             as={
                                 <KeyboardDatePicker
-                                    label={t('Elmah.Resx.UIStringResourcePerEntity:TimeUtc')}
+                                    label={t('UIStringResourcePerEntity:TimeUtc')}
                                     clearable
                                     format="MMM DD, yyyy"
                                     views={["year", "month", "date"]}
@@ -249,7 +313,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='allXml'
-                            label={t('Elmah.Resx.UIStringResourcePerEntity:AllXml')}
+                            label={t('UIStringResourcePerEntity:AllXml')}
                             variant='outlined'
                             margin='normal'
                             inputRef={register(formValidations.allXml)}
