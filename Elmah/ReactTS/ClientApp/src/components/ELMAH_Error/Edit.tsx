@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { FormControl, Grid } from '@material-ui/core';
+import { FormControl, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 import { InputLabel, Select } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { StyledTextField } from '../controls/StyledTextField';
-
+import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/CombinedReducers';
+
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
@@ -42,7 +43,8 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                 value: 50,
                 message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
             }
-        }
+        },
+        message: {}
     };
 
     const elmahApplicationList = useSelector(
@@ -64,7 +66,8 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         (state: RootState) => elmahUserListSelector.selectAll(state)
     );
 
-    const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
+	// TODO: add "setValue," if you need setValue
+    const { register, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
         defaultValues: props.type === FormTypes.Edit ? props.item : createELMAH_ErrorDefault()
@@ -82,7 +85,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         dispatch(upsert(dataToUpsert))
         console.log(data);
 
-        setValue('user', '');
         setOpenPopup(false);
     }
 
@@ -184,7 +186,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             fullWidth
                             autoFocus
                         />
-                        {errors.user && (
+                        {errors.message && (
                             <span className={classes.error}>{errors.message.message}</span>
                         )}
                     </FormControl>
@@ -255,7 +257,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             fullWidth
                             autoFocus
                         />
-                        {errors.user && (
+                        {errors.allXml && (
                             <span className={classes.error}>{errors.allXml.message}</span>
                         )}
                     </FormControl>

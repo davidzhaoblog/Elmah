@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { FormControl, FormControlLabel, Grid } from '@material-ui/core';
+import { FormControl, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 import { StyledTextField } from '../controls/StyledTextField';
 
-import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
@@ -40,7 +39,8 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
 
 
 
-    const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
+	// TODO: add "setValue," if you need setValue
+    const { register, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
         defaultValues: props.type === FormTypes.Edit ? props.item : createElmahStatusCodeDefault()
@@ -58,7 +58,6 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
         dispatch(upsert(dataToUpsert))
         console.log(data);
 
-        setValue('user', '');
         setOpenPopup(false);
     }
 
@@ -80,6 +79,7 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
             <Grid container={true}>
                 <DevTool control={control} />
                 <Grid item lg={12}>
+                    <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='statusCode'
                             label={t('Elmah.Resx.UIStringResourcePerEntity:StatusCode')}
@@ -90,9 +90,10 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
                             fullWidth
                             autoFocus
                         />
-                        {errors.user && (
+                        {errors.statusCode && (
                             <span className={classes.error}>{errors.statusCode.message}</span>
                         )}
+					</FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='name'
@@ -104,7 +105,7 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
                             fullWidth
                             autoFocus
                         />
-                        {errors.user && (
+                        {errors.name && (
                             <span className={classes.error}>{errors.name.message}</span>
                         )}
                     </FormControl>
