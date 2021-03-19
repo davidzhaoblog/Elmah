@@ -20,3 +20,5 @@ export const apiConfig = {
     },
     paramsSerializer: (params: PathLike) => qs.stringify(params, { indices: false }),
 }
+
+
