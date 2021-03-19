@@ -153,9 +153,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
 						<Typography>{props.item.errorId}</Typography>
 					</Grid>
                     <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:Application')}</InputLabel>
                         <Select
                             native
-                            label={t('UIStringResourcePerEntity:Application')}
+							label={t('UIStringResourcePerEntity:Application')}
                             name='application'
                             inputRef={register(formValidations.application)}
                         >
@@ -168,9 +169,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:Host')}</InputLabel>
                         <Select
                             native
-                            label={t('UIStringResourcePerEntity:Host')}
+							label={t('UIStringResourcePerEntity:Host')}
                             name='host'
                             inputRef={register(formValidations.host)}
                         >
@@ -183,9 +185,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:Type')}</InputLabel>
                         <Select
                             native
-                            label={t('UIStringResourcePerEntity:Type')}
+							label={t('UIStringResourcePerEntity:Type')}
                             name='type'
                             inputRef={register(formValidations.type)}
                         >
@@ -198,9 +201,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                         <Select
                             native
-                            label={t('UIStringResourcePerEntity:Source')}
+							label={t('UIStringResourcePerEntity:Source')}
                             name='source'
                             inputRef={register(formValidations.source)}
                         >
@@ -228,9 +232,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         )}
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
                         <Select
                             native
-                            label={t('UIStringResourcePerEntity:User')}
+							label={t('UIStringResourcePerEntity:User')}
                             name='user'
                             inputRef={register(formValidations.user)}
                         >
@@ -243,9 +248,10 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
                         <Select
                             native
-                            label={t('UIStringResourcePerEntity:StatusCode')}
+							label={t('UIStringResourcePerEntity:StatusCode')}
                             name='statusCode'
                             inputRef={register(formValidations.statusCode)}
                         >
