@@ -13,15 +13,15 @@ import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
-import { getIndex, eLMAH_ErrorSelectors } from './Elmah.MvcCore.ClientApp.src.features.Slice';
-import { orderBys, ELMAH_Error } from './Elmah.MvcCore.ClientApp.src.features.Types';
-import Edit from 'src/components/ELMAH_Error/Elmah.MvcCore.ClientApp.src.components.Edit';
-import List from 'src/components/ELMAH_Error/Elmah.MvcCore.ClientApp.src.components.List';
+import { getIndex, eLMAH_ErrorSelectors } from './Slice';
+import { orderBys, ELMAH_Error } from './Types';
+import Edit from 'src/components/ELMAH_Error/Edit';
+import List from 'src/components/ELMAH_Error/List';
 
 export default function IndexPage(): JSX.Element {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { t } = useTranslation(["Elmah.MvcCore.ClientApp.public.locales.en.UIStringResource", "Elmah.MvcCore.ClientApp.public.locales.en.UIStringResourcePerApp"]);
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
 
   const { criteria, orderBy, queryPagingSetting } = store.getState().eLMAH_Error;
 
@@ -66,9 +66,9 @@ export default function IndexPage(): JSX.Element {
     <>
       <Paper className={classes.root}>
         <div className={classes.boxHeader}>
-          <Typography className={classes.boxHeaderTitle}>{t('Elmah.MvcCore.ClientApp.public.locales.en.UIStringResourcePerApp:ELMAH_Error')}</Typography>
+          <Typography className={classes.boxHeaderTitle}>{t('UIStringResourcePerApp:ELMAH_Error')}</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('Elmah.MvcCore.ClientApp.public.locales.en.UIStringResource:AddNew')}</Button>
+          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>
           <Toolbar>
