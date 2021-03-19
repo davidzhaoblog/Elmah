@@ -40,74 +40,54 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
-
         elmahApplication_Name: {
-            },
-
-
+        },
         errorId: {
-            },
-
-
+            required: t('UIStringResourcePerEntity:ErrorId_is_required'),
+        },
         elmahHost_Name: {
-            },
-
-
+        },
         elmahSource_Name: {
-            },
-
-
+        },
         elmahStatusCode_Name: {
-            },
-
-
+        },
         elmahType_Name: {
-            },
-
-
+        },
         elmahUser_Name: {
-            },
-
-
+        },
         application: {
-            },
-
-
+        },
         host: {
-            },
-
-
+        },
         type: {
-            },
-
-
+        },
         source: {
-            },
-
-
+        },
         message: {
+            minLength: {
+                value: 1,
+                message: t('UIStringResourcePerEntity:The_length_of_Message_should_be_1_to_500'),
             },
-
-
+            maxLength: {
+                value: 500,
+                message: t('UIStringResourcePerEntity:The_length_of_Message_should_be_1_to_500'),
+            }
+        },
         user: {
-            },
-
-
+        },
         statusCode: {
-            },
-
-
+        },
         timeUtc: {
-            },
-
-
+            required: t('UIStringResourcePerEntity:TimeUtc_is_required'),
+        },
         sequence: {
-            },
-
-
+        },
         allXml: {
-            },
-
+            minLength: {
+                value: 1,
+                message: t('UIStringResourcePerEntity:The_length_of_AllXml_should_be_1_to_'),
+            }
+        },
 
     };
 
@@ -184,7 +164,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             native
                             label={t('UIStringResourcePerEntity:Application')}
                             name='application'
-                            inputRef={register}
+                            inputRef={register(formValidations.application)}
                         >
                             <option aria-label="None" value="" />
                             {elmahApplicationList.map((item: any) => {
@@ -199,7 +179,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             native
                             label={t('UIStringResourcePerEntity:Host')}
                             name='host'
-                            inputRef={register}
+                            inputRef={register(formValidations.host)}
                         >
                             <option aria-label="None" value="" />
                             {elmahHostList.map((item: any) => {
@@ -214,7 +194,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             native
                             label={t('UIStringResourcePerEntity:Type')}
                             name='type'
-                            inputRef={register}
+                            inputRef={register(formValidations.type)}
                         >
                             <option aria-label="None" value="" />
                             {elmahTypeList.map((item: any) => {
@@ -229,7 +209,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             native
                             label={t('UIStringResourcePerEntity:Source')}
                             name='source'
-                            inputRef={register}
+                            inputRef={register(formValidations.source)}
                         >
                             <option aria-label="None" value="" />
                             {elmahSourceList.map((item: any) => {
@@ -259,7 +239,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             native
                             label={t('UIStringResourcePerEntity:User')}
                             name='user'
-                            inputRef={register}
+                            inputRef={register(formValidations.user)}
                         >
                             <option aria-label="None" value="" />
                             {elmahUserList.map((item: any) => {
@@ -274,7 +254,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             native
                             label={t('UIStringResourcePerEntity:StatusCode')}
                             name='statusCode'
-                            inputRef={register}
+                            inputRef={register(formValidations.statusCode)}
                         >
                             <option aria-label="None" value="" />
                             {elmahStatusCodeList.map((item: any) => {
@@ -302,7 +282,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             }
                             name='timeUtc'
                             defaultValue={new Date()}
-                            rules={{ required: "Field Required" }}
+							rules={formValidations.timeUtc}
                             control={control}
                         />
                     </FormControl>

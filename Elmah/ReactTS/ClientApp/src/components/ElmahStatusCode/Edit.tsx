@@ -28,14 +28,15 @@ export default function Edit(props: IFormProps<ElmahStatusCode> & IPopupProps) {
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
-
         statusCode: {
-            },
-
-
+            required: t('UIStringResourcePerEntity:StatusCode_is_required'),
+        },
         name: {
-            },
-
+            maxLength: {
+                value: 50,
+                message: t('UIStringResourcePerEntity:The_length_of_Name_should_be_0_to_50'),
+            }
+        },
 
     };
 

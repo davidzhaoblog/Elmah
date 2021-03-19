@@ -28,10 +28,16 @@ export default function Edit(props: IFormProps<ElmahUser> & IPopupProps) {
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
-
         user: {
+            minLength: {
+                value: 1,
+                message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
             },
-
+            maxLength: {
+                value: 50,
+                message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
+            }
+        },
 
     };
 
