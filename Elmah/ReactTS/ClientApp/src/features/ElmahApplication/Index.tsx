@@ -13,7 +13,7 @@ import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
-import { getIndex, elmahApplicationSelectors } from './Slice';
+import { getIndexVM, elmahApplicationSelectors } from './Slice';
 import { orderBys, ElmahApplication } from './Types';
 import Edit from 'src/components/ElmahApplication/Edit';
 import List from 'src/components/ElmahApplication/List';
