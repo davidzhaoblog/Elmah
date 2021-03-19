@@ -56,8 +56,8 @@ function ListItem(props: IListItemProps<ElmahStatusCode>) {
             <AccordionDetails>
                 <div className={classes.column}>
                     <InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.statusCode}</Typography> class="hidden-sm"
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:(System.String)Name=~Unknown@NotForeignKey')}</InputLabel>
+                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.statusCode}</Typography>
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:Name')}</InputLabel>
 					<Typography className={classes.labelData}>{props.item.name}</Typography>
                 </div>
             </AccordionDetails>

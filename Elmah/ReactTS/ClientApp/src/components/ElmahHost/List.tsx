@@ -56,7 +56,7 @@ function ListItem(props: IListItemProps<ElmahHost>) {
             <AccordionDetails>
                 <div className={classes.column}>
                     <InputLabel shrink>{t('UIStringResourcePerEntity:Host')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.host}</Typography> class="hidden-sm"
+                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.host}</Typography>
                 </div>
             </AccordionDetails>
             <Divider />
