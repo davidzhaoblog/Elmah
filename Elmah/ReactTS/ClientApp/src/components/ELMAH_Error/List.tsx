@@ -1,10 +1,8 @@
 import * as React from 'react'
 
 import { useDispatch } from 'react-redux';
-import { Button, Typography, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails, InputLabel } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Button, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails, InputLabel } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 
 import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
@@ -13,16 +11,18 @@ import { closeAlert, showAlert } from 'src/layout/appSlice';
 import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { IListProps } from 'src/framework/ViewModels/IListProps';
 
-import { del } from 'src/features/ELMAH_Error/Slice';
-import { ELMAH_Error } from 'src/features/ELMAH_Error/Types';
+import { Link } from 'react-router-dom';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { ReadOnlyTextField } from '../controls/ReadOnlyTextField';
-import { StyledTextField } from '../controls/StyledTextField';
+import { Typography } from '@material-ui/core';
+
+import { del } from 'src/features/ELMAH_Error/Slice';
+import { ELMAH_Error } from 'src/features/ELMAH_Error/Types';
 
 function ListItem(props: IListItemProps<ELMAH_Error>) {
     const classes = props.classes;
     const dispatch = useDispatch();
-    const { t } = useTranslation(["UIStringResource", "UIStringResourcePerEntity"]);
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -42,7 +42,7 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
 
         const deleteAlertDialog = {
             title: t('UIStringResource:Delete'),
-            message: 'You are deleting ' + props.item.user,
+            message: 'You are deleting ' + props.item.errorId,
             buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
         };
 
@@ -53,26 +53,27 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
         <Accordion key={props.item.errorId.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
             <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
                 <Avatar className={classes.avatar} />
-                <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography>
-                <Typography className={classes.secondaryHeading} variant="h2" component="h3">{props.item.user}</Typography>
+                <Typography className={classes.heading} variant="h1" component="h1">Take some data from AccordionDetails</Typography>
+                <Typography className={classes.heading} variant="h1" component="h1">or Add descriptions</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div className={classes.column} >
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:user')}</InputLabel>
-                    <Typography className={classes.labelData}>{props.item.user}</Typography>
-
-
-                    <StyledTextField
-                        label={t('UIStringResourcePerEntity:User')}
-                        value={props.item.user}
-                        variant='standard'
-                        margin='normal'
-                        fullWidth
-                        autoFocus
-                    />
-
-                </div>
                 <div className={classes.column}>
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
+                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography> class="hidden-sm"
+                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahApplication')}</InputLabel>
+					<Link to={{ pathname: '/elmahapplication/details/' + props.item?.elmahApplication_Name}} >{props.item?.elmahApplication_Name}</Link>
+                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahHost')}</InputLabel>
+					<Link to={{ pathname: '/elmahhost/details/' + props.item?.elmahHost_Name}} >{props.item?.elmahHost_Name}</Link>
+                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahType')}</InputLabel>
+					<Link to={{ pathname: '/elmahtype/details/' + props.item?.elmahType_Name}} >{props.item?.elmahType_Name}</Link>
+                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahSource')}</InputLabel>
+					<Link to={{ pathname: '/elmahsource/details/' + props.item?.elmahSource_Name}} >{props.item?.elmahSource_Name}</Link> class="hidden-xs pt-0 pb-0"
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:(System.String)Message=~Unknown@NotForeignKey')}</InputLabel>
+					<Typography className={classes.labelData}>{props.item.message}</Typography> class="hidden-xs pt-0 pb-0"
+                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahUser')}</InputLabel>
+					<Link to={{ pathname: '/elmahuser/details/' + props.item?.elmahUser_Name}} >{props.item?.elmahUser_Name}</Link> class="hidden-sm pt-0 pb-0"
+                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahStatusCode')}</InputLabel>
+					<Link to={{ pathname: '/elmahstatuscode/details/' + props.item?.elmahStatusCode_Name}} >{props.item?.elmahStatusCode_Name}</Link> class="hidden-sm pt-0 pb-0"
                     <KeyboardDatePicker
                         inputProps={{
                             readOnly: true,
@@ -82,23 +83,16 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
                         format="MMM DD, yyyy"
                         margin="normal"
                         id="date-picker-inline"
-                        label={t('UIStringResourcePerEntity:timeUtc')}
+                        label={t('UIStringResourcePerEntity:TimeUtc')}
                         value={props.item.timeUtc}
                         onChange={e => { }}
                         readOnly={true}
                         TextFieldComponent={ReadOnlyTextField}
-                    />
-                </div>
-                <div className={clsx(classes.column)}>
-                    {/* <div>
-                        <InputLabel shrink>{t('UIStringResourcePerEntity:user')}</InputLabel>
-                        <StyledCheckbox checked={props.item.testCheckBox} name="testCheckBox" disabled />
-                    </div> */}
-                    <div>
-                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahApplication')}</InputLabel>
-                        <Link to={{ pathname: '/elmah_error/details/4b090093-ffaa-4ee9-a891-83cb0a1019cc'}} >{t('UIStringResourcePerApp:ElmahApplication')}</Link>
-                        {/* <Link to={{ pathname: '/elmah_error/details?errorid=4B090093-FFAA-4EE9-A891-83CB0A1019CC', state: {application: props.item.application} }}>{t('UIStringResourcePerApp:ElmahApplication')}</Link> */}
-                    </div>
+                    /> class="hidden-md pt-0 pb-0"
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
+					<Typography className={classes.labelData}>{props.item.sequence}</Typography> class="hidden-md pt-0 pb-0"
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:(System.String)AllXml=~Unknown@NotForeignKey')}</InputLabel>
+					<Typography className={classes.labelData}>{props.item.allXml}</Typography> class="pt-0 pb-0"
                 </div>
             </AccordionDetails>
             <Divider />
@@ -121,3 +115,4 @@ export default function List(props: IListProps<ELMAH_Error>) {
         </div>
     );
 }
+
