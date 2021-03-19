@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails, InputLabel } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
@@ -57,7 +58,7 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
                 <Typography className={classes.heading} variant="h1" component="h1">or Add descriptions</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div className={classes.column}>
+                <div className={clsx(classes.column)}>
                     <InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography>
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahApplication')}</InputLabel>
