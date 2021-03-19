@@ -14,7 +14,7 @@ import { StyledTextField } from '../controls/StyledTextField';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/CombinedReducers';
 
-import { FormTypes, IFormProps } from 'src/framework/ViewModels/IFormProps';
+import { FormTypes, IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
@@ -143,15 +143,8 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         dispatch(getElmahUserList());
     }, []);
 
-    return (
-        <FormPopup
-            title={t('UIStringResourcePerApp:ELMAH_Error')}
-            openPopup={openPopup}
-            setOpenPopup={setOpenPopup}
-            submitDisabled={!formState.isValid}
-            handleSubmit={handleSubmit(onSubmit)}
-            buttons={popupButtonsOptions}
-        >
+    const renderItem = () => {
+        return (
             <Grid container={true}>
                 <DevTool control={control} />
                 <Grid item lg={12}>
@@ -282,7 +275,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             }
                             name='timeUtc'
                             defaultValue={new Date()}
-							rules={formValidations.timeUtc}
+                            rules={formValidations.timeUtc}
                             control={control}
                         />
                     </FormControl>
@@ -307,7 +300,29 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                     </FormControl>
                 </Grid>
             </Grid>
-        </FormPopup>
+        );
+    }
+
+    return (
+        <>
+            {props.wrapperType === WrapperTypes.DialogForm &&
+                <FormPopup
+                    title={t('UIStringResourcePerApp:ELMAH_Error')}
+                    openPopup={openPopup}
+                    setOpenPopup={setOpenPopup}
+                    submitDisabled={!formState.isValid}
+                    handleSubmit={handleSubmit(onSubmit)}
+                    buttons={popupButtonsOptions}
+                >
+                    {renderItem()}
+                </FormPopup>
+            }
+            {props.wrapperType !== WrapperTypes.DialogForm &&
+                <>
+                    {renderItem()}
+                </>
+            }
+        </>
     );
 }
 
