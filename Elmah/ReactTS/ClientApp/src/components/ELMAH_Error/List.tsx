@@ -59,7 +59,7 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
             <AccordionDetails>
                 <div className={classes.column}>
                     <InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography> class="hidden-sm"
+                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography>
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahApplication')}</InputLabel>
 					<Link to={{ pathname: '/elmahapplication/details/' + props.item?.elmahApplication_Name}} >{props.item?.elmahApplication_Name}</Link>
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahHost')}</InputLabel>
@@ -67,13 +67,13 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahType')}</InputLabel>
 					<Link to={{ pathname: '/elmahtype/details/' + props.item?.elmahType_Name}} >{props.item?.elmahType_Name}</Link>
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahSource')}</InputLabel>
-					<Link to={{ pathname: '/elmahsource/details/' + props.item?.elmahSource_Name}} >{props.item?.elmahSource_Name}</Link> class="hidden-xs pt-0 pb-0"
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:(System.String)Message=~Unknown@NotForeignKey')}</InputLabel>
-					<Typography className={classes.labelData}>{props.item.message}</Typography> class="hidden-xs pt-0 pb-0"
+					<Link to={{ pathname: '/elmahsource/details/' + props.item?.elmahSource_Name}} >{props.item?.elmahSource_Name}</Link>
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:Message')}</InputLabel>
+					<Typography className={classes.labelData}>{props.item.message}</Typography>
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahUser')}</InputLabel>
-					<Link to={{ pathname: '/elmahuser/details/' + props.item?.elmahUser_Name}} >{props.item?.elmahUser_Name}</Link> class="hidden-sm pt-0 pb-0"
+					<Link to={{ pathname: '/elmahuser/details/' + props.item?.elmahUser_Name}} >{props.item?.elmahUser_Name}</Link>
                     <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahStatusCode')}</InputLabel>
-					<Link to={{ pathname: '/elmahstatuscode/details/' + props.item?.elmahStatusCode_Name}} >{props.item?.elmahStatusCode_Name}</Link> class="hidden-sm pt-0 pb-0"
+					<Link to={{ pathname: '/elmahstatuscode/details/' + props.item?.elmahStatusCode_Name}} >{props.item?.elmahStatusCode_Name}</Link>
                     <KeyboardDatePicker
                         inputProps={{
                             readOnly: true,
@@ -88,11 +88,11 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
                         onChange={e => { }}
                         readOnly={true}
                         TextFieldComponent={ReadOnlyTextField}
-                    /> class="hidden-md pt-0 pb-0"
+                    />
                     <InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
-					<Typography className={classes.labelData}>{props.item.sequence}</Typography> class="hidden-md pt-0 pb-0"
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:(System.String)AllXml=~Unknown@NotForeignKey')}</InputLabel>
-					<Typography className={classes.labelData}>{props.item.allXml}</Typography> class="pt-0 pb-0"
+					<Typography className={classes.labelData}>{props.item.sequence}</Typography>
+                    <InputLabel shrink>{t('UIStringResourcePerEntity:AllXml')}</InputLabel>
+					<Typography className={classes.labelData}>{props.item.allXml}</Typography>
                 </div>
             </AccordionDetails>
             <Divider />
