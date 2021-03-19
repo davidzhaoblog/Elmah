@@ -13,15 +13,15 @@ import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
-import { getIndex, elmahStatusCodeSelectors } from './Elmah.MvcCore.ClientApp.src.features.Slice';
-import { orderBys, ElmahStatusCode } from './Elmah.MvcCore.ClientApp.src.features.Types';
-import Edit from 'src/components/ElmahStatusCode/Elmah.MvcCore.ClientApp.src.components.Edit';
-import List from 'src/components/ElmahStatusCode/Elmah.MvcCore.ClientApp.src.components.List';
+import { getIndex, elmahStatusCodeSelectors } from './Slice';
+import { orderBys, ElmahStatusCode } from './Types';
+import Edit from 'src/components/ElmahStatusCode/Edit';
+import List from 'src/components/ElmahStatusCode/List';
 
 export default function IndexPage(): JSX.Element {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { t } = useTranslation(["Elmah.MvcCore.ClientApp.public.locales.en.UIStringResource", "Elmah.MvcCore.ClientApp.public.locales.en.UIStringResourcePerApp"]);
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
 
   const { criteria, orderBy, queryPagingSetting } = store.getState().elmahStatusCode;
 
@@ -66,9 +66,9 @@ export default function IndexPage(): JSX.Element {
     <>
       <Paper className={classes.root}>
         <div className={classes.boxHeader}>
-          <Typography className={classes.boxHeaderTitle}>{t('Elmah.MvcCore.ClientApp.public.locales.en.UIStringResourcePerApp:ElmahStatusCode')}</Typography>
+          <Typography className={classes.boxHeaderTitle}>{t('UIStringResourcePerApp:ElmahStatusCode')}</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('Elmah.MvcCore.ClientApp.public.locales.en.UIStringResource:AddNew')}</Button>
+          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>
           <Toolbar>
