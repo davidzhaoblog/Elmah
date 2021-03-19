@@ -4,7 +4,7 @@ import { PrivateRoute } from '../Authentication/PrivateRoute';
 
 import DetailsPage from './DetailsPage';
 
-import ListPage from 'src/features/ELMAH_Error/IndexPage';
+import IndexPage from './Index';
 
 
 
