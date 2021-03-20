@@ -11,8 +11,8 @@ export class ApiBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest,
   protected url_GetByIdentifier: string;
   protected url_GetIndexVM: string;
 
-  public constructor(conf?: AxiosRequestConfig) {
-    super(conf);
+  public constructor(conf?: AxiosRequestConfig, token?: string) {
+    super(conf, token);
 
     // this middleware is been called right before the http request is made.
     this.interceptors.request.use((param: AxiosRequestConfig) => ({

@@ -5,6 +5,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //import { authenticationApiClient } from "src/apiCients/AuthenticationApiClient";
 import { closeSpinner } from "src/layout/appSlice";
 import { LoginViewModel } from "src/models/AccountModels";
+import { RootState } from "src/store/CombinedReducers";
 
 export const login = createAsyncThunk(
     'login',
@@ -44,6 +45,7 @@ const authSlice = createSlice({
         loginError: false,
         logoutError: false,
         isAuthenticated: false,
+        token: null,
         user: {},
     },
     reducers: {
@@ -61,12 +63,14 @@ const authSlice = createSlice({
             state.isLoggingIn = false;
             state.isAuthenticated = true;
             state.loginError = false;
+            state.token = payload.token;
             // console.log("login.fulfilled");
         });
         builder.addCase(login.rejected, (state, action) => {
             state.isLoggingIn = false;
             state.isAuthenticated = false;
             state.loginError = true;
+            state.token = null;
             // console.log("login.rejected");
         });
         builder.addCase(logout.pending, (state) => {
@@ -88,3 +92,5 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+
+export const selectToken = (state: RootState) => state.auth.token;

@@ -15,10 +15,10 @@ export class ApiBase extends Axios {
      * Creates an instance of api.
      * @param {import("axios").AxiosRequestConfig} conf
      */
-    public constructor(conf: AxiosRequestConfig) {
+    public constructor(conf: AxiosRequestConfig, token?: string) {
         super(conf);
 
-        this.token = "";
+        this.token = token;
         this.getToken = this.getToken.bind(this);
         this.setToken = this.setToken.bind(this);
         this.getUri = this.getUri.bind(this);
