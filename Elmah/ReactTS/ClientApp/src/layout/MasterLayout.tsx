@@ -52,6 +52,7 @@ import ElmahTypeRoute from "src/features/ElmahType/Route";
 import ElmahUserRoute from "src/features/ElmahUser/Route";
 import Cookies from "universal-cookie";
 import { CookieKeys } from "src/framework/CookieKeys";
+import { supportedLngs } from "src/i18n";
 
 
 
@@ -80,6 +81,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const { t, i18n } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
     const [language, setLanguage] = useState('')
     const [languages, setLanguages] = useState([])
+
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
         setLanguage(i18next.language);
@@ -91,7 +93,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
     useEffect(() => {
         // you can do async server request and fill up form
-        setLanguages(i18n.languages);
+        setLanguages(supportedLngs);
 
         const cookies = new Cookies();
         const language = cookies.get(CookieKeys.Language);
