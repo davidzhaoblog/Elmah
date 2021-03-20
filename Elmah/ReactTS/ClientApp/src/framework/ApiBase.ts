@@ -47,7 +47,7 @@ export class ApiBase extends Axios {
                     defaults: {
                         headers: {
                             ...param.headers,
-                            "Authorization": `Bearer ${token}`
+                            "Authorization": `${token}`
                         },
                     }
                 }
