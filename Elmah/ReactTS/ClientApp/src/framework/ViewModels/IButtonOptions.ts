@@ -30,7 +30,7 @@ export function createCreateFormButtonsOptions(resetHandler: () => void, cancelh
 export function createLogoutAlertButtonsOptions(confirmHandler: () => void, cancelhandler: () => void): IButtonOptions[] {
   const { t } = useTranslation(["UIStringResource"]);
   return [
-    { label: t('UIStringResource:Delete'), color: 'primary', handler: confirmHandler },
+    { label: t('UIStringResource:Account_LogInStatus_LogoutText'), color: 'primary', handler: confirmHandler },
     { label: t('UIStringResource:Cancel'), color: 'default', handler: cancelhandler }];  
 }
 

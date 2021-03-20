@@ -14,6 +14,7 @@ import MasterLayout from './layout/MasterLayout';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import "./i18n"
+import './i18n';
 import { useTranslation } from 'react-i18next';
 
 const theme = createMuiTheme({
@@ -23,28 +24,12 @@ const theme = createMuiTheme({
   }
 })
 
-// class App extends React.Component {
-//   public render() {
-//     document.title = t("UIStringResourcePerApp:Application_Title");
-//     return (
-//       <MuiPickersUtilsProvider utils={MomentUtils}>
-//       <Provider store={store}>
-//         <Router>
-//           <ThemeProvider theme={theme}>
-//             <MasterLayout theme={theme} />
-//           </ThemeProvider>
-//         </Router>
-//       </Provider>
-//       </MuiPickersUtilsProvider>
-//     );
-//   }
-// }
 const persistor = persistStore(store); // used to create the persisted store, persistor will be used in the next step
 
 function App() {
   const { t } = useTranslation(["UIStringResourcePerApp"]);
-  document.title = t("UIStringResourcePerApp:Application_Title");
-
+  document.title = t("UIStringResourcePerApp:Application_Title");  
+  
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Provider store={store}>

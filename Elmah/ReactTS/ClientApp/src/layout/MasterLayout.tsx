@@ -75,7 +75,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const [anchorElMenu, setAnchorElMenu] = useState()
     const [notificationEl, setNotificationEl] = useState()
 
-    const { t, i18n } = useTranslation(["UIStringResourcePerApp"]);
+    const { t, i18n } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
     const [language, setLanguage] = useState('')
     const [languages, setLanguages] = useState([])
     const changeLanguage = (language: string) => {
@@ -86,9 +86,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
     useEffect(() => {
         // you can do async server request and fill up form
-        setLanguages(i18next.languages);
-        i18n.changeLanguage(language);
-        setLanguage(i18next.language);
+        setLanguages(i18n.languages);
+        setLanguage(i18n.language);
     }, []);
 
     // 2.1. Drawer
@@ -136,6 +135,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const handleAlertClose = () => {
         dispatch(closeAlert());
     }
+
     const logoutAlertDialog = {
         title: t('UIStringResource:Account_LogInStatus_LogoutText'),
         message: t('UIStringResource:Account_LogInStatus_LogoutText'),

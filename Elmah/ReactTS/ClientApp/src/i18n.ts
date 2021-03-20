@@ -20,9 +20,10 @@ i18n
     fallbackLng: ['en', 'es'],
     lowerCaseLng: true,
     debug: true,
+    fallbackNS: false,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
-    },
+    }
   });
 
 export default i18n;

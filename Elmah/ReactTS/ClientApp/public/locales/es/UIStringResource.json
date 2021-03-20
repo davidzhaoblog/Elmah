@@ -63,7 +63,7 @@
 	"Account__ChangePasswordPartial_Description": "(es)Change Password Form ",
 	"Account__ChangePasswordPartial_SubmitValue": "(es)Change password",
 	"Account__ExternalLoginsListPartial_Useanotherservicetologin": "(es)Use another service to log in.",
-	"Account__ExternalLoginsListPartial_Description": "(es)There are no external authentication services configured. See <a href=\"http://go.microsoft.com/fwlink/?LinkId=313242\">this article</a> for details on setting up this ASP.NET application to support logging in via external services.",
+	"Account__ExternalLoginsListPartial_Description": "(es)There are no external authentication services configured. See <a href=\\\"http://go.microsoft.com/fwlink/?LinkId=313242\\\">this article</a> for details on setting up this ASP.NET application to support logging in via external services.",
 	"Account__ExternalLoginsListPartial_Loginusingyouraccountas": "(es)Log in using your account as .",
 	"Account__RemoveAccountPartial_Title": "(es)Registered Logins",
 	"Account__RemoveAccountPartial_ButtonText": "(es)Remove login from your account:",
