@@ -15,10 +15,10 @@ export class ApiBase extends Axios {
      * Creates an instance of api.
      * @param {import("axios").AxiosRequestConfig} conf
      */
-    public constructor(conf: AxiosRequestConfig, token?: string) {
+    public constructor(conf: AxiosRequestConfig) {
         super(conf);
 
-        this.token = token;
+        this.token = null;
         this.getToken = this.getToken.bind(this);
         this.setToken = this.setToken.bind(this);
         this.getUri = this.getUri.bind(this);
@@ -36,15 +36,28 @@ export class ApiBase extends Axios {
         this.Get = this.Get.bind(this);
 
         this.interceptors.request.use((param) => {
+            const token = this.getToken();
+            if(token)
+            {
+                return {
+                    ...param,
+                    defaults: {
+                        headers: {
+                            ...param.headers,
+                            "Authorization": `Bearer ${token}`
+                        },
+                    }
+                }
+            }
             return {
                 ...param,
                 defaults: {
                     headers: {
                         ...param.headers,
-                        "Authorization": `Bearer ${this.getToken()}`
                     },
                 }
             }
+
         }, (error) => {
             // handling error
         });
