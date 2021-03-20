@@ -20,7 +20,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
                 <div class="card-body">
-                <div class="form-group" >
+                @*<div class="form-group" >
                     <label asp-for="Item.Application" class="control-label"></label>
                         <select asp-for="Item.Application" asp-items="Model.SelectListOfElmahModel_ElmahApplication" class="form-control">
                             <option value="" disabled selected>@localizer_UIStringResourcePerApp["Please_select_ElmahApplication____"]</option>
@@ -43,13 +43,13 @@
                         <select asp-for="Item.Source" asp-items="Model.SelectListOfElmahModel_ElmahSource" class="form-control">
                             <option value="" disabled selected>@localizer_UIStringResourcePerApp["Please_select_ElmahSource____"]</option>
                         </select>
-                </div>
+                </div>*@
                 <div class="form-group" >
                     <label asp-for="Item.Message" class="control-label"></label>
                         <input type="text" asp-for="Item.Message" class="form-control" />
                         <span asp-validation-for="Item.Message"></span>
                 </div>
-                <div class="form-group" >
+                @*<div class="form-group" >
                     <label asp-for="Item.User" class="control-label"></label>
                         <select asp-for="Item.User" asp-items="Model.SelectListOfElmahModel_ElmahUser" class="form-control">
                             <option value="" disabled selected>@localizer_UIStringResourcePerApp["Please_select_ElmahUser____"]</option>
@@ -60,7 +60,7 @@
                         <select asp-for="Item.StatusCode" asp-items="Model.SelectListOfElmahModel_ElmahStatusCode" class="form-control">
                             <option value="" disabled selected>@localizer_UIStringResourcePerApp["Please_select_ElmahStatusCode____"]</option>
                         </select>
-                </div>
+                </div>*@
                 <div class="form-group" >
                     <label asp-for="Item.TimeUtc" class="control-label"></label>
                         <input type="date" asp-for="Item.TimeUtc" class="form-control" min="@(DateTime.Now.AddYears(-150).ToString("yyyy-MM-dd"))" max="@(DateTime.Now.AddYears(150).ToString("yyyy-MM-dd"))"/>
