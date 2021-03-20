@@ -50,6 +50,8 @@ import ElmahTypeRoute from "src/features/ElmahType/Route";
 
 
 import ElmahUserRoute from "src/features/ElmahUser/Route";
+import Cookies from "universal-cookie";
+import { CookieKeys } from "src/framework/CookieKeys";
 
 
 
@@ -82,12 +84,27 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         i18n.changeLanguage(language);
         setLanguage(i18next.language);
         setAnchorLanguage(null);
+
+        const cookies = new Cookies();
+        cookies.set(CookieKeys.Language, i18next.language);
     }
 
     useEffect(() => {
         // you can do async server request and fill up form
         setLanguages(i18n.languages);
-        setLanguage(i18n.language);
+
+        const cookies = new Cookies();
+        const language = cookies.get(CookieKeys.Language);
+
+        if(language)
+        {
+            setLanguage(language);
+            i18n.changeLanguage(language);
+        }
+        else
+        {
+            setLanguage(i18n.language);
+        }
     }, []);
 
     // 2.1. Drawer
