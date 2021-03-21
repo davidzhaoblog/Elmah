@@ -108,8 +108,12 @@ npm install @date-io/date-fns
 //   } from '@material-ui/pickers';
 
 
-token: based on discussion following link:
+token/Language: based on discussion following link:
 https://stackoverflow.com/questions/44133536/is-it-safe-to-store-a-jwt-in-localstorage-with-reactjs
 There are a total of 2 options available: Web Storage (session storage, local storage) and a client side cookie. Both options are widely used, but this doesn't mean they are very secure.
 cookies: this is better in most of security concerns.
 https://www.npmjs.com/package/universal-cookie
+
+
+.env
+https://create-react-app.dev/docs/adding-custom-environment-variables/
