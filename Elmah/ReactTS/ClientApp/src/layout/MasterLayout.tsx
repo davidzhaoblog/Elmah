@@ -100,8 +100,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
         if(language)
         {
-            setLanguage(language);
             i18n.changeLanguage(language);
+            setLanguage(language);
         }
         else
         {

@@ -72,7 +72,7 @@ export default function LoginPage(): JSX.Element {
                 <Redirect to={from} />
             }
             <Container component='main' maxWidth='xs'>
-                <DevTool control={control} />
+                {process.env.REACT_APP_ENABLE_REDUX_HOOK_FORM_DEBUG !== 'false' && <DevTool control={control} />}
                 <CssBaseline />
                 <Paper className={classes.paper}>
                     <Avatar className={classes.avatar}>

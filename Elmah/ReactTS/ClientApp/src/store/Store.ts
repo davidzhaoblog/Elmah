@@ -8,7 +8,7 @@ import { reducers, RootState } from './CombinedReducers';
 const persistConfig = { // configuration object for redux-persist
     key: 'root',
     storage, // define which storage to use
-    // blacklist: ['navigation'], // navigation will not be persisted
+    blacklist: ['app'], // navigation will not be persisted
     // whitelist: ['navigation'] // only navigation will be persisted
 }
 const persistedReducer = persistReducer(persistConfig, reducers) // create a persisted reducer
