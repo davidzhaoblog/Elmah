@@ -27,7 +27,7 @@ export class ElmahHostApi extends ApiBaseCRUD<
     //   ...param
     // }));
     
-    console.log(conf);
+    // console.log(conf);
   }
 
   // protected  ConvertGetByIdentifierCriteriaToQueryString = (params: ElmahHostIdentifier): string => {

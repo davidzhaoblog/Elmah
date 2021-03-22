@@ -27,7 +27,7 @@ export class ElmahStatusCodeApi extends ApiBaseCRUD<
     //   ...param
     // }));
     
-    console.log(conf);
+    // console.log(conf);
   }
 
   // protected  ConvertGetByIdentifierCriteriaToQueryString = (params: ElmahStatusCodeIdentifier): string => {

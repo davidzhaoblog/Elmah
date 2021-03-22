@@ -30,30 +30,20 @@ import { todosSelectors } from "src/features/Todo/todoSlice";
 import TodoList from "src/features/Todo/ListPage";
 import { createLogoutAlertButtonsOptions } from "src/framework/ViewModels/IButtonOptions";
 
-
-import ELMAH_ErrorRoute from "src/features/ELMAH_Error/Route";
-
-
-import ElmahApplicationRoute from "src/features/ElmahApplication/Route";
-
-
-import ElmahHostRoute from "src/features/ElmahHost/Route";
-
-
-import ElmahSourceRoute from "src/features/ElmahSource/Route";
-
-
-import ElmahStatusCodeRoute from "src/features/ElmahStatusCode/Route";
-
-
-import ElmahTypeRoute from "src/features/ElmahType/Route";
-
-
-import ElmahUserRoute from "src/features/ElmahUser/Route";
 import Cookies from "universal-cookie";
 import { CookieKeys } from "src/framework/CookieKeys";
 import { supportedLngs } from "src/i18n";
 
+import ELMAH_ErrorRoute from "src/features/ELMAH_Error/Route";
+import ElmahApplicationRoute from "src/features/ElmahApplication/Route";
+import ElmahHostRoute from "src/features/ElmahHost/Route";
+import ElmahSourceRoute from "src/features/ElmahSource/Route";
+import ElmahStatusCodeRoute from "src/features/ElmahStatusCode/Route";
+import ElmahTypeRoute from "src/features/ElmahType/Route";
+import ElmahUserRoute from "src/features/ElmahUser/Route";
+import Cookies from "universal-cookie";
+import { CookieKeys } from "src/framework/CookieKeys";
+import { supportedLngs } from "src/i18n";
 
 
 interface IMasterLayoutProps {
@@ -86,11 +76,10 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
         i18n.changeLanguage(language);
         setLanguage(i18next.language);
         setAnchorLanguage(null);
-
-        const cookies = new Cookies();
+		const cookies = new Cookies();
         cookies.set(CookieKeys.Language, i18next.language);
     }
-
+	
     useEffect(() => {
         // you can do async server request and fill up form
         setLanguages(supportedLngs);
@@ -100,8 +89,8 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
         if(language)
         {
-            i18n.changeLanguage(language);
             setLanguage(language);
+            i18n.changeLanguage(language);
         }
         else
         {

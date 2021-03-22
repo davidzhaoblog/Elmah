@@ -20,7 +20,7 @@ import { ElmahUser } from 'src/features/ElmahUser/Types';
 function ListItem(props: IListItemProps<ElmahUser>) {
     const classes = props.classes;
     const dispatch = useDispatch();
-  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -55,8 +55,8 @@ function ListItem(props: IListItemProps<ElmahUser>) {
                 <Typography className={classes.heading} variant="h1" component="h1">or Add descriptions</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div className={clsx(classes.column)}>
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.user}</Typography>
                 </div>
             </AccordionDetails>

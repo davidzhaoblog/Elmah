@@ -40,3 +40,5 @@ export function createDeleteAlertButtonsOptions(confirmHandler: () => void, canc
     { label: t('UIStringResource:Delete'), color: 'primary', handler: confirmHandler },
     { label: t('UIStringResource:Cancel'), color: 'default', handler: cancelhandler }];  
 }
+
+
