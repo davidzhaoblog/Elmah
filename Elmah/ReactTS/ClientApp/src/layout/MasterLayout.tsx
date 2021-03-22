@@ -41,9 +41,6 @@ import ElmahSourceRoute from "src/features/ElmahSource/Route";
 import ElmahStatusCodeRoute from "src/features/ElmahStatusCode/Route";
 import ElmahTypeRoute from "src/features/ElmahType/Route";
 import ElmahUserRoute from "src/features/ElmahUser/Route";
-import Cookies from "universal-cookie";
-import { CookieKeys } from "src/framework/CookieKeys";
-import { supportedLngs } from "src/i18n";
 
 
 interface IMasterLayoutProps {
