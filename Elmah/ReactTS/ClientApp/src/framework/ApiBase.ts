@@ -6,10 +6,11 @@
 // TODO: important decision: use axios.
 
 import { Axios } from './Axios'
+import Cookies from 'universal-cookie';
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-
+import { CookieKeys } from './CookieKeys'
 export class ApiBase extends Axios {
-    private token: string;
+    // private token: string;
 
     /**
      * Creates an instance of api.
@@ -18,7 +19,9 @@ export class ApiBase extends Axios {
     public constructor(conf: AxiosRequestConfig) {
         super(conf);
 
-        this.token = "";
+        // const cookies = new Cookies();
+        // this.token = cookies.get(CookieKeys.Token);
+
         this.getToken = this.getToken.bind(this);
         this.setToken = this.setToken.bind(this);
         this.getUri = this.getUri.bind(this);
@@ -36,15 +39,28 @@ export class ApiBase extends Axios {
         this.Get = this.Get.bind(this);
 
         this.interceptors.request.use((param) => {
+            const token = this.getToken();
+            if(token)
+            {
+                return {
+                    ...param,
+                    defaults: {
+                        headers: {
+                            ...param.headers,
+                            "Authorization": `${token}`
+                        },
+                    }
+                }
+            }
             return {
                 ...param,
                 defaults: {
                     headers: {
                         ...param.headers,
-                        "Authorization": `Bearer ${this.getToken()}`
                     },
                 }
             }
+
         }, (error) => {
             // handling error
         });
@@ -67,7 +83,14 @@ export class ApiBase extends Axios {
      * @memberof Api
      */
     public getToken = () => {
-        return `Bearer ${this.token}`;
+        const cookies = new Cookies();
+        const token = cookies.get(CookieKeys.Token);
+
+        if(token)
+        {
+            return `Bearer ${token}`;
+        }
+        return null;
     }
     /**
      * Sets Token.
@@ -76,7 +99,9 @@ export class ApiBase extends Axios {
      * @memberof Api
      */
     public setToken = (token: string) => {
-        this.token = token;
+        const cookies = new Cookies();
+        cookies.set(CookieKeys.Token, token);        
+        // this.token = token;
     }
 
     /**

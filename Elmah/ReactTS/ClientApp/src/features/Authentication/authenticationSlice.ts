@@ -2,9 +2,11 @@
 // https://stackoverflow.com/questions/64287428/call-reducer-from-a-different-slice-redux-toolkit
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { CookieKeys } from "src/framework/CookieKeys";
 //import { authenticationApiClient } from "src/apiCients/AuthenticationApiClient";
 import { closeSpinner } from "src/layout/appSlice";
 import { LoginViewModel } from "src/models/AccountModels";
+import Cookies from "universal-cookie";
 
 export const login = createAsyncThunk(
     'login',
@@ -23,6 +25,13 @@ export const login = createAsyncThunk(
             roles: ['admin']
         }
         localStorage.setItem('user', JSON.stringify(response));
+
+        if(response.succeeded === true)
+        {
+            const cookies = new Cookies();
+            cookies.set(CookieKeys.Token, response.token);
+        }
+
         dispatch(closeSpinner());
         return response;
     }
@@ -31,6 +40,8 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk(
     'logout',
     async () => {
+        const cookies = new Cookies();
+        cookies.set(CookieKeys.Token, null);
         new Promise(r => setTimeout(r, 5000));
     }
 )
@@ -44,6 +55,7 @@ const authSlice = createSlice({
         loginError: false,
         logoutError: false,
         isAuthenticated: false,
+        token: null,
         user: {},
     },
     reducers: {
@@ -61,12 +73,14 @@ const authSlice = createSlice({
             state.isLoggingIn = false;
             state.isAuthenticated = true;
             state.loginError = false;
+            state.token = payload.token;
             // console.log("login.fulfilled");
         });
         builder.addCase(login.rejected, (state, action) => {
             state.isLoggingIn = false;
             state.isAuthenticated = false;
             state.loginError = true;
+            state.token = null;
             // console.log("login.rejected");
         });
         builder.addCase(logout.pending, (state) => {
@@ -77,6 +91,7 @@ const authSlice = createSlice({
             state.isLoggingOut = false;
             state.isAuthenticated = false;
             state.logoutError = false;
+            state.token = null;
             // console.log("logout.fulfilled");
         });
         builder.addCase(logout.rejected, (state, action) => {
