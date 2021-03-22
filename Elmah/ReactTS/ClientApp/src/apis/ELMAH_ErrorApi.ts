@@ -27,7 +27,7 @@ export class ELMAH_ErrorApi extends ApiBaseCRUD<
     //   ...param
     // }));
     
-    console.log(conf);
+    // console.log(conf);
   }
 
   // protected  ConvertGetByIdentifierCriteriaToQueryString = (params: ELMAH_ErrorIdentifier): string => {

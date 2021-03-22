@@ -30,27 +30,17 @@ import { todosSelectors } from "src/features/Todo/todoSlice";
 import TodoList from "src/features/Todo/ListPage";
 import { createLogoutAlertButtonsOptions } from "src/framework/ViewModels/IButtonOptions";
 
+import Cookies from "universal-cookie";
+import { CookieKeys } from "src/framework/CookieKeys";
+import { supportedLngs } from "src/i18n";
 
 import ELMAH_ErrorRoute from "src/features/ELMAH_Error/Route";
-
-
 import ElmahApplicationRoute from "src/features/ElmahApplication/Route";
-
-
 import ElmahHostRoute from "src/features/ElmahHost/Route";
-
-
 import ElmahSourceRoute from "src/features/ElmahSource/Route";
-
-
 import ElmahStatusCodeRoute from "src/features/ElmahStatusCode/Route";
-
-
 import ElmahTypeRoute from "src/features/ElmahType/Route";
-
-
 import ElmahUserRoute from "src/features/ElmahUser/Route";
-
 
 
 interface IMasterLayoutProps {
@@ -75,20 +65,33 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const [anchorElMenu, setAnchorElMenu] = useState()
     const [notificationEl, setNotificationEl] = useState()
 
-    const { t, i18n } = useTranslation(["UIStringResourcePerApp"]);
+    const { t, i18n } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
     const [language, setLanguage] = useState('')
     const [languages, setLanguages] = useState([])
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
         setLanguage(i18next.language);
         setAnchorLanguage(null);
+		const cookies = new Cookies();
+        cookies.set(CookieKeys.Language, i18next.language);
     }
-
+	
     useEffect(() => {
         // you can do async server request and fill up form
-        setLanguages(i18next.languages);
-        i18n.changeLanguage(language);
-        setLanguage(i18next.language);
+        setLanguages(supportedLngs);
+
+        const cookies = new Cookies();
+        const language = cookies.get(CookieKeys.Language);
+
+        if(language)
+        {
+            setLanguage(language);
+            i18n.changeLanguage(language);
+        }
+        else
+        {
+            setLanguage(i18n.language);
+        }
     }, []);
 
     // 2.1. Drawer

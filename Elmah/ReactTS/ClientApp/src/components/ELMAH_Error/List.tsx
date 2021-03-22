@@ -23,7 +23,7 @@ import { ELMAH_Error } from 'src/features/ELMAH_Error/Types';
 function ListItem(props: IListItemProps<ELMAH_Error>) {
     const classes = props.classes;
     const dispatch = useDispatch();
-  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -58,24 +58,40 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
                 <Typography className={classes.heading} variant="h1" component="h1">or Add descriptions</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div className={clsx(classes.column)}>
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.errorId}</Typography>
-                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahApplication')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahApplication')}</InputLabel>
 					<Link to={{ pathname: '/elmahapplication/details/' + props.item?.elmahApplication_Name}} >{props.item?.elmahApplication_Name}</Link>
-                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahHost')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahHost')}</InputLabel>
 					<Link to={{ pathname: '/elmahhost/details/' + props.item?.elmahHost_Name}} >{props.item?.elmahHost_Name}</Link>
-                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahType')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahType')}</InputLabel>
 					<Link to={{ pathname: '/elmahtype/details/' + props.item?.elmahType_Name}} >{props.item?.elmahType_Name}</Link>
-                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahSource')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahSource')}</InputLabel>
 					<Link to={{ pathname: '/elmahsource/details/' + props.item?.elmahSource_Name}} >{props.item?.elmahSource_Name}</Link>
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:Message')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:Message')}</InputLabel>
 					<Typography className={classes.labelData}>{props.item.message}</Typography>
-                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahUser')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahUser')}</InputLabel>
 					<Link to={{ pathname: '/elmahuser/details/' + props.item?.elmahUser_Name}} >{props.item?.elmahUser_Name}</Link>
-                    <InputLabel shrink>{t('Elmah.Resx.UIStringResourcePerEntity:ElmahStatusCode')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahStatusCode')}</InputLabel>
 					<Link to={{ pathname: '/elmahstatuscode/details/' + props.item?.elmahStatusCode_Name}} >{props.item?.elmahStatusCode_Name}</Link>
-                    <KeyboardDatePicker
+                </div>
+                <div className ={clsx(classes.column)}>
+<KeyboardDatePicker
                         inputProps={{
                             readOnly: true,
                         }}
@@ -90,9 +106,13 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
                         readOnly={true}
                         TextFieldComponent={ReadOnlyTextField}
                     />
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
 					<Typography className={classes.labelData}>{props.item.sequence}</Typography>
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:AllXml')}</InputLabel>
+                </div>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:AllXml')}</InputLabel>
 					<Typography className={classes.labelData}>{props.item.allXml}</Typography>
                 </div>
             </AccordionDetails>

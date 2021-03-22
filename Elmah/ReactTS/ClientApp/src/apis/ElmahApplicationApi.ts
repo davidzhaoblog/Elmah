@@ -27,7 +27,7 @@ export class ElmahApplicationApi extends ApiBaseCRUD<
     //   ...param
     // }));
     
-    console.log(conf);
+    // console.log(conf);
   }
 
   // protected  ConvertGetByIdentifierCriteriaToQueryString = (params: ElmahApplicationIdentifier): string => {

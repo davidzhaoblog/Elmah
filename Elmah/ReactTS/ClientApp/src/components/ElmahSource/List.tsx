@@ -20,7 +20,7 @@ import { ElmahSource } from 'src/features/ElmahSource/Types';
 function ListItem(props: IListItemProps<ElmahSource>) {
     const classes = props.classes;
     const dispatch = useDispatch();
-  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
+  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -55,8 +55,8 @@ function ListItem(props: IListItemProps<ElmahSource>) {
                 <Typography className={classes.heading} variant="h1" component="h1">or Add descriptions</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div className={clsx(classes.column)}>
-                    <InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
+                <div className ={clsx(classes.column)}>
+<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.source}</Typography>
                 </div>
             </AccordionDetails>
