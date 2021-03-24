@@ -68,7 +68,7 @@ namespace Elmah.AspNetMvcCoreApiController
         /// http://[host]/api/HomeApi/HearBeat
         /// </summary>
         /// <returns></returns>
-        [HttpGet, ActionName("HeartBeat")]
+        [HttpGet("/api/HomeApi/HeartBeat", Name = "HeartBeat")]
         public bool HeartBeat()
         {
             return true;

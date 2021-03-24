@@ -40,7 +40,7 @@ namespace Elmah.MvcCore.Controllers
             SignInManager<Elmah.MvcCore.Models.ApplicationUser> signInManager,
             IServiceProvider serviceProvider,
             IEmailSender emailSender,
-            ILogger<AccountController> logger,
+            ILogger<AuthenticationApiController> logger,
             IOptions<AppSettings> appSettings,
             Elmah.MvcCore.Services.GoogleAuthService googleAuthService
             //,

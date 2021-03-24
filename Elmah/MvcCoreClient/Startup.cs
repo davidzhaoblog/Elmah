@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,13 +20,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
-using System.Text.Json;
-using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 using Elmah.EntityFrameworkContext;
 using Elmah.DALContracts;
@@ -285,7 +285,7 @@ namespace Elmah.MvcCore
             services.AddScoped<UISharedViewModel>();
             services.AddScoped<DashboardVM>();
 
-            ViewModelsHelper.RegisterExtendedViewModels(services);
+            // ViewModelsHelper.RegisterExtendedViewModels(services);
 
             //services.AddControllersWithViews().AddJsonOptions(
             //    options => { options.JsonSerializerOptions.IgnoreNullValues = true;
@@ -293,14 +293,14 @@ namespace Elmah.MvcCore
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                // 忽略循环引用
+                // ReferenceLoopHandling.Ignore
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //// 不使用驼峰
+                //// Camel Case
                 //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                //// 设置时间格式
+                //// Date Format
                 //options.SerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ss";
-                // 如字段为null值，该字段不会返回到前端
+                // Ingore null
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 options.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
@@ -309,6 +309,8 @@ namespace Elmah.MvcCore
             {
                 options.CustomSchemaIds(type => type.ToString());
             });
+
+            services.AddSwaggerGenNewtonsoftSupport();
 
             //.ConfigureApiBehaviorOptions(options =>
             //{
@@ -320,8 +322,11 @@ namespace Elmah.MvcCore
             //    //    "https://httpstatuses.com/404";
             //});
 
-            //services.AddControllersWithViews();
+            var assembly = typeof(Elmah.AspNetMvcCoreApiController.HomeApiController).Assembly;
+            services.AddControllersWithViews()
+                .AddApplicationPart(assembly);
             services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -348,7 +353,9 @@ namespace Elmah.MvcCore
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
             app.UseRequestLocalization();
@@ -356,11 +363,7 @@ namespace Elmah.MvcCore
             // Enable Cors
             app.UseCors("AllowAll");
 
-            //app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
             app.UseRouting();
-            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -372,6 +375,7 @@ namespace Elmah.MvcCore
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
         }
     }
     public static class ConnectionStringGetter
