@@ -146,7 +146,7 @@ namespace Elmah.MvcCore
             // Add Cors
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
-                builder.WithOrigins("http://localhost", "https://localhost")
+                builder.WithOrigins("http://localhost:7813", "https://localhost:7814", "http://localhost:3456")
                        //.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader()
