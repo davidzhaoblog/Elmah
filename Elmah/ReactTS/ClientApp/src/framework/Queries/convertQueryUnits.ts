@@ -17,13 +17,13 @@ export const convertQueryUnitEquals = <T>(input: T): QueryUnitEquals<T> => {
 
 export const convertQueryUnitRange = <T>(input: Range<T>): QueryUnitRange<T> => {
   return {
-    isToCompare: Boolean(input.lower) && Boolean(input.upper),
-    isToCompareLowerBound: Boolean(input.lower),
+    isToCompare: Boolean(input?.lower) && Boolean(input?.upper),
+    isToCompareLowerBound: Boolean(input?.lower),
     isToIncludeLowerBound: true,
-    lowerBound: input.lower,
-    isToCompareUpperBound: Boolean(input.upper),
+    lowerBound: input?.lower,
+    isToCompareUpperBound: Boolean(input?.upper),
     isToIncludeUpperBound: false,
-    upperBound: input.upper,
+    upperBound: input?.upper,
   };
 }
 

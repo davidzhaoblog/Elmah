@@ -24,7 +24,7 @@ export default function IndexPage(): JSX.Element {
   const dispatch = useDispatch();
   const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
 
-  const { criteria, orderBy, queryPagingSetting } = store.getState().eLMAH_Error;
+  const { commonCriteria, orderBy, queryPagingSetting } = store.getState().eLMAH_Error;
 
   const [openEditPopup, setOpenEditPopup] = useState(false);
   const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
@@ -33,18 +33,18 @@ export default function IndexPage(): JSX.Element {
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
-    dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: value } }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: value } }));
   }
 
   const handlePageSizeChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
-    dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: 1, pageSize: event.target.value as number } }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: 1, pageSize: event.target.value as number } }));
   }
 
   const handleOrderByChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
     var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
-    dispatch(getIndexVM({ criteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
   
   const openAdvancedSearchInPopup = (type: FormTypes, item: ELMAH_Error) => {
@@ -65,7 +65,7 @@ export default function IndexPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy, queryPagingSetting }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here  
@@ -117,7 +117,9 @@ export default function IndexPage(): JSX.Element {
       {openAdvancedSearchPopup ? <IndexSearch type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openAdvancedSearchPopup}
         setOpenPopup={setOpenAdvancedSearchPopup}
-        item={selectedItem}
+        criteria={commonCriteria}
+        orderBy={orderBy}
+        queryPagingSetting={queryPagingSetting}
       /> : null}
     </>
   );
