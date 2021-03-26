@@ -16,7 +16,7 @@ import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { getIndexVM, eLMAH_ErrorSelectors } from './Slice';
 import { orderBys, ELMAH_Error } from './Types';
 import Edit from 'src/components/ELMAH_Error/Edit';
-// import IndexSearch from 'src/components/ELMAH_Error/IndexSearch';
+import IndexSearch from 'src/components/ELMAH_Error/IndexSearch';
 import List from 'src/components/ELMAH_Error/List';
 
 export default function IndexPage(): JSX.Element {
@@ -27,6 +27,7 @@ export default function IndexPage(): JSX.Element {
   const { criteria, orderBy, queryPagingSetting } = store.getState().eLMAH_Error;
 
   const [openEditPopup, setOpenEditPopup] = useState(false);
+  const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
   const [formType, setFormType] = useState(FormTypes.Create);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -44,6 +45,12 @@ export default function IndexPage(): JSX.Element {
     dispatch(showSpinner());
     var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
     dispatch(getIndexVM({ criteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
+  }
+  
+  const openAdvancedSearchInPopup = (type: FormTypes, item: ELMAH_Error) => {
+    setFormType(type);
+    setOpenAdvancedSearchPopup(true);
+    setSelectedItem(item);
   }
 
   const openFormInPopup = (type: FormTypes, item: ELMAH_Error) => {
@@ -69,6 +76,7 @@ export default function IndexPage(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResourcePerApp:ELMAH_Error')}</Typography>
           <span className={classes.fillRemainingSpace} />
+          <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
           <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>
@@ -104,6 +112,11 @@ export default function IndexPage(): JSX.Element {
       {openEditPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openEditPopup}
         setOpenPopup={setOpenEditPopup}
+        item={selectedItem}
+      /> : null}
+      {openAdvancedSearchPopup ? <IndexSearch type={formType} wrapperType={WrapperTypes.DialogForm}
+        openPopup={openAdvancedSearchPopup}
+        setOpenPopup={setOpenAdvancedSearchPopup}
         item={selectedItem}
       /> : null}
     </>
