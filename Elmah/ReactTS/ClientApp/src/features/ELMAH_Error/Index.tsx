@@ -16,6 +16,7 @@ import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { getIndexVM, eLMAH_ErrorSelectors } from './Slice';
 import { orderBys, ELMAH_Error } from './Types';
 import Edit from 'src/components/ELMAH_Error/Edit';
+// import IndexSearch from 'src/components/ELMAH_Error/IndexSearch';
 import List from 'src/components/ELMAH_Error/List';
 
 export default function IndexPage(): JSX.Element {
@@ -25,7 +26,7 @@ export default function IndexPage(): JSX.Element {
 
   const { criteria, orderBy, queryPagingSetting } = store.getState().eLMAH_Error;
 
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openEditPopup, setOpenEditPopup] = useState(false);
   const [formType, setFormType] = useState(FormTypes.Create);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -47,7 +48,7 @@ export default function IndexPage(): JSX.Element {
 
   const openFormInPopup = (type: FormTypes, item: ELMAH_Error) => {
     setFormType(type);
-    setOpenPopup(true);
+    setOpenEditPopup(true);
     setSelectedItem(item);
   }
 
@@ -100,9 +101,9 @@ export default function IndexPage(): JSX.Element {
           <List items={listItems} classes={classes} openFormInPopup={openFormInPopup} />
         </div>
       </Paper>
-      {openPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
+      {openEditPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
+        openPopup={openEditPopup}
+        setOpenPopup={setOpenEditPopup}
         item={selectedItem}
       /> : null}
     </>
