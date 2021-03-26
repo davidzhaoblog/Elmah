@@ -26,8 +26,9 @@ const theme = createMuiTheme({
 function App() {
   const { t } = useTranslation(["UIStringResourcePerApp"]);
   document.title = t("UIStringResourcePerApp:Application_Title");  
-  
+
   return (
+    
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Provider store={store}>
           <Router>

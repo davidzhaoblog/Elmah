@@ -3,6 +3,7 @@ import { defaultDateRange } from 'src/framework/Models/defaultRanges'
 import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange } from 'src/framework/Queries/convertQueryUnits'
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
+import { PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
 
 export interface ELMAH_Error {
     elmahApplication_Name: string,
@@ -92,6 +93,7 @@ export interface ELMAH_ErrorCommonCriteria {
 	user: string;
 	message: string;
 	allXml: string;
+	timeUtcRangePredefined: PreDefinedDateTimeRanges;
 	timeUtcRange: Range<string>;
 	canQueryWhenNoQuery: boolean;
 }
@@ -106,6 +108,7 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		user: null,
 		message: null,
 		allXml: null,
+		timeUtcRangePredefined: PreDefinedDateTimeRanges.ThisYear,
 		timeUtcRange: defaultDateRange(),
 		canQueryWhenNoQuery: true
 	};

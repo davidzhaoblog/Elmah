@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -32,11 +32,13 @@ import {
 
 import { ELMAH_ErrorCommonCriteria } from 'src/features/ELMAH_Error/Types';
 import { getIndexVM } from 'src/features/ELMAH_Error/Slice';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import { convertToDateTimeRange, getPreDefinedDateTimeRanges, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
 
 export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCriteria> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
-    const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
+    const { t } = useTranslation(["translation", "UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const { openPopup, setOpenPopup, criteria, orderBy, queryPagingSetting } = props;
     
@@ -111,12 +113,20 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
         (state: RootState) => elmahUserListSelector.selectAll(state)
     );
 
+
 	// TODO: add "setValue," if you need setValue
-    const { register, handleSubmit, control, errors, formState, reset } = useForm({
+    const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
         defaultValues: criteria
     });
+
+    const timeUtcRangePredefinedList = getPreDefinedDateTimeRanges();
+    const onChanged_TimeUtcRangePredefined = (predefined: PreDefinedDateTimeRanges) => { 
+        const timeUtcRange = convertToDateTimeRange(predefined); 
+        setValue('timeUtcRange.lower', timeUtcRange.lower);
+        setValue('timeUtcRange.upper', timeUtcRange.upper);
+    }
 
     const closePopup = () => {
         setOpenPopup(false)
@@ -265,7 +275,23 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
-                    {/* <FormControl variant="outlined" className={classes.formControl}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+
+						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
+                        <Select
+                            native
+							label={t('UIStringResourcePerEntity:TimeUtc')}
+                            name='timeUtcRangePredefined'
+                            inputRef={register(formValidations.source)}
+                            onChange = {e => onChanged_TimeUtcRangePredefined(PreDefinedDateTimeRanges[e.target.value.toString()])}
+                        >
+                            <option aria-label="None" value="" />
+                            {timeUtcRangePredefinedList.map((item: any) => {
+                                return (
+                                    <option value={item} key={item}>{t('' + item)}</option>
+                                );
+                            })}
+                        </Select>
                         <Controller
                             as={
                                 <KeyboardDatePicker
@@ -276,17 +302,35 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     inputVariant="outlined"
                                     margin="dense"
                                     InputAdornmentProps={{ position: "start" }}
-                                    error={!!errors?.timeUtc}
                                     value=""
                                     onChange={() => {}}
                                 />
                             }
-                            name='timeUtc'
+                            name='timeUtcRange.lower'
                             defaultValue={new Date()}
-                            rules={formValidations.timeUtc}
+                            
                             control={control}
                         />
-                    </FormControl> */}
+                        <Controller
+                            as={
+                                <KeyboardDatePicker
+                                    label={t('UIStringResourcePerEntity:TimeUtc')}
+                                    clearable
+                                    format="MMM DD, yyyy"
+                                    views={["year", "month", "date"]}
+                                    inputVariant="outlined"
+                                    margin="dense"
+                                    InputAdornmentProps={{ position: "start" }}
+                                    value=""
+                                    onChange={() => {}}
+                                />
+                            }
+                            name='timeUtcRange.upper'
+                            defaultValue={new Date()}
+                            
+                            control={control}
+                        />
+                    </FormControl>
 					{/* <Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
 						<Typography>{props.item?.sequence}</Typography>
