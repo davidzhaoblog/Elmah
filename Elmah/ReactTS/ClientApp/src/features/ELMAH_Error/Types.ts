@@ -96,6 +96,7 @@ export interface ELMAH_ErrorCommonCriteria {
 	timeUtcRangePredefined: PreDefinedDateTimeRanges;
 	timeUtcRange: Range<string>;
 	testBoolean: PredefinedBooleanValues;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
@@ -112,6 +113,7 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		timeUtcRangePredefined: PreDefinedDateTimeRanges.Unknown,
 		timeUtcRange: convertToDateTimeRange(PreDefinedDateTimeRanges.Unknown),
 		testBoolean: PredefinedBooleanValues.All,
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }
@@ -129,6 +131,7 @@ export const convertELMAH_ErrorCommonCriteria = (criteria: ELMAH_ErrorCommonCrit
 			allXml: convertQueryUnitContains(criteria?.allXml),
 			timeUtcRange: convertQueryUnitRange(criteria?.timeUtcRange),
 			testBoolean: convertQueryUnitEqualsPredefinedBoolean(criteria?.testBoolean),
+			stringContains_AllColumns: convertQueryUnitContains(criteria?.stringContains_AllColumns),
         },
 		canQueryWhenNoQuery: true
 	};

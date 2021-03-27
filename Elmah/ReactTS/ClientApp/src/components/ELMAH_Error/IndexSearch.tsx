@@ -21,7 +21,7 @@ import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
 
-import { 
+import {
     elmahApplicationListSelector, getElmahApplicationList,
     elmahHostListSelector, getElmahHostList,
     elmahSourceListSelector, getElmahSourceList,
@@ -42,7 +42,7 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
     const { t } = useTranslation(["translation", "UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const { openPopup, setOpenPopup, criteria, orderBy, queryPagingSetting } = props;
-    
+
     const formValidations = {
         elmahApplication_Name: {
         },
@@ -116,7 +116,7 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
     );
 
 
-	// TODO: add "setValue," if you need setValue
+    // TODO: add "setValue," if you need setValue
     const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
@@ -124,8 +124,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
     });
 
     const timeUtcRangePredefinedList = getPreDefinedDateTimeRanges();
-    const onChanged_TimeUtcRangePredefined = (predefined: PreDefinedDateTimeRanges) => { 
-        const timeUtcRange = convertToDateTimeRange(predefined); 
+    const onChanged_TimeUtcRangePredefined = (predefined: PreDefinedDateTimeRanges) => {
+        const timeUtcRange = convertToDateTimeRange(predefined);
         setValue('timeUtcRange.lower', timeUtcRange.lower);
         setValue('timeUtcRange.upper', timeUtcRange.upper);
     }
@@ -141,7 +141,7 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
     const onSubmit = (data: any) => {
         dispatch(showSpinner());
         dispatch(getIndexVM({ criteria: data, orderBy, queryPagingSetting }));
-        
+
         console.log(data);
 
         setOpenPopup(false);
@@ -164,15 +164,26 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
             <Grid container={true}>
                 <DevTool control={control} />
                 <Grid item lg={12}>
-					{/* <Grid item lg>
+                    {/* <Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
 						<Typography>{props.criteria?.errorId}</Typography>
 					</Grid> */}
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Application')}</InputLabel>
+                        <StyledTextField
+                            name='stringContains_AllColumns'
+                            label={t('Search')}
+                            inputRef={register()}
+                            variant='outlined'
+                            margin='normal'
+                            fullWidth
+                            autoFocus
+                        />
+                    </FormControl>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:Application')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:Application')}
+                            label={t('UIStringResourcePerEntity:Application')}
                             name='application'
                             inputRef={register(formValidations.application)}
                         >
@@ -185,10 +196,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Host')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:Host')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:Host')}
+                            label={t('UIStringResourcePerEntity:Host')}
                             name='host'
                             inputRef={register(formValidations.host)}
                         >
@@ -201,10 +212,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Type')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:Type')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:Type')}
+                            label={t('UIStringResourcePerEntity:Type')}
                             name='type'
                             inputRef={register(formValidations.type)}
                         >
@@ -217,10 +228,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:Source')}
+                            label={t('UIStringResourcePerEntity:Source')}
                             name='source'
                             inputRef={register(formValidations.source)}
                         >
@@ -248,10 +259,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         )}
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:User')}
+                            label={t('UIStringResourcePerEntity:User')}
                             name='user'
                             inputRef={register(formValidations.user)}
                         >
@@ -264,10 +275,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:StatusCode')}
+                            label={t('UIStringResourcePerEntity:StatusCode')}
                             name='statusCode'
                             inputRef={register(formValidations.statusCode)}
                         >
@@ -280,13 +291,13 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:TimeUtc')}
+                            label={t('UIStringResourcePerEntity:TimeUtc')}
                             name='timeUtcRangePredefined'
                             inputRef={register(formValidations.source)}
-                            onChange = {e => onChanged_TimeUtcRangePredefined(PreDefinedDateTimeRanges[e.target.value.toString()])}
+                            onChange={e => onChanged_TimeUtcRangePredefined(PreDefinedDateTimeRanges[e.target.value.toString()])}
                         >
                             {timeUtcRangePredefinedList.map((item: any) => {
                                 return (
@@ -305,8 +316,9 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     margin="dense"
                                     InputAdornmentProps={{ position: "start" }}
                                     value=""
-                                    onChange={() => {}}
-                                />
+                                    onChange={() => { }}
+                                    inputRef={register()}
+                                    />
                             }
                             name='timeUtcRange.lower'
                             defaultValue={new Date()}
@@ -323,15 +335,16 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     margin="dense"
                                     InputAdornmentProps={{ position: "start" }}
                                     value=""
-                                    onChange={() => {}}
-                                />
+                                    onChange={() => { }}
+                                    inputRef={register()}
+                                    />
                             }
                             name='timeUtcRange.upper'
                             defaultValue={new Date()}
                             control={control}
                         />
                     </FormControl>
-					{/* <Grid item lg>
+                    {/* <Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
 						<Typography>{props.item?.sequence}</Typography>
 					</Grid> */}
@@ -351,10 +364,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         )}
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:StatusCode')}
+                            label={t('UIStringResourcePerEntity:StatusCode')}
                             name='testBoolean'
                             inputRef={register(formValidations.testBoolean)}
                         >
