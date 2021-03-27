@@ -317,7 +317,6 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     InputAdornmentProps={{ position: "start" }}
                                     value=""
                                     onChange={() => { }}
-                                    inputRef={register()}
                                     />
                             }
                             name='timeUtcRange.lower'
@@ -336,7 +335,6 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     InputAdornmentProps={{ position: "start" }}
                                     value=""
                                     onChange={() => { }}
-                                    inputRef={register()}
                                     />
                             }
                             name='timeUtcRange.upper'

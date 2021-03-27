@@ -282,7 +282,6 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             }
                             name='timeUtc'
                             defaultValue={new Date()}
-                            rules={formValidations.timeUtc}
                             control={control}
                         />
                     </FormControl>
