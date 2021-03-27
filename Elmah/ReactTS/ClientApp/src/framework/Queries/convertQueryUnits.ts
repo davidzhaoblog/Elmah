@@ -1,4 +1,5 @@
 import { Range } from "../Models/Range";
+import { PredefinedBooleanValues } from "./PredefinedBooleanValues";
 import { QueryUnitContains, QueryUnitEquals, QueryUnitRange, QueryUnitSelectedList } from "./QueryUnits";
 
 export const convertQueryUnitContains = <T>(input: T): QueryUnitContains<T> => {
@@ -12,6 +13,13 @@ export const convertQueryUnitEquals = <T>(input: T): QueryUnitEquals<T> => {
   return {
     isToCompare: Boolean(input),
     valueToCompare: input,
+  };
+}
+
+export const convertQueryUnitEqualsPredefinedBoolean = <T>(input?: PredefinedBooleanValues): QueryUnitEquals<boolean> => {
+  return {
+    isToCompare: input === null || input !== PredefinedBooleanValues.All,
+    valueToCompare: input === PredefinedBooleanValues.True,
   };
 }
 

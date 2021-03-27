@@ -1,9 +1,9 @@
 import { Range } from 'src/framework/Models/Range'
-import { defaultDateRange } from 'src/framework/Models/defaultRanges'
-import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange } from 'src/framework/Queries/convertQueryUnits'
+import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange, convertQueryUnitEqualsPredefinedBoolean } from 'src/framework/Queries/convertQueryUnits'
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
-import { PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
+import { convertToDateTimeRange, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
+import { PredefinedBooleanValues } from 'src/framework/Queries/PredefinedBooleanValues';
 
 export interface ELMAH_Error {
     elmahApplication_Name: string,
@@ -95,6 +95,7 @@ export interface ELMAH_ErrorCommonCriteria {
 	allXml: string;
 	timeUtcRangePredefined: PreDefinedDateTimeRanges;
 	timeUtcRange: Range<string>;
+	testBoolean: PredefinedBooleanValues;
 	canQueryWhenNoQuery: boolean;
 }
 
@@ -108,8 +109,9 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		user: null,
 		message: null,
 		allXml: null,
-		timeUtcRangePredefined: PreDefinedDateTimeRanges.ThisYear,
-		timeUtcRange: defaultDateRange(),
+		timeUtcRangePredefined: PreDefinedDateTimeRanges.Unknown,
+		timeUtcRange: convertToDateTimeRange(PreDefinedDateTimeRanges.Unknown),
+		testBoolean: PredefinedBooleanValues.All,
 		canQueryWhenNoQuery: true
 	};
 }
@@ -126,6 +128,7 @@ export const convertELMAH_ErrorCommonCriteria = (criteria: ELMAH_ErrorCommonCrit
 			message: convertQueryUnitContains(criteria?.message),
 			allXml: convertQueryUnitContains(criteria?.allXml),
 			timeUtcRange: convertQueryUnitRange(criteria?.timeUtcRange),
+			testBoolean: convertQueryUnitEqualsPredefinedBoolean(criteria?.testBoolean),
         },
 		canQueryWhenNoQuery: true
 	};

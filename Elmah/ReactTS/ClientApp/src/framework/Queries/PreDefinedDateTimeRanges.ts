@@ -42,6 +42,10 @@ export function convertToDateTimeRange(input: PreDefinedDateTimeRanges): Range<s
 
     if(input == PreDefinedDateTimeRanges.Custom) {
     }
+    else if(input == PreDefinedDateTimeRanges.Unknown) {
+        lower = null;
+        upper = null;
+    }
     else {
         if(input == PreDefinedDateTimeRanges.LastFiveYears){
             lower.setFullYear(lower.getFullYear() - 5);
@@ -147,6 +151,6 @@ export function convertToDateTimeRange(input: PreDefinedDateTimeRanges): Range<s
         }
     }
 
-    return {lower: lower.toString(), upper: upper.toString()};
+    return {lower: lower?.toISOString(), upper: upper?.toISOString()};
 
 }

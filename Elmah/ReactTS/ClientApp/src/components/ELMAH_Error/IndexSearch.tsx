@@ -34,6 +34,7 @@ import { ELMAH_ErrorCommonCriteria } from 'src/features/ELMAH_Error/Types';
 import { getIndexVM } from 'src/features/ELMAH_Error/Slice';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { convertToDateTimeRange, getPreDefinedDateTimeRanges, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
+import { gePredefinedBooleanValues } from 'src/framework/Queries/PredefinedBooleanValues';
 
 export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCriteria> & IPopupProps) {
     const dispatch = useDispatch();
@@ -91,7 +92,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                 message: t('UIStringResourcePerEntity:The_length_of_AllXml_should_be_1_to_'),
             }
         },
-
+        testBoolean: {
+        },
     };
 
     const elmahApplicationList = useSelector(
@@ -127,6 +129,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
         setValue('timeUtcRange.lower', timeUtcRange.lower);
         setValue('timeUtcRange.upper', timeUtcRange.upper);
     }
+
+    const testBooleanPredefinedList = gePredefinedBooleanValues();
 
     const closePopup = () => {
         setOpenPopup(false)
@@ -276,7 +280,6 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
-
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                         <Select
                             native
@@ -285,7 +288,6 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             inputRef={register(formValidations.source)}
                             onChange = {e => onChanged_TimeUtcRangePredefined(PreDefinedDateTimeRanges[e.target.value.toString()])}
                         >
-                            <option aria-label="None" value="" />
                             {timeUtcRangePredefinedList.map((item: any) => {
                                 return (
                                     <option value={item} key={item}>{t('' + item)}</option>
@@ -308,7 +310,6 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             }
                             name='timeUtcRange.lower'
                             defaultValue={new Date()}
-                            
                             control={control}
                         />
                         <Controller
@@ -327,7 +328,6 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             }
                             name='timeUtcRange.upper'
                             defaultValue={new Date()}
-                            
                             control={control}
                         />
                     </FormControl>
@@ -349,6 +349,21 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                         {errors.allXml && (
                             <span className={classes.error}>{errors.allXml.message}</span>
                         )}
+                    </FormControl>
+                    <FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
+                        <Select
+                            native
+							label={t('UIStringResourcePerEntity:StatusCode')}
+                            name='testBoolean'
+                            inputRef={register(formValidations.testBoolean)}
+                        >
+                            {testBooleanPredefinedList.map((item: any) => {
+                                return (
+                                    <option value={item} key={item}>{t('' + item)}</option>
+                                );
+                            })}
+                        </Select>
                     </FormControl>
                 </Grid>
             </Grid>
