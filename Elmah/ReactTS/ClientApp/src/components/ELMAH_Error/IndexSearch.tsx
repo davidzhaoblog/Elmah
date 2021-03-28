@@ -16,7 +16,7 @@ import { RootState } from 'src/store/CombinedReducers';
 
 import { ISearchFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
-import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+import { createSearchFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
@@ -136,7 +136,7 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
         setOpenPopup(false)
     }
 
-    const popupButtonsOptions = createEditFormButtonsOptions(() => { reset(criteria) }, closePopup);
+    const popupButtonsOptions = createSearchFormButtonsOptions(() => { reset(criteria) }, closePopup);
 
     const onSubmit = (data: any) => {
         dispatch(showSpinner());
