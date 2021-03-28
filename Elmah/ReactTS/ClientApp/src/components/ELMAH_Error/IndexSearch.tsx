@@ -179,6 +179,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             autoFocus
                         />
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:Application')}</InputLabel>
                         <Select
@@ -195,6 +197,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:Host')}</InputLabel>
                         <Select
@@ -211,6 +215,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:Type')}</InputLabel>
                         <Select
@@ -227,6 +233,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                         <Select
@@ -243,6 +251,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={12}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='message'
@@ -258,6 +268,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             <span className={classes.error}>{errors.message.message}</span>
                         )}
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
                         <Select
@@ -274,6 +286,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
                         <Select
@@ -290,6 +304,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={4}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
                         <Select
@@ -305,6 +321,10 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                 );
                             })}
                         </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item lg={4}>
+                    <FormControl variant="outlined" className={classes.formControl}>
                         <Controller
                             as={
                                 <KeyboardDatePicker
@@ -317,12 +337,16 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     InputAdornmentProps={{ position: "start" }}
                                     value=""
                                     onChange={() => { }}
-                                    />
+                                />
                             }
                             name='timeUtcRange.lower'
                             defaultValue={new Date()}
                             control={control}
                         />
+                    </FormControl>
+                </Grid>
+                <Grid item lg={4}>
+                    <FormControl variant="outlined" className={classes.formControl}>
                         <Controller
                             as={
                                 <KeyboardDatePicker
@@ -335,7 +359,7 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
                                     InputAdornmentProps={{ position: "start" }}
                                     value=""
                                     onChange={() => { }}
-                                    />
+                                />
                             }
                             name='timeUtcRange.upper'
                             defaultValue={new Date()}
@@ -346,6 +370,8 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
 						<Typography>{props.item?.sequence}</Typography>
 					</Grid> */}
+                </Grid>
+                <Grid item lg={12}>                    
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
                             name='allXml'
