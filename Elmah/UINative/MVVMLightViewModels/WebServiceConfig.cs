@@ -15,7 +15,7 @@ namespace Elmah.MVVMLightViewModels
 
 #if DEBUG
         public const string WebApiRootUrl_General = "http://localhost:7805/api/";
-        public const string WebApiRootUrl_Android = "http://10.0.2.2:7805/api/";
+        public const string WebApiRootUrl_Android = "http://10.0.2.2:7813/api/";
         public const string WebApiRootUrl_IOS = "http://localhost:7805/api/";
 #else
         // TODO: use production url.
