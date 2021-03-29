@@ -47,18 +47,6 @@ export function createELMAH_ErrorDefault(): ELMAH_Error {
 }
 
 export const orderBys : QueryOrderBySetting[] = [
-	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~ASC' },
-	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~DESC' },
-	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name', expression: 'ElmahHost_Name~ASC' },
-	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahHost_Name', expression: 'ElmahHost_Name~DESC' },
-	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahSource_Name', expression: 'ElmahSource_Name~ASC' },
-	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahSource_Name', expression: 'ElmahSource_Name~DESC' },
-	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahStatusCode_Name', expression: 'ElmahStatusCode_Name~ASC' },
-	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahStatusCode_Name', expression: 'ElmahStatusCode_Name~DESC' },
-	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahType_Name', expression: 'ElmahType_Name~ASC' },
-	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahType_Name', expression: 'ElmahType_Name~DESC' },
-	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahUser_Name', expression: 'ElmahUser_Name~ASC' },
-	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahUser_Name', expression: 'ElmahUser_Name~DESC' },
 	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application', expression: 'Application~ASC' },
 	{ propertyName: 'application', direction: QueryOrderDirections.Descending, displayName: 'Application', expression: 'Application~DESC' },
 	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host', expression: 'Host~ASC' },
