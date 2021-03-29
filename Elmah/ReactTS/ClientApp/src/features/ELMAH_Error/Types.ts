@@ -109,7 +109,7 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		user: null,
 		message: null,
 		allXml: null,
-		timeUtcRangeRangePredefined: PreDefinedDateTimeRanges.Unknown,
+		timeUtcRangePredefined: PreDefinedDateTimeRanges.Unknown,
 		timeUtcRange: convertToDateTimeRange(PreDefinedDateTimeRanges.Unknown),
 		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
