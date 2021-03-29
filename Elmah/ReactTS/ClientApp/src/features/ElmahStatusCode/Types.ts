@@ -22,7 +22,6 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ElmahStatusCodeIdentifier {
 	statusCode: number;
-	stringContains_AllColumns: string;
 }
 
 // CommonCriteria
