@@ -16,6 +16,7 @@ import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { getIndexVM, elmahUserSelectors } from './Slice';
 import { orderBys, ElmahUser } from './Types';
 import Edit from 'src/components/ElmahUser/Edit';
+import Search from 'src/components/ElmahUser/Search';
 import List from 'src/components/ElmahUser/List';
 
 export default function IndexPage(): JSX.Element {
@@ -23,31 +24,38 @@ export default function IndexPage(): JSX.Element {
   const dispatch = useDispatch();
   const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp"]);
 
-  const { criteria, orderBy, queryPagingSetting } = store.getState().elmahUser;
+  const { commonCriteria, orderBy, queryPagingSetting } = store.getState().elmahUser;
 
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openEditPopup, setOpenEditPopup] = useState(false);
+  const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
   const [formType, setFormType] = useState(FormTypes.Create);
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
-    dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: value } }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: value } }));
   }
 
   const handlePageSizeChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
-    dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: 1, pageSize: event.target.value as number } }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy, queryPagingSetting: { ...queryPagingSetting, currentPage: 1, pageSize: event.target.value as number } }));
   }
 
   const handleOrderByChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
     var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
-    dispatch(getIndexVM({ criteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
+  }
+    
+  const openAdvancedSearchInPopup = (type: FormTypes, item: ElmahUser) => {
+    setFormType(type);
+    setOpenAdvancedSearchPopup(true);
+    setSelectedItem(item);
   }
 
   const openFormInPopup = (type: FormTypes, item: ElmahUser) => {
     setFormType(type);
-    setOpenPopup(true);
+    setOpenEditPopup(true);
     setSelectedItem(item);
   }
 
@@ -57,7 +65,7 @@ export default function IndexPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getIndexVM({ criteria, orderBy, queryPagingSetting }));
+    dispatch(getIndexVM({ criteria: commonCriteria, orderBy, queryPagingSetting }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here  
@@ -68,6 +76,7 @@ export default function IndexPage(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResourcePerApp:ElmahUser')}</Typography>
           <span className={classes.fillRemainingSpace} />
+		  <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
           <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>
@@ -100,10 +109,17 @@ export default function IndexPage(): JSX.Element {
           <List items={listItems} classes={classes} openFormInPopup={openFormInPopup} />
         </div>
       </Paper>
-      {openPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
+      {openEditPopup ? <Edit type={formType} wrapperType={WrapperTypes.DialogForm}
+        openPopup={openEditPopup}
+        setOpenPopup={setOpenEditPopup}
         item={selectedItem}
+      /> : null}
+      {openAdvancedSearchPopup ? <Search type={formType} wrapperType={WrapperTypes.DialogForm}
+        openPopup={openAdvancedSearchPopup}
+        setOpenPopup={setOpenAdvancedSearchPopup}
+        criteria={commonCriteria}
+        orderBy={orderBy}
+        queryPagingSetting={queryPagingSetting}
       /> : null}
     </>
   );

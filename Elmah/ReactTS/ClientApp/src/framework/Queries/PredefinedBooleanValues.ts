@@ -5,7 +5,7 @@ export enum PredefinedBooleanValues
     False = 'False',
 }
 
-export function gePredefinedBooleanValues(): any[] {
+export function getPredefinedBooleanValues(): any[] {
     const keys = Object.values(PredefinedBooleanValues); 
     return keys;
 }
