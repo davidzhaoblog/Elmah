@@ -1,5 +1,5 @@
 import { Range } from 'src/framework/Models/Range'
-import { defaultDateRange } from 'src/framework/Models/defaultRanges'
+import { convertToDateTimeRange, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
 import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange } from 'src/framework/Queries/convertQueryUnits'
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
@@ -80,6 +80,7 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ELMAH_ErrorIdentifier {
 	errorId: any;
+	stringContains_AllColumns: string;
 }
 
 // CommonCriteria
@@ -92,7 +93,9 @@ export interface ELMAH_ErrorCommonCriteria {
 	user: string;
 	message: string;
 	allXml: string;
+	timeUtcRangePredefined: PreDefinedDateTimeRanges;
 	timeUtcRange: Range<string>;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
@@ -106,7 +109,9 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		user: null,
 		message: null,
 		allXml: null,
-		timeUtcRange: defaultDateRange(),
+		timeUtcRangeRangePredefined: PreDefinedDateTimeRanges.Unknown,
+		timeUtcRange: convertToDateTimeRange(PreDefinedDateTimeRanges.Unknown),
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }

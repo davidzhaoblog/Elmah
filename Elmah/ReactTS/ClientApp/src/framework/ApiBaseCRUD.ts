@@ -3,8 +3,9 @@
 
 import { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { ApiBase } from './ApiBase';
+import { IIndexVM, IIndexVMRequest } from './Services/IListRequest';
 
-export class ApiBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest, TIndexVMResponse> extends ApiBase {
+export class ApiBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest extends IIndexVM, TIndexVMResponse> extends ApiBase {
 
   protected url_Upsert: string;
   protected url_Delete: string;
@@ -41,12 +42,13 @@ export class ApiBaseCRUD<TItem, TResponse, TIdentifierCriteria, TIndexVMRequest,
   }
 
   public GetByIdentifier = (params: TIdentifierCriteria): Promise<TResponse> => {
-    return this.Get<TIdentifierCriteria, AxiosResponse<TResponse>>(this.url_GetByIdentifier, params)
-      .then(this.success);
+    return this.Get<TIdentifierCriteria, TResponse>(this.url_GetByIdentifier, params);
   }
 
   public GetIndexVM = (params: TIndexVMRequest): Promise<TIndexVMResponse> => {
-    return this.post<TIndexVMResponse, TIndexVMRequest, AxiosResponse<TIndexVMResponse>>(this.url_GetIndexVM, params)
+    console.log(params);
+    const request = { criteria: params.criteria, queryOrderBySettingCollection: [ params.orderBy ], queryPagingSetting: params.queryPagingSetting};
+    return this.post<TIndexVMResponse, IIndexVMRequest, AxiosResponse<TIndexVMResponse>>(this.url_GetIndexVM, request)
       .then(this.success);
   }
 }

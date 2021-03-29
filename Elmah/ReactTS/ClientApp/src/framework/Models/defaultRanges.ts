@@ -9,7 +9,7 @@ export const defaultDateRange = () : Range<string> =>
 {
   var yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  return {lower: yesterday.toString(), upper: (new Date()).toString()};
+  return {lower: yesterday.toISOString(), upper: (new Date()).toISOString()};
 }
 
 export const defaultNumberRange = () : Range<number> =>

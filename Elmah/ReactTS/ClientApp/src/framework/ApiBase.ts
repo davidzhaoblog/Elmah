@@ -276,7 +276,7 @@ export class ApiBase extends Axios {
      * @memberof Api
      */
     public success = <T>(response: AxiosResponse<T>): T => {
-        console.log(response);
+        // console.log(response);
         return response.data;
     }
     /**

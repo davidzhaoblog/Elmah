@@ -1,3 +1,6 @@
+import { QueryOrderBySetting } from "../Queries/QueryOrderBySetting";
+import { QueryPagingSetting } from "../Queries/QueryPagingSetting";
+
 export interface IFormProps<TItem>
 {
   classes?: any;
@@ -6,10 +9,21 @@ export interface IFormProps<TItem>
   item?: TItem;
 }
 
+export interface ISearchFormProps<TCriteria>
+{
+  classes?: any;
+  wrapperType: WrapperTypes;
+  type: FormTypes;
+  criteria?: TCriteria;
+  orderBy : QueryOrderBySetting;
+  queryPagingSetting: QueryPagingSetting;
+}
+
 export enum FormTypes {
   Create,
   Edit,
   View,
+  Search,
 }
 
 export enum WrapperTypes {

@@ -150,7 +150,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                 <Grid item lg={12}>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
-						<Typography>{props.item.errorId}</Typography>
+						<Typography>{props.item?.errorId}</Typography>
 					</Grid>
                     <FormControl variant="outlined" className={classes.formControl}>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Application')}</InputLabel>
@@ -287,7 +287,7 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                     </FormControl>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
-						<Typography>{props.item.sequence}</Typography>
+						<Typography>{props.item?.sequence}</Typography>
 					</Grid>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField

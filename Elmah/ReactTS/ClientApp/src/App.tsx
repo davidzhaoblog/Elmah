@@ -12,9 +12,6 @@ import { pink } from '@material-ui/core/colors';
 import MomentUtils from '@date-io/moment';
 import { useTranslation } from 'react-i18next';
 
-import { persistStore } from 'redux-persist' // imports from redux-persist
-import { PersistGate } from 'redux-persist/integration/react'
-
 import store from './store/Store';
 import MasterLayout from './layout/MasterLayout';
 import "./i18n"
@@ -26,25 +23,45 @@ const theme = createMuiTheme({
   }
 })
 
-const persistor = persistStore(store); // used to create the persisted store, persistor will be used in the next step
-
 function App() {
   const { t } = useTranslation(["UIStringResourcePerApp"]);
   document.title = t("UIStringResourcePerApp:Application_Title");  
-  
+
   return (
+    
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
           <Router>
             <ThemeProvider theme={theme}>
               <MasterLayout theme={theme} />
             </ThemeProvider>
           </Router>
-        </PersistGate>
       </Provider>
     </MuiPickersUtilsProvider>
   );
 }
+
+// import { persistStore } from 'redux-persist' // imports from redux-persist
+// import { PersistGate } from 'redux-persist/integration/react'
+// const persistor = persistStore(store); // used to create the persisted store, persistor will be used in the next step
+// function App() {
+//   const { t } = useTranslation(["UIStringResourcePerApp"]);
+//   document.title = t("UIStringResourcePerApp:Application_Title");  
+  
+//   return (
+//     <MuiPickersUtilsProvider utils={MomentUtils}>
+//       <Provider store={store}>
+//         <PersistGate loading={null} persistor={persistor}>
+//           <Router>
+//             <ThemeProvider theme={theme}>
+//               <MasterLayout theme={theme} />
+//             </ThemeProvider>
+//           </Router>
+//         </PersistGate>
+//       </Provider>
+//     </MuiPickersUtilsProvider>
+//   );
+// }
+
 export default App;
 
