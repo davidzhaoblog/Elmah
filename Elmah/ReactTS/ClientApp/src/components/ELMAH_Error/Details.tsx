@@ -34,7 +34,7 @@ export default function Details(props: IFormProps<ELMAH_Error> & IPopupProps) {
                 <CardContent>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
-						<Typography>{props.item.errorId}</Typography>
+						<Typography>{props.item?.errorId}</Typography>
 					</Grid>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahApplication')}</InputLabel>
@@ -54,7 +54,7 @@ export default function Details(props: IFormProps<ELMAH_Error> & IPopupProps) {
 					</Grid>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Message')}</InputLabel>
-						<Typography>{props.item.message}</Typography>
+						<Typography>{props.item?.message}</Typography>
 					</Grid>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:ElmahUser')}</InputLabel>
@@ -75,7 +75,7 @@ export default function Details(props: IFormProps<ELMAH_Error> & IPopupProps) {
 							margin="normal"
 							id="date-picker-inline"
 							label={t('UIStringResourcePerEntity:TimeUtc')}
-							value={props.item.timeUtc}
+							value={props.item?.timeUtc}
 							onChange={e => { }}
 							readOnly={true}
 							TextFieldComponent={ReadOnlyTextField}
@@ -83,11 +83,11 @@ export default function Details(props: IFormProps<ELMAH_Error> & IPopupProps) {
 					</Grid>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
-						<Typography>{props.item.sequence}</Typography>
+						<Typography>{props.item?.sequence}</Typography>
 					</Grid>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:AllXml')}</InputLabel>
-						<Typography>{props.item.allXml}</Typography>
+						<Typography>{props.item?.allXml}</Typography>
 					</Grid>
                 </CardContent>
                 {/* <CardActions>

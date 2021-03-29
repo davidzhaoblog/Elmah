@@ -22,17 +22,20 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ElmahStatusCodeIdentifier {
 	statusCode: number;
+	stringContains_AllColumns: string;
 }
 
 // CommonCriteria
 export interface ElmahStatusCodeCommonCriteria {
 	name: string;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
 export const defaultElmahStatusCodeCommonCriteria = (): ElmahStatusCodeCommonCriteria => {
 	return {
 		name: null,
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }

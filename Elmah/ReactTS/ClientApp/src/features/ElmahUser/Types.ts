@@ -20,17 +20,20 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ElmahUserIdentifier {
 	user: string;
+	stringContains_AllColumns: string;
 }
 
 // CommonCriteria
 export interface ElmahUserCommonCriteria {
 	user: string;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
 export const defaultElmahUserCommonCriteria = (): ElmahUserCommonCriteria => {
 	return {
 		user: null,
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }

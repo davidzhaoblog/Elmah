@@ -46,7 +46,7 @@ export default function IndexPage(): JSX.Element {
     var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
     dispatch(getIndexVM({ criteria: commonCriteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
-  
+    
   const openAdvancedSearchInPopup = (type: FormTypes, item: ELMAH_Error) => {
     setFormType(type);
     setOpenAdvancedSearchPopup(true);
@@ -76,7 +76,7 @@ export default function IndexPage(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResourcePerApp:ELMAH_Error')}</Typography>
           <span className={classes.fillRemainingSpace} />
-          <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
+		  <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
           <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>

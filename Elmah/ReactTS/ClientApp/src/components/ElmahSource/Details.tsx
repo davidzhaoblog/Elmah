@@ -31,7 +31,7 @@ export default function Details(props: IFormProps<ElmahSource> & IPopupProps) {
                 <CardContent>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
-						<Typography>{props.item.source}</Typography>
+						<Typography>{props.item?.source}</Typography>
 					</Grid>
                 </CardContent>
                 {/* <CardActions>

@@ -1,9 +1,8 @@
 import { Range } from 'src/framework/Models/Range'
-import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange, convertQueryUnitEqualsPredefinedBoolean } from 'src/framework/Queries/convertQueryUnits'
+import { convertToDateTimeRange, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
+import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange } from 'src/framework/Queries/convertQueryUnits'
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
-import { convertToDateTimeRange, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
-import { PredefinedBooleanValues } from 'src/framework/Queries/PredefinedBooleanValues';
 
 export interface ELMAH_Error {
     elmahApplication_Name: string,
@@ -60,18 +59,18 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahType_Name', expression: 'ElmahType_Name~DESC' },
 	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahUser_Name', expression: 'ElmahUser_Name~ASC' },
 	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahUser_Name', expression: 'ElmahUser_Name~DESC' },
-	// { propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application', expression: 'Application~ASC' },
-	// { propertyName: 'application', direction: QueryOrderDirections.Descending, displayName: 'Application', expression: 'Application~DESC' },
-	// { propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host', expression: 'Host~ASC' },
-	// { propertyName: 'host', direction: QueryOrderDirections.Descending, displayName: 'Host', expression: 'Host~DESC' },
-	// { propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type', expression: 'Type~ASC' },
-	// { propertyName: 'type', direction: QueryOrderDirections.Descending, displayName: 'Type', expression: 'Type~DESC' },
-	// { propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source', expression: 'Source~ASC' },
-	// { propertyName: 'source', direction: QueryOrderDirections.Descending, displayName: 'Source', expression: 'Source~DESC' },
+	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application', expression: 'Application~ASC' },
+	{ propertyName: 'application', direction: QueryOrderDirections.Descending, displayName: 'Application', expression: 'Application~DESC' },
+	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host', expression: 'Host~ASC' },
+	{ propertyName: 'host', direction: QueryOrderDirections.Descending, displayName: 'Host', expression: 'Host~DESC' },
+	{ propertyName: 'type', direction: QueryOrderDirections.Ascending, displayName: 'Type', expression: 'Type~ASC' },
+	{ propertyName: 'type', direction: QueryOrderDirections.Descending, displayName: 'Type', expression: 'Type~DESC' },
+	{ propertyName: 'source', direction: QueryOrderDirections.Ascending, displayName: 'Source', expression: 'Source~ASC' },
+	{ propertyName: 'source', direction: QueryOrderDirections.Descending, displayName: 'Source', expression: 'Source~DESC' },
 	{ propertyName: 'message', direction: QueryOrderDirections.Ascending, displayName: 'Message', expression: 'Message~ASC' },
 	{ propertyName: 'message', direction: QueryOrderDirections.Descending, displayName: 'Message', expression: 'Message~DESC' },
-	// { propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User', expression: 'User~ASC' },
-	// { propertyName: 'user', direction: QueryOrderDirections.Descending, displayName: 'User', expression: 'User~DESC' },
+	{ propertyName: 'user', direction: QueryOrderDirections.Ascending, displayName: 'User', expression: 'User~ASC' },
+	{ propertyName: 'user', direction: QueryOrderDirections.Descending, displayName: 'User', expression: 'User~DESC' },
 	{ propertyName: 'timeUtc', direction: QueryOrderDirections.Ascending, displayName: 'TimeUtc', expression: 'TimeUtc~ASC' },
 	{ propertyName: 'timeUtc', direction: QueryOrderDirections.Descending, displayName: 'TimeUtc', expression: 'TimeUtc~DESC' },
 	{ propertyName: 'allXml', direction: QueryOrderDirections.Ascending, displayName: 'AllXml', expression: 'AllXml~ASC' },
@@ -81,6 +80,7 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ELMAH_ErrorIdentifier {
 	errorId: any;
+	stringContains_AllColumns: string;
 }
 
 // CommonCriteria
@@ -95,7 +95,6 @@ export interface ELMAH_ErrorCommonCriteria {
 	allXml: string;
 	timeUtcRangePredefined: PreDefinedDateTimeRanges;
 	timeUtcRange: Range<string>;
-	testBoolean: PredefinedBooleanValues;
 	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
@@ -112,7 +111,6 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		allXml: null,
 		timeUtcRangePredefined: PreDefinedDateTimeRanges.Unknown,
 		timeUtcRange: convertToDateTimeRange(PreDefinedDateTimeRanges.Unknown),
-		testBoolean: PredefinedBooleanValues.All,
 		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
@@ -130,8 +128,6 @@ export const convertELMAH_ErrorCommonCriteria = (criteria: ELMAH_ErrorCommonCrit
 			message: convertQueryUnitContains(criteria?.message),
 			allXml: convertQueryUnitContains(criteria?.allXml),
 			timeUtcRange: convertQueryUnitRange(criteria?.timeUtcRange),
-			testBoolean: convertQueryUnitEqualsPredefinedBoolean(criteria?.testBoolean),
-			stringContains_AllColumns: convertQueryUnitContains(criteria?.stringContains_AllColumns),
         },
 		canQueryWhenNoQuery: true
 	};

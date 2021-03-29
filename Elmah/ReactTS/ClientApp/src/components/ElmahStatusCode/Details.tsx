@@ -31,11 +31,11 @@ export default function Details(props: IFormProps<ElmahStatusCode> & IPopupProps
                 <CardContent>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
-						<Typography>{props.item.statusCode}</Typography>
+						<Typography>{props.item?.statusCode}</Typography>
 					</Grid>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:Name')}</InputLabel>
-						<Typography>{props.item.name}</Typography>
+						<Typography>{props.item?.name}</Typography>
 					</Grid>
                 </CardContent>
                 {/* <CardActions>
