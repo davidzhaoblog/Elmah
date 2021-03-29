@@ -34,9 +34,9 @@ import { ELMAH_ErrorCommonCriteria } from 'src/features/ELMAH_Error/Types';
 import { getIndexVM } from 'src/features/ELMAH_Error/Slice';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { convertToDateTimeRange, getPreDefinedDateTimeRanges, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
-import { gePredefinedBooleanValues } from 'src/framework/Queries/PredefinedBooleanValues';
+import { getPredefinedBooleanValues } from 'src/framework/Queries/PredefinedBooleanValues';
 
-export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCriteria> & IPopupProps) {
+export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
     const { t } = useTranslation(["translation", "UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
@@ -130,7 +130,7 @@ export default function IndexSearch(props: ISearchFormProps<ELMAH_ErrorCommonCri
         setValue('timeUtcRange.upper', timeUtcRange.upper);
     }
 
-    const testBooleanPredefinedList = gePredefinedBooleanValues();
+    const testBooleanPredefinedList = getPredefinedBooleanValues();
 
     const closePopup = () => {
         setOpenPopup(false)

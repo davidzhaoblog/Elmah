@@ -16,7 +16,7 @@ import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { getIndexVM, eLMAH_ErrorSelectors } from './Slice';
 import { orderBys, ELMAH_Error } from './Types';
 import Edit from 'src/components/ELMAH_Error/Edit';
-import IndexSearch from 'src/components/ELMAH_Error/IndexSearch';
+import Search from 'src/components/ELMAH_Error/Search';
 import List from 'src/components/ELMAH_Error/List';
 
 export default function IndexPage(): JSX.Element {
@@ -114,7 +114,7 @@ export default function IndexPage(): JSX.Element {
         setOpenPopup={setOpenEditPopup}
         item={selectedItem}
       /> : null}
-      {openAdvancedSearchPopup ? <IndexSearch type={formType} wrapperType={WrapperTypes.DialogForm}
+      {openAdvancedSearchPopup ? <Search type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openAdvancedSearchPopup}
         setOpenPopup={setOpenAdvancedSearchPopup}
         criteria={commonCriteria}
