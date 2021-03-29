@@ -80,7 +80,6 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ELMAH_ErrorIdentifier {
 	errorId: any;
-	stringContains_AllColumns: string;
 }
 
 // CommonCriteria

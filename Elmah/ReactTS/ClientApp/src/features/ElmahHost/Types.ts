@@ -20,7 +20,6 @@ export const orderBys : QueryOrderBySetting[] = [
 // Identifier
 export interface ElmahHostIdentifier {
 	host: string;
-	stringContains_AllColumns: string;
 }
 
 // CommonCriteria
