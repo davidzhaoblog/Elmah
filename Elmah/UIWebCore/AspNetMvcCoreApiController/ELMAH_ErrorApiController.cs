@@ -332,7 +332,7 @@ System.Guid? errorId = default(System.Guid?))
                 if(retval.QueryPagingSetting == null)
                     retval.QueryPagingSetting = Framework.Queries.QueryPagingSetting.GetDefault();
 
-                // retval.SetServiceProvider(this._serviceProvider);
+                retval.SetServiceProvider(this._serviceProvider);
                 await retval.LoadData(false);
                 return retval;
             }
