@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
@@ -125,13 +124,16 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                         <StyledTextField
                             name='stringContains_AllColumns'
                             label={t('Search')}
-                            inputRef={register()}
+                            inputRef={register(formValidations.stringContains_AllColumns)}
                             variant='outlined'
                             margin='normal'
                             fullWidth
                             autoFocus
                         />
-                    </FormControl>
+                          {errors.stringContains_AllColumns && (
+                            <span className={classes.error}>{errors.stringContains_AllColumns.message}</span>
+                        )}
+					</FormControl>
                 </Grid>
                 <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
@@ -143,7 +145,7 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                             inputRef={register(formValidations.user)}
                         >
                             <option aria-label="None" value="" />
-                            {userSourceList.map((item: any) => {
+                            {elmahUserList.map((item: any) => {
                                 return (
                                     <option value={item.value} key={item.value}>{item.name}</option>
                                 );
@@ -161,7 +163,7 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                             inputRef={register(formValidations.type)}
                         >
                             <option aria-label="None" value="" />
-                            {typeSourceList.map((item: any) => {
+                            {elmahTypeList.map((item: any) => {
                                 return (
                                     <option value={item.value} key={item.value}>{item.name}</option>
                                 );
@@ -179,7 +181,7 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                             inputRef={register(formValidations.statusCode)}
                         >
                             <option aria-label="None" value="" />
-                            {statusCodeSourceList.map((item: any) => {
+                            {elmahStatusCodeList.map((item: any) => {
                                 return (
                                     <option value={item.value} key={item.value}>{item.name}</option>
                                 );
@@ -197,7 +199,7 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                             inputRef={register(formValidations.source)}
                         >
                             <option aria-label="None" value="" />
-                            {sourceSourceList.map((item: any) => {
+                            {elmahSourceList.map((item: any) => {
                                 return (
                                     <option value={item.value} key={item.value}>{item.name}</option>
                                 );
@@ -215,7 +217,7 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                             inputRef={register(formValidations.host)}
                         >
                             <option aria-label="None" value="" />
-                            {hostSourceList.map((item: any) => {
+                            {elmahHostList.map((item: any) => {
                                 return (
                                     <option value={item.value} key={item.value}>{item.name}</option>
                                 );
@@ -233,7 +235,7 @@ export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria
                             inputRef={register(formValidations.application)}
                         >
                             <option aria-label="None" value="" />
-                            {applicationSourceList.map((item: any) => {
+                            {elmahApplicationList.map((item: any) => {
                                 return (
                                     <option value={item.value} key={item.value}>{item.name}</option>
                                 );

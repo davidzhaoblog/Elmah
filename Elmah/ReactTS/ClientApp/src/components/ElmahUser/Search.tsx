@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
@@ -79,13 +78,16 @@ export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> 
                         <StyledTextField
                             name='stringContains_AllColumns'
                             label={t('Search')}
-                            inputRef={register()}
+                            inputRef={register(formValidations.stringContains_AllColumns)}
                             variant='outlined'
                             margin='normal'
                             fullWidth
                             autoFocus
                         />
-                    </FormControl>
+                          {errors.stringContains_AllColumns && (
+                            <span className={classes.error}>{errors.stringContains_AllColumns.message}</span>
+                        )}
+					</FormControl>
                 </Grid>
 
             </Grid>
