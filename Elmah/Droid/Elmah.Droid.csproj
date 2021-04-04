@@ -364,10 +364,15 @@
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-<Target Name="_RemoveMdbFiles" BeforeTargets="_Upload">
-<ItemGroup>
-<_Temp Include="%(_ResolvedSymbols.Identity)" Condition="'%(_ResolvedSymbols.Extension)' == '.mdb'" />
-<_ResolvedSymbols Remove="@(_Temp)"/>
-</ItemGroup>
-</Target>  
+  <Target Name="_RemoveMdbFiles" BeforeTargets="_Upload">
+    <ItemGroup>
+      <_Temp Include="%(_ResolvedSymbols.Identity)" Condition="'%(_ResolvedSymbols.Extension)' == '.mdb'" />
+      <_ResolvedSymbols Remove="@(_Temp)" />
+    </ItemGroup>
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
