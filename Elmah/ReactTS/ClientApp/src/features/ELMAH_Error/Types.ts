@@ -1,5 +1,5 @@
 import { Range } from 'src/framework/Models/Range'
-import { defaultDateRange } from 'src/framework/Models/defaultRanges'
+import { convertToDateTimeRange, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
 import { convertQueryUnitEquals, convertQueryUnitContains, convertQueryUnitRange } from 'src/framework/Queries/convertQueryUnits'
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
@@ -47,18 +47,6 @@ export function createELMAH_ErrorDefault(): ELMAH_Error {
 }
 
 export const orderBys : QueryOrderBySetting[] = [
-	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~ASC' },
-	{ propertyName: 'elmahApplication_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahApplication_Name', expression: 'ElmahApplication_Name~DESC' },
-	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahHost_Name', expression: 'ElmahHost_Name~ASC' },
-	{ propertyName: 'elmahHost_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahHost_Name', expression: 'ElmahHost_Name~DESC' },
-	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahSource_Name', expression: 'ElmahSource_Name~ASC' },
-	{ propertyName: 'elmahSource_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahSource_Name', expression: 'ElmahSource_Name~DESC' },
-	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahStatusCode_Name', expression: 'ElmahStatusCode_Name~ASC' },
-	{ propertyName: 'elmahStatusCode_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahStatusCode_Name', expression: 'ElmahStatusCode_Name~DESC' },
-	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahType_Name', expression: 'ElmahType_Name~ASC' },
-	{ propertyName: 'elmahType_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahType_Name', expression: 'ElmahType_Name~DESC' },
-	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Ascending, displayName: 'ElmahUser_Name', expression: 'ElmahUser_Name~ASC' },
-	{ propertyName: 'elmahUser_Name', direction: QueryOrderDirections.Descending, displayName: 'ElmahUser_Name', expression: 'ElmahUser_Name~DESC' },
 	{ propertyName: 'application', direction: QueryOrderDirections.Ascending, displayName: 'Application', expression: 'Application~ASC' },
 	{ propertyName: 'application', direction: QueryOrderDirections.Descending, displayName: 'Application', expression: 'Application~DESC' },
 	{ propertyName: 'host', direction: QueryOrderDirections.Ascending, displayName: 'Host', expression: 'Host~ASC' },
@@ -92,7 +80,9 @@ export interface ELMAH_ErrorCommonCriteria {
 	user: string;
 	message: string;
 	allXml: string;
+	timeUtcRangePredefined: PreDefinedDateTimeRanges;
 	timeUtcRange: Range<string>;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
@@ -106,7 +96,9 @@ export const defaultELMAH_ErrorCommonCriteria = (): ELMAH_ErrorCommonCriteria =>
 		user: null,
 		message: null,
 		allXml: null,
-		timeUtcRange: defaultDateRange(),
+		timeUtcRangePredefined: PreDefinedDateTimeRanges.Unknown,
+		timeUtcRange: convertToDateTimeRange(PreDefinedDateTimeRanges.Unknown),
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }

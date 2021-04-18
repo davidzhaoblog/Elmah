@@ -5,20 +5,21 @@ import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { InputLabel } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { Controller } from 'react-hook-form';
-import { KeyboardDatePicker } from '@material-ui/pickers';
+import { ISearchFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
+import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
+import { createSearchFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+import { useStyles } from 'src/features/formStyles';
+import FormPopup from '../FormPopup';
+import { showSpinner } from 'src/layout/appSlice';
+
 import { StyledTextField } from '../controls/StyledTextField';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/CombinedReducers';
-
-import { FormTypes, IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
-import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
-import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
-import { useStyles } from 'src/features/formStyles';
-import FormPopup from '../FormPopup';
+import { InputLabel } from '@material-ui/core';
+import { Select } from '@material-ui/core';
+import { Controller } from 'react-hook-form';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import { convertToDateTimeRange, getPreDefinedDateTimeRanges, PreDefinedDateTimeRanges } from 'src/framework/Queries/PreDefinedDateTimeRanges';
 
 import { 
     elmahApplicationListSelector, getElmahApplicationList,
@@ -29,66 +30,28 @@ import {
     elmahUserListSelector, getElmahUserList
 } from 'src/features/listSlices';
 
-import { upsert } from 'src/features/ELMAH_Error/Slice';
-import { createELMAH_ErrorDefault, ELMAH_Error } from 'src/features/ELMAH_Error/Types';
+import { ELMAH_ErrorCommonCriteria } from 'src/features/ELMAH_Error/Types';
+import { getIndexVM } from 'src/features/ELMAH_Error/Slice';
 
-export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
+export default function Search(props: ISearchFormProps<ELMAH_ErrorCommonCriteria> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
-    const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
+    const { t } = useTranslation(["translation", "UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
-    const { openPopup, setOpenPopup } = props;
+    const { openPopup, setOpenPopup, criteria, orderBy, queryPagingSetting } = props;
 
+	// all form validations are empty, can be removed if not in use
     const formValidations = {
-        elmahApplication_Name: {
-        },
-        errorId: {
-            required: t('UIStringResourcePerEntity:ErrorId_is_required'),
-        },
-        elmahHost_Name: {
-        },
-        elmahSource_Name: {
-        },
-        elmahStatusCode_Name: {
-        },
-        elmahType_Name: {
-        },
-        elmahUser_Name: {
-        },
-        application: {
-        },
-        host: {
-        },
-        type: {
-        },
-        source: {
-        },
-        message: {
-            minLength: {
-                value: 1,
-                message: t('UIStringResourcePerEntity:The_length_of_Message_should_be_1_to_500'),
-            },
-            maxLength: {
-                value: 500,
-                message: t('UIStringResourcePerEntity:The_length_of_Message_should_be_1_to_500'),
-            }
-        },
-        user: {
-        },
-        statusCode: {
-        },
-        timeUtc: {
-            required: t('UIStringResourcePerEntity:TimeUtc_is_required'),
-        },
-        sequence: {
-        },
-        allXml: {
-            minLength: {
-                value: 1,
-                message: t('UIStringResourcePerEntity:The_length_of_AllXml_should_be_1_to_'),
-            }
-        },
-
+		application: {},
+		host: {},
+		source: {},
+		statusCode: {},
+		type: {},
+		user: {},
+		message: {},
+		allXml: {},
+		timeUtcRange: {},
+		stringContains_AllColumns: {}
     };
 
     const elmahApplicationList = useSelector(
@@ -110,37 +73,46 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         (state: RootState) => elmahUserListSelector.selectAll(state)
     );
 
-	// TODO: add "setValue," if you need setValue
-    const { register, handleSubmit, control, errors, formState, reset } = useForm({
+    // TODO: add "setValue," if you need setValue, setValue will be added when DateTimeRange
+    const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
-        defaultValues: props.type === FormTypes.Edit ? props.item : createELMAH_ErrorDefault()
+        defaultValues: criteria
     });
+
+
+    const timeUtcRangePredefinedList = getPreDefinedDateTimeRanges();
+    const onChanged_TimeUtcRangePredefined = (predefined: PreDefinedDateTimeRanges) => {
+        const timeUtcRange = convertToDateTimeRange(predefined);
+        setValue('timeUtcRange.lower', timeUtcRange.lower);
+        setValue('timeUtcRange.upper', timeUtcRange.upper);
+    }
 
     const closePopup = () => {
         setOpenPopup(false)
     }
 
-    const inputData = props.type === FormTypes.Edit ? { ...props.item } : createELMAH_ErrorDefault()
-    const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
+    const popupButtonsOptions = createSearchFormButtonsOptions(() => { reset(criteria) }, closePopup);
 
     const onSubmit = (data: any) => {
-        const dataToUpsert = { errorId: 0, ...props.item, ...data };
-        dispatch(upsert(dataToUpsert))
-        console.log(data);
+        dispatch(showSpinner());
+        dispatch(getIndexVM({ criteria: data, orderBy, queryPagingSetting }));
+
+        // console.log(data);
 
         setOpenPopup(false);
     }
 
     useEffect(() => {
         // you can do async server request and fill up form
-        reset(inputData);
         dispatch(getElmahApplicationList());
         dispatch(getElmahHostList());
         dispatch(getElmahSourceList());
         dispatch(getElmahStatusCodeList());
         dispatch(getElmahTypeList());
         dispatch(getElmahUserList());
+        reset(criteria);
+
     }, []);
 
     const renderItem = () => {
@@ -148,94 +120,27 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
             <Grid container={true}>
                 <DevTool control={control} />
                 <Grid item lg={12}>
-					<Grid item lg>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:ErrorId')}</InputLabel>
-						<Typography>{props.item?.errorId}</Typography>
-					</Grid>
-                    <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Application')}</InputLabel>
-                        <Select
-                            native
-							label={t('UIStringResourcePerEntity:Application')}
-                            name='application'
-                            inputRef={register(formValidations.application)}
-                        >
-                            <option aria-label="None" value="" />
-                            {elmahApplicationList.map((item: any) => {
-                                return (
-                                    <option value={item.value} key={item.value}>{item.name}</option>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Host')}</InputLabel>
-                        <Select
-                            native
-							label={t('UIStringResourcePerEntity:Host')}
-                            name='host'
-                            inputRef={register(formValidations.host)}
-                        >
-                            <option aria-label="None" value="" />
-                            {elmahHostList.map((item: any) => {
-                                return (
-                                    <option value={item.value} key={item.value}>{item.name}</option>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Type')}</InputLabel>
-                        <Select
-                            native
-							label={t('UIStringResourcePerEntity:Type')}
-                            name='type'
-                            inputRef={register(formValidations.type)}
-                        >
-                            <option aria-label="None" value="" />
-                            {elmahTypeList.map((item: any) => {
-                                return (
-                                    <option value={item.value} key={item.value}>{item.name}</option>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Source')}</InputLabel>
-                        <Select
-                            native
-							label={t('UIStringResourcePerEntity:Source')}
-                            name='source'
-                            inputRef={register(formValidations.source)}
-                        >
-                            <option aria-label="None" value="" />
-                            {elmahSourceList.map((item: any) => {
-                                return (
-                                    <option value={item.value} key={item.value}>{item.name}</option>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
-                            name='message'
-                            label={t('UIStringResourcePerEntity:Message')}
+                            name='stringContains_AllColumns'
+                            label={t('Search')}
+                            inputRef={register(formValidations.stringContains_AllColumns)}
                             variant='outlined'
                             margin='normal'
-                            inputRef={register(formValidations.message)}
-                            error={!!errors.message}
                             fullWidth
                             autoFocus
                         />
-                        {errors.message && (
-                            <span className={classes.error}>{errors.message.message}</span>
+                          {errors.stringContains_AllColumns && (
+                            <span className={classes.error}>{errors.stringContains_AllColumns.message}</span>
                         )}
-                    </FormControl>
+					</FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahUser')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:User')}
+                            label={t('UIStringResourcePerApp:ElmahUser')}
                             name='user'
                             inputRef={register(formValidations.user)}
                         >
@@ -247,11 +152,31 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:StatusCode')}</InputLabel>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahType')}</InputLabel>
                         <Select
                             native
-							label={t('UIStringResourcePerEntity:StatusCode')}
+                            label={t('UIStringResourcePerApp:ElmahType')}
+                            name='type'
+                            inputRef={register(formValidations.type)}
+                        >
+                            <option aria-label="None" value="" />
+                            {elmahTypeList.map((item: any) => {
+                                return (
+                                    <option value={item.value} key={item.value}>{item.name}</option>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item lg={6}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahStatusCode')}</InputLabel>
+                        <Select
+                            native
+                            label={t('UIStringResourcePerApp:ElmahStatusCode')}
                             name='statusCode'
                             inputRef={register(formValidations.statusCode)}
                         >
@@ -263,6 +188,80 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                             })}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item lg={6}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahSource')}</InputLabel>
+                        <Select
+                            native
+                            label={t('UIStringResourcePerApp:ElmahSource')}
+                            name='source'
+                            inputRef={register(formValidations.source)}
+                        >
+                            <option aria-label="None" value="" />
+                            {elmahSourceList.map((item: any) => {
+                                return (
+                                    <option value={item.value} key={item.value}>{item.name}</option>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item lg={6}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahHost')}</InputLabel>
+                        <Select
+                            native
+                            label={t('UIStringResourcePerApp:ElmahHost')}
+                            name='host'
+                            inputRef={register(formValidations.host)}
+                        >
+                            <option aria-label="None" value="" />
+                            {elmahHostList.map((item: any) => {
+                                return (
+                                    <option value={item.value} key={item.value}>{item.name}</option>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item lg={6}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel shrink>{t('UIStringResourcePerApp:ElmahApplication')}</InputLabel>
+                        <Select
+                            native
+                            label={t('UIStringResourcePerApp:ElmahApplication')}
+                            name='application'
+                            inputRef={register(formValidations.application)}
+                        >
+                            <option aria-label="None" value="" />
+                            {elmahApplicationList.map((item: any) => {
+                                return (
+                                    <option value={item.value} key={item.value}>{item.name}</option>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item lg={4}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel shrink>{t('UIStringResourcePerEntity:TimeUtcRange')}</InputLabel>
+                        <Select
+                            native
+                            label={t('UIStringResourcePerEntity:TimeUtc')}
+                            name='timeUtcRangePredefined'
+                            inputRef={register(formValidations.timeUtcRange)}
+                            onChange={e => onChanged_TimeUtcRangePredefined(PreDefinedDateTimeRanges[e.target.value.toString()])}
+                        >
+                            {timeUtcRangePredefinedList.map((item: any) => {
+                                return (
+                                    <option value={item} key={item}>{t('' + item)}</option>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item lg={4}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <Controller
                             as={
@@ -274,37 +273,39 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
                                     inputVariant="outlined"
                                     margin="dense"
                                     InputAdornmentProps={{ position: "start" }}
-                                    error={!!errors?.timeUtc}
                                     value=""
-                                    onChange={() => {}}
+                                    onChange={() => { }}
                                 />
                             }
-                            name='timeUtc'
+                            name='timeUtcRange.lower'
                             defaultValue={new Date()}
-                            rules={formValidations.timeUtc}
                             control={control}
                         />
                     </FormControl>
-					<Grid item lg>
-						<InputLabel shrink>{t('UIStringResourcePerEntity:Sequence')}</InputLabel>
-						<Typography>{props.item?.sequence}</Typography>
-					</Grid>
+                </Grid>
+                <Grid item lg={4}>
                     <FormControl variant="outlined" className={classes.formControl}>
-                        <StyledTextField
-                            name='allXml'
-                            label={t('UIStringResourcePerEntity:AllXml')}
-                            variant='outlined'
-                            margin='normal'
-                            inputRef={register(formValidations.allXml)}
-                            error={!!errors.allXml}
-                            fullWidth
-                            autoFocus
+                        <Controller
+                            as={
+                                <KeyboardDatePicker
+                                    label={t('UIStringResourcePerEntity:TimeUtc')}
+                                    clearable
+                                    format="MMM DD, yyyy"
+                                    views={["year", "month", "date"]}
+                                    inputVariant="outlined"
+                                    margin="dense"
+                                    InputAdornmentProps={{ position: "start" }}
+                                    value=""
+                                    onChange={() => { }}
+                                />
+                            }
+                            name='timeUtcRange.upper'
+                            defaultValue={new Date()}
+                            control={control}
                         />
-                        {errors.allXml && (
-                            <span className={classes.error}>{errors.allXml.message}</span>
-                        )}
                     </FormControl>
                 </Grid>
+
             </Grid>
         );
     }
@@ -331,5 +332,4 @@ export default function Edit(props: IFormProps<ELMAH_Error> & IPopupProps) {
         </>
     );
 }
-
 

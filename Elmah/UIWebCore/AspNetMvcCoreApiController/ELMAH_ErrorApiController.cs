@@ -321,7 +321,7 @@ System.Guid? errorId = default(System.Guid?))
                 {
                     retval.Criteria = vm.Criteria;
                     retval.QueryPagingSetting = vm.QueryPagingSetting;
-                    retval.QueryOrderBySettingCollecionInString = vm.QueryOrderBySettingCollecionInString;
+                    retval.QueryOrderBySettingCollection = vm.QueryOrderBySettingCollection;
                 }
                 else
                 {
