@@ -281,7 +281,7 @@ string type = default(string))
                 {
                     retval.Criteria = vm.Criteria;
                     retval.QueryPagingSetting = vm.QueryPagingSetting;
-                    retval.QueryOrderBySettingCollecionInString = vm.QueryOrderBySettingCollecionInString;
+                    retval.QueryOrderBySettingCollection = vm.QueryOrderBySettingCollection;
                 }
                 else
                 {

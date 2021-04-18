@@ -8,8 +8,8 @@ namespace Elmah.WcfContracts
     public interface IMapService
     {
 /*
-        [System.ServiceModel.OperationContractAttribute(Action = "http://www.url/Elmah/WcfContracts/IMapService/GetMapItems",
-            ReplyAction = "http://www.url/Elmah/WcfContracts/IMapService/GetMapItemsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://www.Elmah.com/Elmah/WcfContracts/IMapService/GetMapItems",
+            ReplyAction = "http://www.Elmah.com/Elmah/WcfContracts/IMapService/GetMapItemsResponse")]
 */
         Task<Elmah.CommonBLLEntities.BusinessLogicLayerResponseMessageMapItemCollection> GetMapItems(
             Elmah.CommonBLLEntities.GeoSearchRequestMessage request);

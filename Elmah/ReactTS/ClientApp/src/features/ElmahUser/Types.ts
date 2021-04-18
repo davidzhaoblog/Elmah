@@ -25,12 +25,14 @@ export interface ElmahUserIdentifier {
 // CommonCriteria
 export interface ElmahUserCommonCriteria {
 	user: string;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
 export const defaultElmahUserCommonCriteria = (): ElmahUserCommonCriteria => {
 	return {
 		user: null,
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }

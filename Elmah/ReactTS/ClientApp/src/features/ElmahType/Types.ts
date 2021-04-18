@@ -25,12 +25,14 @@ export interface ElmahTypeIdentifier {
 // CommonCriteria
 export interface ElmahTypeCommonCriteria {
 	type: string;
+	stringContains_AllColumns: string;
 	canQueryWhenNoQuery: boolean;
 }
 
 export const defaultElmahTypeCommonCriteria = (): ElmahTypeCommonCriteria => {
 	return {
 		type: null,
+		stringContains_AllColumns: null,
 		canQueryWhenNoQuery: true
 	};
 }

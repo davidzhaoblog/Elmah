@@ -31,7 +31,7 @@ export default function Details(props: IFormProps<ElmahUser> & IPopupProps) {
                 <CardContent>
 					<Grid item lg>
 						<InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
-						<Typography>{props.item.user}</Typography>
+						<Typography>{props.item?.user}</Typography>
 					</Grid>
                 </CardContent>
                 {/* <CardActions>

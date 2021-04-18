@@ -15,42 +15,42 @@ namespace Elmah.WcfContracts
 
         #region Framework.Repositories.DataAccessLayerContractBase<List<Elmah.DataSourceEntities.ElmahSource>,Elmah.DataSourceEntities.ElmahSource,Elmah.DataSourceEntities.ElmahSourceIdentifier> Members
 /*
-        [System.ServiceModel.OperationContractAttribute(Action = "http://www.url/Elmah/WcfContracts/IElmahSourceService/DeleteEntity",
-            ReplyAction = "http://www.url/Elmah/WcfContracts/IElmahSourceService/DeleteEntityResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/DeleteEntity",
+            ReplyAction = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/DeleteEntityResponse")]
 */
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> DeleteEntity(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action = "http://www.url/Elmah/WcfContracts/IElmahSourceService/DeleteByIdentifierEntity",
-            ReplyAction = "http://www.url/Elmah/WcfContracts/IElmahSourceService/DeleteByIdentifierEntityResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/DeleteByIdentifierEntity",
+            ReplyAction = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/DeleteByIdentifierEntityResponse")]
 */
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> DeleteByIdentifierEntity(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltInOfIdentifier id);
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action = "http://www.url/Elmah/WcfContracts/IElmahSourceService/UpsertEntity",
-            ReplyAction = "http://www.url/Elmah/WcfContracts/IElmahSourceService/UpsertEntityResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/UpsertEntity",
+            ReplyAction = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/UpsertEntityResponse")]
 */
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> UpsertEntity(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action = "http://www.url/Elmah/WcfContracts/IElmahSourceService/InsertEntity",
-            ReplyAction = "http://www.url/Elmah/WcfContracts/IElmahSourceService/InsertEntityResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/InsertEntity",
+            ReplyAction = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/InsertEntityResponse")]
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> InsertEntity(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://www.url/Elmah/WcfContracts/IElmahSourceService/UpdateEntity",
-            ReplyAction = "http://www.url/Elmah/WcfContracts/IElmahSourceService/UpdateEntityResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/UpdateEntity",
+            ReplyAction = "http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/UpdateEntityResponse")]
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> UpdateEntity(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/BatchInsert",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/BatchInsertResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/BatchInsert",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/BatchInsertResponse")]
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> BatchInsert(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/BatchDelete",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/BatchDeleteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/BatchDelete",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/BatchDeleteResponse")]
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> BatchDelete(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/BatchUpdate",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/BatchUpdateResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/BatchUpdate",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/BatchUpdateResponse")]
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> BatchUpdate(Elmah.CommonBLLEntities.ElmahSourceRequestMessageBuiltIn input);
 */
 
@@ -59,8 +59,8 @@ namespace Elmah.WcfContracts
         #region Query Methods Of EntityByCommon
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByCommon",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByCommonResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByCommon",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByCommonResponse")]
 */
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> GetCollectionOfEntityByCommon(
             Elmah.CommonBLLEntities.ElmahSourceRequestMessageUserDefinedOfCommon request);
@@ -98,8 +98,8 @@ namespace Elmah.WcfContracts
         #region Query Methods Of NameValuePairByCommon
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfNameValuePairByCommon",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfNameValuePairByCommonResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfNameValuePairByCommon",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfNameValuePairByCommonResponse")]
 */
         Task<Framework.Services.BusinessLogicLayerResponseMessageNameValuePairCollection> GetCollectionOfNameValuePairByCommon(
             Elmah.CommonBLLEntities.ElmahSourceRequestMessageUserDefinedOfCommon request);
@@ -137,15 +137,15 @@ namespace Elmah.WcfContracts
         #region Query Methods Of EntityByIdentifier
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/ExistsOfEntityByIdentifier",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/ExistsOfEntityByIdentifierResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/ExistsOfEntityByIdentifier",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/ExistsOfEntityByIdentifierResponse")]
 */
         Task<Framework.Services.BusinessLogicLayerResponseMessageBoolean> ExistsOfEntityByIdentifier(
             Elmah.CommonBLLEntities.ElmahSourceRequestMessageUserDefinedOfIdentifier request);
 
 /*
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.url/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByIdentifier",
-            ReplyAction="http://www.url/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByIdentifierResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByIdentifier",
+            ReplyAction="http://www.Elmah.com/Elmah/WcfContracts/IElmahSourceService/GetCollectionOfEntityByIdentifierResponse")]
 */
         Task<Elmah.CommonBLLEntities.ElmahSourceResponseMessageBuiltIn> GetCollectionOfEntityByIdentifier(
             Elmah.CommonBLLEntities.ElmahSourceRequestMessageUserDefinedOfIdentifier request);

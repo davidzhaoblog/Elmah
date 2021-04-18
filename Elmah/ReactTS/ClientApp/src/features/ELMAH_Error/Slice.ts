@@ -46,8 +46,8 @@ export const getByIdentifier = createAsyncThunk(
 export const getIndexVM = createAsyncThunk(
     'ELMAH_Error.getIndexVM',
     async (payload: IListRequest<ELMAH_ErrorCommonCriteria>, {dispatch}) => {
-        
-        const response = await eLMAH_ErrorApi.GetIndexVM({criteria: convertELMAH_ErrorCommonCriteria(payload.criteria), ...payload });
+        const request = { criteria: convertELMAH_ErrorCommonCriteria(payload.criteria), orderBy: payload.orderBy, queryPagingSetting: payload.queryPagingSetting  };
+        const response = await eLMAH_ErrorApi.GetIndexVM(request);
         dispatch(closeSpinner());
         return response;
     }
@@ -57,7 +57,7 @@ export const getIndexVM = createAsyncThunk(
 const eLMAH_ErrorSlice = createSlice({
     name: 'eLMAH_Errors',
     initialState: entityAdapter.getInitialState({
-        criteria: defaultELMAH_ErrorCommonCriteria(),
+        commonCriteria: defaultELMAH_ErrorCommonCriteria(),
         orderBy: orderBys.find(x=>x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1

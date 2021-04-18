@@ -41,4 +41,8 @@ export function createDeleteAlertButtonsOptions(confirmHandler: () => void, canc
     { label: t('UIStringResource:Cancel'), color: 'default', handler: cancelhandler }];  
 }
 
+export function createSearchFormButtonsOptions(resetHandler: () => void, cancelhandler: () => void): IButtonOptions[] {
+  const { t } = useTranslation(["UIStringResource"]);
+  return createSubmitFormButtonsOptions(t('UIStringResource:Search'), t('UIStringResource:Refresh'), resetHandler, t('UIStringResource:Cancel'), cancelhandler);
+}
 

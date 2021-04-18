@@ -46,8 +46,8 @@ export const getByIdentifier = createAsyncThunk(
 export const getIndexVM = createAsyncThunk(
     'ElmahStatusCode.getIndexVM',
     async (payload: IListRequest<ElmahStatusCodeCommonCriteria>, {dispatch}) => {
-        
-        const response = await elmahStatusCodeApi.GetIndexVM({criteria: convertElmahStatusCodeCommonCriteria(payload.criteria), ...payload });
+        const request = { criteria: convertElmahStatusCodeCommonCriteria(payload.criteria), orderBy: payload.orderBy, queryPagingSetting: payload.queryPagingSetting  };
+        const response = await elmahStatusCodeApi.GetIndexVM(request);
         dispatch(closeSpinner());
         return response;
     }
@@ -57,7 +57,7 @@ export const getIndexVM = createAsyncThunk(
 const elmahStatusCodeSlice = createSlice({
     name: 'elmahStatusCodes',
     initialState: entityAdapter.getInitialState({
-        criteria: defaultElmahStatusCodeCommonCriteria(),
+        commonCriteria: defaultElmahStatusCodeCommonCriteria(),
         orderBy: orderBys.find(x=>x.expression),
         queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1

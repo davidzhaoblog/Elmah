@@ -281,7 +281,7 @@ int? statusCode = default(int?))
                 {
                     retval.Criteria = vm.Criteria;
                     retval.QueryPagingSetting = vm.QueryPagingSetting;
-                    retval.QueryOrderBySettingCollecionInString = vm.QueryOrderBySettingCollecionInString;
+                    retval.QueryOrderBySettingCollection = vm.QueryOrderBySettingCollection;
                 }
                 else
                 {
