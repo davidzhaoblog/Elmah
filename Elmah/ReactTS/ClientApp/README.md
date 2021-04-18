@@ -2,7 +2,7 @@
 This is a boilerplate for React using Typescript, Material UI and Redux, React Router, Redux Toolkit.
 
 ## Login Page
-http://localhost:78076/account/login
+http://localhost:79076/account/login
 #### Login credentials
 * username/email: *anything*
 * password: *anything*
@@ -20,7 +20,7 @@ The app uses redux to manage the authentication state, and uses redux-auth-wrapp
 ### Local development
 * Clone the project and cd into project
 * npm install
-* npm start and go to [link](*http://localhost:78076*)
+* npm start and go to [link](*http://localhost:79076*)
 
 ### Deployment
 * npm install

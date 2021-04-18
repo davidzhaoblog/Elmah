@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:7802/",
-      "sslPort": 7807
+      "applicationUrl": "http://localhost:7902/",
+      "sslPort": 7907
     }
   },
   "profiles": {
@@ -18,11 +18,11 @@
     "Elmah.MvcCoreAdmin": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7809/",
+      "launchUrl": "https://localhost:7909/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://0.0.0.0:7809/;http://0.0.0.0:7808/"
+      "applicationUrl": "https://0.0.0.0:7909/;http://0.0.0.0:7908/"
     }
   }
 }
