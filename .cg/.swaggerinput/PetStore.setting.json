@@ -1,0 +1,266 @@
+{
+  "SharedComponentsInPaths": {},
+  "SharedComponentsInComplexComponents": {},
+  "SwaggerTagSettings": [
+    {
+      "Tag": "Pets",
+      "OriginalTag": "pets",
+      "Paths": [
+        "/pets",
+        "/pets/{petId}"
+      ],
+      "Components": [
+        "#/components/schemas/Pets",
+        "#/components/schemas/Error",
+        "#/components/schemas/Pet"
+      ],
+      "CollectionCompnentMapping": {}
+    }
+  ],
+  "SwaggerPathSettings": [
+    {
+      "Name": "Pets",
+      "Path": "/pets"
+    },
+    {
+      "Name": "Pets",
+      "Path": "/pets/{petId}"
+    }
+  ],
+  "SwaggerComponentSettings": [
+    {
+      "Name": "Pet",
+      "OriginalName": "Pet",
+      "Type": 1,
+      "PropertyContextCollection": [
+        {
+          "Setting": {
+            "KnownPropertyName": 0,
+            "Name": "id",
+            "DefaultOrder": 0,
+            "PropertyType": {
+              "IsValueType": false,
+              "IsKnownType": false,
+              "CanBeNull": false,
+              "DotNetValueType": 12,
+              "KnownType": 0,
+              "Type": null,
+              "FriendlyType": null
+            },
+            "DefaultValue": null,
+            "IsNullable": false,
+            "IsDbGenerated": false,
+            "PropertyCategory": 0,
+            "EntityReferenceSimplePath": null,
+            "IsForeignKey": false,
+            "ForeignKeyPropertyCategory": 0
+          },
+          "DBColumnSetting": null,
+          "PropertyDataActionSettingCollection": null,
+          "ComputedPropertySetting": null,
+          "PropertyUISetting": {
+            "CanUIDisplay": true,
+            "CanUIEdit": true,
+            "CanUIInsert": true,
+            "CanUIDisplayWhenEdit": false,
+            "CanUIDisplayWhenInsert": false,
+            "CanUIHidden": false,
+            "PropertyUIType": 0,
+            "SourcePropertyNameWithFullPath": null,
+            "SourceEntityReferenceFullPath": null,
+            "SourcePropertyName": null,
+            "DisplayOrder": -1
+          },
+          "PropertyUpdateActionSetting": null,
+          "ValidatorContainer": {
+            "HasValidator": false,
+            "ValidatorCollection": []
+          }
+        },
+        {
+          "Setting": {
+            "KnownPropertyName": 0,
+            "Name": "name",
+            "DefaultOrder": 0,
+            "PropertyType": {
+              "IsValueType": false,
+              "IsKnownType": false,
+              "CanBeNull": false,
+              "DotNetValueType": 15,
+              "KnownType": 0,
+              "Type": null,
+              "FriendlyType": null
+            },
+            "DefaultValue": null,
+            "IsNullable": false,
+            "IsDbGenerated": false,
+            "PropertyCategory": 0,
+            "EntityReferenceSimplePath": null,
+            "IsForeignKey": false,
+            "ForeignKeyPropertyCategory": 0
+          },
+          "DBColumnSetting": null,
+          "PropertyDataActionSettingCollection": null,
+          "ComputedPropertySetting": null,
+          "PropertyUISetting": {
+            "CanUIDisplay": true,
+            "CanUIEdit": true,
+            "CanUIInsert": true,
+            "CanUIDisplayWhenEdit": false,
+            "CanUIDisplayWhenInsert": false,
+            "CanUIHidden": false,
+            "PropertyUIType": 0,
+            "SourcePropertyNameWithFullPath": null,
+            "SourceEntityReferenceFullPath": null,
+            "SourcePropertyName": null,
+            "DisplayOrder": -1
+          },
+          "PropertyUpdateActionSetting": null,
+          "ValidatorContainer": {
+            "HasValidator": false,
+            "ValidatorCollection": []
+          }
+        },
+        {
+          "Setting": {
+            "KnownPropertyName": 0,
+            "Name": "tag",
+            "DefaultOrder": 0,
+            "PropertyType": {
+              "IsValueType": false,
+              "IsKnownType": false,
+              "CanBeNull": false,
+              "DotNetValueType": 15,
+              "KnownType": 0,
+              "Type": null,
+              "FriendlyType": null
+            },
+            "DefaultValue": null,
+            "IsNullable": false,
+            "IsDbGenerated": false,
+            "PropertyCategory": 0,
+            "EntityReferenceSimplePath": null,
+            "IsForeignKey": false,
+            "ForeignKeyPropertyCategory": 0
+          },
+          "DBColumnSetting": null,
+          "PropertyDataActionSettingCollection": null,
+          "ComputedPropertySetting": null,
+          "PropertyUISetting": {
+            "CanUIDisplay": true,
+            "CanUIEdit": true,
+            "CanUIInsert": true,
+            "CanUIDisplayWhenEdit": false,
+            "CanUIDisplayWhenInsert": false,
+            "CanUIHidden": false,
+            "PropertyUIType": 0,
+            "SourcePropertyNameWithFullPath": null,
+            "SourceEntityReferenceFullPath": null,
+            "SourcePropertyName": null,
+            "DisplayOrder": -1
+          },
+          "PropertyUpdateActionSetting": null,
+          "ValidatorContainer": {
+            "HasValidator": false,
+            "ValidatorCollection": []
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Error",
+      "OriginalName": "Error",
+      "Type": 1,
+      "PropertyContextCollection": [
+        {
+          "Setting": {
+            "KnownPropertyName": 0,
+            "Name": "code",
+            "DefaultOrder": 0,
+            "PropertyType": {
+              "IsValueType": false,
+              "IsKnownType": false,
+              "CanBeNull": false,
+              "DotNetValueType": 11,
+              "KnownType": 0,
+              "Type": null,
+              "FriendlyType": null
+            },
+            "DefaultValue": null,
+            "IsNullable": false,
+            "IsDbGenerated": false,
+            "PropertyCategory": 0,
+            "EntityReferenceSimplePath": null,
+            "IsForeignKey": false,
+            "ForeignKeyPropertyCategory": 0
+          },
+          "DBColumnSetting": null,
+          "PropertyDataActionSettingCollection": null,
+          "ComputedPropertySetting": null,
+          "PropertyUISetting": {
+            "CanUIDisplay": true,
+            "CanUIEdit": true,
+            "CanUIInsert": true,
+            "CanUIDisplayWhenEdit": false,
+            "CanUIDisplayWhenInsert": false,
+            "CanUIHidden": false,
+            "PropertyUIType": 0,
+            "SourcePropertyNameWithFullPath": null,
+            "SourceEntityReferenceFullPath": null,
+            "SourcePropertyName": null,
+            "DisplayOrder": -1
+          },
+          "PropertyUpdateActionSetting": null,
+          "ValidatorContainer": {
+            "HasValidator": false,
+            "ValidatorCollection": []
+          }
+        },
+        {
+          "Setting": {
+            "KnownPropertyName": 0,
+            "Name": "message",
+            "DefaultOrder": 0,
+            "PropertyType": {
+              "IsValueType": false,
+              "IsKnownType": false,
+              "CanBeNull": false,
+              "DotNetValueType": 15,
+              "KnownType": 0,
+              "Type": null,
+              "FriendlyType": null
+            },
+            "DefaultValue": null,
+            "IsNullable": false,
+            "IsDbGenerated": false,
+            "PropertyCategory": 0,
+            "EntityReferenceSimplePath": null,
+            "IsForeignKey": false,
+            "ForeignKeyPropertyCategory": 0
+          },
+          "DBColumnSetting": null,
+          "PropertyDataActionSettingCollection": null,
+          "ComputedPropertySetting": null,
+          "PropertyUISetting": {
+            "CanUIDisplay": true,
+            "CanUIEdit": true,
+            "CanUIInsert": true,
+            "CanUIDisplayWhenEdit": false,
+            "CanUIDisplayWhenInsert": false,
+            "CanUIHidden": false,
+            "PropertyUIType": 0,
+            "SourcePropertyNameWithFullPath": null,
+            "SourceEntityReferenceFullPath": null,
+            "SourcePropertyName": null,
+            "DisplayOrder": -1
+          },
+          "PropertyUpdateActionSetting": null,
+          "ValidatorContainer": {
+            "HasValidator": false,
+            "ValidatorCollection": []
+          }
+        }
+      ]
+    }
+  ]
+}
