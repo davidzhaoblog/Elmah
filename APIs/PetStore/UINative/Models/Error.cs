@@ -7,44 +7,44 @@ namespace Elmah.PetStore.Models
     public class Error: Framework.Models.PropertyChangedNotifier
     {
 
-        private int m_code;
-        public int code
+        private int m_Code;
+        public int Code
         {
             get
             {
-                return m_code;
+                return m_Code;
             }
             set
             {
                 if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
                 {
                     //ValidateProperty(value);
-                    Set(nameof(code), ref m_code, value);
+                    Set(nameof(Code), ref m_Code, value);
                 }
                 else
                 {
-                    m_code = value;
+                    m_Code = value;
                 }
             }
         }
 
-        private string m_message;
-        public string message
+        private string m_Message;
+        public string Message
         {
             get
             {
-                return m_message;
+                return m_Message;
             }
             set
             {
                 if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
                 {
                     //ValidateProperty(value);
-                    Set(nameof(message), ref m_message, value);
+                    Set(nameof(Message), ref m_Message, value);
                 }
                 else
                 {
-                    m_message = value;
+                    m_Message = value;
                 }
             }
         }
