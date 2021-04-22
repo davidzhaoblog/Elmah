@@ -12,7 +12,8 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Model.cs" />
+    <Compile Include="Pet.cs" />
+    <Compile Include="Error.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Frameworks\Framework\Framework.csproj">
