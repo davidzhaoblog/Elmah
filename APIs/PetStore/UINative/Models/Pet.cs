@@ -8,6 +8,8 @@ namespace Elmah.PetStore.Models
     {
 
         private long m_Id;
+
+        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Id_is_required")]
         public long Id
         {
             get
@@ -29,6 +31,8 @@ namespace Elmah.PetStore.Models
         }
 
         private string m_Name;
+
+        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Name_is_required")]
         public string Name
         {
             get
@@ -50,6 +54,8 @@ namespace Elmah.PetStore.Models
         }
 
         private string m_Tag;
+
+        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Tag_is_required")]
         public string Tag
         {
             get
