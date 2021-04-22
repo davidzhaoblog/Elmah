@@ -1,0 +1,42 @@
+{
+  "SharedComponentsInPaths": {},
+  "SharedComponentsInComplexComponents": {},
+  "SwaggerTagSettings": [
+    {
+      "Tag": "Pets",
+      "OriginalTag": "pets",
+      "Paths": [
+        "/pets",
+        "/pets/{petId}"
+      ],
+      "Components": [
+        "#/components/schemas/Pets",
+        "#/components/schemas/Error",
+        "#/components/schemas/Pet"
+      ],
+      "CollectionCompnentMapping": {}
+    }
+  ],
+  "SwaggerPathSettings": [
+    {
+      "Name": "Pets",
+      "Path": "/pets"
+    },
+    {
+      "Name": "Pets",
+      "Path": "/pets/{petId}"
+    }
+  ],
+  "SwaggerComponentSettings": [
+    {
+      "Name": "Pet",
+      "OriginalName": "Pet",
+      "Type": 1
+    },
+    {
+      "Name": "Error",
+      "OriginalName": "Error",
+      "Type": 1
+    }
+  ]
+}
