@@ -8,6 +8,8 @@ namespace Elmah.PetStore.Models
     {
 
         private int m_Code;
+
+        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Code_is_required")]
         public int Code
         {
             get
@@ -29,6 +31,8 @@ namespace Elmah.PetStore.Models
         }
 
         private string m_Message;
+
+        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Message_is_required")]
         public string Message
         {
             get
