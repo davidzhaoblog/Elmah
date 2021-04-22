@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
@@ -9,7 +11,8 @@ namespace Elmah.PetStore.Models
 
         private int m_Code;
 
-        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Code_is_required")]
+        [Display(Name = "Code", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Code_is_required")]
         public int Code
         {
             get
@@ -32,7 +35,8 @@ namespace Elmah.PetStore.Models
 
         private string m_Message;
 
-        [RequiredAttribute(ErrorMessageResourceType = typeof(abcdefg.wwww), ErrorMessageResourceName="Message_is_required")]
+        [Display(Name = "Message", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Message_is_required")]
         public string Message
         {
             get
