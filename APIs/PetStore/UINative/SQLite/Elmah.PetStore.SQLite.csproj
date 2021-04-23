@@ -18,6 +18,10 @@
       <Project>{397ffa3d-9a4e-4900-9714-65d16a871613}</Project>
       <Name>Framework.Xamariner</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Models\Elmah.PetStore.Models.csproj">
+      <Project>{c18471c4-5f04-49b8-825c-e017d02e5881}</Project>
+      <Name>Elmah.PetStore.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
