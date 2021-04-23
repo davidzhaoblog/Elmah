@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
-    public class Pet: Framework.Models.PropertyChangedNotifier
+    public class Order: Framework.Models.PropertyChangedNotifier
     {
 
         private long m_Id;
@@ -33,98 +33,74 @@ namespace Elmah.PetStore.Models
             }
         }
 
-        private string m_Name;
+        private long m_PetId;
 
-        [Display(Name = "Name", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
-        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Name_is_required")]
-        public string Name
+        [Display(Name = "PetId", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="PetId_is_required")]
+        public long PetId
         {
             get
             {
-                return m_Name;
+                return m_PetId;
             }
             set
             {
                 if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
                 {
                     //ValidateProperty(value);
-                    Set(nameof(Name), ref m_Name, value);
+                    Set(nameof(PetId), ref m_PetId, value);
                 }
                 else
                 {
-                    m_Name = value;
+                    m_PetId = value;
                 }
             }
         }
 
-        private Elmah.PetStore.Models.Category m_Category;
+        private int m_Quantity;
 
-        [Display(Name = "Category", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
-        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Category_is_required")]
-        public Elmah.PetStore.Models.Category Category
+        [Display(Name = "Quantity", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Quantity_is_required")]
+        public int Quantity
         {
             get
             {
-                return m_Category;
+                return m_Quantity;
             }
             set
             {
                 if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
                 {
                     //ValidateProperty(value);
-                    Set(nameof(Category), ref m_Category, value);
+                    Set(nameof(Quantity), ref m_Quantity, value);
                 }
                 else
                 {
-                    m_Category = value;
+                    m_Quantity = value;
                 }
             }
         }
 
-        private Elmah.PetStore.Models.string[] m_PhotoUrls;
+        private System.DateTime m_ShipDate;
 
-        [Display(Name = "PhotoUrls", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
-        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="PhotoUrls_is_required")]
-        public Elmah.PetStore.Models.string[] PhotoUrls
+        [Display(Name = "ShipDate", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="ShipDate_is_required")]
+        public System.DateTime ShipDate
         {
             get
             {
-                return m_PhotoUrls;
+                return m_ShipDate;
             }
             set
             {
                 if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
                 {
                     //ValidateProperty(value);
-                    Set(nameof(PhotoUrls), ref m_PhotoUrls, value);
+                    Set(nameof(ShipDate), ref m_ShipDate, value);
                 }
                 else
                 {
-                    m_PhotoUrls = value;
-                }
-            }
-        }
-
-        private Elmah.PetStore.Models.Tag[] m_Tags;
-
-        [Display(Name = "Tags", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
-        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Tags_is_required")]
-        public Elmah.PetStore.Models.Tag[] Tags
-        {
-            get
-            {
-                return m_Tags;
-            }
-            set
-            {
-                if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
-                {
-                    //ValidateProperty(value);
-                    Set(nameof(Tags), ref m_Tags, value);
-                }
-                else
-                {
-                    m_Tags = value;
+                    m_ShipDate = value;
                 }
             }
         }
@@ -149,6 +125,30 @@ namespace Elmah.PetStore.Models
                 else
                 {
                     m_Status = value;
+                }
+            }
+        }
+
+        private bool m_Complete;
+
+        [Display(Name = "Complete", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Complete_is_required")]
+        public bool Complete
+        {
+            get
+            {
+                return m_Complete;
+            }
+            set
+            {
+                if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
+                {
+                    //ValidateProperty(value);
+                    Set(nameof(Complete), ref m_Complete, value);
+                }
+                else
+                {
+                    m_Complete = value;
                 }
             }
         }

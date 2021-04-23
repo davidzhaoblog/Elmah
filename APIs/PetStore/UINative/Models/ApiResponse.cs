@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
-    public class Error: Framework.Models.PropertyChangedNotifier
+    public class ApiResponse: Framework.Models.PropertyChangedNotifier
     {
 
         private int m_Code;
@@ -29,6 +29,30 @@ namespace Elmah.PetStore.Models
                 else
                 {
                     m_Code = value;
+                }
+            }
+        }
+
+        private string m_Type;
+
+        [Display(Name = "Type", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+        [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="Type_is_required")]
+        public string Type
+        {
+            get
+            {
+                return m_Type;
+            }
+            set
+            {
+                if (Framework.Models.PropertyChangedNotifierHelper.IsToRaisePropertyChanged)
+                {
+                    //ValidateProperty(value);
+                    Set(nameof(Type), ref m_Type, value);
+                }
+                else
+                {
+                    m_Type = value;
                 }
             }
         }
