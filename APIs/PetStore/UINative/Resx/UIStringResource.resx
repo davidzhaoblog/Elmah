@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   
-  <data name="Pet" xml:space="preserve">
-    <value>Pet</value>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
   </data>
-  <data name="Pets" xml:space="preserve">
-    <value>Pets</value>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
   </data>
   <data name="Id" xml:space="preserve">
     <value>Id</value>
@@ -130,29 +130,176 @@
   <data name="Id_is_required" xml:space="preserve">
     <value>Id is required</value>
   </data>
+  <data name="PetId" xml:space="preserve">
+    <value>PetId</value>
+  </data>
+  <data name="PetId_is_required" xml:space="preserve">
+    <value>PetId is required</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="Quantity_is_required" xml:space="preserve">
+    <value>Quantity is required</value>
+  </data>
+  <data name="ShipDate" xml:space="preserve">
+    <value>ShipDate</value>
+  </data>
+  <data name="ShipDate_is_required" xml:space="preserve">
+    <value>ShipDate is required</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Status_is_required" xml:space="preserve">
+    <value>Status is required</value>
+  </data>
+  <data name="Complete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Complete_is_required" xml:space="preserve">
+    <value>Complete is required</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Username_is_required" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Address_is_required" xml:space="preserve">
+    <value>Address is required</value>
+  </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>Addresses</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Street_is_required" xml:space="preserve">
+    <value>Street is required</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="City_is_required" xml:space="preserve">
+    <value>City is required</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="State_is_required" xml:space="preserve">
+    <value>State is required</value>
+  </data>
+  <data name="Zip" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="Zip_is_required" xml:space="preserve">
+    <value>Zip is required</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="Name_is_required" xml:space="preserve">
     <value>Name is required</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>FirstName</value>
+  </data>
+  <data name="FirstName_is_required" xml:space="preserve">
+    <value>FirstName is required</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>LastName</value>
+  </data>
+  <data name="LastName_is_required" xml:space="preserve">
+    <value>LastName is required</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Email_is_required" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Password_is_required" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Phone_is_required" xml:space="preserve">
+    <value>Phone is required</value>
+  </data>
+  <data name="UserStatus" xml:space="preserve">
+    <value>UserStatus</value>
+  </data>
+  <data name="UserStatus_is_required" xml:space="preserve">
+    <value>UserStatus is required</value>
+  </data>
   <data name="Tag" xml:space="preserve">
     <value>Tag</value>
   </data>
-  <data name="Tag_is_required" xml:space="preserve">
-    <value>Tag is required</value>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
+  <data name="Pet" xml:space="preserve">
+    <value>Pet</value>
   </data>
-  <data name="Errors" xml:space="preserve">
-    <value>Errors</value>
+  <data name="Pets" xml:space="preserve">
+    <value>Pets</value>
+  </data>
+  <data name="Category_is_required" xml:space="preserve">
+    <value>Category is required</value>
+  </data>
+  <data name="PhotoUrls" xml:space="preserve">
+    <value>PhotoUrls</value>
+  </data>
+  <data name="PhotoUrls_is_required" xml:space="preserve">
+    <value>PhotoUrls is required</value>
+  </data>
+  <data name="Tags_is_required" xml:space="preserve">
+    <value>Tags is required</value>
+  </data>
+  <data name="ApiResponse" xml:space="preserve">
+    <value>ApiResponse</value>
+  </data>
+  <data name="ApiResponses" xml:space="preserve">
+    <value>ApiResponses</value>
   </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
   <data name="Code_is_required" xml:space="preserve">
     <value>Code is required</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Type_is_required" xml:space="preserve">
+    <value>Type is required</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>

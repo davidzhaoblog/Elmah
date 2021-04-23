@@ -12,8 +12,14 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Order.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="Pet.cs" />
-    <Compile Include="Error.cs" />
+    <Compile Include="ApiResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Frameworks\Framework\Framework.csproj">
