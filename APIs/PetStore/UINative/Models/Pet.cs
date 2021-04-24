@@ -81,11 +81,11 @@ namespace Elmah.PetStore.Models
             }
         }
 
-        private Elmah.PetStore.Models.string[] m_PhotoUrls;
+        private string[] m_PhotoUrls;
 
         [Display(Name = "PhotoUrls", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
         [RequiredAttribute(ErrorMessageResourceType = typeof(Elmah.PetStore.Resx.UIStringResource), ErrorMessageResourceName="PhotoUrls_is_required")]
-        public Elmah.PetStore.Models.string[] PhotoUrls
+        public string[] PhotoUrls
         {
             get
             {
