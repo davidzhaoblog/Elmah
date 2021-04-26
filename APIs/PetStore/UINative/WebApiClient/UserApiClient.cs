@@ -53,25 +53,25 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $unknown 200 response$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<$unknown 200 response$>> LogoutUserAsync()
-        {
-            string url = GetHttpRequestUrl($"/user/logout");
-            try
-            {
-                var response = await Get<$unknown 200 response$>(url);
-                if (response == null)
-                    return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+        ///// <summary>
+        ///// TODO: $unknown 200 response$
+        ///// </summary>
+        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> LogoutUserAsync()
+        //{
+        //    string url = GetHttpRequestUrl($"/user/logout");
+        //    try
+        //    {
+        //        var response = await Get<$unknown 200 response$>(url);
+        //        if (response == null)
+        //            return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
-            }
-            catch (Exception ex)
-            {
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
-            }
-        }
+        //        return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+        //    }
+        //}
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> GetUserByNameAsync(string username)
         {
@@ -90,25 +90,25 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $unknown 200 response$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<$unknown 200 response$>> PostAsync(Elmah.PetStore.Models.User item)
-        {
-            string url = GetHttpRequestUrl($"");
-            try
-            {
-                var response = await PostCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
-                if (response == null)
-                    return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+        ///// <summary>
+        ///// TODO: $unknown 200 response$
+        ///// </summary>
+        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> PostAsync(Elmah.PetStore.Models.User item)
+        //{
+        //    string url = GetHttpRequestUrl($"");
+        //    try
+        //    {
+        //        var response = await PostCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
+        //        if (response == null)
+        //            return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
-            }
-            catch (Exception ex)
-            {
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
-            }
-        }
+        //        return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+        //    }
+        //}
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> PostAsync(Elmah.PetStore.Models.User[] item)
         {
@@ -127,25 +127,25 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $unknown 200 response$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<$unknown 200 response$>> PutAsync(Elmah.PetStore.Models.User item)
-        {
-            string url = GetHttpRequestUrl($"/user/{username}");
-            try
-            {
-                var response = await PutCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
-                if (response == null)
-                    return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+        ///// <summary>
+        ///// TODO: $unknown 200 response$
+        ///// </summary>
+        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> PutAsync(Elmah.PetStore.Models.User item)
+        //{
+        //    string url = GetHttpRequestUrl($"/user/{username}");
+        //    try
+        //    {
+        //        var response = await PutCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
+        //        if (response == null)
+        //            return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
-            }
-            catch (Exception ex)
-            {
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
-            }
-        }
+        //        return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+        //    }
+        //}
 
     }
 }

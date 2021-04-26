@@ -36,25 +36,25 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $dynamic type, compile error, should use value type or a new classes$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
-        {
-            string url = GetHttpRequestUrl($"");
-            try
-            {
-                var response = await Get<dynamic>(url);
-                if (response == null)
-                    return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+        ///// <summary>
+        ///// TODO: $dynamic type, compile error, should use value type or a new classes$
+        ///// </summary>
+        //public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
+        //{
+        //    string url = GetHttpRequestUrl($"");
+        //    try
+        //    {
+        //        var response = await Get<dynamic>(url);
+        //        if (response == null)
+        //            return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
-                return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
-            }
-            catch (Exception ex)
-            {
-                return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
-            }
-        }
+        //        return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+        //    }
+        //}
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> GetOrderByIdAsync(long orderId)
         {
