@@ -24,7 +24,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response> DeleteOrderAsync(long orderId)
         {
-            string url = GetHttpRequestUrl($"/store/order/{orderId}?");
+            string url = GetHttpRequestUrl($"/store/order/{orderId}");
             try
             {
                 var response = await DeleteCommon(url);
@@ -36,6 +36,9 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        /// <summary>
+        /// TODO: $dynamic type, compile error, should use value type or a new classes$
+        /// </summary>
         public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
         {
             string url = GetHttpRequestUrl($"");
@@ -55,7 +58,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> GetOrderByIdAsync(long orderId)
         {
-            string url = GetHttpRequestUrl($"/store/order/{orderId}?");
+            string url = GetHttpRequestUrl($"/store/order/{orderId}");
             try
             {
                 var response = await Get<Elmah.PetStore.Models.Order>(url);

@@ -72,7 +72,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> GetPetByIdAsync(long petId)
         {
-            string url = GetHttpRequestUrl($"/pet/{petId}?");
+            string url = GetHttpRequestUrl($"/pet/{petId}");
             try
             {
                 var response = await Get<Elmah.PetStore.Models.Pet>(url);
@@ -101,6 +101,26 @@ namespace Elmah.PetStore.WebApiClient
             catch (Exception ex)
             {
                 return new Framework.WebApi.Response<Elmah.PetStore.Models.Pet> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+            }
+        }
+
+        /// <summary>
+        /// TODO: $unknown requestBody$
+        /// </summary>
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> PostAsync($unknown requestBody$ item)
+        {
+            string url = GetHttpRequestUrl($"/pet/{petId}/uploadImage?additionalMetadata={additionalMetadata}");
+            try
+            {
+                var response = await PostCommon<$unknown requestBody$, Elmah.PetStore.Models.ApiResponse>(url, item);
+                if (response == null)
+                    return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+
+                return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+            }
+            catch (Exception ex)
+            {
+                return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
 
