@@ -1,149 +1,219 @@
 {
-  "SharedComponentsInPaths": {},
-  "SharedComponentsInComplexComponents": {},
-  "SwaggerTagSettings": [
+  "sharedComponentsInPaths": {},
+  "sharedComponentsInComplexComponents": {},
+  "swaggerTagSettings": [
     {
-      "Tag": "Pet",
-      "OriginalTag": "pet",
-      "Paths": [
+      "tag": "Pet",
+      "originalTag": "pet",
+      "paths": [
         "/pet/findByStatus",
         "/pet/findByTags",
         "/pet/{petId}",
         "/pet",
         "/pet/{petId}/uploadImage"
       ],
-      "Components": [
+      "components": [
         null,
         "#/components/schemas/Pet",
         "#/components/schemas/ApiResponse"
       ],
-      "CollectionCompnentMapping": {}
+      "collectionCompnentMapping": {}
     },
     {
-      "Tag": "Store",
-      "OriginalTag": "store",
-      "Paths": [
+      "tag": "Store",
+      "originalTag": "store",
+      "paths": [
         "/store/inventory",
         "/store/order/{orderId}",
         "/store/order"
       ],
-      "Components": [
+      "components": [
         null,
         "#/components/schemas/Order"
       ],
-      "CollectionCompnentMapping": {}
+      "collectionCompnentMapping": {}
     },
     {
-      "Tag": "User",
-      "OriginalTag": "user",
-      "Paths": [
+      "tag": "User",
+      "originalTag": "user",
+      "paths": [
         "/user/login",
         "/user/logout",
         "/user/{username}",
         "/user",
         "/user/createWithList"
       ],
-      "Components": [
+      "components": [
         null,
         "#/components/schemas/User"
       ],
-      "CollectionCompnentMapping": {}
+      "collectionCompnentMapping": {}
     }
   ],
-  "SwaggerPathSettings": [
+  "swaggerPathSettings": [
     {
-      "Name": "Pet",
-      "Path": "/pet"
+      "name": "DeletePet",
+      "path": "/pet/{petId}",
+      "tag": "pet",
+      "httpRequestMethodType": "Delete"
     },
     {
-      "Name": "PetFindByStatus",
-      "Path": "/pet/findByStatus"
+      "name": "DeleteOrder",
+      "path": "/store/order/{orderId}",
+      "tag": "store",
+      "httpRequestMethodType": "Delete"
     },
     {
-      "Name": "PetFindByTags",
-      "Path": "/pet/findByTags"
+      "name": "DeleteUser",
+      "path": "/user/{username}",
+      "tag": "user",
+      "httpRequestMethodType": "Delete"
     },
     {
-      "Name": "Pet",
-      "Path": "/pet/{petId}"
+      "name": "FindPetsByStatus",
+      "path": "/pet/findByStatus",
+      "tag": "pet",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "PetUploadImage",
-      "Path": "/pet/{petId}/uploadImage"
+      "name": "FindPetsByTags",
+      "path": "/pet/findByTags",
+      "tag": "pet",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "StoreInventory",
-      "Path": "/store/inventory"
+      "name": "GetPetById",
+      "path": "/pet/{petId}",
+      "tag": "pet",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "StoreOrder",
-      "Path": "/store/order"
+      "name": "GetInventory",
+      "path": "/store/inventory",
+      "tag": "store",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "StoreOrder",
-      "Path": "/store/order/{orderId}"
+      "name": "GetOrderById",
+      "path": "/store/order/{orderId}",
+      "tag": "store",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "User",
-      "Path": "/user"
+      "name": "LoginUser",
+      "path": "/user/login",
+      "tag": "user",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "UserCreateWithList",
-      "Path": "/user/createWithList"
+      "name": "LogoutUser",
+      "path": "/user/logout",
+      "tag": "user",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "UserLogin",
-      "Path": "/user/login"
+      "name": "GetUserByName",
+      "path": "/user/{username}",
+      "tag": "user",
+      "httpRequestMethodType": "Get"
     },
     {
-      "Name": "UserLogout",
-      "Path": "/user/logout"
+      "name": "AddPet",
+      "path": "/pet",
+      "tag": "pet",
+      "httpRequestMethodType": "Post"
     },
     {
-      "Name": "User",
-      "Path": "/user/{username}"
+      "name": "UpdatePetWithForm",
+      "path": "/pet/{petId}",
+      "tag": "pet",
+      "httpRequestMethodType": "Post"
+    },
+    {
+      "name": "UploadFile",
+      "path": "/pet/{petId}/uploadImage",
+      "tag": "pet",
+      "httpRequestMethodType": "Post"
+    },
+    {
+      "name": "PlaceOrder",
+      "path": "/store/order",
+      "tag": "store",
+      "httpRequestMethodType": "Post"
+    },
+    {
+      "name": "CreateUser",
+      "path": "/user",
+      "tag": "user",
+      "httpRequestMethodType": "Post"
+    },
+    {
+      "name": "CreateUsersWithListInput",
+      "path": "/user/createWithList",
+      "tag": "user",
+      "httpRequestMethodType": "Post"
+    },
+    {
+      "name": "UpdatePet",
+      "path": "/pet",
+      "tag": "pet",
+      "httpRequestMethodType": "Put"
+    },
+    {
+      "name": "UpdateUser",
+      "path": "/user/{username}",
+      "tag": "user",
+      "httpRequestMethodType": "Put"
     }
   ],
-  "SwaggerComponentSettings": [
+  "swaggerComponentSettings": [
     {
-      "Name": "Order",
-      "OriginalName": "Order",
-      "Type": 1
+      "name": "Order",
+      "originalName": "Order",
+      "originalNamespace": "Order",
+      "type": "object"
     },
     {
-      "Name": "Customer",
-      "OriginalName": "Customer",
-      "Type": 1
+      "name": "Customer",
+      "originalName": "Customer",
+      "originalNamespace": "Customer",
+      "type": "object"
     },
     {
-      "Name": "Address",
-      "OriginalName": "Address",
-      "Type": 1
+      "name": "Address",
+      "originalName": "Address",
+      "originalNamespace": "Address",
+      "type": "object"
     },
     {
-      "Name": "Category",
-      "OriginalName": "Category",
-      "Type": 1
+      "name": "Category",
+      "originalName": "Category",
+      "originalNamespace": "Category",
+      "type": "object"
     },
     {
-      "Name": "User",
-      "OriginalName": "User",
-      "Type": 1
+      "name": "User",
+      "originalName": "User",
+      "originalNamespace": "User",
+      "type": "object"
     },
     {
-      "Name": "Tag",
-      "OriginalName": "Tag",
-      "Type": 1
+      "name": "Tag",
+      "originalName": "Tag",
+      "originalNamespace": "Tag",
+      "type": "object"
     },
     {
-      "Name": "Pet",
-      "OriginalName": "Pet",
-      "Type": 1
+      "name": "Pet",
+      "originalName": "Pet",
+      "originalNamespace": "Pet",
+      "type": "object"
     },
     {
-      "Name": "ApiResponse",
-      "OriginalName": "ApiResponse",
-      "Type": 1
+      "name": "ApiResponse",
+      "originalName": "ApiResponse",
+      "originalNamespace": "ApiResponse",
+      "type": "object"
     }
   ]
 }

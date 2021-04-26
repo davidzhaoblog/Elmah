@@ -12,6 +12,9 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PetApiClient.cs" />
+    <Compile Include="StoreApiClient.cs" />
+    <Compile Include="UserApiClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Frameworks\Framework\Framework.csproj">
