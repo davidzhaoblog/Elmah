@@ -52,115 +52,115 @@
   ],
   "swaggerPathSettings": [
     {
-      "name": "",
+      "name": "DeletePet",
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Delete"
     },
     {
-      "name": "Order",
+      "name": "DeleteOrder",
       "path": "/store/order/{orderId}",
       "tag": "store",
       "httpRequestMethodType": "Delete"
     },
     {
-      "name": "",
+      "name": "DeleteUser",
       "path": "/user/{username}",
       "tag": "user",
       "httpRequestMethodType": "Delete"
     },
     {
-      "name": "FindByStatus",
+      "name": "FindPetsByStatus",
       "path": "/pet/findByStatus",
       "tag": "pet",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "FindByTags",
+      "name": "FindPetsByTags",
       "path": "/pet/findByTags",
       "tag": "pet",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "",
+      "name": "GetPetById",
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "Inventory",
+      "name": "GetInventory",
       "path": "/store/inventory",
       "tag": "store",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "Order",
+      "name": "GetOrderById",
       "path": "/store/order/{orderId}",
       "tag": "store",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "Login",
+      "name": "LoginUser",
       "path": "/user/login",
       "tag": "user",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "Logout",
+      "name": "LogoutUser",
       "path": "/user/logout",
       "tag": "user",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "",
+      "name": "GetUserByName",
       "path": "/user/{username}",
       "tag": "user",
       "httpRequestMethodType": "Get"
     },
     {
-      "name": "",
+      "name": "AddPet",
       "path": "/pet",
       "tag": "pet",
       "httpRequestMethodType": "Post"
     },
     {
-      "name": "",
+      "name": "UpdatePetWithForm",
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Post"
     },
     {
-      "name": "UploadImage",
+      "name": "UploadFile",
       "path": "/pet/{petId}/uploadImage",
       "tag": "pet",
       "httpRequestMethodType": "Post"
     },
     {
-      "name": "Order",
+      "name": "PlaceOrder",
       "path": "/store/order",
       "tag": "store",
       "httpRequestMethodType": "Post"
     },
     {
-      "name": "",
+      "name": "CreateUser",
       "path": "/user",
       "tag": "user",
       "httpRequestMethodType": "Post"
     },
     {
-      "name": "CreateWithList",
+      "name": "CreateUsersWithListInput",
       "path": "/user/createWithList",
       "tag": "user",
       "httpRequestMethodType": "Post"
     },
     {
-      "name": "",
+      "name": "UpdatePet",
       "path": "/pet",
       "tag": "pet",
       "httpRequestMethodType": "Put"
     },
     {
-      "name": "",
+      "name": "UpdateUser",
       "path": "/user/{username}",
       "tag": "user",
       "httpRequestMethodType": "Put"
