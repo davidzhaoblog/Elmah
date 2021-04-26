@@ -24,7 +24,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response> DeleteUserAsync(string username)
         {
-            string url = GetHttpRequestUrl($"/user/{username}?");
+            string url = GetHttpRequestUrl($"/user/{username}");
             try
             {
                 var response = await DeleteCommon(url);
@@ -53,9 +53,12 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        /// <summary>
+        /// TODO: $unknown 200 response$
+        /// </summary>
         public async Task<Framework.WebApi.Response<$unknown 200 response$>> LogoutUserAsync()
         {
-            string url = GetHttpRequestUrl($"/user/logout?");
+            string url = GetHttpRequestUrl($"/user/logout");
             try
             {
                 var response = await Get<$unknown 200 response$>(url);
@@ -72,7 +75,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> GetUserByNameAsync(string username)
         {
-            string url = GetHttpRequestUrl($"/user/{username}?");
+            string url = GetHttpRequestUrl($"/user/{username}");
             try
             {
                 var response = await Get<Elmah.PetStore.Models.User>(url);
@@ -87,6 +90,9 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        /// <summary>
+        /// TODO: $unknown 200 response$
+        /// </summary>
         public async Task<Framework.WebApi.Response<$unknown 200 response$>> PostAsync(Elmah.PetStore.Models.User item)
         {
             string url = GetHttpRequestUrl($"");
@@ -121,9 +127,12 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        /// <summary>
+        /// TODO: $unknown 200 response$
+        /// </summary>
         public async Task<Framework.WebApi.Response<$unknown 200 response$>> PutAsync(Elmah.PetStore.Models.User item)
         {
-            string url = GetHttpRequestUrl($"/user/{username}?");
+            string url = GetHttpRequestUrl($"/user/{username}");
             try
             {
                 var response = await PutCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
