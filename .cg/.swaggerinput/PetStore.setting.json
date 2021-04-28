@@ -13,9 +13,7 @@
         "/pet/{petId}/uploadImage"
       ],
       "components": [
-        null,
         "#/components/schemas/Pet",
-        "#/components/schemas/ApiResponse"
       ],
       "collectionCompnentMapping": {}
     },
@@ -28,7 +26,6 @@
         "/store/order"
       ],
       "components": [
-        null,
         "#/components/schemas/Order"
       ],
       "collectionCompnentMapping": {}
