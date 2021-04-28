@@ -87,7 +87,7 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> PostAsync(Elmah.PetStore.Models.Pet item)
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> AddPetAsync(Elmah.PetStore.Models.Pet item)
         {
             string url = GetHttpRequestUrl($"/pet");
             try
@@ -107,7 +107,7 @@ namespace Elmah.PetStore.WebApiClient
         ///// <summary>
         ///// TODO: $unknown requestBody$
         ///// </summary>
-        //public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> PostAsync($unknown requestBody$ item)
+        //public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> UploadFileAsync($unknown requestBody$ item)
         //{
         //    string url = GetHttpRequestUrl($"/pet/{petId}/uploadImage?additionalMetadata={additionalMetadata}");
         //    try
@@ -124,7 +124,7 @@ namespace Elmah.PetStore.WebApiClient
         //    }
         //}
 
-        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> PutAsync(Elmah.PetStore.Models.Pet item)
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> UpdatePetAsync(Elmah.PetStore.Models.Pet item)
         {
             string url = GetHttpRequestUrl($"/pet");
             try

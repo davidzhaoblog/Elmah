@@ -93,7 +93,7 @@ namespace Elmah.PetStore.WebApiClient
         ///// <summary>
         ///// TODO: $unknown 200 response$
         ///// </summary>
-        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> PostAsync(Elmah.PetStore.Models.User item)
+        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> CreateUserAsync(Elmah.PetStore.Models.User item)
         //{
         //    string url = GetHttpRequestUrl($"/user");
         //    try
@@ -110,7 +110,7 @@ namespace Elmah.PetStore.WebApiClient
         //    }
         //}
 
-        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> PostAsync(Elmah.PetStore.Models.User[] item)
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> CreateUsersWithListInputAsync(Elmah.PetStore.Models.User[] item)
         {
             string url = GetHttpRequestUrl($"/user/createWithList");
             try
@@ -130,7 +130,7 @@ namespace Elmah.PetStore.WebApiClient
         ///// <summary>
         ///// TODO: $unknown 200 response$
         ///// </summary>
-        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> PutAsync(Elmah.PetStore.Models.User item)
+        //public async Task<Framework.WebApi.Response<$unknown 200 response$>> UpdateUserAsync(Elmah.PetStore.Models.User item)
         //{
         //    string url = GetHttpRequestUrl($"/user/{username}");
         //    try
