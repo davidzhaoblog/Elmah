@@ -41,7 +41,7 @@ namespace Elmah.PetStore.WebApiClient
         ///// </summary>
         //public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
         //{
-        //    string url = GetHttpRequestUrl($"");
+        //    string url = GetHttpRequestUrl($"/store/inventory");
         //    try
         //    {
         //        var response = await Get<dynamic>(url);
@@ -75,7 +75,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> PostAsync(Elmah.PetStore.Models.Order item)
         {
-            string url = GetHttpRequestUrl($"");
+            string url = GetHttpRequestUrl($"/store/order");
             try
             {
                 var response = await PostCommon<Elmah.PetStore.Models.Order, Elmah.PetStore.Models.Order>(url, item);
