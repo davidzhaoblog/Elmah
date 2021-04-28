@@ -17,6 +17,10 @@
         "#/components/schemas/Pet",
         "#/components/schemas/ApiResponse"
       ],
+      "requestArrayComponents": [],
+      "responseArrayComponents": [
+        "#/components/schemas/Pet"
+      ],
       "collectionCompnentMapping": {}
     },
     {
@@ -31,6 +35,8 @@
         null,
         "#/components/schemas/Order"
       ],
+      "requestArrayComponents": [],
+      "responseArrayComponents": [],
       "collectionCompnentMapping": {}
     },
     {
@@ -47,6 +53,10 @@
         null,
         "#/components/schemas/User"
       ],
+      "requestArrayComponents": [
+        "#/components/schemas/User"
+      ],
+      "responseArrayComponents": [],
       "collectionCompnentMapping": {}
     }
   ],

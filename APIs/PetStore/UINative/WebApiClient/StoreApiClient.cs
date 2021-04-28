@@ -73,7 +73,7 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> PostAsync(Elmah.PetStore.Models.Order item)
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> PlaceOrderAsync(Elmah.PetStore.Models.Order item)
         {
             string url = GetHttpRequestUrl($"/store/order");
             try
