@@ -181,49 +181,57 @@
       "name": "Order",
       "originalName": "Order",
       "originalNamespace": "Order",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "id"
     },
     {
       "name": "Customer",
       "originalName": "Customer",
       "originalNamespace": "Customer",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "id"
     },
     {
       "name": "Address",
       "originalName": "Address",
       "originalNamespace": "Address",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "street"
     },
     {
       "name": "Category",
       "originalName": "Category",
       "originalNamespace": "Category",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "id"
     },
     {
       "name": "User",
       "originalName": "User",
       "originalNamespace": "User",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "id"
     },
     {
       "name": "Tag",
       "originalName": "Tag",
       "originalNamespace": "Tag",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "id"
     },
     {
       "name": "Pet",
       "originalName": "Pet",
       "originalNamespace": "Pet",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "id"
     },
     {
       "name": "ApiResponse",
       "originalName": "ApiResponse",
       "originalNamespace": "ApiResponse",
-      "type": "object"
+      "type": "object",
+      "idPropertyName": "code"
     }
   ]
 }
