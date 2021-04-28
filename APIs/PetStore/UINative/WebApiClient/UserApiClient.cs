@@ -95,7 +95,7 @@ namespace Elmah.PetStore.WebApiClient
         /// </summary>
         public async Task<Framework.WebApi.Response<$unknown 200 response$>> PostAsync(Elmah.PetStore.Models.User item)
         {
-            string url = GetHttpRequestUrl($"");
+            string url = GetHttpRequestUrl($"/user");
             try
             {
                 var response = await PostCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
@@ -112,7 +112,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> PostAsync(Elmah.PetStore.Models.User[] item)
         {
-            string url = GetHttpRequestUrl($"");
+            string url = GetHttpRequestUrl($"/user/createWithList");
             try
             {
                 var response = await PostCommon<Elmah.PetStore.Models.User[], Elmah.PetStore.Models.User>(url, item);

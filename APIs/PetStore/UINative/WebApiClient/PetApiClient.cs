@@ -89,7 +89,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> PostAsync(Elmah.PetStore.Models.Pet item)
         {
-            string url = GetHttpRequestUrl($"");
+            string url = GetHttpRequestUrl($"/pet");
             try
             {
                 var response = await PostCommon<Elmah.PetStore.Models.Pet, Elmah.PetStore.Models.Pet>(url, item);
@@ -126,7 +126,7 @@ namespace Elmah.PetStore.WebApiClient
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> PutAsync(Elmah.PetStore.Models.Pet item)
         {
-            string url = GetHttpRequestUrl($"");
+            string url = GetHttpRequestUrl($"/pet");
             try
             {
                 var response = await PutCommon<Elmah.PetStore.Models.Pet, Elmah.PetStore.Models.Pet>(url, item);
