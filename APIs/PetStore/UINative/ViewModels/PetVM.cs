@@ -128,14 +128,14 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
-        public async void OnDeletePet: /pet/{petId}()
+        public async void OnFindPetsByStatus()
         {
             if (ShowSavingPopup)
                 PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.DeletePet: /pet/{petId}Async("", Item.Id);
+            var result = await client.FindPetsByStatusAsync("", Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -156,7 +156,73 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanDeletePet: /pet/{petId}()
+        protected virtual bool CanFindPetsByStatus: /pet/findByStatus()
+        {
+            return true;
+        }
+
+        public async void OnFindPetsByTags()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            var client = WebApiClientFactory.CreatePetApiClient();
+
+            var result = await client.FindPetsByTagsAsync("", Item.Id);
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Items.Any(t => t.Id == Item.Id))
+                {
+                    Items.Remove(Item);
+                    Item = null;
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
+        }
+
+        protected virtual bool CanFindPetsByTags: /pet/findByTags()
+        {
+            return true;
+        }
+
+        public async void OnGetPetById()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            var client = WebApiClientFactory.CreatePetApiClient();
+
+            var result = await client.GetPetByIdAsync("", Item.Id);
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Items.Any(t => t.Id == Item.Id))
+                {
+                    Items.Remove(Item);
+                    Item = null;
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
+        }
+
+        protected virtual bool CanGetPetById: /pet/{petId}()
         {
             return true;
         }

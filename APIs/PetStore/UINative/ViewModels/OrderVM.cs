@@ -94,14 +94,14 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
-        public async void OnDeleteOrder: /store/order/{orderId}()
+        public async void OnGetInventory()
         {
             if (ShowSavingPopup)
                 PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
 
             var client = WebApiClientFactory.CreateStoreApiClient();
 
-            var result = await client.DeleteOrder: /store/order/{orderId}Async("", Item.Id);
+            var result = await client.GetInventoryAsync("", Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -122,7 +122,40 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanDeleteOrder: /store/order/{orderId}()
+        protected virtual bool CanGetInventory: /store/inventory()
+        {
+            return true;
+        }
+
+        public async void OnGetOrderById()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            var client = WebApiClientFactory.CreateStoreApiClient();
+
+            var result = await client.GetOrderByIdAsync("", Item.Id);
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Items.Any(t => t.Id == Item.Id))
+                {
+                    Items.Remove(Item);
+                    Item = null;
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
+        }
+
+        protected virtual bool CanGetOrderById: /store/order/{orderId}()
         {
             return true;
         }
