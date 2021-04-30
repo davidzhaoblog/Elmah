@@ -11,42 +11,45 @@ using System.Windows.Input;
 namespace Elmah.PetStore.ViewModels
 {
     public partial class PetVM
-        : Framework.Xaml.ViewModelBase2
+        : Framework.Xaml.ViewModelBase
     {
+        public const string MessageTitle_LoadData = "Load_PetStore_Pet_ListVM";
+        public string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.Pet;
 
-        public async void OnDFindPetsByStatus()
+        protected Elmah.PetStore.Models.Pet m_Item;
+        public Elmah.PetStore.Models.Pet Item
         {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreatePetApiClient();
-
-            var result = await client.FindPetsByStatusAsync("", Item.Id);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
+            get { return m_Item; }
+            set
             {
-                if (Items.Any(t => t.Id == Item.Id))
-                {
-                    Items.Remove(Item);
-                    Item = null;
-                }
-                // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                Set(t, ref m_Item, value);
+
+                m_Item = value != null ? GetAClone(value) : new Elmah.PetStore.Models.Pet();
+                m_Item.PropertyChanged += Item_PropertyChanged;
+                RaisePropertyChanged(this.Item,);
             }
         }
 
-        protected virtual bool CanFindPetsByStatus()
+        /// <summary>
+        /// Initializes a new instance of the IndexVM class.
+        /// </summary>
+        public PetVM()
+            : base()
         {
-            return true;
+           
+        }
+
+        protected override async Task<Elmah.PetStore.Models.Pet> InsertToServer()
+        {
+            var client = WebApiClientFactory.CreatePetApiClient();
+
+            var result = client.PutAsync()
+            var item = new Elmah.DataSourceEntities.ELMAH_Error();
+            item.CopyFrom<Elmah.EntityContracts.IELMAH_Error>(Item);
+
+            var result = await client.UpsertEntityAsync(item);
+            return result;
         }
     }
 }
-
 
