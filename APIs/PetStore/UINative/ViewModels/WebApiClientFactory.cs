@@ -25,6 +25,7 @@ namespace Elmah.PetStore.ViewModels
         {
             return new Elmah.PetStore.WebApiClient.UserApiClient(WebServiceConfig.WebApiRootUrl, WebServiceConfig.UseToken, WebServiceConfig.Token);
         }
+
     }
 }
 
