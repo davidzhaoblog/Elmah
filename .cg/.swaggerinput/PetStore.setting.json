@@ -63,7 +63,7 @@
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Delete",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": false
     },
     {
       "name": "DeleteOrder",
@@ -147,7 +147,7 @@
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": false
     },
     {
       "name": "UploadFile",
@@ -198,6 +198,7 @@
       "originalName": "Order",
       "originalNamespace": "Order",
       "type": "object",
+      "hasViewModel": true,
       "idPropertyName": "id"
     },
     {
@@ -205,6 +206,7 @@
       "originalName": "Customer",
       "originalNamespace": "Customer",
       "type": "object",
+      "hasViewModel": false,
       "idPropertyName": "id"
     },
     {
@@ -212,6 +214,7 @@
       "originalName": "Address",
       "originalNamespace": "Address",
       "type": "object",
+      "hasViewModel": false,
       "idPropertyName": "street"
     },
     {
@@ -219,6 +222,7 @@
       "originalName": "Category",
       "originalNamespace": "Category",
       "type": "object",
+      "hasViewModel": false,
       "idPropertyName": "id"
     },
     {
@@ -226,6 +230,7 @@
       "originalName": "User",
       "originalNamespace": "User",
       "type": "object",
+      "hasViewModel": true,
       "idPropertyName": "id"
     },
     {
@@ -233,6 +238,7 @@
       "originalName": "Tag",
       "originalNamespace": "Tag",
       "type": "object",
+      "hasViewModel": false,
       "idPropertyName": "id"
     },
     {
@@ -240,6 +246,7 @@
       "originalName": "Pet",
       "originalNamespace": "Pet",
       "type": "object",
+      "hasViewModel": true,
       "idPropertyName": "id"
     },
     {
@@ -247,6 +254,7 @@
       "originalName": "ApiResponse",
       "originalNamespace": "ApiResponse",
       "type": "object",
+      "hasViewModel": true,
       "idPropertyName": "code"
     }
   ]
