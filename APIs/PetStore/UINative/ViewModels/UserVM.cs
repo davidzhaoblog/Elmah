@@ -150,7 +150,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanLoginUser: /user/login()
+        protected virtual bool CanLoginUser()
         {
             return true;
         }
@@ -183,7 +183,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanLogoutUser: /user/logout()
+        protected virtual bool CanLogoutUser()
         {
             return true;
         }
@@ -216,7 +216,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanGetUserByName: /user/{username}()
+        protected virtual bool CanGetUserByName()
         {
             return true;
         }
