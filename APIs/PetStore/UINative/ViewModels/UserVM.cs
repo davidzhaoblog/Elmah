@@ -1,10 +1,11 @@
 using System;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 //using Framework.Xaml.SQLite;
 
@@ -33,6 +34,28 @@ namespace Elmah.PetStore.ViewModels
             set
             {
                 Set(nameof(Item), ref m_Item, value);
+            }
+        }
+
+        // User.Get.01 LoginUser /user/login
+        protected LoginUserCriteria m_LoginUserCriteria;
+        public LoginUserCriteria LoginUserCriteria
+        {
+            get { return m_LoginUserCriteria; }
+            set
+            {
+                Set(nameof(LoginUserCriteria), ref m_LoginUserCriteria, value);
+            }
+        }
+
+        // User.Get.21 GetUserByName /user/{username}
+        protected GetUserByNameCriteria m_GetUserByNameCriteria;
+        public GetUserByNameCriteria GetUserByNameCriteria
+        {
+            get { return m_GetUserByNameCriteria; }
+            set
+            {
+                Set(nameof(GetUserByNameCriteria), ref m_GetUserByNameCriteria, value);
             }
         }
 
@@ -321,10 +344,9 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
-}
 
     // User.Get.01 LoginUser /user/login
-    public class LoginUserCriteria
+    public class LoginUserCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Username;
@@ -360,7 +382,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // User.Get.21 GetUserByName /user/{username}
-    public class GetUserByNameCriteria
+    public class GetUserByNameCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Username;
