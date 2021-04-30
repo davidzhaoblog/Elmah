@@ -122,7 +122,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanGetInventory: /store/inventory()
+        protected virtual bool CanGetInventory()
         {
             return true;
         }
@@ -155,7 +155,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanGetOrderById: /store/order/{orderId}()
+        protected virtual bool CanGetOrderById()
         {
             return true;
         }

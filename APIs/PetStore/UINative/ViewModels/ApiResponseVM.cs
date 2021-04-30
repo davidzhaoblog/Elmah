@@ -146,7 +146,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanFindPetsByStatus: /pet/findByStatus()
+        protected virtual bool CanFindPetsByStatus()
         {
             return true;
         }
@@ -179,7 +179,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanFindPetsByTags: /pet/findByTags()
+        protected virtual bool CanFindPetsByTags()
         {
             return true;
         }
@@ -212,7 +212,7 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanGetPetById: /pet/{petId}()
+        protected virtual bool CanGetPetById()
         {
             return true;
         }
