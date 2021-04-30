@@ -62,115 +62,134 @@
       "name": "DeletePet",
       "path": "/pet/{petId}",
       "tag": "pet",
-      "httpRequestMethodType": "Delete"
+      "httpRequestMethodType": "Delete",
+      "parameterAsCriteria": false
     },
     {
       "name": "DeleteOrder",
       "path": "/store/order/{orderId}",
       "tag": "store",
-      "httpRequestMethodType": "Delete"
+      "httpRequestMethodType": "Delete",
+      "parameterAsCriteria": false
     },
     {
       "name": "DeleteUser",
       "path": "/user/{username}",
       "tag": "user",
-      "httpRequestMethodType": "Delete"
+      "httpRequestMethodType": "Delete",
+      "parameterAsCriteria": false
     },
     {
       "name": "FindPetsByStatus",
       "path": "/pet/findByStatus",
       "tag": "pet",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": true
     },
     {
       "name": "FindPetsByTags",
       "path": "/pet/findByTags",
       "tag": "pet",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": true
     },
     {
       "name": "GetPetById",
       "path": "/pet/{petId}",
       "tag": "pet",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": true
     },
     {
       "name": "GetInventory",
       "path": "/store/inventory",
       "tag": "store",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": false
     },
     {
       "name": "GetOrderById",
       "path": "/store/order/{orderId}",
       "tag": "store",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": true
     },
     {
       "name": "LoginUser",
       "path": "/user/login",
       "tag": "user",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": true
     },
     {
       "name": "LogoutUser",
       "path": "/user/logout",
       "tag": "user",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": false
     },
     {
       "name": "GetUserByName",
       "path": "/user/{username}",
       "tag": "user",
-      "httpRequestMethodType": "Get"
+      "httpRequestMethodType": "Get",
+      "parameterAsCriteria": true
     },
     {
       "name": "AddPet",
       "path": "/pet",
       "tag": "pet",
-      "httpRequestMethodType": "Post"
+      "httpRequestMethodType": "Post",
+      "parameterAsCriteria": false
     },
     {
       "name": "UpdatePetWithForm",
       "path": "/pet/{petId}",
       "tag": "pet",
-      "httpRequestMethodType": "Post"
+      "httpRequestMethodType": "Post",
+      "parameterAsCriteria": false
     },
     {
       "name": "UploadFile",
       "path": "/pet/{petId}/uploadImage",
       "tag": "pet",
-      "httpRequestMethodType": "Post"
+      "httpRequestMethodType": "Post",
+      "parameterAsCriteria": false
     },
     {
       "name": "PlaceOrder",
       "path": "/store/order",
       "tag": "store",
-      "httpRequestMethodType": "Post"
+      "httpRequestMethodType": "Post",
+      "parameterAsCriteria": false
     },
     {
       "name": "CreateUser",
       "path": "/user",
       "tag": "user",
-      "httpRequestMethodType": "Post"
+      "httpRequestMethodType": "Post",
+      "parameterAsCriteria": false
     },
     {
       "name": "CreateUsersWithListInput",
       "path": "/user/createWithList",
       "tag": "user",
-      "httpRequestMethodType": "Post"
+      "httpRequestMethodType": "Post",
+      "parameterAsCriteria": false
     },
     {
       "name": "UpdatePet",
       "path": "/pet",
       "tag": "pet",
-      "httpRequestMethodType": "Put"
+      "httpRequestMethodType": "Put",
+      "parameterAsCriteria": false
     },
     {
       "name": "UpdateUser",
       "path": "/user/{username}",
       "tag": "user",
-      "httpRequestMethodType": "Put"
+      "httpRequestMethodType": "Put",
+      "parameterAsCriteria": false
     }
   ],
   "swaggerComponentSettings": [
