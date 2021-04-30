@@ -122,14 +122,14 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
-        public async void OnDeleteUser: /user/{username}()
+        public async void OnLoginUser()
         {
             if (ShowSavingPopup)
                 PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.DeleteUser: /user/{username}Async("", Item.Id);
+            var result = await client.LoginUserAsync("", Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -150,7 +150,73 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        protected virtual bool CanDeleteUser: /user/{username}()
+        protected virtual bool CanLoginUser: /user/login()
+        {
+            return true;
+        }
+
+        public async void OnLogoutUser()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            var client = WebApiClientFactory.CreateUserApiClient();
+
+            var result = await client.LogoutUserAsync("", Item.Id);
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Items.Any(t => t.Id == Item.Id))
+                {
+                    Items.Remove(Item);
+                    Item = null;
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
+        }
+
+        protected virtual bool CanLogoutUser: /user/logout()
+        {
+            return true;
+        }
+
+        public async void OnGetUserByName()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            var client = WebApiClientFactory.CreateUserApiClient();
+
+            var result = await client.GetUserByNameAsync("", Item.Id);
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Items.Any(t => t.Id == Item.Id))
+                {
+                    Items.Remove(Item);
+                    Item = null;
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
+        }
+
+        protected virtual bool CanGetUserByName: /user/{username}()
         {
             return true;
         }
