@@ -12,6 +12,16 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="OrderVM.cs" />
+    <Compile Include="CustomerVM.cs" />
+    <Compile Include="AddressVM.cs" />
+    <Compile Include="CategoryVM.cs" />
+    <Compile Include="UserVM.cs" />
+    <Compile Include="TagVM.cs" />
+    <Compile Include="PetVM.cs" />
+    <Compile Include="ApiResponseVM.cs" />
+    <Compile Include="WebApiClientFactory.cs" />
+    <Compile Include="WebServiceConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Frameworks\Framework\Framework.csproj">
