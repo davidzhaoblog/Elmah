@@ -12,8 +12,6 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="OrderVM.cs" />
-    <Compile Include="UserVM.cs" />
     <Compile Include="PetVM.cs" />
     <Compile Include="WebApiClientFactory.cs" />
     <Compile Include="WebServiceConfig.cs" />

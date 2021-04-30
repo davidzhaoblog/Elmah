@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Windows.Input;
+using System.ComponentModel.DataAnnotations;
 
 //using Framework.Xaml.SQLite;
 
@@ -51,11 +52,11 @@ namespace Elmah.PetStore.ViewModels
         // Pet.Post.01 AddPet /pet
         public ICommand AddPetCommand { get; protected set; }
 
-        // Pet.Post.11 UpdatePetWithForm /pet/{petId}
-        public ICommand UpdatePetWithFormCommand { get; protected set; }
+        //// Pet.Post.11 UpdatePetWithForm /pet/{petId}
+        //public ICommand UpdatePetWithFormCommand { get; protected set; }
 
-        // Pet.Post.21 UploadFile /pet/{petId}/uploadImage
-        public ICommand UploadFileCommand { get; protected set; }
+        //// Pet.Post.21 UploadFile /pet/{petId}/uploadImage
+        //public ICommand UploadFileCommand { get; protected set; }
 
         // Pet.Put.01 UpdatePet /pet
         public ICommand UpdatePetCommand { get; protected set; }
@@ -82,11 +83,11 @@ namespace Elmah.PetStore.ViewModels
             // Pet.Post.01 AddPet /pet
             AddPetCommand = new Command(OnAddPet, CanAddPet);
 
-            // Pet.Post.11 UpdatePetWithForm /pet/{petId}
-            UpdatePetWithFormCommand = new Command(OnUpdatePetWithForm, CanUpdatePetWithForm);
+            //// Pet.Post.11 UpdatePetWithForm /pet/{petId}
+            //UpdatePetWithFormCommand = new Command(OnUpdatePetWithForm, CanUpdatePetWithForm);
 
-            // Pet.Post.21 UploadFile /pet/{petId}/uploadImage
-            UploadFileCommand = new Command(OnUploadFile, CanUploadFile);
+            //// Pet.Post.21 UploadFile /pet/{petId}/uploadImage
+            //UploadFileCommand = new Command(OnUploadFile, CanUploadFile);
 
             // Pet.Put.01 UpdatePet /pet
             UpdatePetCommand = new Command(OnUpdatePet, CanUpdatePet);
@@ -135,7 +136,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.FindPetsByStatusAsync("", Item.Id);
+            var result = await client.FindPetsByStatusAsync("");
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -168,7 +169,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.FindPetsByTagsAsync("", Item.Id);
+            var result = await client.FindPetsByTagsAsync(new string[] { "" } );
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -201,7 +202,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.GetPetByIdAsync("", Item.Id);
+            var result = await client.GetPetByIdAsync(Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -260,71 +261,71 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
-        // Pet.Post.11 UpdatePetWithForm /pet/{petId}
-        public async void OnUpdatePetWithForm()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
+        //// Pet.Post.11 UpdatePetWithForm /pet/{petId}
+        //public async void OnUpdatePetWithForm()
+        //{
+        //    if (ShowSavingPopup)
+        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
 
-            var client = WebApiClientFactory.CreatePetApiClient();
+        //    var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UpdatePetWithFormAsync(Item);
+        //    var result = await client.UpdatePetWithFormAsync(Item);
 
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
-                {
-                    Items.Add(Item);
-                }
-                // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
-            }
-        }
-        protected virtual bool CanUpdatePetWithForm()
-        {
-            return this.Item != null;
-        }
+        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+        //    // success, will close Item Popup and popup message box
+        //    {
+        //        Item = result.Message;
+        //        if(!Items.Any(t=>t.Id == Item.Id))
+        //        {
+        //            Items.Add(Item);
+        //        }
+        //        // success, will close Item Popup and popup message box
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+        //    }
+        //    else
+        //    // failed
+        //    {
+        //        // failed, will close popup message box, stay at Item Popup
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+        //    }
+        //}
+        //protected virtual bool CanUpdatePetWithForm()
+        //{
+        //    return this.Item != null;
+        //}
 
-        // Pet.Post.21 UploadFile /pet/{petId}/uploadImage
-        public async void OnUploadFile()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
+        //// Pet.Post.21 UploadFile /pet/{petId}/uploadImage
+        //public async void OnUploadFile()
+        //{
+        //    if (ShowSavingPopup)
+        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
 
-            var client = WebApiClientFactory.CreatePetApiClient();
+        //    var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UploadFileAsync(Item);
+        //    var result = await client.UploadFileAsync(Item);
 
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
-                {
-                    Items.Add(Item);
-                }
-                // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
-            }
-        }
-        protected virtual bool CanUploadFile()
-        {
-            return this.Item != null;
-        }
+        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+        //    // success, will close Item Popup and popup message box
+        //    {
+        //        Item = result.Message;
+        //        if(!Items.Any(t=>t.Id == Item.Id))
+        //        {
+        //            Items.Add(Item);
+        //        }
+        //        // success, will close Item Popup and popup message box
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+        //    }
+        //    else
+        //    // failed
+        //    {
+        //        // failed, will close popup message box, stay at Item Popup
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+        //    }
+        //}
+        //protected virtual bool CanUploadFile()
+        //{
+        //    return this.Item != null;
+        //}
 
         // Pet.Put.01 UpdatePet /pet
         public async void OnUpdatePet()
@@ -360,10 +361,9 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
-}
 
     // Pet.Delete.01 DeletePet /pet/{petId}
-    public class DeletePetCriteria
+    public class DeletePetCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Api_key;
@@ -399,8 +399,8 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-    public class FindPetsByStatusCriteria
-    {
+    public class FindPetsByStatusCriteria : Framework.Models.PropertyChangedNotifier
+{
 
         private string m_Status;
 
@@ -420,8 +420,8 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.11 FindPetsByTags /pet/findByTags
-    public class FindPetsByTagsCriteria
-    {
+    public class FindPetsByTagsCriteria : Framework.Models.PropertyChangedNotifier
+{
 
         private string[] m_Tags;
 
@@ -441,8 +441,8 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.21 GetPetById /pet/{petId}
-    public class GetPetByIdCriteria
-    {
+    public class GetPetByIdCriteria : Framework.Models.PropertyChangedNotifier
+{
 
         private long m_PetId;
 
@@ -461,8 +461,8 @@ namespace Elmah.PetStore.ViewModels
 
     }
 
-    public class UpdatePetWithFormCriteria
-    {
+    public class UpdatePetWithFormCriteria : Framework.Models.PropertyChangedNotifier
+{
 
         private long m_PetId;
 
@@ -510,4 +510,4 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
-
+}
