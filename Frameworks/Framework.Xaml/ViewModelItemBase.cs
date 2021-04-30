@@ -249,7 +249,7 @@ namespace Framework.Xaml
     }
 
     public abstract class ViewModelItemBase<TSearchCriteria, TIdentifierContract, TItem>
-        : ViewModelBase, Framework.ViewModels.IViewModelItemBase<TSearchCriteria, TItem>
+        : ViewModelBase2, Framework.ViewModels.IViewModelItemBase<TSearchCriteria, TItem>
         where TSearchCriteria : class, TIdentifierContract, Framework.Models.IClone<TIdentifierContract>, new()
         where TItem : Framework.Models.PropertyChangedNotifier, TIdentifierContract, new()
     {
@@ -350,56 +350,6 @@ namespace Framework.Xaml
             {
                 m_UIActionStatusMessage = value;
                 RaisePropertyChanged("UIActionStatusMessage");
-            }
-        }
-
-        private bool m_ShowSavingPopup;
-        public bool ShowSavingPopup
-        {
-            get { return m_ShowSavingPopup; }
-            set
-            {
-                Set(nameof(ShowSavingPopup), ref m_ShowSavingPopup, value);
-            }
-        }
-
-        private bool m_ShowSuccessfullySavedPopup;
-        public bool ShowSuccessfullySavedPopup
-        {
-            get { return m_ShowSuccessfullySavedPopup; }
-            set
-            {
-                Set(nameof(ShowSuccessfullySavedPopup), ref m_ShowSuccessfullySavedPopup, value);
-            }
-        }
-
-        private bool m_ShowSaveFailedPopup;
-        public bool ShowSaveFailedPopup
-        {
-            get { return m_ShowSaveFailedPopup; }
-            set
-            {
-                Set(nameof(ShowSaveFailedPopup), ref m_ShowSaveFailedPopup, value);
-            }
-        }
-
-        private Framework.Xaml.ControlParentOptions m_ControlParentOption = ControlParentOptions.InPage;
-        public Framework.Xaml.ControlParentOptions ControlParentOption
-        {
-            get { return m_ControlParentOption; }
-            set
-            {
-                Set(nameof(ControlParentOption), ref m_ControlParentOption, value);
-            }
-        }
-
-        private bool m_IsContentEnable = false;
-        public bool IsContentEnable
-        {
-            get { return m_IsContentEnable; }
-            set
-            {
-                Set(nameof(IsContentEnable), ref m_IsContentEnable, value);
             }
         }
 
@@ -635,17 +585,6 @@ namespace Framework.Xaml
                 "Then goto WebApliClient and WebApi class, uncomment DeleteEntityAsync/DeleteEntity methods.");
         }
 
-        protected void PostAction(bool showBuiltInPopup = true, BuiltInPopupTypes builtInPopupType = BuiltInPopupTypes.Custom, string message = null, string highlightedMessage = null, string endMessage = null)
-        {
-            if (ShowSavingPopup)
-                PopupVM.HidePopup();
-
-            if (showBuiltInPopup)
-                PopupVM.ShowBuiltInPopup(builtInPopupType, message, highlightedMessage, endMessage, null, true, false);
-            else
-                PopupVM.HideItemControlPopup();
-        }
-
         public virtual async Task LoadItem()
         {
             await this.LoadItem(this.Criteria);
@@ -706,7 +645,7 @@ namespace Framework.Xaml
         {
             UIActionStatusMessage.UIAction = CurrentUIAction;
             UIActionStatusMessage.UIActionStatus = uiActionStatus;
-            if(string.IsNullOrEmpty(uiMessage))
+            if (string.IsNullOrEmpty(uiMessage))
             {
                 string actionString = string.Empty;
                 if (CurrentUIAction == Framework.ViewModels.UIAction.Create)
@@ -718,7 +657,7 @@ namespace Framework.Xaml
 
                 // We only support Succeeded/Failed status
                 string actionStatus;
-                if(uiActionStatus == Framework.ViewModels.UIActionStatus.Success)
+                if (uiActionStatus == Framework.ViewModels.UIActionStatus.Success)
                     actionStatus = Framework.Resx.UIStringResource.Succeeded.ToString();
                 else
                     actionStatus = Framework.Resx.UIStringResource.Failed.ToString();
@@ -769,7 +708,7 @@ namespace Framework.Xaml
 
         protected abstract TItem GetAClone(TItem item);
 
-        public virtual string GetThisItemDisplayString()
+        public override string GetThisItemDisplayString()
         {
             return GetDisplayString(Item);
         }

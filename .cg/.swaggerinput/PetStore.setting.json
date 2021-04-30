@@ -63,7 +63,7 @@
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Delete",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": true
     },
     {
       "name": "DeleteOrder",
@@ -147,7 +147,7 @@
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": true
     },
     {
       "name": "UploadFile",
@@ -182,7 +182,7 @@
       "path": "/pet",
       "tag": "pet",
       "httpRequestMethodType": "Put",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": true
     },
     {
       "name": "UpdateUser",

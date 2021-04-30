@@ -12,8 +12,6 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\Frameworks\Framework\Framework.csproj">
       <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
       <Name>Framework</Name>
@@ -44,6 +42,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TagVM.cs" />
+    <Compile Include="WebApiClientFactory.cs" />
+    <Compile Include="WebServiceConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />

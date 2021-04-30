@@ -48,5 +48,82 @@ namespace Framework.Xaml
             }
         }
     }
+
+    /// <summary>
+    /// used by Swagger
+    /// </summary>
+    public abstract class ViewModelBase2 : ViewModelBase
+    {
+        #region 1. Properties
+
+        private bool m_ShowSavingPopup;
+        public bool ShowSavingPopup
+        {
+            get { return m_ShowSavingPopup; }
+            set
+            {
+                Set(nameof(ShowSavingPopup), ref m_ShowSavingPopup, value);
+            }
+        }
+
+
+        private bool m_ShowSuccessfullySavedPopup;
+        public bool ShowSuccessfullySavedPopup
+        {
+            get { return m_ShowSuccessfullySavedPopup; }
+            set
+            {
+                Set(nameof(ShowSuccessfullySavedPopup), ref m_ShowSuccessfullySavedPopup, value);
+            }
+        }
+
+        private bool m_ShowSaveFailedPopup;
+        public bool ShowSaveFailedPopup
+        {
+            get { return m_ShowSaveFailedPopup; }
+            set
+            {
+                Set(nameof(ShowSaveFailedPopup), ref m_ShowSaveFailedPopup, value);
+            }
+        }
+
+        private Framework.Xaml.ControlParentOptions m_ControlParentOption = ControlParentOptions.InPage;
+        public Framework.Xaml.ControlParentOptions ControlParentOption
+        {
+            get { return m_ControlParentOption; }
+            set
+            {
+                Set(nameof(ControlParentOption), ref m_ControlParentOption, value);
+            }
+        }
+
+        private bool m_IsContentEnable = false;
+        public bool IsContentEnable
+        {
+            get { return m_IsContentEnable; }
+            set
+            {
+                Set(nameof(IsContentEnable), ref m_IsContentEnable, value);
+            }
+        }
+
+        #endregion 1. Properties
+
+        protected void PostAction(bool showBuiltInPopup = true, BuiltInPopupTypes builtInPopupType = BuiltInPopupTypes.Custom, string message = null, string highlightedMessage = null, string endMessage = null)
+        {
+            if (ShowSavingPopup)
+                PopupVM.HidePopup();
+
+            if (showBuiltInPopup)
+                PopupVM.ShowBuiltInPopup(builtInPopupType, message, highlightedMessage, endMessage, null, true, false);
+            else
+                PopupVM.HideItemControlPopup();
+        }
+
+        public virtual string GetThisItemDisplayString()
+        {
+            return Framework.Resx.UIStringResource.ThisItem;
+        }
+    }
 }
 
