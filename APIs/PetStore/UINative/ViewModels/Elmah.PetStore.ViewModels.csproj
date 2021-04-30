@@ -15,7 +15,6 @@
     <Compile Include="OrderVM.cs" />
     <Compile Include="UserVM.cs" />
     <Compile Include="PetVM.cs" />
-    <Compile Include="ApiResponseVM.cs" />
     <Compile Include="WebApiClientFactory.cs" />
     <Compile Include="WebServiceConfig.cs" />
   </ItemGroup>

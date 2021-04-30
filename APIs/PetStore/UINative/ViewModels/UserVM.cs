@@ -93,20 +93,20 @@ namespace Elmah.PetStore.ViewModels
             // User.Get.01 LoginUser /user/login
             LoginUserCommand = new Command(OnLoginUser, CanLoginUser);
 
-            // User.Get.11 LogoutUser /user/logout
-            LogoutUserCommand = new Command(OnLogoutUser, CanLogoutUser);
+            //// User.Get.11 LogoutUser /user/logout
+            //LogoutUserCommand = new Command(OnLogoutUser, CanLogoutUser);
 
-            // User.Get.21 GetUserByName /user/{username}
-            GetUserByNameCommand = new Command(OnGetUserByName, CanGetUserByName);
+            //// User.Get.21 GetUserByName /user/{username}
+            //GetUserByNameCommand = new Command(OnGetUserByName, CanGetUserByName);
 
-            // User.Post.01 CreateUser /user
-            CreateUserCommand = new Command(OnCreateUser, CanCreateUser);
+            //// User.Post.01 CreateUser /user
+            //CreateUserCommand = new Command(OnCreateUser, CanCreateUser);
 
-            // User.Post.11 CreateUsersWithListInput /user/createWithList
-            CreateUsersWithListInputCommand = new Command(OnCreateUsersWithListInput, CanCreateUsersWithListInput);
+            //// User.Post.11 CreateUsersWithListInput /user/createWithList
+            //CreateUsersWithListInputCommand = new Command(OnCreateUsersWithListInput, CanCreateUsersWithListInput);
 
-            // User.Put.01 UpdateUser /user/{username}
-            UpdateUserCommand = new Command(OnUpdateUser, CanUpdateUser);
+            //// User.Put.01 UpdateUser /user/{username}
+            //UpdateUserCommand = new Command(OnUpdateUser, CanUpdateUser);
 
         }
 
@@ -178,38 +178,38 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
-        public async void OnLogoutUser()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+        //public async void OnLogoutUser()
+        //{
+        //    if (ShowSavingPopup)
+        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
 
-            var client = WebApiClientFactory.CreateUserApiClient();
+        //    var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.LogoutUserAsync("", Item.Id);
+        //    var result = await client.LogoutUserAsync("", Item.Id);
 
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Items.Any(t => t.Id == Item.Id))
-                {
-                    Items.Remove(Item);
-                    Item = null;
-                }
-                // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
+        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+        //    // success, will close Item Popup and popup message box
+        //    {
+        //        if (Items.Any(t => t.Id == Item.Id))
+        //        {
+        //            Items.Remove(Item);
+        //            Item = null;
+        //        }
+        //        // success, will close Item Popup and popup message box
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+        //    }
+        //    else
+        //    // failed
+        //    {
+        //        // failed, will close popup message box, stay at Item Popup
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+        //    }
+        //}
 
-        protected virtual bool CanLogoutUser()
-        {
-            return true;
-        }
+        //protected virtual bool CanLogoutUser()
+        //{
+        //    return true;
+        //}
 
         public async void OnGetUserByName()
         {
@@ -244,38 +244,38 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
-        // User.Post.01 CreateUser /user
-        public async void OnCreateUser()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
+        //// User.Post.01 CreateUser /user
+        //public async void OnCreateUser()
+        //{
+        //    if (ShowSavingPopup)
+        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
 
-            var client = WebApiClientFactory.CreateUserApiClient();
+        //    var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.CreateUserAsync(Item);
+        //    var result = await client.CreateUserAsync(Item);
 
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
-                {
-                    Items.Add(Item);
-                }
-                // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
-            }
-        }
-        protected virtual bool CanCreateUser()
-        {
-            return this.Item != null;
-        }
+        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+        //    // success, will close Item Popup and popup message box
+        //    {
+        //        Item = result.Message;
+        //        if (!Items.Any(t => t.Id == Item.Id))
+        //        {
+        //            Items.Add(Item);
+        //        }
+        //        // success, will close Item Popup and popup message box
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+        //    }
+        //    else
+        //    // failed
+        //    {
+        //        // failed, will close popup message box, stay at Item Popup
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+        //    }
+        //}
+        //protected virtual bool CanCreateUser()
+        //{
+        //    return this.Item != null;
+        //}
 
         // User.Post.11 CreateUsersWithListInput /user/createWithList
         public async void OnCreateUsersWithListInput()
@@ -291,7 +291,7 @@ namespace Elmah.PetStore.ViewModels
             // success, will close Item Popup and popup message box
             {
                 Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
+                if (!Items.Any(t => t.Id == Item.Id))
                 {
                     Items.Add(Item);
                 }
@@ -310,43 +310,43 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
-        // User.Put.01 UpdateUser /user/{username}
-        public async void OnUpdateUser()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
+        //// User.Put.01 UpdateUser /user/{username}
+        //public async void OnUpdateUser()
+        //{
+        //    if (ShowSavingPopup)
+        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
 
-            var client = WebApiClientFactory.CreateUserApiClient();
+        //    var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.UpdateUserAsync(Item);
+        //    var result = await client.UpdateUserAsync(Item);
 
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
-                {
-                    Items.Add(Item);
-                }
-                // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
-            }
-        }
-        protected virtual bool CanUpdateUser()
-        {
-            return this.Item != null;
-        }
+        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+        //    // success, will close Item Popup and popup message box
+        //    {
+        //        Item = result.Message;
+        //        if (!Items.Any(t => t.Id == Item.Id))
+        //        {
+        //            Items.Add(Item);
+        //        }
+        //        // success, will close Item Popup and popup message box
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+        //    }
+        //    else
+        //    // failed
+        //    {
+        //        // failed, will close popup message box, stay at Item Popup
+        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+        //    }
+        //}
+        //protected virtual bool CanUpdateUser()
+        //{
+        //    return this.Item != null;
+        //}
 
     }
 
     // User.Get.01 LoginUser /user/login
-    public class LoginUserCriteria: Framework.Models.PropertyChangedNotifier
+    public class LoginUserCriteria : Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Username;
@@ -382,7 +382,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // User.Get.21 GetUserByName /user/{username}
-    public class GetUserByNameCriteria: Framework.Models.PropertyChangedNotifier
+    public class GetUserByNameCriteria : Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Username;
@@ -401,4 +401,4 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
-
+}

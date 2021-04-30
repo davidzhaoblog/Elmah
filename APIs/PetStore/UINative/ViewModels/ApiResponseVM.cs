@@ -386,7 +386,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-    public class FindPetsByStatusCriteria: Framework.Models.PropertyChangedNotifier
+    public class FindPetsByStatusCriteria : Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Status;
@@ -407,7 +407,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.11 FindPetsByTags /pet/findByTags
-    public class FindPetsByTagsCriteria: Framework.Models.PropertyChangedNotifier
+    public class FindPetsByTagsCriteria : Framework.Models.PropertyChangedNotifier
     {
 
         private string[] m_Tags;
@@ -428,7 +428,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.21 GetPetById /pet/{petId}
-    public class GetPetByIdCriteria: Framework.Models.PropertyChangedNotifier
+    public class GetPetByIdCriteria : Framework.Models.PropertyChangedNotifier
     {
 
         private long m_PetId;
@@ -447,4 +447,5 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
+}
 
