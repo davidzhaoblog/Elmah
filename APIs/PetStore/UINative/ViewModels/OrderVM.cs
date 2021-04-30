@@ -1,10 +1,11 @@
 using System;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 //using Framework.Xaml.SQLite;
 
@@ -23,6 +24,17 @@ namespace Elmah.PetStore.ViewModels
             set
             {
                 Set(nameof(Item), ref m_Item, value);
+            }
+        }
+
+        // Store.Get.11 GetOrderById /store/order/{orderId}
+        protected GetOrderByIdCriteria m_GetOrderByIdCriteria;
+        public GetOrderByIdCriteria GetOrderByIdCriteria
+        {
+            get { return m_GetOrderByIdCriteria; }
+            set
+            {
+                Set(nameof(GetOrderByIdCriteria), ref m_GetOrderByIdCriteria, value);
             }
         }
 
@@ -194,10 +206,9 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
-}
 
     // Store.Get.11 GetOrderById /store/order/{orderId}
-    public class GetOrderByIdCriteria
+    public class GetOrderByIdCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private long m_OrderId;
