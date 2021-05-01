@@ -13,7 +13,6 @@
         "/pet/{petId}/uploadImage"
       ],
       "components": [
-        null,
         "#/components/schemas/Pet",
         "#/components/schemas/ApiResponse"
       ],
@@ -32,7 +31,6 @@
         "/store/order"
       ],
       "components": [
-        null,
         "#/components/schemas/Order"
       ],
       "requestArrayComponents": [],
@@ -50,7 +48,6 @@
         "/user/createWithList"
       ],
       "components": [
-        null,
         "#/components/schemas/User"
       ],
       "requestArrayComponents": [
