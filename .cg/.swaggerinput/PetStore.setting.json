@@ -47,7 +47,6 @@
         "/user/createWithList"
       ],
       "components": [
-        null,
         "#/components/schemas/User"
       ],
       "requestArrayComponents": [
