@@ -130,7 +130,7 @@ namespace Elmah.PetStore.WebApiClient
 
         // Put.1 UpdateUser /user/{username}
 
-        public async Task<Framework.WebApi.Response> UpdateUserAsync(Elmah.PetStore.Models.User item)
+        public async Task<Framework.WebApi.Response> UpdateUserAsync(string username, Elmah.PetStore.Models.User item)
         {
             string url = GetHttpRequestUrl($"/user/{username}");
             try

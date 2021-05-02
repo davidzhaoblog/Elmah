@@ -114,15 +114,12 @@ namespace Elmah.PetStore.WebApiClient
 
         // Post.2 UpdatePetWithForm /pet/{petId}
 
-        /// <summary>
-        /// TODO: $unknown requestBody$
-        /// </summary>
-        public async Task<Framework.WebApi.Response> UpdatePetWithFormAsync($unknown requestBody$ item)
+        public async Task<Framework.WebApi.Response> UpdatePetWithFormAsync(long petId, string name, string status)
         {
             string url = GetHttpRequestUrl($"/pet/{petId}?name={name}&status={status}");
             try
             {
-                await await PostCommon<$unknown requestBody$>(url, item);
+                await PostCommon<string>(url, null);
 
                 return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK };
             }
@@ -134,15 +131,12 @@ namespace Elmah.PetStore.WebApiClient
 
         // Post.3 UploadFile /pet/{petId}/uploadImage
 
-        /// <summary>
-        /// TODO: $unknown requestBody$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> UploadFileAsync($unknown requestBody$ item)
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> UploadFileAsync(long petId, string additionalMetadata)
         {
             string url = GetHttpRequestUrl($"/pet/{petId}/uploadImage?additionalMetadata={additionalMetadata}");
             try
             {
-                var response = await PostCommon<$unknown requestBody$, Elmah.PetStore.Models.ApiResponse>(url, item);
+                var response = await PostCommon<string, Elmah.PetStore.Models.ApiResponse>(url, null);
                 if (response == null)
                     return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
