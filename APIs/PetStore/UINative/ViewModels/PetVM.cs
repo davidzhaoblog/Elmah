@@ -135,7 +135,8 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.DeletePetAsync("", Item.Id);
+            // TODO: Please assign proper parameters
+            var result = await client.DeletePetAsync(Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -169,15 +170,14 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.FindPetsByStatusAsync("", Item.Id);
+            var result = await client.FindPetsByStatusAsync(FindPetsByStatusCriteria.Status);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
                 if (Items.Any(t => t.Id == Item.Id))
                 {
-                    Items.Remove(Item);
-                    Item = null;
+                    Items.Add(Item);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -202,15 +202,14 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.FindPetsByTagsAsync("", Item.Id);
+            var result = await client.FindPetsByTagsAsync(FindPetsByTagsCriteria.Tags);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
                 if (Items.Any(t => t.Id == Item.Id))
                 {
-                    Items.Remove(Item);
-                    Item = null;
+                    Items.Add(Item);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -235,15 +234,14 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.GetPetByIdAsync("", Item.Id);
+            var result = await client.GetPetByIdAsync(GetPetByIdCriteria.PetId);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
                 if (Items.Any(t => t.Id == Item.Id))
                 {
-                    Items.Remove(Item);
-                    Item = null;
+                    Items.Add(Item);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -457,4 +455,6 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
+
+}
 

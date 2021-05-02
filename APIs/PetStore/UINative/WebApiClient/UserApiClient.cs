@@ -36,6 +36,8 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        // Get.1 LoginUser /user/login
+
         public async Task<Framework.WebApi.Response<string>> LoginUserAsync(string username, string password)
         {
             string url = GetHttpRequestUrl($"/user/login?username={username}&password={password}");
@@ -53,25 +55,23 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $unknown 200 response$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<$unknown 200 response$>> LogoutUserAsync()
+        // Get.2 LogoutUser /user/logout
+
+        public async Task<Framework.WebApi.Response> LogoutUserAsync()
         {
             string url = GetHttpRequestUrl($"/user/logout");
             try
             {
-                var response = await Get<$unknown 200 response$>(url);
-                if (response == null)
-                    return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
-
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+                await Get(url);
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK};
             }
             catch (Exception ex)
             {
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
+
+        // Get.3 GetUserByName /user/{username}
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> GetUserByNameAsync(string username)
         {
@@ -90,25 +90,26 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $unknown 200 response$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<$unknown 200 response$>> CreateUserAsync(Elmah.PetStore.Models.User item)
+        // Post.1 CreateUser /user
+
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> CreateUserAsync(Elmah.PetStore.Models.User item)
         {
             string url = GetHttpRequestUrl($"/user");
             try
             {
-                var response = await PostCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
+                var response = await PostCommon<Elmah.PetStore.Models.User, Elmah.PetStore.Models.User>(url, item);
                 if (response == null)
-                    return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+                    return new Framework.WebApi.Response<Elmah.PetStore.Models.User> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+                return new Framework.WebApi.Response<Elmah.PetStore.Models.User> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
             }
             catch (Exception ex)
             {
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+                return new Framework.WebApi.Response<Elmah.PetStore.Models.User> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
+
+        // Post.2 CreateUsersWithListInput /user/createWithList
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.User>> CreateUsersWithListInputAsync(Elmah.PetStore.Models.User[] item)
         {
@@ -127,23 +128,20 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        /// <summary>
-        /// TODO: $unknown 200 response$
-        /// </summary>
-        public async Task<Framework.WebApi.Response<$unknown 200 response$>> UpdateUserAsync(Elmah.PetStore.Models.User item)
+        // Put.1 UpdateUser /user/{username}
+
+        public async Task<Framework.WebApi.Response> UpdateUserAsync(Elmah.PetStore.Models.User item)
         {
             string url = GetHttpRequestUrl($"/user/{username}");
             try
             {
-                var response = await PutCommon<Elmah.PetStore.Models.User, $unknown 200 response$>(url, item);
-                if (response == null)
-                    return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+                var response = await PutCommon<Elmah.PetStore.Models.User>(url, item);
 
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
             }
             catch (Exception ex)
             {
-                return new Framework.WebApi.Response<$unknown 200 response$> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
 
