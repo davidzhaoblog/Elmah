@@ -163,6 +163,7 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
+        // Pet.Get.01 FindPetsByStatus /pet/findByStatus
         public async void OnFindPetsByStatus()
         {
             if (ShowSavingPopup)
@@ -195,6 +196,7 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
+        // Pet.Get.11 FindPetsByTags /pet/findByTags
         public async void OnFindPetsByTags()
         {
             if (ShowSavingPopup)
@@ -227,6 +229,7 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
+        // Pet.Get.21 GetPetById /pet/{petId}
         public async void OnGetPetById()
         {
             if (ShowSavingPopup)
