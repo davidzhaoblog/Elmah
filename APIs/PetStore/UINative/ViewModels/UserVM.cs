@@ -286,7 +286,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.CreateUsersWithListInputAsync(Item);
+            var result = await client.CreateUsersWithListInputAsync(Items.ToArray());
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -324,7 +324,6 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
                 if(!Items.Any(t=>t.Id == Item.Id))
                 {
                     Items.Add(Item);

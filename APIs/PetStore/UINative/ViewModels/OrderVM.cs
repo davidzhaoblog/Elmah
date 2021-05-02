@@ -90,7 +90,7 @@ namespace Elmah.PetStore.ViewModels
             var client = WebApiClientFactory.CreateStoreApiClient();
 
             // TODO: you may add more code here to get proper parameter values.
-            var result = await client.DeleteOrderAsync(orderId);
+            var result = await client.DeleteOrderAsync(Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -130,10 +130,10 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
-                {
-                    Items.Add(Item);
-                }
+                //if (Items.Any(t => t.Id == Item.Id))
+                //{
+                //    Items.Add(Item);
+                //}
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
@@ -163,10 +163,10 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
-                {
-                    Items.Add(Item);
-                }
+                //if (Items.Any(t => t.Id == Item.Id))
+                //{
+                //    Items.Add(Item);
+                //}
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
