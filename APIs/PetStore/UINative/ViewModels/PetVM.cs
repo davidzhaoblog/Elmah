@@ -116,11 +116,11 @@ namespace Elmah.PetStore.ViewModels
             // Pet.Post.01 AddPet /pet
             AddPetCommand = new Command(OnAddPet, CanAddPet);
 
-            //// Pet.Post.11 UpdatePetWithForm /pet/{petId}
-            //UpdatePetWithFormCommand = new Command(OnUpdatePetWithForm, CanUpdatePetWithForm);
+            // Pet.Post.11 UpdatePetWithForm /pet/{petId}
+            UpdatePetWithFormCommand = new Command(OnUpdatePetWithForm, CanUpdatePetWithForm);
 
-            //// Pet.Post.21 UploadFile /pet/{petId}/uploadImage
-            //UploadFileCommand = new Command(OnUploadFile, CanUploadFile);
+            // Pet.Post.21 UploadFile /pet/{petId}/uploadImage
+            UploadFileCommand = new Command(OnUploadFile, CanUploadFile);
 
             // Pet.Put.01 UpdatePet /pet
             UpdatePetCommand = new Command(OnUpdatePet, CanUpdatePet);
@@ -135,7 +135,8 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.DeletePetAsync("", Item.Id);
+            // TODO: Please assign proper parameters
+            var result = await client.DeletePetAsync(Item.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -176,8 +177,7 @@ namespace Elmah.PetStore.ViewModels
             {
                 if (Items.Any(t => t.Id == Item.Id))
                 {
-                    Items.Remove(Item);
-                    Item = null;
+                    Items.Add(Item);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -207,18 +207,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                foreach(var item in result.Message)
+                if (Items.Any(t => t.Id == Item.Id))
                 {
-                    if (!Items.Any(t => t.Id == item.Id))
-                    {
-                        Items.Add(item);
-                    }
-                    else
-                    {
-                        // TODO: update existing in Items property
-                        var existing = Items.First(t => t.Id == item.Id);
-                        existing.Category = item.Category;
-                    }
+                    Items.Add(Item);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -248,15 +239,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (!Items.Any(t => t.Id == result.Message.Id))
+                if (Items.Any(t => t.Id == Item.Id))
                 {
-                    Item = result.Message;
-                }
-                else
-                {
-                    // TODO: update existing in Items property
-                    var existing = Items.First(t => t.Id == result.Message.Id);
-                    existing.Category = result.Message.Category;
+                    Items.Add(Item);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -288,7 +273,7 @@ namespace Elmah.PetStore.ViewModels
             // success, will close Item Popup and popup message box
             {
                 Item = result.Message;
-                if (!Items.Any(t => t.Id == Item.Id))
+                if(!Items.Any(t=>t.Id == Item.Id))
                 {
                     Items.Add(Item);
                 }
@@ -307,71 +292,71 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
-        //// Pet.Post.11 UpdatePetWithForm /pet/{petId}
-        //public async void OnUpdatePetWithForm()
-        //{
-        //    if (ShowSavingPopup)
-        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
+        // Pet.Post.11 UpdatePetWithForm /pet/{petId}
+        public async void OnUpdatePetWithForm()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
 
-        //    var client = WebApiClientFactory.CreatePetApiClient();
+            var client = WebApiClientFactory.CreatePetApiClient();
 
-        //    var result = await client.UpdatePetWithFormAsync(Item);
+            var result = await client.UpdatePetWithFormAsync(Item);
 
-        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-        //    // success, will close Item Popup and popup message box
-        //    {
-        //        Item = result.Message;
-        //        if (!Items.Any(t => t.Id == Item.Id))
-        //        {
-        //            Items.Add(Item);
-        //        }
-        //        // success, will close Item Popup and popup message box
-        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
-        //    }
-        //    else
-        //    // failed
-        //    {
-        //        // failed, will close popup message box, stay at Item Popup
-        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
-        //    }
-        //}
-        //protected virtual bool CanUpdatePetWithForm()
-        //{
-        //    return this.Item != null;
-        //}
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                Item = result.Message;
+                if(!Items.Any(t=>t.Id == Item.Id))
+                {
+                    Items.Add(Item);
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+            }
+        }
+        protected virtual bool CanUpdatePetWithForm()
+        {
+            return this.Item != null;
+        }
 
-        //// Pet.Post.21 UploadFile /pet/{petId}/uploadImage
-        //public async void OnUploadFile()
-        //{
-        //    if (ShowSavingPopup)
-        //        PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
+        // Pet.Post.21 UploadFile /pet/{petId}/uploadImage
+        public async void OnUploadFile()
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Saving, false);
 
-        //    var client = WebApiClientFactory.CreatePetApiClient();
+            var client = WebApiClientFactory.CreatePetApiClient();
 
-        //    var result = await client.UploadFileAsync(Item);
+            var result = await client.UploadFileAsync(Item);
 
-        //    if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-        //    // success, will close Item Popup and popup message box
-        //    {
-        //        Item = result.Message;
-        //        if (!Items.Any(t => t.Id == Item.Id))
-        //        {
-        //            Items.Add(Item);
-        //        }
-        //        // success, will close Item Popup and popup message box
-        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
-        //    }
-        //    else
-        //    // failed
-        //    {
-        //        // failed, will close popup message box, stay at Item Popup
-        //        PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
-        //    }
-        //}
-        //protected virtual bool CanUploadFile()
-        //{
-        //    return this.Item != null;
-        //}
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                Item = result.Message;
+                if(!Items.Any(t=>t.Id == Item.Id))
+                {
+                    Items.Add(Item);
+                }
+                // success, will close Item Popup and popup message box
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+            }
+        }
+        protected virtual bool CanUploadFile()
+        {
+            return this.Item != null;
+        }
 
         // Pet.Put.01 UpdatePet /pet
         public async void OnUpdatePet()
@@ -387,7 +372,7 @@ namespace Elmah.PetStore.ViewModels
             // success, will close Item Popup and popup message box
             {
                 Item = result.Message;
-                if (!Items.Any(t => t.Id == Item.Id))
+                if(!Items.Any(t=>t.Id == Item.Id))
                 {
                     Items.Add(Item);
                 }
@@ -409,7 +394,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-    public class FindPetsByStatusCriteria : Framework.Models.PropertyChangedNotifier
+    public class FindPetsByStatusCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private string m_Status;
@@ -430,7 +415,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.11 FindPetsByTags /pet/findByTags
-    public class FindPetsByTagsCriteria : Framework.Models.PropertyChangedNotifier
+    public class FindPetsByTagsCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private string[] m_Tags;
@@ -451,7 +436,7 @@ namespace Elmah.PetStore.ViewModels
     }
 
     // Pet.Get.21 GetPetById /pet/{petId}
-    public class GetPetByIdCriteria : Framework.Models.PropertyChangedNotifier
+    public class GetPetByIdCriteria: Framework.Models.PropertyChangedNotifier
     {
 
         private long m_PetId;
@@ -470,4 +455,6 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
+
 }
+

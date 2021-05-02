@@ -36,6 +36,8 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        // Get.1 FindPetsByStatus /pet/findByStatus
+
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet[]>> FindPetsByStatusAsync(string status)
         {
             string url = GetHttpRequestUrl($"/pet/findByStatus?status={status}");
@@ -52,6 +54,8 @@ namespace Elmah.PetStore.WebApiClient
                 return new Framework.WebApi.Response<Elmah.PetStore.Models.Pet[]> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
+
+        // Get.2 FindPetsByTags /pet/findByTags
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet[]>> FindPetsByTagsAsync(string[] tags)
         {
@@ -70,6 +74,8 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
+        // Get.3 GetPetById /pet/{petId}
+
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> GetPetByIdAsync(long petId)
         {
             string url = GetHttpRequestUrl($"/pet/{petId}");
@@ -86,6 +92,8 @@ namespace Elmah.PetStore.WebApiClient
                 return new Framework.WebApi.Response<Elmah.PetStore.Models.Pet> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
+
+        // Post.1 AddPet /pet
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> AddPetAsync(Elmah.PetStore.Models.Pet item)
         {
@@ -104,25 +112,49 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        ///// <summary>
-        ///// TODO: $unknown requestBody$
-        ///// </summary>
-        //public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> UploadFileAsync($unknown requestBody$ item)
-        //{
-        //    string url = GetHttpRequestUrl($"/pet/{petId}/uploadImage?additionalMetadata={additionalMetadata}");
-        //    try
-        //    {
-        //        var response = await PostCommon<$unknown requestBody$, Elmah.PetStore.Models.ApiResponse>(url, item);
-        //        if (response == null)
-        //            return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+        // Post.2 UpdatePetWithForm /pet/{petId}
 
-        //        return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
-        //    }
-        //}
+        /// <summary>
+        /// TODO: $unknown requestBody$
+        /// </summary>
+        public async Task<Framework.WebApi.Response> UpdatePetWithFormAsync($unknown requestBody$ item)
+        {
+            string url = GetHttpRequestUrl($"/pet/{petId}?name={name}&status={status}");
+            try
+            {
+                await await PostCommon<$unknown requestBody$>(url, item);
+
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK };
+            }
+            catch (Exception ex)
+            {
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+            }
+        }
+
+        // Post.3 UploadFile /pet/{petId}/uploadImage
+
+        /// <summary>
+        /// TODO: $unknown requestBody$
+        /// </summary>
+        public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse>> UploadFileAsync($unknown requestBody$ item)
+        {
+            string url = GetHttpRequestUrl($"/pet/{petId}/uploadImage?additionalMetadata={additionalMetadata}");
+            try
+            {
+                var response = await PostCommon<$unknown requestBody$, Elmah.PetStore.Models.ApiResponse>(url, item);
+                if (response == null)
+                    return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+
+                return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+            }
+            catch (Exception ex)
+            {
+                return new Framework.WebApi.Response<Elmah.PetStore.Models.ApiResponse> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+            }
+        }
+
+        // Put.1 UpdatePet /pet
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Pet>> UpdatePetAsync(Elmah.PetStore.Models.Pet item)
         {

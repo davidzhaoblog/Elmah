@@ -36,25 +36,29 @@ namespace Elmah.PetStore.WebApiClient
             }
         }
 
-        ///// <summary>
-        ///// TODO: $dynamic type, compile error, should use value type or a new classes$
-        ///// </summary>
-        //public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
-        //{
-        //    string url = GetHttpRequestUrl($"/store/inventory");
-        //    try
-        //    {
-        //        var response = await Get<dynamic>(url);
-        //        if (response == null)
-        //            return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+        // Get.1 GetInventory /store/inventory
 
-        //        return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
-        //    }
-        //}
+        /// <summary>
+        /// TODO: $dynamic type, compile error, should use value type or a new classes$
+        /// </summary>
+        public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
+        {
+            string url = GetHttpRequestUrl($"/store/inventory");
+            try
+            {
+                var response = await Get<dynamic>(url);
+                if (response == null)
+                    return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+
+                return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+            }
+            catch (Exception ex)
+            {
+                return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+            }
+        }
+
+        // Get.2 GetOrderById /store/order/{orderId}
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> GetOrderByIdAsync(long orderId)
         {
@@ -72,6 +76,8 @@ namespace Elmah.PetStore.WebApiClient
                 return new Framework.WebApi.Response<Elmah.PetStore.Models.Order> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
+
+        // Post.1 PlaceOrder /store/order
 
         public async Task<Framework.WebApi.Response<Elmah.PetStore.Models.Order>> PlaceOrderAsync(Elmah.PetStore.Models.Order item)
         {
