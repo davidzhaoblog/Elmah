@@ -117,6 +117,7 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
+        // Store.Get.01 GetInventory /store/inventory
         public async void OnGetInventory()
         {
             if (ShowSavingPopup)
@@ -149,6 +150,7 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
+        // Store.Get.11 GetOrderById /store/order/{orderId}
         public async void OnGetOrderById()
         {
             if (ShowSavingPopup)

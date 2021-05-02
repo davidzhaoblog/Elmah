@@ -146,6 +146,7 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
+        // User.Get.01 LoginUser /user/login
         public async void OnLoginUser()
         {
             if (ShowSavingPopup)
@@ -178,6 +179,7 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
+        // User.Get.11 LogoutUser /user/logout
         public async void OnLogoutUser()
         {
             if (ShowSavingPopup)
@@ -210,6 +212,7 @@ namespace Elmah.PetStore.ViewModels
             return true;
         }
 
+        // User.Get.21 GetUserByName /user/{username}
         public async void OnGetUserByName()
         {
             if (ShowSavingPopup)
