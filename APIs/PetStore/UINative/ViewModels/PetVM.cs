@@ -169,7 +169,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.FindPetsByStatusAsync("", Item.Id);
+            var result = await client.FindPetsByStatusAsync(FindPetsByStatusCriteria.Status);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -202,15 +202,23 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.FindPetsByTagsAsync("", Item.Id);
+            var result = await client.FindPetsByTagsAsync(FindPetsByTagsCriteria.Tags);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                foreach(var item in result.Message)
                 {
-                    Items.Remove(Item);
-                    Item = null;
+                    if (!Items.Any(t => t.Id == item.Id))
+                    {
+                        Items.Add(item);
+                    }
+                    else
+                    {
+                        // TODO: update existing in Items property
+                        var existing = Items.First(t => t.Id == item.Id);
+                        existing.Category = item.Category;
+                    }
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -235,15 +243,20 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.GetPetByIdAsync("", Item.Id);
+            var result = await client.GetPetByIdAsync(GetPetByIdCriteria.PetId);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (!Items.Any(t => t.Id == result.Message.Id))
                 {
-                    Items.Remove(Item);
-                    Item = null;
+                    Item = result.Message;
+                }
+                else
+                {
+                    // TODO: update existing in Items property
+                    var existing = Items.First(t => t.Id == result.Message.Id);
+                    existing.Category = result.Message.Category;
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
