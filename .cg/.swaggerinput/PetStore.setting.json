@@ -253,7 +253,7 @@
       "originalName": "ApiResponse",
       "originalNamespace": "ApiResponse",
       "type": "object",
-      "hasViewModel": true,
+      "hasViewModel": false,
       "idPropertyName": "code"
     }
   ]

@@ -12,6 +12,7 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ViewModelLocator.cs" />
     <Compile Include="OrderVM.cs" />
     <Compile Include="UserVM.cs" />
     <Compile Include="PetVM.cs" />
