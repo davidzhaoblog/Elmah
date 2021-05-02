@@ -135,9 +135,9 @@ namespace Elmah.PetStore.WebApiClient
             string url = GetHttpRequestUrl($"/user/{username}");
             try
             {
-                var response = await PutCommon<Elmah.PetStore.Models.User>(url, item);
+                await PutCommon<Elmah.PetStore.Models.User>(url, item);
 
-                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+                return new Framework.WebApi.Response { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK };
             }
             catch (Exception ex)
             {
