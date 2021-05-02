@@ -135,8 +135,8 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            // TODO: Please assign proper parameters
-            var result = await client.DeletePetAsync(Item.Code);
+            // TODO: you may add more code here to get proper parameter values.
+            var result = await client.DeletePetAsync(api_key, petId);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -303,7 +303,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UpdatePetWithFormAsync(Item);
+            var result = await client.UpdatePetWithFormAsync(petId, name, status);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -336,7 +336,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UploadFileAsync(Item);
+            var result = await client.UploadFileAsync(petId, additionalMetadata, Item);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box

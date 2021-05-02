@@ -89,8 +89,8 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateStoreApiClient();
 
-            // TODO: Please assign proper parameters
-            var result = await client.DeleteOrderAsync(Item.Id);
+            // TODO: you may add more code here to get proper parameter values.
+            var result = await client.DeleteOrderAsync(orderId);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
