@@ -41,20 +41,20 @@ namespace Elmah.PetStore.WebApiClient
         /// <summary>
         /// TODO: $dynamic type, compile error, should use value type or a new classes$
         /// </summary>
-        public async Task<Framework.WebApi.Response<dynamic>> GetInventoryAsync()
+        public async Task<Framework.WebApi.Response<object>> GetInventoryAsync()
         {
             string url = GetHttpRequestUrl($"/store/inventory");
             try
             {
-                var response = await Get<dynamic>(url);
+                var response = await Get<object>(url);
                 if (response == null)
-                    return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
+                    return new Framework.WebApi.Response<object> { Status = Framework.Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource };
 
-                return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
+                return new Framework.WebApi.Response<object> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageOK, Message = response };
             }
             catch (Exception ex)
             {
-                return new Framework.WebApi.Response<dynamic> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
+                return new Framework.WebApi.Response<object> { Status = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected, ErrorMessage = new Dictionary<string, string> { { ex.HResult.ToString(), ex.Message } } };
             }
         }
 
