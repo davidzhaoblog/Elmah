@@ -7,20 +7,12 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Elmah.MVVMLightViewModels
+namespace Elmah.PetStore.ViewModels
 {
     public partial class NavigationVM : Framework.Xaml.NavigationVM
     {
-        public NavigationVM()
-            : base()
-        {
-            RegisterRoutes();
-        }
-
-        public virtual void RegisterRoutes()
-        {
-            throw new NotImplementedException();
-        }
+        public NavigationVM() : base()
+        { }
     }
 }
 

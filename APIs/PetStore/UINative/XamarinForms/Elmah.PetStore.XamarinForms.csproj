@@ -12,8 +12,6 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\Frameworks\Framework\Framework.csproj">
       <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
       <Name>Framework</Name>
@@ -52,6 +50,41 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Controls\Delete.xaml" />
+    <None Remove="Controls\Get.xaml" />
+    <None Remove="Controls\GetList.xaml" />
+    <None Remove="Controls\PutOrPost.xaml" />
+    <None Remove="Controls\Search.xaml" />
+    <None Remove="Pages\ListPages.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\GetList.xaml.cs" />
+    <Compile Include="Controls\Search.xaml.cs" />
+    <Compile Include="Controls\PutOrPost.xaml.cs" />
+    <Compile Include="Controls\Delete.xaml.cs" />
+    <Compile Include="Controls\Get.xaml.cs" />
+    <Compile Include="Pages\ListPages.xaml.cs" />
+    <Compile Include="Pages\DomainManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\GetList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Search.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PutOrPost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Delete.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Get.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ListPages.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />

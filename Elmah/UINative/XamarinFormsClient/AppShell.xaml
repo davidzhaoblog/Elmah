@@ -4,6 +4,7 @@
        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
        xmlns:pp="clr-namespace:Elmah.XamarinForms.Pages"
+       xmlns:ppPetStore="clr-namespace:Elmah.PetStore.XamarinForms.Pages.Pet;assembly=Elmah.PetStore.XamarinForms"
        FlyoutHeaderBehavior="CollapseOnScroll"
        Navigating="OnNavigating"
        Navigated="OnNavigated"
@@ -129,6 +130,13 @@
     <MenuItem Text="{i18n:Translate Text=ELMAH_Error, ResourceId=Elmah.Resx.UIStringResourcePerApp}" AutomationId="LogoutButton"
                 BindingContext="{x:Reference self}"
                 Command="{Binding NavigationVM.NavigationCommand, Source={StaticResource LocatorClient}}" CommandParameter="{Binding BindingContext.ELMAH_Error_NavigateToCommandParam_CommonResultView}" >
+        <MenuItem.IconImageSource>
+            <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf200;"/>
+        </MenuItem.IconImageSource>
+    </MenuItem>
+    <MenuItem Text="Pet" AutomationId="PetListPage"
+                BindingContext="{x:Reference self}"
+                Command="{Binding NavigationVM.NavigationCommand, Source={StaticResource LocatorClient}}" CommandParameter="{Binding BindingContext.PetStore_Pet_NavigateToCommandParam_ListPage}" >
         <MenuItem.IconImageSource>
             <FontImageSource FontFamily="{DynamicResource FontAwesomeSolid}" Glyph="&#xf200;"/>
         </MenuItem.IconImageSource>

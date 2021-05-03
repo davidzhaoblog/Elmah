@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Elmah.PetStore.ViewModels;assembly=Elmah.PetStore.ViewModels"
+		xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+		xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fe="clr-namespace:Framework;assembly=Framework"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        mc:Ignorable="d"
+        x:Name="self"
+        x:Class="Elmah.PetStore.XamarinForms.Controls.Pet.PutOrPost"
+        Visual="Material">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0">
+                <StackLayout BindingContext="{Binding Item}">
+                   <Label AutomationId="ErrorId" Text="Test" Style="{StaticResource RegularLabelStyle}" />
+                </StackLayout>
+            </ScrollView>
+            <!--
+            <fxca:ItemFormActionSheet Grid.Row="1" BindingContext="{Binding NavigationVM.ELMAH_Error.CreateNewFormActionSheet, Source={StaticResource LocatorClient}}" HorizontalOptions="Center"/>
+            -->
+        </Grid>
+    </ContentView.Content>
+</ContentView>
+

@@ -12,12 +12,16 @@
     xmlns:fxcv="clr-namespace:Framework.Xamariner.Converters;assembly=Framework.Xamariner"
     xmlns:vm="clr-namespace:Elmah.MVVMLightViewModels;assembly=Elmah.MVVMLightViewModels"
     xmlns:vmClient="clr-namespace:Elmah.XamarinForms.ViewModels"
+    xmlns:petstorevm="clr-namespace:Elmah.PetStore.ViewModels;assembly=Elmah.PetStore.ViewModels"
     x:Class="Elmah.XamarinForms.App">
     <Application.Resources>
         <ResourceDictionary Source="Themes/LightTheme.xaml" />
         <!-- #region 1. ViewModelLocator and Converters -->
         <vm:ViewModelLocator x:Key="Locator" />
+        <petstorevm:ViewModelLocator x:Key="PetStoreLocator" />
+        <!-- #region 1.1. Swagger ViewModelLocators -->
         <vmClient:ViewModelLocator x:Key="LocatorClient" />
+        <!-- #region 1.2. Converters -->
         <fxcv:AgeConverter x:Key="AgeConverter" />
         <fxcv:BooleanInverter x:Key="BooleanInverter" />
         <fxcv:EnumToNameValuePairConverter x:Key="EnumToNameValuePairConverter" />

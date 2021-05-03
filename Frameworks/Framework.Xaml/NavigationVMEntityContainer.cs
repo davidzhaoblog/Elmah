@@ -8,33 +8,11 @@ using Xamarin.Forms;
 
 namespace Framework.Xaml
 {
-    public abstract class NavigationVMEntityContainer<TItemVM, TSearchCriteria, TIdentifierContract, TItem> : Framework.Xaml._ViewModelBase
+    public abstract class NavigationVMEntityContainer<TItemVM, TSearchCriteria, TIdentifierContract, TItem> : NavigationVMEntityContainer
         where TItemVM : ViewModelItemBase<TSearchCriteria, TIdentifierContract, TItem>
         where TSearchCriteria : class, TIdentifierContract, Framework.Models.IClone<TIdentifierContract>, new()
         where TItem : Framework.Models.PropertyChangedNotifier, TIdentifierContract, new()
     {
-        static PopupVM popupVM = DependencyService.Resolve<PopupVM>(DependencyFetchTarget.GlobalInstance);
-
-        public ICommand ShowListFullScreenActionSheetCommand => new Command(OnShowListFullScreenActionSheetCommand);
-
-        protected virtual void OnShowListFullScreenActionSheetCommand()
-        {
-            throw new NotImplementedException("OnShowListFullScreenActionSheetCommand");
-        }
-
-        private Framework.Xaml.ActionForm.ActionItemModel m_ShowListFullScreenActionSheetActionItemModel;
-        /// <summary>
-        /// Need this property, because Post-Sort should update icons of this ActinItemModel
-        /// </summary>
-        public Framework.Xaml.ActionForm.ActionItemModel ShowListFullScreenActionSheetActionItemModel
-        {
-            get { return m_ShowListFullScreenActionSheetActionItemModel; }
-            set
-            {
-                Set(nameof(ShowListFullScreenActionSheetActionItemModel), ref m_ShowListFullScreenActionSheetActionItemModel, value);
-            }
-        }
-
         #region 1. ItemVM related Command and ActionSheetVM on UI
 
         protected TItemVM ItemVM
@@ -127,30 +105,6 @@ namespace Framework.Xaml
         }
 
         #endregion 1. ItemVM related Command and ActionSheetVM on UI
-
-        #region 2. IndexVM related Command and ActionSheetVM on UI
-
-        private Framework.Xaml.ActionForm.ActionSheetVM m_ListFooterActionSheet;
-        public Framework.Xaml.ActionForm.ActionSheetVM ListFooterActionSheet
-        {
-            get { return m_ListFooterActionSheet; }
-            set
-            {
-                Set(nameof(ListFooterActionSheet), ref m_ListFooterActionSheet, value);
-            }
-        }
-
-        private Framework.Xaml.ActionForm.ActionSheetVM m_SearchFormActionSheet;
-        public Framework.Xaml.ActionForm.ActionSheetVM SearchFormActionSheet
-        {
-            get { return m_SearchFormActionSheet; }
-            set
-            {
-                Set(nameof(SearchFormActionSheet), ref m_SearchFormActionSheet, value);
-            }
-        }
-
-        #endregion 2. IndexVM related Command and ActionSheetVM on UI
 
         public NavigationVMEntityContainer()
         {
@@ -515,31 +469,6 @@ namespace Framework.Xaml
             return new Framework.Xaml.ActionForm.ActionSheetVM { HasIcon = false, ActionItems = new System.Collections.ObjectModel.ObservableCollection<Framework.Xaml.ActionForm.ActionItemModel>(list.OrderBy(t => t.Position)) };
         }
 
-        protected static Framework.Xaml.ActionForm.ActionItemModel GetShowListFullScreenActionSheetActionItemModel(ICommand command)
-        {
-            return new Framework.Xaml.ActionForm.ActionItemModel
-            {
-                ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.CommandItem,
-                Title = Framework.Resx.UIStringResource.More,
-                FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = Framework.Xaml.FontAwesomeIcons.EllipsisV, MasterFontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString() },
-                Command = command,
-                Position = 10,
-            };
-        }
-
-        protected static Framework.Xaml.ActionForm.SortActionItemModel GetShowListFullScreenActionSheetActionItemModel_Sort(ICommand command, Framework.Queries.QueryOrderBySetting selectedQueryOrderBySetting)
-        {
-            return new Framework.Xaml.ActionForm.SortActionItemModel
-            {
-                ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.SortCommandItem,
-                Title = selectedQueryOrderBySetting.DisplayName,
-                FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = selectedQueryOrderBySetting.FontIcon, MasterFontIconFamily = selectedQueryOrderBySetting.FontIconFamily.ToString() },
-                QueryOrderBySetting = selectedQueryOrderBySetting,
-                Command = command,
-                Position = 10,
-            };
-        }
-
         #region Get...ActionItemModel(...)
 
         /// <summary>
@@ -665,46 +594,7 @@ namespace Framework.Xaml
 
         #endregion Get...ActionItemModel(...)
 
-        protected static List<Framework.Xaml.ActionForm.ActionItemModel> GetSortActionItems(Framework.Queries.QueryOrderBySettingCollection queryOrderBySettingCollection, ICommand sortCommand)
-        {
-            var sortActionItems = new List<Framework.Xaml.ActionForm.ActionItemModel>();
-
-            foreach (var queryOrderBySetting in queryOrderBySettingCollection)
-            {
-                var sortActionItemModel = new Framework.Xaml.ActionForm.SortActionItemModel
-                {
-                    ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.SortCommandItem, //SortCommandItem,
-                    Title = queryOrderBySetting.DisplayName, // some localized text here, e.g. Framework.Resx.UIStringResource. or NTierOnTime.Resx.UIStringResourcePerApp, or NTierOnTime.Resx.UIStringResourcePerEntity
-                    FontIconSettings = new Framework.Xaml.FontIconSettings
-                    {
-                        MasterFontIcon = queryOrderBySetting.FontIcon // Search, open CommonSearchView
-    ,
-                        MasterFontIconFamily = queryOrderBySetting.FontIconFamily
-                    },
-                    QueryOrderBySetting = queryOrderBySetting,
-                    Command = sortCommand,
-                };
-
-                sortActionItems.Add(sortActionItemModel);
-            }
-
-            return sortActionItems;
-        }
-
-        protected virtual void UpdateShowListFullScreenActionSheetActionItemModel(Framework.Queries.QueryOrderBySettingCollection queryOrderBySettingCollection)
-        {
-            var selectedQueryOrderBySetting = queryOrderBySettingCollection?.FirstOrDefault(t => t.IsSelected);
-
-            ShowListFullScreenActionSheetActionItemModel.Title = selectedQueryOrderBySetting.DisplayName;
-            ShowListFullScreenActionSheetActionItemModel.FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = selectedQueryOrderBySetting.FontIcon, MasterFontIconFamily = selectedQueryOrderBySetting.FontIconFamily.ToString() };
-            if (ShowListFullScreenActionSheetActionItemModel is Framework.Xaml.ActionForm.SortActionItemModel)
-            {
-                ((Framework.Xaml.ActionForm.SortActionItemModel)ShowListFullScreenActionSheetActionItemModel).QueryOrderBySetting = selectedQueryOrderBySetting;
-            }
-        }
-
         // 1. Create
-
         protected static LoadItemDataRequest<T> GetLoadDataRequest_NavigateToCommand_Create<T>(T item)
         {
             return new Framework.Xaml.LoadItemDataRequest<T>
@@ -764,7 +654,6 @@ namespace Framework.Xaml
         }
 
         // 2. Delete
-
         protected static LoadItemDataRequest<T> GetLoadDataRequest_NavigateToCommand_Delete<T>(T criteria)
         {
             return new Framework.Xaml.LoadItemDataRequest<T>
@@ -883,7 +772,6 @@ namespace Framework.Xaml
         }
 
         // 4. Edit
-
         protected static LoadItemDataRequest<T> GetLoadDataRequest_NavigateToCommand_Edit<T>(T criteria)
         {
             return new Framework.Xaml.LoadItemDataRequest<T>
@@ -943,7 +831,6 @@ namespace Framework.Xaml
         }
 
         // 5. Copy
-
         protected static LoadItemDataRequest<T> GetLoadDataRequest_NavigateToCommand_Copy<T>(T criteria)
         {
             return new Framework.Xaml.LoadItemDataRequest<T>
@@ -1001,5 +888,118 @@ namespace Framework.Xaml
         }
 
     }
-}
+    public abstract class NavigationVMEntityContainer : Framework.Xaml._ViewModelBase
+    {
+        static PopupVM popupVM = DependencyService.Resolve<PopupVM>(DependencyFetchTarget.GlobalInstance);
 
+        public ICommand ShowListFullScreenActionSheetCommand => new Command(OnShowListFullScreenActionSheetCommand);
+
+        protected virtual void OnShowListFullScreenActionSheetCommand()
+        {
+            throw new NotImplementedException("OnShowListFullScreenActionSheetCommand");
+        }
+
+        private Framework.Xaml.ActionForm.ActionItemModel m_ShowListFullScreenActionSheetActionItemModel;
+        /// <summary>
+        /// Need this property, because Post-Sort should update icons of this ActinItemModel
+        /// </summary>
+        public Framework.Xaml.ActionForm.ActionItemModel ShowListFullScreenActionSheetActionItemModel
+        {
+            get { return m_ShowListFullScreenActionSheetActionItemModel; }
+            set
+            {
+                Set(nameof(ShowListFullScreenActionSheetActionItemModel), ref m_ShowListFullScreenActionSheetActionItemModel, value);
+            }
+        }
+
+
+        #region 2. IndexVM related Command and ActionSheetVM on UI
+
+        private Framework.Xaml.ActionForm.ActionSheetVM m_ListFooterActionSheet;
+        public Framework.Xaml.ActionForm.ActionSheetVM ListFooterActionSheet
+        {
+            get { return m_ListFooterActionSheet; }
+            set
+            {
+                Set(nameof(ListFooterActionSheet), ref m_ListFooterActionSheet, value);
+            }
+        }
+
+        private Framework.Xaml.ActionForm.ActionSheetVM m_SearchFormActionSheet;
+        public Framework.Xaml.ActionForm.ActionSheetVM SearchFormActionSheet
+        {
+            get { return m_SearchFormActionSheet; }
+            set
+            {
+                Set(nameof(SearchFormActionSheet), ref m_SearchFormActionSheet, value);
+            }
+        }
+
+        #endregion 2. IndexVM related Command and ActionSheetVM on UI
+
+
+        protected static List<Framework.Xaml.ActionForm.ActionItemModel> GetSortActionItems(Framework.Queries.QueryOrderBySettingCollection queryOrderBySettingCollection, ICommand sortCommand)
+        {
+            var sortActionItems = new List<Framework.Xaml.ActionForm.ActionItemModel>();
+
+            foreach (var queryOrderBySetting in queryOrderBySettingCollection)
+            {
+                var sortActionItemModel = new Framework.Xaml.ActionForm.SortActionItemModel
+                {
+                    ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.SortCommandItem, //SortCommandItem,
+                    Title = queryOrderBySetting.DisplayName, // some localized text here, e.g. Framework.Resx.UIStringResource. or NTierOnTime.Resx.UIStringResourcePerApp, or NTierOnTime.Resx.UIStringResourcePerEntity
+                    FontIconSettings = new Framework.Xaml.FontIconSettings
+                    {
+                        MasterFontIcon = queryOrderBySetting.FontIcon // Search, open CommonSearchView
+    ,
+                        MasterFontIconFamily = queryOrderBySetting.FontIconFamily
+                    },
+                    QueryOrderBySetting = queryOrderBySetting,
+                    Command = sortCommand,
+                };
+
+                sortActionItems.Add(sortActionItemModel);
+            }
+
+            return sortActionItems;
+        }
+
+        protected virtual void UpdateShowListFullScreenActionSheetActionItemModel(Framework.Queries.QueryOrderBySettingCollection queryOrderBySettingCollection)
+        {
+            var selectedQueryOrderBySetting = queryOrderBySettingCollection?.FirstOrDefault(t => t.IsSelected);
+
+            ShowListFullScreenActionSheetActionItemModel.Title = selectedQueryOrderBySetting.DisplayName;
+            ShowListFullScreenActionSheetActionItemModel.FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = selectedQueryOrderBySetting.FontIcon, MasterFontIconFamily = selectedQueryOrderBySetting.FontIconFamily.ToString() };
+            if (ShowListFullScreenActionSheetActionItemModel is Framework.Xaml.ActionForm.SortActionItemModel)
+            {
+                ((Framework.Xaml.ActionForm.SortActionItemModel)ShowListFullScreenActionSheetActionItemModel).QueryOrderBySetting = selectedQueryOrderBySetting;
+            }
+        }
+
+
+        protected static Framework.Xaml.ActionForm.ActionItemModel GetShowListFullScreenActionSheetActionItemModel(ICommand command)
+        {
+            return new Framework.Xaml.ActionForm.ActionItemModel
+            {
+                ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.CommandItem,
+                Title = Framework.Resx.UIStringResource.More,
+                FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = Framework.Xaml.FontAwesomeIcons.EllipsisV, MasterFontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString() },
+                Command = command,
+                Position = 10,
+            };
+        }
+
+        protected static Framework.Xaml.ActionForm.SortActionItemModel GetShowListFullScreenActionSheetActionItemModel_Sort(ICommand command, Framework.Queries.QueryOrderBySetting selectedQueryOrderBySetting)
+        {
+            return new Framework.Xaml.ActionForm.SortActionItemModel
+            {
+                ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.SortCommandItem,
+                Title = selectedQueryOrderBySetting.DisplayName,
+                FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = selectedQueryOrderBySetting.FontIcon, MasterFontIconFamily = selectedQueryOrderBySetting.FontIconFamily.ToString() },
+                QueryOrderBySetting = selectedQueryOrderBySetting,
+                Command = command,
+                Position = 10,
+            };
+        }
+    }
+}

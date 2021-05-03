@@ -208,6 +208,8 @@
     <None Include="map.2.D.1.vsd.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\APIs\PetStore\UINative\ViewModels\Elmah.PetStore.ViewModels.csproj" />
+    <ProjectReference Include="..\..\..\APIs\PetStore\UINative\XamarinForms\Elmah.PetStore.XamarinForms.csproj" />
     <ProjectReference Include="..\..\Contracts\CommonBLLEntities\Elmah.CommonBLLEntities.csproj">
       <Project>{b7d68f23-2115-4425-a457-9b098fec0dd5}</Project>
       <Name>Elmah.CommonBLLEntities</Name>

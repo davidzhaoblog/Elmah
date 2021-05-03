@@ -201,6 +201,14 @@
     <None Include="proguard_xamarin.cfg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\APIs\PetStore\UINative\ViewModels\Elmah.PetStore.ViewModels.csproj">
+      <Project>{fcc901a4-5b00-4025-ab0a-ce1ecdcc1914}</Project>
+      <Name>Elmah.PetStore.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\APIs\PetStore\UINative\XamarinForms\Elmah.PetStore.XamarinForms.csproj">
+      <Project>{82f6272d-9980-4284-8aaa-e6633f93d11c}</Project>
+      <Name>Elmah.PetStore.XamarinForms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\CommonBLLEntities\Elmah.CommonBLLEntities.csproj">
       <Project>{b7d68f23-2115-4425-a457-9b098fec0dd5}</Project>
       <Name>Elmah.CommonBLLEntities</Name>

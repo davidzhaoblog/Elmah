@@ -15,6 +15,7 @@
     <Compile Include="Helpers\ApplicationPropertiesHelper.cs" />
     <Compile Include="Helpers\SignInData.cs" />
     <Compile Include="Helpers\SimpleAesEncryptionHelper.cs" />
+    <Compile Include="NavigationVM.cs" />
     <Compile Include="TableCachingItem.cs" />
     <Compile Include="SQLite\IDatabaseSevice.cs" />
     <Compile Include="SQLite\IDatabaseTableRepository.cs" />
@@ -53,13 +54,16 @@
     <Compile Include="TabSettingVM.cs" />
     <Compile Include="Themes\ThemeSelectorItem.cs" />
     <Compile Include="Themes\ThemeSelectorVM.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.3.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.2.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.1.cs" />
     <Compile Include="ViewModelTabBase.cs" />
     <Compile Include="DomainModel.cs" />
     <Compile Include="LoadItemDataRequest.cs" />
     <Compile Include="PopupVM.cs" />
     <Compile Include="SaveDataRequest.cs" />
     <Compile Include="ViewModelBase.cs" />
-    <Compile Include="ViewModelBaseWithResultAndUIElement.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.4.cs" />
     <Compile Include="ViewModelEntityRelatedBase.cs" />
     <Compile Include="ViewModelEntityUpdateBase.cs" />
     <Compile Include="ViewModelItemBase.cs" />

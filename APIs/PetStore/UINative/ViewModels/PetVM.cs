@@ -12,30 +12,12 @@ using Xamarin.Forms;
 namespace Elmah.PetStore.ViewModels
 {
     public partial class PetVM
-        : Framework.Xaml.ViewModelBase2
+        : Framework.Xaml.ViewModelBaseWithResultAndUIElement<Elmah.PetStore.Models.Pet>
     {
+        #region 1. Properties
+
         public const string MessageTitle_LoadData = "Load_PetStore_Pet_VM";
-        public string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.Pet;
-
-        protected ObservableCollection<Elmah.PetStore.Models.Pet> m_Items = new ObservableCollection<Elmah.PetStore.Models.Pet>();
-        public ObservableCollection<Elmah.PetStore.Models.Pet> Items
-        {
-            get { return m_Items; }
-            set
-            {
-                Set(nameof(Items), ref m_Items, value);
-            }
-        }
-
-        protected Elmah.PetStore.Models.Pet m_Item;
-        public Elmah.PetStore.Models.Pet Item
-        {
-            get { return m_Item; }
-            set
-            {
-                Set(nameof(Item), ref m_Item, value);
-            }
-        }
+        public override string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.Pet;
 
         // Pet.Get.01 FindPetsByStatus /pet/findByStatus
         protected FindPetsByStatusCriteria m_FindPetsByStatusCriteria;
@@ -70,6 +52,10 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
+        #endregion 1. Properties
+
+        #region 2. Commands
+
         // Pet.Delete.01 DeletePet /pet/{petId}
         public ICommand DeletePetCommand { get; protected set; }
 
@@ -94,12 +80,40 @@ namespace Elmah.PetStore.ViewModels
         // Pet.Put.01 UpdatePet /pet
         public ICommand UpdatePetCommand { get; protected set; }
 
+        #endregion 2. Commands
+
         /// <summary>
         /// Initializes a new instance of the IndexVM class.
         /// </summary>
         public PetVM()
             : base()
         {
+            MessagingCenter.Subscribe<PetVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData, (sender, request) =>
+            {
+                ListItemViewMode = request.ListItemViewMode;
+                if (request.BindToGroupedResults.HasValue)
+                {
+                    if (!request.BindToGroupedResults.Value)
+                        BindToGroupedResults = request.BindToGroupedResults.Value;
+                    else
+                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
+                }
+                // Set Critieria
+                if (request.Parameters != null)
+                {
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.onecondition)) && request.Parameters[nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.onecondition)];
+                    // can be more
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.onecondition)) && request.Parameters[nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.onecondition)] != null)
+                    //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.DataSourceEntities.ELMAH_Error.Default.onecondition)];
+                }
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
+                QueryPagingSetting = GetDefaultQueryPagingSetting();
+                QueryPagingSetting.CurrentPage = 1;
+                //await DoSearch(true, true);
+                if (request.ActionWhenLaunch != null)
+                    request.ActionWhenLaunch();
+            });
 
             // Pet.Delete.01 DeletePet /pet/{petId}
             DeletePetCommand = new Command(OnDeletePet, CanDeletePet);
@@ -137,31 +151,31 @@ namespace Elmah.PetStore.ViewModels
 
             // TODO: you may add more code here to get proper parameter values.
             string api_key = string.Empty;
-            var result = await client.DeletePetAsync(api_key, Item.Id);
+            var result = await client.DeletePetAsync(api_key, SelectedItem.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Remove(Item);
+                    Result.Remove(SelectedItem);
                 }
-                Item = new Elmah.PetStore.Models.Pet();
+                SelectedItem = new Elmah.PetStore.Models.Pet();
 
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
         protected virtual bool CanDeletePet()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // Pet.Get.01 FindPetsByStatus /pet/findByStatus
@@ -177,18 +191,18 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
@@ -210,18 +224,18 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
@@ -243,18 +257,18 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
@@ -271,29 +285,29 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.AddPetAsync(Item);
+            var result = await client.AddPetAsync(SelectedItem);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
+                SelectedItem = result.Message;
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanAddPet()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // Pet.Post.11 UpdatePetWithForm /pet/{petId}
@@ -304,28 +318,28 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UpdatePetWithFormAsync(Item.Id, Item.Name, Item.Status);
+            var result = await client.UpdatePetWithFormAsync(SelectedItem.Id, SelectedItem.Name, SelectedItem.Status);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if(!Items.Any(t=>t.Id == Item.Id))
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanUpdatePetWithForm()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // Pet.Post.21 UploadFile /pet/{petId}/uploadImage
@@ -337,28 +351,28 @@ namespace Elmah.PetStore.ViewModels
             var client = WebApiClientFactory.CreatePetApiClient();
 
             string additionalMetadata = string.Empty;
-            var result = await client.UploadFileAsync(Item.Id, additionalMetadata);
+            var result = await client.UploadFileAsync(SelectedItem.Id, additionalMetadata);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if(!Items.Any(t=>t.Id == Item.Id))
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanUploadFile()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // Pet.Put.01 UpdatePet /pet
@@ -369,31 +383,55 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UpdatePetAsync(Item);
+            var result = await client.UpdatePetAsync(SelectedItem);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
+                SelectedItem = result.Message;
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanUpdatePet()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
+        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
+        {
+            return new List<Framework.Queries.QueryOrderBySetting> {
+                new Framework.Queries.QueryOrderBySetting{ IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Pet.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                        ClientSideActions = new QueryOrderBySettingClientSideActions {
+                         GetGroupResults = list => {
+                            var groupedResult =
+                                from t in list
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
+                            return groupedResult.ToList();
+                         },
+                         //GetSQLiteSortTableQuery = (tableQuery, direction) => {
+                         //   tableQuery = tableQuery.Sort(t => t.Type, direction);
+                         //    return tableQuery;
+                         //}
+                }}
+            };
+        }
     }
 
     // Pet.Get.01 FindPetsByStatus /pet/findByStatus
@@ -456,8 +494,6 @@ namespace Elmah.PetStore.ViewModels
                 Set(nameof(PetId), ref m_PetId, value);
             }
         }
-
     }
-
 }
 

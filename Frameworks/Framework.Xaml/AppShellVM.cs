@@ -45,6 +45,8 @@ namespace Framework.Xaml
         //    ShellTabBarIsVisible = show;
         //}
 
+        public virtual void Initialize() { }
+
         public override void Cleanup()
         {
             //SetShellNavBarIsVisible(false);
