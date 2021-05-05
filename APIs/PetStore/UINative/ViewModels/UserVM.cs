@@ -12,9 +12,9 @@ using Xamarin.Forms;
 namespace Elmah.PetStore.ViewModels
 {
     public partial class UserVM
-        : Framework.Xaml.ViewModelBase2
+        : Framework.Xaml.ViewModelBaseWithResultAndUIElement<Elmah.PetStore.Models.User>
     {
-        public string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.User;
+        public override string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.User;
         public const string MessageTitle_LoadData = "Load_PetStore_User_VM";
 
         #region 1. Properties
@@ -116,19 +116,19 @@ namespace Elmah.PetStore.ViewModels
                 SelectedItem = new Elmah.PetStore.Models.User();
 
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
         protected virtual bool CanDeleteUser()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // User.Get.01 LoginUser /user/login
@@ -149,13 +149,13 @@ namespace Elmah.PetStore.ViewModels
                     Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
@@ -182,13 +182,13 @@ namespace Elmah.PetStore.ViewModels
                     Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
@@ -215,13 +215,13 @@ namespace Elmah.PetStore.ViewModels
                     Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
 
@@ -238,7 +238,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.CreateUserAsync(Item);
+            var result = await client.CreateUserAsync(SelectedItem);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -249,18 +249,18 @@ namespace Elmah.PetStore.ViewModels
                     Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanCreateUser()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // User.Post.11 CreateUsersWithListInput /user/createWithList
@@ -271,7 +271,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.CreateUsersWithListInputAsync(Item);
+            var result = await client.CreateUsersWithListInputAsync(SelectedItem);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -282,18 +282,18 @@ namespace Elmah.PetStore.ViewModels
                     Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanCreateUsersWithListInput()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         // User.Put.01 UpdateUser /user/{username}
@@ -304,7 +304,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.UpdateUserAsync(SelectedItem.Username, Item);
+            var result = await client.UpdateUserAsync(SelectedItem.Username, SelectedItem);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -315,18 +315,18 @@ namespace Elmah.PetStore.ViewModels
                     Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
             else
             // failed
             {
                 // failed, will close popup message box, stay at Item Popup
-                PostAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.Error_Failedtoupdate, GetThisItemDisplayString(), "!");
             }
         }
         protected virtual bool CanUpdateUser()
         {
-            return this.Item != null;
+            return this.SelectedItem != null;
         }
 
         public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
@@ -337,7 +337,7 @@ namespace Elmah.PetStore.ViewModels
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
             return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.User.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.ToString(),
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.User.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.Solid.ToString(),
                         ClientSideActions = new Framework.Xaml.QueryOrderBySettingClientSideActions {
                          GetGroupResults = list => {
                             var groupedResult =

@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Elmah.PetStore.ViewModels
 {
-    public partial class NavigationVM.Pet
+    public partial class NavigationVM
     {
         public PetContainer Pet
         {
