@@ -102,7 +102,7 @@ namespace Elmah.MVVMLightViewModels.ElmahType
 
         public override string GetDisplayString(Elmah.DataSourceEntities.ElmahType item)
         {
-            return item != null ? string.Format("{0}({1})", item. ?? ): string.Empty;
+            return item != null ? string.Format("{0}", item.Type ): string.Empty;
         }
 
         /*

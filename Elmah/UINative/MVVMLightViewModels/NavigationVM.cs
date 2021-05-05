@@ -11,6 +11,16 @@ namespace Elmah.MVVMLightViewModels
 {
     public partial class NavigationVM : Framework.Xaml.NavigationVM
     {
+        public NavigationVM()
+            : base()
+        {
+            RegisterRoutes();
+        }
+
+        public virtual void RegisterRoutes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

@@ -10,9 +10,18 @@ namespace Elmah.XamarinForms
 {
     public partial class AppShell : Shell
     {
+        public Elmah.XamarinForms.ViewModels.AppShellVM ViewModel
+        {
+            get
+            {
+                return DependencyService.Resolve<Elmah.XamarinForms.ViewModels.AppShellVM>(DependencyFetchTarget.GlobalInstance);
+            }
+        }
+
         public AppShell()
         {
             InitializeComponent();
+            BindingContext = ViewModel;
         }
 
         void OnNavigating(object sender, ShellNavigatingEventArgs e)

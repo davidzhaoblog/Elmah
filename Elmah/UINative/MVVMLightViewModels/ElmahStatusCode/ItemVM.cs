@@ -102,7 +102,7 @@ namespace Elmah.MVVMLightViewModels.ElmahStatusCode
 
         public override string GetDisplayString(Elmah.DataSourceEntities.ElmahStatusCode item)
         {
-            return item != null ? string.Format("{0}({1})", item. ?? ): string.Empty;
+            return item != null ? string.Format("{0}({1})", item.StatusCode, item.Name ): string.Empty;
         }
 
         /*

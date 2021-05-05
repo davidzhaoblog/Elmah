@@ -23,6 +23,20 @@
     <Compile Include="Authentication\GoogleAuthenticationConstants.cs" />
     <Compile Include="Authentication\GoogleUser.cs" />
     <Compile Include="Controls\CommonSearchHandler.cs" />
+    <Compile Include="Controls\ELMAH_Error\CommonResultView.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\CommonSearchView.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Create.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Delete.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Details.xaml.cs" />
+    <Compile Include="Controls\ELMAH_Error\Edit.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\CommonResultView.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\CommonSearchView.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\Create.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\Delete.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\Details.xaml.cs" />
+    <Compile Include="Pages\ELMAH_Error\DomainManager.cs" />
+    <Compile Include="Pages\ELMAH_Error\Edit.xaml.cs" />
+    <Compile Include="ViewModels\AppShellVM.cs" />
     <EmbeddedResource Include="Controls\DailyCalendar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -30,6 +44,24 @@
     <Compile Include="Controls\DailyCalendar.xaml.cs">
       <DependentUpon>DailyCalendar.xaml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\ELMAH_Error\CommonResultView.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\CommonSearchView.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Create.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Delete.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Details.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ELMAH_Error\Edit.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlyoutHeader.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +104,24 @@
     <Compile Include="Pages\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Pages\ELMAH_Error\CommonResultView.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\CommonSearchView.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Create.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Delete.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Details.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ELMAH_Error\Edit.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\LogInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -202,6 +252,32 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Controls\ElmahApplication\**" />
+    <None Remove="Controls\ElmahHost\**" />
+    <None Remove="Controls\ElmahSource\**" />
+    <None Remove="Controls\ElmahStatusCode\**" />
+    <None Remove="Controls\ElmahType\**" />
+    <None Remove="Controls\ElmahUser\**" />
+    <None Remove="Pages\ElmahApplication\**" />
+    <None Remove="Pages\ElmahHost\**" />
+    <None Remove="Pages\ElmahSource\**" />
+    <None Remove="Pages\ElmahStatusCode\**" />
+    <None Remove="Pages\ElmahType\**" />
+    <None Remove="Pages\ElmahUser\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controls\ELMAH_Error\CommonResultView.xaml" />
+    <None Remove="Controls\ELMAH_Error\CommonSearchView.xaml" />
+    <None Remove="Controls\ELMAH_Error\Create.xaml" />
+    <None Remove="Controls\ELMAH_Error\Delete.xaml" />
+    <None Remove="Controls\ELMAH_Error\Details.xaml" />
+    <None Remove="Controls\ELMAH_Error\Edit.xaml" />
+    <None Remove="Pages\ELMAH_Error\CommonResultView.xaml" />
+    <None Remove="Pages\ELMAH_Error\CommonSearchView.xaml" />
+    <None Remove="Pages\ELMAH_Error\Create.xaml" />
+    <None Remove="Pages\ELMAH_Error\Delete.xaml" />
+    <None Remove="Pages\ELMAH_Error\Details.xaml" />
+    <None Remove="Pages\ELMAH_Error\Edit.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />

@@ -63,13 +63,13 @@ namespace Elmah.MVVMLightViewModels.ElmahType
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.DataSourceEntities.ElmahType.onecondition)) && request.Parameters[nameof(Elmah.DataSourceEntities.ElmahType.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.DataSourceEntities.ElmahType.onecondition)];
+                    // if (request.Parameters.ContainsKey(nameof(Elmah.DataSourceEntities.ElmahType.onecondition)) && request.Parameters[nameof(Elmah.DataSourceEntities.ElmahType.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.DataSourceEntities.ElmahType.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.DataSourceEntities.ElmahType.onecondition)) && request.Parameters[nameof(Elmah.DataSourceEntities.ElmahType.onecondition)] != null)
                         //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.DataSourceEntities.ElmahType.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -123,62 +123,20 @@ namespace Elmah.MVVMLightViewModels.ElmahType
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
             return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting{ DisplayName = Elmah.Resx.UIStringResourcePerEntity., PropertyName = nameof(Elmah.DataSourceEntities.ElmahType.?), Direction = Framework.Queries.QueryOrderDirections.Descending, FontIcon = Framework.Xaml.FontAwesomeIcons.ThList, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
-                    ClientSideActions = new QueryOrderBySettingClientSideActions {
-                         GetGroupResults = list => {
-                            var groupedResult =
-                                from t in list
-                                group t by new { t., t. } into tg
-                                select new GroupedResult(tg.Key., tg.Key., tg.Select(t => t.GetAClone<Elmah.DataSourceEntities.ElmahType>()).ToList());
-                            return groupedResult.ToList();
-                         },
-                         GetSQLiteSortTableQuery = (tableQuery, direction) => {
-                             tableQuery = tableQuery.Sort(t => t., direction).ThenSort(t => t., direction);
-                             return tableQuery;
-                         }
-                }},
-                new Framework.Queries.QueryOrderBySetting{ IsSelected = true, DisplayName = Elmah.Resx.UIStringResourcePerEntity.Name, PropertyName = nameof(Elmah.DataSourceEntities.ElmahType.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                new Framework.Queries.QueryOrderBySetting{ IsSelected = true, DisplayName = Elmah.Resx.UIStringResourcePerEntity.Type, PropertyName = nameof(Elmah.DataSourceEntities.ElmahType.Type), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
                         ClientSideActions = new QueryOrderBySettingClientSideActions {
                          GetGroupResults = list => {
                             var groupedResult =
                                 from t in list
-                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Type) && Char.IsLetter(t.Type.First()) ? t.Type.Substring(0, 1) : "?!#1-9" } into tg
                                 select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone<Elmah.DataSourceEntities.ElmahType>()).ToList());
                             return groupedResult.ToList();
                          },
                          GetSQLiteSortTableQuery = (tableQuery, direction) => {
-                            tableQuery = tableQuery.Sort(t => t.Name, direction);
+                            tableQuery = tableQuery.Sort(t => t.Type, direction);
                              return tableQuery;
                          }
-                }},
-                new Framework.Queries.QueryOrderBySetting{ DisplayName = Framework.Resx.UIStringResource.Recent, PropertyName = nameof(Elmah.DataSourceEntities.ElmahType.ModifiedDate), Direction = Framework.Queries.QueryOrderDirections.Descending, FontIcon = Framework.Xaml.FontAwesomeIcons.Clock, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
-                    ClientSideActions = new QueryOrderBySettingClientSideActions {
-                         GetGroupResults = list => {
-                            var groupedResult =
-                                from t in list
-                                group t by new { t.ModifiedDate?.Year } into tg
-                                select new GroupedResult(tg.Key.Year, tg.Key.Year?.ToString(), tg.Select(t => t.GetAClone<Elmah.DataSourceEntities.ElmahType>()).ToList());
-                            return groupedResult.ToList();
-                         },
-                         GetSQLiteSortTableQuery = (tableQuery, direction) => {
-                             tableQuery = tableQuery.Sort(t => t.ModifiedDate, direction);
-                             return tableQuery;
-                         }
-                }},
-                new Framework.Queries.QueryOrderBySetting{ DisplayName = Framework.Resx.UIStringResource.Age, PropertyName = nameof(Elmah.DataSourceEntities.ElmahType.CreatedDate), Direction = Framework.Queries.QueryOrderDirections.Descending, FontIcon = Framework.Xaml.FontAwesomeIcons.History, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
-                    ClientSideActions = new QueryOrderBySettingClientSideActions {
-                         GetGroupResults = list => {
-                            var groupedResult =
-                                from t in list
-                                group t by new { t.CreatedDate.Year } into tg
-                                select new GroupedResult(tg.Key.Year, tg.Key.Year.ToString(), tg.Select(t => t.GetAClone<Elmah.DataSourceEntities.ElmahType>()).ToList());
-                            return groupedResult.ToList();
-                         },
-                         GetSQLiteSortTableQuery = (tableQuery, direction) => {
-                             tableQuery = tableQuery.Sort(t => t.CreatedDate, direction);
-                             return tableQuery;
-                         }
-                }},
+                }}
             };
         }
     }
