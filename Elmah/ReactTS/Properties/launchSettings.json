@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:7907/",
-      "sslPort": 7912
+      "applicationUrl": "http://localhost:7807/",
+      "sslPort": 7812
     }
   },
   "profiles": {
@@ -18,11 +18,11 @@
     "Elmah.ReactTS": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7914/",
+      "launchUrl": "https://localhost:7814/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://0.0.0.0:7914/;http://0.0.0.0:7913/"
+      "applicationUrl": "https://0.0.0.0:7814/;http://0.0.0.0:7813/"
     }
   }
 }

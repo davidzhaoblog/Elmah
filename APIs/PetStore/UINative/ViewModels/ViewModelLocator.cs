@@ -71,40 +71,23 @@ namespace Elmah.PetStore.ViewModels
             ////}
         }
 
-        public Elmah.PetStore.ViewModels.OrderVM OrderVM
-        {
-            get
-            {
-                return DependencyService.Resolve<Elmah.PetStore.ViewModels.OrderVM>();
-            }
-        }
-
-        public Elmah.PetStore.ViewModels.UserVM UserVM
-        {
-            get
-            {
-                return DependencyService.Resolve<Elmah.PetStore.ViewModels.UserVM>();
-            }
-        }
-
-        public Elmah.PetStore.ViewModels.PetVM PetVM
-        {
-            get
-            {
-                return DependencyService.Resolve<Elmah.PetStore.ViewModels.PetVM>();
-            }
-        }
-
         public static void _RegisterViewModels()
         {
 
-            DependencyService.Register<Elmah.PetStore.ViewModels.OrderVM>();
+            _RegisterViewModelsOfOrder();
 
-            DependencyService.Register<Elmah.PetStore.ViewModels.UserVM>();
+            _RegisterViewModelsOfUser();
 
-            DependencyService.Register<Elmah.PetStore.ViewModels.PetVM>();
+            _RegisterViewModelsOfPet();
 
         }
+
+        static partial void _RegisterViewModelsOfOrder();
+
+        static partial void _RegisterViewModelsOfUser();
+
+        static partial void _RegisterViewModelsOfPet();
+
     }
 }
 

@@ -43,6 +43,7 @@
     <Compile Include="LoadDashboardDataRequest.cs" />
     <Compile Include="LoadListDataRequest.cs" />
     <Compile Include="NavigationButtonsVM.cs" />
+    <Compile Include="NavigationVM.cs" />
     <Compile Include="NavigationVMEntityContainer.cs" />
     <Compile Include="PopupOptions.cs" />
     <Compile Include="ProgressBarVM.cs" />
@@ -53,6 +54,9 @@
     <Compile Include="TabSettingVM.cs" />
     <Compile Include="Themes\ThemeSelectorItem.cs" />
     <Compile Include="Themes\ThemeSelectorVM.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.1.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.2.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.3.cs" />
     <Compile Include="ViewModelTabBase.cs" />
     <Compile Include="DomainModel.cs" />
     <Compile Include="LoadItemDataRequest.cs" />

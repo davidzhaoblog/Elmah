@@ -31,6 +31,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>

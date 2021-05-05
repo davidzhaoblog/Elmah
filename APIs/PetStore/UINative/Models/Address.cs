@@ -105,6 +105,16 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public Address GetAClone()
+        {
+            return new Address
+            {
+                Street = Street,
+                City = City,
+                State = State,
+                Zip = Zip
+            };
+        }
     }
 }
 

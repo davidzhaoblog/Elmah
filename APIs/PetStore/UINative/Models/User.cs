@@ -201,6 +201,20 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public User GetAClone()
+        {
+            return new User
+            {
+                Id = Id,
+                Username = Username,
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email,
+                Password = Password,
+                Phone = Phone,
+                UserStatus = UserStatus
+            };
+        }
     }
 }
 

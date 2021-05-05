@@ -29,7 +29,7 @@ export default function OrderByPicker(props: IOrderByPickerProps): JSX.Element {
                             <Typography variant="inherit">{orderBy.displayName}</Typography>
                             <ListItemIcon>
                                 {
-                                    (orderBy.direction==="Up"
+                                    (orderBy.direction==="Ascending"
                                         ? <ArrowUpwardIcon fontSize="small" />
                                         : <ArrowDownwardIcon fontSize="small" />)
                                 }

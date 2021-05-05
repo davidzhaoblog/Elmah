@@ -12,7 +12,14 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="NavigationVM.cs" />
+    <Compile Include="NavigationVM.Order.cs" />
+    <Compile Include="NavigationVM.User.cs" />
+    <Compile Include="NavigationVM.Pet.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModelLocator.Order.cs" />
+    <Compile Include="ViewModelLocator.User.cs" />
+    <Compile Include="ViewModelLocator.Pet.cs" />
     <Compile Include="OrderVM.cs" />
     <Compile Include="UserVM.cs" />
     <Compile Include="PetVM.cs" />
@@ -33,19 +40,19 @@
       <Name>Framework.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.PetStore.Models.csproj">
-      <Project>{c18471c4-5f04-49b8-825c-e017d02e5881}</Project>
+      <Project>{c4608cc8-2684-4092-94e5-93c1354217ec}</Project>
       <Name>Elmah.PetStore.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.PetStore.Resx.csproj">
-      <Project>{73ae8d28-dbe1-46d0-884d-bda37591d8df}</Project>
+      <Project>{14bde1ec-d3e6-47ff-b836-eb8120d3452e}</Project>
       <Name>Elmah.PetStore.Resx</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLite\Elmah.PetStore.SQLite.csproj">
-      <Project>{36b7b34a-b5d1-4dba-9851-156877e18b72}</Project>
+      <Project>{dcbdd989-1bdb-44b8-9d9c-8fdd99135473}</Project>
       <Name>Elmah.PetStore.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApiClient\Elmah.PetStore.WebApiClient.csproj">
-      <Project>{24fb231f-a811-4ae9-8973-65a32aa9fea3}</Project>
+      <Project>{521c523f-1a31-463f-be54-9e91f51ded61}</Project>
       <Name>Elmah.PetStore.WebApiClient</Name>
     </ProjectReference>
   </ItemGroup>

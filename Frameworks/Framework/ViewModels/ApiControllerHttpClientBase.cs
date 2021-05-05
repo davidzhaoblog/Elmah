@@ -294,6 +294,34 @@ namespace Framework.ViewModels
             }
         }
 
+        public async Task<TResponse> PutCommon<TRequest, TResponse>(string url, TRequest request)
+        {
+            var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            jsonSerializerSettings.Converters.Add(new StringEnumConverter());
+            string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
+            var httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+
+            var response = await Client.PutAsync(url, httpContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<TResponse>(content);
+                    return result;
+                }
+                catch
+                {
+                    return default(TResponse);
+                }
+            }
+            else
+            {
+                return default(TResponse);
+            }
+        }
+
         public async Task<TResponse> Put<TRequest, TResponse>(string url, TRequest request)
             where TResponse : class, Framework.IBusinessLogicLayerResponseMessageBase, new()
         {
@@ -318,6 +346,12 @@ namespace Framework.ViewModels
                 retval.ServerErrorMessage = content;
                 return retval;
             }
+        }
+
+        public async Task<Framework.WebApi.Response> DeleteCommon(string url)
+        {
+            var response = await Client.DeleteAsync(url);
+            return new Framework.WebApi.Response { Status = response.IsSuccessStatusCode ? Framework.Services.BusinessLogicLayerResponseStatus.MessageOK : Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected };
         }
 
         public async Task<TResponse> Delete<TResponse>(string url)

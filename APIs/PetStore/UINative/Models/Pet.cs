@@ -153,6 +153,18 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public Pet GetAClone()
+        {
+            return new Pet
+            {
+                Id = Id,
+                Name = Name,
+                Category = Category,
+                PhotoUrls = PhotoUrls,
+                Tags = Tags,
+                Status = Status
+            };
+        }
     }
 }
 

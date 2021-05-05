@@ -153,6 +153,18 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public Order GetAClone()
+        {
+            return new Order
+            {
+                Id = Id,
+                PetId = PetId,
+                Quantity = Quantity,
+                ShipDate = ShipDate,
+                Status = Status,
+                Complete = Complete
+            };
+        }
     }
 }
 

@@ -142,6 +142,12 @@ namespace Elmah.XamarinForms.ViewModels
             }
 
             // 5. Register ViewModels
+            // 5.1. Register Swagger ViewModels
+
+            // 5.1.1 PetStore Register Swagger ViewModels
+            Elmah.PetStore.ViewModels.ViewModelLocator._RegisterViewModels();
+
+            // 5.2. Register ViewModels
             Elmah.MVVMLightViewModels.ViewModelLocator._RegisterViewModels();
             Elmah.XamarinForms.ViewModels.ViewModelLocator.RegisterViewModels();
 
@@ -163,7 +169,10 @@ namespace Elmah.XamarinForms.ViewModels
         {
             // Add instances of all Framework.Xamariner.Interfaces.IDomainManager types to register domains and routes.
             var typeOfIDomainManager = typeof(Framework.Xamariner.Interfaces.IDomainManager);
-            var concreteTypesOfIDomainManager = AppDomain.CurrentDomain.GetAssemblies()
+
+            // TODO: Currently using Assemblies root namespace as filter, may add more.
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(t=>t.FullName.StartsWith("Elmah."));
+            var concreteTypesOfIDomainManager = assemblies
                 .SelectMany(s => s.GetTypes())
                 .Where(p => typeOfIDomainManager.IsAssignableFrom(p) && (p.IsClass && !p.IsAbstract));
 

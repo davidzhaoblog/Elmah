@@ -57,6 +57,14 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public Category GetAClone()
+        {
+            return new Category
+            {
+                Id = Id,
+                Name = Name
+            };
+        }
     }
 }
 

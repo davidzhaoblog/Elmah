@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Elmah.PetStore.ViewModels;assembly=Elmah.PetStore.ViewModels"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fe="clr-namespace:Framework;assembly=Framework"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        mc:Ignorable="d"
+        x:Name="self"
+        x:Class="Elmah.PetStore.XamarinForms.Controls.ApiResponse.Search"
+        Visual="Material">
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout  Style="{StaticResource SearchCtrlWrapper}">
+    <StackLayout>
+                 <!--<Label Text="{i18n:Translate Text=AnyText, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Entry Placeholder="{i18n:Translate Text=AnyText, ResourceId=Framework.Resx.UIStringResource}" Text="{Binding Path=Criteria.Common.StringContains_AllColumns.NullableValueToBeContained}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
+                <!--<Label Text="{i18n:Translate Text=ElmahUser, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=ElmahUser, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahUser, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahUserSelectedItem, Source={StaticResource Locator}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <!--<Label Text="{i18n:Translate Text=ElmahType, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=ElmahType, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahType, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahTypeSelectedItem, Source={StaticResource Locator}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <!--<Label Text="{i18n:Translate Text=ElmahStatusCode, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=ElmahStatusCode, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahStatusCode, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahStatusCodeSelectedItem, Source={StaticResource Locator}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <!--<Label Text="{i18n:Translate Text=ElmahSource, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=ElmahSource, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahSource, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahSourceSelectedItem, Source={StaticResource Locator}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <!--<Label Text="{i18n:Translate Text=ElmahHost, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=ElmahHost, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahHost, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahHostSelectedItem, Source={StaticResource Locator}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <!--<Label Text="{i18n:Translate Text=ElmahApplication, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=ElmahApplication, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahApplication, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahApplicationSelectedItem, Source={StaticResource Locator}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <!--<Label Text="{i18n:Translate Text=TimeUtc, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
+                <Picker
+                    Title="{i18n:Translate Text=TimeUtc, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Path=Main.PreDefinedDateTimeRangeList, Source={StaticResource Locator}}"
+                    SelectedItem="{Binding Path=Criteria.Common.TimeUtcRange.PreDefinedDateTimeRange, Converter={StaticResource EnumToNameValuePairConverter}}"
+                    Style="{StaticResource FormViewPickerStyle}">
+                </Picker>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{i18n:Translate Text=From, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" FontSize="Small" WidthRequest="50"/>
+                    <DatePicker IsEnabled="{Binding Path=Criteria.Common.TimeUtcRange.IsCustomEditor}" IsVisible="True" Format="F" Date="{Binding Path=Criteria.Common.TimeUtcRange.LowerBound}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{i18n:Translate Text=To, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" FontSize="Small" WidthRequest="50"/>
+                    <DatePicker IsEnabled="{Binding Path=Criteria.Common.TimeUtcRange.IsCustomEditor}" IsVisible="True" Format="F" Date="{Binding Path=Criteria.Common.TimeUtcRange.UpperBound}" />
+                </StackLayout>
+    </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

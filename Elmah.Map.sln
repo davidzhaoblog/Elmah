@@ -6,11 +6,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.MvcCoreAdmin", "Elmah
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.MvcCoreClient", "Elmah\MvcCoreClient\Elmah.MvcCoreClient.csproj", "{2A99839F-C1DF-4E11-BA64-3EF048F78C83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Droid", "Elmah\Droid\Elmah.Droid.csproj", "{227E6A8F-71CB-4F9A-9A28-E6D338DDF81A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.iOS", "Elmah\iOS\Elmah.iOS.csproj", "{AEF493A2-ADDB-4189-ACCA-134A3FAECEB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.UWP", "Elmah\UWP\Elmah.UWP.csproj", "{32611852-7D9B-433C-B316-FC55AACDC142}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.UWPAdmin", "Elmah\UWPAdmin\Elmah.UWPAdmin.csproj", "{8331E090-8164-472E-BB36-9FEB0C90FA8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.UnitTests", "Elmah\UnitTests\Elmah.UnitTests.csproj", "{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.ReactTS", "Elmah\ReactTS\Elmah.ReactTS.csproj", "{96FA24F4-8291-46B7-B390-2BC6F92B52F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.ReactTS", "Elmah\ReactTS\Elmah.ReactTS.csproj", "{8A6E619C-96F0-47E3-A065-7FD471AF3557}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.CommonBLLEntities", "Elmah\Contracts\CommonBLLEntities\Elmah.CommonBLLEntities.csproj", "{B7D68F23-2115-4425-A457-9B098FEC0DD5}"
 EndProject
@@ -30,8 +36,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.EFCoreDAL", "Elmah\DA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Frameworks\Framework\Framework.csproj", "{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.CommonBLLEntities", "Frameworks\Framework.CommonBLLEntities\Framework.CommonBLLEntities.csproj", "{BA8C8C0B-470A-4D3C-B3DA-9E28599799B5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkCore.Services", "Frameworks\FrameworkCore.Services\FrameworkCore.Services.csproj", "{4AA0CE4F-22A7-4202-BA5E-4FCB38096D03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Resx", "Frameworks\Framework.Resx\Framework.Resx.csproj", "{C72B898B-B53B-42D5-9F4F-673F84BB485B}"
@@ -47,6 +51,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.MVVMLightViewModels", "Elmah\UINative\MVVMLightViewModels\Elmah.MVVMLightViewModels.csproj", "{C3B6C186-4BD5-4CCB-8D89-DFFE435638D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.XamarinForms", "Elmah\UINative\XamarinForms\Elmah.XamarinForms.csproj", "{5A287FF0-2660-4B96-8DB1-B5780D7790AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.XamarinFormsClient", "Elmah\UINative\XamarinFormsClient\Elmah.XamarinFormsClient.csproj", "{6AA2F565-F8C9-4A28-AFB9-1AB85682AB18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.SQLite", "Elmah\UINative\SQLite\Elmah.SQLite.csproj", "{138EC5CC-62A8-4706-82DA-346622976EED}"
 EndProject
@@ -120,6 +126,18 @@ Global
 		{2A99839F-C1DF-4E11-BA64-3EF048F78C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A99839F-C1DF-4E11-BA64-3EF048F78C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A99839F-C1DF-4E11-BA64-3EF048F78C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{227E6A8F-71CB-4F9A-9A28-E6D338DDF81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{227E6A8F-71CB-4F9A-9A28-E6D338DDF81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{227E6A8F-71CB-4F9A-9A28-E6D338DDF81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{227E6A8F-71CB-4F9A-9A28-E6D338DDF81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF493A2-ADDB-4189-ACCA-134A3FAECEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF493A2-ADDB-4189-ACCA-134A3FAECEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF493A2-ADDB-4189-ACCA-134A3FAECEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEF493A2-ADDB-4189-ACCA-134A3FAECEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32611852-7D9B-433C-B316-FC55AACDC142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32611852-7D9B-433C-B316-FC55AACDC142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32611852-7D9B-433C-B316-FC55AACDC142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32611852-7D9B-433C-B316-FC55AACDC142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8331E090-8164-472E-BB36-9FEB0C90FA8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8331E090-8164-472E-BB36-9FEB0C90FA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8331E090-8164-472E-BB36-9FEB0C90FA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -128,10 +146,10 @@ Global
 		{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7223D7F5-8CE3-490D-A9FC-8D70AC99089F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96FA24F4-8291-46B7-B390-2BC6F92B52F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96FA24F4-8291-46B7-B390-2BC6F92B52F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96FA24F4-8291-46B7-B390-2BC6F92B52F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96FA24F4-8291-46B7-B390-2BC6F92B52F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6E619C-96F0-47E3-A065-7FD471AF3557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6E619C-96F0-47E3-A065-7FD471AF3557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6E619C-96F0-47E3-A065-7FD471AF3557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6E619C-96F0-47E3-A065-7FD471AF3557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D68F23-2115-4425-A457-9B098FEC0DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7D68F23-2115-4425-A457-9B098FEC0DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D68F23-2115-4425-A457-9B098FEC0DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -168,10 +186,6 @@ Global
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA8C8C0B-470A-4D3C-B3DA-9E28599799B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA8C8C0B-470A-4D3C-B3DA-9E28599799B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA8C8C0B-470A-4D3C-B3DA-9E28599799B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA8C8C0B-470A-4D3C-B3DA-9E28599799B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA0CE4F-22A7-4202-BA5E-4FCB38096D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4AA0CE4F-22A7-4202-BA5E-4FCB38096D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA0CE4F-22A7-4202-BA5E-4FCB38096D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -204,6 +218,10 @@ Global
 		{5A287FF0-2660-4B96-8DB1-B5780D7790AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A287FF0-2660-4B96-8DB1-B5780D7790AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A287FF0-2660-4B96-8DB1-B5780D7790AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA2F565-F8C9-4A28-AFB9-1AB85682AB18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA2F565-F8C9-4A28-AFB9-1AB85682AB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA2F565-F8C9-4A28-AFB9-1AB85682AB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA2F565-F8C9-4A28-AFB9-1AB85682AB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{138EC5CC-62A8-4706-82DA-346622976EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{138EC5CC-62A8-4706-82DA-346622976EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{138EC5CC-62A8-4706-82DA-346622976EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -228,14 +246,13 @@ Global
 		{6d25aa30-c3af-4ae0-b567-0f2653120cdc} = {2de48dd9-908a-4881-af27-121dff17f3bb}
 		{4aa0ce4f-22a7-4202-ba5e-4fcb38096d03} = {2de48dd9-908a-4881-af27-121dff17f3bb}
 		{c72b898b-b53b-42d5-9f4f-673f84bb485b} = {23a5519d-158b-4907-941a-baf58bb490ed}
-		{ba8c8c0b-470a-4d3c-b3da-9e28599799b5} = {99c00974-2ea1-452b-a45c-dd23d9d2048b}
 		{397ffa3d-9a4e-4900-9714-65d16a871613} = {4a621eb1-02e5-4558-bbbf-8694ae854c5d}
 		{e5302713-0022-4657-85d8-9620818071df} = {4a621eb1-02e5-4558-bbbf-8694ae854c5d}
 		{c96e5b5f-c2ca-4db8-8e6f-396e95ca06cb} = {d2ea2239-f0ba-4750-8750-37cd9c231af7}
 		{2a9dcd56-985b-437e-b0aa-1d0195323f2c} = {d2ea2239-f0ba-4750-8750-37cd9c231af7}
 		{756ca332-b393-48b8-9dad-9ab6d6fbe76f} = {d2ea2239-f0ba-4750-8750-37cd9c231af7}
 		{57e586a4-7e99-4c52-b22b-a41f78a40f2a} = {c12033db-cc34-4950-a0fb-4e368a350d23}
-		{96fa24f4-8291-46b7-b390-2bc6f92b52f7} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
+		{8a6e619c-96f0-47e3-a065-7fd471af3557} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
 		{352ba655-9a8e-49c1-88af-d08de3c4213e} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
 		{2cc2798d-c0cc-4343-8849-94c90c541bca} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
 		{df8d6b20-e185-4a3f-97f1-5ebb0209afdc} = {6d84af1b-527c-4f67-82e9-c9f57a619d0a}
@@ -245,10 +262,14 @@ Global
 		{7a295516-06eb-49dc-82d8-de07bf4081ca} = {42ef76b9-9968-4c93-bd48-b3c6bd47de35}
 		{c3b6c186-4bd5-4ccb-8d89-dffe435638d7} = {6adff0ad-d80c-4703-a692-4997477ebde6}
 		{5a287ff0-2660-4b96-8db1-b5780d7790af} = {6adff0ad-d80c-4703-a692-4997477ebde6}
+		{6aa2f565-f8c9-4a28-afb9-1ab85682ab18} = {6adff0ad-d80c-4703-a692-4997477ebde6}
 		{22b730c2-7b0e-4e7c-8257-7aac06fc58d0} = {6adff0ad-d80c-4703-a692-4997477ebde6}
 		{c664fd41-5040-40ae-bca0-8b761a0d0d9f} = {6adff0ad-d80c-4703-a692-4997477ebde6}
 		{28ae2681-8070-44eb-838d-298f7cd5d153} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
 		{2a99839f-c1df-4e11-ba64-3ef048f78c83} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
+		{227e6a8f-71cb-4f9a-9a28-e6d338ddf81a} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
+		{aef493a2-addb-4189-acca-134a3faeceb8} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
+		{32611852-7d9b-433c-b316-fc55aacdc142} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
 		{8331e090-8164-472e-bb36-9feb0c90fa8c} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
 		{7223d7f5-8ce3-490d-a9fc-8d70ac99089f} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}
 		{138ec5cc-62a8-4706-82da-346622976eed} = {81b8a46d-eb62-4dd2-8b85-6094b2d5ffc9}

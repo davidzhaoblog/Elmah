@@ -11,6 +11,8 @@
         <DotNetValueType>SystemUnknow</DotNetValueType>
         <KnownType>Unknown</KnownType>
         <Type>ElmahModel.ElmahApplication</Type>
+        <IsArray>false</IsArray>
+        <IsDynamic>false</IsDynamic>
       </TargetEntityType>
       <TargetEntityPropertyName>Application</TargetEntityPropertyName>
       <IsParent>true</IsParent>
@@ -31,6 +33,8 @@
         <DotNetValueType>SystemUnknow</DotNetValueType>
         <KnownType>Unknown</KnownType>
         <Type>ElmahModel.ElmahHost</Type>
+        <IsArray>false</IsArray>
+        <IsDynamic>false</IsDynamic>
       </TargetEntityType>
       <TargetEntityPropertyName>Host</TargetEntityPropertyName>
       <IsParent>true</IsParent>
@@ -51,6 +55,8 @@
         <DotNetValueType>SystemUnknow</DotNetValueType>
         <KnownType>Unknown</KnownType>
         <Type>ElmahModel.ElmahSource</Type>
+        <IsArray>false</IsArray>
+        <IsDynamic>false</IsDynamic>
       </TargetEntityType>
       <TargetEntityPropertyName>Source</TargetEntityPropertyName>
       <IsParent>true</IsParent>
@@ -71,6 +77,8 @@
         <DotNetValueType>SystemUnknow</DotNetValueType>
         <KnownType>Unknown</KnownType>
         <Type>ElmahModel.ElmahStatusCode</Type>
+        <IsArray>false</IsArray>
+        <IsDynamic>false</IsDynamic>
       </TargetEntityType>
       <TargetEntityPropertyName>StatusCode</TargetEntityPropertyName>
       <IsParent>true</IsParent>
@@ -91,6 +99,8 @@
         <DotNetValueType>SystemUnknow</DotNetValueType>
         <KnownType>Unknown</KnownType>
         <Type>ElmahModel.ElmahType</Type>
+        <IsArray>false</IsArray>
+        <IsDynamic>false</IsDynamic>
       </TargetEntityType>
       <TargetEntityPropertyName>Type</TargetEntityPropertyName>
       <IsParent>true</IsParent>
@@ -111,6 +121,8 @@
         <DotNetValueType>SystemUnknow</DotNetValueType>
         <KnownType>Unknown</KnownType>
         <Type>ElmahModel.ElmahUser</Type>
+        <IsArray>false</IsArray>
+        <IsDynamic>false</IsDynamic>
       </TargetEntityType>
       <TargetEntityPropertyName>User</TargetEntityPropertyName>
       <IsParent>true</IsParent>
@@ -152,6 +164,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.Guid</Type>
           <FriendlyType />
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -203,6 +217,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -258,6 +274,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -313,6 +331,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -368,6 +388,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -423,6 +445,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -477,6 +501,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -532,6 +558,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.Int32</Type>
           <FriendlyType>int</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -584,6 +612,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.DateTime</Type>
           <FriendlyType />
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>
@@ -635,6 +665,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.Int32</Type>
           <FriendlyType>int</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>true</IsDbGenerated>
@@ -680,6 +712,8 @@
           <KnownType>Unknown</KnownType>
           <Type>System.String</Type>
           <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>false</IsDbGenerated>

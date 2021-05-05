@@ -570,6 +570,7 @@
       <DependentUpon>LightTheme.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AppLoadingVM.cs" />
+    <Compile Include="ViewModels\AppShellVM.cs" />
     <Compile Include="ViewModels\AppVM.cs" />
     <Compile Include="ViewModels\CalendarVM.cs" />
     <Compile Include="ViewModels\DashboardVM.cs" />
@@ -825,6 +826,14 @@
     <ProjectReference Include="..\SQLite\Elmah.SQLite.csproj">
       <Project>{138ec5cc-62a8-4706-82da-346622976eed}</Project>
       <Name>Elmah.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\APIs\PetStore\UINative\ViewModels\Elmah.PetStore.ViewModels.csproj">
+      <Project>{f07e9756-9355-45ac-980e-27f6ecb36835}</Project>
+      <Name>Elmah.PetStore.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\APIs\PetStore\UINative\XamarinForms\Elmah.PetStore.XamarinForms.csproj">
+      <Project>{7c53772e-1967-41ca-bcbb-6b05cf253ded}</Project>
+      <Name>Elmah.PetStore.XamarinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Contracts\ViewModelData\Elmah.ViewModelData.csproj">
       <Project>{352ba655-9a8e-49c1-88af-d08de3c4213e}</Project>

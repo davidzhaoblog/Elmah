@@ -81,6 +81,15 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public ApiResponse GetAClone()
+        {
+            return new ApiResponse
+            {
+                Code = Code,
+                Type = Type,
+                Message = Message
+            };
+        }
     }
 }
 

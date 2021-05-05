@@ -81,6 +81,15 @@ namespace Elmah.PetStore.Models
             }
         }
 
+        public Customer GetAClone()
+        {
+            return new Customer
+            {
+                Id = Id,
+                Username = Username,
+                Address = Address
+            };
+        }
     }
 }
 

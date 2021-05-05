@@ -14,28 +14,10 @@ namespace Elmah.PetStore.ViewModels
     public partial class OrderVM
         : Framework.Xaml.ViewModelBase2
     {
-        public const string MessageTitle_LoadData = "Load_PetStore_Order_VM";
         public string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.Order;
+        public const string MessageTitle_LoadData = "Load_PetStore_Order_VM";
 
-        //protected ObservableCollection<Elmah.PetStore.Models.Order> m_Items = new ObservableCollection<Elmah.PetStore.Models.Order>();
-        //public ObservableCollection<Elmah.PetStore.Models.Order> Items
-        //{
-        //    get { return m_Items; }
-        //    set
-        //    {
-        //        Set(nameof(Items), ref m_Items, value);
-        //    }
-        //}
-
-        protected Elmah.PetStore.Models.Order m_Item;
-        public Elmah.PetStore.Models.Order Item
-        {
-            get { return m_Item; }
-            set
-            {
-                Set(nameof(Item), ref m_Item, value);
-            }
-        }
+        #region 1. Properties
 
         // Store.Get.11 GetOrderById /store/order/{orderId}
         protected GetOrderByIdCriteria m_GetOrderByIdCriteria;
@@ -47,6 +29,10 @@ namespace Elmah.PetStore.ViewModels
                 Set(nameof(GetOrderByIdCriteria), ref m_GetOrderByIdCriteria, value);
             }
         }
+
+        #endregion 1. Properties
+
+        #region 2. Commands
 
         // Store.Delete.01 DeleteOrder /store/order/{orderId}
         public ICommand DeleteOrderCommand { get; protected set; }
@@ -60,9 +46,8 @@ namespace Elmah.PetStore.ViewModels
         // Store.Post.01 PlaceOrder /store/order
         public ICommand PlaceOrderCommand { get; protected set; }
 
-        /// <summary>
-        /// Initializes a new instance of the IndexVM class.
-        /// </summary>
+        #endregion 2. Commands
+
         public OrderVM()
             : base()
         {
@@ -95,11 +80,11 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                //if (Items.Any(t => t.Id == Item.Id))
+                //if (Result.Any(t => t.Id == SelectedItem.Id))
                 //{
-                //    Items.Remove(Item);
+                //    Result.Remove(SelectedItem);
                 //}
-                Item = new Elmah.PetStore.Models.Order();
+                SelectedItem = new Elmah.PetStore.Models.Order();
 
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -130,9 +115,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -163,9 +148,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -196,10 +181,10 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
-                //if(!Items.Any(t=>t.Id == Item.Id))
+                SelectedItem = result.Message;
+                //if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 //{
-                //    Items.Add(Item);
+                //    Result.Add(SelectedItem);
                 //}
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
@@ -216,6 +201,30 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
+        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
+        {
+            return new List<Framework.Queries.QueryOrderBySetting> {
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.ToString(),
+                        ClientSideActions = new Framework.Xaml.QueryOrderBySettingClientSideActions {
+                         GetGroupResults = list => {
+                            var groupedResult =
+                                from t in list
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
+                            return groupedResult.ToList();
+                         },
+                         //GetSQLiteSortTableQuery = (tableQuery, direction) => {
+                         //   tableQuery = tableQuery.Sort(t => t.Type, direction);
+                         //    return tableQuery;
+                         //}
+                }}
+            };
+        }
     }
 
     // Store.Get.11 GetOrderById /store/order/{orderId}

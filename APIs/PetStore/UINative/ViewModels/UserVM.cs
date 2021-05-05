@@ -14,28 +14,10 @@ namespace Elmah.PetStore.ViewModels
     public partial class UserVM
         : Framework.Xaml.ViewModelBase2
     {
-        public const string MessageTitle_LoadData = "Load_PetStore_User_VM";
         public string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.User;
+        public const string MessageTitle_LoadData = "Load_PetStore_User_VM";
 
-        protected ObservableCollection<Elmah.PetStore.Models.User> m_Items = new ObservableCollection<Elmah.PetStore.Models.User>();
-        public ObservableCollection<Elmah.PetStore.Models.User> Items
-        {
-            get { return m_Items; }
-            set
-            {
-                Set(nameof(Items), ref m_Items, value);
-            }
-        }
-
-        protected Elmah.PetStore.Models.User m_Item;
-        public Elmah.PetStore.Models.User Item
-        {
-            get { return m_Item; }
-            set
-            {
-                Set(nameof(Item), ref m_Item, value);
-            }
-        }
+        #region 1. Properties
 
         // User.Get.01 LoginUser /user/login
         protected LoginUserCriteria m_LoginUserCriteria;
@@ -59,6 +41,10 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
+        #endregion 1. Properties
+
+        #region 2. Commands
+
         // User.Delete.01 DeleteUser /user/{username}
         public ICommand DeleteUserCommand { get; protected set; }
 
@@ -80,9 +66,8 @@ namespace Elmah.PetStore.ViewModels
         // User.Put.01 UpdateUser /user/{username}
         public ICommand UpdateUserCommand { get; protected set; }
 
-        /// <summary>
-        /// Initializes a new instance of the IndexVM class.
-        /// </summary>
+        #endregion 2. Commands
+
         public UserVM()
             : base()
         {
@@ -119,16 +104,16 @@ namespace Elmah.PetStore.ViewModels
             var client = WebApiClientFactory.CreateUserApiClient();
 
             // TODO: you may add more code here to get proper parameter values.
-            var result = await client.DeleteUserAsync(Item.Username);
+            var result = await client.DeleteUserAsync(SelectedItem.Username);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Remove(Item);
+                    Result.Remove(SelectedItem);
                 }
-                Item = new Elmah.PetStore.Models.User();
+                SelectedItem = new Elmah.PetStore.Models.User();
 
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -159,9 +144,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -192,9 +177,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -225,9 +210,9 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Items.Any(t => t.Id == Item.Id))
+                if (Result.Any(t => t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
@@ -258,10 +243,10 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
+                SelectedItem = result.Message;
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
@@ -291,10 +276,10 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
+                SelectedItem = result.Message;
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
@@ -319,15 +304,15 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.UpdateUserAsync(Item.Username, Item);
+            var result = await client.UpdateUserAsync(SelectedItem.Username, Item);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                Item = result.Message;
-                if(!Items.Any(t=>t.Id == Item.Id))
+                SelectedItem = result.Message;
+                if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
-                    Items.Add(Item);
+                    Result.Add(SelectedItem);
                 }
                 // success, will close Item Popup and popup message box
                 PostAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
@@ -344,6 +329,30 @@ namespace Elmah.PetStore.ViewModels
             return this.Item != null;
         }
 
+        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
+        {
+            return new List<Framework.Queries.QueryOrderBySetting> {
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.User.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.ToString(),
+                        ClientSideActions = new Framework.Xaml.QueryOrderBySettingClientSideActions {
+                         GetGroupResults = list => {
+                            var groupedResult =
+                                from t in list
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
+                            return groupedResult.ToList();
+                         },
+                         //GetSQLiteSortTableQuery = (tableQuery, direction) => {
+                         //   tableQuery = tableQuery.Sort(t => t.Type, direction);
+                         //    return tableQuery;
+                         //}
+                }}
+            };
+        }
     }
 
     // User.Get.01 LoginUser /user/login
