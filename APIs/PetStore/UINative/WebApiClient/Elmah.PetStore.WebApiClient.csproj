@@ -26,11 +26,11 @@
       <Name>Framework.Resx</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.PetStore.Models.csproj">
-      <Project>{c4608cc8-2684-4092-94e5-93c1354217ec}</Project>
+      <Project>{74d34b7a-bfd8-40ef-8c6b-7c878f8efe78}</Project>
       <Name>Elmah.PetStore.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.PetStore.Resx.csproj">
-      <Project>{14bde1ec-d3e6-47ff-b836-eb8120d3452e}</Project>
+      <Project>{e791ab23-98ac-47a3-a3ba-637a035e50d6}</Project>
       <Name>Elmah.PetStore.Resx</Name>
     </ProjectReference>
   </ItemGroup>

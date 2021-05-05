@@ -40,19 +40,19 @@
       <Name>Framework.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.PetStore.Models.csproj">
-      <Project>{c4608cc8-2684-4092-94e5-93c1354217ec}</Project>
+      <Project>{74d34b7a-bfd8-40ef-8c6b-7c878f8efe78}</Project>
       <Name>Elmah.PetStore.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.PetStore.Resx.csproj">
-      <Project>{14bde1ec-d3e6-47ff-b836-eb8120d3452e}</Project>
+      <Project>{e791ab23-98ac-47a3-a3ba-637a035e50d6}</Project>
       <Name>Elmah.PetStore.Resx</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLite\Elmah.PetStore.SQLite.csproj">
-      <Project>{dcbdd989-1bdb-44b8-9d9c-8fdd99135473}</Project>
+      <Project>{7d4fd2f1-9c0b-4938-9e70-1f5da8de2da7}</Project>
       <Name>Elmah.PetStore.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApiClient\Elmah.PetStore.WebApiClient.csproj">
-      <Project>{521c523f-1a31-463f-be54-9e91f51ded61}</Project>
+      <Project>{550aeebe-518b-4ac8-9900-b1f6b9f3f829}</Project>
       <Name>Elmah.PetStore.WebApiClient</Name>
     </ProjectReference>
   </ItemGroup>
