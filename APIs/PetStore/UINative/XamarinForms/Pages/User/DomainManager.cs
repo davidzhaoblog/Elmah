@@ -18,9 +18,13 @@ namespace Elmah.PetStore.XamarinForms.Pages.User
             var domainModel = Framework.Xaml.DomainModel.Create(DomainKey, null, null, null);
 
             // 03.02. CommonResultView -> Elmah.XamarinForms.Pages.ELMAH_Error.CommonResultView
-            domainModel.AddRelativeRoute(Elmah.PetStore.ViewModels.NavigationVM.UserActions.??.ToString(), typeof(Elmah.PetStore.XamarinForms.Pages.User.ListPage), false);
+            domainModel.AddRelativeRoute(Elmah.PetStore.ViewModels.NavigationVM.UserActions.AddPet.ToString(), typeof(Elmah.PetStore.XamarinForms.Pages.User.ListPage), false);
 
             return domainModel;
+        }
+
+        public void RegisterViewModels()
+        {
         }
     }
 }
