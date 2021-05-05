@@ -22,6 +22,7 @@
     <Compile Include="Authentication\AuthenticationState.cs" />
     <Compile Include="Authentication\GoogleAuthenticationConstants.cs" />
     <Compile Include="Authentication\GoogleUser.cs" />
+    <Compile Include="ViewModels\AppShellVM.cs" />
     <EmbeddedResource Include="Controls\ELMAH_Error\Create.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>

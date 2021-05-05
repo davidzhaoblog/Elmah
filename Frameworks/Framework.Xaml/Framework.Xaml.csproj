@@ -63,7 +63,7 @@
     <Compile Include="PopupVM.cs" />
     <Compile Include="SaveDataRequest.cs" />
     <Compile Include="ViewModelBase.cs" />
-    <Compile Include="ViewModelBaseWithResultAndUIElement.4.cs" />
+    <Compile Include="ViewModelBaseWithResultAndUIElement.cs" />
     <Compile Include="ViewModelEntityRelatedBase.cs" />
     <Compile Include="ViewModelEntityUpdateBase.cs" />
     <Compile Include="ViewModelItemBase.cs" />

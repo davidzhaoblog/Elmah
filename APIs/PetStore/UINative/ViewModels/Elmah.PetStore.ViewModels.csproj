@@ -12,9 +12,9 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="NavigationVM.Pet.cs" />
+    <Compile Include="NavigationVM.PerComponent.cs" />
     <Compile Include="NavigationVM.cs" />
-    <Compile Include="ViewModelLocator.Pet.cs" />
+    <Compile Include="ViewModelLocator.PerComponent.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="PetVM.cs" />
     <Compile Include="WebApiClientFactory.cs" />
