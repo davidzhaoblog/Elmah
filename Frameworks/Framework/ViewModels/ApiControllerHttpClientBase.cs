@@ -30,7 +30,7 @@ namespace Framework.ViewModels
         {
             this.RootPath = rootPath;
             Client = new HttpClient(new System.Net.Http.HttpClientHandler());
-            if(useToken)
+            if (useToken)
             {
                 Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             }
@@ -58,13 +58,13 @@ namespace Framework.ViewModels
         public const string ListsApiControllerName = "ListsApi";
         public string GetListsApiHttpRequestUrl(string actionName, Dictionary<string, string> parameters)
         {
-            if(parameters == null)
+            if (parameters == null)
                 return GetHttpRequestUrl(RootPath, ListsApiControllerName, actionName, null);
 
             List<string> parametersInList = new List<string>();
             foreach (var kvPair in parameters)
             {
-                if(!string.IsNullOrEmpty(kvPair.Value))
+                if (!string.IsNullOrEmpty(kvPair.Value))
                     parametersInList.Add(string.Format("{0}={1}", kvPair.Key, kvPair.Value));
             }
             string parametersInString = String.Join("&", parametersInList);
@@ -82,7 +82,7 @@ namespace Framework.ViewModels
             if (array == null && array.Count == 0)
                 return string.Empty;
 
-            if(addNameToParameters)
+            if (addNameToParameters)
                 return string.Join("&", array.Select(t => $"{name}[{array.IndexOf(t)}]={t}"));
             else
                 return string.Join("&", array.Select(t => $"[{array.IndexOf(t)}]={t}"));
@@ -128,6 +128,10 @@ namespace Framework.ViewModels
             {
                 return default(TResponse);
             }
+        }
+        public async Task Get(string url)
+        {
+            await Client.GetAsync(url);
         }
 
         public async Task<TViewModel> GetItemViewModel<TViewModel>(string url)
@@ -198,7 +202,7 @@ namespace Framework.ViewModels
                     return vm;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 vm.StatusOfResult = Framework.Services.BusinessLogicLayerResponseStatus.MessageErrorDetected;
                 vm.StatusMessageOfResult = ex.Message;
@@ -206,12 +210,38 @@ namespace Framework.ViewModels
             }
         }
 
+        public async Task PostCommon<TRequest>(string url, TRequest request)
+        {
+            StringContent httpContent;
+            if (request != null)
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+                jsonSerializerSettings.Converters.Add(new StringEnumConverter());
+                string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
+                httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                httpContent = new StringContent(string.Empty, System.Text.Encoding.UTF8);
+            }
+
+            await Client.PostAsync(url, httpContent);
+        }
+
         public async Task<TResponse> PostCommon<TRequest, TResponse>(string url, TRequest request)
         {
-            var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            jsonSerializerSettings.Converters.Add(new StringEnumConverter());
-            string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
-            var httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+            StringContent httpContent;
+            if (request != null)
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+                jsonSerializerSettings.Converters.Add(new StringEnumConverter());
+                string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
+                httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                httpContent = new StringContent(string.Empty, System.Text.Encoding.UTF8);
+            }
 
             var response = await Client.PostAsync(url, httpContent);
 
@@ -230,7 +260,7 @@ namespace Framework.ViewModels
             }
             else
             {
-                    return default(TResponse);
+                return default(TResponse);
             }
         }
 
@@ -294,12 +324,38 @@ namespace Framework.ViewModels
             }
         }
 
+        public async Task PutCommon<TRequest>(string url, TRequest request)
+        {
+            StringContent httpContent;
+            if (request != null)
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+                jsonSerializerSettings.Converters.Add(new StringEnumConverter());
+                string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
+                httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                httpContent = new StringContent(string.Empty, System.Text.Encoding.UTF8);
+            }
+
+            await Client.PutAsync(url, httpContent);
+        }
+
         public async Task<TResponse> PutCommon<TRequest, TResponse>(string url, TRequest request)
         {
-            var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            jsonSerializerSettings.Converters.Add(new StringEnumConverter());
-            string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
-            var httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+            StringContent httpContent;
+            if (request != null)
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+                jsonSerializerSettings.Converters.Add(new StringEnumConverter());
+                string requestJSON = JsonConvert.SerializeObject(request, Formatting.Indented, jsonSerializerSettings);
+                httpContent = new StringContent(requestJSON, System.Text.Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                httpContent = new StringContent(string.Empty, System.Text.Encoding.UTF8);
+            }
 
             var response = await Client.PutAsync(url, httpContent);
 
