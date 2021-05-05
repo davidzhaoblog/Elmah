@@ -121,7 +121,8 @@ namespace Elmah.PetStore.ViewModels
             var client = WebApiClientFactory.CreatePetApiClient();
 
             // TODO: you may add more code here to get proper parameter values.
-            var result = await client.DeletePetAsync(api_key, petId);
+            string api_key = "";
+            var result = await client.DeletePetAsync(api_key, SelectedItem.Id);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -288,16 +289,17 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UpdatePetWithFormAsync(petId, SelectedItem.Name, SelectedItem.Status);
+            var result = await client.UpdatePetWithFormAsync(SelectedItem.Id, SelectedItem.Name, SelectedItem.Status);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                SelectedItem = result.Message;
-                if(!Result.Any(t=>t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
+                // TODO: OnUpdatePetWithForm shouldn't used in Xamarin.Forms
+                // SelectedItem = result.Message;
+                //if(!Result.Any(t=>t.Id == SelectedItem.Id))
+                //{
+                //    Result.Add(SelectedItem);
+                //}
                 // success, will close Item Popup and popup message box
                 PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
@@ -321,16 +323,19 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreatePetApiClient();
 
-            var result = await client.UploadFileAsync(petId, additionalMetadata, SelectedItem);
+            // TODO: what is additionalMetadata
+            string additionalMetadata = "";
+            var result = await client.UploadFileAsync(SelectedItem.Id, additionalMetadata);
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                SelectedItem = result.Message;
-                if(!Result.Any(t=>t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
+                // TODO: OnUploadFile need more code.
+                //SelectedItem = result.Message;
+                //if(!Result.Any(t=>t.Id == SelectedItem.Id))
+                //{
+                //    Result.Add(SelectedItem);
+                //}
                 // success, will close Item Popup and popup message box
                 PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullyupdated, GetThisItemDisplayString(), "!");
             }
@@ -387,8 +392,8 @@ namespace Elmah.PetStore.ViewModels
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
             return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Pet.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.Solid.ToString(),
-                        ClientSideActions = new Framework.Xaml.QueryOrderBySettingClientSideActions {
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Pet.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                        ClientSideActions = new QueryOrderBySettingClientSideActions {
                          GetGroupResults = list => {
                             var groupedResult =
                                 from t in list

@@ -271,7 +271,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.CreateUsersWithListInputAsync(SelectedItem);
+            var result = await client.CreateUsersWithListInputAsync(SelectedCollection.ToArray());
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -309,7 +309,7 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                SelectedItem = result.Message;
+                // SelectedItem = result.Message;
                 if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
                     Result.Add(SelectedItem);
@@ -337,12 +337,12 @@ namespace Elmah.PetStore.ViewModels
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
             return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.User.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.Solid.ToString(),
-                        ClientSideActions = new Framework.Xaml.QueryOrderBySettingClientSideActions {
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.User.Username), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                        ClientSideActions = new QueryOrderBySettingClientSideActions {
                          GetGroupResults = list => {
                             var groupedResult =
                                 from t in list
-                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Username) && Char.IsLetter(t.Username.First()) ? t.Username.Substring(0, 1) : "?!#1-9" } into tg
                                 select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
                             return groupedResult.ToList();
                          },
