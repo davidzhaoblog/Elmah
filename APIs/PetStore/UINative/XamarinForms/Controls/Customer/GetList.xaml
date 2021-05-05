@@ -11,6 +11,7 @@
         xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
         xmlns:fe="clr-namespace:Framework;assembly=Framework"
         xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms.Controls.Customer"
         mc:Ignorable="d"
         x:Name="self"
         x:Class="Elmah.PetStore.XamarinForms.Controls.Customer.GetList"

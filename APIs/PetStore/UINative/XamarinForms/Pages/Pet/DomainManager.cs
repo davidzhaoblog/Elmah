@@ -22,6 +22,10 @@ namespace Elmah.PetStore.XamarinForms.Pages.Pet
 
             return domainModel;
         }
+
+        public void RegisterViewModels()
+        {
+        }
     }
 }
 

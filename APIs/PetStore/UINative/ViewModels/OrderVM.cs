@@ -209,8 +209,8 @@ namespace Elmah.PetStore.ViewModels
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
             return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.Solid.ToString(),
-                        ClientSideActions = new Framework.Xaml.QueryOrderBySettingClientSideActions {
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                        ClientSideActions = new QueryOrderBySettingClientSideActions {
                          GetGroupResults = list => {
                             var groupedResult =
                                 from t in list
