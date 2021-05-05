@@ -19,7 +19,7 @@
       <Name>Framework.Xamariner</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.PetStore.Models.csproj">
-      <Project>{c4608cc8-2684-4092-94e5-93c1354217ec}</Project>
+      <Project>{74d34b7a-bfd8-40ef-8c6b-7c878f8efe78}</Project>
       <Name>Elmah.PetStore.Models</Name>
     </ProjectReference>
   </ItemGroup>
