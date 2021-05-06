@@ -38,7 +38,10 @@ namespace Elmah.XamarinForms
 
             // 2. AppVM Initialize
             DependencyService.Register<Elmah.XamarinForms.ViewModels.AppVM>();
-            AppVM.Initialize(false);
+
+            // TODO: change hasAuthentication to true if you need login page
+            const bool hasAuthentication = false;
+            AppVM.Initialize(hasAuthentication);
 
             InitializeComponent();
 
