@@ -353,6 +353,21 @@ namespace Elmah.PetStore.ViewModels
                 }}
             };
         }
+
+        protected override void Search()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool CanSearch()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void LoadMore()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     // User.Get.01 LoginUser /user/login

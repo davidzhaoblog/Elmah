@@ -19,6 +19,24 @@ namespace Elmah.PetStore.ViewModels
 
         #region 1. Properties
 
+        protected NavigationVM.PetActions m_CurrentGetAction;
+        public NavigationVM.PetActions CurrentGetAction
+        {
+            get { return m_CurrentGetAction; }
+            set
+            {
+                Set(nameof(CurrentGetAction), ref m_CurrentGetAction, value);
+            }
+        }
+
+        public NavigationVM.PetContainer NavigationContainer
+        {
+            get
+            {
+                return DependencyService.Resolve<NavigationVM.PetContainer>();
+            }
+        }
+
         // Pet.Get.01 FindPetsByStatus /pet/findByStatus
         protected FindPetsByStatusCriteria m_FindPetsByStatusCriteria;
         public FindPetsByStatusCriteria FindPetsByStatusCriteria
@@ -407,6 +425,21 @@ namespace Elmah.PetStore.ViewModels
                          //}
                 }}
             };
+        }
+
+        protected override void Search()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool CanSearch()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void LoadMore()
+        {
+            throw new NotImplementedException();
         }
     }
 

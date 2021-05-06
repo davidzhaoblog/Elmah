@@ -64,9 +64,9 @@ namespace Framework.Xaml
 
         #region 2. Commands
 
-        public ICommand SearchCommand { get; protected set; }
+        // public ICommand SearchCommand { get; protected set; }
 
-        protected async void Search()
+        protected async override void Search()
         {
             IsRemainingItemsZero = false;
 
@@ -88,17 +88,14 @@ namespace Framework.Xaml
             IsRefreshing = false;
         }
 
-        protected bool CanSearch()
+        protected override bool CanSearch()
         {
             return true; // !(this.SearchStatus == Framework.ViewModels.SearchStatus.Searching);
         }
 
-        /// <summary>
-        /// Xamarin.Forms CollectionView.RemainingItemsThresholdReachedCommand
-        /// </summary>
-        public ICommand LoadMoreCommand { get; protected set; }
+        // public ICommand LoadMoreCommand { get; protected set; }
 
-        protected async void LoadMore()
+        protected override async void LoadMore()
         {
             if (IsRemainingItemsZero && (DateTime.Now - LastRemainingItemsZeroDateTime).TotalMinutes < RemainingItemsZeroNoResponseTimeSpanInMinutes)
                 return;
@@ -111,12 +108,6 @@ namespace Framework.Xaml
         public ViewModelBaseWithResultAndUIElement()
             : base()
         {
-            this.Criteria = new TSearchCriteria();
-
-            this.TextFilterCommand = new Command<string>(this.OnTextFilterCommand);
-            this.SearchCommand = new Command(this.Search, this.CanSearch);
-            this.LoadMoreCommand = new Command(this.LoadMore, this.CanSearch);
-
             this.Criteria = new TSearchCriteria();
 
             //_ = GetDefaultPerViewModel();
