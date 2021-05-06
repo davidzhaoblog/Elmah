@@ -47,7 +47,7 @@ namespace Elmah.PetStore.ViewModels
                 {
                     Domain = DomainKey
                     ,
-                    Page = OrderActions.??.ToString()
+                    Page = OrderActions.GetInventory.ToString()
                     ,
                     SendMessage = () => {
                         SendMessage_Init_ListPage(oneCondition, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);

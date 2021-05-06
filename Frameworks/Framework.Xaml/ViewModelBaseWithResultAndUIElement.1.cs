@@ -31,7 +31,7 @@ namespace Framework.Xaml
                 Set(nameof(ListItemViewMode), ref m_ListItemViewMode, value);
                 RaisePropertyChanged(nameof(IsSelectionList));
                 RaisePropertyChanged(nameof(IsRegularList));
-                RaisePropertyChanged(nameof(IsRegularList));
+
             }
         }
 
