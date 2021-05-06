@@ -159,8 +159,6 @@ namespace Elmah.XamarinForms.ViewModels
                 this.DomainRegistrationModels.Add(domainManager.CreateDomainModel());
             }
 
-            AppShellVM.Initialize();
-
             // 7.
             AppShellVM.Cleanup();
         }
