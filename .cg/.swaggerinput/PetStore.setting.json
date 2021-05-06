@@ -13,8 +13,7 @@
         "/pet/{petId}/uploadImage"
       ],
       "components": [
-        "#/components/schemas/Pet",
-        "#/components/schemas/ApiResponse"
+        "#/components/schemas/Pet"
       ],
       "requestArrayComponents": [],
       "responseArrayComponents": [
@@ -63,133 +62,209 @@
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Delete",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "DeleteOrder",
       "path": "/store/order/{orderId}",
       "tag": "store",
       "httpRequestMethodType": "Delete",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "DeleteUser",
       "path": "/user/{username}",
       "tag": "user",
       "httpRequestMethodType": "Delete",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "FindPetsByStatus",
       "path": "/pet/findByStatus",
       "tag": "pet",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": true,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "array",
+      "responseSwaggerComponentName": "#/components/schemas/Pet"
     },
     {
       "name": "FindPetsByTags",
       "path": "/pet/findByTags",
       "tag": "pet",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": true,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "array",
+      "responseSwaggerComponentName": "#/components/schemas/Pet"
     },
     {
       "name": "GetPetById",
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": true,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/Pet"
     },
     {
       "name": "GetInventory",
       "path": "/store/inventory",
       "tag": "store",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "GetOrderById",
       "path": "/store/order/{orderId}",
       "tag": "store",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": true,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/Order"
     },
     {
       "name": "LoginUser",
       "path": "/user/login",
       "tag": "user",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": true,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "LogoutUser",
       "path": "/user/logout",
       "tag": "user",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "GetUserByName",
       "path": "/user/{username}",
       "tag": "user",
       "httpRequestMethodType": "Get",
-      "parameterAsCriteria": true
+      "parameterAsCriteria": true,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/User"
     },
     {
       "name": "AddPet",
       "path": "/pet",
       "tag": "pet",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "object",
+      "requestSwaggerComponentName": "#/components/schemas/Pet",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/Pet"
     },
     {
       "name": "UpdatePetWithForm",
       "path": "/pet/{petId}",
       "tag": "pet",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     },
     {
       "name": "UploadFile",
       "path": "/pet/{petId}/uploadImage",
       "tag": "pet",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "Unknown",
+      "requestSwaggerComponentName": "",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/ApiResponse"
     },
     {
       "name": "PlaceOrder",
       "path": "/store/order",
       "tag": "store",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "object",
+      "requestSwaggerComponentName": "#/components/schemas/Order",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/Order"
     },
     {
       "name": "CreateUser",
       "path": "/user",
       "tag": "user",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "object",
+      "requestSwaggerComponentName": "#/components/schemas/User",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/User"
     },
     {
       "name": "CreateUsersWithListInput",
       "path": "/user/createWithList",
       "tag": "user",
       "httpRequestMethodType": "Post",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "array",
+      "requestSwaggerComponentName": "#/components/schemas/User",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/User"
     },
     {
       "name": "UpdatePet",
       "path": "/pet",
       "tag": "pet",
       "httpRequestMethodType": "Put",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "object",
+      "requestSwaggerComponentName": "#/components/schemas/Pet",
+      "responseSwaggerComponentCategory": "object",
+      "responseSwaggerComponentName": "#/components/schemas/Pet"
     },
     {
       "name": "UpdateUser",
       "path": "/user/{username}",
       "tag": "user",
       "httpRequestMethodType": "Put",
-      "parameterAsCriteria": false
+      "parameterAsCriteria": false,
+      "requestSwaggerComponentCategory": "object",
+      "requestSwaggerComponentName": "#/components/schemas/User",
+      "responseSwaggerComponentCategory": "Unknown",
+      "responseSwaggerComponentName": ""
     }
   ],
   "swaggerComponentSettings": [
