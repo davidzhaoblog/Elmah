@@ -190,11 +190,11 @@
       <Name>Elmah.Resx</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\APIs\PetStore\UINative\ViewModels\Elmah.PetStore.ViewModels.csproj">
-      <Project>{bfd691b1-4c78-457b-98e3-4a040a10e96b}</Project>
+      <Project>{5934cd79-f8e8-40bb-8bea-56f8e6fb7b54}</Project>
       <Name>Elmah.PetStore.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\APIs\PetStore\UINative\XamarinForms\Elmah.PetStore.XamarinForms.csproj">
-      <Project>{fdd0e4f3-8d10-4d74-8336-d5bf009a9eac}</Project>
+      <Project>{a55f84ef-96b4-445e-bbd8-8e3bf9d0bb8e}</Project>
       <Name>Elmah.PetStore.XamarinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contracts\ViewModelData\Elmah.ViewModelData.csproj">

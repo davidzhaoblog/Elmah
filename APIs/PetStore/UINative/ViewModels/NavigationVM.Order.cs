@@ -22,8 +22,10 @@ namespace Elmah.PetStore.ViewModels
 
         public enum OrderActions
         {
-            FindPetsByStatus,
-            AddPet
+            DeleteOrder,
+            GetInventory,
+            GetOrderById,
+            PlaceOrder
         }
 
         public partial class OrderContainer: Framework.Xaml.NavigationVMEntityContainer
@@ -45,7 +47,7 @@ namespace Elmah.PetStore.ViewModels
                 {
                     Domain = DomainKey
                     ,
-                    Page = OrderActions.FindPetsByStatus.ToString()
+                    Page = OrderActions.??.ToString()
                     ,
                     SendMessage = () => {
                         SendMessage_Init_ListPage(oneCondition, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);

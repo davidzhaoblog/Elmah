@@ -14,7 +14,7 @@ using Elmah.EntityFrameworkDAL;
 
 namespace Elmah.AspNetMvcCoreApiController
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("/api/[controller]/[action]")]
     public partial class ElmahStatusCodeApiController : Controller
     {

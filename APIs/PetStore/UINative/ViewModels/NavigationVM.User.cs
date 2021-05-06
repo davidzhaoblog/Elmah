@@ -22,8 +22,13 @@ namespace Elmah.PetStore.ViewModels
 
         public enum UserActions
         {
-            FindPetsByStatus,
-            AddPet
+            DeleteUser,
+            LoginUser,
+            LogoutUser,
+            GetUserByName,
+            CreateUser,
+            CreateUsersWithListInput,
+            UpdateUser
         }
 
         public partial class UserContainer: Framework.Xaml.NavigationVMEntityContainer
@@ -45,7 +50,7 @@ namespace Elmah.PetStore.ViewModels
                 {
                     Domain = DomainKey
                     ,
-                    Page = UserActions.FindPetsByStatus.ToString()
+                    Page = UserActions.??.ToString()
                     ,
                     SendMessage = () => {
                         SendMessage_Init_ListPage(oneCondition, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);

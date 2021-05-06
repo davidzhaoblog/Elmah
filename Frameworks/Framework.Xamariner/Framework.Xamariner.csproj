@@ -149,10 +149,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Controls\FontIcon.xaml.cs" />
-    <EmbeddedResource Include="Controls\GenericCollectionView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <Compile Include="Controls\GenericCollectionView.xaml.cs" />
     <EmbeddedResource Include="Controls\GenericCollectionViewNested2.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -199,6 +195,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Controls\WizardStepIndicator.xaml.cs" />
+    <EmbeddedResource Include="Controls\GenericCollectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Compile Include="XamForms.Controls.Calendar\CalandarChanges.cs" />
     <Compile Include="XamForms.Controls.Calendar\Calendar.cs" />
     <Compile Include="XamForms.Controls.Calendar\Calendar.Disabled.cs" />

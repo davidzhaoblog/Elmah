@@ -31,23 +31,23 @@
       <Name>Framework.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.PetStore.Models.csproj">
-      <Project>{74d34b7a-bfd8-40ef-8c6b-7c878f8efe78}</Project>
+      <Project>{c6b9890d-dcb4-4038-9f9b-5c3fcde0b840}</Project>
       <Name>Elmah.PetStore.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.PetStore.Resx.csproj">
-      <Project>{e791ab23-98ac-47a3-a3ba-637a035e50d6}</Project>
+      <Project>{f62d3ebd-6f7b-4656-b597-5c7a4235876e}</Project>
       <Name>Elmah.PetStore.Resx</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLite\Elmah.PetStore.SQLite.csproj">
-      <Project>{7d4fd2f1-9c0b-4938-9e70-1f5da8de2da7}</Project>
+      <Project>{2128e9cc-ad55-4de1-9e40-201af12323c6}</Project>
       <Name>Elmah.PetStore.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModels\Elmah.PetStore.ViewModels.csproj">
-      <Project>{bfd691b1-4c78-457b-98e3-4a040a10e96b}</Project>
+      <Project>{5934cd79-f8e8-40bb-8bea-56f8e6fb7b54}</Project>
       <Name>Elmah.PetStore.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApiClient\Elmah.PetStore.WebApiClient.csproj">
-      <Project>{550aeebe-518b-4ac8-9900-b1f6b9f3f829}</Project>
+      <Project>{7a6250de-3cd5-4fd4-9741-705aa486f1a7}</Project>
       <Name>Elmah.PetStore.WebApiClient</Name>
     </ProjectReference>
   </ItemGroup>
