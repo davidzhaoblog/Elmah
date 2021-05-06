@@ -66,7 +66,7 @@ namespace Framework.Xaml
 
         // public ICommand SearchCommand { get; protected set; }
 
-        protected async override void Search()
+        protected override async void Search()
         {
             IsRemainingItemsZero = false;
 

@@ -73,13 +73,13 @@ namespace Elmah.XamarinForms.ViewModels
         //    get; private set;
         //}
 
-        // 2.2.2.2 PetStore.User.ListPage
+        // 2.2.1.2 PetStore.User.ListPage
         //public Framework.Xaml.ActionForm.ActionParameter PetStore_User_NavigateToCommandParam_ListPage
         //{
         //    get; private set;
         //}
 
-        // 2.2.3.3 PetStore.Pet.ListPage
+        // 2.2.1.3 PetStore.Pet.ListPage
         //public Framework.Xaml.ActionForm.ActionParameter PetStore_Pet_NavigateToCommandParam_ListPage
         //{
         //    get; private set;
@@ -87,36 +87,40 @@ namespace Elmah.XamarinForms.ViewModels
 
         public AppShellVM()
         {
+            //TODO: change listItemViewMode will display different menus
+            //TODO: #1: clear selection button and done button, IsSelectionList=true and IsRegularList=false when SingleSelection and MultipleSelection
+            //TODO: #2: orderby list, IsSelectionList=false and IsRegularList=true when NavigationWhenClickItem and NavigationWhenRightArrow
+            var listItemViewMode = Framework.Xaml.ListItemViewModes.NavigationWhenRightArrow;
 
             // 3.1.1.1 ELMAH_Error.CommonResultView
-            //ELMAH_Error_NavigateToCommandParam_CommonResultView = NavigationVM.ELMAH_Error.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ELMAH_Error_NavigateToCommandParam_CommonResultView = NavigationVM.ELMAH_Error.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ELMAH_Error.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.1.2.1 ElmahApplication.CommonResultView
-            //ElmahApplication_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahApplication.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ElmahApplication_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahApplication.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahApplication.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.1.3.1 ElmahHost.CommonResultView
-            //ElmahHost_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahHost.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ElmahHost_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahHost.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahHost.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.1.4.1 ElmahSource.CommonResultView
-            //ElmahSource_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahSource.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ElmahSource_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahSource.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahSource.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.1.5.1 ElmahStatusCode.CommonResultView
-            //ElmahStatusCode_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahStatusCode.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ElmahStatusCode_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahStatusCode.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahStatusCode.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.1.6.1 ElmahType.CommonResultView
-            //ElmahType_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahType.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ElmahType_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahType.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahType.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.1.7.1 ElmahUser.CommonResultView
-            //ElmahUser_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahUser.GetNavigateToCommandParam_CommonResultView(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.DataSourceEntities.DataSourceEntity.??), Framework.Queries.QueryOrderDirections.Descending);
+            //ElmahUser_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahUser.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahUser.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.2.1.1 PetStore.Order.ListPage
-            //PetStore_Order_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Order.GetNavigateToCommandParam_ListPage(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.PetStore.Models.{0}.?), Framework.Queries.QueryOrderDirections.Descending);
+            //PetStore_Order_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Order.GetNavigateToCommandParam_ListPage(0, listItemViewMode, false, nameof(Elmah.PetStore.Models.Order.?), Framework.Queries.QueryOrderDirections.Descending);
 
-            // 3.2.2.2 PetStore.User.ListPage
-            //PetStore_User_NavigateToCommandParam_ListPage = NavigationVM_PetStore.User.GetNavigateToCommandParam_ListPage(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.PetStore.Models.{0}.?), Framework.Queries.QueryOrderDirections.Descending);
+            // 3.2.1.2 PetStore.User.ListPage
+            //PetStore_User_NavigateToCommandParam_ListPage = NavigationVM_PetStore.User.GetNavigateToCommandParam_ListPage(0, listItemViewMode, false, nameof(Elmah.PetStore.Models.User.?), Framework.Queries.QueryOrderDirections.Descending);
 
-            // 3.2.3.3 PetStore.Pet.ListPage
-            //PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.PetStore.Models.{0}.?), Framework.Queries.QueryOrderDirections.Descending);
+            // 3.2.1.3 PetStore.Pet.ListPage
+            //PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, listItemViewMode, false, nameof(Elmah.PetStore.Models.Pet.?), Framework.Queries.QueryOrderDirections.Descending);
 
         }
     }

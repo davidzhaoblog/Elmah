@@ -31,7 +31,6 @@ namespace Framework.Xaml
                 Set(nameof(ListItemViewMode), ref m_ListItemViewMode, value);
                 RaisePropertyChanged(nameof(IsSelectionList));
                 RaisePropertyChanged(nameof(IsRegularList));
-
             }
         }
 
@@ -273,7 +272,6 @@ namespace Framework.Xaml
         {
             throw new NotImplementedException("CollectionView SearchBar Text Filter Command not implemented. Please override this method.");
         }
-
 
         public ICommand SearchCommand { get; protected set; }
 
