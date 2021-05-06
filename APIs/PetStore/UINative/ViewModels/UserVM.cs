@@ -15,9 +15,32 @@ namespace Elmah.PetStore.ViewModels
         : Framework.Xaml.ViewModelBaseWithResultAndUIElement<Elmah.PetStore.Models.User>
     {
         public override string SearchBarPlaceHolder => Elmah.PetStore.Resx.UIStringResource.User;
-        public const string MessageTitle_LoadData = "Load_PetStore_User_VM";
+
+        public const string MessageTitle_LoadData_LoginUser = "Load_PetStore_User_LoginUser";
+
+        public const string MessageTitle_LoadData_LogoutUser = "Load_PetStore_User_LogoutUser";
+
+        public const string MessageTitle_LoadData_GetUserByName = "Load_PetStore_User_GetUserByName";
 
         #region 1. Properties
+
+        protected NavigationVM.UserActions m_CurrentGetAction;
+        public NavigationVM.User CurrentGetAction
+        {
+            get { return m_CurrentGetAction; }
+            set
+            {
+                Set(nameof(CurrentGetAction), ref m_CurrentGetAction, value);
+            }
+        }
+
+        public NavigationVM.UserContainer NavigationContainer
+        {
+            get
+            {
+                return DependencyService.Resolve<NavigationVM.UserContainer>();
+            }
+        }
 
         // User.Get.01 LoginUser /user/login
         protected LoginUserCriteria m_LoginUserCriteria;
@@ -71,6 +94,90 @@ namespace Elmah.PetStore.ViewModels
         public UserVM()
             : base()
         {
+
+            MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_LoginUser, async (sender, request) =>
+            {
+                CurrentGetAction = NavigationVM.UserAction.LoginUser;
+                ListItemViewMode = request.ListItemViewMode;
+                if(request.BindToGroupedResults.HasValue)
+                {
+                    if (!request.BindToGroupedResults.Value)
+                        BindToGroupedResults = request.BindToGroupedResults.Value;
+                    else
+                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
+                }
+                // Set Critieria
+                if(request.Parameters != null)
+                {
+                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                    // can be more
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                }
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                QueryPagingSetting = GetDefaultQueryPagingSetting();
+                QueryPagingSetting.CurrentPage = 1;
+                await DoSearch(true, true);
+                if(request.ActionWhenLaunch != null)
+                    request.ActionWhenLaunch();
+            });
+
+            MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_LogoutUser, async (sender, request) =>
+            {
+                CurrentGetAction = NavigationVM.UserAction.LogoutUser;
+                ListItemViewMode = request.ListItemViewMode;
+                if(request.BindToGroupedResults.HasValue)
+                {
+                    if (!request.BindToGroupedResults.Value)
+                        BindToGroupedResults = request.BindToGroupedResults.Value;
+                    else
+                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
+                }
+                // Set Critieria
+                if(request.Parameters != null)
+                {
+                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                    // can be more
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                }
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                QueryPagingSetting = GetDefaultQueryPagingSetting();
+                QueryPagingSetting.CurrentPage = 1;
+                await DoSearch(true, true);
+                if(request.ActionWhenLaunch != null)
+                    request.ActionWhenLaunch();
+            });
+
+            MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetUserByName, async (sender, request) =>
+            {
+                CurrentGetAction = NavigationVM.UserAction.GetUserByName;
+                ListItemViewMode = request.ListItemViewMode;
+                if(request.BindToGroupedResults.HasValue)
+                {
+                    if (!request.BindToGroupedResults.Value)
+                        BindToGroupedResults = request.BindToGroupedResults.Value;
+                    else
+                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
+                }
+                // Set Critieria
+                if(request.Parameters != null)
+                {
+                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                    // can be more
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                }
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                QueryPagingSetting = GetDefaultQueryPagingSetting();
+                QueryPagingSetting.CurrentPage = 1;
+                await DoSearch(true, true);
+                if(request.ActionWhenLaunch != null)
+                    request.ActionWhenLaunch();
+            });
 
             // User.Delete.01 DeleteUser /user/{username}
             DeleteUserCommand = new Command(OnDeleteUser, CanDeleteUser);

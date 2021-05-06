@@ -31,7 +31,6 @@ namespace Framework.Xaml
                 Set(nameof(ListItemViewMode), ref m_ListItemViewMode, value);
                 RaisePropertyChanged(nameof(IsSelectionList));
                 RaisePropertyChanged(nameof(IsRegularList));
-                RaisePropertyChanged(nameof(IsRegularList));
             }
         }
 
@@ -274,6 +273,19 @@ namespace Framework.Xaml
             throw new NotImplementedException("CollectionView SearchBar Text Filter Command not implemented. Please override this method.");
         }
 
+        public ICommand SearchCommand { get; protected set; }
+
+        protected abstract void Search();
+
+        protected abstract bool CanSearch();
+
+        /// <summary>
+        /// Xamarin.Forms CollectionView.RemainingItemsThresholdReachedCommand
+        /// </summary>
+        public ICommand LoadMoreCommand { get; protected set; }
+
+        protected abstract void LoadMore();
+
         public ICommand SortCommand => new Command<Framework.Xaml.ActionForm.SortActionItemModel>(OnSortCommand);
         async void OnSortCommand(Framework.Xaml.ActionForm.SortActionItemModel sortActionItemModel)
         {
@@ -331,6 +343,10 @@ namespace Framework.Xaml
 
         public ViewModelBaseWithResultAndUIElement()
         {
+            this.TextFilterCommand = new Command<string>(this.OnTextFilterCommand);
+            this.SearchCommand = new Command(this.Search, this.CanSearch);
+            this.LoadMoreCommand = new Command(this.LoadMore, this.CanSearch);
+
             this.QueryPagingSetting = GetDefaultQueryPagingSetting();
             this.QueryPagingSetting.CurrentPage = 1;
 

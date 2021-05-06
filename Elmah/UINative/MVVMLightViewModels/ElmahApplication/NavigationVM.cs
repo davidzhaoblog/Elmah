@@ -373,6 +373,9 @@ namespace Elmah.MVVMLightViewModels
             }
 
             // 03.01. CommonSearchView -> Elmah.XamarinForms.Pages.ElmahApplication.CommonSearchView
+            //TODO: change listItemViewMode will display different menus
+            //TODO: #1: clear selection button and done button, IsSelectionList=true and IsRegularList=false when SingleSelection and MultipleSelection
+            //TODO: #2: orderby list, IsSelectionList=false and IsRegularList=true when NavigationWhenClickItem and NavigationWhenRightArrow
 /*
             public Framework.Xaml.ActionForm.ActionItemModel GetActionItemModel_LaunchCommonSearchView(
                 long oneCondition // can be more
@@ -442,6 +445,9 @@ namespace Elmah.MVVMLightViewModels
 */
 
             // 03.02. CommonResultView -> Elmah.XamarinForms.Pages.ElmahApplication.CommonResultView
+            //TODO: change listItemViewMode will display different menus
+            //TODO: #1: clear selection button and done button, IsSelectionList=true and IsRegularList=false when SingleSelection and MultipleSelection
+            //TODO: #2: orderby list, IsSelectionList=false and IsRegularList=true when NavigationWhenClickItem and NavigationWhenRightArrow
 
             public Framework.Xaml.ActionForm.ActionItemModel GetActionItemModel_LaunchCommonResultView(
                 long oneCondition // can be more
