@@ -14,7 +14,7 @@ using Elmah.EntityFrameworkDAL;
 
 namespace Elmah.AspNetMvcCoreApiController
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("/api/[controller]/[action]")]
     public partial class ELMAH_ErrorApiController : Controller
     {
@@ -341,7 +341,7 @@ System.Guid? errorId = default(System.Guid?))
 
         #endregion FileRepository
 
-/*
+
         /// <summary>
         /// HearBeat.
         /// http://[host]/api/ELMAH_ErrorApi/HearBeat
@@ -353,7 +353,7 @@ System.Guid? errorId = default(System.Guid?))
         {
             return true;
         }
-*/
+
     }
 }
 

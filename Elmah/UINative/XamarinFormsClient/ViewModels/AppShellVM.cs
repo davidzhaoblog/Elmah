@@ -17,13 +17,13 @@ namespace Elmah.XamarinForms.ViewModels
         }
 
         // 1.2.1 PetStore NavigationVM
-        //public Elmah.PetStore.ViewModels.NavigationVM NavigationVM_PetStore
-        //{
-        //    get
-        //    {
-        //        return DependencyService.Resolve<Elmah.PetStore.ViewModels.NavigationVM>();
-        //    }
-        //}
+        public Elmah.PetStore.ViewModels.NavigationVM NavigationVM_PetStore
+        {
+            get
+            {
+                return DependencyService.Resolve<Elmah.PetStore.ViewModels.NavigationVM>();
+            }
+        }
 
         // 2.1.1.1 ELMAH_Error.Index
         //public Framework.Xaml.ActionForm.ActionParameter ELMAH_Error_NavigateToCommandParam_Index
@@ -164,10 +164,10 @@ namespace Elmah.XamarinForms.ViewModels
         //}
 
         // 2.2.3.3 PetStore.Pet.ListPage
-        //public Framework.Xaml.ActionForm.ActionParameter PetStore_Pet_NavigateToCommandParam_ListPage
-        //{
-        //    get; private set;
-        //}
+        public Framework.Xaml.ActionForm.ActionParameter PetStore_Pet_NavigateToCommandParam_ListPage
+        {
+            get; private set;
+        }
 
         public AppShellVM()
         {
@@ -242,7 +242,7 @@ namespace Elmah.XamarinForms.ViewModels
             //PetStore_User_NavigateToCommandParam_ListPage = NavigationVM_PetStore.User.GetNavigateToCommandParam_ListPage(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.PetStore.Models.{0}.?), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.2.3.3 PetStore.Pet.ListPage
-            //PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.PetStore.Models.{0}.?), Framework.Queries.QueryOrderDirections.Descending);
+            PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, Framework.Xaml.ListItemViewModes.SingleSelection, false, nameof(Elmah.PetStore.Models.Pet.Category), Framework.Queries.QueryOrderDirections.Descending);
 
         }
     }

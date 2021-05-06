@@ -85,7 +85,7 @@ namespace Framework.Xaml
 
         public virtual void RegisterRoutes()
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         public static async Task NavigateAsync(Framework.Xaml.ActionForm.ActionParameter actionParameter)
