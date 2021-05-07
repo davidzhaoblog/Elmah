@@ -275,16 +275,34 @@ namespace Framework.Xaml
 
         public ICommand SearchCommand { get; protected set; }
 
-        protected abstract void Search();
+        protected virtual async void Search()
+        {
+            IsRemainingItemsZero = false;
 
-        protected abstract bool CanSearch();
+            if (IsRefreshing)
+                return;
+
+            IsRefreshing = true;
+
+            await this.DoSearch(true);
+
+            IsRefreshing = false;
+        }
+
+        protected virtual bool CanSearch()
+        {
+            return true; // !(this.SearchStatus == Framework.ViewModels.SearchStatus.Searching);
+        }
 
         /// <summary>
         /// Xamarin.Forms CollectionView.RemainingItemsThresholdReachedCommand
         /// </summary>
         public ICommand LoadMoreCommand { get; protected set; }
 
-        protected abstract void LoadMore();
+        protected virtual async void LoadMore()
+        {
+            await this.DoSearch(false, CachingOption != CachingOptions.NoCaching, false);
+        }
 
         public ICommand SortCommand => new Command<Framework.Xaml.ActionForm.SortActionItemModel>(OnSortCommand);
         async void OnSortCommand(Framework.Xaml.ActionForm.SortActionItemModel sortActionItemModel)

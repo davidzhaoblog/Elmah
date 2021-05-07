@@ -25,7 +25,7 @@ namespace Elmah.PetStore.ViewModels
         #region 1. Properties
 
         protected NavigationVM.UserActions m_CurrentGetAction;
-        public NavigationVM.User CurrentGetAction
+        public NavigationVM.UserActions CurrentGetAction
         {
             get { return m_CurrentGetAction; }
             set
@@ -71,15 +71,6 @@ namespace Elmah.PetStore.ViewModels
         // User.Delete.01 DeleteUser /user/{username}
         public ICommand DeleteUserCommand { get; protected set; }
 
-        // User.Get.01 LoginUser /user/login
-        public ICommand LoginUserCommand { get; protected set; }
-
-        // User.Get.11 LogoutUser /user/logout
-        public ICommand LogoutUserCommand { get; protected set; }
-
-        // User.Get.21 GetUserByName /user/{username}
-        public ICommand GetUserByNameCommand { get; protected set; }
-
         // User.Post.01 CreateUser /user
         public ICommand CreateUserCommand { get; protected set; }
 
@@ -95,101 +86,8 @@ namespace Elmah.PetStore.ViewModels
             : base()
         {
 
-            MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_LoginUser, async (sender, request) =>
-            {
-                CurrentGetAction = NavigationVM.UserAction.LoginUser;
-                ListItemViewMode = request.ListItemViewMode;
-                if(request.BindToGroupedResults.HasValue)
-                {
-                    if (!request.BindToGroupedResults.Value)
-                        BindToGroupedResults = request.BindToGroupedResults.Value;
-                    else
-                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
-                }
-                // Set Critieria
-                if(request.Parameters != null)
-                {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
-                QueryPagingSetting = GetDefaultQueryPagingSetting();
-                QueryPagingSetting.CurrentPage = 1;
-                await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
-                    request.ActionWhenLaunch();
-            });
-
-            MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_LogoutUser, async (sender, request) =>
-            {
-                CurrentGetAction = NavigationVM.UserAction.LogoutUser;
-                ListItemViewMode = request.ListItemViewMode;
-                if(request.BindToGroupedResults.HasValue)
-                {
-                    if (!request.BindToGroupedResults.Value)
-                        BindToGroupedResults = request.BindToGroupedResults.Value;
-                    else
-                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
-                }
-                // Set Critieria
-                if(request.Parameters != null)
-                {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
-                QueryPagingSetting = GetDefaultQueryPagingSetting();
-                QueryPagingSetting.CurrentPage = 1;
-                await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
-                    request.ActionWhenLaunch();
-            });
-
-            MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetUserByName, async (sender, request) =>
-            {
-                CurrentGetAction = NavigationVM.UserAction.GetUserByName;
-                ListItemViewMode = request.ListItemViewMode;
-                if(request.BindToGroupedResults.HasValue)
-                {
-                    if (!request.BindToGroupedResults.Value)
-                        BindToGroupedResults = request.BindToGroupedResults.Value;
-                    else
-                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
-                }
-                // Set Critieria
-                if(request.Parameters != null)
-                {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
-                QueryPagingSetting = GetDefaultQueryPagingSetting();
-                QueryPagingSetting.CurrentPage = 1;
-                await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
-                    request.ActionWhenLaunch();
-            });
-
             // User.Delete.01 DeleteUser /user/{username}
             DeleteUserCommand = new Command(OnDeleteUser, CanDeleteUser);
-
-            // User.Get.01 LoginUser /user/login
-            LoginUserCommand = new Command(OnLoginUser, CanLoginUser);
-
-            // User.Get.11 LogoutUser /user/logout
-            LogoutUserCommand = new Command(OnLogoutUser, CanLogoutUser);
-
-            // User.Get.21 GetUserByName /user/{username}
-            GetUserByNameCommand = new Command(OnGetUserByName, CanGetUserByName);
 
             // User.Post.01 CreateUser /user
             CreateUserCommand = new Command(OnCreateUser, CanCreateUser);
@@ -236,105 +134,6 @@ namespace Elmah.PetStore.ViewModels
         protected virtual bool CanDeleteUser()
         {
             return this.SelectedItem != null;
-        }
-
-        // User.Get.01 LoginUser /user/login
-        public async void OnLoginUser()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreateUserApiClient();
-
-            var result = await client.LoginUserAsync(LoginUserCriteria.Username, LoginUserCriteria.Password);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanLoginUser()
-        {
-            return true;
-        }
-
-        // User.Get.11 LogoutUser /user/logout
-        public async void OnLogoutUser()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreateUserApiClient();
-
-            var result = await client.LogoutUserAsync();
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanLogoutUser()
-        {
-            return true;
-        }
-
-        // User.Get.21 GetUserByName /user/{username}
-        public async void OnGetUserByName()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreateUserApiClient();
-
-            var result = await client.GetUserByNameAsync(GetUserByNameCriteria.Username);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanGetUserByName()
-        {
-            return true;
         }
 
         // User.Post.01 CreateUser /user
@@ -438,8 +237,51 @@ namespace Elmah.PetStore.ViewModels
 
         public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
         {
-            throw new NotImplementedException();
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            Framework.WebApi.Response<Elmah.PetStore.Models.User[]> result;
+            if(false)
+            {}
+
+            else
+            {
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                return;
+            }
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Result.Any(t => t.Id == SelectedItem.Id))
+                {
+                    Result.Add(SelectedItem);
+                }
+                // success, will close Item Popup and popup message box
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
         }
+
+        /*
+        // TODO: you can customize Search()/CanSearch()/LoadMore()
+        protected override async void Search()
+        {
+        }
+
+        protected override bool CanSearch()
+        {
+        }
+
+        protected override async void LoadMore()
+        {
+        }
+        */
 
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
