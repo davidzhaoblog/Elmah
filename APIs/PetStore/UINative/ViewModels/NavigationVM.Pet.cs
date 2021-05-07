@@ -32,13 +32,13 @@ namespace Elmah.PetStore.ViewModels
             UpdatePet
         }
 
-        public partial class PetContainer: Framework.Xaml.NavigationVMEntityContainer
+        public partial class PetContainer: Framework.Xaml.NavigationVMEntityContainer<Pet>
         {
+            public const string DomainKey = "PetStore_Pet";
+
             public PetContainer(): base()
             {
             }
-
-            public const string DomainKey = "PetStore_Pet";
 
             public Framework.Xaml.ActionForm.ActionParameter GetNavigateToCommandParam_ListPage(
                 long oneCondition // can be more
@@ -69,8 +69,8 @@ namespace Elmah.PetStore.ViewModels
                 , string orderByPropertyName
                 , Framework.Queries.QueryOrderDirections? orderByDirection)
             {
-                var vm = DependencyService.Resolve<PetVM>();
-                MessagingCenter.Send<PetVM, Framework.Xaml.LoadListDataRequest>(vm, PetVM.MessageTitle_LoadData,
+                var vm = DependencyService.Resolve<PetListVM>();
+                MessagingCenter.Send<PetListVM, Framework.Xaml.LoadListDataRequest>(vm, PetListVM.MessageTitle_LoadData,
                     new Framework.Xaml.LoadListDataRequest
                     {
                         ListItemViewMode = listItemViewMode
@@ -91,7 +91,7 @@ namespace Elmah.PetStore.ViewModels
                     });
             }
 
-            protected virtual Framework.Xaml.ActionForm.ActionSheetVM GetListFooterActionSheet(PetVM vm)
+            protected virtual Framework.Xaml.ActionForm.ActionSheetVM GetListFooterActionSheet(PetListVM vm)
             {
                 List<Framework.Xaml.ActionForm.ActionItemModel> list = new List<Framework.Xaml.ActionForm.ActionItemModel>();
                 //list.Add(GetActionItemModel_LaunchCommonSearchView());
@@ -106,7 +106,7 @@ namespace Elmah.PetStore.ViewModels
             {
                 var actionItems = new List<Framework.Xaml.ActionForm.ActionItemModel>();
 
-                var vm = DependencyService.Resolve<PetVM>();
+                var vm = DependencyService.Resolve<PetListVM>();
                 vm.PostOnSortCommand = UpdateShowListFullScreenActionSheetActionItemModel;
 
                 actionItems.Add(vm.GetToggleGroupedResultsViewSearchActionItemModel());
@@ -119,7 +119,7 @@ namespace Elmah.PetStore.ViewModels
             }
             private void UpdateShowListFullScreenActionSheetActionItemModel()
             {
-                var vm = DependencyService.Resolve<PetVM>();
+                var vm = DependencyService.Resolve<PetListVM>();
                 UpdateShowListFullScreenActionSheetActionItemModel(vm.QueryOrderBySettingCollection);
             }
 

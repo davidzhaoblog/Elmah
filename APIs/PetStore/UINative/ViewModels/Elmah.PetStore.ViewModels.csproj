@@ -12,6 +12,12 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="OrderItemVM.cs" />
+    <Compile Include="UserItemVM.cs" />
+    <Compile Include="PetItemVM.cs" />
+    <Compile Include="OrderListVM.cs" />
+    <Compile Include="UserListVM.cs" />
+    <Compile Include="PetListVM.cs" />
     <Compile Include="NavigationVM.cs" />
     <Compile Include="NavigationVM.Order.cs" />
     <Compile Include="NavigationVM.User.cs" />
@@ -20,9 +26,6 @@
     <Compile Include="ViewModelLocator.Order.cs" />
     <Compile Include="ViewModelLocator.User.cs" />
     <Compile Include="ViewModelLocator.Pet.cs" />
-    <Compile Include="OrderVM.cs" />
-    <Compile Include="UserVM.cs" />
-    <Compile Include="PetVM.cs" />
     <Compile Include="WebApiClientFactory.cs" />
     <Compile Include="WebServiceConfig.cs" />
   </ItemGroup>

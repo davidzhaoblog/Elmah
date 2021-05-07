@@ -5,17 +5,26 @@ namespace Elmah.PetStore.ViewModels
     public partial class ViewModelLocator
     {
 
-        public OrderVM OrderVM
+        public OrderListVM OrderListVM
         {
             get
             {
-                return DependencyService.Resolve<OrderVM>();
+                return DependencyService.Resolve<OrderListVM>();
+            }
+        }
+
+        public OrderItemVM OrderItemVM
+        {
+            get
+            {
+                return DependencyService.Resolve<OrderItemVM>();
             }
         }
 
         static partial void _RegisterViewModelsOfOrder()
         {
-            DependencyService.Register<OrderVM>();
+            DependencyService.Register<OrderListVM>();
+            DependencyService.Register<OrderItemVM>();
             DependencyService.Register<NavigationVM.OrderContainer>();
         }
     }
