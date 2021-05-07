@@ -28,7 +28,7 @@ namespace Elmah.PetStore.ViewModels
             PlaceOrder
         }
 
-        public partial class OrderContainer: Framework.Xaml.NavigationVMEntityContainer<Order>
+        public partial class OrderContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.Order>
         {
             public const string DomainKey = "PetStore_Order";
 

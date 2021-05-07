@@ -32,7 +32,7 @@ namespace Elmah.PetStore.ViewModels
             UpdatePet
         }
 
-        public partial class PetContainer: Framework.Xaml.NavigationVMEntityContainer<Pet>
+        public partial class PetContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.Pet>
         {
             public const string DomainKey = "PetStore_Pet";
 
