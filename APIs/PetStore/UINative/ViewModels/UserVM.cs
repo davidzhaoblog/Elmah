@@ -25,7 +25,7 @@ namespace Elmah.PetStore.ViewModels
         #region 1. Properties
 
         protected NavigationVM.UserActions m_CurrentGetAction;
-        public NavigationVM.User CurrentGetAction
+        public NavigationVM.UserActions CurrentGetAction
         {
             get { return m_CurrentGetAction; }
             set
@@ -97,7 +97,7 @@ namespace Elmah.PetStore.ViewModels
 
             MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_LoginUser, async (sender, request) =>
             {
-                CurrentGetAction = NavigationVM.UserAction.LoginUser;
+                CurrentGetAction = NavigationVM.UserActions.LoginUser;
                 ListItemViewMode = request.ListItemViewMode;
                 if(request.BindToGroupedResults.HasValue)
                 {
@@ -109,13 +109,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
                         //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -125,7 +125,7 @@ namespace Elmah.PetStore.ViewModels
 
             MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_LogoutUser, async (sender, request) =>
             {
-                CurrentGetAction = NavigationVM.UserAction.LogoutUser;
+                CurrentGetAction = NavigationVM.UserActions.LogoutUser;
                 ListItemViewMode = request.ListItemViewMode;
                 if(request.BindToGroupedResults.HasValue)
                 {
@@ -137,13 +137,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
                         //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -153,7 +153,7 @@ namespace Elmah.PetStore.ViewModels
 
             MessagingCenter.Subscribe<UserVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetUserByName, async (sender, request) =>
             {
-                CurrentGetAction = NavigationVM.UserAction.GetUserByName;
+                CurrentGetAction = NavigationVM.UserActions.GetUserByName;
                 ListItemViewMode = request.ListItemViewMode;
                 if(request.BindToGroupedResults.HasValue)
                 {
@@ -165,13 +165,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.User.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)] != null)
                         //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.User.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);

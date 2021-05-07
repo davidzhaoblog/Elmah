@@ -70,7 +70,7 @@ namespace Elmah.PetStore.ViewModels
                 , Framework.Queries.QueryOrderDirections? orderByDirection)
             {
                 var vm = DependencyService.Resolve<PetVM>();
-                MessagingCenter.Send<PetVM, Framework.Xaml.LoadListDataRequest>(vm, PetVM.MessageTitle_LoadData,
+                MessagingCenter.Send<PetVM, Framework.Xaml.LoadListDataRequest>(vm, PetVM.MessageTitle_LoadData_FindPetsByStatus,
                     new Framework.Xaml.LoadListDataRequest
                     {
                         ListItemViewMode = listItemViewMode

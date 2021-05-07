@@ -111,7 +111,7 @@ namespace Elmah.PetStore.ViewModels
 
             MessagingCenter.Subscribe<PetVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_FindPetsByStatus, async (sender, request) =>
             {
-                CurrentGetAction = NavigationVM.PetAction.FindPetsByStatus;
+                CurrentGetAction = NavigationVM.PetActions.FindPetsByStatus;
                 ListItemViewMode = request.ListItemViewMode;
                 if(request.BindToGroupedResults.HasValue)
                 {
@@ -123,13 +123,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.Status)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)] != null)
+                        this.FindPetsByStatusCriteria.Status = (string)request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                    //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -139,7 +139,7 @@ namespace Elmah.PetStore.ViewModels
 
             MessagingCenter.Subscribe<PetVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_FindPetsByTags, async (sender, request) =>
             {
-                CurrentGetAction = NavigationVM.PetAction.FindPetsByTags;
+                CurrentGetAction = NavigationVM.PetActions.FindPetsByTags;
                 ListItemViewMode = request.ListItemViewMode;
                 if(request.BindToGroupedResults.HasValue)
                 {
@@ -151,13 +151,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
                         //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -167,7 +167,7 @@ namespace Elmah.PetStore.ViewModels
 
             MessagingCenter.Subscribe<PetVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetPetById, async (sender, request) =>
             {
-                CurrentGetAction = NavigationVM.PetAction.GetPetById;
+                CurrentGetAction = NavigationVM.PetActions.GetPetById;
                 ListItemViewMode = request.ListItemViewMode;
                 if(request.BindToGroupedResults.HasValue)
                 {
@@ -179,13 +179,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
+                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
                         //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -491,9 +491,42 @@ namespace Elmah.PetStore.ViewModels
             return this.SelectedItem != null;
         }
 
-        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        public override async Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
         {
-            throw new NotImplementedException();
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            var client = WebApiClientFactory.CreatePetApiClient();
+
+            Framework.WebApi.Response<Elmah.PetStore.Models.Pet[]> result;
+            if(false)
+            {}
+            else if (CurrentGetAction == NavigationVM.PetActions.FindPetsByStatus)
+            {
+                result = await client.FindPetsByStatusAsync(FindPetsByStatusCriteria.Status);
+            }
+            else
+            {
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                return;
+            }
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Result.Any(t => t.Id == SelectedItem.Id))
+                {
+                    Result.Add(SelectedItem);
+                }
+                // success, will close Item Popup and popup message box
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
         }
 
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
@@ -516,20 +549,6 @@ namespace Elmah.PetStore.ViewModels
             };
         }
 
-        protected override void Search()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override bool CanSearch()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void LoadMore()
-        {
-            throw new NotImplementedException();
-        }
     }
 
     // Pet.Get.01 FindPetsByStatus /pet/findByStatus
