@@ -42,6 +42,7 @@ namespace Elmah.PetStore.ViewModels
 
             public Framework.Xaml.ActionForm.ActionParameter GetNavigateToCommandParam_ListPage(
                 long oneCondition // can be more
+                , string messageTitle
                 , Framework.Xaml.ListItemViewModes listItemViewMode
                 , bool? bindToGroupedResults
                 , string orderByPropertyName
@@ -54,7 +55,7 @@ namespace Elmah.PetStore.ViewModels
                     Page = PetActions.??.ToString()
                     ,
                     SendMessage = () => {
-                        SendMessage_Init_ListPage(oneCondition, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);
+                        SendMessage_Init_ListPage(oneCondition, messageTitle, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);
                     }
                 };
             }
@@ -64,13 +65,14 @@ namespace Elmah.PetStore.ViewModels
             /// </summary>
             public void SendMessage_Init_ListPage(
                 long oneCondition // can be more
+                , string messageTitle
                 , Framework.Xaml.ListItemViewModes listItemViewMode
                 , bool? bindToGroupedResults
                 , string orderByPropertyName
                 , Framework.Queries.QueryOrderDirections? orderByDirection)
             {
                 var vm = DependencyService.Resolve<PetListVM>();
-                MessagingCenter.Send<PetListVM, Framework.Xaml.LoadListDataRequest>(vm, PetListVM.MessageTitle_LoadData,
+                MessagingCenter.Send<PetListVM, Framework.Xaml.LoadListDataRequest>(vm, messageTitle,
                     new Framework.Xaml.LoadListDataRequest
                     {
                         ListItemViewMode = listItemViewMode
