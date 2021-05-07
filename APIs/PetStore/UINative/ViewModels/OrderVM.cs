@@ -41,7 +41,7 @@ namespace Elmah.PetStore.ViewModels
         }
 
         // Store.Get.11 GetOrderById /store/order/{orderId}
-        protected GetOrderByIdCriteria m_GetOrderByIdCriteria;
+        protected GetOrderByIdCriteria m_GetOrderByIdCriteria = new GetOrderByIdCriteria();
         public GetOrderByIdCriteria GetOrderByIdCriteria
         {
             get { return m_GetOrderByIdCriteria; }
@@ -74,6 +74,82 @@ namespace Elmah.PetStore.ViewModels
             PlaceOrderCommand = new Command(OnPlaceOrder, CanPlaceOrder);
 
         }
+
+        public override async Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        {
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            try
+            {
+                Framework.WebApi.Response<Elmah.PetStore.Models.Order[]> result;
+                if(false)
+                {}
+
+                else
+                {
+                    // Do something, developer coding error: parameter is wrong
+                    PopupVM.HidePopup();
+                    return;
+                }
+
+                if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+                // success, will close Item Popup and popup message box
+                {
+                    BindResult(result.Message, isToClearExistingResult);
+                }
+                else
+                // failed
+                {
+                    // TODO: should display error message, no change to binding?
+                    this.StatusMessageOfResult = result.StatusMessageOfResult;
+                    this.StatusOfResult = Framework.Services.BusinessLogicLayerResponseStatus.RequestError;
+                }
+            }
+            catch //(Exception ex)
+            {
+            }
+
+            if (enablePopup)
+                PopupVM.HidePopup();
+        }
+
+        /*
+        // TODO: you can customize Search()/CanSearch()/LoadMore()
+        protected override async void Search()
+        {
+        }
+
+        protected override bool CanSearch()
+        {
+        }
+
+        protected override async void LoadMore()
+        {
+        }
+        */
+
+        public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
+        {
+            return new List<Framework.Queries.QueryOrderBySetting> {
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                        ClientSideActions = new QueryOrderBySettingClientSideActions {
+                         GetGroupResults = list => {
+                            var groupedResult =
+                                from t in list
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
+                            return groupedResult.ToList();
+                         },
+                         //GetSQLiteSortTableQuery = (tableQuery, direction) => {
+                         //   tableQuery = tableQuery.Sort(t => t.Type, direction);
+                         //    return tableQuery;
+                         //}
+                }}
+            };
+        }
+
+        #region Delete, Put and Post Command methods
 
         // Store.Delete.01 DeleteOrder /store/order/{orderId}
         public async void OnDeleteOrder()
@@ -144,73 +220,7 @@ namespace Elmah.PetStore.ViewModels
             return this.SelectedItem != null;
         }
 
-        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            Framework.WebApi.Response<Elmah.PetStore.Models.Order[]> result;
-            if(false)
-            {}
-
-            else
-            {
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-                return;
-            }
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        /*
-        // TODO: you can customize Search()/CanSearch()/LoadMore()
-        protected override async void Search()
-        {
-        }
-
-        protected override bool CanSearch()
-        {
-        }
-
-        protected override async void LoadMore()
-        {
-        }
-        */
-
-        public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
-        {
-            return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
-                        ClientSideActions = new QueryOrderBySettingClientSideActions {
-                         GetGroupResults = list => {
-                            var groupedResult =
-                                from t in list
-                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
-                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
-                            return groupedResult.ToList();
-                         },
-                         //GetSQLiteSortTableQuery = (tableQuery, direction) => {
-                         //   tableQuery = tableQuery.Sort(t => t.Type, direction);
-                         //    return tableQuery;
-                         //}
-                }}
-            };
-        }
+        #endregion Delete, Put and Post Command methods
     }
 
     // Store.Get.11 GetOrderById /store/order/{orderId}
