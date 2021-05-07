@@ -30,14 +30,15 @@ namespace Elmah.PetStore.ViewModels
 
         public partial class OrderContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.Order>
         {
+            public const string DomainKey = "PetStore_Order";
+
             public OrderContainer(): base()
             {
             }
 
-            public const string DomainKey = "PetStore_Order";
-
             public Framework.Xaml.ActionForm.ActionParameter GetNavigateToCommandParam_ListPage(
                 long oneCondition // can be more
+                , string messageTitle
                 , Framework.Xaml.ListItemViewModes listItemViewMode
                 , bool? bindToGroupedResults
                 , string orderByPropertyName
@@ -50,7 +51,7 @@ namespace Elmah.PetStore.ViewModels
                     Page = OrderActions.GetInventory.ToString()
                     ,
                     SendMessage = () => {
-                        SendMessage_Init_ListPage(oneCondition, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);
+                        SendMessage_Init_ListPage(oneCondition, messageTitle, listItemViewMode, bindToGroupedResults, orderByPropertyName, orderByDirection);
                     }
                 };
             }
@@ -60,13 +61,14 @@ namespace Elmah.PetStore.ViewModels
             /// </summary>
             public void SendMessage_Init_ListPage(
                 long oneCondition // can be more
+                , string messageTitle
                 , Framework.Xaml.ListItemViewModes listItemViewMode
                 , bool? bindToGroupedResults
                 , string orderByPropertyName
                 , Framework.Queries.QueryOrderDirections? orderByDirection)
             {
-                var vm = DependencyService.Resolve<OrderVM>();
-                MessagingCenter.Send<OrderVM, Framework.Xaml.LoadListDataRequest>(vm, OrderVM.MessageTitle_LoadData_GetOrderById,
+                var vm = DependencyService.Resolve<OrderListVM>();
+                MessagingCenter.Send<OrderListVM, Framework.Xaml.LoadListDataRequest>(vm, messageTitle,
                     new Framework.Xaml.LoadListDataRequest
                     {
                         ListItemViewMode = listItemViewMode
@@ -87,7 +89,7 @@ namespace Elmah.PetStore.ViewModels
                     });
             }
 
-            protected virtual Framework.Xaml.ActionForm.ActionSheetVM GetListFooterActionSheet(OrderVM vm)
+            protected virtual Framework.Xaml.ActionForm.ActionSheetVM GetListFooterActionSheet(OrderListVM vm)
             {
                 List<Framework.Xaml.ActionForm.ActionItemModel> list = new List<Framework.Xaml.ActionForm.ActionItemModel>();
                 //list.Add(GetActionItemModel_LaunchCommonSearchView());
@@ -102,7 +104,7 @@ namespace Elmah.PetStore.ViewModels
             {
                 var actionItems = new List<Framework.Xaml.ActionForm.ActionItemModel>();
 
-                var vm = DependencyService.Resolve<OrderVM>();
+                var vm = DependencyService.Resolve<OrderListVM>();
                 vm.PostOnSortCommand = UpdateShowListFullScreenActionSheetActionItemModel;
 
                 actionItems.Add(vm.GetToggleGroupedResultsViewSearchActionItemModel());
@@ -115,7 +117,7 @@ namespace Elmah.PetStore.ViewModels
             }
             private void UpdateShowListFullScreenActionSheetActionItemModel()
             {
-                var vm = DependencyService.Resolve<OrderVM>();
+                var vm = DependencyService.Resolve<OrderListVM>();
                 UpdateShowListFullScreenActionSheetActionItemModel(vm.QueryOrderBySettingCollection);
             }
 

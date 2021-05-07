@@ -20,7 +20,7 @@
         BackgroundColor="{DynamicResource Background}"
         Visual="Material">
     <ContentPage.Content>
-        <tctrl:GetList BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}"/>
+        <tctrl:GetList BindingContext="{Binding Path=PetListVM, Source={StaticResource PetStoreLocator}}"/>
     </ContentPage.Content>
 <!-- Using custom NavBar instead of Shell NavBar -->
 <!--
