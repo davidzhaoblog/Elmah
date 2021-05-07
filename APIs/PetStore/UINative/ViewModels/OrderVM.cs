@@ -58,12 +58,6 @@ namespace Elmah.PetStore.ViewModels
         // Store.Delete.01 DeleteOrder /store/order/{orderId}
         public ICommand DeleteOrderCommand { get; protected set; }
 
-        // Store.Get.01 GetInventory /store/inventory
-        public ICommand GetInventoryCommand { get; protected set; }
-
-        // Store.Get.11 GetOrderById /store/order/{orderId}
-        public ICommand GetOrderByIdCommand { get; protected set; }
-
         // Store.Post.01 PlaceOrder /store/order
         public ICommand PlaceOrderCommand { get; protected set; }
 
@@ -73,70 +67,8 @@ namespace Elmah.PetStore.ViewModels
             : base()
         {
 
-            MessagingCenter.Subscribe<OrderVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetInventory, async (sender, request) =>
-            {
-                CurrentGetAction = NavigationVM.OrderActions.GetInventory;
-                ListItemViewMode = request.ListItemViewMode;
-                if(request.BindToGroupedResults.HasValue)
-                {
-                    if (!request.BindToGroupedResults.Value)
-                        BindToGroupedResults = request.BindToGroupedResults.Value;
-                    else
-                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
-                }
-                // Set Critieria
-                if(request.Parameters != null)
-                {
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Order.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)] != null)
-                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Order.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
-                QueryPagingSetting = GetDefaultQueryPagingSetting();
-                QueryPagingSetting.CurrentPage = 1;
-                await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
-                    request.ActionWhenLaunch();
-            });
-
-            MessagingCenter.Subscribe<OrderVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetOrderById, async (sender, request) =>
-            {
-                CurrentGetAction = NavigationVM.OrderActions.GetOrderById;
-                ListItemViewMode = request.ListItemViewMode;
-                if(request.BindToGroupedResults.HasValue)
-                {
-                    if (!request.BindToGroupedResults.Value)
-                        BindToGroupedResults = request.BindToGroupedResults.Value;
-                    else
-                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
-                }
-                // Set Critieria
-                if(request.Parameters != null)
-                {
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Order.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)] != null)
-                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Order.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Order.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
-                QueryPagingSetting = GetDefaultQueryPagingSetting();
-                QueryPagingSetting.CurrentPage = 1;
-                await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
-                    request.ActionWhenLaunch();
-            });
-
             // Store.Delete.01 DeleteOrder /store/order/{orderId}
             DeleteOrderCommand = new Command(OnDeleteOrder, CanDeleteOrder);
-
-            // Store.Get.01 GetInventory /store/inventory
-            GetInventoryCommand = new Command(OnGetInventory, CanGetInventory);
-
-            // Store.Get.11 GetOrderById /store/order/{orderId}
-            GetOrderByIdCommand = new Command(OnGetOrderById, CanGetOrderById);
 
             // Store.Post.01 PlaceOrder /store/order
             PlaceOrderCommand = new Command(OnPlaceOrder, CanPlaceOrder);
@@ -179,72 +111,6 @@ namespace Elmah.PetStore.ViewModels
             return this.SelectedItem != null;
         }
 
-        // Store.Get.01 GetInventory /store/inventory
-        public async void OnGetInventory()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreateStoreApiClient();
-
-            var result = await client.GetInventoryAsync();
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanGetInventory()
-        {
-            return true;
-        }
-
-        // Store.Get.11 GetOrderById /store/order/{orderId}
-        public async void OnGetOrderById()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreateStoreApiClient();
-
-            var result = await client.GetOrderByIdAsync(GetOrderByIdCriteria.OrderId);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanGetOrderById()
-        {
-            return true;
-        }
-
         // Store.Post.01 PlaceOrder /store/order
         public async void OnPlaceOrder()
         {
@@ -280,8 +146,51 @@ namespace Elmah.PetStore.ViewModels
 
         public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
         {
-            throw new NotImplementedException();
+            if (ShowSavingPopup)
+                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
+
+            Framework.WebApi.Response<Elmah.PetStore.Models.Order[]> result;
+            if(false)
+            {}
+
+            else
+            {
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+                return;
+            }
+
+            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
+            // success, will close Item Popup and popup message box
+            {
+                if (Result.Any(t => t.Id == SelectedItem.Id))
+                {
+                    Result.Add(SelectedItem);
+                }
+                // success, will close Item Popup and popup message box
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
+            }
+            else
+            // failed
+            {
+                // failed, will close popup message box, stay at Item Popup
+                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
+            }
         }
+
+        /*
+        // TODO: you can customize Search()/CanSearch()/LoadMore()
+        protected override async void Search()
+        {
+        }
+
+        protected override bool CanSearch()
+        {
+        }
+
+        protected override async void LoadMore()
+        {
+        }
+        */
 
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {

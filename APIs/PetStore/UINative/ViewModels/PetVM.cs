@@ -82,15 +82,6 @@ namespace Elmah.PetStore.ViewModels
         // Pet.Delete.01 DeletePet /pet/{petId}
         public ICommand DeletePetCommand { get; protected set; }
 
-        // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-        public ICommand FindPetsByStatusCommand { get; protected set; }
-
-        // Pet.Get.11 FindPetsByTags /pet/findByTags
-        public ICommand FindPetsByTagsCommand { get; protected set; }
-
-        // Pet.Get.21 GetPetById /pet/{petId}
-        public ICommand GetPetByIdCommand { get; protected set; }
-
         // Pet.Post.01 AddPet /pet
         public ICommand AddPetCommand { get; protected set; }
 
@@ -124,7 +115,7 @@ namespace Elmah.PetStore.ViewModels
                 if(request.Parameters != null)
                 {
                     if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.Status)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)] != null)
-                        this.FindPetsByStatusCriteria.Status = (string)request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)];
+                        FindPetsByStatusCriteria.Status = (string)request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
                     //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
@@ -165,45 +156,8 @@ namespace Elmah.PetStore.ViewModels
                     request.ActionWhenLaunch();
             });
 
-            MessagingCenter.Subscribe<PetVM, Framework.Xaml.LoadListDataRequest>(this, MessageTitle_LoadData_GetPetById, async (sender, request) =>
-            {
-                CurrentGetAction = NavigationVM.PetActions.GetPetById;
-                ListItemViewMode = request.ListItemViewMode;
-                if(request.BindToGroupedResults.HasValue)
-                {
-                    if (!request.BindToGroupedResults.Value)
-                        BindToGroupedResults = request.BindToGroupedResults.Value;
-                    else
-                        SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
-                }
-                // Set Critieria
-                if(request.Parameters != null)
-                {
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                    //    this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        //this.Criteria.Common.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
-                QueryPagingSetting = GetDefaultQueryPagingSetting();
-                QueryPagingSetting.CurrentPage = 1;
-                await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
-                    request.ActionWhenLaunch();
-            });
-
             // Pet.Delete.01 DeletePet /pet/{petId}
             DeletePetCommand = new Command(OnDeletePet, CanDeletePet);
-
-            // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-            FindPetsByStatusCommand = new Command(OnFindPetsByStatus, CanFindPetsByStatus);
-
-            // Pet.Get.11 FindPetsByTags /pet/findByTags
-            FindPetsByTagsCommand = new Command(OnFindPetsByTags, CanFindPetsByTags);
-
-            // Pet.Get.21 GetPetById /pet/{petId}
-            GetPetByIdCommand = new Command(OnGetPetById, CanGetPetById);
 
             // Pet.Post.01 AddPet /pet
             AddPetCommand = new Command(OnAddPet, CanAddPet);
@@ -254,105 +208,6 @@ namespace Elmah.PetStore.ViewModels
         protected virtual bool CanDeletePet()
         {
             return this.SelectedItem != null;
-        }
-
-        // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-        public async void OnFindPetsByStatus()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreatePetApiClient();
-
-            var result = await client.FindPetsByStatusAsync(FindPetsByStatusCriteria.Status);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanFindPetsByStatus()
-        {
-            return true;
-        }
-
-        // Pet.Get.11 FindPetsByTags /pet/findByTags
-        public async void OnFindPetsByTags()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreatePetApiClient();
-
-            var result = await client.FindPetsByTagsAsync(FindPetsByTagsCriteria.Tags);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanFindPetsByTags()
-        {
-            return true;
-        }
-
-        // Pet.Get.21 GetPetById /pet/{petId}
-        public async void OnGetPetById()
-        {
-            if (ShowSavingPopup)
-                PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
-
-            var client = WebApiClientFactory.CreatePetApiClient();
-
-            var result = await client.GetPetByIdAsync(GetPetByIdCriteria.PetId);
-
-            if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
-            // success, will close Item Popup and popup message box
-            {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
-                {
-                    Result.Add(SelectedItem);
-                }
-                // success, will close Item Popup and popup message box
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");
-            }
-            else
-            // failed
-            {
-                // failed, will close popup message box, stay at Item Popup
-                PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
-            }
-        }
-
-        protected virtual bool CanGetPetById()
-        {
-            return true;
         }
 
         // Pet.Post.01 AddPet /pet
@@ -496,15 +351,22 @@ namespace Elmah.PetStore.ViewModels
             if (ShowSavingPopup)
                 PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);
 
-            var client = WebApiClientFactory.CreatePetApiClient();
-
             Framework.WebApi.Response<Elmah.PetStore.Models.Pet[]> result;
             if(false)
             {}
+
             else if (CurrentGetAction == NavigationVM.PetActions.FindPetsByStatus)
             {
+                var client = WebApiClientFactory.CreatePetApiClient();
                 result = await client.FindPetsByStatusAsync(FindPetsByStatusCriteria.Status);
             }
+
+            else if (CurrentGetAction == NavigationVM.PetActions.FindPetsByTags)
+            {
+                var client = WebApiClientFactory.CreatePetApiClient();
+                result = await client.FindPetsByTagsAsync(FindPetsByTagsCriteria.Tags);
+            }
+
             else
             {
                 PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
@@ -528,6 +390,21 @@ namespace Elmah.PetStore.ViewModels
                 PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.ClosePopup, Framework.Resx.UIStringResource.FailedToSave, GetThisItemDisplayString(), "!");
             }
         }
+
+        /*
+        // TODO: you can customize Search()/CanSearch()/LoadMore()
+        protected override async void Search()
+        {
+        }
+
+        protected override bool CanSearch()
+        {
+        }
+
+        protected override async void LoadMore()
+        {
+        }
+        */
 
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
