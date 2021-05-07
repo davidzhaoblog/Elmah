@@ -43,7 +43,7 @@ namespace Elmah.PetStore.ViewModels
         }
 
         // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-        protected FindPetsByStatusCriteria m_FindPetsByStatusCriteria;
+        protected FindPetsByStatusCriteria m_FindPetsByStatusCriteria = new FindPetsByStatusCriteria { Status = "available" };
         public FindPetsByStatusCriteria FindPetsByStatusCriteria
         {
             get { return m_FindPetsByStatusCriteria; }
@@ -376,9 +376,12 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                if (Result.Any(t => t.Id == SelectedItem.Id))
+                foreach (var item in result.Message)
                 {
-                    Result.Add(SelectedItem);
+                    if (!Result.Any(t => t.Id == item.Id))
+                    {
+                        Result.Add(item);
+                    }
                 }
                 // success, will close Item Popup and popup message box
                 PostItemAction(true, Framework.Xaml.BuiltInPopupTypes.CloseItemControlPopup, Framework.Resx.UIStringResource.Info_Successfullydeleted, GetThisItemDisplayString(), "!");

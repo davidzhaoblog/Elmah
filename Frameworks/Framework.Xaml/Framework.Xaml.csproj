@@ -15,6 +15,7 @@
     <Compile Include="Helpers\ApplicationPropertiesHelper.cs" />
     <Compile Include="Helpers\SignInData.cs" />
     <Compile Include="Helpers\SimpleAesEncryptionHelper.cs" />
+    <Compile Include="NavigationVMEntityContainer.1.cs" />
     <Compile Include="TableCachingItem.cs" />
     <Compile Include="SQLite\IDatabaseSevice.cs" />
     <Compile Include="SQLite\IDatabaseTableRepository.cs" />

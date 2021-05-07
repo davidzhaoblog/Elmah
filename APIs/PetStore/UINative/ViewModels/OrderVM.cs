@@ -144,7 +144,7 @@ namespace Elmah.PetStore.ViewModels
             return this.SelectedItem != null;
         }
 
-        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        public override async Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
         {
             if (ShowSavingPopup)
                 PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);

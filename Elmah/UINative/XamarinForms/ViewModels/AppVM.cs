@@ -111,14 +111,17 @@ namespace Elmah.XamarinForms.ViewModels
             if (Device.RuntimePlatform.ToLower() == Framework.Xamariner.Platforms.Android.ToString().ToLower())
             {
                 Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl = Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl_Android;
+                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_Android;
             }
             else if (Device.RuntimePlatform.ToLower() == Framework.Xamariner.Platforms.iOS.ToString().ToLower())
             {
                 Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl = Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl_IOS;
+                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_IOS;
             }
             else
             {
                 Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl = Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl_General;
+                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_General;
             }
 
 #if DEBUG

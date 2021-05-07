@@ -177,7 +177,7 @@ namespace Elmah.PetStore.ViewModels
 
             var client = WebApiClientFactory.CreateUserApiClient();
 
-            var result = await client.CreateUsersWithListInputAsync(SelectedItem);
+            var result = await client.CreateUsersWithListInputAsync(SelectedCollection.ToArray());
 
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
@@ -215,7 +215,7 @@ namespace Elmah.PetStore.ViewModels
             if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
             // success, will close Item Popup and popup message box
             {
-                SelectedItem = result.Message;
+                //SelectedItem = result.Message;
                 if(!Result.Any(t=>t.Id == SelectedItem.Id))
                 {
                     Result.Add(SelectedItem);
@@ -235,7 +235,7 @@ namespace Elmah.PetStore.ViewModels
             return this.SelectedItem != null;
         }
 
-        public override Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
+        public override async Task DoSearch(bool isToClearExistingResult, bool isToLoadFromCache = false, bool enablePopup = true)
         {
             if (ShowSavingPopup)
                 PopupVM.ShowPopup(Framework.Resx.UIStringResource.Loading, false);

@@ -28,7 +28,7 @@ namespace Elmah.PetStore.ViewModels
             PlaceOrder
         }
 
-        public partial class OrderContainer: Framework.Xaml.NavigationVMEntityContainer
+        public partial class OrderContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.Order>
         {
             public OrderContainer(): base()
             {

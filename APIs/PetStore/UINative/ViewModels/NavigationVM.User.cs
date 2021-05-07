@@ -31,7 +31,7 @@ namespace Elmah.PetStore.ViewModels
             UpdateUser
         }
 
-        public partial class UserContainer: Framework.Xaml.NavigationVMEntityContainer
+        public partial class UserContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.User>
         {
             public UserContainer(): base()
             {

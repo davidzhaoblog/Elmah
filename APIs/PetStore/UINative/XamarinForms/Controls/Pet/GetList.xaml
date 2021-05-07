@@ -25,7 +25,7 @@
                     Mode="{Binding Path=ELMAH_Error_IndexVM.ListItemViewMode, Source={StaticResource Locator}}"
                     Style="{DynamicResource CollectionViewItemBase}"
                     MasterFontIcon="{x:Static fxam:FontAwesomeIcons.Book}" MasterFontIconFamily="{StaticResource FontAwesomeSolid}"
-                    NavigateCommmand="{Binding Path=ELMAH_Error_IndexVM.NavigationContainer.ShowPopupCommand_Details, Source={StaticResource Locator}}">
+                    NavigateCommmand="{Binding Path=PetVM.NavigationContainer.ShowPopupCommand_Details, Source={StaticResource PetStoreLocator}}">
                 <fxc:GenericListItemWithFontIcon.MasterContent>
                     <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                         <Label AutomationId="NameLabel" Text="{Binding Path=?, Mode=OneWay}" Style="{StaticResource RegularLabelStyle}" VerticalOptions="Start" VerticalTextAlignment="Start" Padding="0" Margin="0"/>
@@ -50,7 +50,7 @@
                     <Grid>
                         <!-- 1.1. Create -->
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Create}">
-                            <tctrl:Get BindingContext="{Binding Path=ELMAH_Error_ItemVM, Source={StaticResource Locator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheetWhenEdit, Source={StaticResource LocatorClient}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
@@ -64,14 +64,14 @@
                         -->
                         <!-- 1.3. Edit -->
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Edit}">
-                            <tctrl:Get BindingContext="{Binding Path=ELMAH_Error_ItemVM, Source={StaticResource Locator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheetWhenEdit, Source={StaticResource LocatorClient}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
                         <!-- 1.4. Details -->
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Details}">
-                            <tctrl:Get BindingContext="{Binding Path=ELMAH_Error_ItemVM, Source={StaticResource Locator}}" />
-                            <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheetWhenReadOnly, Source={StaticResource LocatorClient}}"/>
+                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
+                            <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheetWhenEdit, Source={StaticResource LocatorClient}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
                         <!-- 1.5. Copy -->
