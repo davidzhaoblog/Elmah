@@ -324,7 +324,14 @@ namespace Framework.Xaml
 
         protected virtual async void LoadMore()
         {
+            if (IsRefreshing)
+                return;
+
+            IsRefreshing = true;
+
             await this.DoSearch(false, CachingOption != CachingOptions.NoCaching, false);
+
+            IsRefreshing = false;
         }
 
         public ICommand SortCommand => new Command<Framework.Xaml.ActionForm.SortActionItemModel>(OnSortCommand);
@@ -508,17 +515,22 @@ namespace Framework.Xaml
                 if (BindToGroupedResults)
                 {
                     var groupedResults = ConvertToGroupdResults(list);
+                    List<GroupedResult> currentGroupedResults;
                     if (isToClearExistingResult)
                     {
-                        this.GroupedResults.Clear();
+                        currentGroupedResults = new List<GroupedResult>();
                     }
-
+                    else
+                    {
+                        currentGroupedResults = GroupedResults.ToList();
+                    }
+                    
                     foreach (var inputGroupedResult in groupedResults)
                     {
                         // 1. remove from different group
                         foreach (var item1 in inputGroupedResult)
                         {
-                            var existings = GroupedResults.Where(t => t.GroupID?.ToString() != inputGroupedResult.GroupID?.ToString() && t.Any(GetPredicateToGetAnExistingItem(item1)));
+                            var existings = currentGroupedResults.Where(t => t.GroupID?.ToString() != inputGroupedResult.GroupID?.ToString() && t.Any(GetPredicateToGetAnExistingItem(item1)));
                             foreach (var existingGroupedResult in existings)
                             {
                                 existingGroupedResult.Remove(existingGroupedResult.First(GetPredicateToGetAnExistingItem(item1)));
@@ -526,9 +538,9 @@ namespace Framework.Xaml
                         }
 
                         // 2. add / update item in same group
-                        if (GroupedResults.Any(t => t.GroupID?.ToString() == inputGroupedResult.GroupID?.ToString()))
+                        if (currentGroupedResults.Any(t => t.GroupID?.ToString() == inputGroupedResult.GroupID?.ToString()))
                         {
-                            var existing = GroupedResults.First(t => t.GroupID?.ToString() == inputGroupedResult.GroupID?.ToString());
+                            var existing = currentGroupedResults.First(t => t.GroupID?.ToString() == inputGroupedResult.GroupID?.ToString());
                             foreach (var item1 in inputGroupedResult)
                             {
                                 if (existing.Any(GetPredicateToGetAnExistingItem(item1))) // 2.1. update existing items in same group
@@ -540,9 +552,11 @@ namespace Framework.Xaml
                         else
                         // 3. Add new Group
                         {
-                            GroupedResults.Add(inputGroupedResult);
+                            currentGroupedResults.Add(inputGroupedResult);
                         }
                     }
+
+                    GroupedResults = new ObservableCollection<GroupedResult>(currentGroupedResults);
                 }
                 else
                 {

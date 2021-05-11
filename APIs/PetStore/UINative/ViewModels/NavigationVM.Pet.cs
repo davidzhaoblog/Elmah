@@ -40,24 +40,22 @@ namespace Elmah.PetStore.ViewModels
             {
             }
 
-            public const string DomainKey = "PetStore_Pet";
-
             // 1.3.2. ShowPopupCommand_Details
-            public override async void OnShowPopupCommand_Details(Elmah.PetStore.Models.Pet item)
-            {
-                PopupVM.HidePopup();
+            //public override async void OnShowPopupCommand_Details(Elmah.PetStore.Models.Pet item)
+            //{
+            //    PopupVM.HidePopup();
 
-                var criteria = new Elmah.PetStore.Models.Pet
-                {
-                    Id = item.Id
-                };
-                var request = GetLoadDataRequest_ShowPopupCommand_Details<Elmah.PetStore.Models.Pet>(criteria);
-                DetailsFormActionSheetWhenReadOnly = GetDetailsFormActionSheetWhenReadOnly(ItemVM);
-                DetailsFormActionSheetWhenEdit = GetDetailsFormActionSheetWhenEdit(ItemVM);
-                MessagingCenter.Send<Elmah.PetStore.ViewModels.PetVM, Framework.Xaml.LoadItemDataRequest<Elmah.PetStore.Models.Pet>>(
-                    ItemVM, Elmah.PetStore.ViewModels.PetVM.MessageTitle_LoadData_GetPetById, request);
-                PopupVM.ShowItemControlPopup(Framework.Xaml.StandardRouteRelativeKey.Details.ToString(), true);
-            }
+            //    var criteria = new Elmah.PetStore.Models.Pet
+            //    {
+            //        Id = item.Id
+            //    };
+            //    var request = GetLoadDataRequest_ShowPopupCommand_Details<Elmah.PetStore.Models.Pet>(criteria);
+            //    DetailsFormActionSheetWhenReadOnly = GetDetailsFormActionSheetWhenReadOnly(ItemVM);
+            //    DetailsFormActionSheetWhenEdit = GetDetailsFormActionSheetWhenEdit(ItemVM);
+            //    MessagingCenter.Send<Elmah.PetStore.ViewModels.PetVM, Framework.Xaml.LoadItemDataRequest<Elmah.PetStore.Models.Pet>>(
+            //        ItemVM, Elmah.PetStore.ViewModels.PetVM.MessageTitle_LoadData_GetPetById, request);
+            //    PopupVM.ShowItemControlPopup(Framework.Xaml.StandardRouteRelativeKey.Details.ToString(), true);
+            //}
 
             public Framework.Xaml.ActionForm.ActionParameter GetNavigateToCommandParam_ListPage(
                 long oneCondition // can be more

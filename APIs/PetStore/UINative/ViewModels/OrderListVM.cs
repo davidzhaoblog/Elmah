@@ -41,15 +41,15 @@ namespace Elmah.PetStore.ViewModels
         }
 
         // Store.Get.11 GetOrderById /store/order/{orderId}
-        protected GetOrderByIdCriteria m_GetOrderByIdCriteria = new GetOrderByIdCriteria();
-        public GetOrderByIdCriteria GetOrderByIdCriteria
-        {
-            get { return m_GetOrderByIdCriteria; }
-            set
-            {
-                Set(nameof(GetOrderByIdCriteria), ref m_GetOrderByIdCriteria, value);
-            }
-        }
+        //protected GetOrderByIdCriteria m_GetOrderByIdCriteria = new GetOrderByIdCriteria();
+        //public GetOrderByIdCriteria GetOrderByIdCriteria
+        //{
+        //    get { return m_GetOrderByIdCriteria; }
+        //    set
+        //    {
+        //        Set(nameof(GetOrderByIdCriteria), ref m_GetOrderByIdCriteria, value);
+        //    }
+        //}
 
         #endregion 1. Properties
 
@@ -80,13 +80,13 @@ namespace Elmah.PetStore.ViewModels
                 if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
                 // success, will close Item Popup and popup message box
                 {
-                    BindResult(result.Message, isToClearExistingResult);
+                    BindResult(result.Message.ToList(), isToClearExistingResult);
                 }
                 else
                 // failed
                 {
                     // TODO: should display error message, no change to binding?
-                    this.StatusMessageOfResult = result.StatusMessageOfResult;
+                    this.StatusMessageOfResult = result.ErrorMessage.FirstOrDefault().Value;
                     this.StatusOfResult = Framework.Services.BusinessLogicLayerResponseStatus.RequestError;
                 }
             }
@@ -116,12 +116,12 @@ namespace Elmah.PetStore.ViewModels
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
             return new List<Framework.Queries.QueryOrderBySetting> {
-                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Name), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
+                new Framework.Queries.QueryOrderBySetting { IsSelected = true, DisplayName = Elmah.PetStore.Resx.UIStringResource.Name, PropertyName = nameof(Elmah.PetStore.Models.Order.Status), Direction = Framework.Queries.QueryOrderDirections.Ascending, FontIcon = Framework.Xaml.FontAwesomeIcons.Font, FontIconFamily = Framework.Xaml.IconFontFamily.FontAwesomeSolid.ToString(),
                         ClientSideActions = new QueryOrderBySettingClientSideActions {
                          GetGroupResults = list => {
                             var groupedResult =
                                 from t in list
-                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
+                                group t by new { FirstLetter = !string.IsNullOrEmpty(t.Status) && Char.IsLetter(t.Status.First()) ? t.Status.Substring(0, 1) : "?!#1-9" } into tg
                                 select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
                             return groupedResult.ToList();
                          },
@@ -134,26 +134,26 @@ namespace Elmah.PetStore.ViewModels
         }
     }
 
-    // Store.Get.11 GetOrderById /store/order/{orderId}
-    public class GetOrderByIdCriteria: Framework.Models.PropertyChangedNotifier
-    {
+    //// Store.Get.11 GetOrderById /store/order/{orderId}
+    //public class GetOrderByIdCriteria: Framework.Models.PropertyChangedNotifier
+    //{
 
-        private long m_OrderId;
+    //    private long m_OrderId;
 
-        [Display(Name = "OrderId", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
-        public long OrderId
-        {
-            get
-            {
-                return m_OrderId;
-            }
-            set
-            {
-                Set(nameof(OrderId), ref m_OrderId, value);
-            }
-        }
+    //    [Display(Name = "OrderId", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
+    //    public long OrderId
+    //    {
+    //        get
+    //        {
+    //            return m_OrderId;
+    //        }
+    //        set
+    //        {
+    //            Set(nameof(OrderId), ref m_OrderId, value);
+    //        }
+    //    }
 
-    }
+    //}
 
 }
 

@@ -13,18 +13,18 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        public PetItemVM PetItemVM
-        {
-            get
-            {
-                return DependencyService.Resolve<PetItemVM>();
-            }
-        }
+        //public PetItemVM PetItemVM
+        //{
+        //    get
+        //    {
+        //        return DependencyService.Resolve<PetItemVM>();
+        //    }
+        //}
 
         static partial void _RegisterViewModelsOfPet()
         {
             DependencyService.Register<PetListVM>();
-            DependencyService.Register<PetItemVM>();
+            //DependencyService.Register<PetItemVM>();
             DependencyService.Register<NavigationVM.PetContainer>();
         }
     }

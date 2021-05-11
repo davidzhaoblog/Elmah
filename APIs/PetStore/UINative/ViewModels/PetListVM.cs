@@ -43,7 +43,7 @@ namespace Elmah.PetStore.ViewModels
         }
 
         // Pet.Get.01 FindPetsByStatus /pet/findByStatus
-        protected FindPetsByStatusCriteria m_FindPetsByStatusCriteria = new FindPetsByStatusCriteria();
+        protected FindPetsByStatusCriteria m_FindPetsByStatusCriteria = new FindPetsByStatusCriteria { Status = "available" };
         public FindPetsByStatusCriteria FindPetsByStatusCriteria
         {
             get { return m_FindPetsByStatusCriteria; }
@@ -64,16 +64,16 @@ namespace Elmah.PetStore.ViewModels
             }
         }
 
-        // Pet.Get.21 GetPetById /pet/{petId}
-        protected GetPetByIdCriteria m_GetPetByIdCriteria = new GetPetByIdCriteria();
-        public GetPetByIdCriteria GetPetByIdCriteria
-        {
-            get { return m_GetPetByIdCriteria; }
-            set
-            {
-                Set(nameof(GetPetByIdCriteria), ref m_GetPetByIdCriteria, value);
-            }
-        }
+        //// Pet.Get.21 GetPetById /pet/{petId}
+        //protected GetPetByIdCriteria m_GetPetByIdCriteria = new GetPetByIdCriteria();
+        //public GetPetByIdCriteria GetPetByIdCriteria
+        //{
+        //    get { return m_GetPetByIdCriteria; }
+        //    set
+        //    {
+        //        Set(nameof(GetPetByIdCriteria), ref m_GetPetByIdCriteria, value);
+        //    }
+        //}
 
         #endregion 1. Properties
 
@@ -95,17 +95,25 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        FindPetsByStatusCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.Status)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)] != null)
+                    //    FindPetsByStatusCriteria.Status = request.Parameters[nameof(Elmah.PetStore.Models.Pet.Status)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
                         //FindPetsByStatusCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
+                if (IsRefreshing)
+                    return;
+
+                IsRefreshing = true;
+
                 await DoSearch(true, true);
-                if(request.ActionWhenLaunch != null)
+
+                IsRefreshing = false;
+
+                if (request.ActionWhenLaunch != null)
                     request.ActionWhenLaunch();
             });
 
@@ -123,13 +131,13 @@ namespace Elmah.PetStore.ViewModels
                 // Set Critieria
                 if(request.Parameters != null)
                 {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        FindPetsByTagsCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
+                    //    FindPetsByTagsCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                     // can be more
                     //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
                         //FindPetsByTagsCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
                 }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
@@ -172,13 +180,13 @@ namespace Elmah.PetStore.ViewModels
                 if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
                 // success, will close Item Popup and popup message box
                 {
-                    BindResult(result.Message, isToClearExistingResult);
+                    BindResult(result.Message.ToList(), isToClearExistingResult);
                 }
                 else
                 // failed
                 {
                     // TODO: should display error message, no change to binding?
-                    this.StatusMessageOfResult = result.StatusMessageOfResult;
+                    this.StatusMessageOfResult = result.ErrorMessage.FirstOrDefault().Value;
                     this.StatusOfResult = Framework.Services.BusinessLogicLayerResponseStatus.RequestError;
                 }
             }
@@ -204,6 +212,21 @@ namespace Elmah.PetStore.ViewModels
         {
         }
         */
+
+        protected override void CopyToItemInList(Elmah.PetStore.Models.Pet itemInList, Elmah.PetStore.Models.Pet newItem)
+        {
+            itemInList.Category = newItem.Category;
+            itemInList.Id = newItem.Id;
+            itemInList.Name = newItem.Name;
+            itemInList.PhotoUrls = newItem.PhotoUrls;
+            itemInList.Status = newItem.Status;
+            itemInList.Tags = newItem.Tags;
+        }
+
+        protected override Func<Elmah.PetStore.Models.Pet, bool> GetPredicateToGetAnExistingItem(Elmah.PetStore.Models.Pet item)
+        {
+            return t => false;
+        }
 
         public override List<Framework.Queries.QueryOrderBySetting> GetDefaultQueryOrderBySettingCollection()
         {
@@ -267,27 +290,5 @@ namespace Elmah.PetStore.ViewModels
         }
 
     }
-
-    // Pet.Get.21 GetPetById /pet/{petId}
-    public class GetPetByIdCriteria: Framework.Models.PropertyChangedNotifier
-    {
-
-        private long m_PetId;
-
-        [Display(Name = "PetId", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
-        public long PetId
-        {
-            get
-            {
-                return m_PetId;
-            }
-            set
-            {
-                Set(nameof(PetId), ref m_PetId, value);
-            }
-        }
-
-    }
-
 }
 
