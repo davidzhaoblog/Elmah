@@ -58,6 +58,7 @@
     <Compile Include="ViewModelBaseWithResultAndUIElement.1.cs" />
     <Compile Include="ViewModelBaseWithResultAndUIElement.2.cs" />
     <Compile Include="ViewModelBaseWithResultAndUIElement.3.cs" />
+    <Compile Include="ViewModelItemBase.1.cs" />
     <Compile Include="ViewModelTabBase.cs" />
     <Compile Include="DomainModel.cs" />
     <Compile Include="LoadItemDataRequest.cs" />
