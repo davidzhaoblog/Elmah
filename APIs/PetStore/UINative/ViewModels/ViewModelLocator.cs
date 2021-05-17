@@ -75,15 +75,11 @@ namespace Elmah.PetStore.ViewModels
         {
             DependencyService.Register<Elmah.PetStore.ViewModels.NavigationVM>();
 
-            _RegisterViewModelsOfOrder();
-
             _RegisterViewModelsOfUser();
 
             _RegisterViewModelsOfPet();
 
         }
-
-        static partial void _RegisterViewModelsOfOrder();
 
         static partial void _RegisterViewModelsOfUser();
 
