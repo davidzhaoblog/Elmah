@@ -6,7 +6,17 @@ using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
-    public class User: Framework.Models.PropertyChangedNotifier
+    public interface IUserIdentifier
+    {
+        long Id { get; set; }
+    }
+
+    public class UserIdentifier
+    {
+        public long Id { get; set; }
+    }
+
+    public class User: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, IUserIdentifier
     {
 
         private long m_Id;
@@ -201,9 +211,9 @@ namespace Elmah.PetStore.Models
             }
         }
 
-        public User GetAClone()
+        public T GetAClone<T>() where T : User, new()
         {
-            return new User
+            return new T
             {
                 Id = Id,
                 Username = Username,
@@ -214,6 +224,30 @@ namespace Elmah.PetStore.Models
                 Phone = Phone,
                 UserStatus = UserStatus
             };
+        }
+
+        public void CopyTo<T>(T destination, bool toDatabase = false, bool isInsert = true) where T : User
+        {
+            destination.Id = Id;
+            destination.Username = Username;
+            destination.FirstName = FirstName;
+            destination.LastName = LastName;
+            destination.Email = Email;
+            destination.Password = Password;
+            destination.Phone = Phone;
+            destination.UserStatus = UserStatus;
+        }
+
+        public void CopyFrom<T>(T source) where T : User
+        {
+            Id = source.Id;
+            Username = source.Username;
+            FirstName = source.FirstName;
+            LastName = source.LastName;
+            Email = source.Email;
+            Password = source.Password;
+            Phone = source.Phone;
+            UserStatus = source.UserStatus;
         }
     }
 }

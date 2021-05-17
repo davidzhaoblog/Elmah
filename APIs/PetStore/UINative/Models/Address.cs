@@ -6,7 +6,17 @@ using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
-    public class Address: Framework.Models.PropertyChangedNotifier
+    public interface IAddressIdentifier
+    {
+        string Street { get; set; }
+    }
+
+    public class AddressIdentifier
+    {
+        public string Street { get; set; }
+    }
+
+    public class Address: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, IAddressIdentifier
     {
 
         private string m_Street;
@@ -105,15 +115,31 @@ namespace Elmah.PetStore.Models
             }
         }
 
-        public Address GetAClone()
+        public T GetAClone<T>() where T : Address, new()
         {
-            return new Address
+            return new T
             {
                 Street = Street,
                 City = City,
                 State = State,
                 Zip = Zip
             };
+        }
+
+        public void CopyTo<T>(T destination, bool toDatabase = false, bool isInsert = true) where T : Address
+        {
+            destination.Street = Street;
+            destination.City = City;
+            destination.State = State;
+            destination.Zip = Zip;
+        }
+
+        public void CopyFrom<T>(T source) where T : Address
+        {
+            Street = source.Street;
+            City = source.City;
+            State = source.State;
+            Zip = source.Zip;
         }
     }
 }

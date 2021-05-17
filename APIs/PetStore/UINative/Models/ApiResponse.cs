@@ -6,7 +6,17 @@ using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
-    public class ApiResponse: Framework.Models.PropertyChangedNotifier
+    public interface IApiResponseIdentifier
+    {
+        int Code { get; set; }
+    }
+
+    public class ApiResponseIdentifier
+    {
+        public int Code { get; set; }
+    }
+
+    public class ApiResponse: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, IApiResponseIdentifier
     {
 
         private int m_Code;
@@ -81,14 +91,28 @@ namespace Elmah.PetStore.Models
             }
         }
 
-        public ApiResponse GetAClone()
+        public T GetAClone<T>() where T : ApiResponse, new()
         {
-            return new ApiResponse
+            return new T
             {
                 Code = Code,
                 Type = Type,
                 Message = Message
             };
+        }
+
+        public void CopyTo<T>(T destination, bool toDatabase = false, bool isInsert = true) where T : ApiResponse
+        {
+            destination.Code = Code;
+            destination.Type = Type;
+            destination.Message = Message;
+        }
+
+        public void CopyFrom<T>(T source) where T : ApiResponse
+        {
+            Code = source.Code;
+            Type = source.Type;
+            Message = source.Message;
         }
     }
 }

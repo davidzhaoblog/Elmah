@@ -93,13 +93,13 @@ namespace Elmah.PetStore.ViewModels
                 if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
                 // success, will close Item Popup and popup message box
                 {
-                    BindResult(result.Message, isToClearExistingResult);
+                    BindResult(result.Message.ToList(), isToClearExistingResult);
                 }
                 else
                 // failed
                 {
                     // TODO: should display error message, no change to binding?
-                    this.StatusMessageOfResult = result.StatusMessageOfResult;
+                    this.StatusMessageOfResult = result.ErrorMessage.FirstOrDefault().Value;
                     this.StatusOfResult = Framework.Services.BusinessLogicLayerResponseStatus.RequestError;
                 }
             }

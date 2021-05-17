@@ -6,7 +6,17 @@ using Newtonsoft.Json;
 
 namespace Elmah.PetStore.Models
 {
-    public class Category: Framework.Models.PropertyChangedNotifier
+    public interface ICategoryIdentifier
+    {
+        long Id { get; set; }
+    }
+
+    public class CategoryIdentifier
+    {
+        public long Id { get; set; }
+    }
+
+    public class Category: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, ICategoryIdentifier
     {
 
         private long m_Id;
@@ -57,13 +67,25 @@ namespace Elmah.PetStore.Models
             }
         }
 
-        public Category GetAClone()
+        public T GetAClone<T>() where T : Category, new()
         {
-            return new Category
+            return new T
             {
                 Id = Id,
                 Name = Name
             };
+        }
+
+        public void CopyTo<T>(T destination, bool toDatabase = false, bool isInsert = true) where T : Category
+        {
+            destination.Id = Id;
+            destination.Name = Name;
+        }
+
+        public void CopyFrom<T>(T source) where T : Category
+        {
+            Id = source.Id;
+            Name = source.Name;
         }
     }
 }
