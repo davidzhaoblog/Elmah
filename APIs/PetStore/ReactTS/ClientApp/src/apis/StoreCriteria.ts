@@ -1,7 +1,6 @@
-export interface GetOrderById {
+export interface GetOrderByIdCriteria {
 	orderId: number;
 }
-
 
 
 

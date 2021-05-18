@@ -1,11 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
-import { ApiBaseCRUD } from 'src/framework/ApiBaseCRUD';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { IResponse } from 'src/framework/Services/IResponse';
-import { IListRequest } from 'src/framework/Services/IListRequest';
-import { IListResponse } from 'src/framework/Services/IListResponse';
 import { FindPetsByStatusCriteria, FindPetsByTagsCriteria, GetPetByIdCriteria } from './PetCriteria';
-import { Pet, PetIdentifier } from 'src/features/Elmah/Pet';
+import { Pet, PetIdentifier } from 'src/features/PetStore/Pet';
 
 export class PetApi extends ApiBase
 {
@@ -41,7 +38,7 @@ export class PetApi extends ApiBase
 
 
   public GetPetById = (criteria: GetPetByIdCriteria): Promise<Pet> => {
-    const url = '/pet/{petId}';
+    const url = `/pet/${criteria.petId}`;
     return this.Get<Pet, AxiosResponse<Pet>>(url, criteria)
       .then(this.success);
   }

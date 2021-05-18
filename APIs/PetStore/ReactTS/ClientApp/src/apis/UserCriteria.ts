@@ -1,14 +1,12 @@
-export interface LoginUser {
+export interface LoginUserCriteria {
 	username: string;
 	password: string;
 }
 
 
-
-export interface GetUserByName {
+export interface GetUserByNameCriteria {
 	username: string;
 }
-
 
 
 

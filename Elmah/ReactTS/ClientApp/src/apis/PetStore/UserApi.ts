@@ -1,11 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
-import { ApiBaseCRUD } from 'src/framework/ApiBaseCRUD';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { IResponse } from 'src/framework/Services/IResponse';
-import { IListRequest } from 'src/framework/Services/IListRequest';
-import { IListResponse } from 'src/framework/Services/IListResponse';
 import { LoginUserCriteria, LogoutUserCriteria, GetUserByNameCriteria } from './UserCriteria';
-import { User, UserIdentifier } from 'src/features/Elmah/User';
+import { User, UserIdentifier } from 'src/features/PetStore/User';
 
 export class UserApi extends ApiBase
 {
@@ -34,7 +31,7 @@ export class UserApi extends ApiBase
 
 
   public GetUserByName = (criteria: GetUserByNameCriteria): Promise<User> => {
-    const url = '/user/{username}';
+    const url = `/user/${criteria.username}`;
     return this.Get<User, AxiosResponse<User>>(url, criteria)
       .then(this.success);
   }
