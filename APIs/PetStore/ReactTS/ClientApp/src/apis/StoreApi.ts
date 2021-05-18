@@ -25,7 +25,7 @@ export class StoreApi extends ApiBase
 
   public GetOrderById = (criteria: GetOrderByIdCriteria): Promise<Order> => {
     const url = `/store/order/${criteria.orderId}`;
-    return this.Get<Order, AxiosResponse<Order>>(url, criteria)
+    return this.Get<GetOrderByIdCriteria, AxiosResponse<Order>>(url, criteria)
       .then(this.success);
   }
 
