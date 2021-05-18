@@ -25,21 +25,21 @@ export class PetApi extends ApiBase
 
   public FindPetsByStatus = (criteria: FindPetsByStatusCriteria): Promise<Pet[]> => {
     const url = '/pet/findByStatus';
-    return this.Get<Pet[], AxiosResponse<Pet[]>>(url, criteria)
+    return this.Get<FindPetsByStatusCriteria, AxiosResponse<Pet[]>>(url, criteria)
       .then(this.success);
   }
 
 
   public FindPetsByTags = (criteria: FindPetsByTagsCriteria): Promise<Pet[]> => {
     const url = '/pet/findByTags';
-    return this.Get<Pet[], AxiosResponse<Pet[]>>(url, criteria)
+    return this.Get<FindPetsByTagsCriteria, AxiosResponse<Pet[]>>(url, criteria)
       .then(this.success);
   }
 
 
   public GetPetById = (criteria: GetPetByIdCriteria): Promise<Pet> => {
     const url = `/pet/${criteria.petId}`;
-    return this.Get<Pet, AxiosResponse<Pet>>(url, criteria)
+    return this.Get<GetPetByIdCriteria, AxiosResponse<Pet>>(url, criteria)
       .then(this.success);
   }
 
