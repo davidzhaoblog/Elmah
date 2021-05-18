@@ -12,9 +12,12 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="ClientApp\src\apis\SwaggerApiPet.ts" />
-    <None Include="ClientApp\src\apis\SwaggerApiStore.ts" />
-    <None Include="ClientApp\src\apis\SwaggerApiUser.ts" />
+    <None Include="ClientApp\src\apis\PetApi.ts" />
+    <None Include="ClientApp\src\apis\StoreApi.ts" />
+    <None Include="ClientApp\src\apis\UserApi.ts" />
+    <None Include="ClientApp\src\apis\PetCriteria.ts" />
+    <None Include="ClientApp\src\apis\StoreCriteria.ts" />
+    <None Include="ClientApp\src\apis\UserCriteria.ts" />
     <None Include="ClientApp\src\components\DetailsOrder.tsx" />
     <None Include="ClientApp\src\components\DetailsCustomer.tsx" />
     <None Include="ClientApp\src\components\DetailsAddress.tsx" />
@@ -79,6 +82,7 @@
     <None Include="ClientApp\src\features\Tag.ts" />
     <None Include="ClientApp\src\features\Pet.ts" />
     <None Include="ClientApp\src\features\ApiResponse.ts" />
+    <None Include="CopyToReactProject.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Elmah\UIWebCore\AspNetMvcCoreApiController\Elmah.AspNetMvcCoreApiController.csproj">
