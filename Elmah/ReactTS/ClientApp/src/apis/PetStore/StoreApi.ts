@@ -1,11 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
-import { ApiBaseCRUD } from 'src/framework/ApiBaseCRUD';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { IResponse } from 'src/framework/Services/IResponse';
-import { IListRequest } from 'src/framework/Services/IListRequest';
-import { IListResponse } from 'src/framework/Services/IListResponse';
 import { GetInventoryCriteria, GetOrderByIdCriteria } from './StoreCriteria';
-import { Store, StoreIdentifier } from 'src/features/Elmah/Store';
+import { Store, StoreIdentifier } from 'src/features/PetStore/Store';
 
 export class StoreApi extends ApiBase
 {
@@ -27,7 +24,7 @@ export class StoreApi extends ApiBase
 
 
   public GetOrderById = (criteria: GetOrderByIdCriteria): Promise<Order> => {
-    const url = '/store/order/{orderId}';
+    const url = `/store/order/${criteria.orderId}`;
     return this.Get<Order, AxiosResponse<Order>>(url, criteria)
       .then(this.success);
   }

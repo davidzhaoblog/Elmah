@@ -1,19 +1,16 @@
-export interface FindPetsByStatus {
+export interface FindPetsByStatusCriteria {
 	status: string;
 }
 
 
-
-export interface FindPetsByTags {
+export interface FindPetsByTagsCriteria {
 	tags: string[];
 }
 
 
-
-export interface GetPetById {
+export interface GetPetByIdCriteria {
 	petId: number;
 }
-
 
 
 
