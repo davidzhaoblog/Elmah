@@ -1,8 +1,8 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { LoginUserCriteria, LogoutUserCriteria, GetUserByNameCriteria } from './UserCriteria';
-import { User, UserIdentifier } from 'src/features/PetStore/User';
+import { LoginUserCriteria, GetUserByNameCriteria } from './UserCriteria';
+import { User } from 'src/features/PetStore/User';
 
 export class UserApi extends ApiBase
 {
@@ -27,6 +27,13 @@ export class UserApi extends ApiBase
     const url = '/user/login';
     return this.Get<LoginUserCriteria, AxiosResponse<string>>(url, criteria)
       .then(this.success);
+  }
+
+
+  public LogoutUser = (): Promise<string> => {
+    const url = '/user/logout';
+    return this.Get<string, AxiosResponse>(url, null)
+      .then(this.success_NoResponseBody);
   }
 
 

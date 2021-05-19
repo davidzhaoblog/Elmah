@@ -1,8 +1,8 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { GetInventoryCriteria, GetOrderByIdCriteria } from './StoreCriteria';
-import { Store, StoreIdentifier } from 'src/features/PetStore/Store';
+import { GetOrderByIdCriteria } from './StoreCriteria';
+import { Order } from 'src/features/PetStore/Order';
 
 export class StoreApi extends ApiBase
 {
@@ -20,6 +20,13 @@ export class StoreApi extends ApiBase
     // }));
     
     // console.log(conf);
+  }
+
+
+  public GetInventory = (): Promise<any> => {
+    const url = '/store/inventory';
+    return this.Get<string, AxiosResponse<any>>(url, null)
+      .then(this.success);
   }
 
 

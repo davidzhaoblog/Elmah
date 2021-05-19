@@ -2,7 +2,8 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
 import { FindPetsByStatusCriteria, FindPetsByTagsCriteria, GetPetByIdCriteria } from './PetCriteria';
-import { Pet, PetIdentifier } from 'src/features/PetStore/Pet';
+import { ApiResponse } from 'src/features/PetStore/ApiResponse';
+import { Pet } from 'src/features/PetStore/Pet';
 
 export class PetApi extends ApiBase
 {
