@@ -6,7 +6,7 @@ import { userApi } from 'src/apis/PetStore/UserApi';
 
 
 
-import { LoginUserCriteria, defaultLoginUserCriteria, GetUserByNameCriteria, defaultGetUserByNameCriteria } from 'src/apis/PetStore/UserCriteria;
+import { LoginUserCriteria, defaultLoginUserCriteria, GetUserByNameCriteria, defaultGetUserByNameCriteria } from 'src/apis/PetStore/UserCriteria';
 
 
 import { orderBys, User } from '../User';
@@ -26,7 +26,7 @@ const entityAdapter = createEntityAdapter<User>({
 export const loginUser = createAsyncThunk(
     'User.loginUser',
     async (criteria: LoginUserCriteria, {dispatch}) => {
-        const response = await _userApi.LoginUser(criteria);
+        const response = await userApi.LoginUser(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -37,7 +37,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
     'User.logoutUser',
     async (criteria: LogoutUserCriteria, {dispatch}) => {
-        const response = await _userApi.LogoutUser(criteria);
+        const response = await userApi.LogoutUser(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -48,7 +48,7 @@ export const logoutUser = createAsyncThunk(
 export const getUserByName = createAsyncThunk(
     'User.getUserByName',
     async (criteria: GetUserByNameCriteria, {dispatch}) => {
-        const response = await _userApi.GetUserByName(criteria);
+        const response = await userApi.GetUserByName(criteria);
         dispatch(closeSpinner());
         return response;
     }
