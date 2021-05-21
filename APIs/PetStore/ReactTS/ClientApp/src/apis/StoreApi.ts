@@ -23,6 +23,7 @@ export class StoreApi extends ApiBase
   }
 
 
+  // Get.1 GetInventory -- /store/inventory
   public GetInventory = (): Promise<any> => {
     const url = '/store/inventory';
     return this.Get<string, AxiosResponse<any>>(url, null)
@@ -30,6 +31,7 @@ export class StoreApi extends ApiBase
   }
 
 
+  // Get.2 GetOrderById -- /store/order/{orderId}
   public GetOrderById = (criteria: GetOrderByIdCriteria): Promise<Order> => {
     const url = `/store/order/${criteria.orderId}`;
     return this.Get<GetOrderByIdCriteria, AxiosResponse<Order>>(url, criteria)
