@@ -1,7 +1,14 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
+
 import { petApi } from 'src/apis/PetStore/PetApi';
+
+
+
+import { FindPetsByStatusCriteria, defaultFindPetsByStatusCriteria, FindPetsByTagsCriteria, defaultFindPetsByTagsCriteria, GetPetByIdCriteria, defaultGetPetByIdCriteria } from 'src/apis/PetStore/PetCriteria;
+
+
 import { orderBys, Pet } from '../Pet';
 
 // 1. createEntityAdapter
@@ -19,7 +26,7 @@ const entityAdapter = createEntityAdapter<Pet>({
 export const findPetsByStatus = createAsyncThunk(
     'Pet.findPetsByStatus',
     async (criteria: FindPetsByStatusCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByStatus(criteria);
+        const response = await _petApi.FindPetsByStatus(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -30,7 +37,7 @@ export const findPetsByStatus = createAsyncThunk(
 export const findPetsByTags = createAsyncThunk(
     'Pet.findPetsByTags',
     async (criteria: FindPetsByTagsCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByTags(criteria);
+        const response = await _petApi.FindPetsByTags(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -41,7 +48,7 @@ export const findPetsByTags = createAsyncThunk(
 export const getPetById = createAsyncThunk(
     'Pet.getPetById',
     async (criteria: GetPetByIdCriteria, {dispatch}) => {
-        const response = await petApi.GetPetById(criteria);
+        const response = await _petApi.GetPetById(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -54,12 +61,17 @@ const petSlice = createSlice({
     name: 'pets',
     initialState: entityAdapter.getInitialState({
         orderBy: orderBys.find(x=>x.expression),
+
+        findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),
+        findPetsByTagsCriteria: defaultFindPetsByTagsCriteria(),
+        getPetByIdCriteria: defaultGetPetByIdCriteria()
+
+
     }), // createEntityAdapter Usage #1
     reducers: {
     },
     // 3.2. extraReducers
     extraReducers: builder => {
-
 
 		// 3.2.Get.1. FindPetsByStatus - /pet/findByStatus
         builder.addCase(findPetsByStatus.pending, (state) => {

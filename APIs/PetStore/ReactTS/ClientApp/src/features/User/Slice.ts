@@ -1,7 +1,14 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
+
 import { userApi } from 'src/apis/PetStore/UserApi';
+
+
+
+import { LoginUserCriteria, defaultLoginUserCriteria, GetUserByNameCriteria, defaultGetUserByNameCriteria } from 'src/apis/PetStore/UserCriteria;
+
+
 import { orderBys, User } from '../User';
 
 // 1. createEntityAdapter
@@ -19,7 +26,7 @@ const entityAdapter = createEntityAdapter<User>({
 export const loginUser = createAsyncThunk(
     'User.loginUser',
     async (criteria: LoginUserCriteria, {dispatch}) => {
-        const response = await userApi.LoginUser(criteria);
+        const response = await _userApi.LoginUser(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -30,7 +37,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
     'User.logoutUser',
     async (criteria: LogoutUserCriteria, {dispatch}) => {
-        const response = await userApi.LogoutUser(criteria);
+        const response = await _userApi.LogoutUser(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -41,7 +48,7 @@ export const logoutUser = createAsyncThunk(
 export const getUserByName = createAsyncThunk(
     'User.getUserByName',
     async (criteria: GetUserByNameCriteria, {dispatch}) => {
-        const response = await userApi.GetUserByName(criteria);
+        const response = await _userApi.GetUserByName(criteria);
         dispatch(closeSpinner());
         return response;
     }
@@ -54,12 +61,16 @@ const userSlice = createSlice({
     name: 'users',
     initialState: entityAdapter.getInitialState({
         orderBy: orderBys.find(x=>x.expression),
+
+        loginUserCriteria: defaultLoginUserCriteria(),
+        getUserByNameCriteria: defaultGetUserByNameCriteria()
+
+
     }), // createEntityAdapter Usage #1
     reducers: {
     },
     // 3.2. extraReducers
     extraReducers: builder => {
-
 
 		// 3.2.Get.1. LoginUser - /user/login
         builder.addCase(loginUser.pending, (state) => {
