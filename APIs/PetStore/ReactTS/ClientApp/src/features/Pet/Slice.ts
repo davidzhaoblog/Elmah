@@ -1,13 +1,13 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
-import { petApi } from 'src/apis/PetApi';
-import { orderBys, Pet } from './Types';
+import { petApi } from 'src/apis/PetStore/PetApi';
+import { orderBys, Pet } from '../Pet';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Pet>({
     // Assume IDs are stored in a field other than `book.id`
-    selectId: (item: Pet) => item.errorId,
+    selectId: (item: Pet) => item.id,
     // Keep the "all IDs" array sorted based on book titles
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
