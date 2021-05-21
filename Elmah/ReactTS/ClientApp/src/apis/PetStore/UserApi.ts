@@ -23,6 +23,7 @@ export class UserApi extends ApiBase
   }
 
 
+  // Get.1 LoginUser -- /user/login
   public LoginUser = (criteria: LoginUserCriteria): Promise<string> => {
     const url = '/user/login';
     return this.Get<LoginUserCriteria, AxiosResponse<string>>(url, criteria)
@@ -30,6 +31,7 @@ export class UserApi extends ApiBase
   }
 
 
+  // Get.2 LogoutUser -- /user/logout
   public LogoutUser = (): Promise<string> => {
     const url = '/user/logout';
     return this.Get<string, AxiosResponse>(url, null)
@@ -37,6 +39,7 @@ export class UserApi extends ApiBase
   }
 
 
+  // Get.3 GetUserByName -- /user/{username}
   public GetUserByName = (criteria: GetUserByNameCriteria): Promise<User> => {
     const url = `/user/${criteria.username}`;
     return this.Get<GetUserByNameCriteria, AxiosResponse<User>>(url, criteria)
