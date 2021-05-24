@@ -36,8 +36,8 @@ export const loginUser = createAsyncThunk(
 // 2.Get.2. LogoutUser - /user/logout
 export const logoutUser = createAsyncThunk(
     'User.logoutUser',
-    async (criteria: LogoutUserCriteria, {dispatch}) => {
-        const response = await userApi.LogoutUser(criteria);
+    async (criteria: any, {dispatch}) => {
+        const response = await userApi.LogoutUser();
         dispatch(closeSpinner());
         return response;
     }
@@ -79,7 +79,7 @@ const userSlice = createSlice({
         builder.addCase(loginUser.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-			entityAdapter.upsertOne(state, payload);
+			 entityAdapter.upsertOne(state, payload);
             // console.log("loginUser.fulfilled");
         });
         builder.addCase(loginUser.rejected, (state, action) => {
@@ -94,7 +94,7 @@ const userSlice = createSlice({
         builder.addCase(logoutUser.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-			entityAdapter.upsertOne(state, payload);
+			// entityAdapter.upsertOne(state, payload);
             // console.log("logoutUser.fulfilled");
         });
         builder.addCase(logoutUser.rejected, (state, action) => {
@@ -109,7 +109,7 @@ const userSlice = createSlice({
         builder.addCase(getUserByName.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-			entityAdapter.upsertOne(state, payload);
+			 entityAdapter.upsertOne(state, payload);
             // console.log("getUserByName.fulfilled");
         });
         builder.addCase(getUserByName.rejected, (state, action) => {
