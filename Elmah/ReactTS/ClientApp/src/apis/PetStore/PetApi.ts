@@ -28,7 +28,7 @@ export class PetApi extends ApiBase
   public FindPetsByStatus = (criteria: FindPetsByStatusCriteria): Promise<Pet[]> => {
     const url = '/pet/findByStatus';
     return this.Get<FindPetsByStatusCriteria, AxiosResponse<Pet[]>>(url, criteria)
-      .then(this.success_Multiple);
+      .then(this.success);
   }
 
 
@@ -36,7 +36,7 @@ export class PetApi extends ApiBase
   public FindPetsByTags = (criteria: FindPetsByTagsCriteria): Promise<Pet[]> => {
     const url = '/pet/findByTags';
     return this.Get<FindPetsByTagsCriteria, AxiosResponse<Pet[]>>(url, criteria)
-      .then(this.success_Multiple);
+      .then(this.success);
   }
 
 
@@ -44,7 +44,7 @@ export class PetApi extends ApiBase
   public GetPetById = (criteria: GetPetByIdCriteria): Promise<Pet> => {
     const url = `/pet/${criteria.petId}`;
     return this.Get<GetPetByIdCriteria, AxiosResponse<Pet>>(url, criteria)
-      .then(this.success_Single);
+      .then(this.success);
   }
 
 
