@@ -80,11 +80,7 @@ const petSlice = createSlice({
         builder.addCase(findPetsByStatus.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            const { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
-                entityAdapter.upsertMany(state, message);
-            }
+			entityAdapter.upsertMany(state, payload);
             // console.log("findPetsByStatus.fulfilled");
         });
         builder.addCase(findPetsByStatus.rejected, (state, action) => {
@@ -99,11 +95,7 @@ const petSlice = createSlice({
         builder.addCase(findPetsByTags.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            const { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
-                entityAdapter.upsertMany(state, message);
-            }
+			entityAdapter.upsertMany(state, payload);
             // console.log("findPetsByTags.fulfilled");
         });
         builder.addCase(findPetsByTags.rejected, (state, action) => {
@@ -118,11 +110,7 @@ const petSlice = createSlice({
         builder.addCase(getPetById.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-            const { businessLogicLayerResponseStatus, message } = payload;
-            if(businessLogicLayerResponseStatus && businessLogicLayerResponseStatus === 'MessageOK')
-            {
-                entityAdapter.upsertMany(state, message);
-            }
+			entityAdapter.upsertOne(state, payload);
             // console.log("getPetById.fulfilled");
         });
         builder.addCase(getPetById.rejected, (state, action) => {
