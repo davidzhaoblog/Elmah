@@ -66,6 +66,14 @@
     <None Include="ClientApp\src\features\Tag\Index.tsx" />
     <None Include="ClientApp\src\features\Pet\Index.tsx" />
     <None Include="ClientApp\src\features\ApiResponse\Index.tsx" />
+    <None Include="ClientApp\src\features\Order\Route.tsx" />
+    <None Include="ClientApp\src\features\Customer\Route.tsx" />
+    <None Include="ClientApp\src\features\Address\Route.tsx" />
+    <None Include="ClientApp\src\features\Category\Route.tsx" />
+    <None Include="ClientApp\src\features\User\Route.tsx" />
+    <None Include="ClientApp\src\features\Tag\Route.tsx" />
+    <None Include="ClientApp\src\features\Pet\Route.tsx" />
+    <None Include="ClientApp\src\features\ApiResponse\Route.tsx" />
     <None Include="ClientApp\src\features\User\Slice.ts" />
     <None Include="ClientApp\src\features\Pet\Slice.ts" />
     <None Include="ClientApp\src\features\Order.ts" />
