@@ -42,6 +42,7 @@ import ElmahStatusCodeRoute from "src/features/ElmahStatusCode/Route";
 import ElmahTypeRoute from "src/features/ElmahType/Route";
 import ElmahUserRoute from "src/features/ElmahUser/Route";
 
+import PetStorePetRoute from "src/features/PetStore/Pet/Route";
 
 interface IMasterLayoutProps {
     theme: Theme;
@@ -310,7 +311,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
                 <PrivateRoute path='/ElmahUser' exact={false} component={ ElmahUserRoute } />
 
-
+                <PrivateRoute path='/PetStore/Pet' exact={false} component={ PetStorePetRoute } />
 
                 <Route path='/account' component={renderAccount} />
                 {renderAlert()}

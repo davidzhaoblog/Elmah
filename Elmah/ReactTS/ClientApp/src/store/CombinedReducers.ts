@@ -13,6 +13,8 @@ import elmahStatusCode from 'src/features/ElmahStatusCode/Slice';
 import elmahType from 'src/features/ElmahType/Slice';
 import elmahUser from 'src/features/ElmahUser/Slice';
 
+import pet from 'src/features/PetStore/Pet/Slice';
+import user from 'src/features/PetStore/User/Slice';
 
 import { 
     eLMAH_ErrorList,
@@ -31,6 +33,9 @@ export const reducers = combineReducers({
     todos: todos,
     visibilityFilter: visibilityFilter,
 
+    user: user,
+    pet: pet,
+
     eLMAH_Error: eLMAH_Error,
     elmahApplication: elmahApplication,
     elmahHost: elmahHost,
@@ -45,7 +50,7 @@ export const reducers = combineReducers({
     elmahSourceList,
     elmahStatusCodeList,
     elmahTypeList,
-    elmahUserList
+    elmahUserList,
 });
 
 export type RootState = ReturnType<typeof reducers>
