@@ -79,7 +79,7 @@ const userSlice = createSlice({
         builder.addCase(loginUser.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-			 entityAdapter.upsertOne(state, payload);
+			entityAdapter.upsertOne(state, payload);
             // console.log("loginUser.fulfilled");
         });
         builder.addCase(loginUser.rejected, (state, action) => {
@@ -109,7 +109,7 @@ const userSlice = createSlice({
         builder.addCase(getUserByName.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-			 entityAdapter.upsertOne(state, payload);
+			entityAdapter.upsertOne(state, payload);
             // console.log("getUserByName.fulfilled");
         });
         builder.addCase(getUserByName.rejected, (state, action) => {

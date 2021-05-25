@@ -12,6 +12,8 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="ClientApp\public\locales\en\UIStringResource.json" />
+    <Content Include="ClientApp\public\locales\es\UIStringResource.json" />
     <None Include="ClientApp\src\apis\PetApi.ts" />
     <None Include="ClientApp\src\apis\StoreApi.ts" />
     <None Include="ClientApp\src\apis\UserApi.ts" />
