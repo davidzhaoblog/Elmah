@@ -1,6 +1,6 @@
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
-import { Category } from "./Category";,
+import { Category } from "./Category";
 import { Tag } from "./Tag";
 
 export interface Pet {

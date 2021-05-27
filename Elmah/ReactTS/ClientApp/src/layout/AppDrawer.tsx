@@ -50,6 +50,8 @@ export default function AppDrawer(props: IAppDrawerProps): JSX.Element {
 
         { path: '/ElmahUser', title: 'ElmahUser', icon: () => <AccountCircleIcon /> },
 
+        { path: '/PetStore/Pet', title: 'Pet', icon: () => <AccountCircleIcon /> },
+
 
 
     ]

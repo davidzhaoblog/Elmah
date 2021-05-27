@@ -16,7 +16,7 @@ namespace Elmah.PetStore.Models
         public long Id { get; set; }
     }
 
-    public class Pet: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, IPetIdentifier
+    public class Pet: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone<Pet>, IPetIdentifier
     {
 
         private long m_Id;

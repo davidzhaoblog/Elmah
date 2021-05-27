@@ -2,6 +2,8 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 
+import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
+
 import { petApi } from 'src/apis/PetStore/PetApi';
 
 
@@ -10,6 +12,7 @@ import { FindPetsByStatusCriteria, defaultFindPetsByStatusCriteria, FindPetsByTa
 
 
 import { orderBys, Pet } from '../Pet';
+
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Pet>({
@@ -64,9 +67,9 @@ const petSlice = createSlice({
 
         findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),
         findPetsByTagsCriteria: defaultFindPetsByTagsCriteria(),
-        getPetByIdCriteria: defaultGetPetByIdCriteria()
+        getPetByIdCriteria: defaultGetPetByIdCriteria(),
 
-
+        queryPagingSetting: createQueryPagingSetting(10, 1)
     }), // createEntityAdapter Usage #1
     reducers: {
     },

@@ -237,7 +237,7 @@ namespace Elmah.PetStore.ViewModels
                             var groupedResult =
                                 from t in list
                                 group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
-                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
+                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone<Models.Pet>()).ToList());
                             return groupedResult.ToList();
                          },
                          //GetSQLiteSortTableQuery = (tableQuery, direction) => {
