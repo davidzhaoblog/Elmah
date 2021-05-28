@@ -14,10 +14,10 @@ import { IListProps } from 'src/framework/ViewModels/IListProps';
 
 import { Typography } from '@material-ui/core';
 
-import { del } from 'src/features/ElmahUser/Slice';
-import { ElmahUser } from 'src/features/ElmahUser/Types';
+// import { del } from 'src/features/ElmahUser/Slice';
+import { Pet } from 'src/features/PetStore/Pet';
 
-function ListItem(props: IListItemProps<ElmahUser>) {
+function ListItem(props: IListItemProps<Pet>) {
     const classes = props.classes;
     const dispatch = useDispatch();
   const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
@@ -31,7 +31,7 @@ function ListItem(props: IListItemProps<ElmahUser>) {
     // 2.1. Delete
     const handleDelete = () => {
         const confirmLDelete = () => {
-            dispatch(del(props.item));
+            // dispatch(del(props.item));
             dispatch(closeAlert());
         }
         const handleAlertClose = () => {
@@ -40,7 +40,7 @@ function ListItem(props: IListItemProps<ElmahUser>) {
 
         const deleteAlertDialog = {
             title: t('UIStringResource:Delete'),
-            message: 'You are deleting ' + props.item.user,
+            message: 'You are deleting ' + props.item.name,
             buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
         };
 
@@ -48,7 +48,7 @@ function ListItem(props: IListItemProps<ElmahUser>) {
     };
 
     return (
-        <Accordion key={props.item.user.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <Accordion key={props.item.name.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
             <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
                 <Avatar className={classes.avatar} />
                 <Typography className={classes.heading} variant="h1" component="h1">Take some data from AccordionDetails</Typography>
@@ -57,7 +57,7 @@ function ListItem(props: IListItemProps<ElmahUser>) {
             <AccordionDetails>
                 <div className ={clsx(classes.column)}>
 <InputLabel shrink>{t('UIStringResourcePerEntity:User')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.user}</Typography>
+                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.name}</Typography>
                 </div>
             </AccordionDetails>
             <Divider />
@@ -69,7 +69,7 @@ function ListItem(props: IListItemProps<ElmahUser>) {
     );
 }
 
-export default function List(props: IListProps<ElmahUser>) {
+export default function List(props: IListProps<Pet>) {
     return (
         <div>
             {props.items.map((item: any) => {

@@ -27,7 +27,7 @@ const entityAdapter = createEntityAdapter<Pet>({
 
 // 2.Get.1. FindPetsByStatus - /pet/findByStatus
 export const findPetsByStatus = createAsyncThunk(
-    'Pet.findPetsByStatus',
+    'findPetsByStatus',
     async (criteria: FindPetsByStatusCriteria, {dispatch}) => {
         const response = await petApi.FindPetsByStatus(criteria);
         dispatch(closeSpinner());
@@ -38,11 +38,19 @@ export const findPetsByStatus = createAsyncThunk(
 
 // 2.Get.2. FindPetsByTags - /pet/findByTags
 export const findPetsByTags = createAsyncThunk(
-    'Pet.findPetsByTags',
+    'findPetsByTags',
     async (criteria: FindPetsByTagsCriteria, {dispatch}) => {
+        try
+        {
         const response = await petApi.FindPetsByTags(criteria);
         dispatch(closeSpinner());
         return response;
+        }
+        catch
+        {
+            dispatch(closeSpinner());
+            return null;
+            }
     }
 )
 

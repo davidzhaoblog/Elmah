@@ -14,15 +14,10 @@ import { showSpinner } from 'src/layout/appSlice';
 
 import { StyledTextField } from '../../controls/StyledTextField';
 
+import { FindPetsByStatusCriteria } from 'src/apis/PetStore/PetCriteria';
+import { getIndexVM } from 'src/features/ELMAH_Error/Slice';
 
-import { 
-
-} from 'src/features/listSlices';
-
-import { ElmahUserCommonCriteria } from 'src/features/ElmahUser/Types';
-import { getIndexVM } from 'src/features/ElmahUser/Slice';
-
-export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> & IPopupProps) {
+export default function Search(props: ISearchFormProps<FindPetsByStatusCriteria> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
     const { t } = useTranslation(["translation", "UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
@@ -31,11 +26,27 @@ export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> 
 
 	// all form validations are empty, can be removed if not in use
     const formValidations = {
-		user: {},
-		stringContains_AllColumns: {}
+		status: {},
     };
 
-
+    // const elmahApplicationList = useSelector(
+    //     (state: RootState) => elmahApplicationListSelector.selectAll(state)
+    // );
+    // const elmahHostList = useSelector(
+    //     (state: RootState) => elmahHostListSelector.selectAll(state)
+    // );
+    // const elmahSourceList = useSelector(
+    //     (state: RootState) => elmahSourceListSelector.selectAll(state)
+    // );
+    // const elmahStatusCodeList = useSelector(
+    //     (state: RootState) => elmahStatusCodeListSelector.selectAll(state)
+    // );
+    // const elmahTypeList = useSelector(
+    //     (state: RootState) => elmahTypeListSelector.selectAll(state)
+    // );
+    // const elmahUserList = useSelector(
+    //     (state: RootState) => elmahUserListSelector.selectAll(state)
+    // );
 
     // TODO: add "setValue," if you need setValue, setValue will be added when DateTimeRange
     const { register, handleSubmit, control, errors, formState, reset } = useForm({
@@ -45,7 +56,12 @@ export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> 
     });
 
 
-
+    // const timeUtcRangePredefinedList = getPreDefinedDateTimeRanges();
+    // const onChanged_TimeUtcRangePredefined = (predefined: PreDefinedDateTimeRanges) => {
+    //     const timeUtcRange = convertToDateTimeRange(predefined);
+    //     setValue('timeUtcRange.lower', timeUtcRange.lower);
+    //     setValue('timeUtcRange.upper', timeUtcRange.upper);
+    // }
 
     const closePopup = () => {
         setOpenPopup(false)
@@ -64,7 +80,12 @@ export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> 
 
     useEffect(() => {
         // you can do async server request and fill up form
-
+        // dispatch(getElmahApplicationList());
+        // dispatch(getElmahHostList());
+        // dispatch(getElmahSourceList());
+        // dispatch(getElmahStatusCodeList());
+        // dispatch(getElmahTypeList());
+        // dispatch(getElmahUserList());
         reset(criteria);
 
     }, []);
@@ -76,20 +97,19 @@ export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> 
                 <Grid item lg={12}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
-                            name='stringContains_AllColumns'
+                            name='status'
                             label={t('Search')}
-                            inputRef={register(formValidations.stringContains_AllColumns)}
+                            inputRef={register(formValidations.status)}
                             variant='outlined'
                             margin='normal'
                             fullWidth
                             autoFocus
                         />
-                          {errors.stringContains_AllColumns && (
-                            <span className={classes.error}>{errors.stringContains_AllColumns.message}</span>
+                          {errors.status && (
+                            <span className={classes.error}>{errors.status.message}</span>
                         )}
 					</FormControl>
                 </Grid>
-
             </Grid>
         );
     }
@@ -98,7 +118,7 @@ export default function Search(props: ISearchFormProps<ElmahUserCommonCriteria> 
         <>
             {props.wrapperType === WrapperTypes.DialogForm &&
                 <FormPopup
-                    title={t('UIStringResourcePerApp:ElmahUser')}
+                    title={t('UIStringResourcePerApp:ELMAH_Error')}
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}
                     submitDisabled={!formState.isValid}

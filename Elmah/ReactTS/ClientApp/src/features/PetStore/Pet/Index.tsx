@@ -17,8 +17,8 @@ import { findPetsByStatus, petSelectors } from './Slice';
 // import { getIndexVM, elmahUserSelectors } from '../../ElmahUser/Slice';
 import { orderBys, Pet } from '../Pet';
 import Edit from 'src/components/PetStore/Pet/Edit';
-import Search from 'src/components/PetStore/Pet//Search';
-import List from 'src/components/PetStore/Pet//List';
+import Search from 'src/components/PetStore/Pet/Search';
+import List from 'src/components/PetStore/Pet/List';
 
 export default function IndexPage(): JSX.Element {
   const classes = useStyles();

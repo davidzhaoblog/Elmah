@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
@@ -13,22 +13,18 @@ import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOp
 import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../../FormPopup';
 
-import { 
+//import { upsert } from 'src/features/ElmahUser/Slice';
+import { createPetDefault, Pet } from 'src/features/PetStore/Pet';
 
-} from 'src/features/listSlices';
-
-import { upsert } from 'src/features/ElmahUser/Slice';
-import { createElmahUserDefault, ElmahUser } from 'src/features/ElmahUser/Types';
-
-export default function Edit(props: IFormProps<ElmahUser> & IPopupProps) {
-    const dispatch = useDispatch();
+export default function Edit(props: IFormProps<Pet> & IPopupProps) {
+    // const dispatch = useDispatch();
     const classes = useStyles();
     const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const { openPopup, setOpenPopup } = props;
 
     const formValidations = {
-        user: {
+        name: {
             minLength: {
                 value: 1,
                 message: t('UIStringResourcePerEntity:The_length_of_User_should_be_1_to_50'),
@@ -47,19 +43,19 @@ export default function Edit(props: IFormProps<ElmahUser> & IPopupProps) {
     const { register, handleSubmit, control, errors, formState, reset } = useForm({
         mode: 'onChange',
         reValidateMode: 'onChange',
-        defaultValues: props.type === FormTypes.Edit ? props.item : createElmahUserDefault()
+        defaultValues: props.type === FormTypes.Edit ? props.item : createPetDefault()
     });
 
     const closePopup = () => {
         setOpenPopup(false)
     }
 
-    const inputData = props.type === FormTypes.Edit ? { ...props.item } : createElmahUserDefault()
+    const inputData = props.type === FormTypes.Edit ? { ...props.item } : createPetDefault()
     const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
 
     const onSubmit = (data: any) => {
-        const dataToUpsert = { errorId: 0, ...props.item, ...data };
-        dispatch(upsert(dataToUpsert))
+        // const dataToUpsert = { errorId: 0, ...props.item, ...data };
+        // dispatch(upsert(dataToUpsert))
         console.log(data);
 
         setOpenPopup(false);
@@ -78,17 +74,17 @@ export default function Edit(props: IFormProps<ElmahUser> & IPopupProps) {
                 <Grid item lg={12}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <StyledTextField
-                            name='user'
-                            label={t('UIStringResourcePerEntity:User')}
+                            name='name'
+                            label={t('UIStringResourcePerEntity:name')}
                             variant='outlined'
                             margin='normal'
-                            inputRef={register(formValidations.user)}
-                            error={!!errors.user}
+                            inputRef={register(formValidations.name)}
+                            error={!!errors.name}
                             fullWidth
                             autoFocus
                         />
-                        {errors.user && (
-                            <span className={classes.error}>{errors.user.message}</span>
+                        {errors.name && (
+                            <span className={classes.error}>{errors.name.message}</span>
                         )}
 					</FormControl>
                 </Grid>

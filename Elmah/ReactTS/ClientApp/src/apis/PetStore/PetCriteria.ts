@@ -3,7 +3,7 @@ export interface FindPetsByStatusCriteria {
 }
 export const defaultFindPetsByStatusCriteria = (): FindPetsByStatusCriteria => {
 	return {
-		status: null
+		status: 'available'
 	};
 }
 

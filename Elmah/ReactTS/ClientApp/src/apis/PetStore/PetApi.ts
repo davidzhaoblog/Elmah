@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
-import { apiConfig } from 'src/framework/apiConfig';
+import { apiConfig } from './apiConfig';
 import { FindPetsByStatusCriteria, FindPetsByTagsCriteria, GetPetByIdCriteria } from './PetCriteria';
 // import { ApiResponse } from 'src/features/PetStore/ApiResponse';
 import { Pet } from 'src/features/PetStore/Pet';
@@ -27,8 +27,7 @@ export class PetApi extends ApiBase
   // Get.1 FindPetsByStatus -- /pet/findByStatus
   public FindPetsByStatus = (criteria: FindPetsByStatusCriteria): Promise<Pet[]> => {
     const url = '/pet/findByStatus';
-    return this.Get<FindPetsByStatusCriteria, AxiosResponse<Pet[]>>(url, criteria)
-      .then(this.success);
+    return this.Get<FindPetsByStatusCriteria, Pet[]>(url, criteria);
   }
 
 
