@@ -2,6 +2,9 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 
+import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
+
+
 import { userApi } from 'src/apis/PetStore/UserApi';
 
 
@@ -26,8 +29,7 @@ const entityAdapter = createEntityAdapter<User>({
 export const loginUser = createAsyncThunk(
     'User.loginUser',
     async (criteria: LoginUserCriteria, {dispatch}) => {
-        const response = await userApi.LoginUser(criteria);
-        dispatch(closeSpinner());
+        const response = await userApi.LoginUser(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -37,8 +39,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
     'User.logoutUser',
     async (criteria: any, {dispatch}) => {
-        const response = await userApi.LogoutUser();
-        dispatch(closeSpinner());
+        const response = await userApi.LogoutUser().catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -48,8 +49,7 @@ export const logoutUser = createAsyncThunk(
 export const getUserByName = createAsyncThunk(
     'User.getUserByName',
     async (criteria: GetUserByNameCriteria, {dispatch}) => {
-        const response = await userApi.GetUserByName(criteria);
-        dispatch(closeSpinner());
+        const response = await userApi.GetUserByName(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -60,7 +60,8 @@ export const getUserByName = createAsyncThunk(
 const userSlice = createSlice({
     name: 'users',
     initialState: entityAdapter.getInitialState({
-        orderBy: orderBys.find(x=>x.expression),
+        orderBys: orderBys.find(x=>x.expression),
+		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         loginUserCriteria: defaultLoginUserCriteria(),
         getUserByNameCriteria: defaultGetUserByNameCriteria()

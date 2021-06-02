@@ -2,6 +2,9 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import { closeSpinner } from 'src/layout/appSlice';
 import { RootState } from 'src/store/CombinedReducers';
 
+import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
+
+
 import { petApi } from 'src/apis/PetStore/PetApi';
 
 
@@ -26,8 +29,7 @@ const entityAdapter = createEntityAdapter<Pet>({
 export const findPetsByStatus = createAsyncThunk(
     'Pet.findPetsByStatus',
     async (criteria: FindPetsByStatusCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByStatus(criteria);
-        dispatch(closeSpinner());
+        const response = await petApi.FindPetsByStatus(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -37,8 +39,7 @@ export const findPetsByStatus = createAsyncThunk(
 export const findPetsByTags = createAsyncThunk(
     'Pet.findPetsByTags',
     async (criteria: FindPetsByTagsCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByTags(criteria);
-        dispatch(closeSpinner());
+        const response = await petApi.FindPetsByTags(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -48,8 +49,7 @@ export const findPetsByTags = createAsyncThunk(
 export const getPetById = createAsyncThunk(
     'Pet.getPetById',
     async (criteria: GetPetByIdCriteria, {dispatch}) => {
-        const response = await petApi.GetPetById(criteria);
-        dispatch(closeSpinner());
+        const response = await petApi.GetPetById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -60,7 +60,8 @@ export const getPetById = createAsyncThunk(
 const petSlice = createSlice({
     name: 'pets',
     initialState: entityAdapter.getInitialState({
-        orderBy: orderBys.find(x=>x.expression),
+        orderBys: orderBys.find(x=>x.expression),
+		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),
         findPetsByTagsCriteria: defaultFindPetsByTagsCriteria(),

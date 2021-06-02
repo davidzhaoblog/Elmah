@@ -16,7 +16,7 @@ namespace Elmah.PetStore.Models
         public string Street { get; set; }
     }
 
-    public class Address: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, IAddressIdentifier
+    public class Address: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone<Address>, IAddressIdentifier
     {
 
         private string m_Street;

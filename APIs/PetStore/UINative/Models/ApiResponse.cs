@@ -16,7 +16,7 @@ namespace Elmah.PetStore.Models
         public int Code { get; set; }
     }
 
-    public class ApiResponse: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone, IApiResponseIdentifier
+    public class ApiResponse: Framework.Models.PropertyChangedNotifier, Framework.Models.IClone<ApiResponse>, IApiResponseIdentifier
     {
 
         private int m_Code;
