@@ -292,8 +292,16 @@
     <Compile Include="Controls\ApiResponse\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Order\DomainManager.cs" />
     <Compile Include="Pages\User\DomainManager.cs" />
     <Compile Include="Pages\Pet\DomainManager.cs" />
+    <Page Include="Pages\Order\ListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\Order\ListPage.xaml.cs">
+      <DependentUpon>ListPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Pages\User\ListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

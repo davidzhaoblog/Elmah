@@ -17,6 +17,7 @@ import { Typography } from '@material-ui/core';
 
 import { ApiResponse } from 'src/features//PetStore/ApiResponse';
 
+
 function ListItem(props: IListItemProps<ApiResponse>) {
     const classes = props.classes;
     const dispatch = useDispatch();
@@ -66,7 +67,7 @@ export default function List(props: IListProps<ApiResponse>) {
         <div>
             {props.items.map((item: any) => {
                 return (
-                    <ListItem key={item.errorId} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
+                    <ListItem key={item.code} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
                 );
             })}
         </div>

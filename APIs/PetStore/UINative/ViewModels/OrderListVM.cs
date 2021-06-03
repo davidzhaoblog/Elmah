@@ -80,13 +80,13 @@ namespace Elmah.PetStore.ViewModels
                 if (result.Status == Framework.Services.BusinessLogicLayerResponseStatus.MessageOK)
                 // success, will close Item Popup and popup message box
                 {
-                    BindResult(result.Message, isToClearExistingResult);
+                    BindResult(result.Message.ToList(), isToClearExistingResult);
                 }
                 else
                 // failed
                 {
                     // TODO: should display error message, no change to binding?
-                    this.StatusMessageOfResult = result.StatusMessageOfResult;
+                    this.StatusMessageOfResult = result.ErrorMessage.FirstOrDefault().Value;
                     this.StatusOfResult = Framework.Services.BusinessLogicLayerResponseStatus.RequestError;
                 }
             }
@@ -122,7 +122,7 @@ namespace Elmah.PetStore.ViewModels
                             var groupedResult =
                                 from t in list
                                 group t by new { FirstLetter = !string.IsNullOrEmpty(t.Name) && Char.IsLetter(t.Name.First()) ? t.Name.Substring(0, 1) : "?!#1-9" } into tg
-                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone()).ToList());
+                                select new GroupedResult(tg.Key.FirstLetter, tg.Key.FirstLetter, tg.Select(t => t.GetAClone<Elmah.PetStore.Models.Order>()).ToList());
                             return groupedResult.ToList();
                          },
                          //GetSQLiteSortTableQuery = (tableQuery, direction) => {

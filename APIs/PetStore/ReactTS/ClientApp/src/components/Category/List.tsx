@@ -17,6 +17,7 @@ import { Typography } from '@material-ui/core';
 
 import { Category } from 'src/features//PetStore/Category';
 
+
 function ListItem(props: IListItemProps<Category>) {
     const classes = props.classes;
     const dispatch = useDispatch();
@@ -62,7 +63,7 @@ export default function List(props: IListProps<Category>) {
         <div>
             {props.items.map((item: any) => {
                 return (
-                    <ListItem key={item.errorId} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
+                    <ListItem key={item.id} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
                 );
             })}
         </div>

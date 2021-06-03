@@ -21,6 +21,7 @@ import { StyledCheckbox } from '../controls/StyledCheckbox';
 
 import { Order } from 'src/features//PetStore/Order';
 
+
 function ListItem(props: IListItemProps<Order>) {
     const classes = props.classes;
     const dispatch = useDispatch();
@@ -95,7 +96,7 @@ export default function List(props: IListProps<Order>) {
         <div>
             {props.items.map((item: any) => {
                 return (
-                    <ListItem key={item.errorId} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
+                    <ListItem key={item.id} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
                 );
             })}
         </div>

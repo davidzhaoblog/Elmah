@@ -293,7 +293,7 @@
       "originalName": "Order",
       "originalNamespace": "Order",
       "type": "object",
-      "hasListView": false,
+      "hasListView": true,
       "hasItemView": true,
       "getItemPath": "/store/order/{orderId}",
       "createPath": "/store/order",
