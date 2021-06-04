@@ -35,15 +35,15 @@ export default function Details(props: IFormProps<Pet> & IPopupProps) {
                 <CardContent>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Id')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.id}</Typography>
+					<Typography>{props.item?.id}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Name')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.name}</Typography>
+					<Typography>{props.item?.name}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Status')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.status}</Typography>
+					<Typography>{props.item?.status}</Typography>
                 </Grid>
                 </CardContent>
                 {/* <CardActions>

@@ -35,35 +35,35 @@ export default function Details(props: IFormProps<User> & IPopupProps) {
                 <CardContent>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Id')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.id}</Typography>
+					<Typography>{props.item?.id}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Username')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.username}</Typography>
+					<Typography>{props.item?.username}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:FirstName')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.firstName}</Typography>
+					<Typography>{props.item?.firstName}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:LastName')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.lastName}</Typography>
+					<Typography>{props.item?.lastName}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Email')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.email}</Typography>
+					<Typography>{props.item?.email}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Password')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.password}</Typography>
+					<Typography>{props.item?.password}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Phone')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.phone}</Typography>
+					<Typography>{props.item?.phone}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:UserStatus')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.userStatus}</Typography>
+					<Typography>{props.item?.userStatus}</Typography>
                 </Grid>
                 </CardContent>
                 {/* <CardActions>
