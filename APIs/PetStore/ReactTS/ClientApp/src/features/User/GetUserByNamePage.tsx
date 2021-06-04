@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { userSelectors, getUserByName } from '../UserSlice';
-import User from 'src/components/PetStore/User/User;
+import User from 'src/components/PetStore/User/User';
 
 
 export default function GetUserByNamePage(): JSX.Element {

@@ -12,7 +12,7 @@ import { storeApi } from 'src/apis/PetStore/StoreApi';
 import { GetOrderByIdCriteria, defaultGetOrderByIdCriteria } from 'src/apis/PetStore/StoreCriteria';
 
 
-import { orderBys, Order } from '../Order';
+import { orderBys, Order } from './Order';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Order>({
@@ -50,7 +50,7 @@ export const getOrderById = createAsyncThunk(
 const orderSlice = createSlice({
     name: 'orders',
     initialState: entityAdapter.getInitialState({
-        orderBys: orderBys.find(x=>x.expression),
+        orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         getOrderByIdCriteria: defaultGetOrderByIdCriteria()

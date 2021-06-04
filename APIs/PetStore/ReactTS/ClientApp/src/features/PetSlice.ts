@@ -12,7 +12,7 @@ import { petApi } from 'src/apis/PetStore/PetApi';
 import { FindPetsByStatusCriteria, defaultFindPetsByStatusCriteria, FindPetsByTagsCriteria, defaultFindPetsByTagsCriteria, GetPetByIdCriteria, defaultGetPetByIdCriteria } from 'src/apis/PetStore/PetCriteria';
 
 
-import { orderBys, Pet } from '../Pet';
+import { orderBys, Pet } from './Pet';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Pet>({
@@ -60,7 +60,7 @@ export const getPetById = createAsyncThunk(
 const petSlice = createSlice({
     name: 'pets',
     initialState: entityAdapter.getInitialState({
-        orderBys: orderBys.find(x=>x.expression),
+        orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),
