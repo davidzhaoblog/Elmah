@@ -1,6 +1,4 @@
-import * as React from 'react'
-
-import { useDispatch } from 'react-redux';
+import * as React from 'react';
 import { Button, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';

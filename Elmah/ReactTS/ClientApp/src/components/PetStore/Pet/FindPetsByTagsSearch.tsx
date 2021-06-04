@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -21,7 +21,7 @@ export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByT
     const classes = useStyles();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
 
-    const { openPopup, setOpenPopup, criteria, orderBy, queryPagingSetting } = props;
+    const { openPopup, setOpenPopup, criteria } = props;
 
 	// all form validations are empty, can be removed if not in use
     const formValidations = {
@@ -43,7 +43,7 @@ export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByT
 
     const onSubmit = (data: any) => {
         dispatch(showSpinner());
-        dispatch(findPetsByTags({ criteria: data, orderBy, queryPagingSetting }));
+        dispatch(findPetsByTags(data));
 
         // console.log(data);
 
@@ -73,7 +73,7 @@ export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByT
                             autoFocus
                         />
                           {errors.tags && (
-                            <span className={classes.error}>{errors.tags.message}</span>
+                            <span className={classes.error}>{errors.tags[0].message}</span>
                         )}
 					</FormControl>
                 </Grid>

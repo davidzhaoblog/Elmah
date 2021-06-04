@@ -11,12 +11,12 @@ import GetPetById from 'src/components/PetStore/Pet/GetPetById';
 
 
 export default function GetPetByIdPage(): JSX.Element {
-  const { petId }: {petId: integer} = useParams()
+  const { petId }: {petId: string} = useParams()
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getPetById({ petId }));
+    dispatch(getPetById({ petId: Number(petId) }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 

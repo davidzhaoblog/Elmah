@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-
 import { StyledTextField } from 'src/components/controls/StyledTextField';
+
 import { ISearchFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createSearchFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
@@ -16,12 +16,13 @@ import { showSpinner } from 'src/layout/appSlice';
 import { FindPetsByStatusCriteria } from 'src/apis/PetStore/PetCriteria';
 import { findPetsByStatus } from 'src/features/PetStore/PetSlice';
 
+
 export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsByStatusCriteria> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
 
-    const { openPopup, setOpenPopup, criteria, orderBy, queryPagingSetting } = props;
+    const { openPopup, setOpenPopup, criteria } = props;
 
 	// all form validations are empty, can be removed if not in use
     const formValidations = {
@@ -43,7 +44,7 @@ export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsB
 
     const onSubmit = (data: any) => {
         dispatch(showSpinner());
-        dispatch(findPetsByStatus({ criteria: data, orderBy, queryPagingSetting }));
+        dispatch(findPetsByStatus(data));
 
         // console.log(data);
 
@@ -106,4 +107,3 @@ export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsB
         </>
     );
 }
-
