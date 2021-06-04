@@ -15,10 +15,10 @@ import { IListProps } from 'src/framework/ViewModels/IListProps';
 import { InputLabel } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
-import { Tag } from 'src/features//PetStore/Tag';
+import { Pet } from 'src/features//PetStore/Pet';
 
 
-function ListItem(props: IListItemProps<Tag>) {
+function ListItem(props: IListItemProps<Pet>) {
     const classes = props.classes;
     const dispatch = useDispatch();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
@@ -48,9 +48,16 @@ function ListItem(props: IListItemProps<Tag>) {
 					<InputLabel shrink>{t('UIStringResource_PetStore:Name')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.name}</Typography>
                 </div>
+                <div className ={clsx(classes.column)}>
+					<InputLabel shrink>{t('UIStringResource_PetStore:Status')}</InputLabel>
+                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.status}</Typography>
+                </div>
             </AccordionDetails>
             <Divider />
             <AccordionActions>
+
+
+                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
 
 
             </AccordionActions>
@@ -58,7 +65,7 @@ function ListItem(props: IListItemProps<Tag>) {
     );
 }
 
-export default function List(props: IListProps<Tag>) {
+export default function List(props: IListProps<Pet>) {
     return (
         <div>
             {props.items.map((item: any) => {

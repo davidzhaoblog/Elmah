@@ -1,16 +1,5 @@
-import * as React from 'react'
-
-import { useDispatch } from 'react-redux';
-import { Button, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails, InputLabel } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useTranslation } from 'react-i18next';
-import clsx from 'clsx';
-
-import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
-import { FormTypes } from 'src/framework/ViewModels/IFormProps';
-import { closeAlert, showAlert } from 'src/layout/appSlice';
-import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
-import { IListProps } from 'src/framework/ViewModels/IListProps';
+import React from 'react'
+import { Card, CardContent, Grid } from '@material-ui/core';
 
 import { InputLabel } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
@@ -19,31 +8,35 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import { ReadOnlyTextField } from '../controls/ReadOnlyTextField';
 import { StyledCheckbox } from '../controls/StyledCheckbox';
 
-import { Order } from 'src/features//PetStore/Order';
+import { useTranslation } from 'react-i18next';
 
+import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
+import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
+import { useStyles } from 'src/features/formStyles';
+import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+import FormPopup from '../FormPopup';
 
-function ListItem(props: IListItemProps<Order>) {
-    const classes = props.classes;
-    const dispatch = useDispatch();
+import { Order } from 'src/features/PetStore/Order/Order';
+
+export default function Details(props: IFormProps<Order> & IPopupProps) {
+    // console.log(props);
+    // console.log(props.item);
+
+    const classes = useStyles();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
 
-    const [expanded, setExpanded] = React.useState<string | false>(false);
+    const { openPopup, setOpenPopup } = props;
 
-    const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-        setExpanded(isExpanded ? panel : false);
-    };
+    const closePopup = () => {
+        setOpenPopup(false)
+    }
 
+    const popupButtonsOptions = createEditFormButtonsOptions(() => {}, closePopup);
 
-
-
-    return (
-        <Accordion key={props.item.errorId.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-            <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
-                <Avatar className={classes.avatar} />
-                <Typography className={classes.heading} variant="h1" component="h1">Take some data from AccordionDetails</Typography>
-                <Typography className={classes.heading} variant="h1" component="h1">or Add descriptions</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
+    const renderItem = () => {
+        return (
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
                 <div className ={clsx(classes.column)}>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Id')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.id}</Typography>
@@ -81,25 +74,34 @@ function ListItem(props: IListItemProps<Order>) {
 					<InputLabel shrink>{t('UIStringResource_PetStore:Complete')}</InputLabel>
                     <StyledCheckbox checked={props.item.complete} disabled />
                 </div>
-            </AccordionDetails>
-            <Divider />
-            <AccordionActions>
+                </CardContent>
+                {/* <CardActions>
+                    <Button size="small">Learn More</Button>
+                </CardActions> */}
+            </Card>
+        );
+    };
 
-
-            </AccordionActions>
-        </Accordion>
-    );
-}
-
-export default function List(props: IListProps<Order>) {
     return (
-        <div>
-            {props.items.map((item: any) => {
-                return (
-                    <ListItem key={item.id} item={item} classes={props.classes} openFormInPopup={props.openFormInPopup} />
-                );
-            })}
-        </div>
+        <>
+            {props.wrapperType === WrapperTypes.DialogForm &&
+                <FormPopup
+                    title={t('UIStringResource_PetStore:<+')}
+                    openPopup={openPopup}
+                    setOpenPopup={setOpenPopup}
+                    submitDisabled={true}
+                    handleSubmit={() => {}}
+                    buttons={popupButtonsOptions}
+                >
+                    {renderItem()}
+                </FormPopup>
+            }
+            {props.wrapperType !== WrapperTypes.DialogForm &&
+                <>
+                    {renderItem()}
+                </>
+            }
+        </>
     );
 }
 

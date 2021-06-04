@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { userSelectors, getUserByName } from '../UserSlice';
-import Details from 'src/components/PetStore/User/Details;
+import User from 'src/components/PetStore/User/User;
 
 
 export default function GetUserByNamePage(): JSX.Element {
@@ -28,7 +28,7 @@ export default function GetUserByNamePage(): JSX.Element {
   return (
     <>
       {item &&
-        <Details type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
+        <User type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
           openPopup={false}
           setOpenPopup={() => { }}
           item={item}

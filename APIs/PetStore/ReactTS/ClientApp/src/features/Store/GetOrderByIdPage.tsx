@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { orderSelectors, getOrderById } from '../OrderSlice';
-import Details from 'src/components/PetStore/Order/Details;
+import Order from 'src/components/PetStore/Order/Order;
 
 
 export default function GetOrderByIdPage(): JSX.Element {
@@ -28,7 +28,7 @@ export default function GetOrderByIdPage(): JSX.Element {
   return (
     <>
       {item &&
-        <Details type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
+        <Order type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
           openPopup={false}
           setOpenPopup={() => { }}
           item={item}
