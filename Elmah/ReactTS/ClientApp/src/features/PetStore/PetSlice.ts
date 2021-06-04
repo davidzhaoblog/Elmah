@@ -60,7 +60,7 @@ export const getPetById = createAsyncThunk(
 const petSlice = createSlice({
     name: 'pets',
     initialState: entityAdapter.getInitialState({
-        orderBys: orderBys.find(x=>x.expression),
+        orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),

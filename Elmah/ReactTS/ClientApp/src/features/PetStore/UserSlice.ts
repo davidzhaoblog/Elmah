@@ -60,7 +60,7 @@ export const getUserByName = createAsyncThunk(
 const userSlice = createSlice({
     name: 'users',
     initialState: entityAdapter.getInitialState({
-        orderBys: orderBys.find(x=>x.expression),
+        orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         loginUserCriteria: defaultLoginUserCriteria(),

@@ -13,10 +13,10 @@ import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
-import { findPetsByTags, petSelectors } from './PetSlice';
+import { findPetsByTags, petSelectors } from '../PetSlice';
 import { orderBys, Pet } from '../Pet';
-import FindPetsByTags from 'src/components/PetStore/FindPetsByTags/pet/FindPetsByTags;
-import FindPetsByTagsSearch from 'src/components/PetStore/FindPetsByTags/pet/FindPetsByTagsSearch;
+import FindPetsByTags from 'src/components/PetStore/Pet/FindPetsByTags';
+import FindPetsByTagsSearch from 'src/components/PetStore/Pet/FindPetsByTagsSearch';
 
 
 export default function FindPetsByTagsPage(): JSX.Element {
@@ -28,7 +28,6 @@ export default function FindPetsByTagsPage(): JSX.Element {
 
   const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
   const [formType, setFormType] = useState(FormTypes.Create);
-  const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
@@ -70,7 +69,6 @@ export default function FindPetsByTagsPage(): JSX.Element {
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResource_PetStore:Pet')}</Typography>
           <span className={classes.fillRemainingSpace} />
 		  <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
-          <Button onClick={() => { openFormInPopup(FormTypes.Create, null) }}>{t('UIStringResource:AddNew')}</Button>
         </div>
         <div>
           <Toolbar>

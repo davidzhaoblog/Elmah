@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { orderSelectors, getOrderById } from '../OrderSlice';
-import Order from 'src/components/PetStore/Order/Order;
+import Order from 'src/components/PetStore/Order/Order';
 
 
 export default function GetOrderByIdPage(): JSX.Element {

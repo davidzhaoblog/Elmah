@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { petSelectors, getPetById } from '../PetSlice';
-import Pet from 'src/components/PetStore/Pet/Pet;
+import Pet from 'src/components/PetStore/Pet/Pet';
 
 
 export default function GetPetByIdPage(): JSX.Element {
