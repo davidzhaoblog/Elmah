@@ -14,7 +14,7 @@ import FormPopup from '../../FormPopup';
 
 import { User } from 'src/features/PetStore/User';
 
-export default function Details(props: IFormProps<User> & IPopupProps) {
+export default function GetUserByName(props: IFormProps<User> & IPopupProps) {
     // console.log(props);
     // console.log(props.item);
 

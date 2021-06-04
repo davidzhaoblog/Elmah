@@ -17,7 +17,7 @@ import FormPopup from '../../FormPopup';
 
 import { Order } from 'src/features/PetStore/Order';
 
-export default function Details(props: IFormProps<Order> & IPopupProps) {
+export default function GetOrderById(props: IFormProps<Order> & IPopupProps) {
     // console.log(props);
     // console.log(props.item);
 

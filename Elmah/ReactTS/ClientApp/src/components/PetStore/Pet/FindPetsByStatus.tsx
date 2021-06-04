@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { Button, Accordion, AccordionSummary, Avatar, Divider, AccordionActions, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
@@ -60,7 +60,7 @@ function ListItem(props: IListItemProps<Pet>) {
     );
 }
 
-export default function List(props: IListProps<Pet>) {
+export default function FindPetsByStatus(props: IListProps<Pet>) {
     return (
         <div>
             {props.items.map((item: any) => {

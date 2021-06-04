@@ -60,7 +60,7 @@ function ListItem(props: IListItemProps<Pet>) {
     );
 }
 
-export default function List(props: IListProps<Pet>) {
+export default function FindPetsByTags(props: IListProps<Pet>) {
     return (
         <div>
             {props.items.map((item: any) => {
