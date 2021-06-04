@@ -48,7 +48,13 @@ export default function FindPetsByTagsPage(): JSX.Element {
   const openAdvancedSearchInPopup = (type: FormTypes, item: Pet) => {
     setFormType(type);
     setOpenAdvancedSearchPopup(true);
-    setSelectedItem(item);
+    // setSelectedItem(item);
+  }
+
+  const openFormInPopup = (type: FormTypes, item: Pet) => {
+    setFormType(type);
+    // setOpenEditPopup(true);
+    // setSelectedItem(item);
   }
 
   const listItems = useSelector(

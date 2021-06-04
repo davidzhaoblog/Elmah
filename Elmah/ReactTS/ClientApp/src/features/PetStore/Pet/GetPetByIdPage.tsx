@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { petSelectors, getPetById } from '../PetSlice';
-import Pet from 'src/components/PetStore/Pet/Pet';
+import GetPetById from 'src/components/PetStore/Pet/GetPetById';
 
 
 export default function GetPetByIdPage(): JSX.Element {
@@ -16,7 +16,7 @@ export default function GetPetByIdPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getPetById({ id: petId }));
+    dispatch(getPetById({ petId }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 
@@ -28,7 +28,7 @@ export default function GetPetByIdPage(): JSX.Element {
   return (
     <>
       {item &&
-        <Pet type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
+        <GetPetById type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
           openPopup={false}
           setOpenPopup={() => { }}
           item={item}

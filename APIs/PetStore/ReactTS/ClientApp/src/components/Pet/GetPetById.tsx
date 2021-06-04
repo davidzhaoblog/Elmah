@@ -10,9 +10,9 @@ import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { useStyles } from 'src/features/formStyles';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
-import FormPopup from '../FormPopup';
+import FormPopup from '../../FormPopup';
 
-import { Pet } from 'src/features/PetStore/Pet/Pet';
+import { Pet } from 'src/features/PetStore/Pet';
 
 export default function Details(props: IFormProps<Pet> & IPopupProps) {
     // console.log(props);
@@ -33,18 +33,18 @@ export default function Details(props: IFormProps<Pet> & IPopupProps) {
         return (
             <Card className={classes.root} variant="outlined">
                 <CardContent>
-                <div className ={clsx(classes.column)}>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Id')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.id}</Typography>
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Name')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.name}</Typography>
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Status')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.status}</Typography>
-                </div>
+                </Grid>
                 </CardContent>
                 {/* <CardActions>
                     <Button size="small">Learn More</Button>
@@ -57,7 +57,7 @@ export default function Details(props: IFormProps<Pet> & IPopupProps) {
         <>
             {props.wrapperType === WrapperTypes.DialogForm &&
                 <FormPopup
-                    title={t('UIStringResource_PetStore:<+')}
+                    title={t('UIStringResource_PetStore:Pet')}
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}
                     submitDisabled={true}

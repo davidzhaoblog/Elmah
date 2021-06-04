@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { orderSelectors, getOrderById } from '../OrderSlice';
-import Order from 'src/components/PetStore/Order/Order';
+import GetOrderById from 'src/components/PetStore/Store/GetOrderById';
 
 
 export default function GetOrderByIdPage(): JSX.Element {
@@ -16,7 +16,7 @@ export default function GetOrderByIdPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getOrderById({ id: orderId }));
+    dispatch(getOrderById({ orderId }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 
@@ -28,7 +28,7 @@ export default function GetOrderByIdPage(): JSX.Element {
   return (
     <>
       {item &&
-        <Order type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
+        <GetOrderById type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
           openPopup={false}
           setOpenPopup={() => { }}
           item={item}
