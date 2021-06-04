@@ -30,11 +30,11 @@ export class UserApi extends ApiBase
   }
 
 
-  // Get.2 LogoutUser -- /user/logout
-  public LogoutUser = (): Promise<string> => {
-    const url = '/user/logout';
-    return this.Get<string, >(url, null);
-  }
+  // // Get.2 LogoutUser -- /user/logout
+  // public LogoutUser = (): Promise<string> => {
+  //   const url = '/user/logout';
+  //   return this.Get<string, >(url, null);
+  // }
 
 
   // Get.3 GetUserByName -- /user/{username}
