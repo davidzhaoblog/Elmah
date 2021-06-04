@@ -12,7 +12,7 @@ import { petApi } from 'src/apis/PetStore/PetApi';
 import { FindPetsByStatusCriteria, defaultFindPetsByStatusCriteria, FindPetsByTagsCriteria, defaultFindPetsByTagsCriteria, GetPetByIdCriteria, defaultGetPetByIdCriteria } from 'src/apis/PetStore/PetCriteria';
 
 
-import { orderBys, Pet } from '../Pet';
+import { orderBys, Pet } from './Pet';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Pet>({

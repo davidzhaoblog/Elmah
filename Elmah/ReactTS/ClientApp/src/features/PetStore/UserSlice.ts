@@ -12,7 +12,7 @@ import { userApi } from 'src/apis/PetStore/UserApi';
 import { LoginUserCriteria, defaultLoginUserCriteria, GetUserByNameCriteria, defaultGetUserByNameCriteria } from 'src/apis/PetStore/UserCriteria';
 
 
-import { orderBys, User } from '../User';
+import { orderBys, User } from './User';
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<User>({

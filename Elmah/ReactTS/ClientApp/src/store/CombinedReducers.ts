@@ -13,8 +13,10 @@ import elmahStatusCode from 'src/features/ElmahStatusCode/Slice';
 import elmahType from 'src/features/ElmahType/Slice';
 import elmahUser from 'src/features/ElmahUser/Slice';
 
-import pet from 'src/features/PetStore/Pet/Slice';
-import user from 'src/features/PetStore/User/Slice';
+// Swagger
+import order from 'src/features/PetStore/OrderSlice';
+import user from 'src/features/PetStore/UserSlice';
+import pet from 'src/features/PetStore/PetSlice';
 
 import { 
     eLMAH_ErrorList,
@@ -33,6 +35,7 @@ export const reducers = combineReducers({
     todos: todos,
     visibilityFilter: visibilityFilter,
 
+    order: order,
     user: user,
     pet: pet,
 
