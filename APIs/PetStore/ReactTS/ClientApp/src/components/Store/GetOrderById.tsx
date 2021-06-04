@@ -3,10 +3,9 @@ import { Card, CardContent, Grid } from '@material-ui/core';
 
 import { InputLabel } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-import { Controller } from 'react-hook-form';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import { ReadOnlyTextField } from '../controls/ReadOnlyTextField';
-import { StyledCheckbox } from '../controls/StyledCheckbox';
+import { ReadOnlyTextField } from '../../controls/ReadOnlyTextField';
+import { StyledCheckbox } from '../../controls/StyledCheckbox';
 
 import { useTranslation } from 'react-i18next';
 

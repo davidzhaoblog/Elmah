@@ -8,8 +8,6 @@ import clsx from 'clsx';
 
 import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
-import { closeAlert, showAlert } from 'src/layout/appSlice';
-import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { IListProps } from 'src/framework/ViewModels/IListProps';
 
 import { InputLabel } from '@material-ui/core';
@@ -20,7 +18,6 @@ import { Pet } from 'src/features//PetStore/Pet';
 
 function ListItem(props: IListItemProps<Pet>) {
     const classes = props.classes;
-    const dispatch = useDispatch();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
@@ -33,7 +30,7 @@ function ListItem(props: IListItemProps<Pet>) {
 
 
     return (
-        <Accordion key={props.item.errorId.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <Accordion key={props.item.id.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
             <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
                 <Avatar className={classes.avatar} />
                 <Typography className={classes.heading} variant="h1" component="h1">Take some data from AccordionDetails</Typography>

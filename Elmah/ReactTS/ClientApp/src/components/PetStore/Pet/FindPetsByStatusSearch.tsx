@@ -5,14 +5,15 @@ import { DevTool } from '@hookform/devtools';
 import { FormControl, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
+import { StyledTextField } from 'src/components/controls/StyledTextField';
 import { ISearchFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createSearchFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
-import FormPopup from '../FormPopup';
+import FormPopup from '../../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
 
-import { FindPetsByStatusCriteria } from 'src/apis/PetStore/petCriteria';
+import { FindPetsByStatusCriteria } from 'src/apis/PetStore/PetCriteria';
 import { findPetsByStatus } from 'src/features/PetStore/PetSlice';
 
 export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsByStatusCriteria> & IPopupProps) {
@@ -26,6 +27,13 @@ export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsB
     const formValidations = {
 		status: {}
     };
+
+    // TODO: add "setValue," if you need setValue, setValue will be added when DateTimeRange
+    const { register, handleSubmit, control, errors, formState, reset } = useForm({
+        mode: 'onChange',
+        reValidateMode: 'onChange',
+        defaultValues: criteria
+    });
 
     const closePopup = () => {
         setOpenPopup(false)
