@@ -39,15 +39,15 @@ export default function Details(props: IFormProps<Order> & IPopupProps) {
                 <CardContent>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Id')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.id}</Typography>
+					<Typography>{props.item?.id}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:PetId')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.petId}</Typography>
+					<Typography>{props.item?.petId}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Quantity')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.quantity}</Typography>
+					<Typography>{props.item?.quantity}</Typography>
                 </Grid>
                 <Grid item lg>
 					<KeyboardDatePicker
@@ -60,7 +60,7 @@ export default function Details(props: IFormProps<Order> & IPopupProps) {
                         margin="normal"
                         id="date-picker-inline"
                         label={t('UIStringResource_PetStore:ShipDate')}
-                        value={props.item.shipDate}
+                        value={props.item?.shipDate}
                         onChange={e => { }}
                         readOnly={true}
                         TextFieldComponent={ReadOnlyTextField}
@@ -68,11 +68,11 @@ export default function Details(props: IFormProps<Order> & IPopupProps) {
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Status')}</InputLabel>
-                    <Typography className={classes.heading} variant="h1" component="h1">{props.item.status}</Typography>
+					<Typography>{props.item?.status}</Typography>
                 </Grid>
                 <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Complete')}</InputLabel>
-                    <StyledCheckbox checked={props.item.complete} disabled />
+					<StyledCheckbox checked={props.item?.complete} name="complete" disabled />
                 </Grid>
                 </CardContent>
                 {/* <CardActions>
