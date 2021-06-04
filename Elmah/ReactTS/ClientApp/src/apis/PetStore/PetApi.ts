@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from './apiConfig';
 import { FindPetsByStatusCriteria, FindPetsByTagsCriteria, GetPetByIdCriteria } from './PetCriteria';
@@ -34,16 +34,14 @@ export class PetApi extends ApiBase
   // Get.2 FindPetsByTags -- /pet/findByTags
   public FindPetsByTags = (criteria: FindPetsByTagsCriteria): Promise<Pet[]> => {
     const url = '/pet/findByTags';
-    return this.Get<FindPetsByTagsCriteria, AxiosResponse<Pet[]>>(url, criteria)
-      .then(this.success);
+    return this.Get<FindPetsByTagsCriteria, Pet[]>(url, criteria);
   }
 
 
   // Get.3 GetPetById -- /pet/{petId}
   public GetPetById = (criteria: GetPetByIdCriteria): Promise<Pet> => {
     const url = `/pet/${criteria.petId}`;
-    return this.Get<GetPetByIdCriteria, AxiosResponse<Pet>>(url, criteria)
-      .then(this.success);
+    return this.Get<GetPetByIdCriteria, Pet>(url, criteria);
   }
 
 

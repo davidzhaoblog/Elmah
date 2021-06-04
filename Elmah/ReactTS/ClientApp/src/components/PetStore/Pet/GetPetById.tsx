@@ -14,7 +14,7 @@ import FormPopup from '../../FormPopup';
 
 import { Pet } from 'src/features/PetStore/Pet';
 
-export default function Details(props: IFormProps<Pet> & IPopupProps) {
+export default function GetPetById(props: IFormProps<Pet> & IPopupProps) {
     // console.log(props);
     // console.log(props.item);
 
