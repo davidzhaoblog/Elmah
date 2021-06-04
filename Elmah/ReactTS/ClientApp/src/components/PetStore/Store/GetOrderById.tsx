@@ -14,9 +14,9 @@ import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { useStyles } from 'src/features/formStyles';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
-import FormPopup from '../FormPopup';
+import FormPopup from '../../FormPopup';
 
-import { Order } from 'src/features/PetStore/Order/Order';
+import { Order } from 'src/features/PetStore/Order';
 
 export default function Details(props: IFormProps<Order> & IPopupProps) {
     // console.log(props);
@@ -37,19 +37,19 @@ export default function Details(props: IFormProps<Order> & IPopupProps) {
         return (
             <Card className={classes.root} variant="outlined">
                 <CardContent>
-                <div className ={clsx(classes.column)}>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Id')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.id}</Typography>
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:PetId')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.petId}</Typography>
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Quantity')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.quantity}</Typography>
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<KeyboardDatePicker
                         inputProps={{
                             readOnly: true,
@@ -65,15 +65,15 @@ export default function Details(props: IFormProps<Order> & IPopupProps) {
                         readOnly={true}
                         TextFieldComponent={ReadOnlyTextField}
                     />
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Status')}</InputLabel>
                     <Typography className={classes.heading} variant="h1" component="h1">{props.item.status}</Typography>
-                </div>
-                <div className ={clsx(classes.column)}>
+                </Grid>
+                <Grid item lg>
 					<InputLabel shrink>{t('UIStringResource_PetStore:Complete')}</InputLabel>
                     <StyledCheckbox checked={props.item.complete} disabled />
-                </div>
+                </Grid>
                 </CardContent>
                 {/* <CardActions>
                     <Button size="small">Learn More</Button>
@@ -86,7 +86,7 @@ export default function Details(props: IFormProps<Order> & IPopupProps) {
         <>
             {props.wrapperType === WrapperTypes.DialogForm &&
                 <FormPopup
-                    title={t('UIStringResource_PetStore:<+')}
+                    title={t('UIStringResource_PetStore:Order')}
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}
                     submitDisabled={true}

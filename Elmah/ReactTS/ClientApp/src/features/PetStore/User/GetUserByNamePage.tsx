@@ -7,7 +7,7 @@ import { RootState } from 'src/store/CombinedReducers';
 import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { userSelectors, getUserByName } from '../UserSlice';
-import User from 'src/components/PetStore/User/User';
+import GetUserByName from 'src/components/PetStore/User/GetUserByName';
 
 
 export default function GetUserByNamePage(): JSX.Element {
@@ -16,7 +16,7 @@ export default function GetUserByNamePage(): JSX.Element {
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(getUserByName({ id: username }));
+    dispatch(getUserByName({ username }));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here 
@@ -28,7 +28,7 @@ export default function GetUserByNamePage(): JSX.Element {
   return (
     <>
       {item &&
-        <User type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
+        <GetUserByName type={FormTypes.View} wrapperType={WrapperTypes.RegularPage}
           openPopup={false}
           setOpenPopup={() => { }}
           item={item}
