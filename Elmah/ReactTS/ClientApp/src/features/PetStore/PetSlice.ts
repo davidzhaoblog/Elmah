@@ -4,6 +4,7 @@ import { RootState } from 'src/store/CombinedReducers';
 
 import { createQueryPagingSetting } from 'src/framework/Queries/QueryPagingSetting';
 
+
 import { petApi } from 'src/apis/PetStore/PetApi';
 
 
@@ -12,7 +13,6 @@ import { FindPetsByStatusCriteria, defaultFindPetsByStatusCriteria, FindPetsByTa
 
 
 import { orderBys, Pet } from '../Pet';
-
 
 // 1. createEntityAdapter
 const entityAdapter = createEntityAdapter<Pet>({
@@ -27,10 +27,9 @@ const entityAdapter = createEntityAdapter<Pet>({
 
 // 2.Get.1. FindPetsByStatus - /pet/findByStatus
 export const findPetsByStatus = createAsyncThunk(
-    'findPetsByStatus',
+    'Pet.findPetsByStatus',
     async (criteria: FindPetsByStatusCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByStatus(criteria);
-        dispatch(closeSpinner());
+        const response = await petApi.FindPetsByStatus(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -38,19 +37,10 @@ export const findPetsByStatus = createAsyncThunk(
 
 // 2.Get.2. FindPetsByTags - /pet/findByTags
 export const findPetsByTags = createAsyncThunk(
-    'findPetsByTags',
+    'Pet.findPetsByTags',
     async (criteria: FindPetsByTagsCriteria, {dispatch}) => {
-        try
-        {
-        const response = await petApi.FindPetsByTags(criteria);
-        dispatch(closeSpinner());
+        const response = await petApi.FindPetsByTags(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
-        }
-        catch
-        {
-            dispatch(closeSpinner());
-            return null;
-            }
     }
 )
 
@@ -59,8 +49,7 @@ export const findPetsByTags = createAsyncThunk(
 export const getPetById = createAsyncThunk(
     'Pet.getPetById',
     async (criteria: GetPetByIdCriteria, {dispatch}) => {
-        const response = await petApi.GetPetById(criteria);
-        dispatch(closeSpinner());
+        const response = await petApi.GetPetById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -71,13 +60,14 @@ export const getPetById = createAsyncThunk(
 const petSlice = createSlice({
     name: 'pets',
     initialState: entityAdapter.getInitialState({
-        orderBy: orderBys.find(x=>x.expression),
+        orderBys: orderBys.find(x=>x.expression),
+		queryPagingSetting: createQueryPagingSetting(10, 1),
 
         findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),
         findPetsByTagsCriteria: defaultFindPetsByTagsCriteria(),
-        getPetByIdCriteria: defaultGetPetByIdCriteria(),
+        getPetByIdCriteria: defaultGetPetByIdCriteria()
 
-        queryPagingSetting: createQueryPagingSetting(10, 1)
+
     }), // createEntityAdapter Usage #1
     reducers: {
     },
