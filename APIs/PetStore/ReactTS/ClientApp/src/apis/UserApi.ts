@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
 import { LoginUserCriteria, GetUserByNameCriteria } from './UserCriteria';
@@ -24,26 +24,23 @@ export class UserApi extends ApiBase
 
 
   // Get.1 LoginUser -- /user/login
-  public LoginUser = (criteria: LoginUserCriteria): Promise<string> => {
+  public LoginUser = (criteria: LoginUserCriteria): Promisestring => {
     const url = '/user/login';
-    return this.Get<LoginUserCriteria, AxiosResponse<string>>(url, criteria)
-      .then(this.success);
+    return this.Get<LoginUserCriteria, string>(url, criteria);
   }
 
 
   // Get.2 LogoutUser -- /user/logout
-  public LogoutUser = (): Promise<string> => {
+  public LogoutUser = (): Promisestring => {
     const url = '/user/logout';
-    return this.Get<string, AxiosResponse>(url, null)
-      .then(this.success_NoResponseBody);
+    return this.Get<string, >(url, null);
   }
 
 
   // Get.3 GetUserByName -- /user/{username}
-  public GetUserByName = (criteria: GetUserByNameCriteria): Promise<User> => {
+  public GetUserByName = (criteria: GetUserByNameCriteria): PromiseUser => {
     const url = `/user/${criteria.username}`;
-    return this.Get<GetUserByNameCriteria, AxiosResponse<User>>(url, criteria)
-      .then(this.success);
+    return this.Get<GetUserByNameCriteria, User>(url, criteria);
   }
 
 

@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
 import { GetOrderByIdCriteria } from './StoreCriteria';
@@ -24,18 +24,16 @@ export class StoreApi extends ApiBase
 
 
   // Get.1 GetInventory -- /store/inventory
-  public GetInventory = (): Promise<any> => {
+  public GetInventory = (): Promiseany => {
     const url = '/store/inventory';
-    return this.Get<string, AxiosResponse<any>>(url, null)
-      .then(this.success);
+    return this.Get<string, any>(url, null);
   }
 
 
   // Get.2 GetOrderById -- /store/order/{orderId}
-  public GetOrderById = (criteria: GetOrderByIdCriteria): Promise<Order> => {
+  public GetOrderById = (criteria: GetOrderByIdCriteria): PromiseOrder => {
     const url = `/store/order/${criteria.orderId}`;
-    return this.Get<GetOrderByIdCriteria, AxiosResponse<Order>>(url, criteria)
-      .then(this.success);
+    return this.Get<GetOrderByIdCriteria, Order>(url, criteria);
   }
 
 
