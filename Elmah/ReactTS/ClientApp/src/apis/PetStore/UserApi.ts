@@ -24,21 +24,21 @@ export class UserApi extends ApiBase
 
 
   // Get.1 LoginUser -- /user/login
-  public LoginUser = (criteria: LoginUserCriteria): Promisestring => {
+  public LoginUser = (criteria: LoginUserCriteria): Promise<string> => {
     const url = '/user/login';
     return this.Get<LoginUserCriteria, string>(url, criteria);
   }
 
 
   // Get.2 LogoutUser -- /user/logout
-  public LogoutUser = (): Promisestring => {
+  public LogoutUser = (): Promise<string> => {
     const url = '/user/logout';
     return this.Get<string, >(url, null);
   }
 
 
   // Get.3 GetUserByName -- /user/{username}
-  public GetUserByName = (criteria: GetUserByNameCriteria): PromiseUser => {
+  public GetUserByName = (criteria: GetUserByNameCriteria): Promise<User> => {
     const url = `/user/${criteria.username}`;
     return this.Get<GetUserByNameCriteria, User>(url, criteria);
   }

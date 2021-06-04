@@ -24,14 +24,14 @@ export class StoreApi extends ApiBase
 
 
   // Get.1 GetInventory -- /store/inventory
-  public GetInventory = (): Promiseany => {
+  public GetInventory = (): Promise<any> => {
     const url = '/store/inventory';
     return this.Get<string, any>(url, null);
   }
 
 
   // Get.2 GetOrderById -- /store/order/{orderId}
-  public GetOrderById = (criteria: GetOrderByIdCriteria): PromiseOrder => {
+  public GetOrderById = (criteria: GetOrderByIdCriteria): Promise<Order> => {
     const url = `/store/order/${criteria.orderId}`;
     return this.Get<GetOrderByIdCriteria, Order>(url, criteria);
   }
