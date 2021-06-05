@@ -5,12 +5,6 @@ import { DevTool } from '@hookform/devtools';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { FormControl } from '@material-ui/core';
-import { StyledTextField } from '../../controls/StyledTextField';
-
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/CombinedReducers';
-
 import { FormTypes, IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
@@ -19,6 +13,8 @@ import FormPopup from '../../FormPopup';
 
 import { createUser } from 'src/features/PetStore/UserSlice';
 import { User, createUserDefault } from 'src/features//PetStore/User';
+import { FormControl } from '@material-ui/core';
+import { StyledTextField } from '../../controls/StyledTextField';
 
 export default function CreateUser(props: IFormProps<User> & IPopupProps) {
     const dispatch = useDispatch();
@@ -70,7 +66,7 @@ export default function CreateUser(props: IFormProps<User> & IPopupProps) {
 
     const onSubmit = (data: any) => {
         const dataToUpsert = { id: 0, ...props.item, ...data };
-        dispatch(upsert(dataToUpsert))
+        dispatch(createUser(dataToUpsert))
         console.log(data);
 
         setOpenPopup(false);

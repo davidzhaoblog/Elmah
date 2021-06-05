@@ -9,7 +9,10 @@ import { storeApi } from 'src/apis/PetStore/StoreApi';
 
 
 
-import { GetOrderByIdParameters, defaultGetOrderByIdParameters } from 'src/apis/PetStore/StoreParameters';
+import { 
+	GetOrderByIdParameters, defaultGetOrderByIdParameters,
+	DeleteOrderParameters, defaultDeleteOrderParameters 
+} from 'src/apis/PetStore/StoreParameters';
 
 
 import { orderBys, Order } from './Order';
@@ -22,14 +25,13 @@ const entityAdapter = createEntityAdapter<Order>({
     // sortComparer: (a, b) => a.text.localeCompare(b.text), 
   })
 
-// 2. actions can dispatch
-
+// 2. Async Thunks
 
 // 2.Get.1. GetInventory - /store/inventory
 export const getInventory = createAsyncThunk(
-    'Order.getInventory',
-    async (criteria: any, {dispatch}) => {
-        const response = await storeApi.GetInventory().catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    'Order.GetInventory',
+    async (, {dispatch}) => {
+        const response = await storeApi.GetInventory(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -37,9 +39,29 @@ export const getInventory = createAsyncThunk(
 
 // 2.Get.2. GetOrderById - /store/order/{orderId}
 export const getOrderById = createAsyncThunk(
-    'Order.getOrderById',
+    'Order.GetOrderById',
     async (criteria: GetOrderByIdParameters, {dispatch}) => {
-        const response = await storeApi.GetOrderById(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        const response = await storeApi.GetOrderById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        return response;
+    }
+)
+
+
+// 2.Post.1. PlaceOrder - /store/order
+export const placeOrder = createAsyncThunk(
+    'Order.PlaceOrder',
+    async (requestBody: Order, {dispatch}) => {
+        const response = await storeApi.PlaceOrder(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        return response;
+    }
+)
+
+
+// 2.Delete.1. DeleteOrder - /store/order/{orderId}
+export const deleteOrder = createAsyncThunk(
+    'Order.DeleteOrder',
+    async (criteria: DeleteOrderParameters, {dispatch}) => {
+        const response = await storeApi.DeleteOrder(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -53,7 +75,8 @@ const orderSlice = createSlice({
         orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
-        getOrderByIdParameters: defaultGetOrderByIdParameters()
+        getOrderByIdParameters: defaultGetOrderByIdParameters(),
+        deleteOrderParameters: defaultDeleteOrderParameters()
 
 
     }), // createEntityAdapter Usage #1
@@ -77,7 +100,7 @@ const orderSlice = createSlice({
         });
 
 
-		// 3.2.Get.1. GetOrderById - /store/order/{orderId}
+		// 3.2.Get.2. GetOrderById - /store/order/{orderId}
         builder.addCase(getOrderById.pending, (state) => {
             // console.log("getOrderById.pending");
         });
@@ -89,6 +112,40 @@ const orderSlice = createSlice({
         });
         builder.addCase(getOrderById.rejected, (state, action) => {
             // console.log("getOrderById.rejected");
+        });
+
+
+		// 3.2.Post.1. PlaceOrder - /store/order
+        builder.addCase(placeOrder.pending, (state) => {
+            // console.log("placeOrder.pending");
+        });
+        builder.addCase(placeOrder.fulfilled, (state, { payload }) => {
+            if(!payload)
+                return;
+			entityAdapter.upsertOne(state, payload);
+            // console.log("placeOrder.fulfilled");
+        });
+        builder.addCase(placeOrder.rejected, (state, action) => {
+            // console.log("placeOrder.rejected");
+        });
+
+
+
+
+		// 3.2.Delete.1. DeleteOrder - /store/order/{orderId}
+        builder.addCase(deleteOrder.pending, (state) => {
+            // console.log("deleteOrder.pending");
+        });
+        builder.addCase(deleteOrder.fulfilled, (state, { payload }) => {
+            if(!payload)
+                return;
+			// TODO: please write your logic to delete one or many entries in entityAdapter
+			// entityAdapter.removeOne(state, payload);
+            // entityAdapter.removeMany(state, payload);
+            // console.log("deleteOrder.fulfilled");
+        });
+        builder.addCase(deleteOrder.rejected, (state, action) => {
+            // console.log("deleteOrder.rejected");
         });
 
 

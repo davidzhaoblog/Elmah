@@ -5,12 +5,6 @@ import { DevTool } from '@hookform/devtools';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { FormControl } from '@material-ui/core';
-import { StyledTextField } from '../../controls/StyledTextField';
-
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/CombinedReducers';
-
 import { FormTypes, IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
@@ -19,6 +13,8 @@ import FormPopup from '../../FormPopup';
 
 import { addPet } from 'src/features/PetStore/PetSlice';
 import { Pet, createPetDefault } from 'src/features//PetStore/Pet';
+import { FormControl } from '@material-ui/core';
+import { StyledTextField } from '../../controls/StyledTextField';
 
 export default function AddPet(props: IFormProps<Pet> & IPopupProps) {
     const dispatch = useDispatch();
@@ -64,7 +60,7 @@ export default function AddPet(props: IFormProps<Pet> & IPopupProps) {
 
     const onSubmit = (data: any) => {
         const dataToUpsert = { id: 0, ...props.item, ...data };
-        dispatch(upsert(dataToUpsert))
+        dispatch(addPet(dataToUpsert))
         console.log(data);
 
         setOpenPopup(false);
