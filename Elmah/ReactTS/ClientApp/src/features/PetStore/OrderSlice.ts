@@ -30,8 +30,8 @@ const entityAdapter = createEntityAdapter<Order>({
 // 2.Get.1. GetInventory - /store/inventory
 export const getInventory = createAsyncThunk(
     'Order.GetInventory',
-    async (, {dispatch}) => {
-        const response = await storeApi.GetInventory(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async ({}, {dispatch}) => {
+        const response = await storeApi.GetInventory().catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -40,8 +40,8 @@ export const getInventory = createAsyncThunk(
 // 2.Get.2. GetOrderById - /store/order/{orderId}
 export const getOrderById = createAsyncThunk(
     'Order.GetOrderById',
-    async (criteria: GetOrderByIdParameters, {dispatch}) => {
-        const response = await storeApi.GetOrderById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: GetOrderByIdParameters, {dispatch}) => {
+        const response = await storeApi.GetOrderById(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -51,7 +51,7 @@ export const getOrderById = createAsyncThunk(
 export const placeOrder = createAsyncThunk(
     'Order.PlaceOrder',
     async (requestBody: Order, {dispatch}) => {
-        const response = await storeApi.PlaceOrder(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        const response = await storeApi.PlaceOrder(requestBody).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -60,8 +60,8 @@ export const placeOrder = createAsyncThunk(
 // 2.Delete.1. DeleteOrder - /store/order/{orderId}
 export const deleteOrder = createAsyncThunk(
     'Order.DeleteOrder',
-    async (criteria: DeleteOrderParameters, {dispatch}) => {
-        const response = await storeApi.DeleteOrder(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: DeleteOrderParameters, {dispatch}) => {
+        const response = await storeApi.DeleteOrder(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )

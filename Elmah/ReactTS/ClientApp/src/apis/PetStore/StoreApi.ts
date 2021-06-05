@@ -31,9 +31,9 @@ export class StoreApi extends ApiBase
 
 
   // Get.2 GetOrderById -- /store/order/{orderId}
-  public GetOrderById = (criteria: GetOrderByIdParameters): Promise<Order> => {
-    const url = `/store/order/${criteria.orderId}`;
-    return this.Get<GetOrderByIdParameters, Order>(url, criteria);
+  public GetOrderById = (params: GetOrderByIdParameters): Promise<Order> => {
+    const url = `/store/order/${params.orderId}`;
+    return this.Get<GetOrderByIdParameters, Order>(url, params);
   }
 
 
@@ -50,8 +50,8 @@ export class StoreApi extends ApiBase
 
 
   // Delete.1 DeleteOrder -- /store/order/{orderId}
-  public DeleteOrder = (criteria: DeleteOrderParameters): Promise<string> => {
-    const url = `/store/order/${criteria.orderId}`;
+  public DeleteOrder = (params: DeleteOrderParameters): Promise<string> => {
+    const url = `/store/order/${params.orderId}`;
     return this.delete<string, AxiosResponse<string>>(url)
       .then(this.success_NoResponseBody);
   }

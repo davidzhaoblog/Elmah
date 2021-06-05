@@ -31,18 +31,18 @@ export default function FindPetsByStatusPage(): JSX.Element {
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
-    dispatch(findPetsByStatus(findPetsByStatusCriteria));
+    dispatch(findPetsByStatus(findPetsByStatusParameters));
   }
 
   const handlePageSizeChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
-    dispatch(findPetsByStatus(findPetsByStatusCriteria));
+    dispatch(findPetsByStatus(findPetsByStatusParameters));
   }
 
   const handleOrderByChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
     // var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
-    dispatch(findPetsByStatus(findPetsByStatusCriteria));
+    dispatch(findPetsByStatus(findPetsByStatusParameters));
   }
     
   const openAdvancedSearchInPopup = (type: FormTypes, item: Pet) => {

@@ -13,10 +13,10 @@ import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
 
-import { FindPetsByStatusCriteria } from 'src/apis/PetStore/PetParameters';
+import { FindPetsByStatusParameters } from 'src/apis/PetStore/PetParameters';
 import { findPetsByStatus } from 'src/features/PetStore/PetSlice';
 
-export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsByStatusCriteria> & IPopupProps) {
+export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsByStatusParameters> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
