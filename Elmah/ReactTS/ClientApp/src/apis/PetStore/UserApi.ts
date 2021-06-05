@@ -1,7 +1,7 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { GetUserByNameParameters, LoginUserParameters, LogoutUserParameters, UpdateUserParameters, DeleteUserParameters } from './UserParameters';
+import { GetUserByNameParameters, LoginUserParameters, UpdateUserParameters, DeleteUserParameters } from './UserParameters';
 import { User } from 'src/features/PetStore/User';
 
 export class UserApi extends ApiBase
