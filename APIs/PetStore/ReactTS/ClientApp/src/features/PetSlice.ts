@@ -9,7 +9,7 @@ import { petApi } from 'src/apis/PetStore/PetApi';
 
 
 
-import { FindPetsByStatusCriteria, defaultFindPetsByStatusCriteria, FindPetsByTagsCriteria, defaultFindPetsByTagsCriteria, GetPetByIdCriteria, defaultGetPetByIdCriteria } from 'src/apis/PetStore/PetCriteria';
+import { FindPetsByStatusParameters, defaultFindPetsByStatusParameters, FindPetsByTagsParameters, defaultFindPetsByTagsParameters, GetPetByIdParameters, defaultGetPetByIdParameters } from 'src/apis/PetStore/PetParameters';
 
 
 import { orderBys, Pet } from './Pet';
@@ -28,8 +28,8 @@ const entityAdapter = createEntityAdapter<Pet>({
 // 2.Get.1. FindPetsByStatus - /pet/findByStatus
 export const findPetsByStatus = createAsyncThunk(
     'Pet.findPetsByStatus',
-    async (criteria: FindPetsByStatusCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByStatus(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (criteria: FindPetsByStatusParameters, {dispatch}) => {
+        const response = await petApi.FindPetsByStatus(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -38,8 +38,8 @@ export const findPetsByStatus = createAsyncThunk(
 // 2.Get.2. FindPetsByTags - /pet/findByTags
 export const findPetsByTags = createAsyncThunk(
     'Pet.findPetsByTags',
-    async (criteria: FindPetsByTagsCriteria, {dispatch}) => {
-        const response = await petApi.FindPetsByTags(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (criteria: FindPetsByTagsParameters, {dispatch}) => {
+        const response = await petApi.FindPetsByTags(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -48,8 +48,8 @@ export const findPetsByTags = createAsyncThunk(
 // 2.Get.3. GetPetById - /pet/{petId}
 export const getPetById = createAsyncThunk(
     'Pet.getPetById',
-    async (criteria: GetPetByIdCriteria, {dispatch}) => {
-        const response = await petApi.GetPetById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (criteria: GetPetByIdParameters, {dispatch}) => {
+        const response = await petApi.GetPetById(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -63,9 +63,9 @@ const petSlice = createSlice({
         orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
-        findPetsByStatusCriteria: defaultFindPetsByStatusCriteria(),
-        findPetsByTagsCriteria: defaultFindPetsByTagsCriteria(),
-        getPetByIdCriteria: defaultGetPetByIdCriteria()
+        findPetsByStatusParameters: defaultFindPetsByStatusParameters(),
+        findPetsByTagsParameters: defaultFindPetsByTagsParameters(),
+        getPetByIdParameters: defaultGetPetByIdParameters()
 
 
     }), // createEntityAdapter Usage #1

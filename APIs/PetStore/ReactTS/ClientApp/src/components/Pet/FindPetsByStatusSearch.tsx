@@ -13,7 +13,7 @@ import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
 
-import { FindPetsByStatusCriteria } from 'src/apis/PetStore/PetCriteria';
+import { FindPetsByStatusCriteria } from 'src/apis/PetStore/PetParameters';
 import { findPetsByStatus } from 'src/features/PetStore/PetSlice';
 
 export default function FindPetsByStatusSearch(props: ISearchFormProps<FindPetsByStatusCriteria> & IPopupProps) {
