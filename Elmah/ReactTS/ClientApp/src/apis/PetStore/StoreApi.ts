@@ -37,6 +37,26 @@ export class StoreApi extends ApiBase
   }
 
 
+
+
+  // Post.1 PlaceOrder -- /store/order
+  public PlaceOrder = (requestBody: Order): Promise<Order> => {
+    const url = '/store/order';
+    return this.post<Order, Order, AxiosResponse<Order>>(url, requestBody)
+      .then(this.success);
+  }
+
+
+
+
+  // Delete.1 DeleteOrder -- /store/order/{orderId}
+  public DeleteOrder = (criteria: DeleteOrderCriteria): Promise<string> => {
+    const url = `/store/order/${criteria.orderId}`;
+    return this.delete<string, AxiosResponse<string>>(url)
+      .then(this.success_NoResponseBody);
+  }
+
+
 }
 export const storeApi = new StoreApi(apiConfig);
 

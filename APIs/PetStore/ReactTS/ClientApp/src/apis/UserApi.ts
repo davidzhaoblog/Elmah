@@ -25,7 +25,7 @@ export class UserApi extends ApiBase
 
   // Get.1 LoginUser -- /user/login
   public LoginUser = (criteria: LoginUserCriteria): Promise<string> => {
-    const url = '/user/login';
+    const url = '/user/login' + "?" + this.ConvertCriteriaToQueryString({ username:criteria.username, password:criteria.password });
     return this.Get<LoginUserCriteria, string>(url, criteria);
   }
 
@@ -33,7 +33,7 @@ export class UserApi extends ApiBase
   // Get.2 LogoutUser -- /user/logout
   public LogoutUser = (): Promise<string> => {
     const url = '/user/logout';
-    return this.Get<string, >(url, null);
+    return this.Get<string, string>(url, null);
   }
 
 
@@ -41,6 +41,42 @@ export class UserApi extends ApiBase
   public GetUserByName = (criteria: GetUserByNameCriteria): Promise<User> => {
     const url = `/user/${criteria.username}`;
     return this.Get<GetUserByNameCriteria, User>(url, criteria);
+  }
+
+
+
+
+  // Post.1 CreateUser -- /user
+  public CreateUser = (requestBody: User): Promise<User> => {
+    const url = '/user';
+    return this.post<User, User, AxiosResponse<User>>(url, requestBody)
+      .then(this.success);
+  }
+
+
+  // Post.2 CreateUsersWithListInput -- /user/createWithList
+  public CreateUsersWithListInput = (requestBody: User[]): Promise<User> => {
+    const url = '/user/createWithList';
+    return this.post<User, User[], AxiosResponse<User>>(url, requestBody)
+      .then(this.success);
+  }
+
+
+  // Put.1 UpdateUser -- /user/{username}
+  public UpdateUser = (criteria: UpdateUserCriteria, requestBody: User): Promise<string> => {
+    const url = `/user/${criteria.username}`;
+    return this.put<string, User, AxiosResponse<string>>(url, requestBody)
+      .then(this.success_NoResponseBody);
+  }
+
+
+
+
+  // Delete.1 DeleteUser -- /user/{username}
+  public DeleteUser = (criteria: DeleteUserCriteria): Promise<string> => {
+    const url = `/user/${criteria.username}`;
+    return this.delete<string, AxiosResponse<string>>(url)
+      .then(this.success_NoResponseBody);
   }
 
 

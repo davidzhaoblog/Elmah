@@ -15,7 +15,7 @@ import { FormTypes, IFormProps, WrapperTypes } from 'src/framework/ViewModels/IF
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
-import FormPopup from '../FormPopup';
+import FormPopup from '../../FormPopup';
 
 import { createUser } from 'src/features/PetStore/UserSlice';
 import { User, createUserDefault } from 'src/features//PetStore/User';
