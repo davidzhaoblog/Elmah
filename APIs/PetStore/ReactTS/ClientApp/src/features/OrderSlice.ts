@@ -9,7 +9,7 @@ import { storeApi } from 'src/apis/PetStore/StoreApi';
 
 
 
-import { GetOrderByIdCriteria, defaultGetOrderByIdCriteria } from 'src/apis/PetStore/StoreCriteria';
+import { GetOrderByIdParameters, defaultGetOrderByIdParameters } from 'src/apis/PetStore/StoreParameters';
 
 
 import { orderBys, Order } from './Order';
@@ -38,8 +38,8 @@ export const getInventory = createAsyncThunk(
 // 2.Get.2. GetOrderById - /store/order/{orderId}
 export const getOrderById = createAsyncThunk(
     'Order.getOrderById',
-    async (criteria: GetOrderByIdCriteria, {dispatch}) => {
-        const response = await storeApi.GetOrderById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (criteria: GetOrderByIdParameters, {dispatch}) => {
+        const response = await storeApi.GetOrderById(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -53,7 +53,7 @@ const orderSlice = createSlice({
         orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
-        getOrderByIdCriteria: defaultGetOrderByIdCriteria()
+        getOrderByIdParameters: defaultGetOrderByIdParameters()
 
 
     }), // createEntityAdapter Usage #1

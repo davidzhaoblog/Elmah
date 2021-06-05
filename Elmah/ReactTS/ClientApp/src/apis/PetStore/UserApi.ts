@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { LoginUserCriteria, GetUserByNameCriteria } from './UserCriteria';
+import { GetUserByNameParameters, LoginUserParameters, LogoutUserParameters, UpdateUserParameters, DeleteUserParameters } from './UserParameters';
 import { User } from 'src/features/PetStore/User';
 
 export class UserApi extends ApiBase
@@ -24,9 +24,9 @@ export class UserApi extends ApiBase
 
 
   // Get.1 LoginUser -- /user/login
-  public LoginUser = (criteria: LoginUserCriteria): Promise<string> => {
+  public LoginUser = (criteria: LoginUserParameters): Promise<string> => {
     const url = '/user/login' + "?" + this.ConvertCriteriaToQueryString({ username:criteria.username, password:criteria.password });
-    return this.Get<LoginUserCriteria, string>(url, criteria);
+    return this.Get<LoginUserParameters, string>(url, criteria);
   }
 
 
@@ -38,9 +38,9 @@ export class UserApi extends ApiBase
 
 
   // Get.3 GetUserByName -- /user/{username}
-  public GetUserByName = (criteria: GetUserByNameCriteria): Promise<User> => {
+  public GetUserByName = (criteria: GetUserByNameParameters): Promise<User> => {
     const url = `/user/${criteria.username}`;
-    return this.Get<GetUserByNameCriteria, User>(url, criteria);
+    return this.Get<GetUserByNameParameters, User>(url, criteria);
   }
 
 
@@ -63,7 +63,7 @@ export class UserApi extends ApiBase
 
 
   // Put.1 UpdateUser -- /user/{username}
-  public UpdateUser = (criteria: UpdateUserCriteria, requestBody: User): Promise<string> => {
+  public UpdateUser = (criteria: UpdateUserParameters, requestBody: User): Promise<string> => {
     const url = `/user/${criteria.username}`;
     return this.put<string, User, AxiosResponse<string>>(url, requestBody)
       .then(this.success_NoResponseBody);
@@ -73,7 +73,7 @@ export class UserApi extends ApiBase
 
 
   // Delete.1 DeleteUser -- /user/{username}
-  public DeleteUser = (criteria: DeleteUserCriteria): Promise<string> => {
+  public DeleteUser = (criteria: DeleteUserParameters): Promise<string> => {
     const url = `/user/${criteria.username}`;
     return this.delete<string, AxiosResponse<string>>(url)
       .then(this.success_NoResponseBody);

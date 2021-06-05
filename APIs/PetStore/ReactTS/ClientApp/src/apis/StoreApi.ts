@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
 import { apiConfig } from 'src/framework/apiConfig';
-import { GetOrderByIdCriteria } from './StoreCriteria';
+import { GetOrderByIdParameters, DeleteOrderParameters } from './StoreParameters';
 import { Order } from 'src/features/PetStore/Order';
 
 export class StoreApi extends ApiBase
@@ -31,9 +31,9 @@ export class StoreApi extends ApiBase
 
 
   // Get.2 GetOrderById -- /store/order/{orderId}
-  public GetOrderById = (criteria: GetOrderByIdCriteria): Promise<Order> => {
+  public GetOrderById = (criteria: GetOrderByIdParameters): Promise<Order> => {
     const url = `/store/order/${criteria.orderId}`;
-    return this.Get<GetOrderByIdCriteria, Order>(url, criteria);
+    return this.Get<GetOrderByIdParameters, Order>(url, criteria);
   }
 
 
@@ -50,7 +50,7 @@ export class StoreApi extends ApiBase
 
 
   // Delete.1 DeleteOrder -- /store/order/{orderId}
-  public DeleteOrder = (criteria: DeleteOrderCriteria): Promise<string> => {
+  public DeleteOrder = (criteria: DeleteOrderParameters): Promise<string> => {
     const url = `/store/order/${criteria.orderId}`;
     return this.delete<string, AxiosResponse<string>>(url)
       .then(this.success_NoResponseBody);

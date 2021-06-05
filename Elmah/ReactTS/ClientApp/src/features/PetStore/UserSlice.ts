@@ -9,7 +9,7 @@ import { userApi } from 'src/apis/PetStore/UserApi';
 
 
 
-import { LoginUserCriteria, defaultLoginUserCriteria, GetUserByNameCriteria, defaultGetUserByNameCriteria } from 'src/apis/PetStore/UserCriteria';
+import { LoginUserParameters, defaultLoginUserParameters, GetUserByNameParameters, defaultGetUserByNameParameters } from 'src/apis/PetStore/UserParameters';
 
 
 import { orderBys, User } from './User';
@@ -28,8 +28,8 @@ const entityAdapter = createEntityAdapter<User>({
 // 2.Get.1. LoginUser - /user/login
 export const loginUser = createAsyncThunk(
     'User.loginUser',
-    async (criteria: LoginUserCriteria, {dispatch}) => {
-        const response = await userApi.LoginUser(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (criteria: LoginUserParameters, {dispatch}) => {
+        const response = await userApi.LoginUser(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -48,8 +48,8 @@ export const logoutUser = createAsyncThunk(
 // 2.Get.3. GetUserByName - /user/{username}
 export const getUserByName = createAsyncThunk(
     'User.getUserByName',
-    async (criteria: GetUserByNameCriteria, {dispatch}) => {
-        const response = await userApi.GetUserByName(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (criteria: GetUserByNameParameters, {dispatch}) => {
+        const response = await userApi.GetUserByName(parameters).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -63,8 +63,8 @@ const userSlice = createSlice({
         orderBy: orderBys.find(x=>x.expression),
 		queryPagingSetting: createQueryPagingSetting(10, 1),
 
-        loginUserCriteria: defaultLoginUserCriteria(),
-        getUserByNameCriteria: defaultGetUserByNameCriteria()
+        loginUserParameters: defaultLoginUserParameters(),
+        getUserByNameParameters: defaultGetUserByNameParameters()
 
 
     }), // createEntityAdapter Usage #1

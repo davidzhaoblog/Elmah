@@ -13,7 +13,7 @@ import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
 
-import { FindPetsByTagsCriteria } from 'src/apis/PetStore/PetCriteria';
+import { FindPetsByTagsCriteria } from 'src/apis/PetStore/PetParameters';
 import { findPetsByTags } from 'src/features/PetStore/PetSlice';
 
 export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByTagsCriteria> & IPopupProps) {
