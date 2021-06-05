@@ -58,7 +58,7 @@ export class PetApi extends ApiBase
   // Post.2 UpdatePetWithForm -- /pet/{petId}
   public UpdatePetWithForm = (criteria: UpdatePetWithFormParameters): Promise<string> => {
     const url = `/pet/${criteria.petId}` + "?" + this.ConvertCriteriaToQueryString({ name:criteria.name, status:criteria.status });
-    return this.post<string, , AxiosResponse<string>>(url, )
+    return this.post<string, string, AxiosResponse<string>>(url, )
       .then(this.success_NoResponseBody);
   }
 
