@@ -216,7 +216,7 @@ const petSlice = createSlice({
         builder.addCase(uploadFile.fulfilled, (state, { payload }) => {
             if(!payload)
                 return;
-			entityAdapter.upsertOne(state, payload);
+			// entityAdapter.upsertOne(state, payload);
             // console.log("uploadFile.fulfilled");
         });
         builder.addCase(uploadFile.rejected, (state, action) => {
