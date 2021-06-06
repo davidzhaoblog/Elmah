@@ -24,7 +24,7 @@ export default function FindPetsByTagsPage(): JSX.Element {
   const dispatch = useDispatch();
   const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
 
-  const { findPetsByTagsCriteria, orderBy, queryPagingSetting } = store.getState().pet;
+  const { findPetsByTagsParameters, orderBy, queryPagingSetting } = store.getState().pet;
 
   const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
   const [formType, setFormType] = useState(FormTypes.Create);
@@ -63,7 +63,7 @@ export default function FindPetsByTagsPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(showSpinner());
-    dispatch(findPetsByTags(findPetsByTagsCriteria));
+    dispatch(findPetsByTags(findPetsByTagsParameters));
 
     // console.log('component mounted!')
   }, []) // notice the empty array here  
@@ -109,7 +109,7 @@ export default function FindPetsByTagsPage(): JSX.Element {
       {openAdvancedSearchPopup ? <FindPetsByTagsSearch type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openAdvancedSearchPopup}
         setOpenPopup={setOpenAdvancedSearchPopup}
-        criteria={findPetsByTagsCriteria}
+        criteria={findPetsByTagsParameters}
         orderBy={orderBy}
         queryPagingSetting={queryPagingSetting}
       /> : null}

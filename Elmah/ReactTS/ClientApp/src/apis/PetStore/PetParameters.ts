@@ -4,7 +4,7 @@ export interface FindPetsByStatusParameters {
 }
 export const defaultFindPetsByStatusParameters = (): FindPetsByStatusParameters => {
 	return {
-		status: null
+		status: "available"
 	};
 }
 

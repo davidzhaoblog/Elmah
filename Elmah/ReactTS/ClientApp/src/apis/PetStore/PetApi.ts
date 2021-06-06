@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
-import { apiConfig } from 'src/framework/apiConfig';
+import { apiConfig } from './apiConfig';
 import { FindPetsByStatusParameters, FindPetsByTagsParameters, GetPetByIdParameters, UpdatePetWithFormParameters, UploadFileParameters, DeletePetParameters } from './PetParameters';
 import { ApiResponse } from 'src/features/PetStore/ApiResponse';
 import { Pet } from 'src/features/PetStore/Pet';
@@ -27,7 +27,7 @@ export class PetApi extends ApiBase
   // Get.1 FindPetsByStatus -- /pet/findByStatus
   public FindPetsByStatus = (params: FindPetsByStatusParameters): Promise<Pet[]> => {
     const url = '/pet/findByStatus' + "?" + this.ConvertCriteriaToQueryString({ status:params.status });
-    return this.Get<FindPetsByStatusParameters, Pet[]>(url, params);
+    return this.get<Pet[], AxiosResponse<Pet[]>>(url).then(this.success);
   }
 
 
