@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiBase } from 'src/framework/ApiBase';
-import { apiConfig } from 'src/framework/apiConfig';
+import { apiConfig } from './apiConfig';
 import { GetOrderByIdParameters, DeleteOrderParameters } from './StoreParameters';
 import { Order } from 'src/features/PetStore/Order';
 
@@ -26,14 +26,14 @@ export class StoreApi extends ApiBase
   // Get.1 GetInventory -- /store/inventory
   public GetInventory = (): Promise<any> => {
     const url = '/store/inventory';
-    return this.Get<string, any>(url, null);
+	return this.get<any, AxiosResponse<any>>(url).then(this.success);
   }
 
 
   // Get.2 GetOrderById -- /store/order/{orderId}
   public GetOrderById = (params: GetOrderByIdParameters): Promise<Order> => {
     const url = `/store/order/${params.orderId}`;
-    return this.Get<GetOrderByIdParameters, Order>(url, params);
+	return this.get<Order, AxiosResponse<Order>>(url).then(this.success);
   }
 
 
