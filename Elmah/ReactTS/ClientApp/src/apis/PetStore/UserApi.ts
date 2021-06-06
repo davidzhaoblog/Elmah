@@ -24,9 +24,9 @@ export class UserApi extends ApiBase
 
 
   // Get.1 LoginUser -- /user/login
-  public LoginUser = (criteria: LoginUserParameters): Promise<string> => {
-    const url = '/user/login' + "?" + this.ConvertCriteriaToQueryString({ username:criteria.username, password:criteria.password });
-    return this.Get<LoginUserParameters, string>(url, criteria);
+  public LoginUser = (params: LoginUserParameters): Promise<string> => {
+    const url = '/user/login' + "?" + this.ConvertCriteriaToQueryString({ username:params.username, password:params.password });
+    return this.Get<LoginUserParameters, string>(url, params);
   }
 
 
@@ -38,9 +38,9 @@ export class UserApi extends ApiBase
 
 
   // Get.3 GetUserByName -- /user/{username}
-  public GetUserByName = (criteria: GetUserByNameParameters): Promise<User> => {
-    const url = `/user/${criteria.username}`;
-    return this.Get<GetUserByNameParameters, User>(url, criteria);
+  public GetUserByName = (params: GetUserByNameParameters): Promise<User> => {
+    const url = `/user/${params.username}`;
+    return this.Get<GetUserByNameParameters, User>(url, params);
   }
 
 
@@ -63,8 +63,8 @@ export class UserApi extends ApiBase
 
 
   // Put.1 UpdateUser -- /user/{username}
-  public UpdateUser = (criteria: UpdateUserParameters, requestBody: User): Promise<string> => {
-    const url = `/user/${criteria.username}`;
+  public UpdateUser = (params: UpdateUserParameters, requestBody: User): Promise<string> => {
+    const url = `/user/${params.username}`;
     return this.put<string, User, AxiosResponse<string>>(url, requestBody)
       .then(this.success_NoResponseBody);
   }
@@ -73,8 +73,8 @@ export class UserApi extends ApiBase
 
 
   // Delete.1 DeleteUser -- /user/{username}
-  public DeleteUser = (criteria: DeleteUserParameters): Promise<string> => {
-    const url = `/user/${criteria.username}`;
+  public DeleteUser = (params: DeleteUserParameters): Promise<string> => {
+    const url = `/user/${params.username}`;
     return this.delete<string, AxiosResponse<string>>(url)
       .then(this.success_NoResponseBody);
   }

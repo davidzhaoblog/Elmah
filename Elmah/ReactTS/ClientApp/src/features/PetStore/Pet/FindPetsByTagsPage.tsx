@@ -31,18 +31,18 @@ export default function FindPetsByTagsPage(): JSX.Element {
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
-    dispatch(findPetsByTags(findPetsByTagsCriteria));
+    dispatch(findPetsByTags(findPetsByTagsParameters));
   }
 
   const handlePageSizeChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
-    dispatch(findPetsByTags(findPetsByTagsCriteria));
+    dispatch(findPetsByTags(findPetsByTagsParameters));
   }
 
   const handleOrderByChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     dispatch(showSpinner());
     // var orderByHere = orderBys.find(o => o.expression === (event.target.value as string));
-    dispatch(findPetsByTags(findPetsByTagsCriteria));
+    dispatch(findPetsByTags(findPetsByTagsParameters));
   }
     
   const openAdvancedSearchInPopup = (type: FormTypes, item: Pet) => {

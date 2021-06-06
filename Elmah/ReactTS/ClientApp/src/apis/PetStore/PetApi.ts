@@ -25,23 +25,23 @@ export class PetApi extends ApiBase
 
 
   // Get.1 FindPetsByStatus -- /pet/findByStatus
-  public FindPetsByStatus = (criteria: FindPetsByStatusParameters): Promise<Pet[]> => {
-    const url = '/pet/findByStatus' + "?" + this.ConvertCriteriaToQueryString({ status:criteria.status });
-    return this.Get<FindPetsByStatusParameters, Pet[]>(url, criteria);
+  public FindPetsByStatus = (params: FindPetsByStatusParameters): Promise<Pet[]> => {
+    const url = '/pet/findByStatus' + "?" + this.ConvertCriteriaToQueryString({ status:params.status });
+    return this.Get<FindPetsByStatusParameters, Pet[]>(url, params);
   }
 
 
   // Get.2 FindPetsByTags -- /pet/findByTags
-  public FindPetsByTags = (criteria: FindPetsByTagsParameters): Promise<Pet[]> => {
-    const url = '/pet/findByTags' + "?" + this.ConvertCriteriaToQueryString({ tags:criteria.tags });
-    return this.Get<FindPetsByTagsParameters, Pet[]>(url, criteria);
+  public FindPetsByTags = (params: FindPetsByTagsParameters): Promise<Pet[]> => {
+    const url = '/pet/findByTags' + "?" + this.ConvertCriteriaToQueryString({ tags:params.tags });
+    return this.Get<FindPetsByTagsParameters, Pet[]>(url, params);
   }
 
 
   // Get.3 GetPetById -- /pet/{petId}
-  public GetPetById = (criteria: GetPetByIdParameters): Promise<Pet> => {
-    const url = `/pet/${criteria.petId}`;
-    return this.Get<GetPetByIdParameters, Pet>(url, criteria);
+  public GetPetById = (params: GetPetByIdParameters): Promise<Pet> => {
+    const url = `/pet/${params.petId}`;
+    return this.Get<GetPetByIdParameters, Pet>(url, params);
   }
 
 
@@ -56,16 +56,16 @@ export class PetApi extends ApiBase
 
 
   // Post.2 UpdatePetWithForm -- /pet/{petId}
-  public UpdatePetWithForm = (criteria: UpdatePetWithFormParameters): Promise<string> => {
-    const url = `/pet/${criteria.petId}` + "?" + this.ConvertCriteriaToQueryString({ name:criteria.name, status:criteria.status });
-    return this.post<string, string, AxiosResponse<string>>(url, )
+  public UpdatePetWithForm = (params: UpdatePetWithFormParameters): Promise<string> => {
+    const url = `/pet/${params.petId}` + "?" + this.ConvertCriteriaToQueryString({ name:params.name, status:params.status });
+    return this.post<string, any, AxiosResponse<string>>(url, null)
       .then(this.success_NoResponseBody);
   }
 
 
   // Post.3 UploadFile -- /pet/{petId}/uploadImage
-  public UploadFile = (criteria: UploadFileParameters): Promise<ApiResponse> => {
-    const url = `/pet/${criteria.petId}/uploadImage` + "?" + this.ConvertCriteriaToQueryString({ additionalMetadata:criteria.additionalMetadata });
+  public UploadFile = (params: UploadFileParameters): Promise<ApiResponse> => {
+    const url = `/pet/${params.petId}/uploadImage` + "?" + this.ConvertCriteriaToQueryString({ additionalMetadata:params.additionalMetadata });
     return this.post<ApiResponse, string, AxiosResponse<ApiResponse>>(url, null)
       .then(this.success);
   }
@@ -82,8 +82,8 @@ export class PetApi extends ApiBase
 
 
   // Delete.1 DeletePet -- /pet/{petId}
-  public DeletePet = (criteria: DeletePetParameters): Promise<string> => {
-    const url = `/pet/${criteria.petId}` + "?" + this.ConvertCriteriaToQueryString({ api_key:criteria.api_key });
+  public DeletePet = (params: DeletePetParameters): Promise<string> => {
+    const url = `/pet/${params.petId}` + "?" + this.ConvertCriteriaToQueryString({ api_key:params.api_key });
     return this.delete<string, AxiosResponse<string>>(url)
       .then(this.success_NoResponseBody);
   }

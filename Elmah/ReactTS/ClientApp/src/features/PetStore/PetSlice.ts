@@ -34,8 +34,8 @@ const entityAdapter = createEntityAdapter<Pet>({
 // 2.Get.1. FindPetsByStatus - /pet/findByStatus
 export const findPetsByStatus = createAsyncThunk(
     'Pet.FindPetsByStatus',
-    async (criteria: FindPetsByStatusParameters, {dispatch}) => {
-        const response = await petApi.FindPetsByStatus(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: FindPetsByStatusParameters, {dispatch}) => {
+        const response = await petApi.FindPetsByStatus(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -44,8 +44,8 @@ export const findPetsByStatus = createAsyncThunk(
 // 2.Get.2. FindPetsByTags - /pet/findByTags
 export const findPetsByTags = createAsyncThunk(
     'Pet.FindPetsByTags',
-    async (criteria: FindPetsByTagsParameters, {dispatch}) => {
-        const response = await petApi.FindPetsByTags(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: FindPetsByTagsParameters, {dispatch}) => {
+        const response = await petApi.FindPetsByTags(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -54,8 +54,8 @@ export const findPetsByTags = createAsyncThunk(
 // 2.Get.3. GetPetById - /pet/{petId}
 export const getPetById = createAsyncThunk(
     'Pet.GetPetById',
-    async (criteria: GetPetByIdParameters, {dispatch}) => {
-        const response = await petApi.GetPetById(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: GetPetByIdParameters, {dispatch}) => {
+        const response = await petApi.GetPetById(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -65,7 +65,7 @@ export const getPetById = createAsyncThunk(
 export const addPet = createAsyncThunk(
     'Pet.AddPet',
     async (requestBody: Pet, {dispatch}) => {
-        const response = await petApi.AddPet(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        const response = await petApi.AddPet(requestBody).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -74,8 +74,8 @@ export const addPet = createAsyncThunk(
 // 2.Post.2. UpdatePetWithForm - /pet/{petId}
 export const updatePetWithForm = createAsyncThunk(
     'Pet.UpdatePetWithForm',
-    async (criteria: UpdatePetWithFormParameters, {dispatch}) => {
-        const response = await petApi.UpdatePetWithForm(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: UpdatePetWithFormParameters, {dispatch}) => {
+        const response = await petApi.UpdatePetWithForm(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -84,8 +84,8 @@ export const updatePetWithForm = createAsyncThunk(
 // 2.Post.3. UploadFile - /pet/{petId}/uploadImage
 export const uploadFile = createAsyncThunk(
     'Pet.UploadFile',
-    async (criteria: UploadFileParameters, {dispatch}) => {
-        const response = await petApi.UploadFile(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: UploadFileParameters, {dispatch}) => {
+        const response = await petApi.UploadFile(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -95,7 +95,7 @@ export const uploadFile = createAsyncThunk(
 export const updatePet = createAsyncThunk(
     'Pet.UpdatePet',
     async (requestBody: Pet, {dispatch}) => {
-        const response = await petApi.UpdatePet(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        const response = await petApi.UpdatePet(requestBody).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -104,8 +104,8 @@ export const updatePet = createAsyncThunk(
 // 2.Delete.1. DeletePet - /pet/{petId}
 export const deletePet = createAsyncThunk(
     'Pet.DeletePet',
-    async (criteria: DeletePetParameters, {dispatch}) => {
-        const response = await petApi.DeletePet(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: DeletePetParameters, {dispatch}) => {
+        const response = await petApi.DeletePet(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )

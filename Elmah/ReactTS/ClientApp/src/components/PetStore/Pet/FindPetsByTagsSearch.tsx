@@ -13,10 +13,10 @@ import { useStyles } from 'src/features/formStyles';
 import FormPopup from '../../FormPopup';
 import { showSpinner } from 'src/layout/appSlice';
 
-import { FindPetsByTagsCriteria } from 'src/apis/PetStore/PetParameters';
+import { FindPetsByTagsParameters } from 'src/apis/PetStore/PetParameters';
 import { findPetsByTags } from 'src/features/PetStore/PetSlice';
 
-export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByTagsCriteria> & IPopupProps) {
+export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByTagsParameters> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);

@@ -32,8 +32,8 @@ const entityAdapter = createEntityAdapter<User>({
 // 2.Get.1. GetUserByName - /user/{username}
 export const getUserByName = createAsyncThunk(
     'User.GetUserByName',
-    async (criteria: GetUserByNameParameters, {dispatch}) => {
-        const response = await userApi.GetUserByName(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: GetUserByNameParameters, {dispatch}) => {
+        const response = await userApi.GetUserByName(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -42,8 +42,8 @@ export const getUserByName = createAsyncThunk(
 // 2.Get.2. LoginUser - /user/login
 export const loginUser = createAsyncThunk(
     'User.LoginUser',
-    async (criteria: LoginUserParameters, {dispatch}) => {
-        const response = await userApi.LoginUser(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: LoginUserParameters, {dispatch}) => {
+        const response = await userApi.LoginUser(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -52,8 +52,8 @@ export const loginUser = createAsyncThunk(
 // 2.Get.3. LogoutUser - /user/logout
 export const logoutUser = createAsyncThunk(
     'User.LogoutUser',
-    async (, {dispatch}) => {
-        const response = await userApi.LogoutUser(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async ({}, {dispatch}) => {
+        const response = await userApi.LogoutUser().catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -63,7 +63,7 @@ export const logoutUser = createAsyncThunk(
 export const createUser = createAsyncThunk(
     'User.CreateUser',
     async (requestBody: User, {dispatch}) => {
-        const response = await userApi.CreateUser(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        const response = await userApi.CreateUser(requestBody).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -73,7 +73,7 @@ export const createUser = createAsyncThunk(
 export const createUsersWithListInput = createAsyncThunk(
     'User.CreateUsersWithListInput',
     async (requestBody: User[], {dispatch}) => {
-        const response = await userApi.CreateUsersWithListInput(null).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+        const response = await userApi.CreateUsersWithListInput(requestBody).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -82,8 +82,8 @@ export const createUsersWithListInput = createAsyncThunk(
 // 2.Put.1. UpdateUser - /user/{username}
 export const updateUser = createAsyncThunk(
     'User.UpdateUser',
-    async (criteria: UpdateUserParameters, requestBody: User, {dispatch}) => {
-        const response = await userApi.UpdateUser(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (composite: { params: UpdateUserParameters, requestBody: User }, {dispatch}) => {
+        const response = await userApi.UpdateUser(composite.params, composite.requestBody).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
@@ -92,8 +92,8 @@ export const updateUser = createAsyncThunk(
 // 2.Delete.1. DeleteUser - /user/{username}
 export const deleteUser = createAsyncThunk(
     'User.DeleteUser',
-    async (criteria: DeleteUserParameters, {dispatch}) => {
-        const response = await userApi.DeleteUser(criteria).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
+    async (params: DeleteUserParameters, {dispatch}) => {
+        const response = await userApi.DeleteUser(params).catch(ex => {alert(ex);}).finally(()=>{dispatch(closeSpinner());});
         return response;
     }
 )
