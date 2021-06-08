@@ -23,6 +23,11 @@ export function createPetDefault(): Pet {
 	}
 }
 
+// Identifier
+export interface PetIdentifier {
+    id: number
+}
+
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'id', direction: QueryOrderDirections.Ascending, displayName: 'Id', expression: 'Id~ASC' },
 	{ propertyName: 'id', direction: QueryOrderDirections.Descending, displayName: 'Id', expression: 'Id~DESC' },
@@ -32,8 +37,6 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'status', direction: QueryOrderDirections.Descending, displayName: 'Status', expression: 'Status~DESC' }
 ];
 
-// Identifier
-export interface PetIdentifier {
-    id: number
-}
+
+
 

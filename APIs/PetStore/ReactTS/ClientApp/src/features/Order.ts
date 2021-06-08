@@ -22,6 +22,11 @@ export function createOrderDefault(): Order {
 	}
 }
 
+// Identifier
+export interface OrderIdentifier {
+    id: number
+}
+
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'id', direction: QueryOrderDirections.Ascending, displayName: 'Id', expression: 'Id~ASC' },
 	{ propertyName: 'id', direction: QueryOrderDirections.Descending, displayName: 'Id', expression: 'Id~DESC' },
@@ -37,8 +42,6 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'complete', direction: QueryOrderDirections.Descending, displayName: 'Complete', expression: 'Complete~DESC' }
 ];
 
-// Identifier
-export interface OrderIdentifier {
-    id: number
-}
+
+
 

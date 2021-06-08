@@ -626,6 +626,204 @@ namespace Elmah.PetStore.Resx {
             }
         }
 
+        /// <summary>
+        ///   Looks up a localized string similar to "Api _key"".
+        /// </summary>
+        public static string Api_key {
+            get {
+                return ResourceManager.GetString("Api_key", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Delete Pet"".
+        /// </summary>
+        public static string DeletePet {
+            get {
+                return ResourceManager.GetString("DeletePet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Order Id"".
+        /// </summary>
+        public static string OrderId {
+            get {
+                return ResourceManager.GetString("OrderId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Delete Order"".
+        /// </summary>
+        public static string DeleteOrder {
+            get {
+                return ResourceManager.GetString("DeleteOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Delete User"".
+        /// </summary>
+        public static string DeleteUser {
+            get {
+                return ResourceManager.GetString("DeleteUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Find Pets By Status"".
+        /// </summary>
+        public static string FindPetsByStatus {
+            get {
+                return ResourceManager.GetString("FindPetsByStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Find Pets By Tags"".
+        /// </summary>
+        public static string FindPetsByTags {
+            get {
+                return ResourceManager.GetString("FindPetsByTags", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Get Pet By Id"".
+        /// </summary>
+        public static string GetPetById {
+            get {
+                return ResourceManager.GetString("GetPetById", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Get Inventory"".
+        /// </summary>
+        public static string GetInventory {
+            get {
+                return ResourceManager.GetString("GetInventory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Get Order By Id"".
+        /// </summary>
+        public static string GetOrderById {
+            get {
+                return ResourceManager.GetString("GetOrderById", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Login User"".
+        /// </summary>
+        public static string LoginUser {
+            get {
+                return ResourceManager.GetString("LoginUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Logout User"".
+        /// </summary>
+        public static string LogoutUser {
+            get {
+                return ResourceManager.GetString("LogoutUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Get User By Name"".
+        /// </summary>
+        public static string GetUserByName {
+            get {
+                return ResourceManager.GetString("GetUserByName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Add Pet"".
+        /// </summary>
+        public static string AddPet {
+            get {
+                return ResourceManager.GetString("AddPet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Update Pet With Form"".
+        /// </summary>
+        public static string UpdatePetWithForm {
+            get {
+                return ResourceManager.GetString("UpdatePetWithForm", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Additional Metadata"".
+        /// </summary>
+        public static string AdditionalMetadata {
+            get {
+                return ResourceManager.GetString("AdditionalMetadata", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Upload File"".
+        /// </summary>
+        public static string UploadFile {
+            get {
+                return ResourceManager.GetString("UploadFile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Place Order"".
+        /// </summary>
+        public static string PlaceOrder {
+            get {
+                return ResourceManager.GetString("PlaceOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Create User"".
+        /// </summary>
+        public static string CreateUser {
+            get {
+                return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Create Users With List Input"".
+        /// </summary>
+        public static string CreateUsersWithListInput {
+            get {
+                return ResourceManager.GetString("CreateUsersWithListInput", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Update Pet"".
+        /// </summary>
+        public static string UpdatePet {
+            get {
+                return ResourceManager.GetString("UpdatePet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Update User"".
+        /// </summary>
+        public static string UpdateUser {
+            get {
+                return ResourceManager.GetString("UpdateUser", resourceCulture);
+            }
+        }
+
     }
 }
 

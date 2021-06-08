@@ -18,6 +18,11 @@ export function createAddressDefault(): Address {
 	}
 }
 
+// Identifier
+export interface AddressIdentifier {
+    street: string
+}
+
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'street', direction: QueryOrderDirections.Ascending, displayName: 'Street', expression: 'Street~ASC' },
 	{ propertyName: 'street', direction: QueryOrderDirections.Descending, displayName: 'Street', expression: 'Street~DESC' },
@@ -29,8 +34,6 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'zip', direction: QueryOrderDirections.Descending, displayName: 'Zip', expression: 'Zip~DESC' }
 ];
 
-// Identifier
-export interface AddressIdentifier {
-    street: string
-}
+
+
 
