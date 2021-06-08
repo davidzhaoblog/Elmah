@@ -14,6 +14,9 @@ import { Typography } from '@material-ui/core';
 import { Pet } from 'src/features//PetStore/Pet';
 
 import { deletePet } from 'src/features//PetStore/PetSlice';
+import { useDispatch } from 'react-redux';
+import { closeAlert, showAlert } from 'src/layout/appSlice';
+import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 
 
 
@@ -27,28 +30,24 @@ function ListItem(props: IListItemProps<Pet>) {
         setExpanded(isExpanded ? panel : false);
     };
 
-
-    // 2.1. Delete
-    const handleDelete = () => {
+    const dispatch = useDispatch();
+    const handleDelete = (item: Pet) => {
         const confirmLDelete = () => {
-            dispatch(deletePet(props.item));
+            dispatch(deletePet({ petId: item.id, api_key: '' }));
             dispatch(closeAlert());
         }
         const handleAlertClose = () => {
             dispatch(closeAlert());
         }
-
+    
         const deleteAlertDialog = {
             title: t('UIStringResource:Delete'),
             message: t('UIStringResource:Do_you_want_to_delete') + " " + props.item.id,
             buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
         };
-
+    
         dispatch(showAlert(deleteAlertDialog));
     };
-
-
-
 
     return (
         <Accordion key={props.item.id.toString()} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -74,7 +73,7 @@ function ListItem(props: IListItemProps<Pet>) {
             <Divider />
             <AccordionActions>
 
-                <Button size="small" onClick={(e) => handleDelete()} color="primary">{t('UIStringResource:Delete')}</Button>
+                <Button size="small" onClick={(e) => handleDelete(props.item)} color="primary">{t('UIStringResource:Delete')}</Button>
 
 
 

@@ -11,10 +11,12 @@ import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { useStyles } from 'src/features/formStyles';
 import { StyledTextField } from '../controls/StyledTextField';
+import { useTranslation } from 'react-i18next';
 
 export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     const dispatch = useDispatch();
     const classes = useStyles();
+    const { t } = useTranslation(["UIStringResource"]);
     const { openPopup, setOpenPopup } = props;
 
     const { register, setValue, handleSubmit, control, errors, formState, reset } = useForm({
@@ -29,7 +31,7 @@ export default function Edit(props: IFormProps<Todo> & IPopupProps) {
     }
 
     const inputData = props.type === FormTypes.Edit ? props.item : createTodoDefault()
-    const popupButtonsOptions = createEditFormButtonsOptions(()=>{reset({...inputData})}, closePopup);
+    const popupButtonsOptions = createEditFormButtonsOptions(t('UIStringResource:Save'), t('UIStringResource:Refresh'), ()=>{reset({...inputData})}, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {
         if (!data.text.trim()) {

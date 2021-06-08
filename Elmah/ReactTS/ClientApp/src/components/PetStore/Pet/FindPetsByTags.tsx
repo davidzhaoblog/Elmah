@@ -13,9 +13,6 @@ import { Typography } from '@material-ui/core';
 
 import { Pet } from 'src/features//PetStore/Pet';
 
-import { deletePet } from 'src/features//PetStore/PetSlice';
-
-
 
 function ListItem(props: IListItemProps<Pet>) {
     const classes = props.classes;
@@ -26,27 +23,6 @@ function ListItem(props: IListItemProps<Pet>) {
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : false);
     };
-
-
-    // 2.1. Delete
-    const handleDelete = () => {
-        const confirmLDelete = () => {
-            dispatch(deletePet(props.item));
-            dispatch(closeAlert());
-        }
-        const handleAlertClose = () => {
-            dispatch(closeAlert());
-        }
-
-        const deleteAlertDialog = {
-            title: t('UIStringResource:Delete'),
-            message: t('UIStringResource:Do_you_want_to_delete') + " " + props.item.id,
-            buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
-        };
-
-        dispatch(showAlert(deleteAlertDialog));
-    };
-
 
 
 
@@ -73,9 +49,6 @@ function ListItem(props: IListItemProps<Pet>) {
             </AccordionDetails>
             <Divider />
             <AccordionActions>
-
-                <Button size="small" onClick={(e) => handleDelete()} color="primary">{t('UIStringResource:Delete')}</Button>
-
 
 
                 <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
