@@ -56,7 +56,7 @@ export default function UpdatePet(props: IFormProps<Pet> & IPopupProps) {
     }
 
     const inputData = props.type === FormTypes.Edit ? { ...props.item } : createPetDefault()
-    const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
+    const popupButtonsOptions = createEditFormButtonsOptions(t('UIStringResource:Save'), t('UIStringResource:Reset'), () => { reset({ ...inputData }) }, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {
         const dataToUpsert = { id: 0, ...props.item, ...data };

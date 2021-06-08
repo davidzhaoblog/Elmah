@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { useStyles } from 'src/features/formStyles';
-import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+import { createCloseButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import FormPopup from '../../FormPopup';
 
 import { Order } from 'src/features/PetStore/Order';
@@ -30,7 +30,7 @@ export default function GetOrderById(props: IFormProps<Order> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const popupButtonsOptions = createEditFormButtonsOptions(() => {}, closePopup);
+    const popupButtonsOptions = createCloseButtonsOptions(t('UIStringResource:Close'), closePopup);
 
     const renderItem = () => {
         return (
