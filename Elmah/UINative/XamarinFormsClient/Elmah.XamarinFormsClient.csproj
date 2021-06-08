@@ -235,11 +235,11 @@
       <Name>Elmah.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\APIs\PetStore\UINative\ViewModels\Elmah.PetStore.ViewModels.csproj">
-      <Project>{5934cd79-f8e8-40bb-8bea-56f8e6fb7b54}</Project>
+      <Project>{c5057f18-c10a-47ea-8d03-4c65eba7e1d1}</Project>
       <Name>Elmah.PetStore.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\APIs\PetStore\UINative\XamarinForms\Elmah.PetStore.XamarinForms.csproj">
-      <Project>{a55f84ef-96b4-445e-bbd8-8e3bf9d0bb8e}</Project>
+      <Project>{dda7b9c1-72f8-4209-9f66-3479844a3ed9}</Project>
       <Name>Elmah.PetStore.XamarinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Contracts\ViewModelData\Elmah.ViewModelData.csproj">

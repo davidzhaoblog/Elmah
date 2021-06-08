@@ -26,6 +26,11 @@ export function createUserDefault(): User {
 	}
 }
 
+// Identifier
+export interface UserIdentifier {
+    id: number
+}
+
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'id', direction: QueryOrderDirections.Ascending, displayName: 'Id', expression: 'Id~ASC' },
 	{ propertyName: 'id', direction: QueryOrderDirections.Descending, displayName: 'Id', expression: 'Id~DESC' },
@@ -45,8 +50,6 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'userStatus', direction: QueryOrderDirections.Descending, displayName: 'UserStatus', expression: 'UserStatus~DESC' }
 ];
 
-// Identifier
-export interface UserIdentifier {
-    id: number
-}
+
+
 

@@ -23,7 +23,7 @@ import { ELMAH_Error } from 'src/features/ELMAH_Error/Types';
 function ListItem(props: IListItemProps<ELMAH_Error>) {
     const classes = props.classes;
     const dispatch = useDispatch();
-  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
+	const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -43,8 +43,8 @@ function ListItem(props: IListItemProps<ELMAH_Error>) {
 
         const deleteAlertDialog = {
             title: t('UIStringResource:Delete'),
-            message: 'You are deleting ' + props.item.errorId,
-            buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
+            message: t('UIStringResource:Do_you_want_to_delete') + props.item.errorId,
+            buttons: createDeleteAlertButtonsOptions(t('UIStringResource:Delete'), confirmLDelete, t('UIStringResource:Cancel'),handleAlertClose)
         };
 
         dispatch(showAlert(deleteAlertDialog));

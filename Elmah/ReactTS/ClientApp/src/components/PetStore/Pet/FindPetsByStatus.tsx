@@ -8,6 +8,10 @@ import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
 import { FormTypes } from 'src/framework/ViewModels/IFormProps';
 import { IListProps } from 'src/framework/ViewModels/IListProps';
 
+import { useDispatch } from 'react-redux';
+import { closeAlert, showAlert } from 'src/layout/appSlice';
+import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+
 import { InputLabel } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
@@ -23,6 +27,7 @@ import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButto
 function ListItem(props: IListItemProps<Pet>) {
     const classes = props.classes;
 	const { t } = useTranslation(["UIStringResource", "UIStringResource_PetStore"]);
+    const dispatch = useDispatch();
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -30,23 +35,24 @@ function ListItem(props: IListItemProps<Pet>) {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const dispatch = useDispatch();
-    const handleDelete = (item: Pet) => {
-        const confirmLDelete = () => {
-            dispatch(deletePet({ petId: item.id, api_key: '' }));
+
+  // Delete.1 DeletePet -- /pet/{petId}
+    const handleDeletePet = () => {
+        const confirmDeletePet = () => {
+            dispatch(deletePet(props.item));
             dispatch(closeAlert());
         }
         const handleAlertClose = () => {
             dispatch(closeAlert());
         }
-    
-        const deleteAlertDialog = {
-            title: t('UIStringResource:Delete'),
+
+        const deletePetAlertDialog = {
+            title: t('UIStringResource_PetStore:DeletePet'),
             message: t('UIStringResource:Do_you_want_to_delete') + " " + props.item.id,
-            buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
+            buttons: createDeleteAlertButtonsOptions(t('UIStringResource:Delete'), confirmDeletePet, t('UIStringResource:Cancel'),handleAlertClose)
         };
-    
-        dispatch(showAlert(deleteAlertDialog));
+
+        dispatch(showAlert(deletePetAlertDialog));
     };
 
     return (
@@ -73,8 +79,14 @@ function ListItem(props: IListItemProps<Pet>) {
             <Divider />
             <AccordionActions>
 
-                <Button size="small" onClick={(e) => handleDelete(props.item)} color="primary">{t('UIStringResource:Delete')}</Button>
+                <Button size="small" onClick={(e) => handleDeletePet(props.item)} color="primary">{t('UIStringResource:Delete')}</Button>
 
+
+
+                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
+
+
+                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
 
 
                 <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>

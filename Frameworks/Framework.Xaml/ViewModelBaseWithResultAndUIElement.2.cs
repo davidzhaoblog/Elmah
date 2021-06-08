@@ -38,7 +38,6 @@ namespace Framework.Xaml
         //    }
         //}
 
-
         #endregion 1. Properties
 
         #region 2. Commands

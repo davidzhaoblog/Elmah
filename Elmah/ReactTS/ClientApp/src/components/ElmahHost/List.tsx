@@ -20,7 +20,7 @@ import { ElmahHost } from 'src/features/ElmahHost/Types';
 function ListItem(props: IListItemProps<ElmahHost>) {
     const classes = props.classes;
     const dispatch = useDispatch();
-  const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
+	const { t } = useTranslation(["UIStringResource", "UIStringResourcePerApp", "UIStringResourcePerEntity"]);
 
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -40,8 +40,8 @@ function ListItem(props: IListItemProps<ElmahHost>) {
 
         const deleteAlertDialog = {
             title: t('UIStringResource:Delete'),
-            message: 'You are deleting ' + props.item.host,
-            buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
+            message: t('UIStringResource:Do_you_want_to_delete') + props.item.host,
+            buttons: createDeleteAlertButtonsOptions(t('UIStringResource:Delete'), confirmLDelete, t('UIStringResource:Cancel'),handleAlertClose)
         };
 
         dispatch(showAlert(deleteAlertDialog));

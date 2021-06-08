@@ -54,6 +54,9 @@ export default function AppDrawer(props: IAppDrawerProps): JSX.Element {
 
 
 
+        { path: '/PetStore/Order', title: 'Order', icon: () => <AccountCircleIcon /> },
+        { path: '/PetStore/User', title: 'User', icon: () => <AccountCircleIcon /> },
+        { path: '/PetStore/Pet', title: 'Pet', icon: () => <AccountCircleIcon /> },
     ]
     
     return (

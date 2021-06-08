@@ -17,7 +17,6 @@ namespace Framework.Xaml
 
         #region 1. Properties
 
-
         private Framework.Services.BusinessLogicLayerResponseStatus m_StatusOfResult;
         public Framework.Services.BusinessLogicLayerResponseStatus StatusOfResult
         {
