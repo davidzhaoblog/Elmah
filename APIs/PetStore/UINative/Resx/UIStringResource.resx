@@ -307,6 +307,72 @@
   <data name="Message_is_required" xml:space="preserve">
     <value>Message is required</value>
   </data>
+  <data name="Api_key" xml:space="preserve">
+    <value>Api _key</value>
+  </data>
+  <data name="DeletePet" xml:space="preserve">
+    <value>Delete Pet</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>Order Id</value>
+  </data>
+  <data name="DeleteOrder" xml:space="preserve">
+    <value>Delete Order</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Delete User</value>
+  </data>
+  <data name="FindPetsByStatus" xml:space="preserve">
+    <value>Find Pets By Status</value>
+  </data>
+  <data name="FindPetsByTags" xml:space="preserve">
+    <value>Find Pets By Tags</value>
+  </data>
+  <data name="GetPetById" xml:space="preserve">
+    <value>Get Pet By Id</value>
+  </data>
+  <data name="GetInventory" xml:space="preserve">
+    <value>Get Inventory</value>
+  </data>
+  <data name="GetOrderById" xml:space="preserve">
+    <value>Get Order By Id</value>
+  </data>
+  <data name="LoginUser" xml:space="preserve">
+    <value>Login User</value>
+  </data>
+  <data name="LogoutUser" xml:space="preserve">
+    <value>Logout User</value>
+  </data>
+  <data name="GetUserByName" xml:space="preserve">
+    <value>Get User By Name</value>
+  </data>
+  <data name="AddPet" xml:space="preserve">
+    <value>Add Pet</value>
+  </data>
+  <data name="UpdatePetWithForm" xml:space="preserve">
+    <value>Update Pet With Form</value>
+  </data>
+  <data name="AdditionalMetadata" xml:space="preserve">
+    <value>Additional Metadata</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>Place Order</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="CreateUsersWithListInput" xml:space="preserve">
+    <value>Create Users With List Input</value>
+  </data>
+  <data name="UpdatePet" xml:space="preserve">
+    <value>Update Pet</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Update User</value>
+  </data>
 
 </root>
 
