@@ -74,7 +74,7 @@ function ListItem(props: IListItemProps<Pet>) {
             <Divider />
             <AccordionActions>
 
-                <Button size="small" onClick={(e) => handleDelete()} color="primary">{t('UIStringResource:Delete')}</Button>
+                <Button size="small" onClick={(e) => handleDelete(props.item)} color="primary">{t('UIStringResource:Delete')}</Button>
 
 
 

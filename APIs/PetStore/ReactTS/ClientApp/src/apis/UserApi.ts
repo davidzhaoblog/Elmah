@@ -26,21 +26,21 @@ export class UserApi extends ApiBase
   // Get.1 LoginUser -- /user/login
   public LoginUser = (params: LoginUserParameters): Promise<string> => {
     const url = '/user/login' + "?" + this.ConvertCriteriaToQueryString({ username:params.username, password:params.password });
-	return this.get<string, AxiosResponse<string>>(url).then(this.success);
+    return this.get<string, AxiosResponse<string>>(url).then(this.success);
   }
 
 
   // Get.2 LogoutUser -- /user/logout
   public LogoutUser = (): Promise<string> => {
     const url = '/user/logout';
-	return this.get<string, AxiosResponse<string>>(url).then(this.success);
+    return this.get<string, AxiosResponse<string>>(url).then(this.success);
   }
 
 
   // Get.3 GetUserByName -- /user/{username}
   public GetUserByName = (params: GetUserByNameParameters): Promise<User> => {
     const url = `/user/${params.username}`;
-	return this.get<User, AxiosResponse<User>>(url).then(this.success);
+    return this.get<User, AxiosResponse<User>>(url).then(this.success);
   }
 
 

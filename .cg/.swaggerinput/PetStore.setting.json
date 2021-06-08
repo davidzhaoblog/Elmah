@@ -295,9 +295,9 @@
       "type": "object",
       "hasListView": true,
       "hasItemView": true,
-      "getItemPath": "/store/order/{orderId}",
-      "createPath": "/store/order",
-	  "deletePath": "/store/order/{orderId}",
+      "getItemPath": ["/store/order/{orderId}"],
+      "createPath": ["/store/order"],
+	  "deletePath": ["/store/order/{orderId}"],
       "idPropertyName": "id"
     },
     {
@@ -334,11 +334,11 @@
       "type": "object",
       "hasListView": true,
       "hasItemView": true,
-      "getItemPath": "/user/{username}",
-      "createPath": "/user",
-      "updatePath": "/user/{username}",
-      "deletePath": "/user/{username}",
-      "batchCreatePath": "/user/createWithList",
+      "getItemPath": ["/user/{username}","/user/login","/user/logout"],
+      "createPath": ["/user"],
+      "updatePath": ["/user/{username}"],
+      "deletePath": ["/user/{username}"],
+      "batchCreatePath": ["/user/createWithList"],
       "idPropertyName": "id"
     },
     {
@@ -357,11 +357,11 @@
       "type": "object",
       "hasListView": true,
       "hasItemView": true,
-      "getItemPath": "/pet/{petId}",
-      "createPath": "/pet",
-      "updatePath": "/pet;/pet/{petId};/pet/{petId}/uploadImage",
-	  "deletePath": "/pet/{petId}",
-      "getListPath": "/pet/findByStatus;findByTags",
+      "getItemPath": ["/pet/{petId}"],
+      "createPath": ["/pet"],
+      "updatePath": ["/pet","/pet/{petId}","/pet/{petId}/uploadImage"],
+	  "deletePath": ["/pet/{petId}"],
+      "getListPath": ["/pet/findByStatus","findByTags"],
       "idPropertyName": "id"
     },
     {
