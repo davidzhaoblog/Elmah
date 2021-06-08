@@ -18,11 +18,6 @@ import elmahStatusCode from 'src/features/ElmahStatusCode/Slice';
 import elmahType from 'src/features/ElmahType/Slice';
 import elmahUser from 'src/features/ElmahUser/Slice';
 
-// Swagger
-import order from 'src/features/PetStore/OrderSlice';
-import user from 'src/features/PetStore/UserSlice';
-import pet from 'src/features/PetStore/PetSlice';
-
 import { 
     eLMAH_ErrorList,
     elmahApplicationList,

@@ -34,8 +34,7 @@ function ListItem(props: IListItemProps<Pet>) {
   // Delete.1 DeletePet -- /pet/{petId}
     const handleDeletePet = (item: Pet) => {
         const confirmDeletePet = () => {
-			// TODO: please match props.item to DeletePetParameters
-            dispatch(deletePet(props.item));
+            dispatch(deletePet({ petId: props.item.id, api_key: ''}));
             dispatch(closeAlert());
         }
         const handleAlertClose = () => {

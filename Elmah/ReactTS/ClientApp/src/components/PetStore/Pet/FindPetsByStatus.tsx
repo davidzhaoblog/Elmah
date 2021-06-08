@@ -18,10 +18,6 @@ import { Typography } from '@material-ui/core';
 import { Pet } from 'src/features//PetStore/Pet';
 
 import { deletePet } from 'src/features//PetStore/PetSlice';
-import { useDispatch } from 'react-redux';
-import { closeAlert, showAlert } from 'src/layout/appSlice';
-import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
-
 
 
 function ListItem(props: IListItemProps<Pet>) {
@@ -39,8 +35,7 @@ function ListItem(props: IListItemProps<Pet>) {
   // Delete.1 DeletePet -- /pet/{petId}
     const handleDeletePet = (item: Pet) => {
         const confirmDeletePet = () => {
-			// TODO: please match props.item to DeletePetParameters
-            dispatch(deletePet(props.item));
+            dispatch(deletePet({ petId: props.item.id, api_key: ''}));
             dispatch(closeAlert());
         }
         const handleAlertClose = () => {
