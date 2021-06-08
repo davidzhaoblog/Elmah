@@ -8,10 +8,12 @@ import { useDispatch } from 'react-redux';
 import { closeAlert, showAlert } from 'src/layout/appSlice';
 import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import { del } from 'src/features/Todo/todoSlice';
+import { useTranslation } from 'react-i18next';
 
 export default function ListItem(props: IListItemProps<Todo>) {
     const classes = props.classes;
     const dispatch = useDispatch();
+    const { t } = useTranslation(["UIStringResource"]);
 
     // 2.1. Delete
     const handleDelete = () => {
@@ -26,7 +28,7 @@ export default function ListItem(props: IListItemProps<Todo>) {
         const deleteAlertDialog = {
             title: 'Delete',
             message: 'You are deleting ' + props.item.text,
-            buttons: createDeleteAlertButtonsOptions(confirmLDelete, handleAlertClose)
+            buttons: createDeleteAlertButtonsOptions(t('UIStringResource:Delete'), confirmLDelete, t('UIStringResource:Cancel'),handleAlertClose)
         };
 
         dispatch(showAlert(deleteAlertDialog));

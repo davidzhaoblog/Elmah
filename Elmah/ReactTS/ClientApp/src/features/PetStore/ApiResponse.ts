@@ -16,6 +16,11 @@ export function createApiResponseDefault(): ApiResponse {
 	}
 }
 
+// Identifier
+export interface ApiResponseIdentifier {
+    code: number
+}
+
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'code', direction: QueryOrderDirections.Ascending, displayName: 'Code', expression: 'Code~ASC' },
 	{ propertyName: 'code', direction: QueryOrderDirections.Descending, displayName: 'Code', expression: 'Code~DESC' },
@@ -25,8 +30,6 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'message', direction: QueryOrderDirections.Descending, displayName: 'Message', expression: 'Message~DESC' }
 ];
 
-// Identifier
-export interface ApiResponseIdentifier {
-    code: number
-}
+
+
 

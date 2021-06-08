@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { IFormProps, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 import { IPopupProps } from 'src/framework/ViewModels/IPopupProps';
 import { useStyles } from 'src/features/formStyles';
-import { createEditFormButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
+import { createCloseButtonsOptions } from 'src/framework/ViewModels/IButtonOptions';
 import FormPopup from '../FormPopup';
 import { ELMAH_Error } from 'src/features/ELMAH_Error/Types';
 
@@ -26,7 +26,7 @@ export default function Details(props: IFormProps<ELMAH_Error> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const popupButtonsOptions = createEditFormButtonsOptions(() => {}, closePopup);
+    const popupButtonsOptions = createCloseButtonsOptions(t('UIStringResource:Close'), closePopup);
 
     const renderItem = () => {
         return (

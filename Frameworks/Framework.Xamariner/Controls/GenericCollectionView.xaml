@@ -36,7 +36,7 @@
                     IsVisible="{Binding BindToGroupedResults, Converter={StaticResource BooleanInverter}}"
                     IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" 
                     Command="{Binding SearchCommand}">
-                    <CollectionView AutomationId="CollectionView" x:Name="ResultView" SelectionMode="{Binding ListItemViewMode, Converter={StaticResource LSMConverter}}"
+                    <CollectionView AutomationId="CollectionView" x:Name="ResultView" SelectionMode="{Binding ListItemViewMode, Converter={StaticResource ListItemViewModeToSelectionModeConverter}}"
                         ItemsSource="{Binding Path=Result}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" EmptyView="{Binding Source={x:Reference searchBar}, Path=Text}"
                         RemainingItemsThreshold ="{Binding RemainingItemsThreshold}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                         ItemTemplate="{Binding ItemTemplate, Source={x:Reference self}}" />
@@ -46,7 +46,7 @@
                     IsVisible="{Binding BindToGroupedResults}"
                     IsRefreshing="{Binding IsRefreshing, Mode=OneWay}" 
                     Command="{Binding SearchCommand}">
-                    <CollectionView AutomationId="GroupedCollectionView" x:Name="GroupedResultView" SelectionMode="{Binding ListItemViewMode, Converter={StaticResource LSMConverter}}"
+                    <CollectionView AutomationId="GroupedCollectionView" x:Name="GroupedResultView" SelectionMode="{Binding ListItemViewMode, Converter={StaticResource ListItemViewModeToSelectionModeConverter}}"
                         ItemsSource="{Binding Path=GroupedResults}"  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" EmptyView="{Binding Source={x:Reference searchBar}, Path=Text}"
                         RemainingItemsThreshold ="{Binding RemainingItemsThreshold}" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                         ItemTemplate="{Binding ItemTemplate, Source={x:Reference self}}" IsGrouped="True" GroupHeaderTemplate="{StaticResource CollectionViewGroupHeaderTemplate}">

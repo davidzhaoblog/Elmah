@@ -55,7 +55,7 @@ export default function Edit(props: IFormProps<ElmahApplication> & IPopupProps) 
     }
 
     const inputData = props.type === FormTypes.Edit ? { ...props.item } : createElmahApplicationDefault()
-    const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
+    const popupButtonsOptions = createEditFormButtonsOptions(t('UIStringResource:Save'), t('UIStringResource:Reset'), () => { reset({ ...inputData }) }, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {
         const dataToUpsert = { errorId: 0, ...props.item, ...data };

@@ -17,6 +17,28 @@ namespace Framework.Xaml
 
         #region 1. Properties
 
+        private Framework.Services.BusinessLogicLayerResponseStatus m_StatusOfResult;
+        public Framework.Services.BusinessLogicLayerResponseStatus StatusOfResult
+        {
+            get { return m_StatusOfResult; }
+            set
+            {
+                Set(nameof(StatusOfResult), ref m_StatusOfResult, value);
+
+                IsRemainingItemsZero = StatusOfResult == Services.BusinessLogicLayerResponseStatus.NoValueFromDataSource;
+            }
+        }
+
+        private string m_StatusMessageOfResult;
+        public string StatusMessageOfResult
+        {
+            get { return m_StatusMessageOfResult; }
+            set
+            {
+                Set(nameof(StatusMessageOfResult), ref m_StatusMessageOfResult, value);
+            }
+        }
+
         public virtual string SearchBarPlaceHolder
         {
             get { return null; }

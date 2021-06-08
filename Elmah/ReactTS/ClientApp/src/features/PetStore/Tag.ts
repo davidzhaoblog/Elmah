@@ -14,6 +14,11 @@ export function createTagDefault(): Tag {
 	}
 }
 
+// Identifier
+export interface TagIdentifier {
+    id: number
+}
+
 export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'id', direction: QueryOrderDirections.Ascending, displayName: 'Id', expression: 'Id~ASC' },
 	{ propertyName: 'id', direction: QueryOrderDirections.Descending, displayName: 'Id', expression: 'Id~DESC' },
@@ -21,8 +26,6 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'name', direction: QueryOrderDirections.Descending, displayName: 'Name', expression: 'Name~DESC' }
 ];
 
-// Identifier
-export interface TagIdentifier {
-    id: number
-}
+
+
 

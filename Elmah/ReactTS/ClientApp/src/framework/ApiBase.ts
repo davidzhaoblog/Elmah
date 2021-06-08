@@ -9,6 +9,8 @@ import { Axios } from './Axios'
 import Cookies from 'universal-cookie';
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { CookieKeys } from './CookieKeys'
+import { IResponse } from './Services/IResponse';
+import { ResponseStatus } from './Services/ResponseStatus';
 export class ApiBase extends Axios {
     // private token: string;
 
@@ -291,13 +293,13 @@ export class ApiBase extends Axios {
     }
 
     public Get = <TRequest, TResponse>(url: string, params: TRequest): Promise<TResponse> => {
-        const queryString = this.ConvertIdentifierCriteriaToQueryString(params)
+        const queryString = this.ConvertCriteriaToQueryString(params)
         const urlWithQueryString = queryString ? url + "?" + queryString :  url;
         return this.get<TResponse, AxiosResponse<TResponse>>(urlWithQueryString)
             .then(this.success);
     }
 
-    protected ConvertIdentifierCriteriaToQueryString = <TRequest>(params: TRequest): string => {
+    protected ConvertCriteriaToQueryString = <TRequest>(params: TRequest): string => {
         // https://morioh.com/p/480aef8e92cd
         // Exclude empty or null or undefined properties or fields.
         // ES 6
@@ -309,5 +311,41 @@ export class ApiBase extends Axios {
         // return Object.keys(params).filter(function(key){ return params[key]; }).map(function(key) {
         //   return key + '=' + params[key]
         // }).join('&');
+    }
+
+    /**
+     *
+     * @template T - type.
+     * @param {import("axios").AxiosResponse<T>} response - axios response.
+     * @returns {IResponse<T>} - expected object.
+     * @memberof Api
+     */
+     public success_Multiple = <T>(response: AxiosResponse<T[]>): IResponse<T> => {
+        // console.log(response);
+        return { businessLogicLayerResponseStatus: ResponseStatus.MessageOK, message: response.data, serverErrorMessage: null };
+    }
+    
+    /**
+     *
+     * @template T - type.
+     * @param {import("axios").AxiosResponse<T>} response - axios response.
+     * @returns {IResponse<T>} - expected object.
+     * @memberof Api
+     */
+     public success_Single = <T>(response: AxiosResponse<T>): IResponse<T> => {
+        // console.log(response);
+        return { businessLogicLayerResponseStatus: ResponseStatus.MessageOK, message: [ response.data ], serverErrorMessage: null };
+    }
+    
+    /**
+     *
+     * @template T - type.
+     * @param {import("axios").AxiosResponse<T>} response - axios response.
+     * @returns {IResponse<T>} - expected object.
+     * @memberof Api
+     */
+     public success_NoResponseBody = (response: AxiosResponse): string => {
+        // console.log(response);
+        return 'Success';
     }
 }
