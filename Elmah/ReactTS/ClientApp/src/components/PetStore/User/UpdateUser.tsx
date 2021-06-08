@@ -62,7 +62,7 @@ export default function UpdateUser(props: IFormProps<User> & IPopupProps) {
     }
 
     const inputData = props.type === FormTypes.Edit ? { ...props.item } : createUserDefault()
-    const popupButtonsOptions = createEditFormButtonsOptions(() => { reset({ ...inputData }) }, closePopup);
+    const popupButtonsOptions = createEditFormButtonsOptions(t('UIStringResource:Save'), t('UIStringResource:Reset'), () => { reset({ ...inputData }) }, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {
         const dataToUpsert = { id: 0, ...props.item, ...data };

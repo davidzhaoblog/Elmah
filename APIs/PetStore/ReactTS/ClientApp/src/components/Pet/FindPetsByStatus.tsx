@@ -34,8 +34,9 @@ function ListItem(props: IListItemProps<Pet>) {
 
 
   // Delete.1 DeletePet -- /pet/{petId}
-    const handleDeletePet = () => {
+    const handleDeletePet = (item: Pet) => {
         const confirmDeletePet = () => {
+			// TODO: please match props.item to DeletePetParameters
             dispatch(deletePet(props.item));
             dispatch(closeAlert());
         }
@@ -46,7 +47,7 @@ function ListItem(props: IListItemProps<Pet>) {
         const deletePetAlertDialog = {
             title: t('UIStringResource_PetStore:DeletePet'),
             message: t('UIStringResource:Do_you_want_to_delete') + " " + props.item.id,
-            buttons: createDeleteAlertButtonsOptions(t('UIStringResource:Delete'), confirmdeletePet, t('UIStringResource:Cancel'),handleAlertClose)
+            buttons: createDeleteAlertButtonsOptions(t('UIStringResource:Delete'), confirmDeletePet, t('UIStringResource:Cancel'),handleAlertClose)
         };
 
         dispatch(showAlert(deletePetAlertDialog));

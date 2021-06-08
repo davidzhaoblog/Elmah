@@ -39,7 +39,7 @@ export default function FindPetsByTagsSearch(props: ISearchFormProps<FindPetsByT
         setOpenPopup(false)
     }
 
-    const popupButtonsOptions = createSearchFormButtonsOptions(() => { reset(criteria) }, closePopup);
+	const popupButtonsOptions = createSearchFormButtonsOptions(t('UIStringResource:Search'), t('UIStringResource:Reset'), () => { reset(criteria) }, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {
         dispatch(showSpinner());
