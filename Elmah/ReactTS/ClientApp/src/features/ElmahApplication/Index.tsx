@@ -28,7 +28,7 @@ export default function IndexPage(): JSX.Element {
 
   const [openEditPopup, setOpenEditPopup] = useState(false);
   const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
-  const [formType, setFormType] = useState(FormTypes.Create);
+  const [formType, setFormType] = useState('Create');
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePageChange = (event: object, value: number): void => {
@@ -47,13 +47,13 @@ export default function IndexPage(): JSX.Element {
     dispatch(getIndexVM({ criteria: commonCriteria, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
     
-  const openAdvancedSearchInPopup = (type: FormTypes, item: ElmahApplication) => {
+  const openAdvancedSearchInPopup = (type: string, item: ElmahApplication) => {
     setFormType(type);
     setOpenAdvancedSearchPopup(true);
     setSelectedItem(item);
   }
 
-  const openFormInPopup = (type: FormTypes, item: ElmahApplication) => {
+  const openFormInPopup = (type: string, item: ElmahApplication) => {
     setFormType(type);
     setOpenEditPopup(true);
     setSelectedItem(item);

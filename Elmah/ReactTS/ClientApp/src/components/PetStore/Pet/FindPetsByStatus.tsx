@@ -32,7 +32,7 @@ function ListItem(props: IListItemProps<Pet>) {
     };
 
 
-  // Delete.1 DeletePet -- /pet/{petId}
+	// Delete.1 DeletePet -- /pet/{petId}
     const handleDeletePet = (item: Pet) => {
         const confirmDeletePet = () => {
             dispatch(deletePet({ petId: props.item.id, api_key: ''}));
