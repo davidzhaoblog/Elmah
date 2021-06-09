@@ -23,7 +23,7 @@ export default function TodoList(): JSX.Element {
   const { orderBy, queryPagingSetting } = store.getState().todos;
 
   const [openPopup, setOpenPopup] = useState(false);
-  const [formType, setFormType] = useState(FormTypes.Create);
+  const [formType, setFormType] = useState('Create');
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePageChange = (event: object, value: number): void => {
@@ -42,7 +42,7 @@ export default function TodoList(): JSX.Element {
     dispatch(getIndexVM({ criteria: null, orderBy: orderByHere, queryPagingSetting: { ...queryPagingSetting, currentPage: 1 } }));
   }
 
-  const openFormInPopup = (type: FormTypes, item: Todo) => {
+  const openFormInPopup = (type: string, item: Todo) => {
     setFormType(type);
     setOpenPopup(true);
     setSelectedItem(item);

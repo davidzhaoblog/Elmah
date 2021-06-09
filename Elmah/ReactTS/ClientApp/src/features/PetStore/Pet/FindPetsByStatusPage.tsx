@@ -27,7 +27,7 @@ export default function FindPetsByStatusPage(): JSX.Element {
   const { findPetsByStatusParameters, orderBy, queryPagingSetting } = store.getState().pet;
 
   const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
-  const [formType, setFormType] = useState(FormTypes.Create);
+  const [formType, setFormType] = useState('Create');
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
@@ -45,13 +45,13 @@ export default function FindPetsByStatusPage(): JSX.Element {
     dispatch(findPetsByStatus(findPetsByStatusParameters));
   }
     
-  const openAdvancedSearchInPopup = (type: FormTypes, item: Pet) => {
+  const openAdvancedSearchInPopup = (type: string, item: Pet) => {
     setFormType(type);
     setOpenAdvancedSearchPopup(true);
     // setSelectedItem(item);
   }
 
-  const openFormInPopup = (type: FormTypes, item: Pet) => {
+  const openFormInPopup = (type: string, item: Pet) => {
     setFormType(type);
     // setOpenEditPopup(true);
     // setSelectedItem(item);
