@@ -43,9 +43,9 @@ import ElmahTypeRoute from "src/features/ElmahType/Route";
 import ElmahUserRoute from "src/features/ElmahUser/Route";
 
 
-import PetStoreOrderRoute from "src/features/PetStore/Order/Route";
-import PetStoreUserRoute from "src/features/PetStore/User/Route";
 import PetStorePetRoute from "src/features/PetStore/Pet/Route";
+import PetStoreStoreRoute from "src/features/PetStore/Store/Route";
+import PetStoreUserRoute from "src/features/PetStore/User/Route";
 
 interface IMasterLayoutProps {
     theme: Theme;
@@ -146,7 +146,7 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
     const logoutAlertDialog = {
         title: t('UIStringResource:Account_LogInStatus_LogoutText'),
         message: t('UIStringResource:Account_LogInStatus_LogoutText'),
-        buttons: createLogoutAlertButtonsOptions(confirmLogout, handleAlertClose)
+        buttons: createLogoutAlertButtonsOptions(t('UIStringResource:Account_LogInStatus_LogoutText'), confirmLogout, t('UIStringResource:Cancel'), handleAlertClose)
     };
 
     const handleLogout = () => {
@@ -316,9 +316,9 @@ export default function MasterLayout(props: IMasterLayoutProps): JSX.Element {
 
 
 
-                <PrivateRoute path='/PetStore/Order' exact={false} component={ PetStoreOrderRoute } />
-                <PrivateRoute path='/PetStore/User' exact={false} component={ PetStoreUserRoute } />
                 <PrivateRoute path='/PetStore/Pet' exact={false} component={ PetStorePetRoute } />
+                <PrivateRoute path='/PetStore/Store' exact={false} component={ PetStoreStoreRoute } />
+                <PrivateRoute path='/PetStore/User' exact={false} component={ PetStoreUserRoute } />
 
                 <Route path='/account' component={renderAccount} />
                 {renderAlert()}

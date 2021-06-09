@@ -5,7 +5,7 @@ export interface IFormProps<TItem>
 {
   classes?: any;
   wrapperType: WrapperTypes;
-  type: FormTypes;
+  type: string;
   item?: TItem;
 }
 
@@ -13,17 +13,17 @@ export interface ISearchFormProps<TCriteria>
 {
   classes?: any;
   wrapperType: WrapperTypes;
-  type: FormTypes;
+  type: string;
   criteria?: TCriteria;
   orderBy : QueryOrderBySetting;
   queryPagingSetting: QueryPagingSetting;
 }
 
 export enum FormTypes {
-  Create,
-  Edit,
-  View,
-  Search,
+  Create = "Create",
+  Edit = "Edit",
+  View = "View",
+  Search = "Search",
 }
 
 export enum WrapperTypes {

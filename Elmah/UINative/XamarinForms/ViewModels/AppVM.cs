@@ -119,14 +119,14 @@ namespace Elmah.XamarinForms.ViewModels
             {
                 Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl = Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl_IOS;
 
-                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_Android;
+                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_IOS;
 
             }
             else
             {
                 Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl = Elmah.MVVMLightViewModels.WebServiceConfig.WebApiRootUrl_General;
 
-                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_Android;
+                Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl = Elmah.PetStore.ViewModels.WebServiceConfig.WebApiRootUrl_General;
 
             }
 
