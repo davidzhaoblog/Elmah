@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
 import { IListItemProps } from 'src/framework/ViewModels/IListItemProps';
-import { FormTypes } from 'src/framework/ViewModels/IFormProps';
 import { IListProps } from 'src/framework/ViewModels/IListProps';
 
 import { useDispatch } from 'react-redux';
@@ -15,7 +14,7 @@ import { createDeleteAlertButtonsOptions } from 'src/framework/ViewModels/IButto
 import { InputLabel } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
-import { Pet } from 'src/features//PetStore/Pet';
+import { Pet, PetPaths } from 'src/features//PetStore/Pet';
 
 import { deletePet } from 'src/features//PetStore/PetSlice';
 
@@ -79,13 +78,13 @@ function ListItem(props: IListItemProps<Pet>) {
 
 
 
-                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
-
-
-                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
-
+                <Button size="small" onClick={(e) => props.openFormInPopup(PetPaths.UpdatePet, props.item)}>{t('UIStringResource_PetStore:UpdatePet')}</Button>
+{/* 
 
                 <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
+
+
+                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button> */}
 
 
             </AccordionActions>

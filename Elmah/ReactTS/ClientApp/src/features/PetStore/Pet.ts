@@ -37,6 +37,14 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'status', direction: QueryOrderDirections.Descending, displayName: 'Status', expression: 'Status~DESC' }
 ];
 
-
-
+export enum PetPaths {
+	FindPetsByStatus = "FindPetsByStatus",
+	FindPetsByTags = "FindPetsByTags",
+	GetPetById = "GetPetById",
+	AddPet = "AddPet",
+	UpdatePetWithForm = "UpdatePetWithForm",
+	UploadFile = "UploadFile",
+	UpdatePet = "UpdatePet",
+	DeletePet = "DeletePet"
+}
 

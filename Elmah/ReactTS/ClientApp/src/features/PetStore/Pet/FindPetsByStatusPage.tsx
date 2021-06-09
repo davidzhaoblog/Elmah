@@ -11,12 +11,14 @@ import { RootState } from 'src/store/CombinedReducers';
 import PageSizePicker from 'src/components/PageSizePicker';
 import { pageSizeListCommon } from 'src/framework/GlobalVariables';
 import OrderByPicker from 'src/components/OrderByPicker';
-import { FormTypes, WrapperTypes } from 'src/framework/ViewModels/IFormProps';
+import { WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { findPetsByStatus, petSelectors } from '../PetSlice';
-import { orderBys, Pet } from '../Pet';
+import { createPetDefault, orderBys, Pet, PetPaths } from '../Pet';
 import FindPetsByStatus from 'src/components/PetStore/Pet/FindPetsByStatus';
 import FindPetsByStatusSearch from 'src/components/PetStore/Pet/FindPetsByStatusSearch';
+import UpdatePet from 'src/components/PetStore/Pet/UpdatePet';
+import AddPet from 'src/components/PetStore/Pet/AddPet';
 
 
 export default function FindPetsByStatusPage(): JSX.Element {
@@ -27,7 +29,10 @@ export default function FindPetsByStatusPage(): JSX.Element {
   const { findPetsByStatusParameters, orderBy, queryPagingSetting } = store.getState().pet;
 
   const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
-  const [formType, setFormType] = useState('Create');
+  const [formType, setFormType] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [openAddPetPopup, setOpenAddPetPopup] = useState(false);
+  const [openUpdatePetPopup, setOpenUpdatePetPopup] = useState(false);
 
   const handlePageChange = (event: object, value: number): void => {
     dispatch(showSpinner());
@@ -53,8 +58,11 @@ export default function FindPetsByStatusPage(): JSX.Element {
 
   const openFormInPopup = (type: string, item: Pet) => {
     setFormType(type);
-    // setOpenEditPopup(true);
-    // setSelectedItem(item);
+    if(type == PetPaths.AddPet)
+      setOpenAddPetPopup(true);
+    if(type == PetPaths.UpdatePet)
+      setOpenUpdatePetPopup(true);
+    setSelectedItem(item);
   }
 
   const listItems = useSelector(
@@ -74,7 +82,8 @@ export default function FindPetsByStatusPage(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResource_PetStore:Pet')}</Typography>
           <span className={classes.fillRemainingSpace} />
-		  <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
+		      <Button onClick={() => { openAdvancedSearchInPopup(PetPaths.FindPetsByStatus, null) }}>{t('UIStringResource_PetStore:FindPetsByStatus')}</Button>
+          <Button onClick={() => { openFormInPopup(PetPaths.AddPet, null) }}>{t('UIStringResource_PetStore:AddPet')}</Button>
         </div>
         <div>
           <Toolbar>
@@ -106,6 +115,16 @@ export default function FindPetsByStatusPage(): JSX.Element {
           <FindPetsByStatus items={listItems} classes={classes} openFormInPopup={openFormInPopup} />
         </div>
       </Paper>
+      {openAddPetPopup ? <AddPet type={formType} wrapperType={WrapperTypes.DialogForm}
+        openPopup={openAddPetPopup}
+        setOpenPopup={setOpenAddPetPopup}
+        item={createPetDefault()}
+      /> : null}
+      {openUpdatePetPopup ? <UpdatePet type={formType} wrapperType={WrapperTypes.DialogForm}
+        openPopup={openUpdatePetPopup}
+        setOpenPopup={setOpenUpdatePetPopup}
+        item={selectedItem}
+      /> : null}
       {openAdvancedSearchPopup ? <FindPetsByStatusSearch type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openAdvancedSearchPopup}
         setOpenPopup={setOpenAdvancedSearchPopup}
