@@ -27,6 +27,7 @@ export default function GetPetById(props: IFormProps<Pet> & IPopupProps) {
         setOpenPopup(false)
     }
 
+    // <Button size="small" onClick={(e) => handleDeletePet(props.item)} color="primary">{t('UIStringResource:Delete')}</Button>
     const popupButtonsOptions = createCloseButtonsOptions(t('UIStringResource:Close'), closePopup);
 
     const renderItem = () => {
