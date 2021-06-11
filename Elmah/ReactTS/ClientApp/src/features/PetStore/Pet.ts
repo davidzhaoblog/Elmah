@@ -1,6 +1,6 @@
 import { QueryOrderBySetting } from "src/framework/Queries/QueryOrderBySetting";
 import { QueryOrderDirections } from "src/framework/Queries/QueryOrderDirections";
-import { Category } from "./Category";,
+import { Category } from "./Category";
 import { Tag } from "./Tag";
 
 export interface Pet {
@@ -37,6 +37,15 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'status', direction: QueryOrderDirections.Descending, displayName: 'Status', expression: 'Status~DESC' }
 ];
 
-
+export enum PetPaths {
+	FindPetsByStatus = "FindPetsByStatus",
+	FindPetsByTags = "FindPetsByTags",
+	GetPetById = "GetPetById",
+	AddPet = "AddPet",
+	UpdatePetWithForm = "UpdatePetWithForm",
+	UploadFile = "UploadFile",
+	UpdatePet = "UpdatePet",
+	DeletePet = "DeletePet"
+}
 
 

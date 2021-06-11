@@ -55,7 +55,7 @@ export default function UpdatePet(props: IFormProps<Pet> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const inputData = props.type === FormTypes.Edit ? { ...props.item } : createPetDefault()
+    const inputData = { ...props.item };
     const popupButtonsOptions = createEditFormButtonsOptions(t('UIStringResource:Save'), t('UIStringResource:Reset'), () => { reset({ ...inputData }) }, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {
