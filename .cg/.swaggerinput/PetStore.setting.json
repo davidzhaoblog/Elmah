@@ -361,7 +361,7 @@
       "createPath": ["/pet"],
       "updatePath": ["/pet","/pet/{petId}","/pet/{petId}/uploadImage"],
 	  "deletePath": ["/pet/{petId}"],
-      "getListPath": ["/pet/findByStatus","findByTags"],
+      "getListPath": ["/pet/findByStatus","/pet/findByTags"],
       "idPropertyName": "id"
     },
     {
