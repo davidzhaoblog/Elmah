@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 //using Framework.Xaml.SQLite;
 
-namespace Elmah.PetStore.ViewModels.Pet.Pet
+namespace Elmah.PetStore.ViewModels.Pet
 {
     public partial class FindPetsByStatusVM
         : Framework.Xaml.ViewModelBaseWithResultAndUIElement<Elmah.PetStore.Models.Pet>
