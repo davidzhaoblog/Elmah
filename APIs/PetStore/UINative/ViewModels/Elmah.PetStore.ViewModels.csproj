@@ -15,17 +15,16 @@
     <Compile Include="OrderItemVM.cs" />
     <Compile Include="UserItemVM.cs" />
     <Compile Include="PetItemVM.cs" />
-    <Compile Include="OrderListVM.cs" />
-    <Compile Include="UserListVM.cs" />
-    <Compile Include="PetListVM.cs" />
+    <Compile Include="Pet\FindPetsByStatusVM.cs" />
+    <Compile Include="Pet\FindPetsByTagsVM.cs" />
     <Compile Include="NavigationVM.cs" />
-    <Compile Include="NavigationVM.Order.cs" />
-    <Compile Include="NavigationVM.User.cs" />
     <Compile Include="NavigationVM.Pet.cs" />
+    <Compile Include="NavigationVM.Store.cs" />
+    <Compile Include="NavigationVM.User.cs" />
     <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModelLocator.Order.cs" />
-    <Compile Include="ViewModelLocator.User.cs" />
     <Compile Include="ViewModelLocator.Pet.cs" />
+    <Compile Include="ViewModelLocator.Store.cs" />
+    <Compile Include="ViewModelLocator.User.cs" />
     <Compile Include="WebApiClientFactory.cs" />
     <Compile Include="WebServiceConfig.cs" />
   </ItemGroup>

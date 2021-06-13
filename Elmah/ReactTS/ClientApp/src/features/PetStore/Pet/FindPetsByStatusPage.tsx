@@ -88,7 +88,7 @@ export default function FindPetsByStatusPage(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResource_PetStore:Pet')}</Typography>
           <span className={classes.fillRemainingSpace} />
-		      <Button onClick={() => { openAdvancedSearchInPopup(PetPaths.FindPetsByStatus, null) }}>{t('UIStringResource_PetStore:FindPetsByStatus')}</Button>
+		  <Button onClick={() => { openAdvancedSearchInPopup(PetPaths.FindPetsByStatus, null) }}>{t('UIStringResource_PetStore:FindPetsByStatus')}</Button>
           <Button onClick={() => { openFormInPopup(PetPaths.AddPet, null) }}>{t('UIStringResource_PetStore:AddPet')}</Button>
         </div>
         <div>

@@ -5,10 +5,10 @@ namespace Elmah.PetStore.ViewModels
     public partial class ViewModelLocator
     {
 
-        static partial void _RegisterViewModelsOfUser()
+        static partial void _RegisterViewModelsOfStore()
         {
 
-            DependencyService.Register<NavigationVM.UserContainer>();
+            DependencyService.Register<NavigationVM.StoreContainer>();
         }
     }
 }

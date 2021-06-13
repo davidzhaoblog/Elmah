@@ -88,7 +88,7 @@ export default function FindPetsByTagsPage(): JSX.Element {
         <div className={classes.boxHeader}>
           <Typography className={classes.boxHeaderTitle}>{t('UIStringResource_PetStore:Pet')}</Typography>
           <span className={classes.fillRemainingSpace} />
-		  <Button onClick={() => { openAdvancedSearchInPopup(FormTypes.Create, null) }}>{t('UIStringResource:Search')}</Button>
+		  <Button onClick={() => { openAdvancedSearchInPopup(PetPaths.FindPetsByTags, null) }}>{t('UIStringResource_PetStore:FindPetsByTags')}</Button>
           <Button onClick={() => { openFormInPopup(PetPaths.AddPet, null) }}>{t('UIStringResource_PetStore:AddPet')}</Button>
         </div>
         <div>

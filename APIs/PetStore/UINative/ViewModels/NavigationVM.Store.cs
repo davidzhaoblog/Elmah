@@ -12,30 +12,27 @@ namespace Elmah.PetStore.ViewModels
 {
     public partial class NavigationVM
     {
-        public UserContainer User
+        public StoreContainer Store
         {
             get
             {
-                return DependencyService.Resolve<UserContainer>();
+                return DependencyService.Resolve<StoreContainer>();
             }
         }
 
-        public enum UserActions
+        public enum StoreActions
         {
-            DeleteUser,
-            LoginUser,
-            LogoutUser,
-            GetUserByName,
-            CreateUser,
-            CreateUsersWithListInput,
-            UpdateUser
+            DeleteOrder,
+            GetInventory,
+            GetOrderById,
+            PlaceOrder
         }
 
-        public partial class UserContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.User>
+        public partial class StoreContainer: Framework.Xaml.NavigationVMEntityContainer<Elmah.PetStore.Models.Store>
         {
-            public const string DomainKey = "PetStore_User";
+            public const string DomainKey = "PetStore_Store";
 
-            public UserContainer(): base()
+            public StoreContainer(): base()
             {
             }
 
