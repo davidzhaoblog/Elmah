@@ -124,197 +124,50 @@
     <Compile Include="Controls\ApiResponse\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Order\GetList.xaml">
+    <ApplicationDefinition Include="Controls\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Order\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
+    <Compile Include="Controls\Pet\FindPetsByStatus.xaml.cs">
+      <DependentUpon>FindPetsByStatus.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Customer\GetList.xaml">
+    <ApplicationDefinition Include="Controls\Pet\FindPetsByTags.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Customer\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
+    <Compile Include="Controls\Pet\FindPetsByTags.xaml.cs">
+      <DependentUpon>FindPetsByTags.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Address\GetList.xaml">
+    <ApplicationDefinition Include="Controls\Pet\FindPetsByStatusSearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Address\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
+    <Compile Include="Controls\Pet\FindPetsByStatusSearch.xaml.cs">
+      <DependentUpon>FindPetsByStatusSearch.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Category\GetList.xaml">
+    <ApplicationDefinition Include="Controls\Pet\FindPetsByTagsSearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Category\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
+    <Compile Include="Controls\Pet\FindPetsByTagsSearch.xaml.cs">
+      <DependentUpon>FindPetsByTagsSearch.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\User\GetList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\User\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Tag\GetList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Tag\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Pet\GetList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Pet\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\ApiResponse\GetList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\ApiResponse\GetList.xaml.cs">
-      <DependentUpon>GetList.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Order\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Order\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Customer\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Customer\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Address\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Address\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Category\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Category\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\User\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\User\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Tag\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Tag\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Pet\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Pet\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\ApiResponse\PutOrPost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\ApiResponse\PutOrPost.xaml.cs">
-      <DependentUpon>PutOrPost.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Order\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Order\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Customer\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Customer\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Address\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Address\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Category\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Category\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\User\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\User\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Tag\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Tag\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\Pet\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\Pet\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <ApplicationDefinition Include="Controls\ApiResponse\Search.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\ApiResponse\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Order\DomainManager.cs" />
-    <Compile Include="Pages\User\DomainManager.cs" />
     <Compile Include="Pages\Pet\DomainManager.cs" />
-    <Page Include="Pages\Order\ListPage.xaml">
+    <Compile Include="Pages\Store\DomainManager.cs" />
+    <Compile Include="Pages\User\DomainManager.cs" />
+    <Page Include="Pages\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Pages\Order\ListPage.xaml.cs">
-      <DependentUpon>ListPage.xaml</DependentUpon>
+    <Compile Include="Pages\Pet\FindPetsByStatus.xaml.cs">
+      <DependentUpon>FindPetsByStatus.xaml</DependentUpon>
     </Compile>
-    <Page Include="Pages\User\ListPage.xaml">
+    <Page Include="Pages\Pet\FindPetsByTags.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Pages\User\ListPage.xaml.cs">
-      <DependentUpon>ListPage.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Pages\Pet\ListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="Pages\Pet\ListPage.xaml.cs">
-      <DependentUpon>ListPage.xaml</DependentUpon>
+    <Compile Include="Pages\Pet\FindPetsByTags.xaml.cs">
+      <DependentUpon>FindPetsByTags.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
