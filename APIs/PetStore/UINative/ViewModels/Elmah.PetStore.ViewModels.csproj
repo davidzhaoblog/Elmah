@@ -18,13 +18,13 @@
     <Compile Include="Pet\FindPetsByStatusVM.cs" />
     <Compile Include="Pet\FindPetsByTagsVM.cs" />
     <Compile Include="NavigationVM.cs" />
-    <Compile Include="NavigationVM.Pet.cs" />
-    <Compile Include="NavigationVM.Store.cs" />
-    <Compile Include="NavigationVM.User.cs" />
+    <Compile Include="Pet\NavigationVM.cs" />
+    <Compile Include="Store\NavigationVM.cs" />
+    <Compile Include="User\NavigationVM.cs" />
     <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModelLocator.Pet.cs" />
-    <Compile Include="ViewModelLocator.Store.cs" />
-    <Compile Include="ViewModelLocator.User.cs" />
+    <Compile Include="Pet\ViewModelLocator.cs" />
+    <Compile Include="Store\ViewModelLocator.cs" />
+    <Compile Include="User\ViewModelLocator.cs" />
     <Compile Include="WebApiClientFactory.cs" />
     <Compile Include="WebServiceConfig.cs" />
   </ItemGroup>
