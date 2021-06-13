@@ -12,9 +12,6 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="OrderItemVM.cs" />
-    <Compile Include="UserItemVM.cs" />
-    <Compile Include="PetItemVM.cs" />
     <Compile Include="Pet\FindPetsByStatusVM.cs" />
     <Compile Include="Pet\FindPetsByTagsVM.cs" />
     <Compile Include="NavigationVM.cs" />
