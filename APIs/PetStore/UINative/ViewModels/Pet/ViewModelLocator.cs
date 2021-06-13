@@ -1,3 +1,4 @@
+using Elmah.PetStore.ViewModels.Pet;
 using Xamarin.Forms;
 
 namespace Elmah.PetStore.ViewModels
