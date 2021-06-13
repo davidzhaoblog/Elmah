@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Elmah.PetStore.ViewModels;assembly=Elmah.PetStore.ViewModels"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fe="clr-namespace:Framework;assembly=Framework"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms"
+        x:Class="Elmah.PetStore.XamarinForms.Pet.FindPetsByStatusPage"
+        mc:Ignorable="d"
+        Title="{i18n:Translate Text=Results, ResourceId=Framework.Resx.UIStringResource}"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False"
+        BackgroundColor="{DynamicResource Background}"
+        Visual="Material">
+    <ContentPage.Content>
+        <tctrl:Pet BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}"/>
+    </ContentPage.Content>
+<!-- Using custom NavBar instead of Shell NavBar -->
+<!--
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Search" Order="Primary" Text="{i18n:Translate Text=Search, ResourceId=Framework.Resx.UIStringResource}" Command="{Binding Path=SearchCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    Glyph="{x:Static fxam:FontAwesomeIcons.Search}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem x:Name="Add" Order="Primary" Text="{i18n:Translate Text=AddNew, ResourceId=Framework.Resx.UIStringResource}" Command="{Binding Path=NavigationVM.ELMAH_Error.NavigateToCommand_Create, Source={StaticResource LocatorClient}}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    Glyph="{x:Static fxam:FontAwesomeIcons.Plus}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+-->
+</ContentPage>

@@ -155,19 +155,19 @@
     <Compile Include="Pages\Pet\DomainManager.cs" />
     <Compile Include="Pages\Store\DomainManager.cs" />
     <Compile Include="Pages\User\DomainManager.cs" />
-    <Page Include="Pages\Pet\FindPetsByStatus.xaml">
+    <Page Include="Pages\Pet\FindPetsByStatusPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Pages\Pet\FindPetsByStatus.xaml.cs">
-      <DependentUpon>FindPetsByStatus.xaml</DependentUpon>
+    <Compile Include="Pages\Pet\FindPetsByStatusPage.xaml.cs">
+      <DependentUpon>FindPetsByStatusPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Pages\Pet\FindPetsByTags.xaml">
+    <Page Include="Pages\Pet\FindPetsByTagsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Pages\Pet\FindPetsByTags.xaml.cs">
-      <DependentUpon>FindPetsByTags.xaml</DependentUpon>
+    <Compile Include="Pages\Pet\FindPetsByTagsPage.xaml.cs">
+      <DependentUpon>FindPetsByTagsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

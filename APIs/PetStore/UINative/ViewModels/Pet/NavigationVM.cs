@@ -41,6 +41,8 @@ namespace Elmah.PetStore.ViewModels
             {
             }
 
+            #region Get.1. FindPetsByStatus - /pet/findByStatus
+
             public Framework.Xaml.ActionForm.ActionParameter GetNavigateToCommandParam_FindPetsByStatus(
                 long oneCondition // can be more
                 , string messageTitle
@@ -126,6 +128,10 @@ namespace Elmah.PetStore.ViewModels
                 UpdateShowListFullScreenActionSheetActionItemModel(vm.QueryOrderBySettingCollection);
             }
 
+            #endregion Get.1. FindPetsByStatus - /pet/findByStatus
+
+            #region Get.2. FindPetsByTags - /pet/findByTags
+
             public Framework.Xaml.ActionForm.ActionParameter GetNavigateToCommandParam_FindPetsByTags(
                 long oneCondition // can be more
                 , string messageTitle
@@ -210,6 +216,8 @@ namespace Elmah.PetStore.ViewModels
                 var vm = DependencyService.Resolve<FindPetsByTagsVM>();
                 UpdateShowListFullScreenActionSheetActionItemModel(vm.QueryOrderBySettingCollection);
             }
+
+            #endregion Get.2. FindPetsByTags - /pet/findByTags
 
             public void DefaultItem(long entityID)
             {
