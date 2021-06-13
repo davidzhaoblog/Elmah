@@ -66,15 +66,15 @@ namespace Elmah.PetStore.ViewModels.Pet.Pet
                         SetBindToGroupedResults(request.OrderByPropertyName, request.OrderByDirection);
                 }
                 // Set Critieria
-                if(request.Parameters != null)
-                {
-                    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        FindPetsByStatusCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
-                    // can be more
-                    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
-                        //FindPetsByStatusCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
-                }
-                CachingOption = Framework.Xaml.CachingOptions.NoCaching  ?;
+                //if(request.Parameters != null)
+                //{
+                //    if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
+                //        FindPetsByStatusCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                //    // can be more
+                //    //if (request.Parameters.ContainsKey(nameof(Elmah.PetStore.Models.Pet.onecondition)) && request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)] != null)
+                //        //FindPetsByStatusCriteria.onecondition.NullableValueToCompare = (long)request.Parameters[nameof(Elmah.PetStore.Models.Pet.onecondition)];
+                //}
+                CachingOption = Framework.Xaml.CachingOptions.NoCaching;
                 QueryPagingSetting = GetDefaultQueryPagingSetting();
                 QueryPagingSetting.CurrentPage = 1;
                 await DoSearch(true, true);
