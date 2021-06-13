@@ -79,12 +79,6 @@ function ListItem(props: IListItemProps<Pet>) {
 
 
                 <Button size="small" onClick={(e) => props.openFormInPopup(PetPaths.UpdatePet, props.item)}>{t('UIStringResource_PetStore:UpdatePet')}</Button>
-{/* 
-
-                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button>
-
-
-                <Button size="small" onClick={(e) => props.openFormInPopup(FormTypes.Edit, props.item)}>{t('UIStringResource:Edit')}</Button> */}
 
 
             </AccordionActions>

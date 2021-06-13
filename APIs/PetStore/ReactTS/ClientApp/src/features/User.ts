@@ -50,6 +50,14 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'userStatus', direction: QueryOrderDirections.Descending, displayName: 'UserStatus', expression: 'UserStatus~DESC' }
 ];
 
-
+export enum UserPaths {
+	GetUserByName = "GetUserByName",
+	LoginUser = "LoginUser",
+	LogoutUser = "LogoutUser",
+	CreateUser = "CreateUser",
+	CreateUsersWithListInput = "CreateUsersWithListInput",
+	UpdateUser = "UpdateUser",
+	DeleteUser = "DeleteUser"
+}
 
 

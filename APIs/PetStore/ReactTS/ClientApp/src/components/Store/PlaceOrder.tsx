@@ -59,7 +59,7 @@ export default function PlaceOrder(props: IFormProps<Order> & IPopupProps) {
         setOpenPopup(false)
     }
 
-    const inputData = props.type === FormTypes.Edit ? { ...props.item } : createOrderDefault()
+    const inputData = { ...props.item };
     const popupButtonsOptions = createEditFormButtonsOptions(t('UIStringResource:Save'), t('UIStringResource:Reset'), () => { reset({ ...inputData }) }, t('UIStringResource:Cancel'), closePopup);
 
     const onSubmit = (data: any) => {

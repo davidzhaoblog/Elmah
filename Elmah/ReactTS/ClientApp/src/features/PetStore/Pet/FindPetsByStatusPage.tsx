@@ -14,7 +14,7 @@ import OrderByPicker from 'src/components/OrderByPicker';
 import { WrapperTypes } from 'src/framework/ViewModels/IFormProps';
 
 import { findPetsByStatus, petSelectors } from '../PetSlice';
-import { createPetDefault, orderBys, Pet, PetPaths } from '../Pet';
+import { orderBys, Pet, PetPaths, createPetDefault } from '../Pet';
 import FindPetsByStatus from 'src/components/PetStore/Pet/FindPetsByStatus';
 import FindPetsByStatusSearch from 'src/components/PetStore/Pet/FindPetsByStatusSearch';
 import UpdatePet from 'src/components/PetStore/Pet/UpdatePet';
@@ -28,9 +28,10 @@ export default function FindPetsByStatusPage(): JSX.Element {
 
   const { findPetsByStatusParameters, orderBy, queryPagingSetting } = store.getState().pet;
 
-  const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
   const [formType, setFormType] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
+
+  const [openAdvancedSearchPopup, setOpenAdvancedSearchPopup] = useState(false);
   const [openAddPetPopup, setOpenAddPetPopup] = useState(false);
   const [openUpdatePetPopup, setOpenUpdatePetPopup] = useState(false);
 
@@ -57,11 +58,16 @@ export default function FindPetsByStatusPage(): JSX.Element {
   }
 
   const openFormInPopup = (type: string, item: Pet) => {
-    setFormType(type);
-    if(type == PetPaths.AddPet)
+    if(false)
+	{}
+    else if(type == PetPaths.AddPet)
       setOpenAddPetPopup(true);
-    if(type == PetPaths.UpdatePet)
+    else if(type == PetPaths.UpdatePet)
       setOpenUpdatePetPopup(true);
+    else
+      return;
+
+    setFormType(type);
     setSelectedItem(item);
   }
 
@@ -120,11 +126,16 @@ export default function FindPetsByStatusPage(): JSX.Element {
         setOpenPopup={setOpenAddPetPopup}
         item={createPetDefault()}
       /> : null}
+
+
+
       {openUpdatePetPopup ? <UpdatePet type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openUpdatePetPopup}
         setOpenPopup={setOpenUpdatePetPopup}
         item={selectedItem}
       /> : null}
+
+
       {openAdvancedSearchPopup ? <FindPetsByStatusSearch type={formType} wrapperType={WrapperTypes.DialogForm}
         openPopup={openAdvancedSearchPopup}
         setOpenPopup={setOpenAdvancedSearchPopup}

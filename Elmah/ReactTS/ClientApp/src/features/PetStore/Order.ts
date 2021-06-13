@@ -42,6 +42,10 @@ export const orderBys : QueryOrderBySetting[] = [
 	{ propertyName: 'complete', direction: QueryOrderDirections.Descending, displayName: 'Complete', expression: 'Complete~DESC' }
 ];
 
-
+export enum OrderPaths {
+	GetOrderById = "GetOrderById",
+	PlaceOrder = "PlaceOrder",
+	DeleteOrder = "DeleteOrder"
+}
 
 
