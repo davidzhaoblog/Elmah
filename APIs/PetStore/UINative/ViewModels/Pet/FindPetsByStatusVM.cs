@@ -155,7 +155,7 @@ namespace Elmah.PetStore.ViewModels.Pet
     public class FindPetsByStatusCriteria: Framework.Models.PropertyChangedNotifier
     {
 
-        private string m_Status;
+        private string m_Status = "available";
 
         [Display(Name = "Status", ResourceType = typeof(Elmah.PetStore.Resx.UIStringResource))]
         public string Status

@@ -103,7 +103,7 @@ namespace Elmah.XamarinForms.ViewModels
             // 3.2.2.2 PetStore.User.ListPage
             //PetStore_User_NavigateToCommandParam_ListPage = NavigationVM_PetStore.User.GetNavigateToCommandParam_ListPage(0, listItemViewMode, false, nameof(Elmah.PetStore.Models.{0}.?), Framework.Queries.QueryOrderDirections.Descending);
             // 3.2.3.3 PetStore.Pet.ListPage
-            PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.PetListVM.MessageTitle_LoadData_FindPetsByStatus, listItemViewMode, false, nameof(Elmah.PetStore.Models.Pet.Status), Framework.Queries.QueryOrderDirections.Descending);
+            PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_FindPetsByStatus(0, Elmah.PetStore.ViewModels.Pet.FindPetsByStatusVM.MessageTitle_LoadData_FindPetsByStatus, listItemViewMode, false, nameof(Elmah.PetStore.Models.Pet.Status), Framework.Queries.QueryOrderDirections.Descending);
         }
     }
 }
