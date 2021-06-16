@@ -11,7 +11,7 @@
         xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
         xmlns:fe="clr-namespace:Framework;assembly=Framework"
         xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
-        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms.Pet"
+        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms.Controls.Pet"
         x:Class="Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByStatusPage"
         mc:Ignorable="d"
         Title="{i18n:Translate Text=Results, ResourceId=Framework.Resx.UIStringResource}"
