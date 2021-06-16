@@ -13,7 +13,7 @@
         xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
         mc:Ignorable="d"
         x:Name="self"
-        x:Class="Elmah.PetStore.XamarinForms.Pet.FindPetsByStatus"
+        x:Class="Elmah.PetStore.XamarinForms.Controls.Pet.FindPetsByStatus"
         Visual="Material">
     <ContentView.Resources>
         <!--
@@ -21,10 +21,10 @@
         -->
         <DataTemplate x:Key="ItemTemplate">
             <fxc:GenericListItemWithFontIcon
-                    Mode="{Binding Path=PetVM.ListItemViewMode, Source={StaticResource PetStoreLocator}}"
+                    Mode="{Binding Path=FindPetsByStatusVM.ListItemViewMode, Source={StaticResource PetStoreLocator}}"
                     Style="{DynamicResource CollectionViewItemBase}"
                     MasterFontIcon="{x:Static fxam:FontAwesomeIcons.Book}" MasterFontIconFamily="{StaticResource FontAwesomeSolid}"
-                    NavigateCommmand="{Binding Path=PetVM.NavigationContainer.ShowPopupCommand_Details, Source={StaticResource PetStoreLocator}}">
+                    NavigateCommmand="{Binding Path=FindPetsByStatusVM.NavigationContainer.ShowPopupCommand_Details, Source={StaticResource PetStoreLocator}}">
                 <fxc:GenericListItemWithFontIcon.MasterContent>
                     <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                         <Label AutomationId="NameLabel" Text="{Binding Path=?, Mode=OneWay}" Style="{StaticResource RegularLabelStyle}" VerticalOptions="Start" VerticalTextAlignment="Start" Padding="0" Margin="0"/>
@@ -50,7 +50,7 @@
                         <!-- 1.1. Create -->
                         <!--
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Create}">
-                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.DetailsFormActionSheetWhenEdit, Source={StaticResource PetStoreLocator}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
@@ -58,7 +58,7 @@
                         <!-- 1.2. Delete -->
                         <!--
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Delete}">
-                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.DetailsFormActionSheetWhenReadOnly, Source={StaticResource PetStoreLocator}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
@@ -66,7 +66,7 @@
                         <!-- 1.3. Edit -->
                         <!--
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Edit}">
-                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.DetailsFormActionSheetWhenEdit, Source={StaticResource PetStoreLocator}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
@@ -74,7 +74,7 @@
                         <!-- 1.4. Details -->
                         <!--
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Details}">
-                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.DetailsFormActionSheetWhenReadOnly, Source={StaticResource PetStoreLocator}}"/>
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
@@ -82,7 +82,7 @@
                         <!-- 1.5. Copy -->
                         <!--
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Copy}">
-                            <tctrl:Get BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}" />
+                            <tctrl:Get BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
                         -->

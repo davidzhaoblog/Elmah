@@ -5,28 +5,28 @@ namespace Elmah.PetStore.ViewModels
     public partial class ViewModelLocator
     {
 
-        public FindPetsByStatusVM FindPetsByStatusVM
+        public Elmah.PetStore.ViewModels.Pet.FindPetsByStatusVM FindPetsByStatusVM
         {
             get
             {
-                return DependencyService.Resolve<FindPetsByStatusVM>();
+                return DependencyService.Resolve<Elmah.PetStore.ViewModels.Pet.FindPetsByStatusVM>();
             }
         }
 
-        public FindPetsByTagsVM FindPetsByTagsVM
+        public Elmah.PetStore.ViewModels.Pet.FindPetsByTagsVM FindPetsByTagsVM
         {
             get
             {
-                return DependencyService.Resolve<FindPetsByTagsVM>();
+                return DependencyService.Resolve<Elmah.PetStore.ViewModels.Pet.FindPetsByTagsVM>();
             }
         }
 
         static partial void _RegisterViewModelsOfPet()
         {
 
-            DependencyService.Register<FindPetsByStatusVM>();
+            DependencyService.Register<Elmah.PetStore.ViewModels.Pet.FindPetsByStatusVM>();
 
-            DependencyService.Register<FindPetsByTagsVM>();
+            DependencyService.Register<Elmah.PetStore.ViewModels.Pet.FindPetsByTagsVM>();
 
             DependencyService.Register<NavigationVM.PetContainer>();
         }

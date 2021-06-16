@@ -12,143 +12,143 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="Controls\Order\Delete.xaml">
+    <Page Include="Controls\Order\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Order\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Customer\Delete.xaml">
+    <Page Include="Controls\Customer\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Customer\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Address\Delete.xaml">
+    <Page Include="Controls\Address\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Address\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Category\Delete.xaml">
+    <Page Include="Controls\Category\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Category\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\User\Delete.xaml">
+    <Page Include="Controls\User\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\User\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Tag\Delete.xaml">
+    <Page Include="Controls\Tag\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Tag\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Pet\Delete.xaml">
+    <Page Include="Controls\Pet\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Pet\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\ApiResponse\Delete.xaml">
+    <Page Include="Controls\ApiResponse\Delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\ApiResponse\Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Order\Get.xaml">
+    <Page Include="Controls\Order\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Order\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Customer\Get.xaml">
+    <Page Include="Controls\Customer\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Customer\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Address\Get.xaml">
+    <Page Include="Controls\Address\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Address\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Category\Get.xaml">
+    <Page Include="Controls\Category\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Category\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\User\Get.xaml">
+    <Page Include="Controls\User\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\User\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Tag\Get.xaml">
+    <Page Include="Controls\Tag\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Tag\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Pet\Get.xaml">
+    <Page Include="Controls\Pet\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Pet\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\ApiResponse\Get.xaml">
+    <Page Include="Controls\ApiResponse\Get.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\ApiResponse\Get.xaml.cs">
       <DependentUpon>Get.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Pet\FindPetsByStatus.xaml">
+    <Page Include="Controls\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Pet\FindPetsByStatus.xaml.cs">
       <DependentUpon>FindPetsByStatus.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Pet\FindPetsByTags.xaml">
+    <Page Include="Controls\Pet\FindPetsByTags.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Pet\FindPetsByTags.xaml.cs">
       <DependentUpon>FindPetsByTags.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Pet\FindPetsByStatusSearch.xaml">
+    <Page Include="Controls\Pet\FindPetsByStatusSearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Pet\FindPetsByStatusSearch.xaml.cs">
       <DependentUpon>FindPetsByStatusSearch.xaml</DependentUpon>
     </Compile>
-    <ApplicationDefinition Include="Controls\Pet\FindPetsByTagsSearch.xaml">
+    <Page Include="Controls\Pet\FindPetsByTagsSearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Controls\Pet\FindPetsByTagsSearch.xaml.cs">
       <DependentUpon>FindPetsByTagsSearch.xaml</DependentUpon>
     </Compile>

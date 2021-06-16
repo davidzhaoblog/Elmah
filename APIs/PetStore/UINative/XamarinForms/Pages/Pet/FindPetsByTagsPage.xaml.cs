@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Elmah.PetStore.XamarinForms.Pet
+namespace Elmah.PetStore.XamarinForms.Pages.Pet
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FindPetsByTagsPage : ContentPage

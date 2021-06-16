@@ -11,8 +11,8 @@
         xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
         xmlns:fe="clr-namespace:Framework;assembly=Framework"
         xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
-        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms"
-        x:Class="Elmah.PetStore.XamarinForms.Pet.FindPetsByStatusPage"
+        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms.Controls.Pet"
+        x:Class="Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByStatusPage"
         mc:Ignorable="d"
         Title="{i18n:Translate Text=Results, ResourceId=Framework.Resx.UIStringResource}"
         Shell.NavBarIsVisible="False"
@@ -20,7 +20,7 @@
         BackgroundColor="{DynamicResource Background}"
         Visual="Material">
     <ContentPage.Content>
-        <tctrl:Pet BindingContext="{Binding Path=PetVM, Source={StaticResource PetStoreLocator}}"/>
+        <tctrl:FindPetsByStatus BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}"/>
     </ContentPage.Content>
 <!-- Using custom NavBar instead of Shell NavBar -->
 <!--
