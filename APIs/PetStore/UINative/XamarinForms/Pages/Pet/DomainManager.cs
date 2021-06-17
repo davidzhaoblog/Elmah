@@ -18,10 +18,10 @@ namespace Elmah.PetStore.XamarinForms.Pages.Pet
             var domainModel = Framework.Xaml.DomainModel.Create(DomainKey, null, null, null);
 
             // Get.1. FindPetsByStatus - /pet/findByStatus
-            domainModel.AddRelativeRoute(Elmah.PetStore.ViewModels.NavigationVM.PetActions.FindPetsByStatus.ToString(), typeof(Elmah.PetStore.XamarinForms.Pages.FindPetsByStatusPage), false);
+            domainModel.AddRelativeRoute(Elmah.PetStore.ViewModels.NavigationVM.PetActions.FindPetsByStatus.ToString(), typeof(Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByStatusPage), false);
 
             // Get.2. FindPetsByTags - /pet/findByTags
-            domainModel.AddRelativeRoute(Elmah.PetStore.ViewModels.NavigationVM.PetActions.FindPetsByTags.ToString(), typeof(Elmah.PetStore.XamarinForms.Pages.FindPetsByTagsPage), false);
+            domainModel.AddRelativeRoute(Elmah.PetStore.ViewModels.NavigationVM.PetActions.FindPetsByTags.ToString(), typeof(Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByTagsPage), false);
 
             return domainModel;
         }
