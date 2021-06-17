@@ -57,14 +57,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Pet\FindPetsByStatus.xaml.cs" />
+    <Compile Include="Controls\Pet\FindPetsByTags.xaml.cs" />
     <Compile Include="Pages\Pet\DomainManager.cs" />
     <Compile Include="Pages\Pet\FindPetsByStatusPage.xaml.cs" />
+    <Compile Include="Pages\Pet\FindPetsByTagsPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Pet\FindPetsByTags.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Pet\FindPetsByStatusPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Pet\FindPetsByTagsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
