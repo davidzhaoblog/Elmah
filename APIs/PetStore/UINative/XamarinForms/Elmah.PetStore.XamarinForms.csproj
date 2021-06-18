@@ -51,13 +51,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\Pet\FindPetsByStatus.xaml" />
+    <None Remove="Controls\Pet\FindPetsByStatusSearch.xaml" />
     <None Remove="Controls\Pet\FindPetsByTags.xaml" />
+    <None Remove="Controls\Pet\FindPetsByTagsSearch.xaml" />
     <None Remove="Pages\Pet\FindPetsByStatusPage.xaml" />
     <None Remove="Pages\Pet\FindPetsByTagsPage.xaml" />
+    <None Remove="Pages\Pet\SearchPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Pet\FindPetsByStatus.xaml.cs" />
+    <Compile Include="Controls\Pet\FindPetsByStatusSearch.xaml.cs" />
     <Compile Include="Controls\Pet\FindPetsByTags.xaml.cs" />
+    <Compile Include="Controls\Pet\FindPetsByTagsSearch.xaml.cs" />
+    <Compile Include="Pages\SearchPage.xaml.cs" />
     <Compile Include="Pages\Pet\DomainManager.cs" />
     <Compile Include="Pages\Pet\FindPetsByStatusPage.xaml.cs" />
     <Compile Include="Pages\Pet\FindPetsByTagsPage.xaml.cs" />
@@ -66,8 +72,18 @@
     <EmbeddedResource Include="Controls\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Pet\FindPetsByStatusSearch.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Pet\FindPetsByTags.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Pet\FindPetsByTagsSearch.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\SearchPage.xaml">
+      <CustomToolNamespace>MSBuild:UpdateDesignTimeXaml</CustomToolNamespace>
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Pet\FindPetsByStatusPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

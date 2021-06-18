@@ -4,7 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:Elmah.PetStore.ViewModels;assembly=Elmah.PetStore.ViewModels"
         xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
         xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
         xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
@@ -12,16 +11,36 @@
         xmlns:fe="clr-namespace:Framework;assembly=Framework"
         xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
         xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms.Controls.Pet"
-        x:Class="Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByStatusPage"
         mc:Ignorable="d"
-        Title="{i18n:Translate Text=Results, ResourceId=Framework.Resx.UIStringResource}"
+        x:Class="Elmah.PetStore.XamarinForms.Pages.Pet.SearchPage"
+        Title="{i18n:Translate Text=Search, ResourceId=Framework.Resx.UIStringResource}"
         Shell.NavBarIsVisible="False"
         Shell.TabBarIsVisible="False"
         BackgroundColor="{DynamicResource Background}"
         Visual="Material">
     <ContentPage.Content>
-        <tctrl:FindPetsByStatus BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" HorizontalOptions="FillAndExpand" VerticalOptions="Start"
-                                />
+        <AbsoluteLayout x:Name="absLayout">
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+                <tctrl:FindPetsByStatusSearch BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" VerticalOptions="StartAndExpand" />
+                <!--<fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.ListFooterActionSheet, Source={StaticResource PetStoreLocator}}" />-->
+                <!-- Close/Navigate back button -->
+                <fxca:CloseButtonNavBack Style="{StaticResource CloseButtonNavBack}" IsVisible="{Binding PopupVM.EnableMasterContent}"/>
+            </Grid>
+            <!--<Grid Style="{StaticResource PopupVerticalActionSheetWrapper}"
+                    IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=VerticalActionSheet}"
+                    AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                
+                <fxca:VerticalActionSheet HeightRequest="275"
+                    BindingContext="{Binding Path=PopupVM.ActionSheetVM, Source={StaticResource Locator}}"
+                    HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>-->
+            <!-- The following is PopupMessage -->
+            <!--<Grid Style="{StaticResource PopupMessageWrapper}"
+                IsVisible="{Binding PopupVM.PopupOption, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=RegularPopup}"
+                AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <fxc:PopupMessage/>
+            </Grid>-->
+        </AbsoluteLayout>
     </ContentPage.Content>
 <!-- Using custom NavBar instead of Shell NavBar -->
 <!--

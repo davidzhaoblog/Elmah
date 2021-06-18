@@ -59,6 +59,14 @@ namespace Elmah.PetStore.ViewModels
     {
         private const bool ForceDesignData = false;
 
+        public Elmah.PetStore.ViewModels.NavigationVM NavigationVM
+        {
+            get
+            {
+                return DependencyService.Resolve<Elmah.PetStore.ViewModels.NavigationVM>(DependencyFetchTarget.GlobalInstance);
+            }
+        }
+
         public ViewModelLocator()
         {
             ////if (ViewModelBase.IsInDesignModeStatic)

@@ -149,6 +149,18 @@ namespace Elmah.PetStore.ViewModels.Pet
                 }}
             };
         }
+
+        public Framework.Xaml.ActionForm.ActionItemModel GetSearchActionItemModel()
+        {
+            return new Framework.Xaml.ActionForm.ActionItemModel
+            {
+                ActionFormItemType = Framework.Xaml.ActionForm.ActionFormItemTypes.CommandItem,
+                Title = Framework.Resx.UIStringResource.Search,
+                FontIconSettings = new Framework.Xaml.FontIconSettings { MasterFontIcon = Framework.Xaml.FontAwesomeIcons.Search, MasterFontIconFamily = "FontAwesomeSolid" },
+                Command = SearchCommand,
+                Position = 100,
+            };
+        }
     }
 
     // Pet.Get. FindPetsByStatus /pet/findByStatus

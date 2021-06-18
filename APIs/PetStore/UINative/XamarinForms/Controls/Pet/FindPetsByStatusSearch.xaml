@@ -17,19 +17,10 @@
         Visual="Material">
     <ContentView.Content>
         <ScrollView>
-            <StackLayout  Style="{StaticResource SearchCtrlWrapper}">
-    <StackLayout>
-                 <!--<Label Text="{i18n:Translate Text=AnyText, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" />-->
-                <Entry Placeholder="{i18n:Translate Text=AnyText, ResourceId=Framework.Resx.UIStringResource}" Text="{Binding Path=Criteria.Common.StringContains_AllColumns.NullableValueToBeContained}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
-                <!--<Label Text="{i18n:Translate Text=ElmahUser, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
-                <Picker
-                    Title="{i18n:Translate Text=ElmahUser, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
-                    ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahUser, Source={StaticResource Locator}}"
-                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahUserSelectedItem, Source={StaticResource Locator}}"
-                    Style="{StaticResource FormViewPickerStyle}">
-                </Picker>
-    </StackLayout>
+            <StackLayout  Style="{StaticResource SearchCtrlWrapper}" HorizontalOptions="FillAndExpand">
+                <Entry Placeholder="{i18n:Translate Text=Status, ResourceId=UIStringResource}" Text="{Binding Path=Criteria.Status}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
+                <Grid Style="{StaticResource HSeparator}" />
+                <Entry Placeholder="{i18n:Translate Text=Status, ResourceId=UIStringResource}" Text="{Binding Path=Criteria.Status}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
             </StackLayout>
         </ScrollView>
     </ContentView.Content>
