@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Elmah.PetStore.ViewModels;assembly=Elmah.PetStore.ViewModels"
+        xmlns:i18n="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fx="clr-namespace:Framework.Xamariner;assembly=Framework.Xamariner"
+        xmlns:fxam="clr-namespace:Framework.Xaml;assembly=Framework.Xaml"
+        xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
+        xmlns:fe="clr-namespace:Framework;assembly=Framework"
+        xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        mc:Ignorable="d"
+        x:Name="self"
+        x:Class="Elmah.PetStore.XamarinForms.Controls.Pet.GetPetById"
+        Visual="Material">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--
+            <Grid>
+                <fxca:HeaderActionSheet IsVisible="{Binding Path=BindingContext.IsContentEnable, Source={Reference self}, Mode=OneWay, Converter={StaticResource BooleanInverter}}" BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheetWhenReadOnly, Source={StaticResource LocatorClient}}" HorizontalOptions="FillAndExpand" Margin="-10,-30,-10,0" BackgroundColor="{StaticResource Secondary}"/>
+                <fxca:HeaderActionSheet IsVisible="{Binding Path=BindingContext.IsContentEnable, Source={Reference self}, Mode=OneWay}" BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheetWhenEdit, Source={StaticResource LocatorClient}}" HorizontalOptions="FillAndExpand" Margin="-10,-30,-10,0" BackgroundColor="{StaticResource Secondary}"/>
+            </Grid>
+            -->
+            <ScrollView Grid.Row="1">
+                <Grid Style="{StaticResource GridToggleIsEnabled}">
+                    <StackLayout BindingContext="{Binding Item}" IsEnabled="{Binding Path=BindingContext.IsContentEnable, Source={Reference self}, Mode=OneWay}">
+                    <Entry AutomationId="id" Placeholder="{i18n:Translate Text=id, ResourceId=Elmah.PetStore.Resx.UIStringResource}" Text="{Binding Path=id, Mode=TwoWay}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" >
+                        <Entry.Behaviors>
+                            <fx:EntryValidationBehavior PropertyName="id" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label AutomationId="idValidation" Text="{Binding Path=Errors, Converter={StaticResource ValidationErrorConverter}, ConverterParameter=id}" IsVisible="{Binding Path=Errors, Converter={StaticResource ValidationErrorToIsVisibleConverter}, ConverterParameter=id}" Style="{StaticResource DataErrorLabelStyle}" />
+                    <Entry AutomationId="name" Placeholder="{i18n:Translate Text=name, ResourceId=Elmah.PetStore.Resx.UIStringResource}" Text="{Binding Path=name, Mode=TwoWay}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" >
+                        <Entry.Behaviors>
+                            <fx:EntryValidationBehavior PropertyName="name" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label AutomationId="nameValidation" Text="{Binding Path=Errors, Converter={StaticResource ValidationErrorConverter}, ConverterParameter=name}" IsVisible="{Binding Path=Errors, Converter={StaticResource ValidationErrorToIsVisibleConverter}, ConverterParameter=name}" Style="{StaticResource DataErrorLabelStyle}" />
+                    <Entry AutomationId="status" Placeholder="{i18n:Translate Text=status, ResourceId=Elmah.PetStore.Resx.UIStringResource}" Text="{Binding Path=status, Mode=TwoWay}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" >
+                        <Entry.Behaviors>
+                            <fx:EntryValidationBehavior PropertyName="status" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label AutomationId="statusValidation" Text="{Binding Path=Errors, Converter={StaticResource ValidationErrorConverter}, ConverterParameter=status}" IsVisible="{Binding Path=Errors, Converter={StaticResource ValidationErrorToIsVisibleConverter}, ConverterParameter=status}" Style="{StaticResource DataErrorLabelStyle}" />
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+            <!--
+            <fxca:ItemFormActionSheet Grid.Row="2"
+                BindingContext="{Binding NavigationVM.ELMAH_Error.DetailsFormActionSheet, Source={StaticResource LocatorClient}}" HorizontalOptions="CenterAndExpand"/>
+            -->
+        </Grid>
+    </ContentView.Content>
+</ContentView>

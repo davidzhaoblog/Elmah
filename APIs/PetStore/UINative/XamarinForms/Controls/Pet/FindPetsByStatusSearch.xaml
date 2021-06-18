@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- TODO: Search Control is not hooked to Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByStatusPage  -->
+<!-- Search Control is not hooked to Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByStatusPage  -->
 <ContentView
         xmlns="http://xamarin.com/schemas/2014/forms"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -18,8 +20,6 @@
     <ContentView.Content>
         <ScrollView>
             <StackLayout  Style="{StaticResource SearchCtrlWrapper}" HorizontalOptions="FillAndExpand">
-                <Entry Placeholder="{i18n:Translate Text=Status, ResourceId=UIStringResource}" Text="{Binding Path=Criteria.Status}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
-                <Grid Style="{StaticResource HSeparator}" />
                 <Entry Placeholder="{i18n:Translate Text=Status, ResourceId=UIStringResource}" Text="{Binding Path=Criteria.Status}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
             </StackLayout>
         </ScrollView>

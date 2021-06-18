@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- TODO: Search Control is not hooked to Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByTagsPage  -->
+<!-- Search Control is not hooked to Elmah.PetStore.XamarinForms.Pages.Pet.FindPetsByTagsPage  -->
 <ContentView
         xmlns="http://xamarin.com/schemas/2014/forms"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -17,19 +19,8 @@
         Visual="Material">
     <ContentView.Content>
         <ScrollView>
-            <StackLayout  Style="{StaticResource SearchCtrlWrapper}">
-    <StackLayout>
-                 <!--<Label Text="{i18n:Translate Text=AnyText, ResourceId=Framework.Resx.UIStringResource}" Style="{StaticResource RegularLabelStyle}" />-->
-                <Entry Placeholder="{i18n:Translate Text=AnyText, ResourceId=Framework.Resx.UIStringResource}" Text="{Binding Path=Criteria.Common.StringContains_AllColumns.NullableValueToBeContained}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
-                <!--<Label Text="{i18n:Translate Text=ElmahUser, ResourceId=Elmah.Resx.UIStringResourcePerEntity}" Style="{StaticResource RegularLabelStyle}" />-->
-                <Picker
-                    Title="{i18n:Translate Text=ElmahUser, ResourceId=Elmah.Resx.UIStringResourcePerEntity}"
-                    ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahUser, Source={StaticResource Locator}}"
-                    SelectedItem="{Binding Path=ELMAH_Error_ExtendedVM.DropDownContentsOfElmahUserSelectedItem, Source={StaticResource Locator}}"
-                    Style="{StaticResource FormViewPickerStyle}">
-                </Picker>
-    </StackLayout>
+            <StackLayout  Style="{StaticResource SearchCtrlWrapper}" HorizontalOptions="FillAndExpand">
+                <Entry Placeholder="{i18n:Translate Text=Tags, ResourceId=UIStringResource}" Text="{Binding Path=Criteria.Tags}" Style="{StaticResource RegularEntryStyle}" ClearButtonVisibility="WhileEditing" />
             </StackLayout>
         </ScrollView>
     </ContentView.Content>
