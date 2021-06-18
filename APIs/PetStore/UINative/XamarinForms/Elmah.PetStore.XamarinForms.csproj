@@ -12,6 +12,27 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Page Include="Controls\Pet\GetPetById.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\Pet\GetPetById.xaml.cs">
+      <DependentUpon>GetPetById.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\Store\GetOrderById.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\Store\GetOrderById.xaml.cs">
+      <DependentUpon>GetOrderById.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\User\GetUserByName.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\User\GetUserByName.xaml.cs">
+      <DependentUpon>GetUserByName.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
