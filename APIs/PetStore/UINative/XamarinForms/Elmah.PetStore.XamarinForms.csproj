@@ -47,6 +47,41 @@
     <Compile Include="Controls\Pet\FindPetsByTags.xaml.cs">
       <DependentUpon>FindPetsByTags.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\Pet\AddPet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\Pet\AddPet.xaml.cs">
+      <DependentUpon>AddPet.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\Store\PlaceOrder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\Store\PlaceOrder.xaml.cs">
+      <DependentUpon>PlaceOrder.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\User\CreateUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\User\CreateUser.xaml.cs">
+      <DependentUpon>CreateUser.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\Pet\UpdatePet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\Pet\UpdatePet.xaml.cs">
+      <DependentUpon>UpdatePet.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\User\UpdateUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\User\UpdateUser.xaml.cs">
+      <DependentUpon>UpdateUser.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\Pet\FindPetsByStatusSearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
