@@ -1,0 +1,11 @@
+Step-1 React17MUI4: #1 create-react-app 
+npm uninstall -g npx
+npm install -g npx
+npm uninstall -g create-react-app
+npm install -g create-react-app 
+npx create-react-app my-app --template typescript
+
+Step-2 React17MUI4: #2 material-ui/core
+npm install @material-ui/core
+
+
