@@ -5,7 +5,7 @@ npm uninstall -g create-react-app
 npm install -g create-react-app 
 npx create-react-app my-app --template typescript
 
-React17MUI4 Step-1.2. material-ui/core
+React17MUI4 Step-1.2.1. material-ui/core
 npm install @material-ui/core
-
+npm install @material-ui/icons
 
