@@ -10,6 +10,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { useTranslation } from 'react-i18next';
+import "./i18n"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -37,6 +40,9 @@ function Copyright() {
 
 export default function App() {
   const classes = useStyles();
+  const { t } = useTranslation(["UIStringResourcePerApp"]);
+  document.title = t("UIStringResourcePerApp:Application_Title");  
+
   return (
     // For full screen: use following
     // <div className={classes.root}></div>
