@@ -11,6 +11,7 @@
         xmlns:fxc="clr-namespace:Framework.Xamariner.Controls;assembly=Framework.Xamariner"
         xmlns:fe="clr-namespace:Framework;assembly=Framework"
         xmlns:fxca="clr-namespace:Framework.Xamariner.Controls.ActionForm;assembly=Framework.Xamariner"
+        xmlns:tctrl="clr-namespace:Elmah.PetStore.XamarinForms.Controls.Pet"
         mc:Ignorable="d"
         x:Name="self"
         x:Class="Elmah.PetStore.XamarinForms.Controls.Pet.FindPetsByStatus"
@@ -63,14 +64,14 @@
                             <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
                         </Grid>
                         -->
-                        <!-- 1.3. Edit -->
-                        <!--
+                        <!-- 1.3. UpdatePet -->
+                        
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Edit}">
-                            <tctrl:Pet BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
-                            <fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.DetailsFormActionSheetWhenEdit, Source={StaticResource PetStoreLocator}}"/>
-                            <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />
+                            <tctrl:UpdatePet BindingContext="{Binding Path=FindPetsByStatusVM, Source={StaticResource PetStoreLocator}}" />
+                            <!--<fxca:FooterActionSheet Style="{StaticResource FooterActionSheet}" BindingContext="{Binding NavigationVM.Pet.DetailsFormActionSheetWhenEdit, Source={StaticResource PetStoreLocator}}"/>
+                            <fxca:CloseButtonCloseItemControlPopup Style="{StaticResource CloseButtonCloseItemControlPopup}" />-->
                         </Grid>
-                        -->
+                        
                         <!-- 1.4. Details -->
                         <!--
                         <Grid IsVisible="{Binding PopupVM.ItemControlKey, Source={StaticResource Locator}, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Details}">

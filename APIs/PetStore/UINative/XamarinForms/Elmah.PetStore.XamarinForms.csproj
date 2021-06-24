@@ -50,25 +50,44 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Controls\Pet\AddPet.xaml" />
     <None Remove="Controls\Pet\FindPetsByStatus.xaml" />
     <None Remove="Controls\Pet\FindPetsByStatusSearch.xaml" />
     <None Remove="Controls\Pet\FindPetsByTags.xaml" />
     <None Remove="Controls\Pet\FindPetsByTagsSearch.xaml" />
+    <None Remove="Controls\Pet\GetPetById.xaml" />
+    <None Remove="Controls\Pet\UpdatePet.xaml" />
+    <None Remove="Controls\Store\GetOrderById.xaml" />
+    <None Remove="Controls\Store\PlaceOrder.xaml" />
+    <None Remove="Controls\User\CreateUser.xaml" />
+    <None Remove="Controls\User\GetUserByName.xaml" />
+    <None Remove="Controls\User\UpdateUser.xaml" />
     <None Remove="Pages\Pet\FindPetsByStatusPage.xaml" />
     <None Remove="Pages\Pet\FindPetsByTagsPage.xaml" />
     <None Remove="Pages\Pet\SearchPage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Pet\AddPet.xaml.cs" />
     <Compile Include="Controls\Pet\FindPetsByStatus.xaml.cs" />
     <Compile Include="Controls\Pet\FindPetsByStatusSearch.xaml.cs" />
     <Compile Include="Controls\Pet\FindPetsByTags.xaml.cs" />
     <Compile Include="Controls\Pet\FindPetsByTagsSearch.xaml.cs" />
+    <Compile Include="Controls\Pet\GetPetById.xaml.cs" />
+    <Compile Include="Controls\Pet\UpdatePet.xaml.cs" />
+    <Compile Include="Controls\Store\GetOrderById.xaml.cs" />
+    <Compile Include="Controls\Store\PlaceOrder.xaml.cs" />
+    <Compile Include="Controls\User\CreateUser.xaml.cs" />
+    <Compile Include="Controls\User\GetUserByName.xaml.cs" />
+    <Compile Include="Controls\User\UpdateUser.xaml.cs" />
     <Compile Include="Pages\SearchPage.xaml.cs" />
     <Compile Include="Pages\Pet\DomainManager.cs" />
     <Compile Include="Pages\Pet\FindPetsByStatusPage.xaml.cs" />
     <Compile Include="Pages\Pet\FindPetsByTagsPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Pet\AddPet.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Pet\FindPetsByStatus.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -79,6 +98,27 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Pet\FindPetsByTagsSearch.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Pet\GetPetById.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Pet\UpdatePet.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Store\GetOrderById.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Store\PlaceOrder.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\User\CreateUser.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\User\GetUserByName.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\User\UpdateUser.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\SearchPage.xaml">
