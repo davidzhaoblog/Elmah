@@ -12,6 +12,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { useTranslation } from 'react-i18next';
 import "./i18n"
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './store/CombinedReducers';
+import { increment } from './layout/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,9 +42,12 @@ function Copyright() {
 }
 
 export default function App() {
+  const count = useSelector((state: RootState) => state.app.value)
+  const dispatch = useDispatch()
+
   const classes = useStyles();
   const { t } = useTranslation(["UIStringResourcePerApp"]);
-  document.title = t("UIStringResourcePerApp:Application_Title");  
+  document.title = t("UIStringResourcePerApp:Application_Title");
 
   return (
     // For full screen: use following
@@ -57,19 +63,27 @@ export default function App() {
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
+          <Typography variant="h6" className={classes.title}>
+            {count}
+          </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
       <Box my={4}>
-      <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h4" component="h1" gutterBottom>
           React 17.0.2
         </Typography>
         <Typography variant="h4" component="h1" gutterBottom>
           Material-UI ^4.11.4
         </Typography>
+        <Typography variant="h6" className={classes.title}>
+          React-Redux test: {count}
+        </Typography>
+        <Button color="inherit" aria-label="Increment value"
+          onClick={() => dispatch(increment())}>Increment</Button>
         <ProTip />
         <Copyright />
       </Box>
-      </div>
+    </div>
   );
 }
