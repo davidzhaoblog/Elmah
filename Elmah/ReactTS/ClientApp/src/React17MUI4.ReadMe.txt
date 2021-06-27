@@ -23,3 +23,6 @@ npm install reduxjs-toolkit-persist
 
 React17MUI4 Step-1.5. react-router-dom
 npm install --save react-router-dom
+
+React17MUI4 Step-1.6. react-cookie
+npm install react-cookie

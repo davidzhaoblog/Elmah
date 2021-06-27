@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -21,6 +21,7 @@ import { ListItemIcon } from '@material-ui/core';
 import { ListItemText } from '@material-ui/core';
 import { Computer } from '@material-ui/icons';
 import TodoList from './features/Todo/ListPage';
+import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,10 +51,15 @@ function Copyright() {
 export default function App() {
   const count = useSelector((state: RootState) => state.app.value)
   const dispatch = useDispatch()
+  const [cookies, setCookie] = useCookies(['cookieTest']);
 
   const classes = useStyles();
   const { t } = useTranslation(["UIStringResourcePerApp"]);
   document.title = t("UIStringResourcePerApp:Application_Title");
+
+  useEffect(() => {
+    setCookie('cookieTest', 'cookie Test', {path: '/'})
+  })
 
   return (
     // For full screen: use following
@@ -103,6 +109,11 @@ export default function App() {
             <ListItemText primary={'todo'} />
           </ListItem>
         </NavLink>
+
+        <Typography variant="h6" className={classes.title}>
+          React-Cookie test: {cookies['cookieTest']}
+        </Typography>
+
         <ProTip />
 
         <Copyright />
