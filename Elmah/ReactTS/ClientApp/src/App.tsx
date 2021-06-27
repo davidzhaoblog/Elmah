@@ -15,6 +15,12 @@ import "./i18n"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/CombinedReducers';
 import { increment } from './layout/appSlice';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import ListItem from '@material-ui/core/ListItem';
+import { ListItemIcon } from '@material-ui/core';
+import { ListItemText } from '@material-ui/core';
+import { Computer } from '@material-ui/icons';
+import TodoList from './features/Todo/ListPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,7 +87,24 @@ export default function App() {
         </Typography>
         <Button color="inherit" aria-label="Increment value"
           onClick={() => dispatch(increment())}>Increment</Button>
+
+        <Typography variant="h6" className={classes.title}>
+          React-Router-Dom test:
+        </Typography>
+        <Switch>
+          <Route path="/todo" component={TodoList} exact />
+        </Switch>
+
+        <NavLink exact={true} to={'/todo'} >
+          <ListItem button={true}>
+            <ListItemIcon>
+              <Computer />
+            </ListItemIcon>
+            <ListItemText primary={'todo'} />
+          </ListItem>
+        </NavLink>
         <ProTip />
+
         <Copyright />
       </Box>
     </div>
