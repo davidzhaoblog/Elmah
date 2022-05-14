@@ -27,7 +27,7 @@
       <Name>Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.PetStore.Resx.csproj">
-      <Project>{b91cfe38-f967-4624-aaa1-4f2268ce7b1d}</Project>
+      <Project>{ced9da3d-cfa9-41e9-baf8-360095d53df2}</Project>
       <Name>Elmah.PetStore.Resx</Name>
     </ProjectReference>
   </ItemGroup>

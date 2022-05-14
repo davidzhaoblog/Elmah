@@ -828,11 +828,11 @@
       <Name>Elmah.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\APIs\PetStore\UINative\ViewModels\Elmah.PetStore.ViewModels.csproj">
-      <Project>{c5057f18-c10a-47ea-8d03-4c65eba7e1d1}</Project>
+      <Project>{07ae5312-28dc-4ac3-92c0-cc506d60b562}</Project>
       <Name>Elmah.PetStore.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\APIs\PetStore\UINative\XamarinForms\Elmah.PetStore.XamarinForms.csproj">
-      <Project>{dda7b9c1-72f8-4209-9f66-3479844a3ed9}</Project>
+      <Project>{5aca322e-d5a6-4831-87ad-650b2767cf9d}</Project>
       <Name>Elmah.PetStore.XamarinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Contracts\ViewModelData\Elmah.ViewModelData.csproj">

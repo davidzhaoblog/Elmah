@@ -114,13 +114,13 @@ namespace Elmah.XamarinForms.ViewModels
             //ElmahUser_NavigateToCommandParam_CommonResultView = NavigationVM.ElmahUser.GetNavigateToCommandParam_CommonResultView(0, listItemViewMode, false, nameof(Elmah.DataSourceEntities.ElmahUser.??), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.2.1.1 PetStore.Order.ListPage
-            //PetStore_Order_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Order.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.OrderListVM.MessageTitle_LoadData_?, listItemViewMode, false, nameof(Elmah.PetStore.Models.Order.?), Framework.Queries.QueryOrderDirections.Descending);
+            //PetStore_Order_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Order.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.OrderVM.MessageTitle_LoadData_?, listItemViewMode, false, nameof(Elmah.PetStore.Models.Order.?), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.2.1.2 PetStore.User.ListPage
-            //PetStore_User_NavigateToCommandParam_ListPage = NavigationVM_PetStore.User.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.UserListVM.MessageTitle_LoadData_?, listItemViewMode, false, nameof(Elmah.PetStore.Models.User.?), Framework.Queries.QueryOrderDirections.Descending);
+            //PetStore_User_NavigateToCommandParam_ListPage = NavigationVM_PetStore.User.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.UserVM.MessageTitle_LoadData_?, listItemViewMode, false, nameof(Elmah.PetStore.Models.User.?), Framework.Queries.QueryOrderDirections.Descending);
 
             // 3.2.1.3 PetStore.Pet.ListPage
-            //PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.PetListVM.MessageTitle_LoadData_?, listItemViewMode, false, nameof(Elmah.PetStore.Models.Pet.?), Framework.Queries.QueryOrderDirections.Descending);
+            //PetStore_Pet_NavigateToCommandParam_ListPage = NavigationVM_PetStore.Pet.GetNavigateToCommandParam_ListPage(0, Elmah.PetStore.ViewModels.PetVM.MessageTitle_LoadData_?, listItemViewMode, false, nameof(Elmah.PetStore.Models.Pet.?), Framework.Queries.QueryOrderDirections.Descending);
 
         }
     }

@@ -22,7 +22,7 @@ namespace Elmah.PetStore.XamarinForms.Controls.Pet
         {
             var navigationVM = DependencyService.Resolve<Elmah.XamarinForms.ViewModels.NavigationVM>();
             Elmah.XamarinForms.ViewModels.NavigationVM.InlineActionSheetHandler.Show_InlineActionSheet<Elmah.DataSourceEntities.ELMAH_Error.Default>(
-                sender, e, this.InlineActionSheet, navigationVM.ELMAH_Error.{0}ItemInlineActionSheet);
+                sender, e, this.InlineActionSheet, navigationVM.ELMAH_Error.Elmah.PetStore.XamarinForms.Controls.{0}ItemInlineActionSheet);
         }
         */
 
