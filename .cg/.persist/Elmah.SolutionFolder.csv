@@ -1,9 +1,0 @@
-﻿Name,DisplayName,Path,ParentPath,Guid,ParentGuid
-Contracts,Contracts,Contracts,,c077c415-6c00-4677-869b-25287fc75498,
-DAL,DAL,DAL,,97d95bc9-bf78-4915-8499-38a2042ac330,
-DALCore,DALCore,DALCore,,6de27fbd-5184-41d0-83a2-4d228a4cc4e0,
-Frameworks,Frameworks,Frameworks,,b627375d-d8c2-408c-bedf-99060ec757ba,
-Services,Services,Services,,5bbf6910-72d1-4af4-b6c5-27fccaa62a01,
-ServicesCore,ServicesCore,ServicesCore,,8f612f0f-03b3-42dd-b2bd-84477e8fdeb4,
-UINative,UINative,UINative,,1c826517-8d2c-41c6-bdc5-0a0dbcd4c166,
-UIWebCore,UIWebCore,UIWebCore,,5d80620b-4319-48d7-b3e4-f242d0d8895c,

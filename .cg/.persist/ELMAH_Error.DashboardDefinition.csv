@@ -1,7 +1,0 @@
-﻿TABLE_SCHEMA,TABLE_NAME,Enabled,DeepFKType,Order,PropertyNameInDashboardVM,BaseTableName,MasterTableName,EntityReferenceSimpleFullPath,EntityReferenceName,CachingOption,IsRequired,IsATab,InXamarinFormsVM,FuntionDashboardName,InBaseTableFuntionDashboard,InWizard,WizardOrder
-dbo,ELMAH_Error,True,AncestorTable,1,ElmahApplication,,,\Application,,UpdateCacheWhenViewLoaded,False,False,False,,False,False,0
-dbo,ELMAH_Error,True,AncestorTable,2,ElmahHost,,,\Host,,UpdateCacheWhenViewLoaded,False,False,False,,False,False,0
-dbo,ELMAH_Error,True,AncestorTable,3,ElmahSource,,,\Source,,UpdateCacheWhenViewLoaded,False,False,False,,False,False,0
-dbo,ELMAH_Error,True,AncestorTable,4,ElmahStatusCode,,,\StatusCode,,UpdateCacheWhenViewLoaded,False,False,False,,False,False,0
-dbo,ELMAH_Error,True,AncestorTable,5,ElmahType,,,\Type,,UpdateCacheWhenViewLoaded,False,False,False,,False,False,0
-dbo,ELMAH_Error,True,AncestorTable,6,ElmahUser,,,\User,,UpdateCacheWhenViewLoaded,False,False,False,,False,False,0
