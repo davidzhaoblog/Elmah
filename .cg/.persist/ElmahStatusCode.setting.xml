@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="ElmahModel.ElmahStatusCode">
+  <DataView Key="NameValuePair" DataViewKnownCategory="NameValuePair" IsGroupByResult="false">
+    <Properties Key="nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting">(SystemString)Value=StatusCode.ToString();(SystemString)Name=Name~Name</Properties>
+    <Properties Key="nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting" />
+    <Properties Key="nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting" />
+  </DataView>
+  <DataView Key="RssItem" DataViewKnownCategory="RssItem" IsGroupByResult="false">
+    <Properties Key="nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting">(SystemString)IdentifierInString=StatusCode.ToString();(SystemString)Title=Name;(SystemString)Description=Name</Properties>
+    <Properties Key="nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting" />
+    <Properties Key="nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting" />
+  </DataView>
+  <Criteria Key="Common" SourceTypeFullName="ElmahModel.ElmahStatusCode">
+    <Description>Query by EntityReference, String, Bool, Order By DateTime</Description>
+    <Queries>Common</Queries>
+  </Criteria>
+  <Criteria Key="Identifier" SourceTypeFullName="ElmahModel.ElmahStatusCode">
+    <Description>Query by Identifier/UniqueConstraint/CompositeIdentifier</Description>
+    <Queries>Identifier</Queries>
+  </Criteria>
+  <Query Key="Common" DataQueryPerQueryKnownKey="Common" SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="AND" />
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">Name=:Name.Contains</QueryUnits>
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR" />
+  </Query>
+  <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
+    <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">StatusCode=:StatusCode.Equals</QueryUnits>
+  </Query>
+  <QueryResult Key="EntityByCommon" CriteriaKey="Common" OrderBys="">
+    <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
+    <BLLMethodSetting HasGetCollectionMethod="true" />
+  </QueryResult>
+  <QueryResult Key="NameValuePairByCommon" CriteriaKey="Common" DataViewKey="NameValuePair" OrderBys="">
+    <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
+    <BLLMethodSetting HasGetCollectionMethod="true" />
+  </QueryResult>
+  <QueryResult Key="EntityByIdentifier" CriteriaKey="Identifier" OrderBys="">
+    <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
+    <BLLMethodSetting HasExistsMethod="true" HasGetCollectionMethod="true" />
+  </QueryResult>
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" Group="Aside" Key="V_ElmahStatusCode_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
+      <PropertyList>StatusCode;Name</PropertyList>
+    </PartialView>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <ForeignKeyPersistList />
+</Entity>

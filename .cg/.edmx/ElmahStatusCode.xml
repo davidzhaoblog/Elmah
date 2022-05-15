@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TypeDeclarationContext xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityReferenceSettingCollection />
+  <EntityReferenceSettingCollectionReferencedBy />
+  <PivotTableSettingCollection />
+  <PivotTableRowLableSettingCollection />
+  <PivotTableColumnLableSettingCollection />
+  <PivotTableValueColumnSettingCollection />
+  <UIDataSourceMethodSettingGroupCollection />
+  <UIDataSourceMethodSettingCollection />
+  <DataQueryPerQuerySettingCollection />
+  <ChainedDataQuerySettingCollection />
+  <DataViewContextCollection />
+  <EntityIdentifierSetting>
+    <Name />
+    <PropertyList>StatusCode</PropertyList>
+    <PropertyTypeList>StatusCode</PropertyTypeList>
+    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
+  </EntityIdentifierSetting>
+  <PropertyContextCollection>
+    <PropertyContext>
+      <Setting>
+        <KnownPropertyName>Unknown</KnownPropertyName>
+        <Name>StatusCode</Name>
+        <DefaultOrder>0</DefaultOrder>
+        <PropertyType>
+          <IsValueType>true</IsValueType>
+          <IsKnownType>false</IsKnownType>
+          <CanBeNull>false</CanBeNull>
+          <DotNetValueType>SystemInt32</DotNetValueType>
+          <KnownType>Unknown</KnownType>
+          <Type>System.Int32</Type>
+          <FriendlyType>int</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
+        </PropertyType>
+        <IsNullable>false</IsNullable>
+        <IsDbGenerated>false</IsDbGenerated>
+        <PropertyCategory>Identifier</PropertyCategory>
+        <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
+      </Setting>
+      <DBColumnSetting>
+        <Name>StatusCode</Name>
+        <DbType>Int</DbType>
+        <CanBeNull>false</CanBeNull>
+        <IsIdentity>false</IsIdentity>
+        <IsDbGenerated>false</IsDbGenerated>
+        <IsDiscriminator>false</IsDiscriminator>
+        <IsPrimaryKey>true</IsPrimaryKey>
+        <IsVersion>false</IsVersion>
+        <Length>0</Length>
+        <DbTypePrimary_DATA_TYPE>Int</DbTypePrimary_DATA_TYPE>
+        <UpdateCheck>Always</UpdateCheck>
+      </DBColumnSetting>
+      <PropertyUISetting>
+        <CanUIDisplay>true</CanUIDisplay>
+        <CanUIEdit>true</CanUIEdit>
+        <CanUIInsert>true</CanUIInsert>
+        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
+        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
+        <CanUIHidden>false</CanUIHidden>
+        <PropertyUIType>Unknown</PropertyUIType>
+        <DisplayOrder>-1</DisplayOrder>
+      </PropertyUISetting>
+      <ValidatorContainer>
+        <RequiredFieldValidator>
+          <ErrorMessage>StatusCode is required</ErrorMessage>
+          <ErrorMessageResourceName>StatusCode_is_required</ErrorMessageResourceName>
+          <InitialValue>default(int)</InitialValue>
+          <AllowEmptyStrings>true</AllowEmptyStrings>
+        </RequiredFieldValidator>
+      </ValidatorContainer>
+    </PropertyContext>
+    <PropertyContext>
+      <Setting>
+        <KnownPropertyName>Unknown</KnownPropertyName>
+        <Name>Name</Name>
+        <DefaultOrder>100</DefaultOrder>
+        <PropertyType>
+          <IsValueType>true</IsValueType>
+          <IsKnownType>false</IsKnownType>
+          <CanBeNull>true</CanBeNull>
+          <DotNetValueType>SystemString</DotNetValueType>
+          <KnownType>Unknown</KnownType>
+          <Type>System.String</Type>
+          <FriendlyType>string</FriendlyType>
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
+        </PropertyType>
+        <IsNullable>true</IsNullable>
+        <IsDbGenerated>false</IsDbGenerated>
+        <PropertyCategory>Unknown</PropertyCategory>
+        <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
+      </Setting>
+      <DBColumnSetting>
+        <Name>Name</Name>
+        <DbType>NVarChar(50)</DbType>
+        <CanBeNull>true</CanBeNull>
+        <IsIdentity>false</IsIdentity>
+        <IsDbGenerated>false</IsDbGenerated>
+        <IsDiscriminator>false</IsDiscriminator>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVersion>false</IsVersion>
+        <Length>0</Length>
+        <DbTypePrimary_DATA_TYPE>NVarChar</DbTypePrimary_DATA_TYPE>
+        <DbTypeMaxLength>50</DbTypeMaxLength>
+        <DbTypeFixedLength>false</DbTypeFixedLength>
+        <DbUniCode>true</DbUniCode>
+        <UpdateCheck>Always</UpdateCheck>
+      </DBColumnSetting>
+      <PropertyUISetting>
+        <CanUIDisplay>true</CanUIDisplay>
+        <CanUIEdit>true</CanUIEdit>
+        <CanUIInsert>true</CanUIInsert>
+        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
+        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
+        <CanUIHidden>false</CanUIHidden>
+        <PropertyUIType>Unknown</PropertyUIType>
+        <DisplayOrder>-1</DisplayOrder>
+      </PropertyUISetting>
+      <ValidatorContainer>
+        <StringLengthValidator>
+          <ErrorMessage>The length of Name should be 0 to 50</ErrorMessage>
+          <ErrorMessageResourceName>The_length_of_Name_should_be_0_to_50</ErrorMessageResourceName>
+          <MaximumLength>50</MaximumLength>
+        </StringLengthValidator>
+      </ValidatorContainer>
+    </PropertyContext>
+  </PropertyContextCollection>
+  <UniqueConstraintSettingCollection />
+  <PropertyNameListSettingCollection />
+  <TableSetting>
+    <Schema>dbo</Schema>
+    <Name>ElmahStatusCode</Name>
+    <MemberFieldNameOfDBML>ElmahStatusCode</MemberFieldNameOfDBML>
+    <TypeNameOfDBML>ElmahStatusCode</TypeNameOfDBML>
+  </TableSetting>
+  <ValidatorContainer />
+  <Setting>
+    <Name>ElmahStatusCode</Name>
+    <Alias>E5</Alias>
+    <IsEnum>false</IsEnum>
+    <Namespace>ElmahModel</Namespace>
+    <NamespaceSetting>
+      <Namespace>ElmahModel</Namespace>
+    </NamespaceSetting>
+  </Setting>
+</TypeDeclarationContext>

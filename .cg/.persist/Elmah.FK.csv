@@ -1,0 +1,7 @@
+﻿TABLE_SCHEMA,TABLE_NAME,EntityReferenceSimpleFullPath,PKTypeDeclarationContextName,DuplicateIDPropertyFullPath,IsLeftJoin,InLinqJoin,IDInCriteria,IDInDefaultDataView,UniqueConstraintInDefaultDataView,PropertiesInDefaultDataView,CreatedDate
+dbo,ELMAH_Error,\Application,ElmahApplication,,False,True,True,True,True,,5/15/2022 12:00:00 AM
+dbo,ELMAH_Error,\Host,ElmahHost,,False,True,True,True,True,,5/15/2022 12:00:00 AM
+dbo,ELMAH_Error,\Source,ElmahSource,,False,True,True,True,True,,5/15/2022 12:00:00 AM
+dbo,ELMAH_Error,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,5/15/2022 12:00:00 AM
+dbo,ELMAH_Error,\Type,ElmahType,,False,True,True,True,True,,5/15/2022 12:00:00 AM
+dbo,ELMAH_Error,\User,ElmahUser,,False,True,True,True,True,,5/15/2022 12:00:00 AM
