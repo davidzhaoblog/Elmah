@@ -46,5 +46,21 @@
   </UIView>
   <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahSource" Group="Aside" Key="V_ElmahSource_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
+      <PropertyList>Source</PropertyList>
+    </PartialView>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahSource" Group="Aside" Key="V_ElmahSource_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
+      <PropertyList>Source</PropertyList>
+    </PartialView>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahSource" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <ForeignKeyPersistList />
 </Entity>

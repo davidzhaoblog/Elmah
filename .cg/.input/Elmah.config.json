@@ -1,0 +1,57 @@
+{
+  "excludedProjects": null,
+  "originalInput": "D:\\Test4\\WhatEverII\\trunk\\Projects\\Elmah\\DB\\Edmx\\Elmah.edmx",
+  "solutionConfig": {
+    "useTypeFullName": true,
+    "rootNamespace": "Elmah",
+    "solutionName": "Elmah",
+    "subRootFolder": "Elmah",
+    "swaggerRootFolder": "APIs",
+    "codeVersion": "1.0.0.0",
+    "startPort": 7900,
+    "excludedTables": null
+  },
+  "companyConfig": {
+    "name": "Elmah",
+    "emailDomainName": "Elmah.com"
+  },
+  "databaseSetting": {
+    "connectionStringName": "Elmah",
+    "sever": "Localhost",
+    "name": "Elmah",
+    "integratedSecurity": false,
+    "userName": "sa",
+    "password": "Qwer~123"
+  },
+  "excludedTables": [
+    "aspnet_*",
+    "__RefactorLog",
+    "__MigrationHistory"
+  ],
+  "coreTables": null,
+  "detailsTables": null,
+  "codeListTables": null,
+  "lookupTables": null,
+  "listTables": null,
+  "crossReferenceTables": null,
+  "stageTables": null,
+  "operationTables": null,
+  "functionalTables": null,
+  "dispositionTables": null,
+  "archiveTables": null,
+  "otherTables": null,
+  "abstractTables": null,
+  "globalMapConfig": null,
+  "globalQueryResultMethodSetting": {
+    "hasCountMethod": false,
+    "hasExistsMethod": false,
+    "hasGetSingleItemMethod": false,
+    "hasGetCollectionMethod": false
+  },
+  "ideSetting": {
+    "ide": 1,
+    "version": "2013",
+    "name": null,
+    "description": null
+  }
+}
