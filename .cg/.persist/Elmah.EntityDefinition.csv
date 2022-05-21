@@ -1,8 +1,8 @@
 ﻿TABLE_SCHEMA,HasModifiedDate,Hasrowguid,CreatedDate,CacheNameValue,CacheDetails,CacheYourData,CacheWhenUse,System_Data,Test_Data,Has_Data,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,ToLoadSystemRecords,HasCreatedDate,DownardListTableOfListTable,CompositeQueryIdentifiers,ConsumableDetailsTablesOfBaseTable,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,IsEnum,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,XamarinExcluded,BaseTableUniqueConstraint,ConsumableCrossReferenceTablesOfBaseTable,HasXamarinFormsTabDashboard
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ELMAH_Error,TRUE,CrossReferenceTable,,,FALSE,,FALSE,,,,,,FALSE,,,FALSE
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ElmahApplication,TRUE,CodeList,,,FALSE,,FALSE,,,,,,FALSE,,,FALSE
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ElmahHost,TRUE,CodeList,,,FALSE,,FALSE,,,,,,FALSE,,,FALSE
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ElmahSource,TRUE,CodeList,,,FALSE,,FALSE,,,,,,FALSE,,,FALSE
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ElmahStatusCode,TRUE,CodeList,,,FALSE,Name,FALSE,,,,,,FALSE,,,FALSE
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ElmahType,TRUE,CodeList,,,FALSE,,FALSE,,,,,,FALSE,,,FALSE
-dbo,FALSE,FALSE,12/24/2020 19:39,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,FALSE,0,TRUE,FALSE,FALSE,,,,ElmahUser,TRUE,CodeList,,,FALSE,,FALSE,,,,,,FALSE,,,FALSE
+dbo,False,False,5/21/2022 3:01:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ELMAH_Error,True,CrossReferenceTable,,,False,,False,,,,,,False,,,False
+dbo,False,False,12/24/2020 7:39:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ElmahApplication,True,CodeList,,,False,,False,,,,,,False,,,False
+dbo,False,False,12/24/2020 7:39:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ElmahHost,True,CodeList,,,False,,False,,,,,,False,,,False
+dbo,False,False,12/24/2020 7:39:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ElmahSource,True,CodeList,,,False,,False,,,,,,False,,,False
+dbo,False,False,12/24/2020 7:39:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ElmahStatusCode,True,CodeList,,,False,Name,False,,,,,,False,,,False
+dbo,False,False,12/24/2020 7:39:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ElmahType,True,CodeList,,,False,,False,,,,,,False,,,False
+dbo,False,False,12/24/2020 7:39:00 PM,False,False,False,False,False,False,False,,False,0,True,False,False,,,,ElmahUser,True,CodeList,,,False,,False,,,,,,False,,,False

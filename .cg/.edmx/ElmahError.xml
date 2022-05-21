@@ -763,7 +763,7 @@
   </TableSetting>
   <ValidatorContainer />
   <Setting>
-    <Name>ELMAH_Error</Name>
+    <Name>ElmahError</Name>
     <Alias>E1</Alias>
     <IsEnum>false</IsEnum>
     <Namespace>ElmahModel</Namespace>

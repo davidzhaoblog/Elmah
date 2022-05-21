@@ -5,3 +5,9 @@ dbo,ELMAH_Error,\Source,ElmahSource,,False,True,True,True,True,,12/24/2020 12:00
 dbo,ELMAH_Error,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,12/24/2020 12:00:00 AM
 dbo,ELMAH_Error,\Type,ElmahType,,False,True,True,True,True,,12/24/2020 12:00:00 AM
 dbo,ELMAH_Error,\User,ElmahUser,,False,True,True,True,True,,12/24/2020 12:00:00 AM
+dbo,ElmahError,\Application,ElmahApplication,,False,True,True,True,True,,5/21/2022 12:00:00 AM
+dbo,ElmahError,\Host,ElmahHost,,False,True,True,True,True,,5/21/2022 12:00:00 AM
+dbo,ElmahError,\Source,ElmahSource,,False,True,True,True,True,,5/21/2022 12:00:00 AM
+dbo,ElmahError,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,5/21/2022 12:00:00 AM
+dbo,ElmahError,\Type,ElmahType,,False,True,True,True,True,,5/21/2022 12:00:00 AM
+dbo,ElmahError,\User,ElmahUser,,False,True,True,True,True,,5/21/2022 12:00:00 AM

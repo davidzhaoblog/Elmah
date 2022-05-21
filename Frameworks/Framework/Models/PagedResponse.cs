@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Framework.Models
 {
-    public class PagedResponse<TStatus, TRequestBody> : Framework.Models.Request<TStatus, TRequestBody>
+    public class PagedResponse<TStatus, TRequestBody> : Request<TStatus, TRequestBody>
     {
-        public Framework.Models.Pagination? Pagination { get; set; }
+        public Pagination? Pagination { get; set; }
     }
 }
 

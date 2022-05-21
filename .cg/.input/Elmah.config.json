@@ -2,18 +2,18 @@
   "excludedProjects": null,
   "originalInput": "D:\\Test4\\WhatEverII\\trunk\\Projects\\Elmah\\DB\\Edmx\\Elmah.edmx",
   "solutionConfig": {
-    "useTypeFullName": true,
+    "useTypeFullName": false,
     "rootNamespace": "Elmah",
     "solutionName": "Elmah",
     "subRootFolder": "Elmah",
     "swaggerRootFolder": "APIs",
     "codeVersion": "1.0.0.0",
-    "startPort": 7900,
+    "startPort": 7800,
     "excludedTables": null
   },
   "companyConfig": {
     "name": "Elmah",
-    "emailDomainName": "Elmah.com"
+    "emailDomainName": "url"
   },
   "databaseSetting": {
     "connectionStringName": "Elmah",
@@ -47,11 +47,5 @@
     "hasExistsMethod": false,
     "hasGetSingleItemMethod": false,
     "hasGetCollectionMethod": false
-  },
-  "ideSetting": {
-    "ide": 1,
-    "version": "2013",
-    "name": null,
-    "description": null
   }
 }

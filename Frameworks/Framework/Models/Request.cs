@@ -8,7 +8,7 @@ namespace Framework.Models
 {
     public class Request<TStatus, TRequestBody>
     {
-        public Framework.Models.RequestTypes Type { get; set; }
+        public RequestTypes Type { get; set; }
         public TStatus? Status { get; set; }
         public TRequestBody? RequestBody { get; set; }
     }
