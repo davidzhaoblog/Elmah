@@ -5,5 +5,37 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" />
+    <PackageReference Include="Microsoft.Spatial" />
+    <PackageReference Include="NetTopologySuite.IO.GeoJSON" />
+</ItemGroup>
+<ItemGroup>
+    <ProjectReference Include="..\EFCoreContext\Elmah.EFCoreContext.csproj">
+      <Project>{5251af9c-1af7-4841-a487-043b9ee892ef}</Project>
+      <Name>Elmah.EFCoreContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelContracts\Elmah.ModelContracts.csproj">
+      <Project>{60cd7610-3e66-41c8-a233-21a33ad3e21f}</Project>
+      <Name>Elmah.ModelContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Elmah.Models.csproj">
+      <Project>{bbef46af-ca4a-410f-93ef-5f6ce23c8cb0}</Project>
+      <Name>Elmah.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj">
+      <Project>{398b602b-2a1a-47d0-8e08-dc7bd39c8391}</Project>
+      <Name>Elmah.RepositoryContracts</Name>
+    </ProjectReference>
+</ItemGroup>
 
 </Project>

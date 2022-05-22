@@ -5,5 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+<ItemGroup>
+    <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj">
+      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Elmah.Models.csproj">
+      <Project>{bbef46af-ca4a-410f-93ef-5f6ce23c8cb0}</Project>
+      <Name>Elmah.Models</Name>
+    </ProjectReference>
+</ItemGroup>
 
 </Project>
