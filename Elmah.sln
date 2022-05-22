@@ -1,20 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{C077C415-6C00-4677-869B-25287FC75498}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{97D95BC9-BF78-4915-8499-38A2042AC330}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DALCore", "DALCore", "{6DE27FBD-5184-41D0-83A2-4D228A4CC4E0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{B627375D-D8C2-408C-BEDF-99060EC757BA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5BBF6910-72D1-4AF4-B6C5-27FCCAA62A01}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicesCore", "ServicesCore", "{8F612F0F-03B3-42DD-B2BD-84477E8FDEB4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UINative", "UINative", "{1C826517-8D2C-41C6-BDC5-0A0DBCD4C166}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIWebCore", "UIWebCore", "{5D80620B-4319-48D7-B3E4-F242D0D8895C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.WebApiControllers", "Elmah\WebApiControllers\Elmah.WebApiControllers.csproj", "{5CF8F04B-3C21-487B-9760-9479EF2D44B5}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -44,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Models", "Elmah\Model
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.EFCoreContext", "Elmah\EFCoreContext\Elmah.EFCoreContext.csproj", "{5251AF9C-1AF7-4841-A487-043B9EE892EF}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC} = {6D25AA30-C3AF-4AE0-B567-0F2653120CDC}
+		{60CD7610-3E66-41C8-A233-21A33AD3E21F} = {60CD7610-3E66-41C8-A233-21A33AD3E21F}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.EFCoreRepositories", "Elmah\EFCoreRepositories\Elmah.EFCoreRepositories.csproj", "{D2040BFA-F8D2-43C8-AB0F-B5A4A1258EFF}"
