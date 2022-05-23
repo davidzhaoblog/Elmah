@@ -10,6 +10,10 @@
       <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
       <Name>Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ModelContracts\Elmah.ModelContracts.csproj">
+      <Project>{60cd7610-3e66-41c8-a233-21a33ad3e21f}</Project>
+      <Name>Elmah.ModelContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.Resx.csproj">
       <Project>{426bc868-968d-46f0-a44f-0afa36cad51d}</Project>
       <Name>Elmah.Resx</Name>
