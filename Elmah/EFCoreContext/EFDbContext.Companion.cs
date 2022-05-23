@@ -24,7 +24,7 @@ namespace Elmah.EFCoreContext
             {
                 if (this.SpatialLocation____ == null)
                     return null;
-                string geoJson = Elmah.EFCoreContext.IGeometryHelper.ToGeoJson(this.SpatialLocation____);
+                string geoJson = Framework.Helpers.IGeometryHelper.ToGeoJson(this.SpatialLocation____);
                 return (Microsoft.Spatial.GeographyPoint)Framework.Helpers.GeoHelperSinglton.Instance.GeographyFromGeoJSON<Microsoft.Spatial.GeographyPoint>(geoJson);
             }
             set
@@ -34,7 +34,7 @@ namespace Elmah.EFCoreContext
                 else
                 {
                     var gml = Framework.Helpers.GeoHelperSinglton.Instance.GeographyToGeoJSON(value);
-                    this.SpatialLocation____ = Elmah.EFCoreContext.IGeometryHelper.FromGeoJson(gml);
+                    this.SpatialLocation____ = Framework.Helpers.IGeometryHelper.FromGeoJson(gml);
                 }
             }
         }

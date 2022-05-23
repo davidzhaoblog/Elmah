@@ -13,7 +13,7 @@ namespace Elmah.EFCoreContext
         }
         public string Host { get; set; } = null!;
 
-        public IGeometry SpatialLocation____ { get; set; }
+        public Geometry SpatialLocation____ { get; set; }
 
         public ICollection<ElmahError> ELMAH_Error { get; set; }
 
