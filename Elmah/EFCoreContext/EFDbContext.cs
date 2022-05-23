@@ -16,19 +16,19 @@ namespace Elmah.EFCoreContext
         {
         }
 
-        public DbSet<ElmahError> ELMAH_Error { get; set; } = null!;
+        public DbSet<ElmahError> ElmahErrors { get; set; } = null!;
 
-        public DbSet<ElmahApplication> ElmahApplication { get; set; } = null!;
+        public DbSet<ElmahApplication> ElmahApplications { get; set; } = null!;
 
-        public DbSet<ElmahHost> ElmahHost { get; set; } = null!;
+        public DbSet<ElmahHost> ElmahHosts { get; set; } = null!;
 
-        public DbSet<ElmahSource> ElmahSource { get; set; } = null!;
+        public DbSet<ElmahSource> ElmahSources { get; set; } = null!;
 
-        public DbSet<ElmahStatusCode> ElmahStatusCode { get; set; } = null!;
+        public DbSet<ElmahStatusCode> ElmahStatusCodes { get; set; } = null!;
 
-        public DbSet<ElmahType> ElmahType { get; set; } = null!;
+        public DbSet<ElmahType> ElmahTypes { get; set; } = null!;
 
-        public DbSet<ElmahUser> ElmahUser { get; set; } = null!;
+        public DbSet<ElmahUser> ElmahUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
