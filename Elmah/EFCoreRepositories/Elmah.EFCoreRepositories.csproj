@@ -17,7 +17,7 @@
 </ItemGroup>
 <ItemGroup>
     <ProjectReference Include="..\EFCoreContext\Elmah.EFCoreContext.csproj">
-      <Project>{5251af9c-1af7-4841-a487-043b9ee892ef}</Project>
+      <Project>{b41fbd14-bd68-425e-83d8-1b7c81ef8800}</Project>
       <Name>Elmah.EFCoreContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj">
@@ -25,15 +25,15 @@
       <Name>Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\ModelContracts\Elmah.ModelContracts.csproj">
-      <Project>{60cd7610-3e66-41c8-a233-21a33ad3e21f}</Project>
+      <Project>{f16078a8-5076-4741-95aa-17cc9fbc0c61}</Project>
       <Name>Elmah.ModelContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.Models.csproj">
-      <Project>{bbef46af-ca4a-410f-93ef-5f6ce23c8cb0}</Project>
+      <Project>{bfafde29-25f7-45d7-b2ae-5925e63e2cf4}</Project>
       <Name>Elmah.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj">
-      <Project>{398b602b-2a1a-47d0-8e08-dc7bd39c8391}</Project>
+      <Project>{d90ca62c-a6a3-40c9-9c2c-32d12fbeb874}</Project>
       <Name>Elmah.RepositoryContracts</Name>
     </ProjectReference>
 </ItemGroup>

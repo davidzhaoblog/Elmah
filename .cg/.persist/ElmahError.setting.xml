@@ -60,6 +60,18 @@
   <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonResultView" UIViewType="Results" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
   </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Index" UIViewType="SearchResult" DataViewKey="Default" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahError" Group="Aside" Key="V_ElmahError_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" DataViewKey="Default" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
+      <PropertyList>Application;Application_Name;Host;Host_Name;Type;Type_Name;Source;Source_Name;Message;User;User_Name;StatusCode;StatusCode_Name;TimeUtc;Sequence;AllXml</PropertyList>
+    </PartialView>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonSearchView" UIViewType="Search" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonResultView" UIViewType="Results" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
+  </UIView>
   <ForeignKeyPersistList>
     <ForeignKeyPersist Result="Application" IsTop="true" PKTypeFullName="ElmahModel.ElmahApplication" PKPropertyName="Application" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="Application" FKName="FK_ELMAH_Error_ElmahApplication" FKAlias="t" PropertyName_Origin_InThisType="Application" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\Application</EntityReferenceSimpleFullPath>

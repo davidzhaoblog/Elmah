@@ -41,6 +41,7 @@ namespace Elmah.EFCoreRepositories
                         ResponseBody = new ElmahHostModel
                         {
                             Host = existing.Host,
+                            SpatialLocation = existing.SpatialLocation,
                         }
                     });
             }
@@ -70,6 +71,7 @@ namespace Elmah.EFCoreRepositories
                         ResponseBody = new ElmahHostModel
                         {
                             Host = existing.Host,
+                            SpatialLocation = existing.SpatialLocation,
                         }
                     });
             }
@@ -88,6 +90,7 @@ namespace Elmah.EFCoreRepositories
                 var toInsert = new ElmahHost
                 {
                             Host = input.Host,
+                            SpatialLocation = input.SpatialLocation,
                 };
                 await _dbcontext.ElmahHosts.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
@@ -98,6 +101,7 @@ namespace Elmah.EFCoreRepositories
                         ResponseBody = new ElmahHostModel
                         {
                             Host = toInsert.Host,
+                            SpatialLocation = toInsert.SpatialLocation,
                         }
                     });
             }
@@ -122,6 +126,7 @@ namespace Elmah.EFCoreRepositories
 
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.Host = input.Host;
+                existing.SpatialLocation = input.SpatialLocation;
                 await _dbcontext.SaveChangesAsync();
                 return await Task<Response<HttpStatusCode, ElmahHostModel>>.FromResult(
                     new Response<HttpStatusCode, ElmahHostModel>
@@ -130,6 +135,7 @@ namespace Elmah.EFCoreRepositories
                         ResponseBody = new ElmahHostModel
                         {
                             Host = existing.Host,
+                            SpatialLocation = existing.SpatialLocation,
                         }
                     });
             }

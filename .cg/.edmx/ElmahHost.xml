@@ -74,6 +74,52 @@
         </StringLengthValidator>
       </ValidatorContainer>
     </PropertyContext>
+    <PropertyContext>
+      <Setting>
+        <KnownPropertyName>Unknown</KnownPropertyName>
+        <Name>SpatialLocation</Name>
+        <DefaultOrder>100</DefaultOrder>
+        <PropertyType>
+          <IsValueType>true</IsValueType>
+          <IsKnownType>false</IsKnownType>
+          <CanBeNull>true</CanBeNull>
+          <DotNetValueType>Geography</DotNetValueType>
+          <KnownType>Unknown</KnownType>
+          <Type>Microsoft.Spatial.Geography</Type>
+          <FriendlyType />
+          <IsArray>false</IsArray>
+          <IsDynamic>false</IsDynamic>
+        </PropertyType>
+        <IsNullable>true</IsNullable>
+        <IsDbGenerated>false</IsDbGenerated>
+        <PropertyCategory>Unknown</PropertyCategory>
+        <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
+      </Setting>
+      <DBColumnSetting>
+        <Name>SpatialLocation</Name>
+        <DbType>Geography</DbType>
+        <CanBeNull>true</CanBeNull>
+        <IsIdentity>false</IsIdentity>
+        <IsDbGenerated>false</IsDbGenerated>
+        <IsDiscriminator>false</IsDiscriminator>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVersion>false</IsVersion>
+        <Length>0</Length>
+        <DbTypePrimary_DATA_TYPE>Geography</DbTypePrimary_DATA_TYPE>
+        <UpdateCheck>Always</UpdateCheck>
+      </DBColumnSetting>
+      <PropertyUISetting>
+        <CanUIDisplay>true</CanUIDisplay>
+        <CanUIEdit>true</CanUIEdit>
+        <CanUIInsert>true</CanUIInsert>
+        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
+        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
+        <CanUIHidden>false</CanUIHidden>
+        <PropertyUIType>Unknown</PropertyUIType>
+        <DisplayOrder>-1</DisplayOrder>
+      </PropertyUISetting>
+      <ValidatorContainer />
+    </PropertyContext>
   </PropertyContextCollection>
   <UniqueConstraintSettingCollection />
   <PropertyNameListSettingCollection />

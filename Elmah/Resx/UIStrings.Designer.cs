@@ -357,6 +357,15 @@ namespace Elmah.Resx {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Spatial Location"".
+        /// </summary>
+        public static string SpatialLocation {
+            get {
+                return ResourceManager.GetString("SpatialLocation", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "The length of Name should be 0 to 50"".
         /// </summary>
         public static string The_length_of_Name_should_be_0_to_50 {

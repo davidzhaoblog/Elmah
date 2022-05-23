@@ -217,6 +217,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="SpatialLocation" xml:space="preserve">
+    <value>Spatial Location</value>
+  </data>
   <data name="The_length_of_Name_should_be_0_to_50" xml:space="preserve">
     <value>The length of Name should be 0 to 50</value>
   </data>

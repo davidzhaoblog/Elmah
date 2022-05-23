@@ -18,6 +18,26 @@ namespace Elmah.EFCoreContext
 
     public partial class ElmahHost : IElmahHost
     {
+        public Microsoft.Spatial.GeographyPoint SpatialLocation
+        {
+            get
+            {
+                if (this.SpatialLocation____ == null)
+                    return null;
+                string geoJson = Elmah.EFCoreContext.IGeometryHelper.ToGeoJson(this.SpatialLocation____);
+                return (Microsoft.Spatial.GeographyPoint)Framework.Helpers.GeoHelperSinglton.Instance.GeographyFromGeoJSON<Microsoft.Spatial.GeographyPoint>(geoJson);
+            }
+            set
+            {
+                if (value == null)
+                    this.SpatialLocation____ = null;
+                else
+                {
+                    var gml = Framework.Helpers.GeoHelperSinglton.Instance.GeographyToGeoJSON(value);
+                    this.SpatialLocation____ = Elmah.EFCoreContext.IGeometryHelper.FromGeoJson(gml);
+                }
+            }
+        }
 
     }
 

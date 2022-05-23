@@ -162,6 +162,8 @@ namespace Elmah.EFCoreContext
 
                 entity.ToTable("ElmahHost", "dbo");
 
+                entity.Ignore(t=>t.SpatialLocation);
+
                 entity.HasKey(e => new { e.Host })
                     .HasName("PK_ElmahHost_Host");
 
@@ -170,6 +172,9 @@ namespace Elmah.EFCoreContext
                     .IsRequired()
                     .ValueGeneratedNever()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.SpatialLocation____)
+                    .HasColumnName("SpatialLocation");
 
             });
 

@@ -17,7 +17,7 @@
 </ItemGroup>
 <ItemGroup>
     <ProjectReference Include="..\ModelContracts\Elmah.ModelContracts.csproj">
-      <Project>{60cd7610-3e66-41c8-a233-21a33ad3e21f}</Project>
+      <Project>{f16078a8-5076-4741-95aa-17cc9fbc0c61}</Project>
       <Name>Elmah.ModelContracts</Name>
     </ProjectReference>
 </ItemGroup>

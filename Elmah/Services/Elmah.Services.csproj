@@ -17,19 +17,19 @@
       <Name>Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.Models.csproj">
-      <Project>{bbef46af-ca4a-410f-93ef-5f6ce23c8cb0}</Project>
+      <Project>{bfafde29-25f7-45d7-b2ae-5925e63e2cf4}</Project>
       <Name>Elmah.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj">
-      <Project>{398b602b-2a1a-47d0-8e08-dc7bd39c8391}</Project>
+      <Project>{d90ca62c-a6a3-40c9-9c2c-32d12fbeb874}</Project>
       <Name>Elmah.RepositoryContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resx\Elmah.Resx.csproj">
-      <Project>{426bc868-968d-46f0-a44f-0afa36cad51d}</Project>
+      <Project>{6a636986-699b-46cd-84ba-d62dd9eec538}</Project>
       <Name>Elmah.Resx</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceContracts\Elmah.ServiceContracts.csproj">
-      <Project>{5bb894b0-b3ee-4085-bbd9-3cf243fd57ea}</Project>
+      <Project>{7bcc12cd-3167-4c5c-864e-470fb78a618b}</Project>
       <Name>Elmah.ServiceContracts</Name>
     </ProjectReference>
 </ItemGroup>

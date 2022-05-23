@@ -14,7 +14,7 @@
       <Name>Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Elmah.Models.csproj">
-      <Project>{bbef46af-ca4a-410f-93ef-5f6ce23c8cb0}</Project>
+      <Project>{bfafde29-25f7-45d7-b2ae-5925e63e2cf4}</Project>
       <Name>Elmah.Models</Name>
     </ProjectReference>
 </ItemGroup>
