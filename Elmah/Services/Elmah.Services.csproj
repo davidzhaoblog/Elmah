@@ -6,32 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 <ItemGroup>
-    <PackageReference Include="ClosedXML" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-    <PackageReference Include="Microsoft.Extensions.Options" />
-    <PackageReference Include="MiniGuid" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
 </ItemGroup>
 <ItemGroup>
-    <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj">
-      <Project>{6d25aa30-c3af-4ae0-b567-0f2653120cdc}</Project>
-      <Name>Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Elmah.Models.csproj">
-      <Project>{bfafde29-25f7-45d7-b2ae-5925e63e2cf4}</Project>
-      <Name>Elmah.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj">
-      <Project>{d90ca62c-a6a3-40c9-9c2c-32d12fbeb874}</Project>
-      <Name>Elmah.RepositoryContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resx\Elmah.Resx.csproj">
-      <Project>{6a636986-699b-46cd-84ba-d62dd9eec538}</Project>
-      <Name>Elmah.Resx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceContracts\Elmah.ServiceContracts.csproj">
-      <Project>{7bcc12cd-3167-4c5c-864e-470fb78a618b}</Project>
-      <Name>Elmah.ServiceContracts</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj" />
+    <ProjectReference Include="..\Models\Elmah.Models.csproj" />
+    <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj" />
+    <ProjectReference Include="..\Resx\Elmah.Resx.csproj" />
+    <ProjectReference Include="..\ServiceContracts\Elmah.ServiceContracts.csproj" />
 </ItemGroup>
 
 </Project>

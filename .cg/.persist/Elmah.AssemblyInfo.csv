@@ -9,3 +9,4 @@ ClassLibrary,204c4fd4-fbda-45e2-b52d-6814a44042f0,False,"",Elmah,Copyright © El
 ClassLibrary,6a636986-699b-46cd-84ba-d62dd9eec538,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Elmah.Resx,7799,Elmah.Resx,Elmah.Resx,,DotNet6,Resources,Elmah.Resx,1.0.0.0
 ClassLibrary,7bcc12cd-3167-4c5c-864e-470fb78a618b,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Elmah.ServiceContracts,7799,Elmah.ServiceContracts,Elmah.ServiceContracts,,DotNet6,ServiceContracts,Elmah.ServiceContracts,1.0.0.0
 ClassLibrary,6d25aa30-c3af-4ae0-b567-0f2653120cdc,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Framework,-1,Framework,Framework,,DotNet6,Framework,Framework,1.0.0.0
+ClassLibrary,4393a996-0a64-47b2-9bd5-e2673996998d,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Elmah.WebApiApp,7799,Elmah.WebApiApp,Elmah.WebApiApp,,DotNet6,WebApiApp,Elmah.WebApiApp,1.0.0.0

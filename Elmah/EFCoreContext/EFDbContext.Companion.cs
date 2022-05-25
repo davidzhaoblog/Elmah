@@ -18,7 +18,7 @@ namespace Elmah.EFCoreContext
 
     public partial class ElmahHost : IElmahHost
     {
-        public Microsoft.Spatial.GeographyPoint SpatialLocation
+        public Microsoft.Spatial.Geography SpatialLocation
         {
             get
             {
