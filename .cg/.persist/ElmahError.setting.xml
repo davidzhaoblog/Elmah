@@ -25,8 +25,8 @@
   </Criteria>
   <Query Key="Common" DataQueryPerQueryKnownKey="Common" SourceTypeDeclarationFullName="ElmahModel.ElmahError" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
     <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="EntityReference" OutterConditionOperator="AND" ConditionOperator="AND">Application=\Application:Application.Equals;Host=\Host:Host.Equals;Source=\Source:Source.Equals;StatusCode=\StatusCode:StatusCode.Equals;Type=\Type:Type.Equals;User=\User:User.Equals</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">Message=:Message.Contains;AllXml=:AllXml.Contains</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">TimeUtcRange=:TimeUtc.Range</QueryUnits>
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">Message=:Message.Contains;AllXml=:AllXml.Contains</QueryUnits>
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">TimeUtcRange=:TimeUtc.Range</QueryUnits>
   </Query>
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahError" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">ErrorId=:ErrorId.Equals</QueryUnits>
@@ -60,18 +60,6 @@
   <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonResultView" UIViewType="Results" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
   </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Index" UIViewType="SearchResult" DataViewKey="Default" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
-  </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahError" Group="Aside" Key="V_ElmahError_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" DataViewKey="Default" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
-      <PropertyList>Application;Application_Name;Host;Host_Name;Type;Type_Name;Source;Source_Name;Message;User;User_Name;StatusCode;StatusCode_Name;TimeUtc;Sequence;AllXml</PropertyList>
-    </PartialView>
-  </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonSearchView" UIViewType="Search" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonResultView" UIViewType="Results" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
-  </UIView>
   <ForeignKeyPersistList>
     <ForeignKeyPersist Result="Application" IsTop="true" PKTypeFullName="ElmahModel.ElmahApplication" PKPropertyName="Application" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="Application" FKName="FK_ELMAH_Error_ElmahApplication" FKAlias="t" PropertyName_Origin_InThisType="Application" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\Application</EntityReferenceSimpleFullPath>
@@ -79,7 +67,7 @@
       <EntityReferenceForeignKeyPath>\FK_ELMAH_Error_ElmahApplication</EntityReferenceForeignKeyPath>
       <IsJoinFromPKToFK>false</IsJoinFromPKToFK>
       <DefaultOrder>1</DefaultOrder>
-      <CreatedDate>2022-05-21T00:00:00-04:00</CreatedDate>
+      <CreatedDate>2022-05-28T00:00:00-04:00</CreatedDate>
     </ForeignKeyPersist>
     <ForeignKeyPersist Result="Host" IsTop="true" PKTypeFullName="ElmahModel.ElmahHost" PKPropertyName="Host" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="Host" FKName="FK_ELMAH_Error_ElmahHost" FKAlias="t" PropertyName_Origin_InThisType="Host" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\Host</EntityReferenceSimpleFullPath>
@@ -87,7 +75,7 @@
       <EntityReferenceForeignKeyPath>\FK_ELMAH_Error_ElmahHost</EntityReferenceForeignKeyPath>
       <IsJoinFromPKToFK>false</IsJoinFromPKToFK>
       <DefaultOrder>1</DefaultOrder>
-      <CreatedDate>2022-05-21T00:00:00-04:00</CreatedDate>
+      <CreatedDate>2022-05-28T00:00:00-04:00</CreatedDate>
     </ForeignKeyPersist>
     <ForeignKeyPersist Result="Source" IsTop="true" PKTypeFullName="ElmahModel.ElmahSource" PKPropertyName="Source" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="Source" FKName="FK_ELMAH_Error_ElmahSource" FKAlias="t" PropertyName_Origin_InThisType="Source" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\Source</EntityReferenceSimpleFullPath>
@@ -95,7 +83,7 @@
       <EntityReferenceForeignKeyPath>\FK_ELMAH_Error_ElmahSource</EntityReferenceForeignKeyPath>
       <IsJoinFromPKToFK>false</IsJoinFromPKToFK>
       <DefaultOrder>1</DefaultOrder>
-      <CreatedDate>2022-05-21T00:00:00-04:00</CreatedDate>
+      <CreatedDate>2022-05-28T00:00:00-04:00</CreatedDate>
     </ForeignKeyPersist>
     <ForeignKeyPersist Result="StatusCode" IsTop="true" PKTypeFullName="ElmahModel.ElmahStatusCode" PKPropertyName="StatusCode" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="StatusCode" FKName="FK_ELMAH_Error_ElmahStatusCode" FKAlias="t" PropertyName_Origin_InThisType="StatusCode" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\StatusCode</EntityReferenceSimpleFullPath>
@@ -103,7 +91,7 @@
       <EntityReferenceForeignKeyPath>\FK_ELMAH_Error_ElmahStatusCode</EntityReferenceForeignKeyPath>
       <IsJoinFromPKToFK>false</IsJoinFromPKToFK>
       <DefaultOrder>1</DefaultOrder>
-      <CreatedDate>2022-05-21T00:00:00-04:00</CreatedDate>
+      <CreatedDate>2022-05-28T00:00:00-04:00</CreatedDate>
     </ForeignKeyPersist>
     <ForeignKeyPersist Result="Type" IsTop="true" PKTypeFullName="ElmahModel.ElmahType" PKPropertyName="Type" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="Type" FKName="FK_ELMAH_Error_ElmahType" FKAlias="t" PropertyName_Origin_InThisType="Type" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\Type</EntityReferenceSimpleFullPath>
@@ -111,7 +99,7 @@
       <EntityReferenceForeignKeyPath>\FK_ELMAH_Error_ElmahType</EntityReferenceForeignKeyPath>
       <IsJoinFromPKToFK>false</IsJoinFromPKToFK>
       <DefaultOrder>1</DefaultOrder>
-      <CreatedDate>2022-05-21T00:00:00-04:00</CreatedDate>
+      <CreatedDate>2022-05-28T00:00:00-04:00</CreatedDate>
     </ForeignKeyPersist>
     <ForeignKeyPersist Result="User" IsTop="true" PKTypeFullName="ElmahModel.ElmahUser" PKPropertyName="User" FKTypeFullName="ElmahModel.ElmahError" FKPropertyName="User" FKName="FK_ELMAH_Error_ElmahUser" FKAlias="t" PropertyName_Origin_InThisType="User" InUIEdit="true" InUIDisplay="true" InUIHidden="false" InUICriteria="true" EntityReferenceResultType="DownTree">
       <EntityReferenceSimpleFullPath>\User</EntityReferenceSimpleFullPath>
@@ -119,7 +107,7 @@
       <EntityReferenceForeignKeyPath>\FK_ELMAH_Error_ElmahUser</EntityReferenceForeignKeyPath>
       <IsJoinFromPKToFK>false</IsJoinFromPKToFK>
       <DefaultOrder>1</DefaultOrder>
-      <CreatedDate>2022-05-21T00:00:00-04:00</CreatedDate>
+      <CreatedDate>2022-05-28T00:00:00-04:00</CreatedDate>
     </ForeignKeyPersist>
   </ForeignKeyPersistList>
 </Entity>

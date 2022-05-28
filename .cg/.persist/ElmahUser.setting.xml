@@ -19,9 +19,9 @@
     <Queries>Identifier</Queries>
   </Criteria>
   <Query Key="Common" DataQueryPerQueryKnownKey="Common" SourceTypeDeclarationFullName="ElmahModel.ElmahUser" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="AND" />
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">User=:User.Contains</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR" />
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="AND" />
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">User=:User.Contains</QueryUnits>
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR" />
   </Query>
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahUser" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">User=:User.Equals</QueryUnits>
@@ -38,14 +38,6 @@
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasExistsMethod="true" HasGetCollectionMethod="true" />
   </QueryResult>
-  <UIView MasterTypeFullName="ElmahModel.ElmahUser" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahUser" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahUser" Group="Aside" Key="V_ElmahUser_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
-      <PropertyList>User</PropertyList>
-    </PartialView>
-  </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahUser" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahUser" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahUser" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahUser" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahUser" Group="Aside" Key="V_ElmahUser_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">

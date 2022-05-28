@@ -19,9 +19,9 @@
     <Queries>Identifier</Queries>
   </Criteria>
   <Query Key="Common" DataQueryPerQueryKnownKey="Common" SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="AND" />
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">Name=:Name.Contains</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR" />
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="AND" />
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">Name=:Name.Contains</QueryUnits>
+    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR" />
   </Query>
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">StatusCode=:StatusCode.Equals</QueryUnits>
@@ -38,14 +38,6 @@
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasExistsMethod="true" HasGetCollectionMethod="true" />
   </QueryResult>
-  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" Group="Aside" Key="V_ElmahStatusCode_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
-      <PropertyList>StatusCode;Name</PropertyList>
-    </PartialView>
-  </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" Group="Aside" Key="V_ElmahStatusCode_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
