@@ -3,12 +3,16 @@ using System.Net;
 
 namespace Framework.Interfaces
 {
-    public interface IService<T, TIdentifier>
+    public interface IService<T, TIdentifier>: IService<T, T, TIdentifier>
     {
-        Task<Response<HttpStatusCode, T>> Create(T input);
-        Task<Response<HttpStatusCode, T>> Delete(TIdentifier id);
-        Task<Response<HttpStatusCode, T>> Get(TIdentifier id);
-        Task<Response<HttpStatusCode, T>> Update(T input);
+    }
+
+    public interface IService<TRequest, TResponse, TIdentifier>
+    {
+        Task<Response<HttpStatusCode, TResponse>> Create(TRequest input);
+        Task<Response<HttpStatusCode, TResponse>> Delete(TIdentifier id);
+        Task<Response<HttpStatusCode, TResponse>> Get(TIdentifier id);
+        Task<Response<HttpStatusCode, TResponse>> Update(TRequest input);
     }
 }
 

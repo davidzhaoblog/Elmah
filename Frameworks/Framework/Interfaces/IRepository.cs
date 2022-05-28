@@ -3,12 +3,16 @@ using System.Net;
 
 namespace Framework.Interfaces
 {
-    public interface IRepository<T, TIdentifier>
+    public interface IRepository<T, TIdentifier>: IRepository<T, T, TIdentifier>
     {
-        Task<Response<HttpStatusCode, T>> Create(T input);
-        Task<Response<HttpStatusCode, T>> Delete(TIdentifier id);
-        Task<Response<HttpStatusCode, T>> Get(TIdentifier id);
-        Task<Response<HttpStatusCode, T>> Update(T input);
+    }
+
+    public interface IRepository<TRequest, TResponse, TIdentifier>
+    {
+        Task<Response<HttpStatusCode, TResponse>> Create(TRequest input);
+        Task<Response<HttpStatusCode, TResponse>> Delete(TIdentifier id);
+        Task<Response<HttpStatusCode, TResponse>> Get(TIdentifier id);
+        Task<Response<HttpStatusCode, TResponse>> Update(TRequest input);
     }
 }
 
