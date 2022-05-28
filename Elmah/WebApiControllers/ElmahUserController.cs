@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace WebApiControllers_ElmahHostController
+namespace ElmahUserController
 {
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("/api/[controller]/[action]")]
-    public partial class WebApiControllers_ElmahHostController : Controller
+    public partial class ElmahUserController : Controller
     {
-        IElmahHostService _thisService { get; set; }
+        IElmahUserService _thisService { get; set; }
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<WebApiControllers_ElmahHostController> _logger;
+        private readonly ILogger<ElmahUserController> _logger;
 
-        public WebApiControllers_ElmahHostController(IElmahHostService thisService, IServiceProvider serviceProvider, ILogger<WebApiControllers_ElmahHostController> logger)
+        public ElmahUserController(IElmahUserService thisService, IServiceProvider serviceProvider, ILogger<ElmahUserController> logger)
         {
             this._serviceProvider = serviceProvider;
             this._thisService = thisService;
@@ -26,25 +26,25 @@ namespace WebApiControllers_ElmahHostController
         }
 
         [HttpDelete]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahHostModel>>> Delete(ElmahHostIdModel id)
+        public async Task<ActionResult<Response<HttpStatusCode, ElmahUserModel>>> Delete(ElmahUserIdModel id)
         {
             return await _thisService.Delete(id);
         }
 
         [HttpGet]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahHostModel>>> Get(ElmahHostIdModel id)
+        public async Task<ActionResult<Response<HttpStatusCode, ElmahUserModel>>> Get(ElmahUserIdModel id)
         {
             return await _thisService.Get(id);
         }
 
         [HttpPut]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahHostModel>>> Put(ElmahHostModel input)
+        public async Task<ActionResult<Response<HttpStatusCode, ElmahUserModel>>> Put(ElmahUserModel input)
         {
             return await _thisService.Create(input);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahHostModel>>> Post(ElmahHostModel input)
+        public async Task<ActionResult<Response<HttpStatusCode, ElmahUserModel>>> Post(ElmahUserModel input)
         {
             return await _thisService.Update(input);
         }

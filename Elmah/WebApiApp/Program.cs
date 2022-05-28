@@ -6,7 +6,6 @@ using Elmah.EFCoreContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
-using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +35,7 @@ builder.Services.AddScoped<IElmahTypeService, ElmahTypeService>();
 builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => x.UseNetTopologySuite()));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => x.UseNetTopologySuite()), ServiceLifetime.Transient);
 
 var app = builder.Build();
 

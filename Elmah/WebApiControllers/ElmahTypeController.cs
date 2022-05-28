@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace WebApiControllers_ElmahTypeController
+namespace ElmahTypeController
 {
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("/api/[controller]/[action]")]
-    public partial class WebApiControllers_ElmahTypeController : Controller
+    public partial class ElmahTypeController : Controller
     {
         IElmahTypeService _thisService { get; set; }
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<WebApiControllers_ElmahTypeController> _logger;
+        private readonly ILogger<ElmahTypeController> _logger;
 
-        public WebApiControllers_ElmahTypeController(IElmahTypeService thisService, IServiceProvider serviceProvider, ILogger<WebApiControllers_ElmahTypeController> logger)
+        public ElmahTypeController(IElmahTypeService thisService, IServiceProvider serviceProvider, ILogger<ElmahTypeController> logger)
         {
             this._serviceProvider = serviceProvider;
             this._thisService = thisService;
