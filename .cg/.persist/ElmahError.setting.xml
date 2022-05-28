@@ -15,28 +15,28 @@
     <Properties Key="nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting" />
     <Properties Key="nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting" />
   </DataView>
-  <Criteria Key="Common" SourceTypeFullName="ElmahModel.ElmahError">
+  <Criteria Key="AdvancedQuery" SourceTypeFullName="ElmahModel.ElmahError">
     <Description>Query by EntityReference, String, Bool, Order By DateTime</Description>
-    <Queries>Common</Queries>
+    <Queries>AdvancedQuery</Queries>
   </Criteria>
   <Criteria Key="Identifier" SourceTypeFullName="ElmahModel.ElmahError">
     <Description>Query by Identifier/UniqueConstraint/CompositeIdentifier</Description>
     <Queries>Identifier</Queries>
   </Criteria>
-  <Query Key="Common" DataQueryPerQueryKnownKey="Common" SourceTypeDeclarationFullName="ElmahModel.ElmahError" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="EntityReference" OutterConditionOperator="AND" ConditionOperator="AND">Application=\Application:Application.Equals;Host=\Host:Host.Equals;Source=\Source:Source.Equals;StatusCode=\StatusCode:StatusCode.Equals;Type=\Type:Type.Equals;User=\User:User.Equals</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">Message=:Message.Contains;AllXml=:AllXml.Contains</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">TimeUtcRange=:TimeUtc.Range</QueryUnits>
+  <Query Key="AdvancedQuery" DataQueryPerQueryKnownKey="AdvancedQuery" SourceTypeDeclarationFullName="ElmahModel.ElmahError" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
+    <QueryUnits Key="AdvancedQuery" DataQueryPerQueryUnitSettingType="EntityReference" OutterConditionOperator="AND" ConditionOperator="AND">Application=\Application:Application.Equals;Host=\Host:Host.Equals;Source=\Source:Source.Equals;StatusCode=\StatusCode:StatusCode.Equals;Type=\Type:Type.Equals;User=\User:User.Equals</QueryUnits>
+    <QueryUnits Key="AdvancedQuery" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">Message=:Message.Contains;AllXml=:AllXml.Contains</QueryUnits>
+    <QueryUnits Key="AdvancedQuery" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">TimeUtcRange=:TimeUtc.Range</QueryUnits>
   </Query>
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahError" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">ErrorId=:ErrorId.Equals</QueryUnits>
   </Query>
-  <QueryResult Key="EntityByCommon" CriteriaKey="Common" OrderBys="" />
-  <QueryResult Key="NameValuePairByCommon" CriteriaKey="Common" DataViewKey="NameValuePair" OrderBys="">
+  <QueryResult Key="EntityByAdvancedQuery" CriteriaKey="AdvancedQuery" OrderBys="" />
+  <QueryResult Key="NameValuePairByAdvancedQuery" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="">
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasGetCollectionMethod="true" />
   </QueryResult>
-  <QueryResult Key="DefaultByCommon" CriteriaKey="Common" DataViewKey="Default" OrderBys="">
+  <QueryResult Key="DefaultByAdvancedQuery" CriteriaKey="AdvancedQuery" DataViewKey="Default" OrderBys="">
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasGetCollectionMethod="true" />
   </QueryResult>
@@ -48,7 +48,7 @@
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasExistsMethod="true" HasGetCollectionMethod="true" />
   </QueryResult>
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Index" UIViewType="SearchResult" DataViewKey="Default" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Index" UIViewType="SearchResult" DataViewKey="Default" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
   </UIView>
   <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
@@ -56,8 +56,8 @@
       <PropertyList>Application;Application_Name;Host;Host_Name;Type;Type_Name;Source;Source_Name;Message;User;User_Name;StatusCode;StatusCode_Name;TimeUtc;Sequence;AllXml</PropertyList>
     </PartialView>
   </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonSearchView" UIViewType="Search" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="CommonResultView" UIViewType="Results" DataViewKey="Default" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="AdvancedQuerySearchView" UIViewType="Search" DataViewKey="Default" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahError" Key="AdvancedQueryResultView" UIViewType="Results" DataViewKey="Default" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
   </UIView>
   <ForeignKeyPersistList>

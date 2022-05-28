@@ -10,27 +10,27 @@
     <Properties Key="nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting" />
     <Properties Key="nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting" />
   </DataView>
-  <Criteria Key="Common" SourceTypeFullName="ElmahModel.ElmahHost">
+  <Criteria Key="AdvancedQuery" SourceTypeFullName="ElmahModel.ElmahHost">
     <Description>Query by EntityReference, String, Bool, Order By DateTime</Description>
-    <Queries>Common</Queries>
+    <Queries>AdvancedQuery</Queries>
   </Criteria>
   <Criteria Key="Identifier" SourceTypeFullName="ElmahModel.ElmahHost">
     <Description>Query by Identifier/UniqueConstraint/CompositeIdentifier</Description>
     <Queries>Identifier</Queries>
   </Criteria>
-  <Query Key="Common" DataQueryPerQueryKnownKey="Common" SourceTypeDeclarationFullName="ElmahModel.ElmahHost" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="AND" />
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR">Host=:Host.Contains;SpatialLocation=:SpatialLocation.GeographyRange;SpatialLocationGeographyIntersects=:SpatialLocation.GeographyIntersects</QueryUnits>
-    <QueryUnits Key="Common" DataQueryPerQueryUnitSettingType="Advanced" OutterConditionOperator="AND" ConditionOperator="OR" />
+  <Query Key="AdvancedQuery" DataQueryPerQueryKnownKey="AdvancedQuery" SourceTypeDeclarationFullName="ElmahModel.ElmahHost" ConditionOperator="AND" HasStringContainsDataQueryPerQueryUnitSettingForAll="true">
+    <QueryUnits Key="AdvancedQuery" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="AND" />
+    <QueryUnits Key="AdvancedQuery" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR">Host=:Host.Contains;SpatialLocation=:SpatialLocation.GeographyRange;SpatialLocationGeographyIntersects=:SpatialLocation.GeographyIntersects</QueryUnits>
+    <QueryUnits Key="AdvancedQuery" DataQueryPerQueryUnitSettingType="Common" OutterConditionOperator="AND" ConditionOperator="OR" />
   </Query>
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahHost" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">Host=:Host.Equals</QueryUnits>
   </Query>
-  <QueryResult Key="EntityByCommon" CriteriaKey="Common" OrderBys="">
+  <QueryResult Key="EntityByAdvancedQuery" CriteriaKey="AdvancedQuery" OrderBys="">
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasGetCollectionMethod="true" />
   </QueryResult>
-  <QueryResult Key="NameValuePairByCommon" CriteriaKey="Common" DataViewKey="NameValuePair" OrderBys="">
+  <QueryResult Key="NameValuePairByAdvancedQuery" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="">
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasGetCollectionMethod="true" />
   </QueryResult>
@@ -38,13 +38,13 @@
     <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
     <BLLMethodSetting HasExistsMethod="true" HasGetCollectionMethod="true" />
   </QueryResult>
-  <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="Index" UIViewType="SearchResult" CriteriaKey="Common" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahHost" Group="Aside" Key="V_ElmahHost_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
       <PropertyList>Host</PropertyList>
     </PartialView>
   </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="CommonSearchView" UIViewType="Search" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="CommonResultView" UIViewType="Results" CriteriaKey="Common" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="AdvancedQuerySearchView" UIViewType="Search" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahHost" Key="AdvancedQueryResultView" UIViewType="Results" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <ForeignKeyPersistList />
 </Entity>
