@@ -6,8 +6,6 @@
   <PivotTableRowLableSettingCollection />
   <PivotTableColumnLableSettingCollection />
   <PivotTableValueColumnSettingCollection />
-  <UIDataSourceMethodSettingGroupCollection />
-  <UIDataSourceMethodSettingCollection />
   <DataQueryPerQuerySettingCollection />
   <ChainedDataQuerySettingCollection />
   <DataViewContextCollection />
@@ -86,7 +84,7 @@
           <DotNetValueType>Geography</DotNetValueType>
           <KnownType>Unknown</KnownType>
           <Type>Microsoft.Spatial.Geography</Type>
-          <FriendlyType />
+          <FriendlyType>Microsoft.Spatial.Geography</FriendlyType>
           <IsArray>false</IsArray>
           <IsDynamic>false</IsDynamic>
         </PropertyType>

@@ -26,18 +26,9 @@
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahType" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">Type=:Type.Equals</QueryUnits>
   </Query>
-  <QueryResult Key="EntityByAdvancedQuery" CriteriaKey="AdvancedQuery" OrderBys="">
-    <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
-    <BLLMethodSetting HasGetCollectionMethod="true" />
-  </QueryResult>
-  <QueryResult Key="NameValuePairByAdvancedQuery" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="">
-    <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
-    <BLLMethodSetting HasGetCollectionMethod="true" />
-  </QueryResult>
-  <QueryResult Key="EntityByIdentifier" CriteriaKey="Identifier" OrderBys="">
-    <DALMethodSetting HasCountMethod="true" HasExistsMethod="true" HasGetCollectionMethod="true" />
-    <BLLMethodSetting HasExistsMethod="true" HasGetCollectionMethod="true" />
-  </QueryResult>
+  <QueryResult Key="EntityByAdvancedQuery" CriteriaKey="AdvancedQuery" OrderBys="" />
+  <QueryResult Key="NameValuePairByAdvancedQuery" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="" />
+  <QueryResult Key="EntityByIdentifier" CriteriaKey="Identifier" OrderBys="" />
   <UIView MasterTypeFullName="ElmahModel.ElmahType" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahType" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahType" Group="Aside" Key="V_ElmahType_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">

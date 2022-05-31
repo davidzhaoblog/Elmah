@@ -139,8 +139,6 @@
   <PivotTableRowLableSettingCollection />
   <PivotTableColumnLableSettingCollection />
   <PivotTableValueColumnSettingCollection />
-  <UIDataSourceMethodSettingGroupCollection />
-  <UIDataSourceMethodSettingCollection />
   <DataQueryPerQuerySettingCollection />
   <ChainedDataQuerySettingCollection />
   <DataViewContextCollection />
@@ -163,7 +161,7 @@
           <DotNetValueType>SystemGuid</DotNetValueType>
           <KnownType>Unknown</KnownType>
           <Type>System.Guid</Type>
-          <FriendlyType />
+          <FriendlyType>System.Guid</FriendlyType>
           <IsArray>false</IsArray>
           <IsDynamic>false</IsDynamic>
         </PropertyType>
@@ -611,7 +609,7 @@
           <DotNetValueType>SystemDateTime</DotNetValueType>
           <KnownType>Unknown</KnownType>
           <Type>System.DateTime</Type>
-          <FriendlyType />
+          <FriendlyType>System.DateTime</FriendlyType>
           <IsArray>false</IsArray>
           <IsDynamic>false</IsDynamic>
         </PropertyType>

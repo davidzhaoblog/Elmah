@@ -41,11 +41,5 @@
   "archiveTables": null,
   "otherTables": null,
   "abstractTables": null,
-  "globalMapConfig": null,
-  "globalQueryResultMethodSetting": {
-    "hasCountMethod": false,
-    "hasExistsMethod": false,
-    "hasGetSingleItemMethod": false,
-    "hasGetCollectionMethod": false
-  }
+  "globalMapConfig": null
 }

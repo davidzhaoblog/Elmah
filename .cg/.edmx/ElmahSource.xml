@@ -6,8 +6,6 @@
   <PivotTableRowLableSettingCollection />
   <PivotTableColumnLableSettingCollection />
   <PivotTableValueColumnSettingCollection />
-  <UIDataSourceMethodSettingGroupCollection />
-  <UIDataSourceMethodSettingCollection />
   <DataQueryPerQuerySettingCollection />
   <ChainedDataQuerySettingCollection />
   <DataViewContextCollection />

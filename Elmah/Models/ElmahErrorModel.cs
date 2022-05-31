@@ -26,7 +26,7 @@ namespace Elmah.Models
 
         public string AllXml { get; set; } = null!;
 
-        public partial class Default
+        public partial class DefaultView
         {
               public string Application_Name { get; set; } = null!;
 
