@@ -26,9 +26,24 @@
   <Query Key="Identifier" DataQueryPerQueryKnownKey="Identifier" SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" ConditionOperator="OR" HasStringContainsDataQueryPerQueryUnitSettingForAll="false">
     <QueryUnits Key="Identifier" DataQueryPerQueryUnitSettingType="Identifier" OutterConditionOperator="AND" ConditionOperator="AND">StatusCode=:StatusCode.Equals</QueryUnits>
   </Query>
-  <QueryResult Key="EntityByAdvancedQuery" CriteriaKey="AdvancedQuery" OrderBys="" />
-  <QueryResult Key="NameValuePairByAdvancedQuery" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="" />
-  <QueryResult Key="EntityByIdentifier" CriteriaKey="Identifier" OrderBys="" />
+  <QueryResult Key="Search" CriteriaKey="AdvancedQuery" DataViewKey="" OrderBys="" />
+  <QueryResult Key="GetCodeList" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" Group="Aside" Key="V_ElmahStatusCode_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
+      <PropertyList>StatusCode;Name</PropertyList>
+    </PartialView>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="AdvancedQuerySearchView" UIViewType="Search" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="AdvancedQueryResultView" UIViewType="Results" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" Group="Aside" Key="V_ElmahStatusCode_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
+      <PropertyList>StatusCode;Name</PropertyList>
+    </PartialView>
+  </UIView>
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="AdvancedQuerySearchView" UIViewType="Search" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
+  <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="AdvancedQueryResultView" UIViewType="Results" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahStatusCode" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahStatusCode" Group="Aside" Key="V_ElmahStatusCode_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">

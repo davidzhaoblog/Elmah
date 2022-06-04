@@ -12,5 +12,8 @@ namespace Framework.Models
         public TResponseBody? ResponseBody { get; set; }
         public string? StatusMessage { get; set; }
     }
+    public class Response<TResponseBody> : Response<System.Net.HttpStatusCode, TResponseBody>
+    {
+    }
 }
 

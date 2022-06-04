@@ -5,5 +5,8 @@ namespace Framework.Models
     {
         public PaginationResponse? Pagination { get; set; }
     }
+    public class PagedResponse<TResponseBody> : PagedResponse<System.Net.HttpStatusCode, TResponseBody>
+    {
+    }
 }
 

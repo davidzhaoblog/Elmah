@@ -1,7 +1,9 @@
+using Framework.Models;
+
 namespace Elmah.Models
 {
 
-    public class ElmahHostAdvancedQuery
+    public class ElmahHostAdvancedQuery: BaseQuery
     {
         // will query all text columns in database
         public string? TextSearch { get; set; }
@@ -11,8 +13,8 @@ namespace Elmah.Models
 
         // PredicateType:GeographyRange - ReferencePoint
         public Microsoft.Spatial.Geography? SpatialLocation { get; set; }
-        // PredicateType:GeographyRange - Distance
-        public long SpatialLocationDistance { get; set; }
+        // PredicateType:GeographyRange - Radius
+        public long? SpatialLocationRadius { get; set; }
 
         // PredicateType:GeographyIntersects
         public Microsoft.Spatial.GeographyPolygon? SpatialLocationGeographyIntersects { get; set; }

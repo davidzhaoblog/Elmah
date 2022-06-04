@@ -25,36 +25,47 @@ namespace ElmahStatusCodeController
             this._logger = logger;
         }
 
+        // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahStatusCodeModel>>> Delete(ElmahStatusCodeIdModel id)
+        public async Task<ActionResult<Response<ElmahStatusCodeModel>>> Delete(ElmahStatusCodeIdModel id)
         {
             return await _thisService.Delete(id);
         }
 
+        // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahStatusCodeModel>>> Get(ElmahStatusCodeIdModel id)
+        public async Task<ActionResult<Response<ElmahStatusCodeModel>>> Get(ElmahStatusCodeIdModel id)
         {
             return await _thisService.Get(id);
         }
 
+        // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahStatusCodeModel>>> Put(ElmahStatusCodeModel input)
+        public async Task<ActionResult<Response<ElmahStatusCodeModel>>> Put(ElmahStatusCodeModel input)
         {
             return await _thisService.Create(input);
         }
 
+        // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahStatusCodeModel>>> Post(ElmahStatusCodeModel input)
+        public async Task<ActionResult<Response<ElmahStatusCodeModel>>> Post(ElmahStatusCodeModel input)
         {
             return await _thisService.Update(input);
         }
 
+        public async Task<PagedResponse<ElmahStatusCodeModel[]>> Search(
+            ElmahStatusCodeAdvancedQuery query)
+        {
+            return await _thisService.Search(query);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahStatusCodeAdvancedQuery query)
+        {
+            return await _thisService.GetCodeList(query);
+        }
+
         /*
-        /// <summary>
-        /// HearBeat.
-        /// http://[host]/api/ElmahUserApi/HearBeat
-        /// </summary>
-        /// <returns></returns>
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]
         public bool HeartBeat()

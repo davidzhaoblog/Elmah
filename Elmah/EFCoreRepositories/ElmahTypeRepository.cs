@@ -1,9 +1,11 @@
 using Elmah.Models;
 using Elmah.RepositoryContracts;
 using Elmah.EFCoreContext;
+using Framework.Helpers;
 using Framework.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using System.Linq.Dynamic.Core;
 
 namespace Elmah.EFCoreRepositories
 {
@@ -19,23 +21,23 @@ namespace Elmah.EFCoreRepositories
             _logger = logger;
         }
 
-        public async Task<Response<HttpStatusCode, ElmahTypeModel>> Delete(ElmahTypeIdModel id)
+        public async Task<Response<ElmahTypeModel>> Delete(ElmahTypeIdModel id)
         {
             if (id == null)
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
 
             try
             {
-                var existing = _dbcontext.ElmahTypes.SingleOrDefault(t => t.Type == id.Type);
+                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
 
                 if (existing == null)
-                    return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
 
-                _dbcontext.ElmahTypes.Remove(existing);
+                _dbcontext.ElmahType.Remove(existing);
                 await _dbcontext.SaveChangesAsync();
 
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(
-                    new Response<HttpStatusCode, ElmahTypeModel>
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = new ElmahTypeModel
@@ -46,25 +48,25 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<HttpStatusCode, ElmahTypeModel>> Get(ElmahTypeIdModel id)
+        public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdModel id)
         {
             if (id == null)
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
 
             try
             {
-                var existing = _dbcontext.ElmahTypes.SingleOrDefault(t => t.Type == id.Type);
+                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
 
                 // TODO: can create a new record here.
                 if (existing == null)
-                    return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
 
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(
-                    new Response<HttpStatusCode, ElmahTypeModel>
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = new ElmahTypeModel
@@ -75,24 +77,24 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<HttpStatusCode, ElmahTypeModel>> Create(ElmahTypeModel input)
+        public async Task<Response<ElmahTypeModel>> Create(ElmahTypeModel input)
         {
             if (input == null)
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
             try
             {
                 var toInsert = new ElmahType
                 {
                             Type = input.Type,
                 };
-                await _dbcontext.ElmahTypes.AddAsync(toInsert);
+                await _dbcontext.ElmahType.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(
-                    new Response<HttpStatusCode, ElmahTypeModel>
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = new ElmahTypeModel
@@ -103,28 +105,28 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<HttpStatusCode, ElmahTypeModel>> Update(ElmahTypeModel input)
+        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeModel input)
         {
             if (input == null)
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
 
             try
             {
-                var existing = _dbcontext.ElmahTypes.SingleOrDefault(t => t.Type == input.Type);
+                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == input.Type);
 
                 // TODO: can create a new record here.
                 if (existing == null)
-                    return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
 
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.Type = input.Type;
                 await _dbcontext.SaveChangesAsync();
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(
-                    new Response<HttpStatusCode, ElmahTypeModel>
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = new ElmahTypeModel
@@ -135,9 +137,139 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<HttpStatusCode, ElmahTypeModel>>.FromResult(new Response<HttpStatusCode, ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
+
+        private IQueryable<ElmahTypeModel> GetSearchQuery(
+            ElmahTypeAdvancedQuery query, bool withPagingAndOrderBy)
+        {
+            var toCompare = new
+            {
+                Type = !string.IsNullOrEmpty(query.Type),
+
+            };
+
+            var queryable =
+                from t in _dbcontext.ElmahType
+
+                where
+
+                    (!toCompare.Type || t.Type.Contains(query.Type))
+                select new ElmahTypeModel
+                {
+
+                        Type = t.Type,
+                };
+
+            // 1. Without Paging And OrderBy
+            if (!withPagingAndOrderBy)
+                return queryable;
+
+            // 2. With Paging And OrderBy
+            var orderBys = QueryOrderBySetting.Parse(query.OrderBys);
+            if (orderBys.Count() > 0)
+            {
+                queryable = queryable.OrderBy(QueryOrderBySetting.GetOrderByExpression(orderBys));
+            }
+
+            queryable = queryable.Skip((query.PageIndex - 1) * query.PageSize).Take(query.PageSize);
+
+            return queryable;
+        }
+
+        public async Task<PagedResponse<ElmahTypeModel[]>> Search(
+            ElmahTypeAdvancedQuery query)
+        {
+            try
+            {
+                var queryableOfTotalCount = GetSearchQuery(query, false);
+                var totalCount = queryableOfTotalCount.Count();
+
+                var queryable = GetSearchQuery(query, true);
+                var result = await queryable.ToDynamicArrayAsync<ElmahTypeModel>();
+                return new PagedResponse<ElmahTypeModel[]>
+                {
+                    Status = HttpStatusCode.OK,
+                    Pagination = new PaginationResponse { TotalCount = totalCount, Count = result.Count(), PageIndex = query.PageIndex, PageSize = query.PageSize },
+                    ResponseBody = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return await Task<PagedResponse<ElmahTypeModel[]>>.FromResult(new PagedResponse<ElmahTypeModel[]>
+                {
+                    Status = HttpStatusCode.InternalServerError,
+                    StatusMessage = ex.Message
+                });
+            }
+        }
+
+        private IQueryable<NameValuePair> GetGetCodeListQuery(
+            ElmahTypeAdvancedQuery query, bool withPagingAndOrderBy)
+        {
+            var toCompare = new
+            {
+                Type = !string.IsNullOrEmpty(query.Type),
+
+            };
+
+            var queryable =
+                from t in _dbcontext.ElmahType
+
+                where
+
+                    (!toCompare.Type || t.Type.Contains(query.Type))
+                select new NameValuePair
+                {
+
+                        Value = t.Type,
+                        Name = t.Type,
+                };
+
+            // 1. Without Paging And OrderBy
+            if (!withPagingAndOrderBy)
+                return queryable;
+
+            // 2. With Paging And OrderBy
+            var orderBys = QueryOrderBySetting.Parse(query.OrderBys);
+            if (orderBys.Count() > 0)
+            {
+                queryable = queryable.OrderBy(QueryOrderBySetting.GetOrderByExpression(orderBys));
+            }
+
+            queryable = queryable.Skip((query.PageIndex - 1) * query.PageSize).Take(query.PageSize);
+
+            return queryable;
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahTypeAdvancedQuery query)
+        {
+            try
+            {
+                var queryableOfTotalCount = GetGetCodeListQuery(query, false);
+                var totalCount = queryableOfTotalCount.Count();
+
+                var queryable = GetGetCodeListQuery(query, true);
+                var result = await queryable.ToDynamicArrayAsync<NameValuePair>();
+                return new PagedResponse<NameValuePair[]>
+                {
+                    Status = HttpStatusCode.OK,
+                    Pagination = new PaginationResponse { TotalCount = totalCount, Count = result.Count(), PageIndex = query.PageIndex, PageSize = query.PageSize },
+                    ResponseBody = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return await Task<PagedResponse<NameValuePair[]>>.FromResult(new PagedResponse<NameValuePair[]>
+                {
+                    Status = HttpStatusCode.InternalServerError,
+                    StatusMessage = ex.Message
+                });
+            }
+        }
+
     }
 }
 

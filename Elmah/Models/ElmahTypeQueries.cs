@@ -1,7 +1,9 @@
+using Framework.Models;
+
 namespace Elmah.Models
 {
 
-    public class ElmahTypeAdvancedQuery
+    public class ElmahTypeAdvancedQuery: BaseQuery
     {
         // will query all text columns in database
         public string? TextSearch { get; set; }

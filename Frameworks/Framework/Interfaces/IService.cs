@@ -9,10 +9,10 @@ namespace Framework.Interfaces
 
     public interface IService<TRequest, TResponse, TIdentifier>
     {
-        Task<Response<HttpStatusCode, TResponse>> Create(TRequest input);
-        Task<Response<HttpStatusCode, TResponse>> Delete(TIdentifier id);
-        Task<Response<HttpStatusCode, TResponse>> Get(TIdentifier id);
-        Task<Response<HttpStatusCode, TResponse>> Update(TRequest input);
+        Task<Response<TResponse>> Create(TRequest input);
+        Task<Response<TResponse>> Delete(TIdentifier id);
+        Task<Response<TResponse>> Get(TIdentifier id);
+        Task<Response<TResponse>> Update(TRequest input);
     }
 }
 

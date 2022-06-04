@@ -25,36 +25,47 @@ namespace ElmahTypeController
             this._logger = logger;
         }
 
+        // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahTypeModel>>> Delete(ElmahTypeIdModel id)
+        public async Task<ActionResult<Response<ElmahTypeModel>>> Delete(ElmahTypeIdModel id)
         {
             return await _thisService.Delete(id);
         }
 
+        // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahTypeModel>>> Get(ElmahTypeIdModel id)
+        public async Task<ActionResult<Response<ElmahTypeModel>>> Get(ElmahTypeIdModel id)
         {
             return await _thisService.Get(id);
         }
 
+        // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahTypeModel>>> Put(ElmahTypeModel input)
+        public async Task<ActionResult<Response<ElmahTypeModel>>> Put(ElmahTypeModel input)
         {
             return await _thisService.Create(input);
         }
 
+        // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahTypeModel>>> Post(ElmahTypeModel input)
+        public async Task<ActionResult<Response<ElmahTypeModel>>> Post(ElmahTypeModel input)
         {
             return await _thisService.Update(input);
         }
 
+        public async Task<PagedResponse<ElmahTypeModel[]>> Search(
+            ElmahTypeAdvancedQuery query)
+        {
+            return await _thisService.Search(query);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahTypeAdvancedQuery query)
+        {
+            return await _thisService.GetCodeList(query);
+        }
+
         /*
-        /// <summary>
-        /// HearBeat.
-        /// http://[host]/api/ElmahUserApi/HearBeat
-        /// </summary>
-        /// <returns></returns>
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]
         public bool HeartBeat()

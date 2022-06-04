@@ -19,24 +19,36 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<Response<HttpStatusCode, ElmahErrorModel>> Delete(ElmahErrorIdModel id)
+        public async Task<Response<ElmahErrorModel>> Delete(ElmahErrorIdModel id)
         {
             return await _thisRepository.Delete(id);
         }
 
-        public async Task<Response<HttpStatusCode, ElmahErrorModel>> Get(ElmahErrorIdModel id)
+        public async Task<Response<ElmahErrorModel>> Get(ElmahErrorIdModel id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<HttpStatusCode, ElmahErrorModel>> Create(ElmahErrorModel input)
+        public async Task<Response<ElmahErrorModel>> Create(ElmahErrorModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public async Task<Response<HttpStatusCode, ElmahErrorModel>> Update(ElmahErrorModel input)
+        public async Task<Response<ElmahErrorModel>> Update(ElmahErrorModel input)
         {
             return await _thisRepository.Update(input);
+        }
+
+        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
+            ElmahErrorAdvancedQuery query)
+        {
+            return await _thisRepository.Search(query);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahErrorAdvancedQuery query)
+        {
+            return await _thisRepository.GetCodeList(query);
         }
     }
 }

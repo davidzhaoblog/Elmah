@@ -25,36 +25,47 @@ namespace ElmahSourceController
             this._logger = logger;
         }
 
+        // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahSourceModel>>> Delete(ElmahSourceIdModel id)
+        public async Task<ActionResult<Response<ElmahSourceModel>>> Delete(ElmahSourceIdModel id)
         {
             return await _thisService.Delete(id);
         }
 
+        // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahSourceModel>>> Get(ElmahSourceIdModel id)
+        public async Task<ActionResult<Response<ElmahSourceModel>>> Get(ElmahSourceIdModel id)
         {
             return await _thisService.Get(id);
         }
 
+        // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahSourceModel>>> Put(ElmahSourceModel input)
+        public async Task<ActionResult<Response<ElmahSourceModel>>> Put(ElmahSourceModel input)
         {
             return await _thisService.Create(input);
         }
 
+        // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Response<HttpStatusCode, ElmahSourceModel>>> Post(ElmahSourceModel input)
+        public async Task<ActionResult<Response<ElmahSourceModel>>> Post(ElmahSourceModel input)
         {
             return await _thisService.Update(input);
         }
 
+        public async Task<PagedResponse<ElmahSourceModel[]>> Search(
+            ElmahSourceAdvancedQuery query)
+        {
+            return await _thisService.Search(query);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahSourceAdvancedQuery query)
+        {
+            return await _thisService.GetCodeList(query);
+        }
+
         /*
-        /// <summary>
-        /// HearBeat.
-        /// http://[host]/api/ElmahUserApi/HearBeat
-        /// </summary>
-        /// <returns></returns>
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]
         public bool HeartBeat()
