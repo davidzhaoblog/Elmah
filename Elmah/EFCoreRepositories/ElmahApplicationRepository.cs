@@ -40,10 +40,6 @@ namespace Elmah.EFCoreRepositories
                     new Response<ElmahApplicationModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahApplicationModel
-                        {
-                            Application = existing.Application,
-                        }
                     });
             }
             catch (Exception ex)
@@ -60,8 +56,6 @@ namespace Elmah.EFCoreRepositories
             try
             {
                 var existing = _dbcontext.ElmahApplication.SingleOrDefault(t => t.Application == id.Application);
-
-                // TODO: can create a new record here.
                 if (existing == null)
                     return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.BadRequest });
 
@@ -74,6 +68,7 @@ namespace Elmah.EFCoreRepositories
                             Application = existing.Application,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -93,6 +88,7 @@ namespace Elmah.EFCoreRepositories
                 };
                 await _dbcontext.ElmahApplication.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahApplicationModel>>.FromResult(
                     new Response<ElmahApplicationModel>
                     {
@@ -102,6 +98,7 @@ namespace Elmah.EFCoreRepositories
                             Application = toInsert.Application,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -125,6 +122,7 @@ namespace Elmah.EFCoreRepositories
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.Application = input.Application;
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahApplicationModel>>.FromResult(
                     new Response<ElmahApplicationModel>
                     {
@@ -134,6 +132,7 @@ namespace Elmah.EFCoreRepositories
                             Application = existing.Application,
                         }
                     });
+
             }
             catch (Exception ex)
             {

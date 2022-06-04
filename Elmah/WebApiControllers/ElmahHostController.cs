@@ -53,12 +53,18 @@ namespace ElmahHostController
             return await _thisService.Update(input);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<ElmahHostModel[]>> Search(
             ElmahHostAdvancedQuery query)
         {
             return await _thisService.Search(query);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahHostAdvancedQuery query)
         {

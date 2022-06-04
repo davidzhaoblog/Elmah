@@ -3,7 +3,7 @@ using Elmah.Models;
 using Framework.Models;
 namespace Elmah.ServiceContracts
 {
-    public interface IElmahErrorService: IService<ElmahErrorModel, ElmahErrorIdModel>
+    public interface IElmahErrorService: IService<ElmahErrorModel, ElmahErrorModel.DefaultView, ElmahErrorIdModel>
     {
 
         Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(

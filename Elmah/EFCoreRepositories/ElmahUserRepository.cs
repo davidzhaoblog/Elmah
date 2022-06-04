@@ -40,10 +40,6 @@ namespace Elmah.EFCoreRepositories
                     new Response<ElmahUserModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahUserModel
-                        {
-                            User = existing.User,
-                        }
                     });
             }
             catch (Exception ex)
@@ -60,8 +56,6 @@ namespace Elmah.EFCoreRepositories
             try
             {
                 var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == id.User);
-
-                // TODO: can create a new record here.
                 if (existing == null)
                     return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
 
@@ -74,6 +68,7 @@ namespace Elmah.EFCoreRepositories
                             User = existing.User,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -93,6 +88,7 @@ namespace Elmah.EFCoreRepositories
                 };
                 await _dbcontext.ElmahUser.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahUserModel>>.FromResult(
                     new Response<ElmahUserModel>
                     {
@@ -102,6 +98,7 @@ namespace Elmah.EFCoreRepositories
                             User = toInsert.User,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -125,6 +122,7 @@ namespace Elmah.EFCoreRepositories
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.User = input.User;
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahUserModel>>.FromResult(
                     new Response<ElmahUserModel>
                     {
@@ -134,6 +132,7 @@ namespace Elmah.EFCoreRepositories
                             User = existing.User,
                         }
                     });
+
             }
             catch (Exception ex)
             {

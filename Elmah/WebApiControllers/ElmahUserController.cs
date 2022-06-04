@@ -53,12 +53,18 @@ namespace ElmahUserController
             return await _thisService.Update(input);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<ElmahUserModel[]>> Search(
             ElmahUserAdvancedQuery query)
         {
             return await _thisService.Search(query);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahUserAdvancedQuery query)
         {

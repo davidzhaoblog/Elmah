@@ -53,12 +53,18 @@ namespace ElmahTypeController
             return await _thisService.Update(input);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<ElmahTypeModel[]>> Search(
             ElmahTypeAdvancedQuery query)
         {
             return await _thisService.Search(query);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahTypeAdvancedQuery query)
         {

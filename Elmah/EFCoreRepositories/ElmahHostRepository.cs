@@ -40,11 +40,6 @@ namespace Elmah.EFCoreRepositories
                     new Response<ElmahHostModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahHostModel
-                        {
-                            Host = existing.Host,
-                            SpatialLocation = existing.SpatialLocation,
-                        }
                     });
             }
             catch (Exception ex)
@@ -61,8 +56,6 @@ namespace Elmah.EFCoreRepositories
             try
             {
                 var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
-
-                // TODO: can create a new record here.
                 if (existing == null)
                     return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
 
@@ -76,6 +69,7 @@ namespace Elmah.EFCoreRepositories
                             SpatialLocation = existing.SpatialLocation,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -96,6 +90,7 @@ namespace Elmah.EFCoreRepositories
                 };
                 await _dbcontext.ElmahHost.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahHostModel>>.FromResult(
                     new Response<ElmahHostModel>
                     {
@@ -106,6 +101,7 @@ namespace Elmah.EFCoreRepositories
                             SpatialLocation = toInsert.SpatialLocation,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -130,6 +126,7 @@ namespace Elmah.EFCoreRepositories
                 existing.Host = input.Host;
                 existing.SpatialLocation = input.SpatialLocation;
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahHostModel>>.FromResult(
                     new Response<ElmahHostModel>
                     {
@@ -140,6 +137,7 @@ namespace Elmah.EFCoreRepositories
                             SpatialLocation = existing.SpatialLocation,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -168,9 +166,9 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (!toCompare.Host || t.Host.Contains(query.Host))
-&&
+                    &&
                     (!toCompare.SpatialLocation || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
-&&
+                    &&
                     (!toCompare.SpatialLocationGeographyIntersects || t.SpatialLocation____ != null && geoQueryValue.SpatialLocation != null && geoQueryValue.SpatialLocation.Contains(t.SpatialLocation____))
                 select new ElmahHostModel
                 {
@@ -243,9 +241,9 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (!toCompare.Host || t.Host.Contains(query.Host))
-&&
+                    &&
                     (!toCompare.SpatialLocation || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
-&&
+                    &&
                     (!toCompare.SpatialLocationGeographyIntersects || t.SpatialLocation____ != null && geoQueryValue.SpatialLocation != null && geoQueryValue.SpatialLocation.Contains(t.SpatialLocation____))
                 select new NameValuePair
                 {

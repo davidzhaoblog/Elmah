@@ -40,11 +40,6 @@ namespace Elmah.EFCoreRepositories
                     new Response<ElmahStatusCodeModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahStatusCodeModel
-                        {
-                            StatusCode = existing.StatusCode,
-                            Name = existing.Name,
-                        }
                     });
             }
             catch (Exception ex)
@@ -61,8 +56,6 @@ namespace Elmah.EFCoreRepositories
             try
             {
                 var existing = _dbcontext.ElmahStatusCode.SingleOrDefault(t => t.StatusCode == id.StatusCode);
-
-                // TODO: can create a new record here.
                 if (existing == null)
                     return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.BadRequest });
 
@@ -76,6 +69,7 @@ namespace Elmah.EFCoreRepositories
                             Name = existing.Name,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -96,6 +90,7 @@ namespace Elmah.EFCoreRepositories
                 };
                 await _dbcontext.ElmahStatusCode.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahStatusCodeModel>>.FromResult(
                     new Response<ElmahStatusCodeModel>
                     {
@@ -106,6 +101,7 @@ namespace Elmah.EFCoreRepositories
                             Name = toInsert.Name,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -130,6 +126,7 @@ namespace Elmah.EFCoreRepositories
                 existing.StatusCode = input.StatusCode;
                 existing.Name = input.Name;
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahStatusCodeModel>>.FromResult(
                     new Response<ElmahStatusCodeModel>
                     {
@@ -140,6 +137,7 @@ namespace Elmah.EFCoreRepositories
                             Name = existing.Name,
                         }
                     });
+
             }
             catch (Exception ex)
             {

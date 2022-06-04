@@ -40,10 +40,6 @@ namespace Elmah.EFCoreRepositories
                     new Response<ElmahSourceModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahSourceModel
-                        {
-                            Source = existing.Source,
-                        }
                     });
             }
             catch (Exception ex)
@@ -60,8 +56,6 @@ namespace Elmah.EFCoreRepositories
             try
             {
                 var existing = _dbcontext.ElmahSource.SingleOrDefault(t => t.Source == id.Source);
-
-                // TODO: can create a new record here.
                 if (existing == null)
                     return await Task<Response<ElmahSourceModel>>.FromResult(new Response<ElmahSourceModel> { Status = HttpStatusCode.BadRequest });
 
@@ -74,6 +68,7 @@ namespace Elmah.EFCoreRepositories
                             Source = existing.Source,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -93,6 +88,7 @@ namespace Elmah.EFCoreRepositories
                 };
                 await _dbcontext.ElmahSource.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahSourceModel>>.FromResult(
                     new Response<ElmahSourceModel>
                     {
@@ -102,6 +98,7 @@ namespace Elmah.EFCoreRepositories
                             Source = toInsert.Source,
                         }
                     });
+
             }
             catch (Exception ex)
             {
@@ -125,6 +122,7 @@ namespace Elmah.EFCoreRepositories
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.Source = input.Source;
                 await _dbcontext.SaveChangesAsync();
+
                 return await Task<Response<ElmahSourceModel>>.FromResult(
                     new Response<ElmahSourceModel>
                     {
@@ -134,6 +132,7 @@ namespace Elmah.EFCoreRepositories
                             Source = existing.Source,
                         }
                     });
+
             }
             catch (Exception ex)
             {

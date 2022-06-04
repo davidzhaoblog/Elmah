@@ -27,38 +27,44 @@ namespace ElmahErrorController
 
         // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Response<ElmahErrorModel>>> Delete(ElmahErrorIdModel id)
+        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Delete(ElmahErrorIdModel id)
         {
             return await _thisService.Delete(id);
         }
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<Response<ElmahErrorModel>>> Get(ElmahErrorIdModel id)
+        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Get(ElmahErrorIdModel id)
         {
             return await _thisService.Get(id);
         }
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<ElmahErrorModel>>> Put(ElmahErrorModel input)
+        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Put(ElmahErrorModel input)
         {
             return await _thisService.Create(input);
         }
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Response<ElmahErrorModel>>> Post(ElmahErrorModel input)
+        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Post(ElmahErrorModel input)
         {
             return await _thisService.Update(input);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query)
         {
             return await _thisService.Search(query);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahErrorAdvancedQuery query)
         {

@@ -53,12 +53,18 @@ namespace ElmahStatusCodeController
             return await _thisService.Update(input);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<ElmahStatusCodeModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             return await _thisService.Search(query);
         }
 
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
         public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahStatusCodeAdvancedQuery query)
         {
