@@ -21,30 +21,30 @@ namespace Elmah.EFCoreRepositories
             _logger = logger;
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Delete(ElmahErrorIdModel id)
+        public async Task<Response> Delete(ElmahErrorIdModel id)
         {
             if (id == null)
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
 
             try
             {
                 var existing = _dbcontext.ELMAH_Error.SingleOrDefault(t => t.ErrorId == id.ErrorId);
 
                 if (existing == null)
-                    return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
 
                 _dbcontext.ELMAH_Error.Remove(existing);
                 await _dbcontext.SaveChangesAsync();
 
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
-                    new Response<ElmahErrorModel.DefaultView>
+                return await Task<Response>.FromResult(
+                    new Response
                     {
                         Status = HttpStatusCode.OK,
                     });
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
@@ -89,6 +89,8 @@ namespace Elmah.EFCoreRepositories
                         AllXml = t.AllXml,
 
                     }).First();
+                if (responseBody == null)
+                    return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.NotFound });
                 return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
                     new Response<ElmahErrorModel.DefaultView>
                     {
@@ -159,6 +161,7 @@ namespace Elmah.EFCoreRepositories
                         AllXml = t.AllXml,
 
                     }).First();
+
                 return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
                     new Response<ElmahErrorModel.DefaultView>
                     {
@@ -233,6 +236,7 @@ namespace Elmah.EFCoreRepositories
                         AllXml = t.AllXml,
 
                     }).First();
+
                 return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
                     new Response<ElmahErrorModel.DefaultView>
                     {
@@ -247,7 +251,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahErrorModel.DefaultView> GetSearchQuery(
+        private IQueryable<ElmahErrorModel.DefaultView> SearchQuery(
             ElmahErrorAdvancedQuery query, bool withPagingAndOrderBy)
         {
             var toCompare = new
@@ -336,10 +340,10 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryableOfTotalCount = GetSearchQuery(query, false);
+                var queryableOfTotalCount = SearchQuery(query, false);
                 var totalCount = queryableOfTotalCount.Count();
 
-                var queryable = GetSearchQuery(query, true);
+                var queryable = SearchQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<ElmahErrorModel.DefaultView>();
                 return new PagedResponse<ElmahErrorModel.DefaultView[]>
                 {
@@ -358,7 +362,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<NameValuePair> GetGetCodeListQuery(
+        private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahErrorAdvancedQuery query, bool withPagingAndOrderBy)
         {
             var toCompare = new
@@ -432,10 +436,10 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryableOfTotalCount = GetGetCodeListQuery(query, false);
+                var queryableOfTotalCount = GetCodeListQuery(query, false);
                 var totalCount = queryableOfTotalCount.Count();
 
-                var queryable = GetGetCodeListQuery(query, true);
+                var queryable = GetCodeListQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<NameValuePair>();
                 return new PagedResponse<NameValuePair[]>
                 {

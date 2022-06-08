@@ -11,6 +11,7 @@ namespace Elmah.ServiceContracts
 
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahHostAdvancedQuery query);
+
     }
 }
 

@@ -19,7 +19,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<Response<ElmahUserModel>> Delete(ElmahUserIdModel id)
+        public async Task<Response> Delete(ElmahUserIdModel id)
         {
             return await _thisRepository.Delete(id);
         }
@@ -50,6 +50,7 @@ namespace Elmah.Services
         {
             return await _thisRepository.GetCodeList(query);
         }
+
     }
 }
 

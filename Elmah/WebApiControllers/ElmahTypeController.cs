@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace ElmahTypeController
+namespace Elmah.WebApiControllers
 {
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ApiController]
     [Route("/api/[controller]/[action]")]
-    public partial class ElmahTypeController : Controller
+    public partial class ElmahTypeController : BaseApiController
     {
         IElmahTypeService _thisService { get; set; }
         private readonly IServiceProvider _serviceProvider;
@@ -27,56 +28,62 @@ namespace ElmahTypeController
 
         // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Response<ElmahTypeModel>>> Delete(ElmahTypeIdModel id)
+        public async Task<ActionResult> Delete(ElmahTypeIdModel id)
         {
-            return await _thisService.Delete(id);
+            var serviceResponse = await _thisService.Delete(id);
+            return ReturnWithoutBodyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<Response<ElmahTypeModel>>> Get(ElmahTypeIdModel id)
+        public async Task<ActionResult<ElmahTypeModel>> Get(ElmahTypeIdModel id)
         {
-            return await _thisService.Get(id);
+            var serviceResponse = await _thisService.Get(id);
+            return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<ElmahTypeModel>>> Put(ElmahTypeModel input)
+        public async Task<ActionResult<ElmahTypeModel>> Put(ElmahTypeModel input)
         {
-            return await _thisService.Create(input);
+            var serviceResponse = await _thisService.Create(input);
+            return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Response<ElmahTypeModel>>> Post(ElmahTypeModel input)
+        public async Task<ActionResult<ElmahTypeModel>> Post(ElmahTypeModel input)
         {
-            return await _thisService.Update(input);
-        }
-
-        // [Authorize]
-        [HttpGet]
-        [HttpPost]
-        public async Task<PagedResponse<ElmahTypeModel[]>> Search(
-            ElmahTypeAdvancedQuery query)
-        {
-            return await _thisService.Search(query);
+            var serviceResponse = await _thisService.Update(input);
+            return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        public async Task<ActionResult<PagedResponse<ElmahTypeModel[]>>> Search(
             ElmahTypeAdvancedQuery query)
         {
-            return await _thisService.GetCodeList(query);
+            var serviceResponse = await _thisService.Search(query);
+            return ReturnActionResult(serviceResponse);
+        }
+
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
+        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetCodeList(
+            ElmahTypeAdvancedQuery query)
+        {
+            var serviceResponse = await _thisService.GetCodeList(query);
+            return ReturnActionResult(serviceResponse);
         }
 
         /*
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]
-        public bool HeartBeat()
+        public Task<ActionResult> HeartBeat()
         {
-            return true;
+            return Ok();
         }
         */
     }

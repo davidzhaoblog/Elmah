@@ -21,30 +21,30 @@ namespace Elmah.EFCoreRepositories
             _logger = logger;
         }
 
-        public async Task<Response<ElmahStatusCodeModel>> Delete(ElmahStatusCodeIdModel id)
+        public async Task<Response> Delete(ElmahStatusCodeIdModel id)
         {
             if (id == null)
-                return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
 
             try
             {
                 var existing = _dbcontext.ElmahStatusCode.SingleOrDefault(t => t.StatusCode == id.StatusCode);
 
                 if (existing == null)
-                    return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
 
                 _dbcontext.ElmahStatusCode.Remove(existing);
                 await _dbcontext.SaveChangesAsync();
 
-                return await Task<Response<ElmahStatusCodeModel>>.FromResult(
-                    new Response<ElmahStatusCodeModel>
+                return await Task<Response>.FromResult(
+                    new Response
                     {
                         Status = HttpStatusCode.OK,
                     });
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
@@ -57,7 +57,7 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing = _dbcontext.ElmahStatusCode.SingleOrDefault(t => t.StatusCode == id.StatusCode);
                 if (existing == null)
-                    return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.BadRequest });
+                    return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.NotFound });
 
                 return await Task<Response<ElmahStatusCodeModel>>.FromResult(
                     new Response<ElmahStatusCodeModel>
@@ -145,7 +145,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahStatusCodeModel> GetSearchQuery(
+        private IQueryable<ElmahStatusCodeModel> SearchQuery(
             ElmahStatusCodeAdvancedQuery query, bool withPagingAndOrderBy)
         {
             var toCompare = new
@@ -188,10 +188,10 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryableOfTotalCount = GetSearchQuery(query, false);
+                var queryableOfTotalCount = SearchQuery(query, false);
                 var totalCount = queryableOfTotalCount.Count();
 
-                var queryable = GetSearchQuery(query, true);
+                var queryable = SearchQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<ElmahStatusCodeModel>();
                 return new PagedResponse<ElmahStatusCodeModel[]>
                 {
@@ -210,7 +210,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<NameValuePair> GetGetCodeListQuery(
+        private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahStatusCodeAdvancedQuery query, bool withPagingAndOrderBy)
         {
             var toCompare = new
@@ -253,10 +253,10 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryableOfTotalCount = GetGetCodeListQuery(query, false);
+                var queryableOfTotalCount = GetCodeListQuery(query, false);
                 var totalCount = queryableOfTotalCount.Count();
 
-                var queryable = GetGetCodeListQuery(query, true);
+                var queryable = GetCodeListQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<NameValuePair>();
                 return new PagedResponse<NameValuePair[]>
                 {

@@ -30,22 +30,9 @@
   <QueryResult Key="GetCodeList" CriteriaKey="AdvancedQuery" DataViewKey="NameValuePair" OrderBys="" />
   <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
   <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahApplication" Group="Aside" Key="V_ElmahApplication_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
-      <PropertyList>Application</PropertyList>
+    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahError" Group="Article" Key="V_ElmahError_Via_Application_List" UIViewType="RelatedEntityWhenMasterViewIsPKEntity" CriteriaKey="AdvancedQuery" DataViewKey="DefaultView" EntityReferenceName="FK_ELMAH_Error_ElmahApplication" DataBindingRelativePath="ELMAH_Error">
+      <PropertyList>Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml</PropertyList>
     </PartialView>
-  </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="AdvancedQuerySearchView" UIViewType="Search" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="AdvancedQueryResultView" UIViewType="Results" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
-    <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahApplication" Group="Aside" Key="V_ElmahApplication_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
-      <PropertyList>Application</PropertyList>
-    </PartialView>
-  </UIView>
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="AdvancedQuerySearchView" UIViewType="Search" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="AdvancedQueryResultView" UIViewType="Results" CriteriaKey="AdvancedQuery" KeyOfReferencedViewModel="TabIndex" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="Index" UIViewType="SearchResult" CriteriaKey="AdvancedQuery" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false" />
-  <UIView MasterTypeFullName="ElmahModel.ElmahApplication" Key="Dashboard" UIViewType="FullDetails" HasCreateUI="false" HasEditUI="false" HasDeleteUI="false" HasDetailsUI="false">
     <PartialView SourceTypeDeclarationFullName="ElmahModel.ElmahApplication" Group="Aside" Key="V_ElmahApplication_Via_This" UIViewType="MasterViewAsideKeyInformation" CriteriaKey="Identifier" EntityReferenceSimpleFullPath="" EntityReferenceName="" DataBindingRelativePath="MasterEntity">
       <PropertyList>Application</PropertyList>
     </PartialView>

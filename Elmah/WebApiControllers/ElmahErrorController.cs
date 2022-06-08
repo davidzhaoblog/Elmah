@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace ElmahErrorController
+namespace Elmah.WebApiControllers
 {
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ApiController]
     [Route("/api/[controller]/[action]")]
-    public partial class ElmahErrorController : Controller
+    public partial class ElmahErrorController : BaseApiController
     {
         IElmahErrorService _thisService { get; set; }
         private readonly IServiceProvider _serviceProvider;
@@ -27,56 +28,62 @@ namespace ElmahErrorController
 
         // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Delete(ElmahErrorIdModel id)
+        public async Task<ActionResult> Delete(ElmahErrorIdModel id)
         {
-            return await _thisService.Delete(id);
+            var serviceResponse = await _thisService.Delete(id);
+            return ReturnWithoutBodyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Get(ElmahErrorIdModel id)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id)
         {
-            return await _thisService.Get(id);
+            var serviceResponse = await _thisService.Get(id);
+            return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Put(ElmahErrorModel input)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Put(ElmahErrorModel input)
         {
-            return await _thisService.Create(input);
+            var serviceResponse = await _thisService.Create(input);
+            return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Response<ElmahErrorModel.DefaultView>>> Post(ElmahErrorModel input)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorModel input)
         {
-            return await _thisService.Update(input);
-        }
-
-        // [Authorize]
-        [HttpGet]
-        [HttpPost]
-        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
-            ElmahErrorAdvancedQuery query)
-        {
-            return await _thisService.Search(query);
+            var serviceResponse = await _thisService.Update(input);
+            return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        public async Task<ActionResult<PagedResponse<ElmahErrorModel.DefaultView[]>>> Search(
             ElmahErrorAdvancedQuery query)
         {
-            return await _thisService.GetCodeList(query);
+            var serviceResponse = await _thisService.Search(query);
+            return ReturnActionResult(serviceResponse);
+        }
+
+        // [Authorize]
+        [HttpGet]
+        [HttpPost]
+        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetCodeList(
+            ElmahErrorAdvancedQuery query)
+        {
+            var serviceResponse = await _thisService.GetCodeList(query);
+            return ReturnActionResult(serviceResponse);
         }
 
         /*
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]
-        public bool HeartBeat()
+        public Task<ActionResult> HeartBeat()
         {
-            return true;
+            return Ok();
         }
         */
     }

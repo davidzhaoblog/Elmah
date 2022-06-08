@@ -21,30 +21,30 @@ namespace Elmah.EFCoreRepositories
             _logger = logger;
         }
 
-        public async Task<Response<ElmahHostModel>> Delete(ElmahHostIdModel id)
+        public async Task<Response> Delete(ElmahHostIdModel id)
         {
             if (id == null)
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
 
             try
             {
                 var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
 
                 if (existing == null)
-                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
 
                 _dbcontext.ElmahHost.Remove(existing);
                 await _dbcontext.SaveChangesAsync();
 
-                return await Task<Response<ElmahHostModel>>.FromResult(
-                    new Response<ElmahHostModel>
+                return await Task<Response>.FromResult(
+                    new Response
                     {
                         Status = HttpStatusCode.OK,
                     });
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
@@ -57,7 +57,7 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
                 if (existing == null)
-                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
+                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.NotFound });
 
                 return await Task<Response<ElmahHostModel>>.FromResult(
                     new Response<ElmahHostModel>
@@ -145,7 +145,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahHostModel> GetSearchQuery(
+        private IQueryable<ElmahHostModel> SearchQuery(
             ElmahHostAdvancedQuery query, bool withPagingAndOrderBy)
         {
             var toCompare = new
@@ -169,7 +169,7 @@ namespace Elmah.EFCoreRepositories
                     &&
                     (!toCompare.SpatialLocation || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
-                    (!toCompare.SpatialLocationGeographyIntersects || t.SpatialLocation____ != null && geoQueryValue.SpatialLocation != null && geoQueryValue.SpatialLocation.Contains(t.SpatialLocation____))
+                    (!toCompare.SpatialLocationGeographyIntersects || t.SpatialLocation____ != null && geoQueryValue.SpatialLocationGeographyIntersects != null && geoQueryValue.SpatialLocationGeographyIntersects.Contains(t.SpatialLocation____))
                 select new ElmahHostModel
                 {
 
@@ -198,10 +198,10 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryableOfTotalCount = GetSearchQuery(query, false);
+                var queryableOfTotalCount = SearchQuery(query, false);
                 var totalCount = queryableOfTotalCount.Count();
 
-                var queryable = GetSearchQuery(query, true);
+                var queryable = SearchQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<ElmahHostModel>();
                 return new PagedResponse<ElmahHostModel[]>
                 {
@@ -220,7 +220,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<NameValuePair> GetGetCodeListQuery(
+        private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahHostAdvancedQuery query, bool withPagingAndOrderBy)
         {
             var toCompare = new
@@ -244,7 +244,7 @@ namespace Elmah.EFCoreRepositories
                     &&
                     (!toCompare.SpatialLocation || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
-                    (!toCompare.SpatialLocationGeographyIntersects || t.SpatialLocation____ != null && geoQueryValue.SpatialLocation != null && geoQueryValue.SpatialLocation.Contains(t.SpatialLocation____))
+                    (!toCompare.SpatialLocationGeographyIntersects || t.SpatialLocation____ != null && geoQueryValue.SpatialLocationGeographyIntersects != null && geoQueryValue.SpatialLocationGeographyIntersects.Contains(t.SpatialLocation____))
                 select new NameValuePair
                 {
 
@@ -273,10 +273,10 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryableOfTotalCount = GetGetCodeListQuery(query, false);
+                var queryableOfTotalCount = GetCodeListQuery(query, false);
                 var totalCount = queryableOfTotalCount.Count();
 
-                var queryable = GetGetCodeListQuery(query, true);
+                var queryable = GetCodeListQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<NameValuePair>();
                 return new PagedResponse<NameValuePair[]>
                 {

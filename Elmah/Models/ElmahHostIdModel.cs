@@ -5,7 +5,6 @@ namespace Elmah.Models
     public partial class ElmahHostIdModel : IElmahHostIdentifier
     {
         public string Host { get; set; } = null!;
-
     }
 }
 
