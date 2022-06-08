@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<paths>
+		<left>C:\Github\Elmah\Elmah.AuthenticatonNone</left>
+		<right>C:\Github\Elmah\Elmah.AuthenticationMicrosoftIdentityPlatform</right>
+		<filter>*.*</filter>
+		<subfolders>1</subfolders>
+		<left-readonly>0</left-readonly>
+		<right-readonly>0</right-readonly>
+	</paths>
+</project>

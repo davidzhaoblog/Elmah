@@ -1,32 +1,39 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 17
+# Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{B627375D-D8C2-408C-BEDF-99060EC757BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.WebApiControllers", "Elmah\WebApiControllers\Elmah.WebApiControllers.csproj", "{560DC4CE-AC23-4FD4-9BDA-87E2E2D94947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.WebApiControllers", "Elmah\WebApiControllers\Elmah.WebApiControllers.csproj", "{560DC4CE-AC23-4FD4-9BDA-87E2E2D94947}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.WebApiApp", "Elmah\WebApiApp\Elmah.WebApiApp.csproj", "{098A0267-F070-40A4-B843-95A820EDB417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.WebApiApp", "Elmah\WebApiApp\Elmah.WebApiApp.csproj", "{098A0267-F070-40A4-B843-95A820EDB417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Services", "Elmah\Services\Elmah.Services.csproj", "{79F62AE8-A298-4909-ABB2-200B30B616FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.Services", "Elmah\Services\Elmah.Services.csproj", "{79F62AE8-A298-4909-ABB2-200B30B616FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.RepositoryContracts", "Elmah\RepositoryContracts\Elmah.RepositoryContracts.csproj", "{6747A1C3-DAFC-4AE5-A3F2-6FAA4B8B4B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.RepositoryContracts", "Elmah\RepositoryContracts\Elmah.RepositoryContracts.csproj", "{6747A1C3-DAFC-4AE5-A3F2-6FAA4B8B4B4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.ModelContracts", "Elmah\ModelContracts\Elmah.ModelContracts.csproj", "{C886EDC5-F751-4B3C-9274-414D63B8285C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.ModelContracts", "Elmah\ModelContracts\Elmah.ModelContracts.csproj", "{C886EDC5-F751-4B3C-9274-414D63B8285C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Models", "Elmah\Models\Elmah.Models.csproj", "{DA990057-EDC7-429E-A561-EC5E33CBED83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.Models", "Elmah\Models\Elmah.Models.csproj", "{DA990057-EDC7-429E-A561-EC5E33CBED83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.EFCoreContext", "Elmah\EFCoreContext\Elmah.EFCoreContext.csproj", "{6BBBF9E9-EAF1-461C-B209-0AB92E71756E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.EFCoreContext", "Elmah\EFCoreContext\Elmah.EFCoreContext.csproj", "{6BBBF9E9-EAF1-461C-B209-0AB92E71756E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.EFCoreRepositories", "Elmah\EFCoreRepositories\Elmah.EFCoreRepositories.csproj", "{BD738C1C-4176-4C93-B5B8-F554B885E51A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.EFCoreRepositories", "Elmah\EFCoreRepositories\Elmah.EFCoreRepositories.csproj", "{BD738C1C-4176-4C93-B5B8-F554B885E51A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Resx", "Elmah\Resx\Elmah.Resx.csproj", "{AEC2AB1C-F3F9-48B2-8F00-43392DBAC2CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.Resx", "Elmah\Resx\Elmah.Resx.csproj", "{AEC2AB1C-F3F9-48B2-8F00-43392DBAC2CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.ServiceContracts", "Elmah\ServiceContracts\Elmah.ServiceContracts.csproj", "{A49139CB-EC9F-45A0-9C7B-334281FB9560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.ServiceContracts", "Elmah\ServiceContracts\Elmah.ServiceContracts.csproj", "{A49139CB-EC9F-45A0-9C7B-334281FB9560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Frameworks\Framework\Framework.csproj", "{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Frameworks\Framework\Framework.csproj", "{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}"
 EndProject
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.AuthenticatonNone", "Elmah.AuthenticatonNone\Elmah.AuthenticatonNone.csproj", "{1A61FFB1-729B-48BC-901A-928F6ED3F05B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.AuthenticationIndividualAccount", "Elmah.AuthenticationIndividualAccount\Elmah.AuthenticationIndividualAccount.csproj", "{70D505AE-D211-4335-B549-16E98080E2CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.AuthenticationMicrosoftIdentityPlatform", "Elmah.AuthenticationMicrosoftIdentityPlatform\Elmah.AuthenticationMicrosoftIdentityPlatform.csproj", "{27BE9EF1-C86F-4B3E-8FD8-00BD294F01F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.AuthenticationWindows", "Elmah.AuthenticationWindows\Elmah.AuthenticationWindows.csproj", "{49ED4BB9-0DB0-4DFC-B55B-2D7F0AFC1AEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,13 +84,30 @@ Global
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Release|Any CPU.Build.0 = Release|Any CPU
-
+		{1A61FFB1-729B-48BC-901A-928F6ED3F05B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A61FFB1-729B-48BC-901A-928F6ED3F05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A61FFB1-729B-48BC-901A-928F6ED3F05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A61FFB1-729B-48BC-901A-928F6ED3F05B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D505AE-D211-4335-B549-16E98080E2CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D505AE-D211-4335-B549-16E98080E2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D505AE-D211-4335-B549-16E98080E2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D505AE-D211-4335-B549-16E98080E2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27BE9EF1-C86F-4B3E-8FD8-00BD294F01F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27BE9EF1-C86F-4B3E-8FD8-00BD294F01F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27BE9EF1-C86F-4B3E-8FD8-00BD294F01F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27BE9EF1-C86F-4B3E-8FD8-00BD294F01F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49ED4BB9-0DB0-4DFC-B55B-2D7F0AFC1AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49ED4BB9-0DB0-4DFC-B55B-2D7F0AFC1AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49ED4BB9-0DB0-4DFC-B55B-2D7F0AFC1AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49ED4BB9-0DB0-4DFC-B55B-2D7F0AFC1AEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC} = {B627375D-D8C2-408C-BEDF-99060EC757BA}
-
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3596FFB6-3FEB-4938-A013-82CB1FCBDDC3}
 	EndGlobalSection
 EndGlobal
