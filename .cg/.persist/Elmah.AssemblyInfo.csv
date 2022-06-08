@@ -10,3 +10,4 @@ ClassLibrary,bd738c1c-4176-4c93-b5b8-f554b885e51a,False,"",Elmah,Copyright © El
 ClassLibrary,aec2ab1c-f3f9-48b2-8f00-43392dbac2ca,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Elmah.Resx,7799,Elmah.Resx,Elmah.Resx,,DotNet6,Resources,Elmah.Resx,1.0.0.0
 ClassLibrary,a49139cb-ec9f-45a0-9c7b-334281fb9560,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Elmah.ServiceContracts,7799,Elmah.ServiceContracts,Elmah.ServiceContracts,,DotNet6,ServiceContracts,Elmah.ServiceContracts,1.0.0.0
 ClassLibrary,6d25aa30-c3af-4ae0-b567-0f2653120cdc,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Framework,-1,Framework,Framework,,DotNet6,Framework,Framework,1.0.0.0
+ClassLibrary,8b06ffc9-43f8-41f4-b581-f5ffb621bc38,False,"",Elmah,Copyright © Elmah 2022,Elmah,Elmah,1.0.0.0,"",Elmah.MvcWebApp,7810,Elmah.MvcWebApp,Elmah.MvcWebApp,,DotNet6,MvcWebApp,Elmah.MvcWebApp,1.0.0.0

@@ -4,6 +4,8 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{B627375D-D8C2-408C-BEDF-99060EC757BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.MvcWebApp", "Elmah\MvcWebApp\Elmah.MvcWebApp.csproj", "{8B06FFC9-43F8-41F4-B581-F5FFB621BC38}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.WebApiControllers", "Elmah\WebApiControllers\Elmah.WebApiControllers.csproj", "{560DC4CE-AC23-4FD4-9BDA-87E2E2D94947}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.WebApiApp", "Elmah\WebApiApp\Elmah.WebApiApp.csproj", "{098A0267-F070-40A4-B843-95A820EDB417}"
@@ -33,6 +35,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B06FFC9-43F8-41F4-B581-F5FFB621BC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B06FFC9-43F8-41F4-B581-F5FFB621BC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B06FFC9-43F8-41F4-B581-F5FFB621BC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B06FFC9-43F8-41F4-B581-F5FFB621BC38}.Release|Any CPU.Build.0 = Release|Any CPU
 		{560DC4CE-AC23-4FD4-9BDA-87E2E2D94947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{560DC4CE-AC23-4FD4-9BDA-87E2E2D94947}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{560DC4CE-AC23-4FD4-9BDA-87E2E2D94947}.Release|Any CPU.ActiveCfg = Release|Any CPU
