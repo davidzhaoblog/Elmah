@@ -1,0 +1,26 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahTypeModel
+@inject IUIStrings localizor;
+@{
+    ViewData["Title"] = localizor.Get("Delete");
+}
+<h1>@localizor.Get("Delete")</h1>
+<h3>@localizor.Get("Are_you_sure_you_want_to_delete_this_")</h3>
+<div>
+    <h4>@localizor.Get("ElmahHost")</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SpatialLocation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SpatialLocation)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Host" />
+        <input type="submit" value="@localizor.Get("Delete")" class="btn btn-danger" /> |
+        <a asp-action="Index">@localizor.Get("Back_to_List")</a>
+    </form>
+</div>

@@ -1,0 +1,35 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@model IEnumerable<ElmahUserModel>
+@inject IUIStrings localizor;
+@{
+    ViewData["Title"] = localizor.Get("Index");
+}
+<h1>@localizor.Get("Index")</h1>
+<p>
+    <a asp-action="Create">@localizor.Get("Create_New")</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SpatialLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpatialLocation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Host">@localizor.Get("Edit")</a> |
+                <a asp-action="Details" asp-route-id="@item.Host">@localizor.Get("Details")</a> |
+                <a asp-action="Delete" asp-route-id="@item.Host">@localizor.Get("Delete")</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

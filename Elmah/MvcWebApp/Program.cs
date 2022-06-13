@@ -1,9 +1,63 @@
+using Elmah.RepositoryContracts;
+using Elmah.EFCoreRepositories;
+using Elmah.ServiceContracts;
+using Elmah.Services;
+using Elmah.EFCoreContext;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(Elmah.Resx.Resources.UIStrings));
+    });
+
+builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
+
+// http://blog.mohnady.com/2017/05/how-to-aspnet-core-resource-files-in.html
+//
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new List<CultureInfo>
+        {
+            new CultureInfo("en"),
+            new CultureInfo("fr")
+        };
+    options.DefaultRequestCulture = new RequestCulture("fr", "fr");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
+builder.Services.AddSingleton<Elmah.Resx.IUIStrings, Elmah.Resx.UIStrings>();
 
 var app = builder.Build();
+
+// 1.1. IoC Repositories
+builder.Services.AddScoped<IElmahErrorRepository, ElmahErrorRepository>();
+builder.Services.AddScoped<IElmahApplicationRepository, ElmahApplicationRepository>();
+builder.Services.AddScoped<IElmahHostRepository, ElmahHostRepository>();
+builder.Services.AddScoped<IElmahSourceRepository, ElmahSourceRepository>();
+builder.Services.AddScoped<IElmahStatusCodeRepository, ElmahStatusCodeRepository>();
+builder.Services.AddScoped<IElmahTypeRepository, ElmahTypeRepository>();
+builder.Services.AddScoped<IElmahUserRepository, ElmahUserRepository>();
+
+// 1.2. IoC Services
+builder.Services.AddScoped<IElmahErrorService, ElmahErrorService>();
+builder.Services.AddScoped<IElmahApplicationService, ElmahApplicationService>();
+builder.Services.AddScoped<IElmahHostService, ElmahHostService>();
+builder.Services.AddScoped<IElmahSourceService, ElmahSourceService>();
+builder.Services.AddScoped<IElmahStatusCodeService, ElmahStatusCodeService>();
+builder.Services.AddScoped<IElmahTypeService, ElmahTypeService>();
+builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
+
+builder.Services.AddDbContext<EFDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => x.UseNetTopologySuite()), ServiceLifetime.Transient);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -15,6 +69,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
 
