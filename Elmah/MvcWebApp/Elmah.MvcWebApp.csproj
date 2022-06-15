@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>8b06ffc9-43f8-41f4-b581-f5ffb621bc38</UserSecretsId>
+    <UserSecretsId>46b147de-11b6-43ca-a918-56bc05fdeb63</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <OutputType>Exe</OutputType>
   </PropertyGroup>

@@ -3,10 +3,12 @@ using Elmah.EFCoreRepositories;
 using Elmah.ServiceContracts;
 using Elmah.Services;
 using Elmah.EFCoreContext;
-using Microsoft.Extensions.Configuration;
 using System.Configuration;
-using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,0 +1,30 @@
+@using Framework.Models;
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IViewLocalizer Localizer
+@model PaginationResponse
+<ul class="pagination pagination-lg">
+    <li class="@(Model.EnableFirstAndPrevious ? "page-item" : "page-item disabled" )"><a class="page-link" href="#" onclick="pageIndexChanged(1);">First</a></li>
+    <li class="@(Model.EnableFirstAndPrevious ? "page-item" : "page-item disabled" )"><a class="page-link" href="#" onclick="pageIndexChanged(@(Model.PageIndex - 1));">Previous</a></li>
+    @if (Model.ThreeDotPreCurrent)
+    {
+        <li class="page-item">...</li>
+    }
+    @foreach (var pageItem in Model.PreCurrent)
+    {
+        <li class="page-item"><a class="page-link" href="#" onclick="pageIndexChanged(@pageItem);">@pageItem</a></li>
+    }
+    <li class="page-item active"><a class="page-link" href="#">@(Model.PageIndex)</a></li>
+    @foreach (var pageItem in Model.PostCurrent)
+    {
+        <li class="page-item"><a class="page-link" href="#" onclick="pageIndexChanged(@pageItem);">@pageItem</a></li>
+    }
+    @if (Model.ThreeDotPostCurrent)
+    {
+        <li class="page-item">...</li>
+    }
+    <li class="@(Model.EnableLastAndNext ? "page-item" : "page-item disabled" )"><a class="page-link" href="#" onclick="pageIndexChanged(@(Model.PageIndex + 1));">Next</a></li>
+    <li class="@(Model.EnableLastAndNext? "page-item" : "page-item disabled" )"><a class="page-link" href="#" onclick="pageIndexChanged(@(Model.LastPageIndex));">Last</a></li>
+</ul>

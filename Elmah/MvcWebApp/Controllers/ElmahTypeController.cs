@@ -1,18 +1,33 @@
-using Elmah.ServiceContracts;
+using Elmah.MvcWebApp.Models;
+using Framework.Models;
 using Elmah.Models;
+using Elmah.Resx;
+using Elmah.ServiceContracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Elmah.MvcWebApp.Controllers
 {
     public class ElmahTypeController : Controller
     {
-        private readonly ILogger<ElmahTypeController> _logger;
         private readonly IElmahTypeService _thisService;
 
-        public ElmahTypeController(IElmahTypeService thisService, ILogger<ElmahTypeController> logger)
+        private readonly SelectListHelper _selectListHelper;
+        private readonly IUIStrings _localizor;
+        private readonly ILogger<ElmahTypeController> _logger;
+
+        public ElmahTypeController(
+            IElmahTypeService thisService,
+
+            SelectListHelper selectListHelper,
+            IUIStrings localizor,
+            ILogger<ElmahTypeController> logger)
         {
             _thisService = thisService;
+
+            _selectListHelper = selectListHelper;
+            _localizor = localizor;
             _logger = logger;
         }
 
@@ -20,13 +35,25 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Index(ElmahTypeAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
-            return View(result.ResponseBody);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Type")), Value = "Type~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Type")), Value = "Type~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            return View(new PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeModel[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahType/Details/{type}
-        public async Task<IActionResult> Details(string type)
+        // GET: ElmahType/Details/{Type}
+        [Route("[controller]/[action]/{Type}")]
+        public async Task<IActionResult> Details([FromRoute]ElmahTypeIdModel id)
         {
-            var result = await _thisService.Get(new ElmahTypeIdModel { Type = type });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
@@ -43,7 +70,7 @@ namespace Elmah.MvcWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Host,SpatialLocation____")] ElmahTypeModel input)
+        public async Task<IActionResult> Create([Bind("Type")] ElmahTypeModel input)
         {
             if (ModelState.IsValid)
             {
@@ -53,28 +80,30 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahType/Edit/{type}
-        public async Task<IActionResult> Edit(string type)
+        // GET: ElmahType/Edit/{Type}
+        [Route("[controller]/[action]/{Type}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahTypeIdModel id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var result = await _thisService.Get(new ElmahTypeIdModel { Type = type });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahType/Edit/{type}
+        // POST: ElmahType/Edit/{Type}
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string type, [Bind("Host,SpatialLocation____")] ElmahTypeModel input)
+        [Route("[controller]/[action]/{Type}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahTypeIdModel id, [Bind("Type")] ElmahTypeModel input)
         {
-            if (type != input.Type)
+            if (id.Type != input.Type)
             {
                 return NotFound();
             }
@@ -89,10 +118,11 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahType/Delete/{type}
-        public async Task<IActionResult> Delete(string type)
+        // GET: ElmahType/Delete/{Type}
+        [Route("[controller]/[action]/{Type}")]
+        public async Task<IActionResult> Delete([FromRoute]ElmahTypeIdModel id)
         {
-            var result = await _thisService.Get(new ElmahTypeIdModel { Type = type });
+            var result = await _thisService.Get(id);
             if (result.Status == System.Net.HttpStatusCode.NotFound)
                 return NotFound();
             else if (result.Status != System.Net.HttpStatusCode.OK)
@@ -101,12 +131,13 @@ namespace Elmah.MvcWebApp.Controllers
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahType/Delete/{type}
+        // POST: ElmahType/Delete/{Type}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string type)
+        [Route("[controller]/[action]/{Type}")]
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahTypeIdModel id)
         {
-            var result = await _thisService.Delete(new ElmahTypeIdModel { Type = type });
+            var result = await _thisService.Delete(id);
             if(result.Status != System.Net.HttpStatusCode.OK)
                 return Problem(result.StatusMessage);
             return RedirectToAction(nameof(Index));

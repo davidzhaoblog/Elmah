@@ -1,18 +1,33 @@
-using Elmah.ServiceContracts;
+using Elmah.MvcWebApp.Models;
+using Framework.Models;
 using Elmah.Models;
+using Elmah.Resx;
+using Elmah.ServiceContracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Elmah.MvcWebApp.Controllers
 {
     public class ElmahStatusCodeController : Controller
     {
-        private readonly ILogger<ElmahStatusCodeController> _logger;
         private readonly IElmahStatusCodeService _thisService;
 
-        public ElmahStatusCodeController(IElmahStatusCodeService thisService, ILogger<ElmahStatusCodeController> logger)
+        private readonly SelectListHelper _selectListHelper;
+        private readonly IUIStrings _localizor;
+        private readonly ILogger<ElmahStatusCodeController> _logger;
+
+        public ElmahStatusCodeController(
+            IElmahStatusCodeService thisService,
+
+            SelectListHelper selectListHelper,
+            IUIStrings localizor,
+            ILogger<ElmahStatusCodeController> logger)
         {
             _thisService = thisService;
+
+            _selectListHelper = selectListHelper;
+            _localizor = localizor;
             _logger = logger;
         }
 
@@ -20,13 +35,25 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Index(ElmahStatusCodeAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
-            return View(result.ResponseBody);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Name")), Value = "Name~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Name")), Value = "Name~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            return View(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahStatusCode/Details/{statuscode}
-        public async Task<IActionResult> Details(int statuscode)
+        // GET: ElmahStatusCode/Details/{StatusCode}
+        [Route("[controller]/[action]/{StatusCode}")]
+        public async Task<IActionResult> Details([FromRoute]ElmahStatusCodeIdModel id)
         {
-            var result = await _thisService.Get(new ElmahStatusCodeIdModel { StatusCode = statuscode });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
@@ -43,7 +70,7 @@ namespace Elmah.MvcWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Host,SpatialLocation____")] ElmahStatusCodeModel input)
+        public async Task<IActionResult> Create([Bind("StatusCode,Name")] ElmahStatusCodeModel input)
         {
             if (ModelState.IsValid)
             {
@@ -53,28 +80,30 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahStatusCode/Edit/{statuscode}
-        public async Task<IActionResult> Edit(int statuscode)
+        // GET: ElmahStatusCode/Edit/{StatusCode}
+        [Route("[controller]/[action]/{StatusCode}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahStatusCodeIdModel id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var result = await _thisService.Get(new ElmahStatusCodeIdModel { StatusCode = statuscode });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahStatusCode/Edit/{statuscode}
+        // POST: ElmahStatusCode/Edit/{StatusCode}
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int statuscode, [Bind("Host,SpatialLocation____")] ElmahStatusCodeModel input)
+        [Route("[controller]/[action]/{StatusCode}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahStatusCodeIdModel id, [Bind("StatusCode,Name")] ElmahStatusCodeModel input)
         {
-            if (statuscode != input.StatusCode)
+            if (id.StatusCode != input.StatusCode)
             {
                 return NotFound();
             }
@@ -89,10 +118,11 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahStatusCode/Delete/{statuscode}
-        public async Task<IActionResult> Delete(int statuscode)
+        // GET: ElmahStatusCode/Delete/{StatusCode}
+        [Route("[controller]/[action]/{StatusCode}")]
+        public async Task<IActionResult> Delete([FromRoute]ElmahStatusCodeIdModel id)
         {
-            var result = await _thisService.Get(new ElmahStatusCodeIdModel { StatusCode = statuscode });
+            var result = await _thisService.Get(id);
             if (result.Status == System.Net.HttpStatusCode.NotFound)
                 return NotFound();
             else if (result.Status != System.Net.HttpStatusCode.OK)
@@ -101,12 +131,13 @@ namespace Elmah.MvcWebApp.Controllers
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahStatusCode/Delete/{statuscode}
+        // POST: ElmahStatusCode/Delete/{StatusCode}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int statuscode)
+        [Route("[controller]/[action]/{StatusCode}")]
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahStatusCodeIdModel id)
         {
-            var result = await _thisService.Delete(new ElmahStatusCodeIdModel { StatusCode = statuscode });
+            var result = await _thisService.Delete(id);
             if(result.Status != System.Net.HttpStatusCode.OK)
                 return Problem(result.StatusMessage);
             return RedirectToAction(nameof(Index));

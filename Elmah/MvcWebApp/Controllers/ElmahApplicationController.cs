@@ -1,18 +1,33 @@
-using Elmah.ServiceContracts;
+using Elmah.MvcWebApp.Models;
+using Framework.Models;
 using Elmah.Models;
+using Elmah.Resx;
+using Elmah.ServiceContracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Elmah.MvcWebApp.Controllers
 {
     public class ElmahApplicationController : Controller
     {
-        private readonly ILogger<ElmahApplicationController> _logger;
         private readonly IElmahApplicationService _thisService;
 
-        public ElmahApplicationController(IElmahApplicationService thisService, ILogger<ElmahApplicationController> logger)
+        private readonly SelectListHelper _selectListHelper;
+        private readonly IUIStrings _localizor;
+        private readonly ILogger<ElmahApplicationController> _logger;
+
+        public ElmahApplicationController(
+            IElmahApplicationService thisService,
+
+            SelectListHelper selectListHelper,
+            IUIStrings localizor,
+            ILogger<ElmahApplicationController> logger)
         {
             _thisService = thisService;
+
+            _selectListHelper = selectListHelper;
+            _localizor = localizor;
             _logger = logger;
         }
 
@@ -20,13 +35,25 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Index(ElmahApplicationAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
-            return View(result.ResponseBody);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Application")), Value = "Application~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Application")), Value = "Application~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            return View(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahApplication/Details/{application}
-        public async Task<IActionResult> Details(string application)
+        // GET: ElmahApplication/Details/{Application}
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> Details([FromRoute]ElmahApplicationIdModel id)
         {
-            var result = await _thisService.Get(new ElmahApplicationIdModel { Application = application });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
@@ -43,7 +70,7 @@ namespace Elmah.MvcWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Host,SpatialLocation____")] ElmahApplicationModel input)
+        public async Task<IActionResult> Create([Bind("Application")] ElmahApplicationModel input)
         {
             if (ModelState.IsValid)
             {
@@ -53,28 +80,30 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahApplication/Edit/{application}
-        public async Task<IActionResult> Edit(string application)
+        // GET: ElmahApplication/Edit/{Application}
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahApplicationIdModel id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var result = await _thisService.Get(new ElmahApplicationIdModel { Application = application });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahApplication/Edit/{application}
+        // POST: ElmahApplication/Edit/{Application}
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string application, [Bind("Host,SpatialLocation____")] ElmahApplicationModel input)
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahApplicationIdModel id, [Bind("Application")] ElmahApplicationModel input)
         {
-            if (application != input.Application)
+            if (id.Application != input.Application)
             {
                 return NotFound();
             }
@@ -89,10 +118,11 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahApplication/Delete/{application}
-        public async Task<IActionResult> Delete(string application)
+        // GET: ElmahApplication/Delete/{Application}
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> Delete([FromRoute]ElmahApplicationIdModel id)
         {
-            var result = await _thisService.Get(new ElmahApplicationIdModel { Application = application });
+            var result = await _thisService.Get(id);
             if (result.Status == System.Net.HttpStatusCode.NotFound)
                 return NotFound();
             else if (result.Status != System.Net.HttpStatusCode.OK)
@@ -101,12 +131,13 @@ namespace Elmah.MvcWebApp.Controllers
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahApplication/Delete/{application}
+        // POST: ElmahApplication/Delete/{Application}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string application)
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahApplicationIdModel id)
         {
-            var result = await _thisService.Delete(new ElmahApplicationIdModel { Application = application });
+            var result = await _thisService.Delete(id);
             if(result.Status != System.Net.HttpStatusCode.OK)
                 return Problem(result.StatusMessage);
             return RedirectToAction(nameof(Index));

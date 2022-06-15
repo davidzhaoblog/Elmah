@@ -1,18 +1,33 @@
-using Elmah.ServiceContracts;
+using Elmah.MvcWebApp.Models;
+using Framework.Models;
 using Elmah.Models;
+using Elmah.Resx;
+using Elmah.ServiceContracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Elmah.MvcWebApp.Controllers
 {
     public class ElmahSourceController : Controller
     {
-        private readonly ILogger<ElmahSourceController> _logger;
         private readonly IElmahSourceService _thisService;
 
-        public ElmahSourceController(IElmahSourceService thisService, ILogger<ElmahSourceController> logger)
+        private readonly SelectListHelper _selectListHelper;
+        private readonly IUIStrings _localizor;
+        private readonly ILogger<ElmahSourceController> _logger;
+
+        public ElmahSourceController(
+            IElmahSourceService thisService,
+
+            SelectListHelper selectListHelper,
+            IUIStrings localizor,
+            ILogger<ElmahSourceController> logger)
         {
             _thisService = thisService;
+
+            _selectListHelper = selectListHelper;
+            _localizor = localizor;
             _logger = logger;
         }
 
@@ -20,13 +35,25 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Index(ElmahSourceAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
-            return View(result.ResponseBody);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Source")), Value = "Source~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Source")), Value = "Source~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahSource/Details/{source}
-        public async Task<IActionResult> Details(string source)
+        // GET: ElmahSource/Details/{Source}
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> Details([FromRoute]ElmahSourceIdModel id)
         {
-            var result = await _thisService.Get(new ElmahSourceIdModel { Source = source });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
@@ -43,7 +70,7 @@ namespace Elmah.MvcWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Host,SpatialLocation____")] ElmahSourceModel input)
+        public async Task<IActionResult> Create([Bind("Source")] ElmahSourceModel input)
         {
             if (ModelState.IsValid)
             {
@@ -53,28 +80,30 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahSource/Edit/{source}
-        public async Task<IActionResult> Edit(string source)
+        // GET: ElmahSource/Edit/{Source}
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahSourceIdModel id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var result = await _thisService.Get(new ElmahSourceIdModel { Source = source });
+            var result = await _thisService.Get(id);
             if (result.Status != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahSource/Edit/{source}
+        // POST: ElmahSource/Edit/{Source}
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string source, [Bind("Host,SpatialLocation____")] ElmahSourceModel input)
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahSourceIdModel id, [Bind("Source")] ElmahSourceModel input)
         {
-            if (source != input.Source)
+            if (id.Source != input.Source)
             {
                 return NotFound();
             }
@@ -89,10 +118,11 @@ namespace Elmah.MvcWebApp.Controllers
             return View(input);
         }
 
-        // GET: ElmahSource/Delete/{source}
-        public async Task<IActionResult> Delete(string source)
+        // GET: ElmahSource/Delete/{Source}
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> Delete([FromRoute]ElmahSourceIdModel id)
         {
-            var result = await _thisService.Get(new ElmahSourceIdModel { Source = source });
+            var result = await _thisService.Get(id);
             if (result.Status == System.Net.HttpStatusCode.NotFound)
                 return NotFound();
             else if (result.Status != System.Net.HttpStatusCode.OK)
@@ -101,12 +131,13 @@ namespace Elmah.MvcWebApp.Controllers
             return View(result.ResponseBody);
         }
 
-        // POST: ElmahSource/Delete/{source}
+        // POST: ElmahSource/Delete/{Source}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string source)
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahSourceIdModel id)
         {
-            var result = await _thisService.Delete(new ElmahSourceIdModel { Source = source });
+            var result = await _thisService.Delete(id);
             if(result.Status != System.Net.HttpStatusCode.OK)
                 return Problem(result.StatusMessage);
             return RedirectToAction(nameof(Index));

@@ -132,11 +132,281 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Export to Csv"".
+        /// </summary>
+        public static string ExportToCsv {
+            get {
+                return ResourceManager.GetString("ExportToCsv", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Export to Excel"".
+        /// </summary>
+        public static string ExportToExcel {
+            get {
+                return ResourceManager.GetString("ExportToExcel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "First"".
+        /// </summary>
+        public static string First {
+            get {
+                return ResourceManager.GetString("First", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "All {0}"".
+        /// </summary>
+        public static string Format_All {
+            get {
+                return ResourceManager.GetString("Format_All", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "{0} Items Per Page"".
+        /// </summary>
+        public static string Format_ItemsPerPage {
+            get {
+                return ResourceManager.GetString("Format_ItemsPerPage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Import"".
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Index"".
         /// </summary>
         public static string Index {
             get {
                 return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last"".
+        /// </summary>
+        public static string Last {
+            get {
+                return ResourceManager.GetString("Last", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next"".
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Custom"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_Custom {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_Custom", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Five Years"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastFiveYears {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastFiveYears", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Month"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastMonth {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastMonth", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Six Months"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastSixMonths {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastSixMonths", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Ten Years"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastTenYears {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastTenYears", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Three Months"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastThreeMonths {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastThreeMonths", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Week"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastWeek {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastWeek", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Last Year"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_LastYear {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_LastYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Five Years"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextFiveYears {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextFiveYears", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Month"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextMonth {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextMonth", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Six Months"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextSixMonths {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextSixMonths", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Ten Years"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextTenYears {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextTenYears", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Three Months"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextThreeMonths {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextThreeMonths", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Week"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextWeek {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextWeek", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Next Year"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_NextYear {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_NextYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "This Month"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_ThisMonth {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_ThisMonth", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "This Week"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_ThisWeek {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_ThisWeek", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "This Year"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_ThisYear {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_ThisYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Today"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_Today {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_Today", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Tomorrow"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_Tomorrow {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_Tomorrow", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Yesterday"".
+        /// </summary>
+        public static string PreDefinedDateTimeRanges_Yesterday {
+            get {
+                return ResourceManager.GetString("PreDefinedDateTimeRanges_Yesterday", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Previous"".
+        /// </summary>
+        public static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
 

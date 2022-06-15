@@ -11,3 +11,9 @@ dbo,ElmahError,\Source,ElmahSource,,False,True,True,True,True,,6/7/2022 12:00:00
 dbo,ElmahError,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,6/7/2022 12:00:00 AM
 dbo,ElmahError,\Type,ElmahType,,False,True,True,True,True,,6/7/2022 12:00:00 AM
 dbo,ElmahError,\User,ElmahUser,,False,True,True,True,True,,6/7/2022 12:00:00 AM
+dbo,ELMAHError,\Application,ElmahApplication,,False,True,True,True,True,,6/15/2022 12:00:00 AM
+dbo,ELMAHError,\Host,ElmahHost,,False,True,True,True,True,,6/15/2022 12:00:00 AM
+dbo,ELMAHError,\Source,ElmahSource,,False,True,True,True,True,,6/15/2022 12:00:00 AM
+dbo,ELMAHError,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,6/15/2022 12:00:00 AM
+dbo,ELMAHError,\Type,ElmahType,,False,True,True,True,True,,6/15/2022 12:00:00 AM
+dbo,ELMAHError,\User,ElmahUser,,False,True,True,True,True,,6/15/2022 12:00:00 AM

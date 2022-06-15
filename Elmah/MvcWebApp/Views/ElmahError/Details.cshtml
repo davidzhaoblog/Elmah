@@ -7,9 +7,9 @@
 }
 <h1>@localizor.Get("Details")</h1>
 <div>
-    <h4>@localizor.Get("ElmahHost")</h4>
+    <h4>@localizor.Get("ElmahError")</h4>
     <hr />
-        <dl class="row">
+    <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Host)
         </dt>
@@ -27,6 +27,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Host">@localizor.Get("Edit")</a> |
+    <a asp-action="Edit" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String]>@localizor.Get("Edit")</a> |
     <a asp-action="Index">@localizor.Get("Back_to_List")</a>
 </div>

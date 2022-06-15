@@ -142,8 +142,98 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="ExportToCsv" xml:space="preserve">
+    <value>Export to Csv</value>
+  </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="Format_All" xml:space="preserve">
+    <value>All {0}</value>
+  </data>
+  <data name="Format_ItemsPerPage" xml:space="preserve">
+    <value>{0} Items Per Page</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
   <data name="Index" xml:space="preserve">
     <value>Index</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastFiveYears" xml:space="preserve">
+    <value>Last Five Years</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastMonth" xml:space="preserve">
+    <value>Last Month</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastSixMonths" xml:space="preserve">
+    <value>Last Six Months</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastTenYears" xml:space="preserve">
+    <value>Last Ten Years</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastThreeMonths" xml:space="preserve">
+    <value>Last Three Months</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastWeek" xml:space="preserve">
+    <value>Last Week</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_LastYear" xml:space="preserve">
+    <value>Last Year</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextFiveYears" xml:space="preserve">
+    <value>Next Five Years</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextMonth" xml:space="preserve">
+    <value>Next Month</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextSixMonths" xml:space="preserve">
+    <value>Next Six Months</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextTenYears" xml:space="preserve">
+    <value>Next Ten Years</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextThreeMonths" xml:space="preserve">
+    <value>Next Three Months</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextWeek" xml:space="preserve">
+    <value>Next Week</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_NextYear" xml:space="preserve">
+    <value>Next Year</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_ThisMonth" xml:space="preserve">
+    <value>This Month</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_ThisWeek" xml:space="preserve">
+    <value>This Week</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_ThisYear" xml:space="preserve">
+    <value>This Year</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_Tomorrow" xml:space="preserve">
+    <value>Tomorrow</value>
+  </data>
+  <data name="PreDefinedDateTimeRanges_Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
