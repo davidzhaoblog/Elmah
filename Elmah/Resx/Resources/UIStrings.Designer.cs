@@ -177,6 +177,15 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Please Select {0}"".
+        /// </summary>
+        public static string Format_Please_Select {
+            get {
+                return ResourceManager.GetString("Format_Please_Select", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Import"".
         /// </summary>
         public static string Import {

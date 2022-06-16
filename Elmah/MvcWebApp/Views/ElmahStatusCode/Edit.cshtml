@@ -4,6 +4,7 @@
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Edit");
+    var format_Please_Select = localizor.Get("Format_Please_Select");
 }
 <h1>@localizor.Get("Edit")</h1>
 <h4>@localizor.Get("ElmahStatusCode")</h4>
@@ -12,12 +13,16 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<input type="hidden" asp-for="Host" />
-            <div class="form-group">
-                <label asp-for="SpatialLocation" class="control-label"></label>
-                <input asp-for="SpatialLocation" class="form-control" />
-                <span asp-validation-for="SpatialLocation" class="text-danger"></span>
-            </div>*@
+                <div class="form-group">
+                    <label asp-for="StatusCode" class="control-label"></label>
+                    <input asp-for="StatusCode" class="form-control" />
+                    <span asp-validation-for="StatusCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
             <div class="form-group">
                 <input type="submit" value="@localizor.Get("Save")" class="btn btn-primary" />
             </div>
