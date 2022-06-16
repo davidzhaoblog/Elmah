@@ -5,11 +5,9 @@
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Index");
+    var format_All = localizor.Get("Format_All");
 }
 <h1>@localizor.Get("Index")</h1>
-<p>
-    <a asp-action="Create">@localizor.Get("Create_New")</a>
-</p>
 <div class="row">
     <div class="col-12 col-sm-4 col-md-3 col-lg-3">
         <form asp-controller="ElmahApplication" asp-action="Index" id="thisform" method="post">
@@ -17,58 +15,19 @@
                 <div class="card-header">
                     <h3 class="card-title" style="padding-top:7.5px;display:inline;">@localizor.Get("Search")</h3>
                     <div class="float-right">
-                        <button class="btn btn-secondary" role="button" type="submit" name="SearchToolBarUp" title="@localizor.Get("Search")"`>
+                        <button class="btn btn-secondary" role="button" type="submit" title="@localizor.Get("Search")"`>
                             <span class="fa fa-search"></span>
                         </button>
+                        <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" />
                         <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
                         <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
                     </div>
                 </div>
-                @*<div class="card-body">
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahUser")</label>
-                        <select asp-for="Query.User" asp-items="Model.SelectListOfElmahModel_ElmahUser" class="form-control">
-                            <option value="" selected>@localizor.Get("Please_select_ElmahUser____")</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahType")</label>
-                        <select asp-for="Query.Type" asp-items="Model.SelectListOfElmahModel_ElmahType" class="form-control">
-                            <option value="" selected>@localizor.Get("Please_select_ElmahType____")</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahStatusCode")</label>
-                        <select asp-for="Query.StatusCode" asp-items="Model.SelectListOfElmahModel_ElmahStatusCode" class="form-control">
-                            <option value="" selected>@localizor.Get("Please_select_ElmahStatusCode____")</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahSource")</label>
-                        <select asp-for="Query.Source" asp-items="Model.SelectListOfElmahModel_ElmahSource" class="form-control">
-                            <option value="" selected>@localizor.Get("Please_select_ElmahSource____")</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahHost")</label>
-                        <select asp-for="Query.Host" asp-items="Model.SelectListOfElmahModel_ElmahHost" class="form-control">
-                            <option value="" selected>@localizor.Get("Please_select_ElmahHost____")</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahApplication")</label>
-                        <select asp-for="Query.Application" asp-items="Model.SelectListOfElmahModel_ElmahApplication" class="form-control">
-                            <option value="" selected>@localizor.Get("Please_select_ElmahApplication____")</option>
-                        </select>
-                    </div>
-                    <label class="control-label">@localizor.Get("TimeUtc")</label>
-                    <select asp-for="Query.TimeUtcRangeLower" asp-items="Model.UISharedViewModel.PreDefinedDateTimeRangeList" class="form-control"></select>
-                    <input asp-for="Query.TimeUtcRangeLower" class="form-control" readonly="readonly" />
-                    <input asp-for="Query.TimeUtcRangeUpper" class="form-control" readonly="readonly" />
-                </div>*@
+                <div class="card-body">
+                </div>
                 <div class="card-footer">
                     <div class="float-right">
-                        <button class="btn btn-secondary" role="button" type="submit" name="SearchToolBarBottom" title="@localizor.Get("Search")">
+                        <button class="btn btn-secondary" role="button" type="submit" title="@localizor.Get("Search")">
                             <span class="fa fa-search"></span>
                         </button>
                     </div>
@@ -82,26 +41,25 @@
                 <h3 class="card-title" style="padding-top:7.5px;display:inline;"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahApplication" asp-action="Index">@localizor.Get("ElmahApplication")</a></h3>
                 <div class="float-right row">
                     <div class="btn-group">
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Create" class="btn btn-secondary" role="button" name="createNew" title="@localizor.Get("Create_New")">
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create_New")">
                             <span class="fa fa-plus"></span>
                         </a>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Index_Export" asp-route-dataServiceType="Csv" class="btn btn-secondary" role="button" name="exportToCsv" title="@localizor.Get("ExportToCsv")" download>
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Index_Export" asp-route-dataServiceType="Csv" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToCsv")" download>
                             <span class="fa fa-download"></span>
                         </a>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Index_Export" asp-route-dataServiceType="Excel2010" class="btn btn-secondary" role="button" name="exportToExcel" title="@localizor.Get("ExportToExcel")" download>
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Index_Export" asp-route-dataServiceType="Excel2010" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToExcel")" download>
                             <span class="fa fa-download"></span>
                         </a>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Import" class="btn btn-secondary" role="button" name="import" title="@localizor.Get("Import")">
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Import" class="btn btn-secondary" role="button" title="@localizor.Get("Import")">
                             <span class="fa fa-upload"></span>
                         </a>
-@*                        <select asp-for="Query.PageSize" asp-items="Model.UISharedViewModel.SelectListOfPageSize" class="form-control col-3" id="pageSize"></select>
-                        <label class="form-inline">Sort by:</label>
-                        <select asp-for="Query.OrderBys" asp-items="Model.UISharedViewModel.SelectListOfQueryOrderBySettingCollecionInString" class="form-control col-3" id="orderBy"></select>
-*@                    </div>
+                        <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select" id="pageSize"></select>
+                        <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select" id="orderBy"></select>
+                    </div>
                 </div>
             </div>
             <div class="card-body table-responsive">
-                <table id="MasterDataControl1" name="masterList" class="table table-hover table-bordered table-striped">
+                <table id="masterList" class="table table-hover table-bordered table-striped">
                     <thead>
                         <tr class="pt-0 pb-0">
                             <th class="p-0"></th>
@@ -116,10 +74,10 @@
                                 <tr class="pt-0 pb-0">
                                     <td class="p-0">
                                         <div class="btn-group">
-                                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String] class="btn btn-secondary" role="button" name="FullDetailsToolBarRightInList" title="@localizor.Get("FullDetails")">
+                                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String] class="btn btn-secondary" role="button" title="@localizor.Get("FullDetails")">
                                                 <span class="fa fa-briefcase"></span>
                                             </a>
-                                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String] class="btn btn-secondary" role="button" name="EditToolBarRightInList" title="@localizor.Get("Edit")">
+                                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String] class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                                                 <span class="fa fa-edit"></span>
                                             </a>
                                         </div>
@@ -139,70 +97,18 @@
                     </tbody>
                 </table>
             </div>
-            @*@Model.QueryPagingSetting.GetPagingInformationString()*@
-            <div class="card-footer">
-                @if (Model != null && Model.Result != null)
-                {
-                    var staticPagedList =  new StaticPagedList<Elmah.Models.ElmahErrorModel.DefaultView>(Model.Result.ResponseBody, Model?.Result?.Pagination?.Count ?? 1, Model?.Result?.Pagination?.PageSize ?? 10, Model?.Result?.Pagination?.TotalCount ?? 0);
-                    <div class="float-right">
-                        @Html.PagedListPager(staticPagedList, currentPage => Url.Action("Index", new { currentPage = currentPage }))
-                    </div>
-                }
-            </div>
+            @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
+            {
+                <div class="card-footer">
+                    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
+                </div>
+            }
         </div>
     </div>
 </div>
 @section Scripts {
     <script type="text/javascript">
         $(document).ready($(function() {
-            //$('select[name="Query.TimeUtcRange.PreDefinedDateTimeRange"]').change(function() {
-            //    preDefinedDateTimeRangeChanged('Query.TimeUtcRange');
-            //});
-            //preDefinedDateTimeRangeChanged('Query.TimeUtcRange');
-            $('input[name="Query.TimeUtcRangeLower"]').datepicker({
-                autoclose: false,
-                showClose: true,
-                beforeShowDay: $.noop,
-                calendarWeeks: false,
-                clearBtn: true,
-                daysOfWeekDisabled: [],
-                endDate: Infinity,
-                forceParse: true,
-                format: 'dd/mm/yyyy',
-                keyboardNavigation: true,
-                language: 'en',
-                minViewMode: 0,
-                orientation: 'auto',
-                rtl: false,
-                startDate: -Infinity,
-                startView: 2,
-                todayBtn: true,
-                todayHighlight: false,
-                weekStart: 0
-            });
-            $('input[name="Query.TimeUtcRangeUpper"]').datepicker({
-                autoclose: false,
-                showClose: true,
-                beforeShowDay: $.noop,
-                calendarWeeks: false,
-                clearBtn: true,
-                daysOfWeekDisabled: [],
-                endDate: Infinity,
-                forceParse: true,
-                format: 'dd/mm/yyyy',
-                keyboardNavigation: true,
-                language: 'en',
-                minViewMode: 0,
-                orientation: 'auto',
-                rtl: false,
-                startDate: -Infinity,
-                startView: 2,
-                todayBtn: true,
-                todayHighlight: false,
-                weekStart: 0
-            });
-            $('input[name="Query.TimeUtcRangeLower"]').prop('disabled', true);
-            $('input[name="Query.TimeUtcRangeUpper"]').prop('disabled', true);
         }));
     </script>
 }

@@ -38,8 +38,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 builder.Services.AddSingleton<Elmah.Resx.IUIStrings, Elmah.Resx.UIStrings>();
 
-var app = builder.Build();
-
 // 1.1. IoC Repositories
 builder.Services.AddScoped<IElmahErrorRepository, ElmahErrorRepository>();
 builder.Services.AddScoped<IElmahApplicationRepository, ElmahApplicationRepository>();
@@ -60,6 +58,8 @@ builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => x.UseNetTopologySuite()), ServiceLifetime.Transient);
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

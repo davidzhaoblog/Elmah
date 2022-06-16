@@ -32,6 +32,7 @@ namespace Elmah.Models
         // PredicateType:Contains
         public string? AllXml { get; set; }
 
+        public string? TimeUtcRange { get; set; }
         // PredicateType:Range - Lower Bound
         public System.DateTime? TimeUtcRangeLower { get; set; }
         // PredicateType:Range - Upper Bound

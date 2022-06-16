@@ -87,29 +87,29 @@ namespace Elmah.MvcWebApp.Controllers
                 new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextTenYears"), Value = "NextTenYears" },
             });
 
-            var elmahApplicationList = await _elmahApplicationService.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-            if (elmahApplicationList.Status == System.Net.HttpStatusCode.OK)
-                ViewBag.ElmahApplicationList = new SelectList(elmahApplicationList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+            var applicationList = await _elmahApplicationService.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (applicationList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.ApplicationList = new SelectList(applicationList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            var elmahHostList = await _elmahHostService.GetCodeList(new ElmahHostAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-            if (elmahHostList.Status == System.Net.HttpStatusCode.OK)
-                ViewBag.ElmahHostList = new SelectList(elmahHostList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+            var hostList = await _elmahHostService.GetCodeList(new ElmahHostAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (hostList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.HostList = new SelectList(hostList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            var elmahSourceList = await _elmahSourceService.GetCodeList(new ElmahSourceAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-            if (elmahSourceList.Status == System.Net.HttpStatusCode.OK)
-                ViewBag.ElmahSourceList = new SelectList(elmahSourceList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+            var sourceList = await _elmahSourceService.GetCodeList(new ElmahSourceAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (sourceList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.SourceList = new SelectList(sourceList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            var elmahStatusCodeList = await _elmahStatusCodeService.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-            if (elmahStatusCodeList.Status == System.Net.HttpStatusCode.OK)
-                ViewBag.ElmahStatusCodeList = new SelectList(elmahStatusCodeList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+            var statusCodeList = await _elmahStatusCodeService.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (statusCodeList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.StatusCodeList = new SelectList(statusCodeList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            var elmahTypeList = await _elmahTypeService.GetCodeList(new ElmahTypeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-            if (elmahTypeList.Status == System.Net.HttpStatusCode.OK)
-                ViewBag.ElmahTypeList = new SelectList(elmahTypeList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+            var typeList = await _elmahTypeService.GetCodeList(new ElmahTypeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (typeList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.TypeList = new SelectList(typeList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            var elmahUserList = await _elmahUserService.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-            if (elmahUserList.Status == System.Net.HttpStatusCode.OK)
-                ViewBag.ElmahUserList = new SelectList(elmahUserList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+            var userList = await _elmahUserService.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (userList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.UserList = new SelectList(userList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
         }
