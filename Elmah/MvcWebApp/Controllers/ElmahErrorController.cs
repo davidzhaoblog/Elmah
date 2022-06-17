@@ -64,28 +64,127 @@ namespace Elmah.MvcWebApp.Controllers
                 query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
             }
 
-            ViewBag.TimeUtcRangeList = new List<SelectListItem>(new[] {
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_Custom"), Value = "Custom" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastFiveYears"), Value = "LastFiveYears" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastYear"), Value = "LastYear" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastSixMonths"), Value = "LastSixMonths" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastThreeMonths"), Value = "LastThreeMonths" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastMonth"), Value = "LastMonth" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastWeek"), Value = "LastWeek" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_Yesterday"), Value = "Yesterday" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_Today"), Value = "Today" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_Tomorrow"), Value = "Tomorrow" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_ThisWeek"), Value = "ThisWeek" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_ThisMonth"), Value = "ThisMonth" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_ThisYear"), Value = "ThisYear" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextWeek"), Value = "NextWeek" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextMonth"), Value = "NextMonth" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextThreeMonths"), Value = "NextThreeMonths" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextSixMonths"), Value = "NextSixMonths" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextYear"), Value = "NextYear" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextFiveYears"), Value = "NextFiveYears" },
-                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_NextTenYears"), Value = "NextTenYears" },
-            });
+            ViewBag.TimeUtcRangeList = _selectListHelper.GetDefaultPredefinedDateTimeRange();
+            await LoadIndexViewTopLevelSelectLists();
+            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
+        }
+
+        // GET: ElmahError/Details/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            return View(result.ResponseBody);
+        }
+
+        // GET: ElmahError/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Status = System.Net.HttpStatusCode.OK;
+            await LoadIndexViewTopLevelSelectLists();
+            return View();
+        }
+
+        // POST: ElmahError/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Create(input);
+                if(result.Status == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            await LoadIndexViewTopLevelSelectLists();
+            return View(input);
+        }
+
+        // GET: ElmahError/Edit/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id)
+        {
+            if (id == null)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                return View();
+            }
+
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            await LoadIndexViewTopLevelSelectLists();
+            return View(result.ResponseBody);
+        }
+
+        // POST: ElmahError/Edit/{ErrorId}
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (id.ErrorId != input.ErrorId)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                await LoadIndexViewTopLevelSelectLists();
+                return View(input);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Update(input);
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return RedirectToAction(nameof(Index));
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            await LoadIndexViewTopLevelSelectLists();
+            return View(input);
+        }
+
+        // GET: ElmahError/Delete/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            return View(result.ResponseBody);
+        }
+
+        // POST: ElmahError/Delete/{ErrorId}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Delete(id);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return RedirectToAction(nameof(Index));
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+
+            var result1 = await _thisService.Get(id);
+            return View(result1.ResponseBody);
+        }
+
+        private async Task LoadIndexViewTopLevelSelectLists()
+        {
 
             var applicationList = await _elmahApplicationService.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
             if (applicationList.Status == System.Net.HttpStatusCode.OK)
@@ -110,102 +209,58 @@ namespace Elmah.MvcWebApp.Controllers
             var userList = await _elmahUserService.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
             if (userList.Status == System.Net.HttpStatusCode.OK)
                 ViewBag.UserList = new SelectList(userList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
-
-            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahError/Details/{ErrorId}
-        [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdModel id)
+        private async Task LoadSingleItemViewTopLevelSelectLists()
         {
-            var result = await _thisService.Get(id);
-            if (result.Status != System.Net.HttpStatusCode.OK)
-                return NotFound();
-            return View(result.ResponseBody);
-        }
 
-        // GET: ElmahError/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+            var application_NameList = await _elmahApplicationService.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (application_NameList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.Application_NameList = new SelectList(application_NameList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-        // POST: ElmahError/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _thisService.Create(input);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(input);
-        }
+            var host_NameList = await _elmahHostService.GetCodeList(new ElmahHostAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (host_NameList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.Host_NameList = new SelectList(host_NameList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-        // GET: ElmahError/Edit/{ErrorId}
-        [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var source_NameList = await _elmahSourceService.GetCodeList(new ElmahSourceAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (source_NameList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.Source_NameList = new SelectList(source_NameList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            var result = await _thisService.Get(id);
-            if (result.Status != System.Net.HttpStatusCode.OK)
-                return NotFound();
-            return View(result.ResponseBody);
-        }
+            var statusCode_NameList = await _elmahStatusCodeService.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (statusCode_NameList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.StatusCode_NameList = new SelectList(statusCode_NameList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-        // POST: ElmahError/Edit/{ErrorId}
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
-        {
-            if (id.ErrorId != input.ErrorId)
-            {
-                return NotFound();
-            }
+            var type_NameList = await _elmahTypeService.GetCodeList(new ElmahTypeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (type_NameList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.Type_NameList = new SelectList(type_NameList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            if (ModelState.IsValid)
-            {
-                var result = await _thisService.Update(input);
-                if(result.Status != System.Net.HttpStatusCode.OK)
-                    return NotFound();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(input);
-        }
+            var user_NameList = await _elmahUserService.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (user_NameList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.User_NameList = new SelectList(user_NameList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-        // GET: ElmahError/Delete/{ErrorId}
-        [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdModel id)
-        {
-            var result = await _thisService.Get(id);
-            if (result.Status == System.Net.HttpStatusCode.NotFound)
-                return NotFound();
-            else if (result.Status != System.Net.HttpStatusCode.OK)
-                return Problem(result.StatusMessage);
+            var applicationList = await _elmahApplicationService.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (applicationList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.ApplicationList = new SelectList(applicationList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-            return View(result.ResponseBody);
-        }
+            var hostList = await _elmahHostService.GetCodeList(new ElmahHostAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (hostList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.HostList = new SelectList(hostList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
 
-        // POST: ElmahError/Delete/{ErrorId}
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdModel id)
-        {
-            var result = await _thisService.Delete(id);
-            if(result.Status != System.Net.HttpStatusCode.OK)
-                return Problem(result.StatusMessage);
-            return RedirectToAction(nameof(Index));
+            var typeList = await _elmahTypeService.GetCodeList(new ElmahTypeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (typeList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.TypeList = new SelectList(typeList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+
+            var sourceList = await _elmahSourceService.GetCodeList(new ElmahSourceAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (sourceList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.SourceList = new SelectList(sourceList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+
+            var userList = await _elmahUserService.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (userList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.UserList = new SelectList(userList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
+
+            var statusCodeList = await _elmahStatusCodeService.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+            if (statusCodeList.Status == System.Net.HttpStatusCode.OK)
+                ViewBag.StatusCodeList = new SelectList(statusCodeList.ResponseBody, nameof(NameValuePair.Name), nameof(NameValuePair.Value));
         }
     }
 }

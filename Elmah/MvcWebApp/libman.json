@@ -9,10 +9,6 @@
     {
       "library": "moment.js@2.29.3",
       "destination": "wwwroot/lib/moment.js/"
-    },
-    {
-      "library": "bootstrap-datepicker@1.9.0",
-      "destination": "wwwroot/lib/bootstrap-datepicker/"
     }
   ]
 }

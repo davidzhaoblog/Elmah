@@ -54,14 +54,16 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Details([FromRoute]ElmahHostIdModel id)
         {
             var result = await _thisService.Get(id);
-            if (result.Status != System.Net.HttpStatusCode.OK)
-                return NotFound();
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
             return View(result.ResponseBody);
         }
 
         // GET: ElmahHost/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Status = System.Net.HttpStatusCode.OK;
+
             return View();
         }
 
@@ -75,8 +77,15 @@ namespace Elmah.MvcWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Create(input);
-                return RedirectToAction(nameof(Index));
+                if(result.Status == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
             }
+
             return View(input);
         }
 
@@ -86,12 +95,15 @@ namespace Elmah.MvcWebApp.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                return View();
             }
 
             var result = await _thisService.Get(id);
-            if (result.Status != System.Net.HttpStatusCode.OK)
-                return NotFound();
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+
             return View(result.ResponseBody);
         }
 
@@ -105,16 +117,21 @@ namespace Elmah.MvcWebApp.Controllers
         {
             if (id.Host != input.Host)
             {
-                return NotFound();
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+
+                return View(input);
             }
 
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Update(input);
-                if(result.Status != System.Net.HttpStatusCode.OK)
-                    return NotFound();
-                return RedirectToAction(nameof(Index));
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return RedirectToAction(nameof(Index));
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
             }
+
             return View(input);
         }
 
@@ -123,11 +140,8 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Delete([FromRoute]ElmahHostIdModel id)
         {
             var result = await _thisService.Get(id);
-            if (result.Status == System.Net.HttpStatusCode.NotFound)
-                return NotFound();
-            else if (result.Status != System.Net.HttpStatusCode.OK)
-                return Problem(result.StatusMessage);
-
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
             return View(result.ResponseBody);
         }
 
@@ -138,9 +152,13 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahHostIdModel id)
         {
             var result = await _thisService.Delete(id);
-            if(result.Status != System.Net.HttpStatusCode.OK)
-                return Problem(result.StatusMessage);
-            return RedirectToAction(nameof(Index));
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return RedirectToAction(nameof(Index));
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+
+            var result1 = await _thisService.Get(id);
+            return View(result1.ResponseBody);
         }
     }
 }

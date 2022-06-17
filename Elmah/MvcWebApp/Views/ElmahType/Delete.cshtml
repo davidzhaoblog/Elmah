@@ -5,22 +5,48 @@
 @{
     ViewData["Title"] = localizor.Get("Delete");
 }
-<h1>@localizor.Get("Delete")</h1>
-<h3>@localizor.Get("Are_you_sure_you_want_to_delete_this_")</h3>
-<div>
-    <h4>@localizor.Get("ElmahType")</h4>
-    <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Type)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Type)
-            </dd>
-        </dl>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Type" />
-        <input type="submit" value="@localizor.Get("Delete")" class="btn btn-danger" /> |
-        <a asp-action="Index">@localizor.Get("Back_to_List")</a>
-    </form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1>@localizor.Get("Delete")</h1>
+                <h4>@localizor.Get("ElmahType")</h4>
+                <h3>@localizor.Get("Are_you_sure_you_want_to_delete_this_")</h3>
+            </div>
+            @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+            {
+                <div class="card-body">
+                    <div class="text-danger">@ViewBag.StatusMessage</div>
+                </div>
+            }
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Type)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Type)
+                    </dd>
+                </dl>
+            <div class="card-footer">
+                <div class="btn-group" role="group" aria-label="...">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Type" />
+                        <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
+                            <span class="fa-solid fa-trash"></span>
+                            <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Delete")</span>
+                        </button>
+                    </form>
+                    <a asp-area="" asp-controller="ElmahType" asp-action="Delete" asp-route-type="@Model.Type" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <i class="fa-solid fa-refresh"></i>
+                        <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Refresh")</span>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahType" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Back_to_List")</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

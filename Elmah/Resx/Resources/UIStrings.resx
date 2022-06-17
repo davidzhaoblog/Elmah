@@ -133,6 +133,9 @@
   <data name="Create_New" xml:space="preserve">
     <value>Create New</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -152,13 +155,13 @@
     <value>First</value>
   </data>
   <data name="Format_All" xml:space="preserve">
-    <value>All {0}</value>
+    <value>-- All {0} --</value>
   </data>
   <data name="Format_ItemsPerPage" xml:space="preserve">
     <value>{0} Items Per Page</value>
   </data>
   <data name="Format_Please_Select" xml:space="preserve">
-    <value>Please Select {0}</value>
+    <value>-- Please Select {0} --</value>
   </data>
   <data name="Import" xml:space="preserve">
     <value>Import</value>

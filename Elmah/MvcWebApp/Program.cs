@@ -56,6 +56,10 @@ builder.Services.AddScoped<IElmahStatusCodeService, ElmahStatusCodeService>();
 builder.Services.AddScoped<IElmahTypeService, ElmahTypeService>();
 builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
 
+// 1.3. Other Services
+builder.Services.AddScoped<Elmah.MvcWebApp.Models.SelectListHelper>();
+
+builder.Services.AddScoped<Elmah.MvcWebApp.Models.SelectListHelper>();
 builder.Services.AddDbContext<EFDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => x.UseNetTopologySuite()), ServiceLifetime.Transient);
 

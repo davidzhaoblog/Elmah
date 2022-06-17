@@ -16,7 +16,7 @@
                     <h3 class="card-title" style="padding-top:7.5px;display:inline;">@localizor.Get("Search")</h3>
                     <div class="float-right">
                         <button class="btn btn-secondary" role="button" type="submit" title="@localizor.Get("Search")"`>
-                            <span class="fa fa-search"></span>
+                            <i class="fa fa-search"></i>
                         </button>
                         <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" />
                         <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
@@ -28,7 +28,7 @@
                 <div class="card-footer">
                     <div class="float-right">
                         <button class="btn btn-secondary" role="button" type="submit" title="@localizor.Get("Search")">
-                            <span class="fa fa-search"></span>
+                            <i class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
@@ -74,11 +74,14 @@
                                 <tr class="pt-0 pb-0">
                                     <td class="p-0">
                                         <div class="btn-group">
-                                            <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String] class="btn btn-secondary" role="button" title="@localizor.Get("FullDetails")">
-                                                <span class="fa fa-briefcase"></span>
+                                            <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.Result.ResponseBody[i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                                <i class="fa fa-briefcase"></i>
                                             </a>
-                                            <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" System.Linq.Enumerable+WhereSelectListIterator`2[nTierCraft.CodeGen.Contexts.PropertyContext,System.String] class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                                                <span class="fa fa-edit"></span>
+                                            <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model.Result.ResponseBody[i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model.Result.ResponseBody[i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                                <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
                                     </td>
