@@ -159,7 +159,12 @@ namespace Elmah.EFCoreRepositories
 
                 where
 
-                    (!toCompare.Name || t.Name.Contains(query.Name))
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Name.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Name.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Name.EndsWith(query.TextSearch)))
+                    &&
+                    (!string.IsNullOrEmpty(query.Name) && (query.NameSearchType == TextSearchTypes.Contains && t.Name.Contains(query.Name) || query.NameSearchType == TextSearchTypes.StartsWith && t.Name.StartsWith(query.Name) || query.NameSearchType == TextSearchTypes.EndsWith && t.Name.EndsWith(query.Name)))
                 select new ElmahStatusCodeModel
                 {
 
@@ -224,7 +229,12 @@ namespace Elmah.EFCoreRepositories
 
                 where
 
-                    (!toCompare.Name || t.Name.Contains(query.Name))
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Name.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Name.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Name.EndsWith(query.TextSearch)))
+                    &&
+                    (!string.IsNullOrEmpty(query.Name) && (query.NameSearchType == TextSearchTypes.Contains && t.Name.Contains(query.Name) || query.NameSearchType == TextSearchTypes.StartsWith && t.Name.StartsWith(query.Name) || query.NameSearchType == TextSearchTypes.EndsWith && t.Name.EndsWith(query.Name)))
                 select new NameValuePair
                 {
 

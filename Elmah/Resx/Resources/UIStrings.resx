@@ -127,6 +127,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Contains" xml:space="preserve">
+    <value>Contains</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -144,6 +147,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="EndsWith" xml:space="preserve">
+    <value>Ends With</value>
   </data>
   <data name="ExportToCsv" xml:space="preserve">
     <value>Export to Csv</value>
@@ -246,6 +252,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="StartsWith" xml:space="preserve">
+    <value>Starts With</value>
   </data>
   <data name="Tab_AlsoA" xml:space="preserve">
     <value>Also a ...</value>

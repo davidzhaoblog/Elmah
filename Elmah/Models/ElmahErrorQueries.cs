@@ -5,8 +5,9 @@ namespace Elmah.Models
 
     public class ElmahErrorAdvancedQuery: BaseQuery
     {
-        // will query all text columns in database
+        // will query all text columns in this table, ||
         public string? TextSearch { get; set; }
+        public TextSearchTypes TextSearchType { get; set; }
 
         // PredicateType:Equals
         public string? Application { get; set; }
@@ -28,9 +29,11 @@ namespace Elmah.Models
 
         // PredicateType:Contains
         public string? Message { get; set; }
+        public TextSearchTypes MessageSearchType { get; set; }
 
         // PredicateType:Contains
         public string? AllXml { get; set; }
+        public TextSearchTypes AllXmlSearchType { get; set; }
 
         public string? TimeUtcRange { get; set; }
         // PredicateType:Range - Lower Bound

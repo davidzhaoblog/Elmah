@@ -87,6 +87,15 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Contains"".
+        /// </summary>
+        public static string Contains {
+            get {
+                return ResourceManager.GetString("Contains", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Create"".
         /// </summary>
         public static string Create {
@@ -137,6 +146,15 @@ namespace Elmah.Resx.Resources {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Ends With"".
+        /// </summary>
+        public static string EndsWith {
+            get {
+                return ResourceManager.GetString("EndsWith", resourceCulture);
             }
         }
 
@@ -443,6 +461,15 @@ namespace Elmah.Resx.Resources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Starts With"".
+        /// </summary>
+        public static string StartsWith {
+            get {
+                return ResourceManager.GetString("StartsWith", resourceCulture);
             }
         }
 

@@ -1,4 +1,5 @@
 using Elmah.Resx;
+using Framework.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Elmah.MvcWebApp.Models
@@ -10,6 +11,17 @@ namespace Elmah.MvcWebApp.Models
         public SelectListHelper(IUIStrings localizor)
         {
             _localizor = localizor;
+        }
+
+        public List<SelectListItem> GetTextSearchTypeList()
+        {
+            var format_ItemsPerPage = _localizor.Get("Format_ItemsPerPage");
+
+            return new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = _localizor.Get(TextSearchTypes.Contains.ToString()), Value = TextSearchTypes.Contains.ToString(), Selected=true },
+                new SelectListItem{ Text = _localizor.Get(TextSearchTypes.StartsWith.ToString()), Value = TextSearchTypes.StartsWith.ToString() },
+                new SelectListItem{ Text = _localizor.Get(TextSearchTypes.EndsWith.ToString()), Value = TextSearchTypes.EndsWith.ToString()},
+            });
         }
 
         public List<SelectListItem> GetDefaultPageSizeList()

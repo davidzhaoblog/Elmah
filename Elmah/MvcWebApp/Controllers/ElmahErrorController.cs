@@ -64,6 +64,8 @@ namespace Elmah.MvcWebApp.Controllers
                 query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
             }
 
+            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+
             ViewBag.TimeUtcRangeList = _selectListHelper.GetDefaultPredefinedDateTimeRange();
             await LoadIndexViewTopLevelSelectLists();
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });

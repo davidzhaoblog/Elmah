@@ -165,7 +165,12 @@ namespace Elmah.EFCoreRepositories
 
                 where
 
-                    (!toCompare.Host || t.Host.Contains(query.Host))
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Host.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Host.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Host.EndsWith(query.TextSearch)))
+                    &&
+                    (!string.IsNullOrEmpty(query.Host) && (query.HostSearchType == TextSearchTypes.Contains && t.Host.Contains(query.Host) || query.HostSearchType == TextSearchTypes.StartsWith && t.Host.StartsWith(query.Host) || query.HostSearchType == TextSearchTypes.EndsWith && t.Host.EndsWith(query.Host)))
                     &&
                     (!toCompare.SpatialLocation || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
@@ -240,7 +245,12 @@ namespace Elmah.EFCoreRepositories
 
                 where
 
-                    (!toCompare.Host || t.Host.Contains(query.Host))
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Host.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Host.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Host.EndsWith(query.TextSearch)))
+                    &&
+                    (!string.IsNullOrEmpty(query.Host) && (query.HostSearchType == TextSearchTypes.Contains && t.Host.Contains(query.Host) || query.HostSearchType == TextSearchTypes.StartsWith && t.Host.StartsWith(query.Host) || query.HostSearchType == TextSearchTypes.EndsWith && t.Host.EndsWith(query.Host)))
                     &&
                     (!toCompare.SpatialLocation || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&

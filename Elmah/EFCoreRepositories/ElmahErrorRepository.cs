@@ -280,6 +280,11 @@ namespace Elmah.EFCoreRepositories
                 join User in _dbcontext.ElmahUser on t.User equals User.User
                 where
 
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Message.Contains(query.TextSearch) || t.AllXml.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Message.StartsWith(query.TextSearch) || t.AllXml.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Message.EndsWith(query.TextSearch) || t.AllXml.EndsWith(query.TextSearch)))
+                    &&
                     (!toCompare.Application || Application.Application == query.Application)
                     &&
                     (!toCompare.Host || Host.Host == query.Host)
@@ -292,9 +297,9 @@ namespace Elmah.EFCoreRepositories
                     &&
                     (!toCompare.User || User.User == query.User)
                     &&
-                    (!toCompare.Message || t.Message.Contains(query.Message))
+                    (!string.IsNullOrEmpty(query.Message) && (query.MessageSearchType == TextSearchTypes.Contains && t.Message.Contains(query.Message) || query.MessageSearchType == TextSearchTypes.StartsWith && t.Message.StartsWith(query.Message) || query.MessageSearchType == TextSearchTypes.EndsWith && t.Message.EndsWith(query.Message)))
                     &&
-                    (!toCompare.AllXml || t.AllXml.Contains(query.AllXml))
+                    (!string.IsNullOrEmpty(query.AllXml) && (query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml.EndsWith(query.AllXml)))
                     &&
                     (!toCompare.TimeUtcRangeLower && !toCompare.TimeUtcRangeUpper || (!toCompare.TimeUtcRangeLower || t.TimeUtc >= query.TimeUtcRangeLower) && (!toCompare.TimeUtcRangeUpper || t.TimeUtc <= query.TimeUtcRangeUpper))
                 select new ElmahErrorModel.DefaultView
@@ -391,6 +396,11 @@ namespace Elmah.EFCoreRepositories
                 join User in _dbcontext.ElmahUser on t.User equals User.User
                 where
 
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Message.Contains(query.TextSearch) || t.AllXml.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Message.StartsWith(query.TextSearch) || t.AllXml.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Message.EndsWith(query.TextSearch) || t.AllXml.EndsWith(query.TextSearch)))
+                    &&
                     (!toCompare.Application || Application.Application == query.Application)
                     &&
                     (!toCompare.Host || Host.Host == query.Host)
@@ -403,9 +413,9 @@ namespace Elmah.EFCoreRepositories
                     &&
                     (!toCompare.User || User.User == query.User)
                     &&
-                    (!toCompare.Message || t.Message.Contains(query.Message))
+                    (!string.IsNullOrEmpty(query.Message) && (query.MessageSearchType == TextSearchTypes.Contains && t.Message.Contains(query.Message) || query.MessageSearchType == TextSearchTypes.StartsWith && t.Message.StartsWith(query.Message) || query.MessageSearchType == TextSearchTypes.EndsWith && t.Message.EndsWith(query.Message)))
                     &&
-                    (!toCompare.AllXml || t.AllXml.Contains(query.AllXml))
+                    (!string.IsNullOrEmpty(query.AllXml) && (query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml.EndsWith(query.AllXml)))
                     &&
                     (!toCompare.TimeUtcRangeLower && !toCompare.TimeUtcRangeUpper || (!toCompare.TimeUtcRangeLower || t.TimeUtc >= query.TimeUtcRangeLower) && (!toCompare.TimeUtcRangeUpper || t.TimeUtc <= query.TimeUtcRangeUpper))
                 select new NameValuePair

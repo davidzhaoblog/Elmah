@@ -46,6 +46,8 @@ namespace Elmah.MvcWebApp.Controllers
                 query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
             }
 
+            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+
             return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]> { Query = query, Result = result });
         }
 

@@ -24,6 +24,16 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="input-group m-0 p-0">
+                        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
+                        </select>
+                        <input asp-for="Query.TextSearch" class="form-control"  aria-label="Search text in all text fields"/>
+                    </div>
+                    @*<div class="input-group m-0 p-0">
+                        <select asp-for="Query.NameType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
+                        </select>
+                        <input asp-for="Query.Name" class="form-control"  aria-label="Search text in Name field"/>
+                    </div>*@
                 </div>
                 <div class="card-footer">
                     <div class="float-right">

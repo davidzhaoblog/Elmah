@@ -154,7 +154,12 @@ namespace Elmah.EFCoreRepositories
 
                 where
 
-                    (!toCompare.User || t.User.Contains(query.User))
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.User.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.User.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.User.EndsWith(query.TextSearch)))
+                    &&
+                    (!string.IsNullOrEmpty(query.User) && (query.UserSearchType == TextSearchTypes.Contains && t.User.Contains(query.User) || query.UserSearchType == TextSearchTypes.StartsWith && t.User.StartsWith(query.User) || query.UserSearchType == TextSearchTypes.EndsWith && t.User.EndsWith(query.User)))
                 select new ElmahUserModel
                 {
 
@@ -218,7 +223,12 @@ namespace Elmah.EFCoreRepositories
 
                 where
 
-                    (!toCompare.User || t.User.Contains(query.User))
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (t.User.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.User.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.User.EndsWith(query.TextSearch)))
+                    &&
+                    (!string.IsNullOrEmpty(query.User) && (query.UserSearchType == TextSearchTypes.Contains && t.User.Contains(query.User) || query.UserSearchType == TextSearchTypes.StartsWith && t.User.StartsWith(query.User) || query.UserSearchType == TextSearchTypes.EndsWith && t.User.EndsWith(query.User)))
                 select new NameValuePair
                 {
 
