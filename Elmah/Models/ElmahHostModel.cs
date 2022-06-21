@@ -11,7 +11,7 @@ namespace Elmah.Models
         public string Host { get; set; } = null!;
 
         [Display(Name = "SpatialLocation", ResourceType = typeof(UIStrings))]
-        public Microsoft.Spatial.Geography SpatialLocation { get; set; }
+        public Microsoft.Spatial.Geography? SpatialLocation { get; set; }
 
     }
 }

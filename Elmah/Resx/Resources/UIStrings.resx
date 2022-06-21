@@ -172,6 +172,9 @@
   <data name="Last" xml:space="preserve">
     <value>Last</value>
   </data>
+  <data name="MoreDetails" xml:space="preserve">
+    <value>More Details</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
@@ -243,6 +246,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="Tab_AlsoA" xml:space="preserve">
+    <value>Also a ...</value>
   </data>
   <data name="ErrorId" xml:space="preserve">
     <value>Error Id</value>
@@ -342,6 +348,12 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="Tab_Lists" xml:space="preserve">
+    <value>Lists</value>
+  </data>
+  <data name="Section_ElmahErrors" xml:space="preserve">
+    <value>Elmah Errors</value>
   </data>
   <data name="SpatialLocation" xml:space="preserve">
     <value>Spatial Location</value>

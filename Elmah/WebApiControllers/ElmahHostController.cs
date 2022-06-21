@@ -78,6 +78,14 @@ namespace Elmah.WebApiControllers
             return ReturnActionResult(serviceResponse);
         }
 
+        // [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<ElmahHostCompositeModel>> GetCompositeModel(ElmahHostIdModel id)
+        {
+            var serviceResponse = await _thisService.GetCompositeModel(id, null);
+            return Ok(serviceResponse);
+        }
+
         /*
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]

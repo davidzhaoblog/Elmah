@@ -1,2 +1,2 @@
-﻿TABLE_SCHEMA,TABLE_NAME,Enabled,DeepFKType,Order,PropertyNameInDashboardVM,BaseTableName,MasterTableName,EntityReferenceSimpleFullPath,EntityReferenceName,CachingOption,IsRequired,IsATab,InXamarinFormsVM,FuntionDashboardName,InBaseTableFuntionDashboard,InWizard,WizardOrder
-dbo,ElmahType,True,ListTable,20100,ELMAH_Error,,,,FK_ELMAH_Error_ElmahType,UpdateCacheWhenMasterLoaded,False,False,False,,False,False,0
+﻿TABLE_SCHEMA,TABLE_NAME,Enabled,DeepFKType,Order,PropertyNameInDashboardVM,BaseTableName,MasterTableName,ForeignKeyTableName,EntityReferenceSimpleFullPath,EntityReferenceName,CachingOption,IsRequired,IsATab,InXamarinFormsVM,FuntionDashboardName,InBaseTableFuntionDashboard,InWizard,WizardOrder
+dbo,ElmahType,True,ListTable,20100,ElmahErrors,,,ElmahError,,FK_ELMAH_Error_ElmahType,UpdateCacheWhenMasterLoaded,False,False,False,Lists,False,False,0

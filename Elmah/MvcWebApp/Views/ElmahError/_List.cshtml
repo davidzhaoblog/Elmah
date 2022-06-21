@@ -1,0 +1,68 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@model PagedResponse<ElmahErrorModel.DefaultView[]>
+@inject IUIStrings localizor;
+<table id="masterList" class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr class="pt-0 pb-0">
+            <th class="p-0"></th>
+            <th class="pt-0 pb-0">@localizor.Get("ErrorId")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Application")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Host")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Type")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Source")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Message")</th>
+            <th class="pt-0 pb-0">@localizor.Get("User")</th>
+            <th class="pt-0 pb-0">@localizor.Get("StatusCode")</th>
+            <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
+            <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+        {
+            for (var i = 0; i < Model.ResponseBody.Length; i++)
+            {
+                <tr class="pt-0 pb-0">
+                    <td class="p-0">
+                        <div class="btn-group">
+                            <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                <i class="fa fa-briefcase"></i>
+                            </a>
+                            <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].ErrorId</td>
+                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody[i].Application">@Model.ResponseBody[i].Application_Name</a></td>
+                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody[i].Host">@Model.ResponseBody[i].Host_Name</a></td>
+                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ResponseBody[i].Type">@Model.ResponseBody[i].Type_Name</a></td>
+                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody[i].Source">@Model.ResponseBody[i].Source_Name</a></td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].Message</td>
+                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody[i].User">@Model.ResponseBody[i].User_Name</a></td>
+                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody[i].StatusCode">@Model.ResponseBody[i].StatusCode_Name</a></td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].TimeUtc</td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].Sequence</td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].AllXml</td>
+                </tr>
+            }
+        }
+        else if (Model != null)
+        {
+            <tr>
+                <td colspan="50">
+                    <div class="text-danger">@Model.StatusMessage</div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

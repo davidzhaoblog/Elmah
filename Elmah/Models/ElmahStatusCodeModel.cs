@@ -12,7 +12,7 @@ namespace Elmah.Models
 
         [Display(Name = "Name", ResourceType = typeof(UIStrings))]
         [StringLength(50, ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="The_length_of_Name_should_be_0_to_50")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
     }
 }

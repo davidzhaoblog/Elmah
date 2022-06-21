@@ -26,7 +26,6 @@
     <ProjectReference Include="..\Resx\Elmah.Resx.csproj" />
     <ProjectReference Include="..\ServiceContracts\Elmah.ServiceContracts.csproj" />
     <ProjectReference Include="..\Services\Elmah.Services.csproj" />
-    <ProjectReference Include="..\WebApiControllers\Elmah.WebApiControllers.csproj" />
 </ItemGroup>
 
 </Project>

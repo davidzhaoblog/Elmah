@@ -1,0 +1,103 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@model ElmahApplicationCompositeModel;
+@inject IUIStrings localizor;
+@{
+    ViewData["Title"] = localizor.Get("Dashboard");
+}
+<div class="row">
+    <div class="col-12 col-md-8 nopadding">
+        <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lists-tab" data-bs-toggle="tab" data-bs-target="#lists" type="button" role="tab" aria-controls="lists" aria-selected="true">@localizor.Get("Tab_lists")</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="dashboardTabContent">
+            <div class="tab-pane fade show active" id="lists" role="tabpanel" aria-labelledby="lists-tab">
+                <div class="accordion" id="listsPanels">
+                    @if (Model.Responses.ContainsKey(ElmahApplicationCompositeDataOptions.ElmahErrors))
+                    {
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-elmahErrors">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-elmahErrors" aria-expanded="true" aria-controls="panelsStayOpen-elmahErrors">
+                                    @localizor.Get("Section_ElmahErrors")
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-elmahErrors" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-elmahErrors">
+                                <div class="accordion-body">
+                                    <div class="btn-group">
+                                        <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
+                                            <span class="fa fa-search"></span>
+                                        </a>
+                                    </div>
+                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].Status ?? System.Net.HttpStatusCode.NoContent, StatusMessage= Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].StatusMessage })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <!-- ElmahApplicationCompositeDataOptions.__Master__ -->
+        <div class="card-group">
+            <div class="card">
+                <div class="card-header">
+                    <h3 style="display: inline;">
+                        @localizor.Get("ElmahApplication")
+                    </h3>
+                </div>
+                @if (Model.Responses[ElmahApplicationCompositeDataOptions.__Master__].Status == System.Net.HttpStatusCode.OK && Model.__Master__ != null)
+                { // Item
+                    <div class="card-header">
+                        <div class="btn-group">
+                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model?.__Master__.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <span class="fa fa-edit"></span>
+                            </a>
+                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                                <span class="fa fa-plus"></span>
+                            </a>
+                            @*<a asp-area="" asp-controller="ElmahApplication" asp-action="Copy" asp-route-application="@Model?.__Master__.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Copy")">
+                                <span class="fa fa-copy"></span>
+                            </a>*@
+                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Details" asp-route-application="@Model?.__Master__.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Details")">
+                                <span class="fa fa-file"></span>
+                            </a>
+                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
+                                <span class="fa fa-search"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="__Master__.Application" class="control-label"></label>
+                            <input asp-for="__Master__.Application" class="form-control" readonly />
+                        </div>
+                    </div>
+                    @*
+                    <div class="card-footer">
+                        <div class="btn-group">
+                        </div>
+                    </div>*@
+                }
+                else
+                {
+                    <div class="btn-group">
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                            <span class="fa fa-plus"></span>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                    <div class="text-danger">@Model.Responses[ElmahApplicationCompositeDataOptions.__Master__]</div>
+                    <div class="btn-group">
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- ElmahApplicationCompositeDataOptions.__Master__ -->
+    </div>
+</div>

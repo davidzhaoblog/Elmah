@@ -33,7 +33,14 @@
     ""
   ],
   "coreTables": [],
-  "detailsTables": [],
+  "detailsTables": [
+    "ElmahApplication",
+    "ElmahHost",
+    "ElmahSource",
+    "ElmahStatusCode",
+    "ElmahType",
+    "ElmahUser"
+  ],
   "codeListTables": [],
   "lookupTables": [],
   "listTables": [],

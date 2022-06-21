@@ -12,6 +12,9 @@ namespace Elmah.ServiceContracts
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahSourceAdvancedQuery query);
 
+        Task<ElmahSourceCompositeModel> GetCompositeModel(
+            ElmahSourceIdModel id, ElmahSourceCompositeDataOptions[]? dataOptions = null);
+
     }
 }
 

@@ -2,7 +2,7 @@ namespace Elmah.ModelContracts
 {
     public interface IElmahHost: IElmahHostIdentifier
     {
-        Microsoft.Spatial.Geography SpatialLocation { get; set; }
+        Microsoft.Spatial.Geography? SpatialLocation { get; set; }
     }
 }
 

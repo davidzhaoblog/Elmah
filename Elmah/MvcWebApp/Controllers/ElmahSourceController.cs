@@ -49,6 +49,14 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]> { Query = query, Result = result });
         }
 
+        // GET: ElmahSource/Dashboard/{Source}
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahSourceIdModel id)
+        {
+            var result = await _thisService.GetCompositeModel(id);
+            return View(result);
+        }
+
         // GET: ElmahSource/Details/{Source}
         [Route("[controller]/[action]/{Source}")]
         public async Task<IActionResult> Details([FromRoute]ElmahSourceIdModel id)

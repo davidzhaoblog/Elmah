@@ -1,0 +1,50 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@model PagedResponse<ElmahStatusCodeModel[]>
+@inject IUIStrings localizor;
+<table id="masterList" class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr class="pt-0 pb-0">
+            <th class="p-0"></th>
+            <th class="pt-0 pb-0">@localizor.Get("StatusCode")</th>
+            <th class="pt-0 pb-0">@localizor.Get("Name")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+        {
+            for (var i = 0; i < Model.ResponseBody.Length; i++)
+            {
+                <tr class="pt-0 pb-0">
+                    <td class="p-0">
+                        <div class="btn-group">
+                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                <i class="fa fa-briefcase"></i>
+                            </a>
+                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Edit" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Delete" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].StatusCode</td>
+                    <td class="pt-0 pb-0">@Model.ResponseBody[i].Name</td>
+                </tr>
+            }
+        }
+        else if (Model != null)
+        {
+            <tr>
+                <td colspan="50">
+                    <div class="text-danger">@Model.StatusMessage</div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

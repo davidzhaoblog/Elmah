@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk" >
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,11 +9,11 @@
     <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.5" />
 </ItemGroup>
 <ItemGroup>
-  <Compile Update="Resources\UIStrings.Designer.cs">
-    <DesignTime>True</DesignTime>
-    <AutoGen>True</AutoGen>
-    <DependentUpon>UIStrings.resx</DependentUpon>
-  </Compile>
+    <Compile Update="Resources\UIStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen >
+      <DependentUpon>UIStrings.resx</DependentUpon>
+    </Compile>
 </ItemGroup>
 <ItemGroup>
     <EmbeddedResource Update="Resources\UIStrings.resx">

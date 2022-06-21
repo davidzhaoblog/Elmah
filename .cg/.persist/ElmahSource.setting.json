@@ -1,0 +1,281 @@
+{
+  "name": "ElmahModel.ElmahSource",
+  "entityDefinition": null,
+  "dataViewCollection": [
+    {
+      "key": "NameValuePair",
+      "dataViewKnownCategory": 5,
+      "isGroupByResult": false,
+      "defaultOrderByPropertyName": null,
+      "properties": [
+        {
+          "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
+          "keySpecified": true,
+          "descriptionSpecified": false,
+          "value": "(SystemString)Value=Source;(SystemString)Name=Source~Name"
+        },
+        {
+          "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
+          "keySpecified": true,
+          "descriptionSpecified": false,
+          "value": ""
+        },
+        {
+          "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
+          "keySpecified": true,
+          "descriptionSpecified": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "key": "RssItem",
+      "dataViewKnownCategory": 4,
+      "isGroupByResult": false,
+      "defaultOrderByPropertyName": null,
+      "properties": [
+        {
+          "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
+          "keySpecified": true,
+          "descriptionSpecified": false,
+          "value": "(SystemString)IdentifierInString=Source.ToString();(SystemString)Title=Source;(SystemString)Description=Source"
+        },
+        {
+          "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
+          "keySpecified": true,
+          "descriptionSpecified": false,
+          "value": ""
+        },
+        {
+          "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
+          "keySpecified": true,
+          "descriptionSpecified": false,
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "criteriaCollection": [
+    {
+      "key": "AdvancedQuery",
+      "description": "Query by EntityReference, String, Bool, Order By DateTime",
+      "sourceTypeFullName": "ElmahModel.ElmahSource",
+      "queries": [
+        {
+          "keySpecified": false,
+          "descriptionSpecified": false,
+          "value": "AdvancedQuery"
+        }
+      ]
+    },
+    {
+      "key": "Identifier",
+      "description": "Query by Identifier/UniqueConstraint/CompositeIdentifier",
+      "sourceTypeFullName": "ElmahModel.ElmahSource",
+      "queries": [
+        {
+          "keySpecified": false,
+          "descriptionSpecified": false,
+          "value": "Identifier"
+        }
+      ]
+    }
+  ],
+  "queryCollection": [
+    {
+      "key": "AdvancedQuery",
+      "dataQueryPerQueryKnownKey": 1,
+      "sourceTypeDeclarationFullName": "ElmahModel.ElmahSource",
+      "conditionOperator": 0,
+      "hasStringContainsDataQueryPerQueryUnitSettingForAll": true,
+      "queryUnits": [
+        {
+          "key": "AdvancedQuery",
+          "keySpecified": true,
+          "dataQueryPerQueryUnitSettingType": 0,
+          "outterConditionOperator": 0,
+          "conditionOperator": 0,
+          "value": ""
+        },
+        {
+          "key": "AdvancedQuery",
+          "keySpecified": true,
+          "dataQueryPerQueryUnitSettingType": 0,
+          "outterConditionOperator": 0,
+          "conditionOperator": 1,
+          "value": "Source=:Source.Contains"
+        },
+        {
+          "key": "AdvancedQuery",
+          "keySpecified": true,
+          "dataQueryPerQueryUnitSettingType": 0,
+          "outterConditionOperator": 0,
+          "conditionOperator": 1,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "key": "Identifier",
+      "dataQueryPerQueryKnownKey": 2,
+      "sourceTypeDeclarationFullName": "ElmahModel.ElmahSource",
+      "conditionOperator": 1,
+      "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
+      "queryUnits": [
+        {
+          "key": "Identifier",
+          "keySpecified": true,
+          "dataQueryPerQueryUnitSettingType": 1,
+          "outterConditionOperator": 0,
+          "conditionOperator": 0,
+          "value": "Source=:Source.Equals"
+        }
+      ]
+    }
+  ],
+  "dataOperationCollection": null,
+  "queryResultCollection": [
+    {
+      "key": "Search",
+      "criteriaKey": "AdvancedQuery",
+      "dataViewKey": "",
+      "orderBys": ""
+    },
+    {
+      "key": "GetCodeList",
+      "criteriaKey": "AdvancedQuery",
+      "dataViewKey": "NameValuePair",
+      "orderBys": ""
+    }
+  ],
+  "uiViewCollection": [
+    {
+      "masterTypeFullName": "ElmahModel.ElmahSource",
+      "key": "Index",
+      "uiViewType": 1,
+      "dataViewKey": null,
+      "criteriaKey": "AdvancedQuery",
+      "queryKey": null,
+      "keyOfViewModelData": null,
+      "keyOfReferencedViewModel": null,
+      "excludedProjects": null,
+      "embeddedQuery": null,
+      "dataView": null,
+      "hasCreateUI": false,
+      "hasEditUI": false,
+      "hasDeleteUI": false,
+      "hasDetailsUI": false,
+      "partialViews": null,
+      "partialViewReferences": null,
+      "propertyList": null
+    },
+    {
+      "masterTypeFullName": "ElmahModel.ElmahSource",
+      "key": "Dashboard",
+      "uiViewType": 2,
+      "dataViewKey": null,
+      "criteriaKey": null,
+      "queryKey": null,
+      "keyOfViewModelData": null,
+      "keyOfReferencedViewModel": null,
+      "excludedProjects": null,
+      "embeddedQuery": null,
+      "dataView": null,
+      "hasCreateUI": false,
+      "hasEditUI": false,
+      "hasDeleteUI": false,
+      "hasDetailsUI": false,
+      "partialViews": [
+        {
+          "sourceTypeDeclarationFullName": "ElmahModel.ElmahError",
+          "group": 2,
+          "key": "V_ElmahError_Via_Source_List",
+          "uiViewType": 4,
+          "criteriaKey": "AdvancedQuery",
+          "dataViewKey": "DefaultView",
+          "entityReferenceSimpleFullPath": null,
+          "entityReferenceName": "FK_ELMAH_Error_ElmahSource",
+          "dataBindingRelativePath": "ElmahErrors",
+          "propertyList": "Application_Name;Host_Name;Source_Name;StatusCode_Name;Type_Name;User_Name;Application;Host;Type;Source;Message;User;StatusCode;TimeUtc;Sequence;AllXml"
+        },
+        {
+          "sourceTypeDeclarationFullName": "ElmahModel.ElmahSource",
+          "group": 3,
+          "key": "V_ElmahSource_Via_This",
+          "uiViewType": 3,
+          "criteriaKey": "Identifier",
+          "dataViewKey": null,
+          "entityReferenceSimpleFullPath": "",
+          "entityReferenceName": "",
+          "dataBindingRelativePath": "MasterEntity",
+          "propertyList": "Source"
+        }
+      ],
+      "partialViewReferences": null,
+      "propertyList": null
+    },
+    {
+      "masterTypeFullName": "ElmahModel.ElmahSource",
+      "key": "AdvancedQuerySearchView",
+      "uiViewType": 7,
+      "dataViewKey": null,
+      "criteriaKey": "AdvancedQuery",
+      "queryKey": null,
+      "keyOfViewModelData": null,
+      "keyOfReferencedViewModel": "TabIndex",
+      "excludedProjects": null,
+      "embeddedQuery": null,
+      "dataView": null,
+      "hasCreateUI": false,
+      "hasEditUI": false,
+      "hasDeleteUI": false,
+      "hasDetailsUI": false,
+      "partialViews": null,
+      "partialViewReferences": null,
+      "propertyList": null
+    },
+    {
+      "masterTypeFullName": "ElmahModel.ElmahSource",
+      "key": "AdvancedQueryResultView",
+      "uiViewType": 8,
+      "dataViewKey": null,
+      "criteriaKey": "AdvancedQuery",
+      "queryKey": null,
+      "keyOfViewModelData": null,
+      "keyOfReferencedViewModel": "TabIndex",
+      "excludedProjects": null,
+      "embeddedQuery": null,
+      "dataView": null,
+      "hasCreateUI": false,
+      "hasEditUI": false,
+      "hasDeleteUI": false,
+      "hasDetailsUI": false,
+      "partialViews": null,
+      "partialViewReferences": null,
+      "propertyList": null
+    },
+    {
+      "masterTypeFullName": "ElmahModel.ElmahSource",
+      "key": "Lists",
+      "uiViewType": 10,
+      "dataViewKey": null,
+      "criteriaKey": null,
+      "queryKey": null,
+      "keyOfViewModelData": "Dashboard",
+      "keyOfReferencedViewModel": null,
+      "excludedProjects": null,
+      "embeddedQuery": null,
+      "dataView": null,
+      "hasCreateUI": false,
+      "hasEditUI": false,
+      "hasDeleteUI": false,
+      "hasDetailsUI": false,
+      "partialViews": [],
+      "partialViewReferences": null,
+      "propertyList": null
+    }
+  ],
+  "entityReferenceResultForPersistAliasCollection": [],
+  "entityReferenceResultForPersistAliasCollectionOfBridged": null,
+  "entityReferenceResultForPersistAliasCollectionOfCrossJoined": null
+}

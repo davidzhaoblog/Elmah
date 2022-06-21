@@ -13,7 +13,7 @@ namespace Elmah.EFCoreContext
         }
         public int StatusCode { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public ICollection<ElmahError> ELMAH_Error { get; set; }
 
