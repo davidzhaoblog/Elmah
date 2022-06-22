@@ -6,6 +6,7 @@ using Framework.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Elmah.EFCoreRepositories
 {
@@ -155,6 +156,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Source!.EndsWith(query.TextSearch)))
                     &&
                     (string.IsNullOrEmpty(query.Source) || query.SourceSearchType == TextSearchTypes.Contains && t.Source!.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source!.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source!.EndsWith(query.Source))
+
                 select new ElmahSourceModel
                 {
 
@@ -219,6 +221,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Source!.EndsWith(query.TextSearch)))
                     &&
                     (string.IsNullOrEmpty(query.Source) || query.SourceSearchType == TextSearchTypes.Contains && t.Source!.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source!.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source!.EndsWith(query.Source))
+
                 select new NameValuePair
                 {
 

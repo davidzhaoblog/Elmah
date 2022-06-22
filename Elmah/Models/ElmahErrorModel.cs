@@ -51,26 +51,26 @@ namespace Elmah.Models
         public partial class DefaultView
         {
             [Display(Name = "Application", ResourceType = typeof(UIStrings))]
-            public string Application_Name { get; set; } = null!;
+            public string? Application_Name { get; set; }
 
             [Display(Name = "ErrorId", ResourceType = typeof(UIStrings))]
             [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="ErrorId_is_required")]
             public System.Guid ErrorId { get; set; }
 
             [Display(Name = "Host", ResourceType = typeof(UIStrings))]
-            public string Host_Name { get; set; } = null!;
+            public string? Host_Name { get; set; }
 
             [Display(Name = "Source", ResourceType = typeof(UIStrings))]
-            public string Source_Name { get; set; } = null!;
+            public string? Source_Name { get; set; }
 
             [Display(Name = "Name", ResourceType = typeof(UIStrings))]
-            public string StatusCode_Name { get; set; } = null!;
+            public string? StatusCode_Name { get; set; }
 
             [Display(Name = "Type", ResourceType = typeof(UIStrings))]
-            public string Type_Name { get; set; } = null!;
+            public string? Type_Name { get; set; }
 
             [Display(Name = "User", ResourceType = typeof(UIStrings))]
-            public string User_Name { get; set; } = null!;
+            public string? User_Name { get; set; }
 
             [Display(Name = "ElmahApplication", ResourceType = typeof(UIStrings))]
             public string Application { get; set; } = null!;

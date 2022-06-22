@@ -6,6 +6,7 @@ using Framework.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Elmah.EFCoreRepositories
 {
@@ -67,6 +68,7 @@ namespace Elmah.EFCoreRepositories
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User
                     where t.ErrorId == id.ErrorId
+
                     select new ElmahErrorModel.DefaultView
                     {
 
@@ -139,6 +141,7 @@ namespace Elmah.EFCoreRepositories
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User
                     where t.ErrorId == toInsert.ErrorId
+
                     select new ElmahErrorModel.DefaultView
                     {
 
@@ -214,6 +217,7 @@ namespace Elmah.EFCoreRepositories
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User
                     where t.ErrorId == existing.ErrorId
+
                     select new ElmahErrorModel.DefaultView
                     {
 
@@ -288,6 +292,7 @@ namespace Elmah.EFCoreRepositories
                     (string.IsNullOrEmpty(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml!.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml!.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml!.EndsWith(query.AllXml))
                     &&
                     (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
+
                 select new ElmahErrorModel.DefaultView
                 {
 
@@ -390,6 +395,7 @@ namespace Elmah.EFCoreRepositories
                     (string.IsNullOrEmpty(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml!.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml!.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml!.EndsWith(query.AllXml))
                     &&
                     (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
+
                 select new NameValuePair
                 {
 
