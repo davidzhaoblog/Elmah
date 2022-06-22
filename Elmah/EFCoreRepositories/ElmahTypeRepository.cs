@@ -150,11 +150,11 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Type.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Type.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Type.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Type!.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Type!.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Type!.EndsWith(query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Type) || query.TypeSearchType == TextSearchTypes.Contains && t.Type.Contains(query.Type) || query.TypeSearchType == TextSearchTypes.StartsWith && t.Type.StartsWith(query.Type) || query.TypeSearchType == TextSearchTypes.EndsWith && t.Type.EndsWith(query.Type))
+                    (string.IsNullOrEmpty(query.Type) || query.TypeSearchType == TextSearchTypes.Contains && t.Type!.Contains(query.Type) || query.TypeSearchType == TextSearchTypes.StartsWith && t.Type!.StartsWith(query.Type) || query.TypeSearchType == TextSearchTypes.EndsWith && t.Type!.EndsWith(query.Type))
                 select new ElmahTypeModel
                 {
 
@@ -214,11 +214,11 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Type.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Type.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Type.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Type!.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Type!.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Type!.EndsWith(query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Type) || query.TypeSearchType == TextSearchTypes.Contains && t.Type.Contains(query.Type) || query.TypeSearchType == TextSearchTypes.StartsWith && t.Type.StartsWith(query.Type) || query.TypeSearchType == TextSearchTypes.EndsWith && t.Type.EndsWith(query.Type))
+                    (string.IsNullOrEmpty(query.Type) || query.TypeSearchType == TextSearchTypes.Contains && t.Type!.Contains(query.Type) || query.TypeSearchType == TextSearchTypes.StartsWith && t.Type!.StartsWith(query.Type) || query.TypeSearchType == TextSearchTypes.EndsWith && t.Type!.EndsWith(query.Type))
                 select new NameValuePair
                 {
 

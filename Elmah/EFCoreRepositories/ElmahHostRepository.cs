@@ -159,13 +159,13 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Host.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Host.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Host.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Host!.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Host!.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Host!.EndsWith(query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Host) || query.HostSearchType == TextSearchTypes.Contains && t.Host.Contains(query.Host) || query.HostSearchType == TextSearchTypes.StartsWith && t.Host.StartsWith(query.Host) || query.HostSearchType == TextSearchTypes.EndsWith && t.Host.EndsWith(query.Host))
+                    (string.IsNullOrEmpty(query.Host) || query.HostSearchType == TextSearchTypes.Contains && t.Host!.Contains(query.Host) || query.HostSearchType == TextSearchTypes.StartsWith && t.Host!.StartsWith(query.Host) || query.HostSearchType == TextSearchTypes.EndsWith && t.Host!.EndsWith(query.Host))
                     &&
-                    (query.SpatialLocation == null || query.SpatialLocation.IsEmpty || !query.SpatialLocationRadius.HasValue || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
+                    (query.SpatialLocation == null || query.SpatialLocation.IsEmpty || !query.SpatialLocationRadius.HasValue || t.SpatialLocation____ != null && t.SpatialLocation____!.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
                     (query.SpatialLocationGeographyIntersects == null || query.SpatialLocationGeographyIntersects.IsEmpty || t.SpatialLocation____ != null && geoQueryValue.SpatialLocationGeographyIntersects != null && geoQueryValue.SpatialLocationGeographyIntersects.Contains(t.SpatialLocation____))
                 select new ElmahHostModel
@@ -232,13 +232,13 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Host.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Host.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Host.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Host!.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Host!.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Host!.EndsWith(query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Host) || query.HostSearchType == TextSearchTypes.Contains && t.Host.Contains(query.Host) || query.HostSearchType == TextSearchTypes.StartsWith && t.Host.StartsWith(query.Host) || query.HostSearchType == TextSearchTypes.EndsWith && t.Host.EndsWith(query.Host))
+                    (string.IsNullOrEmpty(query.Host) || query.HostSearchType == TextSearchTypes.Contains && t.Host!.Contains(query.Host) || query.HostSearchType == TextSearchTypes.StartsWith && t.Host!.StartsWith(query.Host) || query.HostSearchType == TextSearchTypes.EndsWith && t.Host!.EndsWith(query.Host))
                     &&
-                    (query.SpatialLocation == null || query.SpatialLocation.IsEmpty || !query.SpatialLocationRadius.HasValue || t.SpatialLocation____ != null && t.SpatialLocation____.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
+                    (query.SpatialLocation == null || query.SpatialLocation.IsEmpty || !query.SpatialLocationRadius.HasValue || t.SpatialLocation____ != null && t.SpatialLocation____!.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
                     (query.SpatialLocationGeographyIntersects == null || query.SpatialLocationGeographyIntersects.IsEmpty || t.SpatialLocation____ != null && geoQueryValue.SpatialLocationGeographyIntersects != null && geoQueryValue.SpatialLocationGeographyIntersects.Contains(t.SpatialLocation____))
                 select new NameValuePair

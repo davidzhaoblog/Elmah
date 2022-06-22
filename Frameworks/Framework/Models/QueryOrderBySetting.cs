@@ -16,7 +16,7 @@ namespace Framework.Models
                 return Enumerable.Empty<QueryOrderBySetting>();
 
             var result = new List<QueryOrderBySetting>();
-            foreach (string _Splitted1Item in _Splitted1)
+            foreach (string _Splitted1Item in _Splitted1!)
             {
                 if (string.IsNullOrWhiteSpace(_Splitted1Item) == false)
                 {

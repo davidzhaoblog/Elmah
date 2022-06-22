@@ -16,7 +16,7 @@
         <div class="tab-content" id="dashboardTabContent">
             <div class="tab-pane fade show active" id="lists" role="tabpanel" aria-labelledby="lists-tab">
                 <div class="accordion" id="listsPanels">
-                    @if (Model.Responses.ContainsKey(ElmahApplicationCompositeDataOptions.ElmahErrors))
+                    @if (Model!.Responses.ContainsKey(ElmahApplicationCompositeDataOptions.ElmahErrors))
                     {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-elmahErrors">
@@ -49,7 +49,7 @@
                         @localizor.Get("ElmahApplication")
                     </h3>
                 </div>
-                @if (Model.Responses[ElmahApplicationCompositeDataOptions.__Master__].Status == System.Net.HttpStatusCode.OK && Model.__Master__ != null)
+                @if (Model!.Responses[ElmahApplicationCompositeDataOptions.__Master__].Status == System.Net.HttpStatusCode.OK && Model!.__Master__ != null)
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
@@ -92,7 +92,7 @@
                             <span class="fa fa-search"></span>
                         </a>
                     </div>
-                    <div class="text-danger">@Model.Responses[ElmahApplicationCompositeDataOptions.__Master__]</div>
+                    <div class="text-danger">@Model!.Responses[ElmahApplicationCompositeDataOptions.__Master__]</div>
                     <div class="btn-group">
                     </div>
                 }

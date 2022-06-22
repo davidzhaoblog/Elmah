@@ -150,11 +150,11 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Application.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Application.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Application.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Application!.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Application!.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Application!.EndsWith(query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Application) || query.ApplicationSearchType == TextSearchTypes.Contains && t.Application.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application.EndsWith(query.Application))
+                    (string.IsNullOrEmpty(query.Application) || query.ApplicationSearchType == TextSearchTypes.Contains && t.Application!.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application!.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application!.EndsWith(query.Application))
                 select new ElmahApplicationModel
                 {
 
@@ -214,11 +214,11 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Application.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Application.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Application.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (t.Application!.Contains(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Application!.StartsWith(query.TextSearch)) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Application!.EndsWith(query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Application) || query.ApplicationSearchType == TextSearchTypes.Contains && t.Application.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application.EndsWith(query.Application))
+                    (string.IsNullOrEmpty(query.Application) || query.ApplicationSearchType == TextSearchTypes.Contains && t.Application!.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application!.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application!.EndsWith(query.Application))
                 select new NameValuePair
                 {
 
