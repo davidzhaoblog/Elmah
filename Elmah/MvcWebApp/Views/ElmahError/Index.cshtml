@@ -29,40 +29,46 @@
                         </select>
                         <input asp-for="Query.TextSearch" class="form-control"  aria-label="Search text in all text fields"/>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahApplication")</label>
-                        <select asp-for="Query.Application" asp-items="ViewBag.ApplicationList" class="form-control form-select">
-                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahApplication"))</option>
+                    <!-- \ElmahModel.ElmahError.User --> <!--  -->
+                      <div class="form-group">
+                        <label class="control-label">@localizor.Get("ElmahUser")</label>
+                        <select asp-for="Query.User" class="form-control form-select\ElmahModel.ElmahError.User" asp-items="ViewBag.UserList" >
+                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahUser"))</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahHost")</label>
-                        <select asp-for="Query.Host" asp-items="ViewBag.HostList" class="form-control form-select">
-                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahHost"))</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahSource")</label>
-                        <select asp-for="Query.Source" asp-items="ViewBag.SourceList" class="form-control form-select">
-                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahSource"))</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahStatusCode")</label>
-                        <select asp-for="Query.StatusCode" asp-items="ViewBag.StatusCodeList" class="form-control form-select">
-                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahStatusCode"))</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
+                    <!-- \ElmahModel.ElmahError.Type --> <!--  -->
+                      <div class="form-group">
                         <label class="control-label">@localizor.Get("ElmahType")</label>
-                        <select asp-for="Query.Type" asp-items="ViewBag.TypeList" class="form-control form-select">
+                        <select asp-for="Query.Type" class="form-control form-select\ElmahModel.ElmahError.Type" asp-items="ViewBag.TypeList" >
                             <option value="" selected>@string.Format(format_All, localizor.Get("ElmahType"))</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">@localizor.Get("ElmahUser")</label>
-                        <select asp-for="Query.User" asp-items="ViewBag.UserList" class="form-control form-select">
-                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahUser"))</option>
+                    <!-- \ElmahModel.ElmahError.StatusCode --> <!--  -->
+                      <div class="form-group">
+                        <label class="control-label">@localizor.Get("ElmahStatusCode")</label>
+                        <select asp-for="Query.StatusCode" class="form-control form-select\ElmahModel.ElmahError.StatusCode" asp-items="ViewBag.StatusCodeList" >
+                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahStatusCode"))</option>
+                        </select>
+                    </div>
+                    <!-- \ElmahModel.ElmahError.Source --> <!--  -->
+                      <div class="form-group">
+                        <label class="control-label">@localizor.Get("ElmahSource")</label>
+                        <select asp-for="Query.Source" class="form-control form-select\ElmahModel.ElmahError.Source" asp-items="ViewBag.SourceList" >
+                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahSource"))</option>
+                        </select>
+                    </div>
+                    <!-- \ElmahModel.ElmahError.Host --> <!--  -->
+                      <div class="form-group">
+                        <label class="control-label">@localizor.Get("ElmahHost")</label>
+                        <select asp-for="Query.Host" class="form-control form-select\ElmahModel.ElmahError.Host" asp-items="ViewBag.HostList" >
+                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahHost"))</option>
+                        </select>
+                    </div>
+                    <!-- \ElmahModel.ElmahError.Application --> <!--  -->
+                      <div class="form-group">
+                        <label class="control-label">@localizor.Get("ElmahApplication")</label>
+                        <select asp-for="Query.Application" class="form-control form-select\ElmahModel.ElmahError.Application" asp-items="ViewBag.ApplicationList" >
+                            <option value="" selected>@string.Format(format_All, localizor.Get("ElmahApplication"))</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -72,12 +78,12 @@
                         <input asp-for="Query.TimeUtcRangeUpper" class="form-control" readonly />
                     </div>
                     @*<div class="input-group m-0 p-0">
-                        <select asp-for="Query.MessageType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
+                        <select asp-for="Query.MessageSearchType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
                         </select>
                         <input asp-for="Query.Message" class="form-control"  aria-label="Search text in Message field"/>
                     </div>*@
                     @*<div class="input-group m-0 p-0">
-                        <select asp-for="Query.AllXmlType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
+                        <select asp-for="Query.AllXmlSearchType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
                         </select>
                         <input asp-for="Query.AllXml" class="form-control"  aria-label="Search text in AllXml field"/>
                     </div>*@

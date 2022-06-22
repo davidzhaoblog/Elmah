@@ -143,11 +143,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<ElmahSourceModel> SearchQuery(
             ElmahSourceAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                Source = !string.IsNullOrEmpty(query.Source),
-
-            };
 
             var queryable =
                 from t in _dbcontext.ElmahSource
@@ -159,7 +154,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.Source.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Source.EndsWith(query.TextSearch)))
                     &&
-                    (!string.IsNullOrEmpty(query.Source) && (query.SourceSearchType == TextSearchTypes.Contains && t.Source.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source.EndsWith(query.Source)))
+                    (string.IsNullOrEmpty(query.Source) || query.SourceSearchType == TextSearchTypes.Contains && t.Source.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source.EndsWith(query.Source))
                 select new ElmahSourceModel
                 {
 
@@ -212,11 +207,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahSourceAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                Source = !string.IsNullOrEmpty(query.Source),
-
-            };
 
             var queryable =
                 from t in _dbcontext.ElmahSource
@@ -228,7 +218,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.Source.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Source.EndsWith(query.TextSearch)))
                     &&
-                    (!string.IsNullOrEmpty(query.Source) && (query.SourceSearchType == TextSearchTypes.Contains && t.Source.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source.EndsWith(query.Source)))
+                    (string.IsNullOrEmpty(query.Source) || query.SourceSearchType == TextSearchTypes.Contains && t.Source.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source.EndsWith(query.Source))
                 select new NameValuePair
                 {
 

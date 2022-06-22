@@ -143,11 +143,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<ElmahApplicationModel> SearchQuery(
             ElmahApplicationAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                Application = !string.IsNullOrEmpty(query.Application),
-
-            };
 
             var queryable =
                 from t in _dbcontext.ElmahApplication
@@ -159,7 +154,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.Application.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Application.EndsWith(query.TextSearch)))
                     &&
-                    (!string.IsNullOrEmpty(query.Application) && (query.ApplicationSearchType == TextSearchTypes.Contains && t.Application.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application.EndsWith(query.Application)))
+                    (string.IsNullOrEmpty(query.Application) || query.ApplicationSearchType == TextSearchTypes.Contains && t.Application.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application.EndsWith(query.Application))
                 select new ElmahApplicationModel
                 {
 
@@ -212,11 +207,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahApplicationAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                Application = !string.IsNullOrEmpty(query.Application),
-
-            };
 
             var queryable =
                 from t in _dbcontext.ElmahApplication
@@ -228,7 +218,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.Application.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Application.EndsWith(query.TextSearch)))
                     &&
-                    (!string.IsNullOrEmpty(query.Application) && (query.ApplicationSearchType == TextSearchTypes.Contains && t.Application.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application.EndsWith(query.Application)))
+                    (string.IsNullOrEmpty(query.Application) || query.ApplicationSearchType == TextSearchTypes.Contains && t.Application.Contains(query.Application) || query.ApplicationSearchType == TextSearchTypes.StartsWith && t.Application.StartsWith(query.Application) || query.ApplicationSearchType == TextSearchTypes.EndsWith && t.Application.EndsWith(query.Application))
                 select new NameValuePair
                 {
 

@@ -7,11 +7,11 @@ namespace Elmah.Models
     {
         // will query all text columns in this table, ||
         public string? TextSearch { get; set; }
-        public TextSearchTypes TextSearchType { get; set; }
+        public TextSearchTypes TextSearchType { get; set; } = TextSearchTypes.Contains;
 
         // PredicateType:Contains
         public string? Host { get; set; }
-        public TextSearchTypes HostSearchType { get; set; }
+        public TextSearchTypes HostSearchType { get; set; } = TextSearchTypes.Contains;
 
         // PredicateType:GeographyRange - ReferencePoint
         public Microsoft.Spatial.Geography? SpatialLocation { get; set; }

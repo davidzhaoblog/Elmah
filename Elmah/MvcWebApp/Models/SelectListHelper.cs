@@ -13,6 +13,15 @@ namespace Elmah.MvcWebApp.Models
             _localizor = localizor;
         }
 
+        public List<SelectListItem> GetDefaultTrueFalseBooleanSelectList()
+        {
+            return new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = _localizor.Get("All"), Value = "", Selected=true },
+                new SelectListItem{ Text = _localizor.Get("True"), Value = "True"  },
+                new SelectListItem{ Text = _localizor.Get("False"), Value = "False"  },
+            });
+        }
+
         public List<SelectListItem> GetTextSearchTypeList()
         {
             var format_ItemsPerPage = _localizor.Get("Format_ItemsPerPage");

@@ -7,11 +7,11 @@ namespace Elmah.Models
     {
         // will query all text columns in this table, ||
         public string? TextSearch { get; set; }
-        public TextSearchTypes TextSearchType { get; set; }
+        public TextSearchTypes TextSearchType { get; set; } = TextSearchTypes.Contains;
 
         // PredicateType:Contains
         public string? Type { get; set; }
-        public TextSearchTypes TypeSearchType { get; set; }
+        public TextSearchTypes TypeSearchType { get; set; } = TextSearchTypes.Contains;
 
     }
 

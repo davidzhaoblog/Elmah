@@ -143,11 +143,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<ElmahUserModel> SearchQuery(
             ElmahUserAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                User = !string.IsNullOrEmpty(query.User),
-
-            };
 
             var queryable =
                 from t in _dbcontext.ElmahUser
@@ -159,7 +154,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.User.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.User.EndsWith(query.TextSearch)))
                     &&
-                    (!string.IsNullOrEmpty(query.User) && (query.UserSearchType == TextSearchTypes.Contains && t.User.Contains(query.User) || query.UserSearchType == TextSearchTypes.StartsWith && t.User.StartsWith(query.User) || query.UserSearchType == TextSearchTypes.EndsWith && t.User.EndsWith(query.User)))
+                    (string.IsNullOrEmpty(query.User) || query.UserSearchType == TextSearchTypes.Contains && t.User.Contains(query.User) || query.UserSearchType == TextSearchTypes.StartsWith && t.User.StartsWith(query.User) || query.UserSearchType == TextSearchTypes.EndsWith && t.User.EndsWith(query.User))
                 select new ElmahUserModel
                 {
 
@@ -212,11 +207,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahUserAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                User = !string.IsNullOrEmpty(query.User),
-
-            };
 
             var queryable =
                 from t in _dbcontext.ElmahUser
@@ -228,7 +218,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.User.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.User.EndsWith(query.TextSearch)))
                     &&
-                    (!string.IsNullOrEmpty(query.User) && (query.UserSearchType == TextSearchTypes.Contains && t.User.Contains(query.User) || query.UserSearchType == TextSearchTypes.StartsWith && t.User.StartsWith(query.User) || query.UserSearchType == TextSearchTypes.EndsWith && t.User.EndsWith(query.User)))
+                    (string.IsNullOrEmpty(query.User) || query.UserSearchType == TextSearchTypes.Contains && t.User.Contains(query.User) || query.UserSearchType == TextSearchTypes.StartsWith && t.User.StartsWith(query.User) || query.UserSearchType == TextSearchTypes.EndsWith && t.User.EndsWith(query.User))
                 select new NameValuePair
                 {
 

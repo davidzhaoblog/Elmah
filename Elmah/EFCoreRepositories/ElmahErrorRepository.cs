@@ -254,20 +254,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<ElmahErrorModel.DefaultView> SearchQuery(
             ElmahErrorAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                Application = !string.IsNullOrEmpty(query.Application),
-                Host = !string.IsNullOrEmpty(query.Host),
-                Source = !string.IsNullOrEmpty(query.Source),
-                StatusCode = query.StatusCode.HasValue,
-                Type = !string.IsNullOrEmpty(query.Type),
-                User = !string.IsNullOrEmpty(query.User),
-                Message = !string.IsNullOrEmpty(query.Message),
-                AllXml = !string.IsNullOrEmpty(query.AllXml),
-                TimeUtcRangeLower = query.TimeUtcRangeLower.HasValue,
-                TimeUtcRangeUpper = query.TimeUtcRangeUpper.HasValue,
-
-            };
 
             var queryable =
                 from t in _dbcontext.ELMAH_Error
@@ -285,23 +271,23 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.Message.StartsWith(query.TextSearch) || t.AllXml.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Message.EndsWith(query.TextSearch) || t.AllXml.EndsWith(query.TextSearch)))
                     &&
-                    (!toCompare.Application || Application.Application == query.Application)
+                    (string.IsNullOrEmpty(query.Application) || Application.Application == query.Application)
                     &&
-                    (!toCompare.Host || Host.Host == query.Host)
+                    (string.IsNullOrEmpty(query.Host) || Host.Host == query.Host)
                     &&
-                    (!toCompare.Source || Source.Source == query.Source)
+                    (string.IsNullOrEmpty(query.Source) || Source.Source == query.Source)
                     &&
-                    (!toCompare.StatusCode || StatusCode.StatusCode == query.StatusCode)
+                    (!query.StatusCode.HasValue || StatusCode.StatusCode == query.StatusCode)
                     &&
-                    (!toCompare.Type || Type.Type == query.Type)
+                    (string.IsNullOrEmpty(query.Type) || Type.Type == query.Type)
                     &&
-                    (!toCompare.User || User.User == query.User)
+                    (string.IsNullOrEmpty(query.User) || User.User == query.User)
                     &&
-                    (!string.IsNullOrEmpty(query.Message) && (query.MessageSearchType == TextSearchTypes.Contains && t.Message.Contains(query.Message) || query.MessageSearchType == TextSearchTypes.StartsWith && t.Message.StartsWith(query.Message) || query.MessageSearchType == TextSearchTypes.EndsWith && t.Message.EndsWith(query.Message)))
+                    (string.IsNullOrEmpty(query.Message) || query.MessageSearchType == TextSearchTypes.Contains && t.Message.Contains(query.Message) || query.MessageSearchType == TextSearchTypes.StartsWith && t.Message.StartsWith(query.Message) || query.MessageSearchType == TextSearchTypes.EndsWith && t.Message.EndsWith(query.Message))
                     &&
-                    (!string.IsNullOrEmpty(query.AllXml) && (query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml.EndsWith(query.AllXml)))
+                    (string.IsNullOrEmpty(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml.EndsWith(query.AllXml))
                     &&
-                    (!toCompare.TimeUtcRangeLower && !toCompare.TimeUtcRangeUpper || (!toCompare.TimeUtcRangeLower || t.TimeUtc >= query.TimeUtcRangeLower) && (!toCompare.TimeUtcRangeUpper || t.TimeUtc <= query.TimeUtcRangeUpper))
+                    (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
                 select new ElmahErrorModel.DefaultView
                 {
 
@@ -370,20 +356,6 @@ namespace Elmah.EFCoreRepositories
         private IQueryable<NameValuePair> GetCodeListQuery(
             ElmahErrorAdvancedQuery query, bool withPagingAndOrderBy)
         {
-            var toCompare = new
-            {
-                Application = !string.IsNullOrEmpty(query.Application),
-                Host = !string.IsNullOrEmpty(query.Host),
-                Source = !string.IsNullOrEmpty(query.Source),
-                StatusCode = query.StatusCode.HasValue,
-                Type = !string.IsNullOrEmpty(query.Type),
-                User = !string.IsNullOrEmpty(query.User),
-                Message = !string.IsNullOrEmpty(query.Message),
-                AllXml = !string.IsNullOrEmpty(query.AllXml),
-                TimeUtcRangeLower = query.TimeUtcRangeLower.HasValue,
-                TimeUtcRangeUpper = query.TimeUtcRangeUpper.HasValue,
-
-            };
 
             var queryable =
                 from t in _dbcontext.ELMAH_Error
@@ -401,23 +373,23 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (t.Message.StartsWith(query.TextSearch) || t.AllXml.StartsWith(query.TextSearch)) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (t.Message.EndsWith(query.TextSearch) || t.AllXml.EndsWith(query.TextSearch)))
                     &&
-                    (!toCompare.Application || Application.Application == query.Application)
+                    (string.IsNullOrEmpty(query.Application) || Application.Application == query.Application)
                     &&
-                    (!toCompare.Host || Host.Host == query.Host)
+                    (string.IsNullOrEmpty(query.Host) || Host.Host == query.Host)
                     &&
-                    (!toCompare.Source || Source.Source == query.Source)
+                    (string.IsNullOrEmpty(query.Source) || Source.Source == query.Source)
                     &&
-                    (!toCompare.StatusCode || StatusCode.StatusCode == query.StatusCode)
+                    (!query.StatusCode.HasValue || StatusCode.StatusCode == query.StatusCode)
                     &&
-                    (!toCompare.Type || Type.Type == query.Type)
+                    (string.IsNullOrEmpty(query.Type) || Type.Type == query.Type)
                     &&
-                    (!toCompare.User || User.User == query.User)
+                    (string.IsNullOrEmpty(query.User) || User.User == query.User)
                     &&
-                    (!string.IsNullOrEmpty(query.Message) && (query.MessageSearchType == TextSearchTypes.Contains && t.Message.Contains(query.Message) || query.MessageSearchType == TextSearchTypes.StartsWith && t.Message.StartsWith(query.Message) || query.MessageSearchType == TextSearchTypes.EndsWith && t.Message.EndsWith(query.Message)))
+                    (string.IsNullOrEmpty(query.Message) || query.MessageSearchType == TextSearchTypes.Contains && t.Message.Contains(query.Message) || query.MessageSearchType == TextSearchTypes.StartsWith && t.Message.StartsWith(query.Message) || query.MessageSearchType == TextSearchTypes.EndsWith && t.Message.EndsWith(query.Message))
                     &&
-                    (!string.IsNullOrEmpty(query.AllXml) && (query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml.EndsWith(query.AllXml)))
+                    (string.IsNullOrEmpty(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.Contains && t.AllXml.Contains(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.StartsWith && t.AllXml.StartsWith(query.AllXml) || query.AllXmlSearchType == TextSearchTypes.EndsWith && t.AllXml.EndsWith(query.AllXml))
                     &&
-                    (!toCompare.TimeUtcRangeLower && !toCompare.TimeUtcRangeUpper || (!toCompare.TimeUtcRangeLower || t.TimeUtc >= query.TimeUtcRangeLower) && (!toCompare.TimeUtcRangeUpper || t.TimeUtc <= query.TimeUtcRangeUpper))
+                    (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
                 select new NameValuePair
                 {
 
