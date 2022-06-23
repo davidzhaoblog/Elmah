@@ -4,30 +4,27 @@
 @model PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
 @inject IUIStrings localizor;
 @{
-    ViewData["Title"] = localizor.Get("Index");
+    ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahSource");
     var format_All = localizor.Get("Format_All");
 }
-<h1>@localizor.Get("Index")</h1>
 <div class="row">
     <div class="col-12 col-sm-4 col-md-3 col-lg-3">
         <form asp-controller="ElmahSource" asp-action="Index" id="thisform" method="post">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title" style="padding-top:7.5px;display:inline;">@localizor.Get("Search")</h3>
-                    <div class="float-right">
-                        <button class="btn btn-secondary" role="button" type="submit" title="@localizor.Get("Search")"`>
-                            <i class="fa fa-search"></i>
-                        </button>
-                        <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" />
-                        <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
-                        <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
-                    </div>
+                <div class="card-header p-0">
+                    <button class="btn btn-secondary w-100" role="button" type="submit" title="@localizor.Get("Search")"`>
+                        <i class="fa fa-search"></i>
+                            @localizor.Get("Search")
+                    </button>
+                    <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" />
+                    <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
+                    <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
                 </div>
                 <div class="card-body">
                     <div class="input-group m-0 p-0">
-                        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
+                        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="form-select input-group-text">
                         </select>
-                        <input asp-for="Query.TextSearch" class="form-control"  aria-label="Search text in all text fields"/>
+                        <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("Text Search")" aria-label="Search text in all text fields"/>
                     </div>
                     @*<div class="input-group m-0 p-0">
                         <select asp-for="Query.SourceSearchType" asp-items="ViewBag.TextSearchTypeList" class="form-control form-select">
@@ -35,12 +32,11 @@
                         <input asp-for="Query.Source" class="form-control"  aria-label="Search text in Source field"/>
                     </div>*@
                 </div>
-                <div class="card-footer">
-                    <div class="float-right">
-                        <button class="btn btn-secondary" role="button" type="submit" title="@localizor.Get("Search")">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+                <div class="card-footer p-0">
+                    <button class="btn btn-secondary w-100" role="button" type="submit" title="@localizor.Get("Search")"`>
+                        <i class="fa fa-search"></i>
+                            @localizor.Get("Search")
+                    </button>
                 </div>
             </div>
         </form>
@@ -48,29 +44,27 @@
     <div class="col-12 col-sm-8 col-md-9 col-lg-9 nopadding">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title" style="padding-top:7.5px;display:inline;"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahSource" asp-action="Index">@localizor.Get("ElmahSource")</a></h3>
-                <div class="float-right row">
-                    <div class="btn-group">
-                        <a asp-area="" asp-controller="ElmahSource" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create_New")">
-                            <span class="fa fa-plus"></span>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahSource" asp-action="Index_Export" asp-route-dataServiceType="Csv" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToCsv")" download>
-                            <span class="fa fa-download"></span>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahSource" asp-action="Index_Export" asp-route-dataServiceType="Excel2010" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToExcel")" download>
-                            <span class="fa fa-download"></span>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahSource" asp-action="Import" class="btn btn-secondary" role="button" title="@localizor.Get("Import")">
-                            <span class="fa fa-upload"></span>
-                        </a>
-                        <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select" id="pageSize"></select>
-                        <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select" id="orderBy"></select>
-                    </div>
+                <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahSource" asp-action="Index">@localizor.Get("ElmahSource")</a></h3>
+                <div class="btn-group float-end mt-1">
+                    <a asp-area="" asp-controller="ElmahSource" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create_New")">
+                        <span class="fa fa-plus"></span>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahSource" asp-action="Index_Export" asp-route-dataServiceType="Csv" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToCsv")" download>
+                        <span class="fa fa-download"></span>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahSource" asp-action="Index_Export" asp-route-dataServiceType="Excel2010" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToExcel")" download>
+                        <span class="fa fa-download"></span>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahSource" asp-action="Import" class="btn btn-secondary" role="button" title="@localizor.Get("Import")">
+                        <span class="fa fa-upload"></span>
+                    </a>
+                    <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select" id="pageSize"></select>
+                    <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select" id="orderBy"></select>
                 </div>
             </div>
-            <div class="card-body table-responsive">
+            <div class="card-body table-responsive p-0">
                 <table id="masterList" class="table table-hover table-bordered table-striped">
-                    <thead>
+                    <thead class="table-dark">
                         <tr class="pt-0 pb-0">
                             <th class="p-0"></th>
                             <th class="pt-0 pb-0">@localizor.Get("Source")</th>
