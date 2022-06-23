@@ -61,12 +61,12 @@ namespace Elmah.EFCoreRepositories
                     (
                     from t in _dbcontext.ELMAH_Error
 
-                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application
-                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host
-                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source
-                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode
-                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type
-                    join User in _dbcontext.ElmahUser on t.User equals User.User
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                     where t.ErrorId == id.ErrorId
 
                     select new ElmahErrorModel.DefaultView
@@ -134,12 +134,12 @@ namespace Elmah.EFCoreRepositories
                     (
                     from t in _dbcontext.ELMAH_Error
 
-                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application
-                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host
-                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source
-                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode
-                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type
-                    join User in _dbcontext.ElmahUser on t.User equals User.User
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                     where t.ErrorId == toInsert.ErrorId
 
                     select new ElmahErrorModel.DefaultView
@@ -210,12 +210,12 @@ namespace Elmah.EFCoreRepositories
                     (
                     from t in _dbcontext.ELMAH_Error
 
-                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application
-                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host
-                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source
-                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode
-                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type
-                    join User in _dbcontext.ElmahUser on t.User equals User.User
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                     where t.ErrorId == existing.ErrorId
 
                     select new ElmahErrorModel.DefaultView
@@ -262,12 +262,12 @@ namespace Elmah.EFCoreRepositories
             var queryable =
                 from t in _dbcontext.ELMAH_Error
 
-                join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application
-                join Host in _dbcontext.ElmahHost on t.Host equals Host.Host
-                join Source in _dbcontext.ElmahSource on t.Source equals Source.Source
-                join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode
-                join Type in _dbcontext.ElmahType on t.Type equals Type.Type
-                join User in _dbcontext.ElmahUser on t.User equals User.User
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
@@ -365,12 +365,12 @@ namespace Elmah.EFCoreRepositories
             var queryable =
                 from t in _dbcontext.ELMAH_Error
 
-                join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application
-                join Host in _dbcontext.ElmahHost on t.Host equals Host.Host
-                join Source in _dbcontext.ElmahSource on t.Source equals Source.Source
-                join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode
-                join Type in _dbcontext.ElmahType on t.Type equals Type.Type
-                join User in _dbcontext.ElmahUser on t.User equals User.User
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
