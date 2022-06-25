@@ -27,7 +27,7 @@ namespace Elmah.MvcWebApp.Models
             var format_ItemsPerPage = _localizor.Get("Format_ItemsPerPage");
 
             return new List<SelectListItem>(new[] {
-                new SelectListItem{ Text = _localizor.Get(TextSearchTypes.Contains.ToString()), Value = TextSearchTypes.Contains.ToString(), Selected=true },
+                new SelectListItem{ Text = _localizor.Get(TextSearchTypes.Contains.ToString()), Value = "", Selected=true },
                 new SelectListItem{ Text = _localizor.Get(TextSearchTypes.StartsWith.ToString()), Value = TextSearchTypes.StartsWith.ToString() },
                 new SelectListItem{ Text = _localizor.Get(TextSearchTypes.EndsWith.ToString()), Value = TextSearchTypes.EndsWith.ToString()},
             });
@@ -48,7 +48,9 @@ namespace Elmah.MvcWebApp.Models
         public List<SelectListItem> GetDefaultPredefinedDateTimeRange()
         {
             return new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = _localizor.Get("AllTime"), Value = "AllTime" },
                 new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_Custom"), Value = "Custom" },
+                new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastTenYears"), Value = "LastTenYears" },
                 new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastFiveYears"), Value = "LastFiveYears" },
                 new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastYear"), Value = "LastYear" },
                 new SelectListItem{ Text = _localizor.Get("PreDefinedDateTimeRanges_LastSixMonths"), Value = "LastSixMonths" },

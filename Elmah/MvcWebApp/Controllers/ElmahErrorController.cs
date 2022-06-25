@@ -50,6 +50,8 @@ namespace Elmah.MvcWebApp.Controllers
         }
 
         // GET: ElmahError
+        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query)
         {
             var result = await _thisService.Search(query);

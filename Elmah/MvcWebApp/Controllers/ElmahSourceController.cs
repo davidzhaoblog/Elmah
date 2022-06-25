@@ -32,6 +32,8 @@ namespace Elmah.MvcWebApp.Controllers
         }
 
         // GET: ElmahSource
+        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Index(ElmahSourceAdvancedQuery query)
         {
             var result = await _thisService.Search(query);

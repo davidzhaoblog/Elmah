@@ -60,6 +60,15 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Advanced Search"".
+        /// </summary>
+        public static string AdvancedSearch {
+            get {
+                return ResourceManager.GetString("AdvancedSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Are you sure you want to delete this?"".
         /// </summary>
         public static string Are_you_sure_you_want_to_delete_this_ {
@@ -213,6 +222,24 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Search text in {0} field"".
+        /// </summary>
+        public static string Format_SearchTextDescription {
+            get {
+                return ResourceManager.GetString("Format_SearchTextDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Hide Advanced Search"".
+        /// </summary>
+        public static string HideAdvancedSearch {
+            get {
+                return ResourceManager.GetString("HideAdvancedSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Import"".
         /// </summary>
         public static string Import {
@@ -236,6 +263,15 @@ namespace Elmah.Resx.Resources {
         public static string Last {
             get {
                 return ResourceManager.GetString("Last", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "More"".
+        /// </summary>
+        public static string More {
+            get {
+                return ResourceManager.GetString("More", resourceCulture);
             }
         }
 
@@ -461,6 +497,24 @@ namespace Elmah.Resx.Resources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Search text in all text fields"".
+        /// </summary>
+        public static string SearchTextDescription {
+            get {
+                return ResourceManager.GetString("SearchTextDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Show Advanced Search"".
+        /// </summary>
+        public static string ShowAdvancedSearch {
+            get {
+                return ResourceManager.GetString("ShowAdvancedSearch", resourceCulture);
             }
         }
 
