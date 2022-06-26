@@ -49,6 +49,162 @@ namespace Elmah.MvcWebApp.Controllers
             _logger = logger;
         }
 
+        // GET: ElmahError
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+
+            ViewBag.TimeUtcRangeList = _selectListHelper.GetDefaultPredefinedDateTimeRange();
+
+            await LoadIndexViewTopLevelSelectLists();
+            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
+        }
+
+        // GET: ElmahError/_MultiItems
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> _MultiItems(ElmahErrorAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            return PartialView("_List", result);
+        }
+
+        // GET: ElmahError/Dashboard/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.GetCompositeModel(id);
+            return View(result);
+        }
+
+        // GET: ElmahError/Edit/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id)
+        {
+            if (id == null)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                return View();
+            }
+
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            await LoadIndexViewTopLevelSelectLists();
+            return View(result.ResponseBody);
+        }
+
+        // POST: ElmahError/Edit/{ErrorId}
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (id.ErrorId != input.ErrorId)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                await LoadIndexViewTopLevelSelectLists();
+                return View(input);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Update(input);
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return RedirectToAction(nameof(Index));
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            await LoadIndexViewTopLevelSelectLists();
+            return View(input);
+        }
+
+        // GET: ElmahError/Details/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            return View(result.ResponseBody);
+        }
+
+        // GET: ElmahError/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Status = System.Net.HttpStatusCode.OK;
+            await LoadIndexViewTopLevelSelectLists();
+            return View();
+        }
+
+        // POST: ElmahError/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Create(input);
+                if(result.Status == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            await LoadIndexViewTopLevelSelectLists();
+            return View(input);
+        }
+
+        // GET: ElmahError/Delete/{ErrorId}
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            return View(result.ResponseBody);
+        }
+
+        // POST: ElmahError/Delete/{ErrorId}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Delete(id);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return RedirectToAction(nameof(Index));
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+
+            var result1 = await _thisService.Get(id);
+            return View(result1.ResponseBody);
+        }
+
         private async Task LoadIndexViewTopLevelSelectLists()
         {
 

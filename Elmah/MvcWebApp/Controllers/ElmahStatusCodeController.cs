@@ -31,6 +31,43 @@ namespace Elmah.MvcWebApp.Controllers
             _logger = logger;
         }
 
-    }
+        // GET: ElmahStatusCode
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> Index(ElmahStatusCodeAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Name")), Value = "Name~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Name")), Value = "Name~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+
+            return View(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]> { Query = query, Result = result });
+        }
+
+        // GET: ElmahStatusCode/_MultiItems
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> _MultiItems(ElmahStatusCodeAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            return PartialView("_List", result);
+        }
+
+        // GET: ElmahStatusCode/Dashboard/{StatusCode}
+        [Route("[controller]/[action]/{StatusCode}")]
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahStatusCodeIdModel id)
+        {
+            var result = await _thisService.GetCompositeModel(id);
+            return View(result);
+        }    }
 }
 

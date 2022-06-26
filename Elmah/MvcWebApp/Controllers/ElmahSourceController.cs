@@ -31,6 +31,43 @@ namespace Elmah.MvcWebApp.Controllers
             _logger = logger;
         }
 
-    }
+        // GET: ElmahSource
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> Index(ElmahSourceAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+
+            ViewBag.OrderByList = new List<SelectListItem>(new[] {
+                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Source")), Value = "Source~ASC" },
+                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Source")), Value = "Source~DESC" },
+            });
+            if(string.IsNullOrEmpty(query.OrderBys))
+            {
+                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+            }
+
+            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+
+            return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]> { Query = query, Result = result });
+        }
+
+        // GET: ElmahSource/_MultiItems
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> _MultiItems(ElmahSourceAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            return PartialView("_List", result);
+        }
+
+        // GET: ElmahSource/Dashboard/{Source}
+        [Route("[controller]/[action]/{Source}")]
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahSourceIdModel id)
+        {
+            var result = await _thisService.GetCompositeModel(id);
+            return View(result);
+        }    }
 }
 
