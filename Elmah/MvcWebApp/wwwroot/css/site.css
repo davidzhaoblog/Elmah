@@ -16,3 +16,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* advanced search toggle.start */
+.advanced-search-button[aria-expanded=false] .advanced-search-expanded {
+    display: none;
+}
+
+.advanced-search-button[aria-expanded=true] .advanced-search-collapsed {
+    display: none;
+}
+/* advanced search toggle.end */

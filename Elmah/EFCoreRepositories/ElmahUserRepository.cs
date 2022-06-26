@@ -192,7 +192,7 @@ namespace Elmah.EFCoreRepositories
                 return new PagedResponse<ElmahUserModel[]>
                 {
                     Status = HttpStatusCode.OK,
-                    Pagination = new PaginationResponse (totalCount, result.Count(), query.PageIndex, query.PageSize),
+                    Pagination = new PaginationResponse (totalCount, result.Count(), query.PageIndex, query.PageSize, query.PaginationOption),
                     ResponseBody = result,
                 };
             }
@@ -258,7 +258,7 @@ namespace Elmah.EFCoreRepositories
                 return new PagedResponse<NameValuePair[]>
                 {
                     Status = HttpStatusCode.OK,
-                    Pagination = new PaginationResponse (totalCount, result.Count(), query.PageIndex, query.PageSize),
+                    Pagination = new PaginationResponse (totalCount, result.Count(), query.PageIndex, query.PageSize, query.PaginationOption),
                     ResponseBody = result,
                 };
             }

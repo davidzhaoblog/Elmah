@@ -2,6 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+// 1.Start CascadingDropdown
 $(".ddlcascading").change(function (e) {
     const childlisturl = $(this).data("childlisturl");
     const targetchild = $(this).data("targetchild");
@@ -49,7 +50,39 @@ $(".ddlcascading").change(function (e) {
     //console.log(childlisturl);
     //console.log(targetchild);
 });
+// 1.End CascadingDropdown
 
+// 2.Start Predefined DateTime Range Changed
+$(".datetime-predefinedrange").change(function (e) {
+    preDefinedDateTimeRangeChanged($(e.target), $(e.target).attr("name"));
+})
+function preDefinedDateTimeRangeChanged(self, masterName) {
+    var thisInput = $(self);
+    var inputLowerBound = $('input[name="' + masterName + 'Lower"]');
+    var inputUpperBound = $('input[name="' + masterName + 'Upper"]');
+    if ($(thisInput).val() == 'Custom') {
+        inputLowerBound[0].removeAttribute('readonly');
+        inputUpperBound[0].removeAttribute('readonly');
+    }
+    else {
+        inputLowerBound[0].setAttribute("readonly", "readonly");
+        inputUpperBound[0].setAttribute("readonly", "readonly");
+
+        var range = getDateRange(moment(), $(thisInput).val());
+        if (!!range.LowerBound) {
+            inputLowerBound.val(range.LowerBound.format('YYYY-MM-DDThh:mm'));
+        }
+        else {
+            inputLowerBound.val(null);
+        }
+        if (!!range.UpperBound) {
+            inputUpperBound.val(range.UpperBound.format('YYYY-MM-DDThh:mm'));
+        }
+        else {
+            inputUpperBound.val(null);
+        }
+    }
+}
 function getDateRange(referenceDate, type) {
     var lowerBound = moment(referenceDate);
     var upperBound = moment(referenceDate);
@@ -123,69 +156,147 @@ function getDateRange(referenceDate, type) {
             break;
     }
 }
-function preDefinedDateTimeRangeChanged(self, masterName) {
-    var thisInput = $(self);
-    var inputLowerBound = $('input[name="' + masterName + 'Lower"]');
-    var inputUpperBound = $('input[name="' + masterName + 'Upper"]');
-    if ($(thisInput).val() == 'Custom') {
-        inputLowerBound[0].removeAttribute('readonly');
-        inputUpperBound[0].removeAttribute('readonly');
-    }
-    else {
-        inputLowerBound[0].setAttribute("readonly", "readonly");
-        inputUpperBound[0].setAttribute("readonly", "readonly");
+// 2.End Predefined DateTime Range Changed
 
-        var range = getDateRange(moment(), $(thisInput).val());
-        if (!!range.LowerBound) {
-            inputLowerBound.val(range.LowerBound.format('YYYY-MM-DDThh:mm'));
-        }
-        else {
-            inputLowerBound.val(null);
-        }
-        if (!!range.UpperBound) {
-            inputUpperBound.val(range.UpperBound.format('YYYY-MM-DDThh:mm'));
-        }
-        else {
-            inputUpperBound.val(null);
-        }
-    }
-}
-
-const datePickerOptions = {
-    autoclose: false,
-    showClose: true,
-    beforeShowDay: $.noop,
-    calendarWeeks: false,
-    clearBtn: true,
-    daysOfWeekDisabled: [],
-    endDate: Infinity,
-    forceParse: true,
-    format: 'mm/dd/yyyy',
-    keyboardNavigation: true,
-    language: 'en',
-    minViewMode: 0,
-    orientation: 'auto',
-    rtl: false,
-    startDate: -Infinity,
-    startView: 2,
-    todayBtn: true,
-    todayHighlight: false,
-    weekStart: 0,
-    enableOnReadonly: false
-};
-
-function pageIndexChanged(pageIndex) {
-    $("#pageIndexH").val(pageIndex);
-    $("thisform").submit();
-}
-
+// 3.Start Pagination and OrderBy
 $(document).ready($(function () {
-    $("#pageSize").change(function (e) {
-        $("#pageSizeH").val(e.target.value);
-        $("thisform").submit();
-    });
-    $("#orderBy").change(function (e) {
-        $("#orderByH").val(e.target.value);
-        $("thisform").submit();
+    $(".page-link").click(function (e) {
+        $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("updatetarget"));
+        $($(this).closest(".list-container-submit").data("submittarget")).submit();
     });
 }));
+
+$(document).ready($(function () {
+    $(".selectchange-submit").change(function (e) {
+        $($(this).data("updatetarget")).val(e.target.value);
+        $($(this).data("submittarget")).submit();
+    });
+}));
+// 3.End Pagination and OrderBy
+
+// 4.Start. Clear all select/input inside .advanced-search-field when .advanced-search-button button clicked
+$(document).ready($(function () {
+    $('.advanced-search-button').click(function (e) {
+        $('.advanced-search-field div div select').val('')
+        $('.advanced-search-field div div input').val('')
+    });
+}));
+// 4.End. Clear all select/input inside .advanced-search-field when .advanced-search-button button clicked
+
+// 5.start form ajax-submit: POST .ajax-partial-load-post
+$(document).ready($(function () {
+    $('.ajax-partial-load-post-formdata').submit(function (e) {
+        e.preventDefault();
+        const url = $(this).data("partial-url");
+        const updateTarget = $(this).data("updatetarget");
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            async: false,
+            processData: false,
+            contentType: false,
+            dataType: "html",
+            success: function (response) {
+                $(updateTarget).html(response);
+                // console.log(response);
+            },
+            failure: function (response) {
+                // console.log(response);
+            },
+            error: function (response) {
+                // console.log(response);
+            }
+        });
+    });
+
+    // requires complicated json conversion. not suggested to use it.
+    //$('.ajax-partial-load-post-json').submit(function (e) {
+    //    e.preventDefault();
+    //    const url = $(this).data("partial-url");
+    //    const updateTarget = $(this).data("updatetarget");
+    //    var data = $(this)
+    //        //.filter(function (index, element) {
+    //        //    console.log($(element).val());
+    //        //    return !!$(element).val();
+    //        //})
+    //        .serializeArray();
+    //    var jsonData = {};
+    //    $.map(data, function (n, i) {
+    //        // jsonData[n['name'].replace("Query.", "query.")] = n['value'];
+    //        jsonData["query." + lowerCaseWords(n['name'].replace("Query.", ""))] = n['value'];
+    //    });
+
+    //    console.log(jsonData);
+    //    console.log(data);
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: url,
+    //        data: JSON.stringify(jsonData),
+    //        async: false,
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "html",
+    //        success: function (response) {
+    //            $(updateTarget).html(response);
+    //            // console.log(response);
+    //        },
+    //        failure: function (response) {
+    //            // console.log(response);
+    //        },
+    //        error: function (response) {
+    //            // console.log(response);
+    //        }
+    //    });
+    //});
+
+    $('.ajax-partial-load-get').submit(function (e) {
+        e.preventDefault();
+        const url = $(this).data("partial-url");
+        const updateTarget = $(this).data("updatetarget");
+        var data = $(this)
+            //.filter(function (index, element) {
+            //    console.log($(element).val());
+            //    return !!$(element).val();
+            //})
+            .serialize();
+
+        console.log(data);
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: data,
+            async: false,
+            dataType: "html",
+            success: function (response) {
+                $(updateTarget).html(response);
+                // console.log(response);
+            },
+            failure: function (response) {
+                // console.log(response);
+            },
+            error: function (response) {
+                // console.log(response);
+            }
+        });
+    });
+}));
+// 5.end form ajax-submit
+
+// 6.Start. PagedViewOptions clicked
+$(document).ready($(function () {
+    $('.radio-pagedviewoption-submit').click(function (e) {
+        $($(this).data("updatetarget")).val($(this).data("value"));
+        $($(this).data("submittarget")).submit();
+    });
+}));
+// 6.End. PagedViewOptions clicked
+
+
+//function lowerCaseWords(str) {
+//    return (str + '').replace(/^([A-Z])|\s+([A-Z])/g, function ($1) {
+//        return $1.toLowerCase();
+//    });
+//}

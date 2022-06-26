@@ -7,10 +7,13 @@
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahError");
     var format_All = localizor.Get("Format_All");
 }
-<form asp-controller="ElmahError" asp-action="Index" id="thisform" method="post">
+<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("_MultiItems", "ElmahError")" data-updatetarget=".list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
+    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
+    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" />
+    <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
     <div class="d-flex flex-row-reverse pt-1">
         <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
             <i class="fa fa-search"></i>
@@ -24,7 +27,6 @@
             <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
         </div>
     <div class="row pt-1">
-    <div class="row pt-1">
         <div class="col-lg-6">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("TimeUtcRange")</label>
@@ -33,7 +35,6 @@
                 <input asp-for="Query.TimeUtcRangeUpper" class="form-control" readonly />
             </div>
         </div>
-    </div>
     </div>
     <div class="row pt-1">
         <div class="col-md-6 col-lg-4 col-xl-3">
@@ -114,10 +115,24 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
+        <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
+            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-value="List" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" @(Model.Query.PagedViewOption==Framework.Models.PagedViewOptions.List ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
+            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-value="Tiles" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" @(Model.Query.PagedViewOption==Framework.Models.PagedViewOptions.Tile ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
+            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-value="SlideShow" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" @(Model.Query.PagedViewOption==Framework.Models.PagedViewOptions.SlideShow ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
+        </div>
+        <div class="btn-group float-end mt-1 ms-3 me-3">
+            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#pageSizeH" data-submittarget="#thisform"></select>
+            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#orderByH" data-submittarget="#thisform"></select>
+        </div>
         <div class="btn-group float-end mt-1">
             <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create_New")">
                 <span class="fa fa-plus"></span>
+                @localizor.Get("Create")
             </a>
+            @*
             <a asp-area="" asp-controller="ElmahError" asp-action="Index_Export" asp-route-dataServiceType="Csv" class="btn btn-secondary" role="button" title="@localizor.Get("ExportToCsv")" download>
                 <span class="fa fa-download"></span>
             </a>
@@ -127,86 +142,12 @@
             <a asp-area="" asp-controller="ElmahError" asp-action="Import" class="btn btn-secondary" role="button" title="@localizor.Get("Import")">
                 <span class="fa fa-upload"></span>
             </a>
-            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select" id="pageSize"></select>
-            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select" id="orderBy"></select>
+            *@
+            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#pageSizeH" data-submittarget="#thisform"></select>
+            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#orderByH" data-submittarget="#thisform"></select>
         </div>
     </div>
-    <div class="card-body table-responsive p-0">
-        <table id="masterList" class="table table-hover table-bordered table-striped">
-            <thead class="table-dark">
-                <tr class="pt-0 pb-0">
-                    <th class="p-0"></th>
-                            <th class="pt-0 pb-0">@localizor.Get("ErrorId")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("Application")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("Host")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("Type")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("Source")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("Message")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("User")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("StatusCode")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
-                            <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
-                {
-                    for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
-                    {
-                        <tr class="pt-0 pb-0">
-                            <td class="p-0">
-                                <div class="btn-group">
-                                    <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.Result.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
-                                        <i class="fa fa-briefcase"></i>
-                                    </a>
-                                    <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.Result.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.Result.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                                    <td class="pt-0 pb-0">@Model.Result.ResponseBody[i].ErrorId</td>
-                                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.Result.ResponseBody[i].Application">@Model.Result.ResponseBody[i].Application_Name</a></td>
-                                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Result.ResponseBody[i].Host">@Model.Result.ResponseBody[i].Host_Name</a></td>
-                                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Result.ResponseBody[i].Type">@Model.Result.ResponseBody[i].Type_Name</a></td>
-                                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.Result.ResponseBody[i].Source">@Model.Result.ResponseBody[i].Source_Name</a></td>
-                                    <td class="pt-0 pb-0">@Model.Result.ResponseBody[i].Message</td>
-                                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.Result.ResponseBody[i].User">@Model.Result.ResponseBody[i].User_Name</a></td>
-                                    <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.Result.ResponseBody[i].StatusCode">@Model.Result.ResponseBody[i].StatusCode_Name</a></td>
-                                    <td class="pt-0 pb-0">@Model.Result.ResponseBody[i].TimeUtc</td>
-                                    <td class="pt-0 pb-0">@Model.Result.ResponseBody[i].Sequence</td>
-                                    <td class="pt-0 pb-0">@Model.Result.ResponseBody[i].AllXml</td>
-                        </tr>
-                    }
-                }
-                else if (Model != null)
-                {
-                    <tr>
-                        <td colspan="50">
-                            <div class="text-danger">@Model.Result.StatusMessage</div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="card-body p-0 list-container-submit" data-updatetarget="#pageIndexH" data-submittarget="#thisform">
+        @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", Model.Result)
     </div>
-    @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
-    {
-        <div class="card-footer">
-            @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
-        </div>
-    }
 </div>
-@section Scripts {
-    @if(@Context.Request.Method != "GET")
-    {
-<script type="text/javascript">
-    $(document).ready($(function() {
-        location.href = "#masterList";
-    }));
-</script>
-    }
-}

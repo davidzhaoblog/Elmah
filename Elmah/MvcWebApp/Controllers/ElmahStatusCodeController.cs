@@ -53,6 +53,15 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]> { Query = query, Result = result });
         }
 
+        // GET: ElmahStatusCode/_MultiItems
+        [HttpGet] // from query string
+        [HttpPost]// form post formdata
+        public async Task<IActionResult> _MultiItems(ElmahStatusCodeAdvancedQuery query)
+        {
+            var result = await _thisService.Search(query);
+            return PartialView("_List", result);
+        }
+
         // GET: ElmahStatusCode/Dashboard/{StatusCode}
         [Route("[controller]/[action]/{StatusCode}")]
         public async Task<IActionResult> Dashboard([FromRoute]ElmahStatusCodeIdModel id)

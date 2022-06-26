@@ -2,7 +2,7 @@ namespace Framework.Models
 {
     public class PaginationResponse
     {
-        public PaginationResponse(int totalCount, int count, int pageIndex, int pageSize)
+        public PaginationResponse(int totalCount, int count, int pageIndex, int pageSize, PaginationOptions paginationOption = PaginationOptions.Paged)
         {
             TotalCount = totalCount;
             Count = count;
@@ -18,6 +18,7 @@ namespace Framework.Models
             PostCurrent = LastPageIndex - PageIndex >= 1 ? Enumerable.Range(PageIndex + 1, LastPageIndex - PageIndex > 1 ? 2 : 1).ToArray() : Enumerable.Empty<int>().ToArray();
             ThreeDotPreCurrent = PageIndex > 3;
             ThreeDotPostCurrent = LastPageIndex - PageIndex >= 3;
+            PaginationOption = paginationOption;
         }
         public int PageSize { get; set; } = 10; // default 10 items per pages
         public int PageIndex { get; set; } = 1; // start from 1
@@ -35,6 +36,7 @@ namespace Framework.Models
         public int[] PostCurrent { get; private set; }
         public bool ThreeDotPreCurrent { get; private set; }
         public bool ThreeDotPostCurrent { get; private set; }
+        public PaginationOptions PaginationOption { get; set; }
     }
 }
 
