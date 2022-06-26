@@ -68,6 +68,7 @@ namespace Elmah.MvcWebApp.Controllers
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
-        }    }
+        }
+    }
 }
 

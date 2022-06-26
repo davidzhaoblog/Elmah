@@ -260,6 +260,7 @@ namespace Elmah.MvcWebApp.Controllers
             if (statusCodeList.Status == System.Net.HttpStatusCode.OK)
                 ViewBag.StatusCodeList = new SelectList(statusCodeList.ResponseBody, nameof(NameValuePair.Value), nameof(NameValuePair.Name));
         }
+
     }
 }
 

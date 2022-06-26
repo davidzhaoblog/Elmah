@@ -151,11 +151,14 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Source!.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Source!.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Source!.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Source, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Source, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Source, "%" + query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Source) || query.SourceSearchType == TextSearchTypes.Contains && t.Source!.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source!.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source!.EndsWith(query.Source))
+                    (string.IsNullOrEmpty(query.Source) ||
+                            query.SourceSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Source, "%" + query.Source + "%") ||
+                            query.SourceSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Source, query.Source + "%") ||
+                            query.SourceSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Source, "%" + query.Source))
 
                 select new ElmahSourceModel
                 {
@@ -216,11 +219,14 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (t.Source!.Contains(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (t.Source!.StartsWith(query.TextSearch)) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (t.Source!.EndsWith(query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Source, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Source, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Source, "%" + query.TextSearch)))
                     &&
-                    (string.IsNullOrEmpty(query.Source) || query.SourceSearchType == TextSearchTypes.Contains && t.Source!.Contains(query.Source) || query.SourceSearchType == TextSearchTypes.StartsWith && t.Source!.StartsWith(query.Source) || query.SourceSearchType == TextSearchTypes.EndsWith && t.Source!.EndsWith(query.Source))
+                    (string.IsNullOrEmpty(query.Source) ||
+                            query.SourceSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Source, "%" + query.Source + "%") ||
+                            query.SourceSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Source, query.Source + "%") ||
+                            query.SourceSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Source, "%" + query.Source))
 
                 select new NameValuePair
                 {
