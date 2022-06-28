@@ -161,7 +161,7 @@ function getDateRange(referenceDate, type) {
 // 3.Start Pagination and OrderBy
 $(document).ready($(function () {
     $(".page-link").click(function (e) {
-        $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("updatetarget"));
+        $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("pageindex"));
         $($(this).closest(".list-container-submit").data("submittarget")).submit();
     });
 }));
@@ -186,11 +186,11 @@ $(document).ready($(function () {
 // 5.start form ajax-submit: POST .ajax-partial-load-post
 $(document).ready($(function () {
     $('.ajax-partial-load-post-formdata').submit(function (e) {
-        e.preventDefault();
         const url = $(this).data("partial-url");
         const updateTarget = $(this).data("updatetarget");
         var formData = new FormData($(this)[0]);
-
+        const pagedViewOption = $(this).children(".paged-view-options").val();
+        const pageIndex = $(this).children(".page-index").val();
         $.ajax({
             type: "POST",
             url: url,
@@ -200,60 +200,31 @@ $(document).ready($(function () {
             contentType: false,
             dataType: "html",
             success: function (response) {
-                $(updateTarget).html(response);
-                // console.log(response);
+                if (pagedViewOption !== "Tiles" || pageIndex == 1) {
+                    $(updateTarget).html(response);
+                }
+                else {
+                    $(updateTarget).children(".btn-load-more").remove()
+                    $(updateTarget).append(response);
+                }
+                //console.log("success", response);
+                // attach pagination event handler again.
+                $(".page-link").on("click", function (e) {
+                    $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("pageindex"));
+                    $($(this).closest(".list-container-submit").data("submittarget")).submit();
+                });
             },
             failure: function (response) {
-                // console.log(response);
+                // console.log("failure", response);
             },
             error: function (response) {
-                // console.log(response);
+                // console.log("error", response);
             }
         });
+        e.preventDefault();
     });
 
-    // requires complicated json conversion. not suggested to use it.
-    //$('.ajax-partial-load-post-json').submit(function (e) {
-    //    e.preventDefault();
-    //    const url = $(this).data("partial-url");
-    //    const updateTarget = $(this).data("updatetarget");
-    //    var data = $(this)
-    //        //.filter(function (index, element) {
-    //        //    console.log($(element).val());
-    //        //    return !!$(element).val();
-    //        //})
-    //        .serializeArray();
-    //    var jsonData = {};
-    //    $.map(data, function (n, i) {
-    //        // jsonData[n['name'].replace("Query.", "query.")] = n['value'];
-    //        jsonData["query." + lowerCaseWords(n['name'].replace("Query.", ""))] = n['value'];
-    //    });
-
-    //    console.log(jsonData);
-    //    console.log(data);
-
-    //    $.ajax({
-    //        type: "POST",
-    //        url: url,
-    //        data: JSON.stringify(jsonData),
-    //        async: false,
-    //        contentType: "application/json; charset=utf-8",
-    //        dataType: "html",
-    //        success: function (response) {
-    //            $(updateTarget).html(response);
-    //            // console.log(response);
-    //        },
-    //        failure: function (response) {
-    //            // console.log(response);
-    //        },
-    //        error: function (response) {
-    //            // console.log(response);
-    //        }
-    //    });
-    //});
-
     $('.ajax-partial-load-get').submit(function (e) {
-        e.preventDefault();
         const url = $(this).data("partial-url");
         const updateTarget = $(this).data("updatetarget");
         var data = $(this)
@@ -262,8 +233,9 @@ $(document).ready($(function () {
             //    return !!$(element).val();
             //})
             .serialize();
-
-        console.log(data);
+        const pagedViewOption = $(this).children(".paged-view-options").val();
+        const pageIndex = $(this).children(".page-index").val();
+        //console.log(data);
         $.ajax({
             type: "GET",
             url: url,
@@ -271,16 +243,28 @@ $(document).ready($(function () {
             async: false,
             dataType: "html",
             success: function (response) {
-                $(updateTarget).html(response);
-                // console.log(response);
+                if (pagedViewOption !== "Tiles" || pageIndex == 1) {
+                    $(updateTarget).html(response);
+                }
+                else {
+                    $(updateTarget).children(".btn-load-more").remove()
+                    $(updateTarget).append(response);
+                }
+                //console.log("success", response);
+                // attach pagination event handler again.
+                $(".page-link").on("click", function (e) {
+                    $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("pageindex"));
+                    $($(this).closest(".list-container-submit").data("submittarget")).submit();
+                });
             },
             failure: function (response) {
-                // console.log(response);
+                // console.log("failure", response);
             },
             error: function (response) {
-                // console.log(response);
+                // console.log("error", response);
             }
         });
+        e.preventDefault();
     });
 }));
 // 5.end form ajax-submit
@@ -288,15 +272,9 @@ $(document).ready($(function () {
 // 6.Start. PagedViewOptions clicked
 $(document).ready($(function () {
     $('.radio-pagedviewoption-submit').click(function (e) {
+        $($(this).data("paginationoptionupdatetarget")).val($(this).data("paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
         $($(this).data("updatetarget")).val($(this).data("value"));
         $($(this).data("submittarget")).submit();
     });
 }));
 // 6.End. PagedViewOptions clicked
-
-
-//function lowerCaseWords(str) {
-//    return (str + '').replace(/^([A-Z])|\s+([A-Z])/g, function ($1) {
-//        return $1.toLowerCase();
-//    });
-//}

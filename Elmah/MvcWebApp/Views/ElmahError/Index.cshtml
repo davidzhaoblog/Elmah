@@ -8,11 +8,11 @@
     var format_All = localizor.Get("Format_All");
 }
 <form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("_MultiItems", "ElmahError")" data-updatetarget=".list-container-submit">
-    <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" />
+    <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="page-index" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
     <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
-    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" />
+    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="paged-view-options" />
     <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
     <div class="d-flex flex-row-reverse pt-1">
         <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
@@ -116,11 +116,11 @@
     <div class="card-header">
         <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-value="List" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" @(Model.Query.PagedViewOption==Framework.Models.PagedViewOptions.List ? "checked": "")>
+            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-value="List" data-updatetarget="#pagedViewOptionH" data-paginationoptionupdatetarget="#paginationOptionH" data-paginationoptionupdatevalue="Paged" data-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
-            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-value="Tiles" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" @(Model.Query.PagedViewOption==Framework.Models.PagedViewOptions.Tile ? "checked": "")>
+            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-value="Tiles" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" data-paginationoptionupdatetarget="#paginationOptionH" data-paginationoptionupdatevalue="LoadMore" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-value="SlideShow" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" @(Model.Query.PagedViewOption==Framework.Models.PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-value="SlideShow" data-updatetarget="#pagedViewOptionH" data-submittarget="#thisform" data-paginationoptionupdatetarget="#paginationOptionH" data-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
@@ -145,7 +145,7 @@
             *@
         </div>
     </div>
-    <div class="card-body p-0 list-container-submit" data-updatetarget="#pageIndexH" data-submittarget="#thisform">
+    <div class="card-body list-container-submit row m-0 p-0" data-updatetarget="#pageIndexH" data-submittarget="#thisform">
         @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", Model.Result)
     </div>
 </div>

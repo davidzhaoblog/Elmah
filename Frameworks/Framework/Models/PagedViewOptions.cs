@@ -3,7 +3,7 @@ namespace Framework.Models
     public enum PagedViewOptions
     {
         List,
-        Tile,
+        Tiles,
         SlideShow,
     }
 }

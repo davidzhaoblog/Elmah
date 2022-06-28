@@ -59,7 +59,15 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> _MultiItems(ElmahUserAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
-            return PartialView("_List", result);
+            if (query.PagedViewOption == PagedViewOptions.List)
+            {
+                return PartialView("_List", result);
+            }
+            else if (query.PagedViewOption == PagedViewOptions.Tiles)
+            {
+                return PartialView("_Tiles", result);
+            }
+            return PartialView("_SlideShow", result);
         }
 
         // GET: ElmahUser/Dashboard/{User}

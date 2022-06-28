@@ -271,9 +271,9 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Message, "%" + query.TextSearch + "%") || EF.Functions.Like(t.AllXml, "%" + query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Message, query.TextSearch + "%") || EF.Functions.Like(t.AllXml, query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Message, "%" + query.TextSearch) || EF.Functions.Like(t.AllXml, "%" + query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Message!, "%" + query.TextSearch + "%") || EF.Functions.Like(t.AllXml!, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Message!, query.TextSearch + "%") || EF.Functions.Like(t.AllXml!, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Message!, "%" + query.TextSearch) || EF.Functions.Like(t.AllXml!, "%" + query.TextSearch)))
                     &&
                     (string.IsNullOrEmpty(query.Application) || Application.Application == query.Application)
                     &&
@@ -288,14 +288,14 @@ namespace Elmah.EFCoreRepositories
                     (string.IsNullOrEmpty(query.User) || User.User == query.User)
                     &&
                     (string.IsNullOrEmpty(query.Message) ||
-                            query.MessageSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Message, "%" + query.Message + "%") ||
-                            query.MessageSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Message, query.Message + "%") ||
-                            query.MessageSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Message, "%" + query.Message))
+                            query.MessageSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Message!, "%" + query.Message + "%") ||
+                            query.MessageSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Message!, query.Message + "%") ||
+                            query.MessageSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Message!, "%" + query.Message))
                     &&
                     (string.IsNullOrEmpty(query.AllXml) ||
-                            query.AllXmlSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.AllXml, "%" + query.AllXml + "%") ||
-                            query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml, query.AllXml + "%") ||
-                            query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml, "%" + query.AllXml))
+                            query.AllXmlSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.AllXml!, "%" + query.AllXml + "%") ||
+                            query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml!, query.AllXml + "%") ||
+                            query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml!, "%" + query.AllXml))
                     &&
                     (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
 
@@ -380,9 +380,9 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Message, "%" + query.TextSearch + "%") || EF.Functions.Like(t.AllXml, "%" + query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Message, query.TextSearch + "%") || EF.Functions.Like(t.AllXml, query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Message, "%" + query.TextSearch) || EF.Functions.Like(t.AllXml, "%" + query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Message!, "%" + query.TextSearch + "%") || EF.Functions.Like(t.AllXml!, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Message!, query.TextSearch + "%") || EF.Functions.Like(t.AllXml!, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Message!, "%" + query.TextSearch) || EF.Functions.Like(t.AllXml!, "%" + query.TextSearch)))
                     &&
                     (string.IsNullOrEmpty(query.Application) || Application.Application == query.Application)
                     &&
@@ -397,14 +397,14 @@ namespace Elmah.EFCoreRepositories
                     (string.IsNullOrEmpty(query.User) || User.User == query.User)
                     &&
                     (string.IsNullOrEmpty(query.Message) ||
-                            query.MessageSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Message, "%" + query.Message + "%") ||
-                            query.MessageSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Message, query.Message + "%") ||
-                            query.MessageSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Message, "%" + query.Message))
+                            query.MessageSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Message!, "%" + query.Message + "%") ||
+                            query.MessageSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Message!, query.Message + "%") ||
+                            query.MessageSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Message!, "%" + query.Message))
                     &&
                     (string.IsNullOrEmpty(query.AllXml) ||
-                            query.AllXmlSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.AllXml, "%" + query.AllXml + "%") ||
-                            query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml, query.AllXml + "%") ||
-                            query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml, "%" + query.AllXml))
+                            query.AllXmlSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.AllXml!, "%" + query.AllXml + "%") ||
+                            query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml!, query.AllXml + "%") ||
+                            query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml!, "%" + query.AllXml))
                     &&
                     (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
 

@@ -1,0 +1,45 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@model PagedResponse<ElmahUserModel[]>
+@inject IUIStrings localizor;
+@if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+{
+    @for (var i = 0; i < Model.ResponseBody.Length; i++)
+    {
+        <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 m-2">
+            @*<img class="card-img-top" src="..." alt="Card image cap">*@
+            <div class="card-header">
+                <h5 class="card-title">Please Customize title</h5>
+                <p class="card-text">Please Customize sub-title</p>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="ResponseBody[i].User" class="control-label"></label>
+                    <input asp-for="ResponseBody[i].User" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="btn-group">
+                    <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody[i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                        <i class="fa fa-briefcase"></i>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model.ResponseBody[i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model.ResponseBody[i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else if (Model != null)
+{
+    <div class="text-danger">@Model.StatusMessage</div>
+}
+@if (Model != null && Model.Pagination != null)
+{
+    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)
+}

@@ -151,14 +151,14 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Type, "%" + query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Type, query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Type, "%" + query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Type!, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Type!, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Type!, "%" + query.TextSearch)))
                     &&
                     (string.IsNullOrEmpty(query.Type) ||
-                            query.TypeSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Type, "%" + query.Type + "%") ||
-                            query.TypeSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Type, query.Type + "%") ||
-                            query.TypeSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Type, "%" + query.Type))
+                            query.TypeSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Type!, "%" + query.Type + "%") ||
+                            query.TypeSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Type!, query.Type + "%") ||
+                            query.TypeSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Type!, "%" + query.Type))
 
                 select new ElmahTypeModel
                 {
@@ -219,14 +219,14 @@ namespace Elmah.EFCoreRepositories
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
-                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Type, "%" + query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Type, query.TextSearch + "%")) ||
-                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Type, "%" + query.TextSearch)))
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Type!, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Type!, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Type!, "%" + query.TextSearch)))
                     &&
                     (string.IsNullOrEmpty(query.Type) ||
-                            query.TypeSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Type, "%" + query.Type + "%") ||
-                            query.TypeSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Type, query.Type + "%") ||
-                            query.TypeSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Type, "%" + query.Type))
+                            query.TypeSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Type!, "%" + query.Type + "%") ||
+                            query.TypeSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Type!, query.Type + "%") ||
+                            query.TypeSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Type!, "%" + query.Type))
 
                 select new NameValuePair
                 {

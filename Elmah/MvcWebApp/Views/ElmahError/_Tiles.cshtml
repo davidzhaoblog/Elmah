@@ -1,0 +1,87 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@using Framework.Models;
+@model PagedResponse<ElmahErrorModel.DefaultView[]>
+@inject IUIStrings localizor;
+@if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+{
+    @for (var i = 0; i < Model.ResponseBody.Length; i++)
+    {
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3  p-1">
+            <div class="card">
+                @*<img class="card-img-top" src="..." alt="Card image cap">*@
+                <div class="card-header">
+                    <h5 class="card-title">Please Customize title</h5>
+                    <p class="card-text">Please Customize sub-title</p>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].ErrorId" class="control-label"></label>
+                        <input asp-for="ResponseBody[i].ErrorId" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].Application" class="control-label"></label>
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody[i].Application" class="form-control">@Model.ResponseBody[i].Application_Name</a>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].Host" class="control-label"></label>
+                        <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody[i].Host" class="form-control">@Model.ResponseBody[i].Host_Name</a>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].Type" class="control-label"></label>
+                        <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ResponseBody[i].Type" class="form-control">@Model.ResponseBody[i].Type_Name</a>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].Source" class="control-label"></label>
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody[i].Source" class="form-control">@Model.ResponseBody[i].Source_Name</a>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].Message" class="control-label"></label>
+                        <input asp-for="ResponseBody[i].Message" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].User" class="control-label"></label>
+                        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody[i].User" class="form-control">@Model.ResponseBody[i].User_Name</a>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].StatusCode" class="control-label"></label>
+                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="form-control">@Model.ResponseBody[i].StatusCode_Name</a>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].TimeUtc" class="control-label"></label>
+                        <input asp-for="ResponseBody[i].TimeUtc" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].Sequence" class="control-label"></label>
+                        <input asp-for="ResponseBody[i].Sequence" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResponseBody[i].AllXml" class="control-label"></label>
+                        <input asp-for="ResponseBody[i].AllXml" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="btn-group">
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                            <i class="fa fa-briefcase"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else if (Model != null)
+{
+    <div class="text-danger">@Model.StatusMessage</div>
+}
+@if (Model != null && Model.Pagination != null)
+{
+    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)
+}
