@@ -24,7 +24,7 @@
                         <h5 class="card-title">@Model.ResponseBody[i].User</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@Model.ResponseBody[i].User</h6>
                         <p class="card-text">@Model.ResponseBody[i].User</p>
-                        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody[i].User" title="@Model.ResponseBody[i].User">
+                        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody![i].User" title="@Model.ResponseBody[i].User">
                              @Model.ResponseBody[i].User
                         </a>
                     </div>

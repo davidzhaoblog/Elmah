@@ -24,7 +24,7 @@
                         <h5 class="card-title">@Model.ResponseBody[i].Application</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@Model.ResponseBody[i].Application</h6>
                         <p class="card-text">@Model.ResponseBody[i].Application</p>
-                        <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody[i].ErrorId" title="@Model.ResponseBody[i].Application">
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" title="@Model.ResponseBody[i].Application">
                              @Model.ResponseBody[i].Application
                         </a>
                     </div>

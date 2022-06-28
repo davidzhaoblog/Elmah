@@ -7,29 +7,31 @@
 {
     @for (var i = 0; i < Model.ResponseBody.Length; i++)
     {
-        <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 m-2">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
-            <div class="card-header">
-                <h5 class="card-title">Please Customize title</h5>
-                <p class="card-text">Please Customize sub-title</p>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label asp-for="ResponseBody[i].Source" class="control-label"></label>
-                    <input asp-for="ResponseBody[i].Source" class="form-control" readonly />
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3  p-1">
+            <div class="card">
+                @*<img class="card-img-top" src="..." alt="Card image cap">*@
+                <div class="card-header">
+                    <h5 class="card-title">Please Customize title</h5>
+                    <p class="card-text">Please Customize sub-title</p>
                 </div>
-            </div>
-            <div class="card-footer text-muted">
-                <div class="btn-group">
-                    <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody[i].Source" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
-                        <i class="fa fa-briefcase"></i>
-                    </a>
-                    <a asp-area="" asp-controller="ElmahSource" asp-action="Edit" asp-route-source="@Model.ResponseBody[i].Source" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a asp-area="" asp-controller="ElmahSource" asp-action="Delete" asp-route-source="@Model.ResponseBody[i].Source" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
-                        <i class="fa fa-trash"></i>
-                    </a>
+                <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="ResponseBody![i].Source" class="control-label"></label>
+                    <input asp-for="ResponseBody![i].Source" class="form-control" readonly />
+                </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="btn-group">
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody![i].Source" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                            <i class="fa fa-briefcase"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Edit" asp-route-source="@Model.ResponseBody![i].Source" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Delete" asp-route-source="@Model.ResponseBody![i].Source" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

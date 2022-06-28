@@ -24,7 +24,7 @@
                         <h5 class="card-title">@Model.ResponseBody[i].Host</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@Model.ResponseBody[i].Host</h6>
                         <p class="card-text">@Model.ResponseBody[i].Host</p>
-                        <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody[i].Host" title="@Model.ResponseBody[i].Host">
+                        <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host" title="@Model.ResponseBody[i].Host">
                              @Model.ResponseBody[i].Host
                         </a>
                     </div>

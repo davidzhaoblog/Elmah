@@ -29,28 +29,28 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody[i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
                         </td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].ErrorId</td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody[i].Application">@Model.ResponseBody[i].Application_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody[i].Host">@Model.ResponseBody[i].Host_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ResponseBody[i].Type">@Model.ResponseBody[i].Type_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody[i].Source">@Model.ResponseBody[i].Source_Name</a></td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].Message</td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody[i].User">@Model.ResponseBody[i].User_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody[i].StatusCode">@Model.ResponseBody[i].StatusCode_Name</a></td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].TimeUtc</td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].Sequence</td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].AllXml</td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].ErrorId</td>
+                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody![i].Application">@Model.ResponseBody![i].Application_Name</a></td>
+                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host">@Model.ResponseBody![i].Host_Name</a></td>
+                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ResponseBody![i].Type">@Model.ResponseBody![i].Type_Name</a></td>
+                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody![i].Source">@Model.ResponseBody![i].Source_Name</a></td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].Message</td>
+                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody![i].User">@Model.ResponseBody![i].User_Name</a></td>
+                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody![i].StatusCode">@Model.ResponseBody![i].StatusCode_Name</a></td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].TimeUtc</td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].Sequence</td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].AllXml</td>
                     </tr>
                 }
             }

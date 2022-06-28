@@ -7,33 +7,35 @@
 {
     @for (var i = 0; i < Model.ResponseBody.Length; i++)
     {
-        <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 m-2">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
-            <div class="card-header">
-                <h5 class="card-title">Please Customize title</h5>
-                <p class="card-text">Please Customize sub-title</p>
-            </div>
-            <div class="card-body">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3  p-1">
+            <div class="card">
+                @*<img class="card-img-top" src="..." alt="Card image cap">*@
+                <div class="card-header">
+                    <h5 class="card-title">Please Customize title</h5>
+                    <p class="card-text">Please Customize sub-title</p>
+                </div>
+                <div class="card-body">
                 <div class="form-group">
-                    <label asp-for="ResponseBody[i].StatusCode" class="control-label"></label>
-                    <input asp-for="ResponseBody[i].StatusCode" class="form-control" readonly />
+                    <label asp-for="ResponseBody![i].StatusCode" class="control-label"></label>
+                    <input asp-for="ResponseBody![i].StatusCode" class="form-control" readonly />
                 </div>
                 <div class="form-group">
-                    <label asp-for="ResponseBody[i].Name" class="control-label"></label>
-                    <input asp-for="ResponseBody[i].Name" class="form-control" readonly />
+                    <label asp-for="ResponseBody![i].Name" class="control-label"></label>
+                    <input asp-for="ResponseBody![i].Name" class="form-control" readonly />
                 </div>
-            </div>
-            <div class="card-footer text-muted">
-                <div class="btn-group">
-                    <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
-                        <i class="fa fa-briefcase"></i>
-                    </a>
-                    <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Edit" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Delete" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
-                        <i class="fa fa-trash"></i>
-                    </a>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="btn-group">
+                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                            <i class="fa fa-briefcase"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Edit" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Delete" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

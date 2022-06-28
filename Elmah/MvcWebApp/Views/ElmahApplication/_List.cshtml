@@ -19,18 +19,18 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody[i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
-                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model.ResponseBody[i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Delete" asp-route-application="@Model.ResponseBody[i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Delete" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
                         </td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].Application</td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].Application</td>
                     </tr>
                 }
             }

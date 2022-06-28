@@ -24,7 +24,7 @@
                         <h5 class="card-title">@Model.ResponseBody[i].Source</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@Model.ResponseBody[i].Source</h6>
                         <p class="card-text">@Model.ResponseBody[i].Source</p>
-                        <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody[i].Source" title="@Model.ResponseBody[i].Source">
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody![i].Source" title="@Model.ResponseBody[i].Source">
                              @Model.ResponseBody[i].Source
                         </a>
                     </div>

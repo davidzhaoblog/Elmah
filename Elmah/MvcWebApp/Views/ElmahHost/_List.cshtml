@@ -20,19 +20,19 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody[i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
-                                <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model.ResponseBody[i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model.ResponseBody[i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
                         </td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].Host</td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody[i].SpatialLocation</td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].Host</td>
+                        <td class="pt-0 pb-0">@Model.ResponseBody![i].SpatialLocation</td>
                     </tr>
                 }
             }

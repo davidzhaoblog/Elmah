@@ -24,7 +24,7 @@
                         <h5 class="card-title">@Model.ResponseBody[i].Name</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@Model.ResponseBody[i].Name</h6>
                         <p class="card-text">@Model.ResponseBody[i].Name</p>
-                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody[i].StatusCode" title="@Model.ResponseBody[i].Name">
+                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" title="@Model.ResponseBody[i].Name">
                              @Model.ResponseBody[i].Name
                         </a>
                     </div>
