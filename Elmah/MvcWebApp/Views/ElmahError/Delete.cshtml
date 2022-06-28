@@ -117,7 +117,7 @@
                             <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Delete")</span>
                         </button>
                     </form>
-                    <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                    <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                         <i class="fa-solid fa-refresh"></i>
                         <span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Refresh")</span>
                     </a>

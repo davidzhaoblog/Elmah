@@ -24,8 +24,6 @@ namespace Elmah.MvcWebApp.Models
 
         public List<SelectListItem> GetTextSearchTypeList()
         {
-            var format_ItemsPerPage = _localizor.Get("Format_ItemsPerPage");
-
             return new List<SelectListItem>(new[] {
                 new SelectListItem{ Text = _localizor.Get(TextSearchTypes.Contains.ToString()), Value = "", Selected=true },
                 new SelectListItem{ Text = _localizor.Get(TextSearchTypes.StartsWith.ToString()), Value = TextSearchTypes.StartsWith.ToString() },

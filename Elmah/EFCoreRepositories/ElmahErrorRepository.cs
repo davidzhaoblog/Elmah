@@ -327,7 +327,7 @@ namespace Elmah.EFCoreRepositories
 
             // 2. With Paging And OrderBy
             var orderBys = QueryOrderBySetting.Parse(query.OrderBys);
-            if (orderBys.Count() > 0)
+            if (orderBys.Any())
             {
                 queryable = queryable.OrderBy(QueryOrderBySetting.GetOrderByExpression(orderBys));
             }
@@ -421,7 +421,7 @@ namespace Elmah.EFCoreRepositories
 
             // 2. With Paging And OrderBy
             var orderBys = QueryOrderBySetting.Parse(query.OrderBys);
-            if (orderBys.Count() > 0)
+            if (orderBys.Any())
             {
                 queryable = queryable.OrderBy(QueryOrderBySetting.GetOrderByExpression(orderBys));
             }
