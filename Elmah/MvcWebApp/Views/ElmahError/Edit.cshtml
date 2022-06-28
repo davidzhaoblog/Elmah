@@ -29,7 +29,6 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Application" class="control-label"></label>
-                    <!-- \ElmahModel.ElmahError.Application --> <!--  -->
                     <select asp-for="Application" class="form-control form-select" asp-items="ViewBag.ApplicationList" >
                         <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahApplication"))</option>
                     </select>
@@ -37,7 +36,6 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Host" class="control-label"></label>
-                    <!-- \ElmahModel.ElmahError.Host --> <!--  -->
                     <select asp-for="Host" class="form-control form-select" asp-items="ViewBag.HostList" >
                         <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahHost"))</option>
                     </select>
@@ -45,7 +43,6 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Type" class="control-label"></label>
-                    <!-- \ElmahModel.ElmahError.Type --> <!--  -->
                     <select asp-for="Type" class="form-control form-select" asp-items="ViewBag.TypeList" >
                         <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahType"))</option>
                     </select>
@@ -53,7 +50,6 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Source" class="control-label"></label>
-                    <!-- \ElmahModel.ElmahError.Source --> <!--  -->
                     <select asp-for="Source" class="form-control form-select" asp-items="ViewBag.SourceList" >
                         <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahSource"))</option>
                     </select>
@@ -66,7 +62,6 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="User" class="control-label"></label>
-                    <!-- \ElmahModel.ElmahError.User --> <!--  -->
                     <select asp-for="User" class="form-control form-select" asp-items="ViewBag.UserList" >
                         <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahUser"))</option>
                     </select>
@@ -74,7 +69,6 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="StatusCode" class="control-label"></label>
-                    <!-- \ElmahModel.ElmahError.StatusCode --> <!--  -->
                     <select asp-for="StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList" >
                         <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahStatusCode"))</option>
                     </select>
