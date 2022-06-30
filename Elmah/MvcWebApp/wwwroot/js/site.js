@@ -2,6 +2,47 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+function attachCrudActionDialog() {
+    var crudActionDialog = document.getElementById('crudActionDialog');
+    crudActionDialog.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        let button = event.relatedTarget;
+        const partialUrl = $(button).data("partialurl");
+        $.ajax({
+            type: "GET",
+            url: partialUrl,
+            async: false,
+            contentType: "application/json",
+            success: function (response) {
+                let modalBody = $("#crudActionDialog .modal-body");
+                modalBody.html(response);
+                console.log(response);
+            },
+            failure: function (response) {
+                // console.log(response);
+            },
+            error: function (response) {
+                // console.log(response);
+            }
+        });
+        // Extract info from data-bs-* attributes
+        var recipient = button.getAttribute('data-target');
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        var modalTitle = crudActionDialog.querySelector('.modal-title');
+        // var modalBodyInput = exampleModal.querySelector('.modal-body input');
+
+        modalTitle.textContent = 'New message to ' + recipient;
+        // modalBodyInput.value = recipient;
+    })
+}
+
+$(document).ready(function () {
+    attachCrudActionDialog();
+});
+
 // 1.Start CascadingDropdown
 $(".ddlcascading").change(function (e) {
     const childlisturl = $(this).data("childlisturl");
@@ -25,7 +66,7 @@ $(".ddlcascading").change(function (e) {
         url: childlisturl,
         data: query,
         async: false,
-        contentType: "application/json",
+        dataType: "html",
         success: function (response) {
             if (response.status == 200 && !!response.responseBody) {
                 console.log($('select[name="' + targetchild + '"]'));

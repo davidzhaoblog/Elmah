@@ -9,6 +9,7 @@ namespace Framework.Interfaces
 
     public interface IService<TRequest, TResponse, TIdentifier>
     {
+        TResponse GetDefault();
         Task<Response<TResponse>> Create(TRequest input);
         Task<Response> Delete(TIdentifier id);
         Task<Response<TResponse>> Get(TIdentifier id);

@@ -27,9 +27,10 @@
                 for (var i = 0; i < Model.ResponseBody.Length; i++)
                 {
                     <tr class="pt-0 pb-0">
+                    <form>
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+@*                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
@@ -37,7 +38,15 @@
                                 </a>
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
-                                </a>
+                                </a>*@
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                                    data-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })" 
+                                    data-submiturl="@Url.Action("AjaxEdit", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-bs-whatever="++fat" title="@localizor.Get("Delete")">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </div>
                         </td>
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].ErrorId</td>
@@ -51,6 +60,7 @@
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].TimeUtc</td>
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].Sequence</td>
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].AllXml</td>
+                    </form>
                     </tr>
                 }
             }

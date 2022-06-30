@@ -74,10 +74,10 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahError/_MultiItems
+        // GET: ElmahError/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> _MultiItems(ElmahErrorAdvancedQuery query)
+        public async Task<IActionResult> AjaxMultiItems(ElmahErrorAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
             if (query.PagedViewOption == PagedViewOptions.List)
@@ -89,6 +89,63 @@ namespace Elmah.MvcWebApp.Controllers
                 return PartialView("_Tiles", result);
             }
             return PartialView("_SlideShow", result);
+        }
+
+
+        // GET: ElmahApplication/AjaxLoadItem
+        [HttpGet] // from query string or route
+        [Route("[controller]/[action]/{view}/{template}/{ErrorId}")]
+        public async Task<IActionResult> AjaxLoadItem(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, Elmah.Models.ElmahErrorIdModel id)
+        {
+            Elmah.Models.ElmahErrorModel.DefaultView? result;
+            if (template == ViewItemTemplateNames.NewItem)
+            {
+                result = _thisService.GetDefault();
+                ViewBag.Status = System.Net.HttpStatusCode.OK;
+            }
+            else
+            {
+                var response = await _thisService.Get(id);
+                result = response.ResponseBody;
+                ViewBag.Status = response.Status;
+                ViewBag.StatusMessage = response.StatusMessage;
+            }
+            ViewBag.Template = template;
+            if (view == Framework.Models.PagedViewOptions.List && container == CRUDViewContainers.Inline)
+            {
+                return PartialView("_MultiItemTemplates", result);
+            }
+            return PartialView("_SingleItemTemplates", result);
+        }
+
+
+        // POST: ElmahError/Edit/{ErrorId}
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> AjaxEdit(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (id.ErrorId != input.ErrorId)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                await LoadIndexViewTopLevelSelectLists();
+                return View(input);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Update(input);
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return RedirectToAction(nameof(Index));
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            await LoadIndexViewTopLevelSelectLists();
+            return View(input);
         }
 
         // GET: ElmahError/Dashboard/{ErrorId}
