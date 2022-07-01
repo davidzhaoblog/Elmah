@@ -1,0 +1,27 @@
+@inject Elmah.Resx.IUIStrings localizor;
+@model Elmah.MvcWebApp.Models.AjaxResponseViewModel
+@if(Model.Status == System.Net.HttpStatusCode.OK)
+{
+    <h2 class="text-success">@localizor.Get("HttpStatusCodeOKMessage")</h2>
+}
+else if(Model.Status == System.Net.HttpStatusCode.NotFound)
+{
+    <h2 class="text-danger">@localizor.Get("HttpStatusCodeNotFoundMessage")</h2>
+}
+else if(Model.Status == System.Net.HttpStatusCode.BadRequest)
+{
+    <h2 class="text-danger">@localizor.Get("HttpStatusCodeBadRequestMessage")</h2>
+}
+else //if(Model.Status == System.Net.HttpStatusCode.InternalServerError)
+{
+    <h2 class="text-danger">@localizor.Get("HttpStatusCode.InternalServerErrorMessage")</h2>
+}
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+@{
+    ViewData["Title"] = "Error";
+}

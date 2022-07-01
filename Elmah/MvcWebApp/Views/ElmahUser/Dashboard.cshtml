@@ -32,7 +32,7 @@
                                             @localizor.Get("Search")
                                         </a>
                                     </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahUserCompositeDataOptions.ElmahErrors].Status ?? System.Net.HttpStatusCode.NoContent, StatusMessage= Model.Responses[ElmahUserCompositeDataOptions.ElmahErrors].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahUserCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahUserCompositeDataOptions.ElmahErrors].StatusMessage })
                                 </div>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ namespace Framework.Models
 
     public class Response
     {
-        public System.Net.HttpStatusCode? Status { get; set; }
+        public System.Net.HttpStatusCode Status { get; set; } =  System.Net.HttpStatusCode.NoContent;
         public string? StatusMessage { get; set; }
     }
 }

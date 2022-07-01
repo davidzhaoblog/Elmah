@@ -61,7 +61,7 @@ namespace Elmah.MvcWebApp.Controllers
                 new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
                 new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
             });
-            if(string.IsNullOrEmpty(query.OrderBys))
+            if (string.IsNullOrEmpty(query.OrderBys))
             {
                 query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
             }
@@ -94,7 +94,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahApplication/AjaxLoadItem
         [HttpGet] // from query string or route
-        [Route("[controller]/[action]/{view}/{template}/{ErrorId}")]
+        [Route("[controller]/[action]/{ErrorId}")]
         public async Task<IActionResult> AjaxLoadItem(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, Elmah.Models.ElmahErrorIdModel id)
         {
             Elmah.Models.ElmahErrorModel.DefaultView? result;
@@ -110,6 +110,12 @@ namespace Elmah.MvcWebApp.Controllers
                 ViewBag.Status = response.Status;
                 ViewBag.StatusMessage = response.StatusMessage;
             }
+
+            if (template == ViewItemTemplateNames.EditItem || template == ViewItemTemplateNames.NewItem)
+            {
+                await LoadSingleItemViewTopLevelSelectLists();
+            }
+
             ViewBag.Template = template;
             if (view == Framework.Models.PagedViewOptions.List && container == CRUDViewContainers.Inline)
             {
@@ -118,39 +124,66 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("_SingleItemTemplates", result);
         }
 
-
         // POST: ElmahError/Edit/{ErrorId}
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> AjaxEdit(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        public async Task<IActionResult> AjaxEdit(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, ElmahErrorIdModel id, ElmahErrorModel input)
         {
             if (id.ErrorId != input.ErrorId)
             {
-                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
-                ViewBag.StatusMessage = "Not Found";
-                await LoadIndexViewTopLevelSelectLists();
-                return View(input);
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Update(input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return RedirectToAction(nameof(Index));
-                ViewBag.Status = result.Status;
-                ViewBag.StatusMessage = result.StatusMessage;
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
             }
 
-            await LoadIndexViewTopLevelSelectLists();
-            return View(input);
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        // POST: ElmahError/AjaxCreate
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public async Task<IActionResult> AjaxCreate(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Create(input);
+
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            }
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        // POST: ElmahError/AjaxDelete/{ErrorId}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> AjaxDeleteConfirmed(Framework.Models.PagedViewOptions view, Framework.Models.CRUDViewContainers container, Framework.Models.ViewItemTemplateNames template, [FromRoute] ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Delete(id);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         // GET: ElmahError/Dashboard/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Dashboard([FromRoute] ElmahErrorIdModel id)
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
@@ -158,7 +191,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Edit/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Edit([FromRoute] ElmahErrorIdModel id)
         {
             if (id == null)
             {
@@ -180,7 +213,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        public async Task<IActionResult> Edit([FromRoute] ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (id.ErrorId != input.ErrorId)
             {
@@ -205,7 +238,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Details/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Details([FromRoute] ElmahErrorIdModel id)
         {
             var result = await _thisService.Get(id);
             ViewBag.Status = result.Status;
@@ -231,7 +264,7 @@ namespace Elmah.MvcWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Create(input);
-                if(result.Status == System.Net.HttpStatusCode.OK)
+                if (result.Status == System.Net.HttpStatusCode.OK)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -246,7 +279,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Delete/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Delete([FromRoute] ElmahErrorIdModel id)
         {
             var result = await _thisService.Get(id);
             ViewBag.Status = result.Status;
@@ -258,7 +291,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> DeleteConfirmed([FromRoute] ElmahErrorIdModel id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)
