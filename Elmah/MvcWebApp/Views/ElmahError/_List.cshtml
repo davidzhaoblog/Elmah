@@ -40,8 +40,8 @@
                         <i class="fa fa-trash"></i>
                         </a>*@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                                    data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), container = Framework.Models.CrudViewContainers.Dialog.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })"
-                                    data-nt-postbackurl="@Url.Action("AjaxEdit", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), container = Framework.Models.CrudViewContainers.Dialog.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
+                                    data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), container = Framework.Models.CrudViewContainers.Dialog.ToString(), template = Framework.Models.ViewItemTemplateNames.Edit.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })"
+                                    data-nt-postbackurl="@Url.Action("AjaxEdit", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), container = Framework.Models.CrudViewContainers.Dialog.ToString(), template = Framework.Models.ViewItemTemplateNames.Edit.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-bs-whatever="++fat" title="@localizor.Get("Delete")">

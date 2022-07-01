@@ -32,8 +32,8 @@
                                     <i class="fa fa-briefcase"></i>
                                     </a>*@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                                    data-partialurl="@Url.Action("_AjaxItem", "ElmahApplication", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  Application = Model.ResponseBody![i].Application })" 
-                                    data-submiturl="@Url.Action("_AjaxItem", "ElmahApplication", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  Application = Model.ResponseBody![i].Application })">
+                                    data-partialurl="@Url.Action("_AjaxItem", "ElmahApplication", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.Edit.ToString(),  Application = Model.ResponseBody![i].Application })" 
+                                    data-submiturl="@Url.Action("_AjaxItem", "ElmahApplication", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.Edit.ToString(),  Application = Model.ResponseBody![i].Application })">
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-bs-whatever="++fat" title="@localizor.Get("Delete")">

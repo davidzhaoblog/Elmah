@@ -54,10 +54,10 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahApplication/AjaxLoadItem
         [HttpGet] // from query string or route
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> AjaxLoadItem(Framework.Models.PagedViewOptions view, Framework.Models.CrudViewContainers container, Framework.Models.ViewItemTemplateNames template, Elmah.Models.ElmahErrorIdModel id)
+        public async Task<IActionResult> AjaxLoadItem(Framework.Models.PagedViewOptions view, Framework.Models.CrudViewContainers container, string template, Elmah.Models.ElmahErrorIdModel id)
         {
             Elmah.Models.ElmahErrorModel.DefaultView? result;
-            if (template == Framework.Models.ViewItemTemplateNames.NewItem)
+            if (template == Framework.Models.ViewItemTemplateNames.Create.ToString())
             {
                 result = _thisService.GetDefault();
                 ViewBag.Status = System.Net.HttpStatusCode.OK;
@@ -70,7 +70,7 @@ namespace Elmah.MvcWebApp.Controllers
                 ViewBag.StatusMessage = response.StatusMessage;
             }
 
-            if (template == Framework.Models.ViewItemTemplateNames.EditItem || template == Framework.Models.ViewItemTemplateNames.NewItem)
+            if (template == Framework.Models.ViewItemTemplateNames.Edit.ToString() || template == Framework.Models.ViewItemTemplateNames.Create.ToString())
             {
                 await LoadSingleItemViewTopLevelSelectLists();
             }
@@ -80,7 +80,8 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 return PartialView("_MultiItemTemplates", result);
             }
-            return PartialView("_SingleItemTemplates", result);
+            // each template should have a partial view start with _ then template name
+            return PartialView($"_{template}", result);
         }
 
         // POST: ElmahError/Edit/{ErrorId}

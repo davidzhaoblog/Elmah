@@ -10,7 +10,7 @@
         <div class="text-danger">@ViewBag.StatusMessage</div>
     </div>
 }
-else if ((Framework.Models.ViewItemTemplateNames)ViewBag.Template == Framework.Models.ViewItemTemplateNames.DisplayItem)
+else if ((Framework.Models.ViewItemTemplateNames)ViewBag.Template == Framework.Models.ViewItemTemplateNames.Details)
 {
     <input class="hidden-modal-title" value="@Model.Message" type="hidden" />
     <dl class="row">
@@ -22,7 +22,7 @@ else if ((Framework.Models.ViewItemTemplateNames)ViewBag.Template == Framework.M
         </dd>
     </dl>
 }
-else if ((Framework.Models.ViewItemTemplateNames)ViewBag.Template == Framework.Models.ViewItemTemplateNames.ReadonlyItem)
+else if ((Framework.Models.ViewItemTemplateNames)ViewBag.Template == Framework.Models.ViewItemTemplateNames.Delete)
 {
     <input class="nt-hidden-modal-title" value="@Model.Message" type="hidden" />
     <div class="form-group">

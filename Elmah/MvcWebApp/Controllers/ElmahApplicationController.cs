@@ -77,7 +77,7 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> _AjaxItem(Framework.Models.PagedViewOptions view, Framework.Models.ViewItemTemplateNames template, Elmah.Models.ElmahApplicationIdModel id)
         {
             Elmah.Models.ElmahApplicationModel? result;
-            if(template == ViewItemTemplateNames.NewItem)
+            if(template == ViewItemTemplateNames.Create)
             {
                 result = _thisService.GetDefault();
                 ViewBag.Status = System.Net.HttpStatusCode.OK;

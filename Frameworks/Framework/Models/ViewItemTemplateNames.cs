@@ -2,9 +2,9 @@ namespace Framework.Models
 {
     public enum ViewItemTemplateNames
     {
-        DisplayItem,
-        ReadonlyItem,
-        EditItem,
-        NewItem,
+        Details,
+        Delete,
+        Edit,
+        Create,
     }
 }
