@@ -7,7 +7,7 @@
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahSource");
     var format_All = localizor.Get("Format_All");
 }
-<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("_AjaxMultiItems", "ElmahSource")" data-updatetarget=".list-container-submit">
+<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("AjaxMultiItems", "ElmahSource")" data-updatetarget=".list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="page-index" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />

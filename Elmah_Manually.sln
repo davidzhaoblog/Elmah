@@ -1,0 +1,95 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{B627375D-D8C2-408C-BEDF-99060EC757BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.MvcWebApp", "Elmah\MvcWebApp\Elmah.MvcWebApp.csproj", "{46B147DE-11B6-43CA-A918-56BC05FDEB63}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.WebApiControllers", "Elmah\WebApiControllers\Elmah.WebApiControllers.csproj", "{8A0F4ED9-7306-46CC-A549-EF1E51B66A5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.WebApiApp", "Elmah\WebApiApp\Elmah.WebApiApp.csproj", "{07F1FA36-84C4-4AFC-A6D6-5C0DF400BCA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.Services", "Elmah\Services\Elmah.Services.csproj", "{9DE10104-3683-4DA9-8E6A-5773A78D84A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.RepositoryContracts", "Elmah\RepositoryContracts\Elmah.RepositoryContracts.csproj", "{2C4C0458-DF03-4523-90D1-A297B1FCEF7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.ModelContracts", "Elmah\ModelContracts\Elmah.ModelContracts.csproj", "{A4DAF6A6-53CF-4015-A003-D4E586641AB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.Models", "Elmah\Models\Elmah.Models.csproj", "{C3E8DF98-FA2D-4792-BF27-1E174D7EA8FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.EFCoreContext", "Elmah\EFCoreContext\Elmah.EFCoreContext.csproj", "{4BB3A3E4-A7F9-4B30-BD5F-4E177C870375}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.EFCoreRepositories", "Elmah\EFCoreRepositories\Elmah.EFCoreRepositories.csproj", "{633E3990-C20D-4D77-AAAD-5F93E3ED99D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.Resx", "Elmah\Resx\Elmah.Resx.csproj", "{CC0D3278-3DE1-4838-BE73-45B5ECE33858}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elmah.ServiceContracts", "Elmah\ServiceContracts\Elmah.ServiceContracts.csproj", "{E4EB8DE8-76EF-41E8-AB52-805ECE51B05E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Frameworks\Framework\Framework.csproj", "{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46B147DE-11B6-43CA-A918-56BC05FDEB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B147DE-11B6-43CA-A918-56BC05FDEB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B147DE-11B6-43CA-A918-56BC05FDEB63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B147DE-11B6-43CA-A918-56BC05FDEB63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A0F4ED9-7306-46CC-A549-EF1E51B66A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A0F4ED9-7306-46CC-A549-EF1E51B66A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A0F4ED9-7306-46CC-A549-EF1E51B66A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A0F4ED9-7306-46CC-A549-EF1E51B66A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07F1FA36-84C4-4AFC-A6D6-5C0DF400BCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07F1FA36-84C4-4AFC-A6D6-5C0DF400BCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07F1FA36-84C4-4AFC-A6D6-5C0DF400BCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07F1FA36-84C4-4AFC-A6D6-5C0DF400BCA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE10104-3683-4DA9-8E6A-5773A78D84A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE10104-3683-4DA9-8E6A-5773A78D84A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE10104-3683-4DA9-8E6A-5773A78D84A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE10104-3683-4DA9-8E6A-5773A78D84A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4C0458-DF03-4523-90D1-A297B1FCEF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4C0458-DF03-4523-90D1-A297B1FCEF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4C0458-DF03-4523-90D1-A297B1FCEF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4C0458-DF03-4523-90D1-A297B1FCEF7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4DAF6A6-53CF-4015-A003-D4E586641AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4DAF6A6-53CF-4015-A003-D4E586641AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4DAF6A6-53CF-4015-A003-D4E586641AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4DAF6A6-53CF-4015-A003-D4E586641AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E8DF98-FA2D-4792-BF27-1E174D7EA8FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E8DF98-FA2D-4792-BF27-1E174D7EA8FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E8DF98-FA2D-4792-BF27-1E174D7EA8FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E8DF98-FA2D-4792-BF27-1E174D7EA8FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BB3A3E4-A7F9-4B30-BD5F-4E177C870375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB3A3E4-A7F9-4B30-BD5F-4E177C870375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB3A3E4-A7F9-4B30-BD5F-4E177C870375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB3A3E4-A7F9-4B30-BD5F-4E177C870375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633E3990-C20D-4D77-AAAD-5F93E3ED99D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633E3990-C20D-4D77-AAAD-5F93E3ED99D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633E3990-C20D-4D77-AAAD-5F93E3ED99D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633E3990-C20D-4D77-AAAD-5F93E3ED99D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0D3278-3DE1-4838-BE73-45B5ECE33858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0D3278-3DE1-4838-BE73-45B5ECE33858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0D3278-3DE1-4838-BE73-45B5ECE33858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0D3278-3DE1-4838-BE73-45B5ECE33858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4EB8DE8-76EF-41E8-AB52-805ECE51B05E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4EB8DE8-76EF-41E8-AB52-805ECE51B05E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4EB8DE8-76EF-41E8-AB52-805ECE51B05E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4EB8DE8-76EF-41E8-AB52-805ECE51B05E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D25AA30-C3AF-4AE0-B567-0F2653120CDC} = {B627375D-D8C2-408C-BEDF-99060EC757BA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F2AFC04-D0CF-4068-9654-3C6DFAD17C3B}
+	EndGlobalSection
+EndGlobal
