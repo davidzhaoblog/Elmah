@@ -25,15 +25,8 @@
                 </div>
                 </div>
                 <div class="card-footer text-muted">
-                <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
-                    <i class="fa fa-briefcase"></i>
-                </a>
-                <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Edit" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Delete" asp-route-statuscode="@Model.ResponseBody![i].StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
-                    <i class="fa fa-trash"></i>
-                </a>
+                <div class="btn-group">
+                </div>
                 </div>
             </div>
         </div>

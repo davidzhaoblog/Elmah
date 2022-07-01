@@ -53,10 +53,9 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostModel[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahHost/_MultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> _MultiItems(ElmahHostAdvancedQuery query)
+        public async Task<IActionResult> AjaxMultiItems(ElmahHostAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
             if (query.PagedViewOption == PagedViewOptions.List)

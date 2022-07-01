@@ -26,6 +26,12 @@ namespace Elmah.Services
             _logger = logger;
         }
 
+        public ElmahErrorModel.DefaultView GetDefault()
+        {
+            // TODO: please set default value here
+            return new ElmahErrorModel.DefaultView();
+        }
+
         public async Task<Response> Delete(ElmahErrorIdModel id)
         {
             return await _thisRepository.Delete(id);

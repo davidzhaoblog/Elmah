@@ -19,7 +19,7 @@ namespace Elmah.WebApiControllers
                 return NotFound(serviceResponse.StatusMessage);
             // else if (result.Status == HttpStatusCode.InternalServerError)
 
-            return StatusCode(serviceResponse.Status.HasValue ? (int)serviceResponse.Status : (int)HttpStatusCode.InternalServerError);
+            return StatusCode((int)serviceResponse.Status);
         }
 
         public ActionResult<T> ReturnResultOnlyActionResult<T>(Response<T> serviceResponse)

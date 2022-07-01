@@ -1,8 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-// 1.Start CascadingDropdown
+﻿// 1.Start CascadingDropdown
 $(".ddlcascading").change(function (e) {
     const childlisturl = $(this).data("childlisturl");
     const targetchild = $(this).data("targetchild");
@@ -25,7 +21,7 @@ $(".ddlcascading").change(function (e) {
         url: childlisturl,
         data: query,
         async: false,
-        contentType: "application/json",
+        dataType: "html",
         success: function (response) {
             if (response.status == 200 && !!response.responseBody) {
                 console.log($('select[name="' + targetchild + '"]'));
