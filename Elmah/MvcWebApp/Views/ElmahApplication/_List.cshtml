@@ -19,15 +19,26 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                @*<a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
                                     <i class="fa fa-briefcase"></i>
-                                </a>
-                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                    </a>
+                                    <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                                     <i class="fa fa-edit"></i>
-                                </a>
-                                <a asp-area="" asp-controller="ElmahApplication" asp-action="Delete" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                    </a>
+                                    <a asp-area="" asp-controller="ElmahApplication" asp-action="Delete" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
-                                </a>
+                                    </a>*@
+                                @*                          <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody![i].Application" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                    <i class="fa fa-briefcase"></i>
+                                    </a>*@
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                                    data-partialurl="@Url.Action("_AjaxItem", "ElmahApplication", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  Application = Model.ResponseBody![i].Application })" 
+                                    data-submiturl="@Url.Action("_AjaxItem", "ElmahApplication", new { view = Framework.Models.PagedViewOptions.List.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  Application = Model.ResponseBody![i].Application })">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-bs-whatever="++fat" title="@localizor.Get("Delete")">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </div>
                         </td>
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].Application</td>
@@ -49,3 +60,25 @@
         @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)
     }
 </div>
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        var exampleModal = document.getElementById('exampleModal');
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            var recipient = button.getAttribute('data-bs-whatever');
+            // If necessary, you could initiate an AJAX request here
+            // and then do the updating in a callback.
+            //
+            // Update the modal's content.
+            var modalTitle = exampleModal.querySelector('.modal-title');
+            var modalBodyInput = exampleModal.querySelector('.modal-body input');
+
+            modalTitle.textContent = 'New message to ' + recipient;
+            modalBodyInput.value = recipient;
+        })
+    });
+</script>
+}

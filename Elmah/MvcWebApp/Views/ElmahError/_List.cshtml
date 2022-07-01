@@ -1,6 +1,7 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
+@using Microsoft.AspNetCore.Http;
 @model PagedResponse<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
@@ -29,15 +30,23 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
-                                    <i class="fa fa-briefcase"></i>
-                                </a>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                @*                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                        <i class="fa fa-briefcase"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                        <i class="fa fa-edit"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                        <i class="fa fa-trash"></i>
+                        </a>*@
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                                    data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), container = Framework.Models.CrudViewContainers.Dialog.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })"
+                                    data-nt-postbackurl="@Url.Action("AjaxEdit", "ElmahError", new { view = Framework.Models.PagedViewOptions.List.ToString(), container = Framework.Models.CrudViewContainers.Dialog.ToString(), template = Framework.Models.ViewItemTemplateNames.EditItem.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
                                     <i class="fa fa-edit"></i>
-                                </a>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                </button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-bs-whatever="++fat" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
-                                </a>
+                                </button>
                             </div>
                         </td>
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].ErrorId</td>
