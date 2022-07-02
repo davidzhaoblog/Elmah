@@ -32,7 +32,7 @@
                                             @localizor.Get("Search")
                                         </a>
                                     </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahStatusCodeCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahStatusCodeCompositeDataOptions.ElmahErrors].StatusMessage })
+                                    @await Html.PartialAsync("~~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahStatusCodeCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahStatusCodeCompositeDataOptions.ElmahErrors].StatusMessage })
                                 </div>
                             </div>
                         </div>
@@ -54,19 +54,7 @@
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
-                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Edit" asp-route-statuscode="@Model?.__Master__.StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                                <span class="fa fa-edit"></span>
-                            </a>
-                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                                <span class="fa fa-plus"></span>
-                            </a>
-                            @*<a asp-area="" asp-controller="ElmahStatusCode" asp-action="Copy" asp-route-statuscode="@Model?.__Master__.StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Copy")">
-                                <span class="fa fa-copy"></span>
-                            </a>*@
-                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Details" asp-route-statuscode="@Model?.__Master__.StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Details")">
-                                <span class="fa fa-file"></span>
-                            </a>
-                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
+                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
                                 <span class="fa fa-search"></span>
                             </a>
                         </div>
@@ -90,10 +78,7 @@
                 else
                 {
                     <div class="btn-group">
-                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                            <span class="fa fa-plus"></span>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
+                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
                             <span class="fa fa-search"></span>
                         </a>
                     </div>

@@ -20,6 +20,9 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
+                                <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                                    <i class="fa-solid fa-folder-tree"></i>
+                                </a>
                             </div>
                         </td>
                         <td class="pt-0 pb-0">@Model.ResponseBody![i].Host</td>

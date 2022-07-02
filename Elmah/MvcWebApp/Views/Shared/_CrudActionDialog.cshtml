@@ -14,9 +14,15 @@
             <div class="modal-body nt-modal-body">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@localizor.Get("Close")</button>
-                <button type="button" class="btn btn-primary nt-btn-save" style="display: none;">@localizor.Get("Save")</button>
-                <button type="button" class="btn btn-primary nt-btn-delete" style="display: none;">@localizor.Get("Delete")</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-circle-xmark"></i><span class="ms-1 nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Close")</span>
+                </button>
+                <button type="button" class="btn btn-primary nt-btn-save" style="display: none;">
+                    <i class="fa-solid fa-check-circle"></i><span class="ms-1 nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Save")</span>
+                </button>
+                <button type="button" class="btn btn-primary nt-btn-delete" style="display: none;">
+                    <i class="fa fa-trash"></i><span class="ms-1 nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Delete")</span>
+                </button>
             </div>
         </div>
     </div>

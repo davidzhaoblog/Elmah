@@ -26,6 +26,9 @@
                 </div>
                 <div class="card-footer text-muted">
                 <div class="btn-group">
+                    <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                        <i class="fa-solid fa-folder-tree"></i>
+                    </a>
                 </div>
                 </div>
             </div>

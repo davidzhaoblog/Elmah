@@ -7,7 +7,7 @@
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahUser");
     var format_All = localizor.Get("Format_All");
 }
-<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("_AjaxMultiItems", "ElmahUser")" data-updatetarget=".list-container-submit">
+<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("AjaxMultiItems", "ElmahUser")" data-updatetarget=".list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="page-index" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
@@ -59,15 +59,9 @@
             <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#pageSizeH" data-submittarget="#thisform"></select>
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#orderByH" data-submittarget="#thisform"></select>
         </div>
-        <div class="btn-group float-end mt-1">
-            <a asp-area="" asp-controller="ElmahUser" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create_New")">
-                <span class="fa fa-plus"></span>
-                @localizor.Get("Create")
-            </a>
-        </div>
     </div>
     <div class="card-body list-container-submit row m-0 p-0" data-updatetarget="#pageIndexH" data-submittarget="#thisform">
         @await Html.PartialAsync("~/Views/ElmahUser/_List.cshtml", Model.Result)
     </div>
 </div>
-<partial name="~/Views/Shared/_CRUDActionDialog.cshtml" />
+<partial name="~/Views/Shared/_CrudActionDialog.cshtml" />

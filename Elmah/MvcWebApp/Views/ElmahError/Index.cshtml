@@ -7,7 +7,7 @@
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahError");
     var format_All = localizor.Get("Format_All");
 }
-<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("_AjaxMultiItems", "ElmahError")" data-updatetarget=".list-container-submit">
+<form id="thisform" method="post" class="ajax-partial-load-post-formdata" data-partial-url="@Url.Action("AjaxMultiItems", "ElmahError")" data-updatetarget=".list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="page-index" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
@@ -128,14 +128,18 @@
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select selectchange-submit" data-updatetarget="#orderByH" data-submittarget="#thisform"></select>
         </div>
         <div class="btn-group float-end mt-1">
-            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create_New")">
-                <span class="fa fa-plus"></span>
-                @localizor.Get("Create")
+            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                <i class="fa fa-plus"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
             </a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Create_New")"
+                data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Create.ToString(),   ErrorId = default(System.Guid) })"
+                data-nt-postbackurl="@Url.Action("AjaxCreate", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Create.ToString(),  ErrorId = default(System.Guid) })">
+                <i class="fa fa-plus"></i>
+            </button>
         </div>
     </div>
     <div class="card-body list-container-submit row m-0 p-0" data-updatetarget="#pageIndexH" data-submittarget="#thisform">
         @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", Model.Result)
     </div>
 </div>
-<partial name="~/Views/Shared/_CRUDActionDialog.cshtml" />
+<partial name="~/Views/Shared/_CrudActionDialog.cshtml" />

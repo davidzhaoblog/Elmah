@@ -29,11 +29,14 @@
                     <tr class="pt-0 pb-0">
                         <td class="p-0">
                             <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                                    <i class="fa-solid fa-folder-tree"></i>
+                                </a>
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Details")"
-                                    data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Edit.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Details")"
+                                    data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Details.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
                                     <i class="fa fa-briefcase"></i>
                                 </button>
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
@@ -44,7 +47,7 @@
                                     data-nt-postbackurl="@Url.Action("AjaxEdit", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Edit.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>

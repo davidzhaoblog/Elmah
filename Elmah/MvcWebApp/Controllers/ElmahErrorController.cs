@@ -74,6 +74,7 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
         }
 
+        // GET: ElmahError/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
         public async Task<IActionResult> AjaxMultiItems(ElmahErrorAdvancedQuery query)
@@ -91,6 +92,7 @@ namespace Elmah.MvcWebApp.Controllers
         }
 
         // GET: ElmahError/Dashboard/{ErrorId}
+        [HttpGet, ActionName("Dashboard")]
         [Route("[controller]/[action]/{ErrorId}")]
         public async Task<IActionResult> Dashboard([FromRoute]ElmahErrorIdModel id)
         {
@@ -98,7 +100,116 @@ namespace Elmah.MvcWebApp.Controllers
             return View(result);
         }
 
+        // GET: ElmahError/AjaxLoadItem/{ErrorId}
+        [HttpGet, ActionName("AjaxLoadItem")]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> AjaxLoadItem(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            string template,
+            ElmahErrorIdModel id)
+        {
+            ElmahErrorModel.DefaultView? result;
+            if (template == ViewItemTemplateNames.Create.ToString())
+            {
+                result = _thisService.GetDefault();
+                ViewBag.Status = System.Net.HttpStatusCode.OK;
+            }
+            else
+            {
+                var response = await _thisService.Get(id);
+                result = response.ResponseBody;
+                ViewBag.Status = response.Status;
+                ViewBag.StatusMessage = response.StatusMessage;
+            }
+
+            // TODO: Maybe some special for Edit/Create
+            if (template == ViewItemTemplateNames.Edit.ToString() || template == ViewItemTemplateNames.Create.ToString())
+            {
+                await LoadIndexViewTopLevelSelectLists();
+            }
+
+            ViewBag.Template = template;
+            if (view == PagedViewOptions.List && container == CrudViewContainers.Inline)
+            {
+                // By Default: _List{template}Item.cshtml
+                // Developer can customize template name
+                return PartialView($"_List{template}Item", result);
+            }
+            // By Default: _{template}.cshtml
+            // Developer can customize template name
+            return PartialView($"_{template}", result);
+        }
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ElmahError/AjaxCreate
+        [HttpPost, ActionName("AjaxCreate")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxCreate(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            ViewItemTemplateNames template,
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Create(input);
+
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // POST: ElmahError/AjaxDelete/{ErrorId}
+        [HttpPost, ActionName("AjaxDelete")]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> AjaxDelete(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            ViewItemTemplateNames template,
+            [FromRoute] ElmahErrorIdModel id)
+        {
+            var result = await _thisService.Delete(id);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ElmahError/AjaxEdit/{ErrorId}
+        [HttpPost, ActionName("AjaxEdit")]
+        //[ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{ErrorId}")]
+        public async Task<IActionResult> AjaxEdit(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            ViewItemTemplateNames template,
+            ElmahErrorIdModel id,
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        {
+            if (id.ErrorId != input.ErrorId)
+            {
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Update(input);
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
+            }
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
         // GET: ElmahError/Edit/{ErrorId}
+        //[HttpGet, ActionName("Edit")]
         [Route("[controller]/[action]/{ErrorId}")]
         public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id)
         {
@@ -119,10 +230,12 @@ namespace Elmah.MvcWebApp.Controllers
         // POST: ElmahError/Edit/{ErrorId}
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id, [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        public async Task<IActionResult> Edit(
+            [FromRoute]ElmahErrorIdModel id,
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (id.ErrorId != input.ErrorId)
             {
@@ -168,7 +281,8 @@ namespace Elmah.MvcWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+        public async Task<IActionResult> Create(
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (ModelState.IsValid)
             {
