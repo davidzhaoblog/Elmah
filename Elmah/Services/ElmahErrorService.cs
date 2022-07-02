@@ -26,15 +26,10 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-
-        /// <summary>
-        /// This method is to set default value
-        /// </summary>
-        /// <returns></returns>
-        public Elmah.Models.ElmahErrorModel.DefaultView GetDefault()
+        public ElmahErrorModel.DefaultView GetDefault()
         {
             // TODO: please set default value here
-            return new Elmah.Models.ElmahErrorModel.DefaultView();
+            return new ElmahErrorModel.DefaultView();
         }
 
         public async Task<Response> Delete(ElmahErrorIdModel id)

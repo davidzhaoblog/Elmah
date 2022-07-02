@@ -14,6 +14,7 @@ namespace Framework.Interfaces
         Task<Response> Delete(TIdentifier id);
         Task<Response<TResponse>> Get(TIdentifier id);
         Task<Response<TResponse>> Update(TRequest input);
+        TResponse GetDefault();
     }
 }
 

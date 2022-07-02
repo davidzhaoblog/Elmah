@@ -53,10 +53,10 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]> { Query = query, Result = result });
         }
 
-        // GET: ElmahApplication/_AjaxMultiItems
+        // GET: ElmahApplication/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> _AjaxMultiItems(ElmahApplicationAdvancedQuery query)
+        public async Task<IActionResult> AjaxMultiItems(ElmahApplicationAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
             if (query.PagedViewOption == PagedViewOptions.List)
@@ -70,14 +70,26 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("_SlideShow", result);
         }
 
-        // GET: ElmahApplication/_AjaxItem
-        [HttpGet] // from query string or route
-        [HttpPost]// form post formdata
-        [Route("[controller]/[action]/{view}/{template}/{Application}")]
-        public async Task<IActionResult> _AjaxItem(Framework.Models.PagedViewOptions view, Framework.Models.ViewItemTemplateNames template, Elmah.Models.ElmahApplicationIdModel id)
+        // GET: ElmahApplication/Dashboard/{Application}
+        [HttpGet, ActionName("Dashboard")]
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahApplicationIdModel id)
         {
-            Elmah.Models.ElmahApplicationModel? result;
-            if(template == ViewItemTemplateNames.Create)
+            var result = await _thisService.GetCompositeModel(id);
+            return View(result);
+        }
+
+        // GET: ElmahApplication/AjaxLoadItem/{Application}
+        [HttpGet, ActionName("AjaxLoadItem")]
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> AjaxLoadItem(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            string template,
+            ElmahApplicationIdModel id)
+        {
+            ElmahApplicationModel? result;
+            if (template == ViewItemTemplateNames.Create.ToString())
             {
                 result = _thisService.GetDefault();
                 ViewBag.Status = System.Net.HttpStatusCode.OK;
@@ -89,20 +101,92 @@ namespace Elmah.MvcWebApp.Controllers
                 ViewBag.Status = response.Status;
                 ViewBag.StatusMessage = response.StatusMessage;
             }
-            ViewBag.Template = template;
-            if (view == PagedViewOptions.Single)
+
+            // TODO: Maybe some special for Edit/Create
+            if (template == ViewItemTemplateNames.Edit.ToString() || template == ViewItemTemplateNames.Create.ToString())
             {
-                return PartialView("_SingleItemTemplates", result);
+
             }
-            return PartialView("_MultiItemTemplates", result);
+
+            ViewBag.Template = template;
+            if (view == PagedViewOptions.List && container == CrudViewContainers.Inline)
+            {
+                // By Default: _List{template}Item.cshtml
+                // Developer can customize template name
+                return PartialView($"_List{template}Item", result);
+            }
+            // By Default: _{template}.cshtml
+            // Developer can customize template name
+            return PartialView($"_{template}", result);
         }
 
-        // GET: ElmahApplication/Dashboard/{Application}
-        [Route("[controller]/[action]/{Application}")]
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahApplicationIdModel id)
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ElmahApplication/AjaxCreate
+        [HttpPost, ActionName("AjaxCreate")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxCreate(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            ViewItemTemplateNames template,
+            [Bind("Application")] ElmahApplicationModel input)
         {
-            var result = await _thisService.GetCompositeModel(id);
-            return View(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Create(input);
+
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        // POST: ElmahApplication/AjaxDelete/{Application}
+        [HttpPost, ActionName("AjaxDelete")]
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> AjaxDelete(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            ViewItemTemplateNames template,
+            [FromRoute] ElmahApplicationIdModel id)
+        {
+            var result = await _thisService.Delete(id);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ElmahApplication/AjaxEdit/{Application}
+        [HttpPost, ActionName("AjaxEdit")]
+        //[ValidateAntiForgeryToken]
+        [Route("[controller]/[action]/{Application}")]
+        public async Task<IActionResult> AjaxEdit(
+            PagedViewOptions view,
+            CrudViewContainers container,
+            ViewItemTemplateNames template,
+            ElmahApplicationIdModel id,
+            [Bind("Application")] ElmahApplicationModel input)
+        {
+            if (id.Application != input.Application)
+            {
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Update(input);
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
+            }
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
     }
 }
+

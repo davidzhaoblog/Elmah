@@ -21,17 +21,11 @@
                 </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <div class="btn-group">
-                        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Dashboard")">
-                            <i class="fa fa-briefcase"></i>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Delete")">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </div>
+                <div class="btn-group">
+                    <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                        <i class="fa-solid fa-folder-tree"></i>
+                    </a>
+                </div>
                 </div>
             </div>
         </div>

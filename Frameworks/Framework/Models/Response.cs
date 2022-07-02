@@ -8,7 +8,7 @@ namespace Framework.Models
 {
     public class Response<TStatus, TResponseBody>
     {
-        public TStatus? Status { get; set; }
+        public TStatus Status { get; set; } = default(TStatus)!;
         public TResponseBody? ResponseBody { get; set; }
         public string? StatusMessage { get; set; }
     }
@@ -18,7 +18,7 @@ namespace Framework.Models
 
     public class Response
     {
-        public System.Net.HttpStatusCode Status { get; set; } =  System.Net.HttpStatusCode.NoContent;
+        public System.Net.HttpStatusCode Status { get; set; } = System.Net.HttpStatusCode.NoContent;
         public string? StatusMessage { get; set; }
     }
 }

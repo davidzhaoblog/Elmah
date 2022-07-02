@@ -4,7 +4,7 @@ namespace Elmah.Models
 {
     public partial class ElmahSourceIdModel : IElmahSourceIdentifier
     {
-        public string Source { get; set; } = null!;
+        public string Source { get; set; } = String.Empty;
     }
 }
 

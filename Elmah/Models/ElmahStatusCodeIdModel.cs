@@ -4,7 +4,7 @@ namespace Elmah.Models
 {
     public partial class ElmahStatusCodeIdModel : IElmahStatusCodeIdentifier
     {
-        public int StatusCode { get; set; }
+        public int StatusCode { get; set; } = default(int);
     }
 }
 
