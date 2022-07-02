@@ -13,13 +13,13 @@ namespace Elmah.WebApiControllers
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("/api/[controller]/[action]")]
-    public partial class ElmahSourceController : BaseApiController
+    public partial class ElmahStatusCodeApiController : BaseApiController
     {
-        IElmahSourceService _thisService { get; set; }
+        IElmahStatusCodeService _thisService { get; set; }
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<ElmahSourceController> _logger;
+        private readonly ILogger<ElmahStatusCodeApiController> _logger;
 
-        public ElmahSourceController(IElmahSourceService thisService, IServiceProvider serviceProvider, ILogger<ElmahSourceController> logger)
+        public ElmahStatusCodeApiController(IElmahStatusCodeService thisService, IServiceProvider serviceProvider, ILogger<ElmahStatusCodeApiController> logger)
         {
             this._serviceProvider = serviceProvider;
             this._thisService = thisService;
@@ -28,7 +28,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahSourceIdModel id)
+        public async Task<ActionResult> Delete(ElmahStatusCodeIdModel id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);
@@ -36,7 +36,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahSourceModel>> Get(ElmahSourceIdModel id)
+        public async Task<ActionResult<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdModel id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -44,7 +44,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<ElmahSourceModel>> Put(ElmahSourceModel input)
+        public async Task<ActionResult<ElmahStatusCodeModel>> Put(ElmahStatusCodeModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -52,7 +52,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<ElmahSourceModel>> Post(ElmahSourceModel input)
+        public async Task<ActionResult<ElmahStatusCodeModel>> Post(ElmahStatusCodeModel input)
         {
             var serviceResponse = await _thisService.Update(input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -61,8 +61,8 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahSourceModel[]>>> Search(
-            ElmahSourceAdvancedQuery query)
+        public async Task<ActionResult<PagedResponse<ElmahStatusCodeModel[]>>> Search(
+            ElmahStatusCodeAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
             return ReturnActionResult(serviceResponse);
@@ -72,7 +72,7 @@ namespace Elmah.WebApiControllers
         [HttpGet]
         [HttpPost]
         public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetCodeList(
-            ElmahSourceAdvancedQuery query)
+            ElmahStatusCodeAdvancedQuery query)
         {
             var serviceResponse = await _thisService.GetCodeList(query);
             return ReturnActionResult(serviceResponse);
@@ -80,7 +80,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahSourceCompositeModel>> GetCompositeModel(ElmahSourceIdModel id)
+        public async Task<ActionResult<ElmahStatusCodeCompositeModel>> GetCompositeModel(ElmahStatusCodeIdModel id)
         {
             var serviceResponse = await _thisService.GetCompositeModel(id, null);
             return Ok(serviceResponse);
