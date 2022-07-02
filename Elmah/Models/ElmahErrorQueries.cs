@@ -1,4 +1,5 @@
 using Framework.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
