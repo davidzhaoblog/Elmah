@@ -1,14 +1,22 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// data-nt-modelsize
-// data-nt-partialurl
-// data-nt-postbackurl
-
-// .nt-modal-body
-// .nt-btn-save
-// .nt-result
-// .nt-btn-delete
+/*
+ * single dialog instance with id="crudActionDialog"
+ * #crudActionDialog
+ * 
+ * data-nt-modelsize
+ * data-nt-partialurl
+ * data-nt-postbackurl
+ * data-nt-action
+ * 
+ * .nt-modal-body
+ * .nt-hidden-modal-title
+ * .nt-btn-save
+ * .nt-result
+ * .nt-btn-delete
+ * .nt-submit-text
+ */
 
 function attachCrudActionDialog() {
     var crudActionDialog = document.getElementById('crudActionDialog');
@@ -26,7 +34,7 @@ function attachCrudActionDialog() {
             async: false,
             contentType: "application/json",
             success: function (response) {
-                const action = $(button).data("action");
+                const action = $(button).data("nt-action");
                 // 1.1. add response html to .nt-modal-body
                 let modalBody = $("#crudActionDialog .nt-modal-body");
                 if (action == "PUT" || action == "POST") // wrap with <form>..</form> Edit or Create
