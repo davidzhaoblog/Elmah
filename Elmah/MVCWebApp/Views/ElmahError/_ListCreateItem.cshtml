@@ -1,92 +1,64 @@
+@using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
 @model ElmahErrorModel.DefaultView
 @inject IUIStrings localizor;
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.ErrorId)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.ErrorId)
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Application)
-    </dt>
-    <dd class="col-sm-10">
-        <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.Application">@Model.Application_Name</a>
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Host)
-    </dt>
-    <dd class="col-sm-10">
-        <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Host">@Model.Host_Name</a>
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Type)
-    </dt>
-    <dd class="col-sm-10">
-        <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Type">@Model.Type_Name</a>
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Source)
-    </dt>
-    <dd class="col-sm-10">
-        <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.Source">@Model.Source_Name</a>
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Message)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Message)
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.User)
-    </dt>
-    <dd class="col-sm-10">
-        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.User">@Model.User_Name</a>
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.StatusCode)
-    </dt>
-    <dd class="col-sm-10">
-        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.StatusCode">@Model.StatusCode_Name</a>
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.TimeUtc)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.TimeUtc)
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Sequence)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Sequence)
-    </dd>
-</dl>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.AllXml)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.AllXml)
-    </dd>
-</dl>
+@{
+    var format_Please_Select = localizor.Get("Format_Please_Select");
+}
+<td class="form-group pt-0 pb-0">
+    <input asp-for="ErrorId" class="form-control" />
+    <span asp-validation-for="ErrorId" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <select asp-for="Application" class="form-control form-select" asp-items="ViewBag.ApplicationList" >
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahApplication"))</option>
+    </select>
+    <span asp-validation-for="Application" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <select asp-for="Host" class="form-control form-select" asp-items="ViewBag.HostList" >
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahHost"))</option>
+    </select>
+    <span asp-validation-for="Host" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <select asp-for="Type" class="form-control form-select" asp-items="ViewBag.TypeList" >
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahType"))</option>
+    </select>
+    <span asp-validation-for="Type" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <select asp-for="Source" class="form-control form-select" asp-items="ViewBag.SourceList" >
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahSource"))</option>
+    </select>
+    <span asp-validation-for="Source" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <input asp-for="Message" class="form-control" />
+    <span asp-validation-for="Message" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <select asp-for="User" class="form-control form-select" asp-items="ViewBag.UserList" >
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahUser"))</option>
+    </select>
+    <span asp-validation-for="User" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <select asp-for="StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList" >
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahStatusCode"))</option>
+    </select>
+    <span asp-validation-for="StatusCode" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <input asp-for="TimeUtc" class="form-control" />
+    <span asp-validation-for="TimeUtc" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <input asp-for="Sequence" class="form-control" />
+    <span asp-validation-for="Sequence" class="text-danger"></span>
+</td>
+<td class="form-group pt-0 pb-0">
+    <input asp-for="AllXml" class="form-control" />
+    <span asp-validation-for="AllXml" class="text-danger"></span>
+</td>

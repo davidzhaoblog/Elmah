@@ -1,5 +1,7 @@
-@inject Elmah.Resx.IUIStrings localizor;
-@model Elmah.MvcWebApp.Models.AjaxResponseViewModel
+@using Elmah.MvcWebApp.Models;
+@using Elmah.Resx;
+@inject IUIStrings localizor;
+@model AjaxResponseViewModel
 @if(Model.Status == System.Net.HttpStatusCode.OK)
 {
     <h2 class="text-success">@localizor.Get("HttpStatusCodeOKMessage")</h2>
