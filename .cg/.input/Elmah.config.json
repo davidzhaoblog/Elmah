@@ -18,10 +18,7 @@
   "databaseSetting": {
     "connectionStringName": "Elmah",
     "sever": "Localhost",
-    "name": "Elmah",
-    "integratedSecurity": false,
-    "userName": "sa",
-    "password": "Qwer~123"
+    "name": "Elmah"
   },
   "excludedTables": [
     "aspnet_*",

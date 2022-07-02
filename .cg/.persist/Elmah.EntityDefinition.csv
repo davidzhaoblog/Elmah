@@ -1,8 +1,8 @@
-﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,IsEnum,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,XamarinExcluded,BaseTableUniqueConstraint,ConsumableDetailsTablesOfBaseTable,ConsumableCrossReferenceTablesOfBaseTable,CompositeQueryIdentifiers,HasCreatedDate,HasModifiedDate,Hasrowguid,CreatedDate,CacheNameValue,CacheDetails,CacheYourData,CacheWhenUse,System_Data,Test_Data,Has_Data,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,ToLoadSystemRecords,DownwardListTableOfListTable,HasXamarinFormsTabDashboard
-dbo,ELMAH_Error,True,CrossReferenceTable,,,False,,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
-dbo,ElmahApplication,True,DetailsTable,,,False,,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
-dbo,ElmahHost,True,DetailsTable,,,False,,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
-dbo,ElmahSource,True,DetailsTable,,,False,,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
-dbo,ElmahStatusCode,True,DetailsTable,,,False,Name,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
-dbo,ElmahType,True,DetailsTable,,,False,,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
-dbo,ElmahUser,True,DetailsTable,,,False,,False,,,,,,False,,,,,False,False,False,6/22/2022 10:14:04 AM,False,False,False,False,False,False,False,,False,0,True,False,,False
+﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,IsEnum,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,BaseTableUniqueConstraint,CompositeQueryIdentifiers,CreatedDateProperty,ModifiedDateProperty,RowguidProperty,CreatedDate,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,DownwardListTableOfListTable
+dbo,ELMAH_Error,True,CrossReferenceTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+dbo,ElmahApplication,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+dbo,ElmahHost,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+dbo,ElmahSource,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+dbo,ElmahStatusCode,True,DetailsTable,,,False,Name,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+dbo,ElmahType,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+dbo,ElmahUser,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,

@@ -13,13 +13,13 @@ namespace Elmah.WebApiControllers
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("/api/[controller]/[action]")]
-    public partial class ElmahHostController : BaseApiController
+    public partial class ElmahErrorApiController : BaseApiController
     {
-        IElmahHostService _thisService { get; set; }
+        IElmahErrorService _thisService { get; set; }
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<ElmahHostController> _logger;
+        private readonly ILogger<ElmahErrorApiController> _logger;
 
-        public ElmahHostController(IElmahHostService thisService, IServiceProvider serviceProvider, ILogger<ElmahHostController> logger)
+        public ElmahErrorApiController(IElmahErrorService thisService, IServiceProvider serviceProvider, ILogger<ElmahErrorApiController> logger)
         {
             this._serviceProvider = serviceProvider;
             this._thisService = thisService;
@@ -28,7 +28,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahHostIdModel id)
+        public async Task<ActionResult> Delete(ElmahErrorIdModel id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);
@@ -36,7 +36,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahHostModel>> Get(ElmahHostIdModel id)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -44,7 +44,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<ElmahHostModel>> Put(ElmahHostModel input)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Put(ElmahErrorModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -52,7 +52,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<ElmahHostModel>> Post(ElmahHostModel input)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorModel input)
         {
             var serviceResponse = await _thisService.Update(input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -61,8 +61,8 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahHostModel[]>>> Search(
-            ElmahHostAdvancedQuery query)
+        public async Task<ActionResult<PagedResponse<ElmahErrorModel.DefaultView[]>>> Search(
+            ElmahErrorAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
             return ReturnActionResult(serviceResponse);
@@ -72,7 +72,7 @@ namespace Elmah.WebApiControllers
         [HttpGet]
         [HttpPost]
         public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetCodeList(
-            ElmahHostAdvancedQuery query)
+            ElmahErrorAdvancedQuery query)
         {
             var serviceResponse = await _thisService.GetCodeList(query);
             return ReturnActionResult(serviceResponse);
@@ -80,7 +80,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahHostCompositeModel>> GetCompositeModel(ElmahHostIdModel id)
+        public async Task<ActionResult<ElmahErrorCompositeModel>> GetCompositeModel(ElmahErrorIdModel id)
         {
             var serviceResponse = await _thisService.GetCompositeModel(id, null);
             return Ok(serviceResponse);

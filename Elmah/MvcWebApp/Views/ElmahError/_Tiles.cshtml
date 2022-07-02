@@ -62,20 +62,17 @@
                 </div>
                 <div class="card-footer text-muted">
                 <div class="btn-group">
-                    <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
-                        <i class="fa-solid fa-folder-tree"></i>
-                    </a>
                     <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                         <i class="fa fa-briefcase"></i>
                     </a>
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Details")"
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Details")"
                         data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Details.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
                         <i class="fa fa-briefcase"></i>
                     </button>
                     <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
                         data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Edit.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })"
                         data-nt-postbackurl="@Url.Action("AjaxEdit", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Edit.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
                         <i class="fa fa-edit"></i>
