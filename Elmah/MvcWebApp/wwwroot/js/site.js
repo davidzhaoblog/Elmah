@@ -1,5 +1,13 @@
-﻿// 1.Start CascadingDropdown
-$(".ddlcascading").change(function (e) {
+﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
+
+// 1.Start CascadingDropdown
+/* data-targetchild
+ * data-nt-queryparamname
+ * 
+ * .nt-ddlcascading
+ */ 
+$(".nt-ddlcascading").change(function (e) {
     const childlisturl = $(this).data("childlisturl");
     const targetchild = $(this).data("targetchild");
 
@@ -11,7 +19,7 @@ $(".ddlcascading").change(function (e) {
     console.log(sameTargetChilds);
     $.each(sameTargetChilds, function (index, item) {
         const selectedValue = $(item).find(":selected").val();
-        const queryparamname = $(item).data("queryparamname");
+        const queryparamname = $(item).data("nt-queryparamname");
         query[queryparamname] = selectedValue;
         //console.log(queryparamname);
         //console.log(selectedValue);
@@ -49,7 +57,13 @@ $(".ddlcascading").change(function (e) {
 // 1.End CascadingDropdown
 
 // 2.Start Predefined DateTime Range Changed
-$(".datetime-predefinedrange").change(function (e) {
+/* 
+ * data-nt-targetchild
+ *
+ * .nt-ddlcascading
+ * .nt-datetime-predefinedrange
+ */
+$(".nt-datetime-predefinedrange").change(function (e) {
     preDefinedDateTimeRangeChanged($(e.target), $(e.target).attr("name"));
 })
 function preDefinedDateTimeRangeChanged(self, masterName) {
@@ -155,38 +169,64 @@ function getDateRange(referenceDate, type) {
 // 2.End Predefined DateTime Range Changed
 
 // 3.Start Pagination and OrderBy
+/* 
+ * data-nt-targetchild
+ * data-nt-pageindex
+ * data-nt-updatetarget
+ * data-nt-submittarget
+ *
+ * .nt-list-container-submit
+ * .nt-selectchange-submit
+ */
 $(document).ready($(function () {
     $(".page-link").click(function (e) {
-        $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("pageindex"));
-        $($(this).closest(".list-container-submit").data("submittarget")).submit();
+        $($(this).closest(".nt-list-container-submit").data("nt-updatetarget")).val($(this).data("nt-pageindex"));
+        $($(this).closest(".nt-list-container-submit").data("nt-submittarget")).submit();
     });
 }));
 
 $(document).ready($(function () {
-    $(".selectchange-submit").change(function (e) {
-        $($(this).data("updatetarget")).val(e.target.value);
-        $($(this).data("submittarget")).submit();
+    $(".nt-selectchange-submit").change(function (e) {
+        $($(this).data("nt-updatetarget")).val(e.target.value);
+        $($(this).data("nt-submittarget")).submit();
     });
 }));
 // 3.End Pagination and OrderBy
 
-// 4.Start. Clear all select/input inside .advanced-search-field when .advanced-search-button button clicked
+// 4.Start. Clear all select/input inside .nt-advanced-search-field when .nt-advanced-search-button button clicked
+/*
+ * .nt-advanced-search-button
+ * .nt-advanced-search-field
+ */ 
 $(document).ready($(function () {
-    $('.advanced-search-button').click(function (e) {
-        $('.advanced-search-field div div select').val('')
-        $('.advanced-search-field div div input').val('')
+    $('.nt-advanced-search-button').click(function (e) {
+        $('.nt-advanced-search-field div div select').val('')
+        $('.nt-advanced-search-field div div input').val('')
     });
 }));
 // 4.End. Clear all select/input inside .advanced-search-field when .advanced-search-button button clicked
 
 // 5.start form ajax-submit: POST .ajax-partial-load-post
+/* 
+ * data-nt-partial-url
+ * data-nt-updatetarget
+ * data-nt-pageindex
+ * 
+ * .nt-ajax-partial-load-post-formdata
+ * .nt-ajax-partial-load-get
+ * .nt-paged-view-options
+ * .nt-page-index
+ * .btn-nt-load-more
+ * .nt-list-container-submit
+ * 
+ */ 
 $(document).ready($(function () {
-    $('.ajax-partial-load-post-formdata').submit(function (e) {
-        const url = $(this).data("partial-url");
-        const updateTarget = $(this).data("updatetarget");
+    $('.nt-ajax-partial-load-post-formdata').submit(function (e) {
+        const url = $(this).data("nt-partial-url");
+        const updateTarget = $(this).data("nt-updatetarget");
         var formData = new FormData($(this)[0]);
-        const pagedViewOption = $(this).children(".paged-view-options").val();
-        const pageIndex = $(this).children(".page-index").val();
+        const pagedViewOption = $(this).children(".nt-paged-view-options").val();
+        const pageIndex = $(this).children(".nt-page-index").val();
         $.ajax({
             type: "POST",
             url: url,
@@ -200,14 +240,14 @@ $(document).ready($(function () {
                     $(updateTarget).html(response);
                 }
                 else {
-                    $(updateTarget).children(".btn-load-more").remove()
+                    $(updateTarget).children(".btn-nt-load-more").remove()
                     $(updateTarget).append(response);
                 }
                 //console.log("success", response);
                 // attach pagination event handler again.
                 $(".page-link").on("click", function (e) {
-                    $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("pageindex"));
-                    $($(this).closest(".list-container-submit").data("submittarget")).submit();
+                    $($(this).closest(".nt-list-container-submit").data("nt-updatetarget")).val($(this).data("nt-pageindex"));
+                    $($(this).closest(".nt-list-container-submit").data("nt-submittarget")).submit();
                 });
             },
             failure: function (response) {
@@ -220,17 +260,17 @@ $(document).ready($(function () {
         e.preventDefault();
     });
 
-    $('.ajax-partial-load-get').submit(function (e) {
-        const url = $(this).data("partial-url");
-        const updateTarget = $(this).data("updatetarget");
+    $('.nt-ajax-partial-load-get').submit(function (e) {
+        const url = $(this).data("nt-partial-url");
+        const updateTarget = $(this).data("nt-updatetarget");
         var data = $(this)
             //.filter(function (index, element) {
             //    console.log($(element).val());
             //    return !!$(element).val();
             //})
             .serialize();
-        const pagedViewOption = $(this).children(".paged-view-options").val();
-        const pageIndex = $(this).children(".page-index").val();
+        const pagedViewOption = $(this).children(".nt-paged-view-options").val();
+        const pageIndex = $(this).children(".nt-page-index").val();
         //console.log(data);
         $.ajax({
             type: "GET",
@@ -243,14 +283,14 @@ $(document).ready($(function () {
                     $(updateTarget).html(response);
                 }
                 else {
-                    $(updateTarget).children(".btn-load-more").remove()
+                    $(updateTarget).children(".btn-nt-load-more").remove()
                     $(updateTarget).append(response);
                 }
                 //console.log("success", response);
                 // attach pagination event handler again.
                 $(".page-link").on("click", function (e) {
-                    $($(this).closest(".list-container-submit").data("updatetarget")).val($(this).data("pageindex"));
-                    $($(this).closest(".list-container-submit").data("submittarget")).submit();
+                    $($(this).closest(".nt-list-container-submit").data("nt-updatetarget")).val($(this).data("nt-pageindex"));
+                    $($(this).closest(".nt-list-container-submit").data("nt-submittarget")).submit();
                 });
             },
             failure: function (response) {
@@ -266,11 +306,20 @@ $(document).ready($(function () {
 // 5.end form ajax-submit
 
 // 6.Start. PagedViewOptions clicked
+/*
+ * data-nt-updatetarget
+ * data-nt-submittarget
+ * data-nt-paginationoptionupdatetarget
+ * data-nt-paginationoptionupdatevalue
+ * data-nt-value
+ * 
+ * .nt-radio-pagedviewoption-submit
+ */
 $(document).ready($(function () {
-    $('.radio-pagedviewoption-submit').click(function (e) {
-        $($(this).data("paginationoptionupdatetarget")).val($(this).data("paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
-        $($(this).data("updatetarget")).val($(this).data("value"));
-        $($(this).data("submittarget")).submit();
+    $('.nt-radio-pagedviewoption-submit').click(function (e) {
+        $($(this).data("nt-paginationoptionupdatetarget")).val($(this).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
+        $($(this).data("nt-updatetarget")).val($(this).data("nt-value"));
+        $($(this).data("nt-submittarget")).submit();
     });
 }));
 // 6.End. PagedViewOptions clicked

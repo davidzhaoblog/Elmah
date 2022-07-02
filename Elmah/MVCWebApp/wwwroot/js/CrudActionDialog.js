@@ -1,7 +1,15 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
+// data-nt-modelsize
+// data-nt-partialurl
+// data-nt-postbackurl
+
+// .nt-modal-body
+// .nt-btn-save
+// .nt-result
+// .nt-btn-delete
+
 function attachCrudActionDialog() {
     var crudActionDialog = document.getElementById('crudActionDialog');
     crudActionDialog.addEventListener('show.bs.modal', function (event) {
