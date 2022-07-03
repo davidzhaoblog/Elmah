@@ -1,6 +1,6 @@
-using Elmah.Models;
 using Elmah.RepositoryContracts;
 using Elmah.EFCoreContext;
+using Elmah.Models;
 using Framework.Helpers;
 using Framework.Models;
 using Microsoft.Extensions.Logging;
@@ -20,130 +20,6 @@ namespace Elmah.EFCoreRepositories
         {
             _dbcontext = dbcontext;
             _logger = logger;
-        }
-
-        public async Task<Response> Delete(ElmahHostIdModel id)
-        {
-            if (id == null)
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
-
-                if (existing == null)
-                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
-
-                _dbcontext.ElmahHost.Remove(existing);
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response>.FromResult(
-                    new Response
-                    {
-                        Status = HttpStatusCode.OK,
-                    });
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdModel id)
-        {
-            if (id == null)
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
-                if (existing == null)
-                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.NotFound });
-
-                return await Task<Response<ElmahHostModel>>.FromResult(
-                    new Response<ElmahHostModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahHostModel
-                        {
-                            Host = existing.Host,
-                            SpatialLocation = existing.SpatialLocation,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahHostModel>> Create(ElmahHostModel input)
-        {
-            if (input == null)
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
-            try
-            {
-                var toInsert = new ElmahHost
-                {
-                            Host = input.Host,
-                            SpatialLocation = input.SpatialLocation,
-                };
-                await _dbcontext.ElmahHost.AddAsync(toInsert);
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response<ElmahHostModel>>.FromResult(
-                    new Response<ElmahHostModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahHostModel
-                        {
-                            Host = toInsert.Host,
-                            SpatialLocation = toInsert.SpatialLocation,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahHostModel>> Update(ElmahHostModel input)
-        {
-            if (input == null)
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == input.Host);
-
-                // TODO: can create a new record here.
-                if (existing == null)
-                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.NotFound });
-
-                // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
-                existing.Host = input.Host;
-                existing.SpatialLocation = input.SpatialLocation;
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response<ElmahHostModel>>.FromResult(
-                    new Response<ElmahHostModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahHostModel
-                        {
-                            Host = existing.Host,
-                            SpatialLocation = existing.SpatialLocation,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
         }
 
         private IQueryable<ElmahHostModel> SearchQuery(
@@ -220,6 +96,130 @@ namespace Elmah.EFCoreRepositories
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
                 });
+            }
+        }
+
+        public async Task<Response<ElmahHostModel>> Update(ElmahHostModel input)
+        {
+            if (input == null)
+                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == input.Host);
+
+                // TODO: can create a new record here.
+                if (existing == null)
+                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.NotFound });
+
+                // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
+                existing.Host = input.Host;
+                existing.SpatialLocation = input.SpatialLocation;
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response<ElmahHostModel>>.FromResult(
+                    new Response<ElmahHostModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahHostModel
+                        {
+                            Host = existing.Host,
+                            SpatialLocation = existing.SpatialLocation,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdModel id)
+        {
+            if (id == null)
+                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
+                if (existing == null)
+                    return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.NotFound });
+
+                return await Task<Response<ElmahHostModel>>.FromResult(
+                    new Response<ElmahHostModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahHostModel
+                        {
+                            Host = existing.Host,
+                            SpatialLocation = existing.SpatialLocation,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response<ElmahHostModel>> Create(ElmahHostModel input)
+        {
+            if (input == null)
+                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
+            try
+            {
+                var toInsert = new ElmahHost
+                {
+                            Host = input.Host,
+                            SpatialLocation = input.SpatialLocation,
+                };
+                await _dbcontext.ElmahHost.AddAsync(toInsert);
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response<ElmahHostModel>>.FromResult(
+                    new Response<ElmahHostModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahHostModel
+                        {
+                            Host = toInsert.Host,
+                            SpatialLocation = toInsert.SpatialLocation,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response> Delete(ElmahHostIdModel id)
+        {
+            if (id == null)
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahHost.SingleOrDefault(t => t.Host == id.Host);
+
+                if (existing == null)
+                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
+
+                _dbcontext.ElmahHost.Remove(existing);
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response>.FromResult(
+                    new Response
+                    {
+                        Status = HttpStatusCode.OK,
+                    });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 

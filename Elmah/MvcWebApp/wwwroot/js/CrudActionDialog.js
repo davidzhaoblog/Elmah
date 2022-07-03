@@ -8,12 +8,14 @@
  * data-nt-modelsize
  * data-nt-partialurl
  * data-nt-postbackurl
+ * data-nt-action
  * 
  * .nt-modal-body
  * .nt-hidden-modal-title
  * .nt-btn-save
  * .nt-result
  * .nt-btn-delete
+ * .nt-submit-text
  */
 
 function attachCrudActionDialog() {
@@ -32,7 +34,7 @@ function attachCrudActionDialog() {
             async: false,
             contentType: "application/json",
             success: function (response) {
-                const action = $(button).data("action");
+                const action = $(button).data("nt-action");
                 // 1.1. add response html to .nt-modal-body
                 let modalBody = $("#crudActionDialog .nt-modal-body");
                 if (action == "PUT" || action == "POST") // wrap with <form>..</form> Edit or Create
