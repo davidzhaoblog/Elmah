@@ -91,15 +91,6 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("_SlideShow", result);
         }
 
-        // GET: ElmahError/Dashboard/{ErrorId}
-        [HttpGet, ActionName("Dashboard")]
-        [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahErrorIdModel id)
-        {
-            var result = await _thisService.GetCompositeModel(id);
-            return View(result);
-        }
-
         // GET: ElmahError/AjaxLoadItem/{ErrorId}
         [HttpGet, ActionName("AjaxLoadItem")]
         [Route("[controller]/[action]/{ErrorId}")]

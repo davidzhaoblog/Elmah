@@ -26,15 +26,15 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public ElmahErrorModel.DefaultView GetDefault()
+        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
+            ElmahErrorAdvancedQuery query)
         {
-            // TODO: please set default value here
-            return new ElmahErrorModel.DefaultView();
+            return await _thisRepository.Search(query);
         }
 
-        public async Task<Response> Delete(ElmahErrorIdModel id)
+        public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorModel input)
         {
-            return await _thisRepository.Delete(id);
+            return await _thisRepository.Update(input);
         }
 
         public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id)
@@ -47,50 +47,15 @@ namespace Elmah.Services
             return await _thisRepository.Create(input);
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorModel input)
+        public ElmahErrorModel.DefaultView GetDefault()
         {
-            return await _thisRepository.Update(input);
+            // TODO: please set default value here
+            return new ElmahErrorModel.DefaultView();
         }
 
-        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
-            ElmahErrorAdvancedQuery query)
+        public async Task<Response> Delete(ElmahErrorIdModel id)
         {
-            return await _thisRepository.Search(query);
-        }
-
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
-            ElmahErrorAdvancedQuery query)
-        {
-            return await _thisRepository.GetCodeList(query);
-        }
-
-        public async Task<ElmahErrorCompositeModel> GetCompositeModel(ElmahErrorIdModel id, ElmahErrorCompositeDataOptions[]? dataOptions = null)
-        {
-            var masterResponse = await this._thisRepository.Get(id);
-            if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
-            {
-                var failedResponse = new ElmahErrorCompositeModel();
-                failedResponse.Responses.Add(ElmahErrorCompositeDataOptions.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
-                return failedResponse;
-            }
-
-            var successResponse = new ElmahErrorCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahErrorCompositeDataOptions, Response>();
-            responses.TryAdd(ElmahErrorCompositeDataOptions.__Master__, new Response { Status = HttpStatusCode.OK });
-
-            var tasks = new List<Task>();
-
-            if (tasks.Count > 0)
-            {
-                Task t = Task.WhenAll(tasks.ToArray());
-                try
-                {
-                    await t;
-                }
-                catch { }
-            }
-            successResponse.Responses = new Dictionary<ElmahErrorCompositeDataOptions, Response>(responses);
-            return successResponse;
+            return await _thisRepository.Delete(id);
         }
 
     }

@@ -27,54 +27,12 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahApplicationIdModel id)
-        {
-            var serviceResponse = await _thisService.Delete(id);
-            return ReturnWithoutBodyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpGet]
-        public async Task<ActionResult<ElmahApplicationModel>> Get(ElmahApplicationIdModel id)
-        {
-            var serviceResponse = await _thisService.Get(id);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<ElmahApplicationModel>> Put(ElmahApplicationModel input)
-        {
-            var serviceResponse = await _thisService.Create(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahApplicationModel>> Post(ElmahApplicationModel input)
-        {
-            var serviceResponse = await _thisService.Update(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
         [HttpGet]
         [HttpPost]
         public async Task<ActionResult<PagedResponse<ElmahApplicationModel[]>>> Search(
             ElmahApplicationAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
-            return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpGet]
-        [HttpPost]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetCodeList(
-            ElmahApplicationAdvancedQuery query)
-        {
-            var serviceResponse = await _thisService.GetCodeList(query);
             return ReturnActionResult(serviceResponse);
         }
 
