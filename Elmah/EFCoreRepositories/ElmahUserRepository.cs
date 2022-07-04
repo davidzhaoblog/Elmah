@@ -1,6 +1,6 @@
-using Elmah.Models;
 using Elmah.RepositoryContracts;
 using Elmah.EFCoreContext;
+using Elmah.Models;
 using Framework.Helpers;
 using Framework.Models;
 using Microsoft.Extensions.Logging;
@@ -20,125 +20,6 @@ namespace Elmah.EFCoreRepositories
         {
             _dbcontext = dbcontext;
             _logger = logger;
-        }
-
-        public async Task<Response> Delete(ElmahUserIdModel id)
-        {
-            if (id == null)
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == id.User);
-
-                if (existing == null)
-                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
-
-                _dbcontext.ElmahUser.Remove(existing);
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response>.FromResult(
-                    new Response
-                    {
-                        Status = HttpStatusCode.OK,
-                    });
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahUserModel>> Get(ElmahUserIdModel id)
-        {
-            if (id == null)
-                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == id.User);
-                if (existing == null)
-                    return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.NotFound });
-
-                return await Task<Response<ElmahUserModel>>.FromResult(
-                    new Response<ElmahUserModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahUserModel
-                        {
-                            User = existing.User,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahUserModel>> Create(ElmahUserModel input)
-        {
-            if (input == null)
-                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
-            try
-            {
-                var toInsert = new ElmahUser
-                {
-                            User = input.User,
-                };
-                await _dbcontext.ElmahUser.AddAsync(toInsert);
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response<ElmahUserModel>>.FromResult(
-                    new Response<ElmahUserModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahUserModel
-                        {
-                            User = toInsert.User,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahUserModel>> Update(ElmahUserModel input)
-        {
-            if (input == null)
-                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == input.User);
-
-                // TODO: can create a new record here.
-                if (existing == null)
-                    return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.NotFound });
-
-                // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
-                existing.User = input.User;
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response<ElmahUserModel>>.FromResult(
-                    new Response<ElmahUserModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahUserModel
-                        {
-                            User = existing.User,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
         }
 
         private IQueryable<ElmahUserModel> SearchQuery(
@@ -206,6 +87,125 @@ namespace Elmah.EFCoreRepositories
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
                 });
+            }
+        }
+
+        public async Task<Response<ElmahUserModel>> Update(ElmahUserModel input)
+        {
+            if (input == null)
+                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == input.User);
+
+                // TODO: can create a new record here.
+                if (existing == null)
+                    return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.NotFound });
+
+                // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
+                existing.User = input.User;
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response<ElmahUserModel>>.FromResult(
+                    new Response<ElmahUserModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahUserModel
+                        {
+                            User = existing.User,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response<ElmahUserModel>> Get(ElmahUserIdModel id)
+        {
+            if (id == null)
+                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == id.User);
+                if (existing == null)
+                    return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.NotFound });
+
+                return await Task<Response<ElmahUserModel>>.FromResult(
+                    new Response<ElmahUserModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahUserModel
+                        {
+                            User = existing.User,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response<ElmahUserModel>> Create(ElmahUserModel input)
+        {
+            if (input == null)
+                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.BadRequest });
+            try
+            {
+                var toInsert = new ElmahUser
+                {
+                            User = input.User,
+                };
+                await _dbcontext.ElmahUser.AddAsync(toInsert);
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response<ElmahUserModel>>.FromResult(
+                    new Response<ElmahUserModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahUserModel
+                        {
+                            User = toInsert.User,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahUserModel>>.FromResult(new Response<ElmahUserModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response> Delete(ElmahUserIdModel id)
+        {
+            if (id == null)
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahUser.SingleOrDefault(t => t.User == id.User);
+
+                if (existing == null)
+                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
+
+                _dbcontext.ElmahUser.Remove(existing);
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response>.FromResult(
+                    new Response
+                    {
+                        Status = HttpStatusCode.OK,
+                    });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 

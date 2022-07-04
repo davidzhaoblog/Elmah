@@ -53,16 +53,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Host should be 1 to 50</ErrorMessage>
@@ -106,16 +96,6 @@
         <DbTypePrimary_DATA_TYPE>Geography</DbTypePrimary_DATA_TYPE>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer />
     </PropertyContext>
   </PropertyContextCollection>

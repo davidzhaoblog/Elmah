@@ -53,16 +53,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Application should be 1 to 60</ErrorMessage>

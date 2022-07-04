@@ -1,4 +1,5 @@
 using Framework.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
@@ -37,8 +38,10 @@ namespace Elmah.Models
 
         public string? TimeUtcRange { get; set; }
         // PredicateType:Range - Lower Bound
+        [DataType(DataType.Date)]
         public System.DateTime? TimeUtcRangeLower { get; set; }
         // PredicateType:Range - Upper Bound
+        [DataType(DataType.Date)]
         public System.DateTime? TimeUtcRangeUpper { get; set; }
 
     }

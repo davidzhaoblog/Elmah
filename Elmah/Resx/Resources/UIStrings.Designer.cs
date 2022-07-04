@@ -160,15 +160,6 @@ namespace Elmah.Resx.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
-        /// </summary>
-        public static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string Details {
@@ -345,15 +336,6 @@ namespace Elmah.Resx.Resources {
         public static string Host {
             get {
                 return ResourceManager.GetString("Host", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Identifier In String.
-        /// </summary>
-        public static string IdentifierInString {
-            get {
-                return ResourceManager.GetString("IdentifierInString", resourceCulture);
             }
         }
         
@@ -628,15 +610,6 @@ namespace Elmah.Resx.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pub Date.
-        /// </summary>
-        public static string PubDate {
-            get {
-                return ResourceManager.GetString("PubDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -831,15 +804,6 @@ namespace Elmah.Resx.Resources {
         public static string TimeUtc_is_required {
             get {
                 return ResourceManager.GetString("TimeUtc_is_required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

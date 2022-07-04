@@ -1,19 +1,21 @@
-using Framework.Interfaces;
 using Elmah.Models;
 using Framework.Models;
 namespace Elmah.ServiceContracts
 {
-    public interface IElmahErrorService: IService<ElmahErrorModel, ElmahErrorModel.DefaultView, ElmahErrorIdModel>
+    public interface IElmahErrorService
     {
 
         Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query);
 
-        Task<PagedResponse<NameValuePair[]>> GetCodeList(
-            ElmahErrorAdvancedQuery query);
+        Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorModel input);
 
-        Task<ElmahErrorCompositeModel> GetCompositeModel(
-            ElmahErrorIdModel id, ElmahErrorCompositeDataOptions[]? dataOptions = null);
+        Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id);
+
+        Task<Response<ElmahErrorModel.DefaultView>> Create(ElmahErrorModel input);
+        ElmahErrorModel.DefaultView GetDefault();
+
+        Task<Response> Delete(ElmahErrorIdModel id);
 
     }
 }

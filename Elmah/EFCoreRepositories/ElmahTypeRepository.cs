@@ -1,6 +1,6 @@
-using Elmah.Models;
 using Elmah.RepositoryContracts;
 using Elmah.EFCoreContext;
+using Elmah.Models;
 using Framework.Helpers;
 using Framework.Models;
 using Microsoft.Extensions.Logging;
@@ -20,125 +20,6 @@ namespace Elmah.EFCoreRepositories
         {
             _dbcontext = dbcontext;
             _logger = logger;
-        }
-
-        public async Task<Response> Delete(ElmahTypeIdModel id)
-        {
-            if (id == null)
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
-
-                if (existing == null)
-                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
-
-                _dbcontext.ElmahType.Remove(existing);
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response>.FromResult(
-                    new Response
-                    {
-                        Status = HttpStatusCode.OK,
-                    });
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdModel id)
-        {
-            if (id == null)
-                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
-                if (existing == null)
-                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
-
-                return await Task<Response<ElmahTypeModel>>.FromResult(
-                    new Response<ElmahTypeModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahTypeModel
-                        {
-                            Type = existing.Type,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahTypeModel>> Create(ElmahTypeModel input)
-        {
-            if (input == null)
-                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
-            try
-            {
-                var toInsert = new ElmahType
-                {
-                            Type = input.Type,
-                };
-                await _dbcontext.ElmahType.AddAsync(toInsert);
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response<ElmahTypeModel>>.FromResult(
-                    new Response<ElmahTypeModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahTypeModel
-                        {
-                            Type = toInsert.Type,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeModel input)
-        {
-            if (input == null)
-                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
-
-            try
-            {
-                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == input.Type);
-
-                // TODO: can create a new record here.
-                if (existing == null)
-                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
-
-                // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
-                existing.Type = input.Type;
-                await _dbcontext.SaveChangesAsync();
-
-                return await Task<Response<ElmahTypeModel>>.FromResult(
-                    new Response<ElmahTypeModel>
-                    {
-                        Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahTypeModel
-                        {
-                            Type = existing.Type,
-                        }
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
         }
 
         private IQueryable<ElmahTypeModel> SearchQuery(
@@ -206,6 +87,125 @@ namespace Elmah.EFCoreRepositories
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
                 });
+            }
+        }
+
+        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeModel input)
+        {
+            if (input == null)
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == input.Type);
+
+                // TODO: can create a new record here.
+                if (existing == null)
+                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
+
+                // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
+                existing.Type = input.Type;
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahTypeModel
+                        {
+                            Type = existing.Type,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdModel id)
+        {
+            if (id == null)
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
+                if (existing == null)
+                    return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
+
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahTypeModel
+                        {
+                            Type = existing.Type,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response<ElmahTypeModel>> Create(ElmahTypeModel input)
+        {
+            if (input == null)
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
+            try
+            {
+                var toInsert = new ElmahType
+                {
+                            Type = input.Type,
+                };
+                await _dbcontext.ElmahType.AddAsync(toInsert);
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response<ElmahTypeModel>>.FromResult(
+                    new Response<ElmahTypeModel>
+                    {
+                        Status = HttpStatusCode.OK,
+                        ResponseBody = new ElmahTypeModel
+                        {
+                            Type = toInsert.Type,
+                        }
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response> Delete(ElmahTypeIdModel id)
+        {
+            if (id == null)
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+
+            try
+            {
+                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
+
+                if (existing == null)
+                    return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
+
+                _dbcontext.ElmahType.Remove(existing);
+                await _dbcontext.SaveChangesAsync();
+
+                return await Task<Response>.FromResult(
+                    new Response
+                    {
+                        Status = HttpStatusCode.OK,
+                    });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 

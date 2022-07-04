@@ -4,52 +4,20 @@
   "dataViewCollection": [
     {
       "key": "NameValuePair",
-      "dataViewKnownCategory": 5,
-      "isGroupByResult": false,
-      "defaultOrderByPropertyName": null,
-      "properties": [
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": "(SystemString)Value=ErrorId.ToString();(SystemString)Name=Application~Name"
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": ""
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": ""
-        }
-      ]
-    },
-    {
-      "key": "RssItem",
       "dataViewKnownCategory": 4,
       "isGroupByResult": false,
       "defaultOrderByPropertyName": null,
       "properties": [
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": "(SystemString)IdentifierInString=ErrorId.ToString();(SystemString)Title=Application;(SystemString)Description=Application;(SystemDateTime)PubDate=TimeUtc"
+          "value": "(SystemString)Value=ErrorId.ToString();(SystemString)Name=Application~Name"
         },
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": ""
         },
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": ""
         }
       ]
@@ -62,20 +30,14 @@
       "properties": [
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": "(SystemString?)Application_Name=\\Application:Application~Name@AncestorName;(SystemGuid)ErrorId=ErrorId~Identifier;(SystemString?)Host_Name=\\Host:Host~Name@AncestorName;(SystemString?)Source_Name=\\Source:Source~Name@AncestorName;(SystemString?)StatusCode_Name=\\StatusCode:Name~Name@AncestorName;(SystemString?)Type_Name=\\Type:Type~Name@AncestorName;(SystemString?)User_Name=\\User:User~Name@AncestorName;(SystemString)Application=Application@Ancestor;(SystemString)Host=Host@Ancestor;(SystemString)Type=Type@Ancestor;(SystemString)Source=Source@Ancestor;(SystemString)Message=Message;(SystemString)User=User@Ancestor;(SystemInt32)StatusCode=StatusCode@Ancestor;(SystemDateTime)TimeUtc=TimeUtc;(!SystemInt32)Sequence=Sequence~Identifier;(SystemString)AllXml=AllXml"
         },
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": ""
         },
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": ""
         }
       ]
@@ -88,8 +50,7 @@
       "sourceTypeFullName": "ElmahModel.ElmahError",
       "queries": [
         {
-          "keySpecified": false,
-          "descriptionSpecified": false,
+          "key": "",
           "value": "AdvancedQuery"
         }
       ]
@@ -100,8 +61,7 @@
       "sourceTypeFullName": "ElmahModel.ElmahError",
       "queries": [
         {
-          "keySpecified": false,
-          "descriptionSpecified": false,
+          "key": "",
           "value": "Identifier"
         }
       ]
@@ -117,7 +77,6 @@
       "queryUnits": [
         {
           "key": "AdvancedQuery",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 3,
           "outterConditionOperator": 0,
           "conditionOperator": 0,
@@ -125,7 +84,6 @@
         },
         {
           "key": "AdvancedQuery",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 0,
           "outterConditionOperator": 0,
           "conditionOperator": 1,
@@ -133,7 +91,6 @@
         },
         {
           "key": "AdvancedQuery",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 0,
           "outterConditionOperator": 0,
           "conditionOperator": 1,
@@ -150,7 +107,6 @@
       "queryUnits": [
         {
           "key": "Identifier",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 1,
           "outterConditionOperator": 0,
           "conditionOperator": 0,

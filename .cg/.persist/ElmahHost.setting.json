@@ -4,52 +4,20 @@
   "dataViewCollection": [
     {
       "key": "NameValuePair",
-      "dataViewKnownCategory": 5,
-      "isGroupByResult": false,
-      "defaultOrderByPropertyName": null,
-      "properties": [
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": "(SystemString)Value=Host;(SystemString)Name=Host~Name"
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": ""
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": ""
-        }
-      ]
-    },
-    {
-      "key": "RssItem",
       "dataViewKnownCategory": 4,
       "isGroupByResult": false,
       "defaultOrderByPropertyName": null,
       "properties": [
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
-          "value": "(SystemString)IdentifierInString=Host.ToString();(SystemString)Title=Host;(SystemString)Description=Host"
+          "value": "(SystemString)Value=Host;(SystemString)Name=Host~Name"
         },
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": ""
         },
         {
           "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "keySpecified": true,
-          "descriptionSpecified": false,
           "value": ""
         }
       ]
@@ -62,8 +30,7 @@
       "sourceTypeFullName": "ElmahModel.ElmahHost",
       "queries": [
         {
-          "keySpecified": false,
-          "descriptionSpecified": false,
+          "key": "",
           "value": "AdvancedQuery"
         }
       ]
@@ -74,8 +41,7 @@
       "sourceTypeFullName": "ElmahModel.ElmahHost",
       "queries": [
         {
-          "keySpecified": false,
-          "descriptionSpecified": false,
+          "key": "",
           "value": "Identifier"
         }
       ]
@@ -91,7 +57,6 @@
       "queryUnits": [
         {
           "key": "AdvancedQuery",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 0,
           "outterConditionOperator": 0,
           "conditionOperator": 0,
@@ -99,7 +64,6 @@
         },
         {
           "key": "AdvancedQuery",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 0,
           "outterConditionOperator": 0,
           "conditionOperator": 1,
@@ -107,7 +71,6 @@
         },
         {
           "key": "AdvancedQuery",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 0,
           "outterConditionOperator": 0,
           "conditionOperator": 1,
@@ -124,7 +87,6 @@
       "queryUnits": [
         {
           "key": "Identifier",
-          "keySpecified": true,
           "dataQueryPerQueryUnitSettingType": 1,
           "outterConditionOperator": 0,
           "conditionOperator": 0,

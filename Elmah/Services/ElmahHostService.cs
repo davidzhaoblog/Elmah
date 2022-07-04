@@ -26,42 +26,10 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public ElmahHostModel GetDefault()
-        {
-            // TODO: please set default value here
-            return new ElmahHostModel();
-        }
-
-        public async Task<Response> Delete(ElmahHostIdModel id)
-        {
-            return await _thisRepository.Delete(id);
-        }
-
-        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdModel id)
-        {
-            return await _thisRepository.Get(id);
-        }
-
-        public async Task<Response<ElmahHostModel>> Create(ElmahHostModel input)
-        {
-            return await _thisRepository.Create(input);
-        }
-
-        public async Task<Response<ElmahHostModel>> Update(ElmahHostModel input)
-        {
-            return await _thisRepository.Update(input);
-        }
-
         public async Task<PagedResponse<ElmahHostModel[]>> Search(
             ElmahHostAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
-        }
-
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
-            ElmahHostAdvancedQuery query)
-        {
-            return await _thisRepository.GetCodeList(query);
         }
 
         public async Task<ElmahHostCompositeModel> GetCompositeModel(ElmahHostIdModel id, ElmahHostCompositeDataOptions[]? dataOptions = null)
@@ -111,6 +79,38 @@ namespace Elmah.Services
             }
             successResponse.Responses = new Dictionary<ElmahHostCompositeDataOptions, Response>(responses);
             return successResponse;
+        }
+
+        public async Task<Response<ElmahHostModel>> Update(ElmahHostModel input)
+        {
+            return await _thisRepository.Update(input);
+        }
+
+        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdModel id)
+        {
+            return await _thisRepository.Get(id);
+        }
+
+        public async Task<Response<ElmahHostModel>> Create(ElmahHostModel input)
+        {
+            return await _thisRepository.Create(input);
+        }
+
+        public ElmahHostModel GetDefault()
+        {
+            // TODO: please set default value here
+            return new ElmahHostModel();
+        }
+
+        public async Task<Response> Delete(ElmahHostIdModel id)
+        {
+            return await _thisRepository.Delete(id);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahHostAdvancedQuery query)
+        {
+            return await _thisRepository.GetCodeList(query);
         }
 
     }

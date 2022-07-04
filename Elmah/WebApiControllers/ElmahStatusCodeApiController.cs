@@ -27,54 +27,12 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahStatusCodeIdModel id)
-        {
-            var serviceResponse = await _thisService.Delete(id);
-            return ReturnWithoutBodyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpGet]
-        public async Task<ActionResult<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdModel id)
-        {
-            var serviceResponse = await _thisService.Get(id);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<ElmahStatusCodeModel>> Put(ElmahStatusCodeModel input)
-        {
-            var serviceResponse = await _thisService.Create(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahStatusCodeModel>> Post(ElmahStatusCodeModel input)
-        {
-            var serviceResponse = await _thisService.Update(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
         [HttpGet]
         [HttpPost]
         public async Task<ActionResult<PagedResponse<ElmahStatusCodeModel[]>>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
-            return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpGet]
-        [HttpPost]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetCodeList(
-            ElmahStatusCodeAdvancedQuery query)
-        {
-            var serviceResponse = await _thisService.GetCodeList(query);
             return ReturnActionResult(serviceResponse);
         }
 

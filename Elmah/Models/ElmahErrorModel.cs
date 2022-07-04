@@ -39,6 +39,7 @@ namespace Elmah.Models
         public int StatusCode { get; set; }
 
         [Display(Name = "TimeUtc", ResourceType = typeof(UIStrings))]
+        [DataType(DataType.DateTime)]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="TimeUtc_is_required")]
         public System.DateTime TimeUtc { get; set; }
 
@@ -95,6 +96,7 @@ namespace Elmah.Models
             public int StatusCode { get; set; }
 
             [Display(Name = "TimeUtc", ResourceType = typeof(UIStrings))]
+            [DataType(DataType.DateTime)]
             [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="TimeUtc_is_required")]
             [DataType(DataType.DateTime)]
             public System.DateTime TimeUtc { get; set; }

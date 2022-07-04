@@ -26,42 +26,10 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public ElmahStatusCodeModel GetDefault()
-        {
-            // TODO: please set default value here
-            return new ElmahStatusCodeModel();
-        }
-
-        public async Task<Response> Delete(ElmahStatusCodeIdModel id)
-        {
-            return await _thisRepository.Delete(id);
-        }
-
-        public async Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdModel id)
-        {
-            return await _thisRepository.Get(id);
-        }
-
-        public async Task<Response<ElmahStatusCodeModel>> Create(ElmahStatusCodeModel input)
-        {
-            return await _thisRepository.Create(input);
-        }
-
-        public async Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeModel input)
-        {
-            return await _thisRepository.Update(input);
-        }
-
         public async Task<PagedResponse<ElmahStatusCodeModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
-        }
-
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
-            ElmahStatusCodeAdvancedQuery query)
-        {
-            return await _thisRepository.GetCodeList(query);
         }
 
         public async Task<ElmahStatusCodeCompositeModel> GetCompositeModel(ElmahStatusCodeIdModel id, ElmahStatusCodeCompositeDataOptions[]? dataOptions = null)
@@ -111,6 +79,38 @@ namespace Elmah.Services
             }
             successResponse.Responses = new Dictionary<ElmahStatusCodeCompositeDataOptions, Response>(responses);
             return successResponse;
+        }
+
+        public async Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeModel input)
+        {
+            return await _thisRepository.Update(input);
+        }
+
+        public async Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdModel id)
+        {
+            return await _thisRepository.Get(id);
+        }
+
+        public async Task<Response<ElmahStatusCodeModel>> Create(ElmahStatusCodeModel input)
+        {
+            return await _thisRepository.Create(input);
+        }
+
+        public ElmahStatusCodeModel GetDefault()
+        {
+            // TODO: please set default value here
+            return new ElmahStatusCodeModel();
+        }
+
+        public async Task<Response> Delete(ElmahStatusCodeIdModel id)
+        {
+            return await _thisRepository.Delete(id);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahStatusCodeAdvancedQuery query)
+        {
+            return await _thisRepository.GetCodeList(query);
         }
 
     }
