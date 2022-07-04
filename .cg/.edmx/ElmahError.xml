@@ -183,16 +183,6 @@
         <DbTypePrimary_DATA_TYPE>UniqueIdentifier</DbTypePrimary_DATA_TYPE>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <RequiredFieldValidator>
           <ErrorMessage>ErrorId is required</ErrorMessage>
@@ -240,16 +230,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Application should be 1 to 60</ErrorMessage>
@@ -297,16 +277,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Host should be 1 to 50</ErrorMessage>
@@ -354,16 +324,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Type should be 1 to 100</ErrorMessage>
@@ -411,16 +371,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Source should be 1 to 60</ErrorMessage>
@@ -467,16 +417,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of Message should be 1 to 500</ErrorMessage>
@@ -524,16 +464,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of User should be 1 to 50</ErrorMessage>
@@ -578,16 +508,6 @@
         <DbTypePrimary_DATA_TYPE>Int</DbTypePrimary_DATA_TYPE>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <RequiredFieldValidator>
           <ErrorMessage>StatusCode is required</ErrorMessage>
@@ -631,16 +551,6 @@
         <DbTypePrimary_DATA_TYPE>DateTime</DbTypePrimary_DATA_TYPE>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <RequiredFieldValidator>
           <ErrorMessage>TimeUtc is required</ErrorMessage>
@@ -685,16 +595,6 @@
         <DbTypePrimary_DATA_TYPE>Int</DbTypePrimary_DATA_TYPE>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>false</CanUIEdit>
-        <CanUIInsert>false</CanUIInsert>
-        <CanUIDisplayWhenEdit>true</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>true</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer />
     </PropertyContext>
     <PropertyContext>
@@ -732,16 +632,6 @@
         <DbUniCode>true</DbUniCode>
         <UpdateCheck>Always</UpdateCheck>
       </DBColumnSetting>
-      <PropertyUISetting>
-        <CanUIDisplay>true</CanUIDisplay>
-        <CanUIEdit>true</CanUIEdit>
-        <CanUIInsert>true</CanUIInsert>
-        <CanUIDisplayWhenEdit>false</CanUIDisplayWhenEdit>
-        <CanUIDisplayWhenInsert>false</CanUIDisplayWhenInsert>
-        <CanUIHidden>false</CanUIHidden>
-        <PropertyUIType>Unknown</PropertyUIType>
-        <DisplayOrder>-1</DisplayOrder>
-      </PropertyUISetting>
       <ValidatorContainer>
         <StringLengthValidator>
           <ErrorMessage>The length of AllXml should be 1 to </ErrorMessage>

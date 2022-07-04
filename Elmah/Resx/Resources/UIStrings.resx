@@ -346,12 +346,6 @@
   <data name="ElmahApplication" xml:space="preserve">
     <value>Elmah Application</value>
   </data>
-  <data name="IdentifierInString" xml:space="preserve">
-    <value>Identifier In String</value>
-  </data>
-  <data name="PubDate" xml:space="preserve">
-    <value>Pub Date</value>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -369,12 +363,6 @@
   </data>
   <data name="ElmahStatusCode" xml:space="preserve">
     <value>Elmah Status Code</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
   </data>
   <data name="Tab_Lists" xml:space="preserve">
     <value>Lists</value>
