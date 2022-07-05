@@ -598,7 +598,7 @@
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>true</IsDbGenerated>
-        <PropertyCategory>Identifier</PropertyCategory>
+        <PropertyCategory>Identity</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
       <DBColumnSetting>
