@@ -6,21 +6,7 @@
       "key": "NameValuePair",
       "dataViewKnownCategory": 4,
       "isGroupByResult": false,
-      "defaultOrderByPropertyName": null,
-      "properties": [
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "value": "(SystemString)Value=Host;(SystemString)Name=Host~Name"
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "value": ""
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "value": ""
-        }
-      ]
+      "defaultOrderByPropertyName": null
     }
   ],
   "criteriaCollection": [
