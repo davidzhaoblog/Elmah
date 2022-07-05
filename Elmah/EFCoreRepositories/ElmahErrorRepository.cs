@@ -70,6 +70,7 @@ namespace Elmah.EFCoreRepositories
                 {
 
                         Application_Name = Application.Application,
+                        ErrorId = t.ErrorId,
                         Host_Name = Host.Host,
                         Source_Name = Source.Source,
                         StatusCode_Name = StatusCode.Name,
@@ -79,10 +80,9 @@ namespace Elmah.EFCoreRepositories
                         Host = t.Host,
                         Type = t.Type,
                         Source = t.Source,
+                        Message = t.Message,
                         User = t.User,
                         StatusCode = t.StatusCode,
-                        ErrorId = t.ErrorId,
-                        Message = t.Message,
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
@@ -174,6 +174,7 @@ namespace Elmah.EFCoreRepositories
                     {
 
                         Application_Name = Application.Application,
+                        ErrorId = t.ErrorId,
                         Host_Name = Host.Host,
                         Source_Name = Source.Source,
                         StatusCode_Name = StatusCode.Name,
@@ -183,10 +184,9 @@ namespace Elmah.EFCoreRepositories
                         Host = t.Host,
                         Type = t.Type,
                         Source = t.Source,
+                        Message = t.Message,
                         User = t.User,
                         StatusCode = t.StatusCode,
-                        ErrorId = t.ErrorId,
-                        Message = t.Message,
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
@@ -231,6 +231,7 @@ namespace Elmah.EFCoreRepositories
                     {
 
                         Application_Name = Application.Application,
+                        ErrorId = t.ErrorId,
                         Host_Name = Host.Host,
                         Source_Name = Source.Source,
                         StatusCode_Name = StatusCode.Name,
@@ -240,10 +241,9 @@ namespace Elmah.EFCoreRepositories
                         Host = t.Host,
                         Type = t.Type,
                         Source = t.Source,
+                        Message = t.Message,
                         User = t.User,
                         StatusCode = t.StatusCode,
-                        ErrorId = t.ErrorId,
-                        Message = t.Message,
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
@@ -304,6 +304,7 @@ namespace Elmah.EFCoreRepositories
                     {
 
                         Application_Name = Application.Application,
+                        ErrorId = t.ErrorId,
                         Host_Name = Host.Host,
                         Source_Name = Source.Source,
                         StatusCode_Name = StatusCode.Name,
@@ -313,10 +314,9 @@ namespace Elmah.EFCoreRepositories
                         Host = t.Host,
                         Type = t.Type,
                         Source = t.Source,
+                        Message = t.Message,
                         User = t.User,
                         StatusCode = t.StatusCode,
-                        ErrorId = t.ErrorId,
-                        Message = t.Message,
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
