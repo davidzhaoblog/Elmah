@@ -2,6 +2,10 @@
 @using Elmah.Resx;
 @inject IUIStrings localizor;
 @model AjaxResponseViewModel
+@{
+    // This is the seperator between partial views, javascript is using the same string to split response into sections.
+    const string htmlSeperator = "===---------===";
+}
 @if(Model.Status == System.Net.HttpStatusCode.OK)
 {
     <h2 class="text-success">@localizor.Get("HttpStatusCodeOKMessage")</h2>
@@ -24,6 +28,12 @@ else //if(Model.Status == System.Net.HttpStatusCode.InternalServerError)
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
     </p>
 }
-@{
-    ViewData["Title"] = "Error";
+
+@if(Model.PartialViews != null)
+{
+    foreach(var partialView in Model.PartialViews)
+    {
+@htmlSeperator
+@await Html.PartialAsync(partialView.Item1, partialView.Item2)
+    }
 }

@@ -10,24 +10,56 @@
  * data-nt-postbackurl
  * data-nt-action
  * 
+ * .nt-result
  * .nt-modal-body
  * .nt-hidden-modal-title
- * .nt-btn-save
- * .nt-result
- * .nt-btn-delete
+ * .nt-btn-action-save
+ * .nt-btn-action-delete
  * .nt-submit-text
+ * .nt-list-wrapper, shared with other .js files
+ * .nt-list-container-submit, shared with other .js files
+ * .nt-listitem
+ * .nt-editing(will set on .nt-list-container-submit and .nt-listitem)
  */
 
 function attachCrudActionDialog() {
     var crudActionDialog = document.getElementById('crudActionDialog');
+    crudActionDialog.addEventListener('hide.bs.modal', function (event) {
+        // 1.1. clear .nt-editing on all .nt-listitem, then set .nt-editing to current item,
+        $(".nt-listitem").removeClass("nt-editing");
+        // 1.2. set .nt-editing to .nt-list-container-submit
+        $(".nt-list-container-submit").removeClass("nt-editing");
+        // 1.3. set .nt-editing to .nt-list-wrapper
+        $(".nt-list-wrapper").removeClass("nt-editing");
+
+        // 2.1. hide status section
+        $("#crudActionDialog .nt-result").hide();
+        // 2.2. clear .nt-modal-body inner html, remove all htmls
+        $("#crudActionDialog .nt-modal-body").empty();
+
+        // 3. btn-nt-* hide() and disabled
+
+        // clear data-nt-action
+        $("#crudActionDialog").data("nt-action", ""); 
+    })
     crudActionDialog.addEventListener('show.bs.modal', function (event) {
-        // 1. load the item partial view from .data-nt-partialurl
         let button = event.relatedTarget;
+        // 1.1. clear .nt-editing on all .nt-listitem, then set .nt-editing to current item,
+        $(".nt-listitem").removeClass("nt-editing");
+        $(button).closest(".nt-listitem").addClass("nt-editing");
+        // 1.2. set .nt-editing to .nt-list-container-submit
+        $(".nt-list-container-submit").removeClass("nt-editing");
+        $(button).closest(".nt-list-container-submit").addClass("nt-editing");
+        // 1.3. set .nt-editing to .nt-list-wrapper
+        $(".nt-list-wrapper").removeClass("nt-editing");
+        $(button).closest(".nt-list-wrapper").addClass("nt-editing");
+        // 2. load the item partial view from .data-nt-partialurl
         const sizeCss = $(button).data("nt-modelsize");
         if (!!sizeCss) {
             $("#crudActionDialog .modal-dialog").addClass(sizeCss);
         }
         const partialUrl = $(button).data("nt-partialurl");
+        // 3. Ajax to get htmls
         $.ajax({
             type: "GET",
             url: partialUrl,
@@ -35,7 +67,7 @@ function attachCrudActionDialog() {
             contentType: "application/json",
             success: function (response) {
                 const action = $(button).data("nt-action");
-                // 1.1. add response html to .nt-modal-body
+                // 3.1. add response html to .nt-modal-body
                 let modalBody = $("#crudActionDialog .nt-modal-body");
                 if (action == "PUT" || action == "POST") // wrap with <form>..</form> Edit or Create
                 {
@@ -45,12 +77,12 @@ function attachCrudActionDialog() {
                     modalBody.html(response);
                 }
                 // console.log(response);
-                // 2. set text for .modal-title in .nt.hidden-modal-title
+                // 3.2. set text for .modal-title in .nt.hidden-modal-title
                 $("#crudActionDialog .modal-header .modal-title").text($("#crudActionDialog .modal-body .nt-hidden-modal-title").val());
-                // 3.2. clear .nt-result
-                // 3.1. show/hide button based on CRUD Action Types
+                // 3.3. clear .nt-result
+                // 3.4. show/hide button based on CRUD Action Types
                 const postbackurl = $(button).data("nt-postbackurl");
-                initialize(action, postbackurl);
+                initializeModal(action, postbackurl);
             },
             failure: function (response) {
                 // console.log(response);
@@ -64,7 +96,7 @@ function attachCrudActionDialog() {
 
 $(document).ready(function () {
     attachCrudActionDialog();
-    $("#crudActionDialog .nt-btn-save").click(function (e) {
+    $("#crudActionDialog .nt-btn-action-save").click(function (e) {
         const self = this;
         $(this).attr("disabled", true);
         const postbackurl = $(this).data("nt-postbackurl");
@@ -86,9 +118,18 @@ $(document).ready(function () {
             success: function (response) {
                 $(self).removeAttr("disabled");
                 // console.log(response);
-                $("#crudActionDialog .nt-result").html(response);
-                $("#crudActionDialog .nt-result").show();
-                // TODO: should have a timer to auto hide after a few seconds.
+                const splitResponse = response.split("===---------===");
+                // response part #1, status html
+                if (splitResponse.length > 0) {
+                    $("#crudActionDialog .nt-result").html(splitResponse[0]);
+                    $("#crudActionDialog .nt-result").show();
+                }
+                // response part #1.1 TODO: should have a timer to auto hide after a few seconds.
+
+                // response part #2, to update the item which is updated/created.
+                if (splitResponse.length > 1) {
+                    $(".nt-listitem .nt-editing").html(splitResponse[1]);
+                }
             },
             failure: function (response) {
                 // console.log(response);
@@ -102,26 +143,27 @@ $(document).ready(function () {
     });
 });
 
-function initialize(action, postbackurl) {
+function initializeModal(action, postbackurl) {
+    $("#crudActionDialog").data("nt-action", action);
     // 3.2. clear .nt-result
     $("#crudActionDialog .nt-result").html("");
     $("#crudActionDialog .nt-result").hide();
     // 3.1. show/hide button based on CRUD Action Types
     if (action === "PUT" || action === "POST") // EDIT || CREATE
     {
-        $("#crudActionDialog .modal-footer .nt-btn-save").data("nt-postbackurl", postbackurl);
-        $("#crudActionDialog .modal-footer .nt-btn-save").show();
-        $("#crudActionDialog .modal-footer .nt-btn-save").removeAttr("disabled");
-        $("#crudActionDialog .modal-footer .nt-btn-delete").hide();
+        $("#crudActionDialog .modal-footer .nt-btn-action-save").data("nt-postbackurl", postbackurl);
+        $("#crudActionDialog .modal-footer .nt-btn-action-save").show();
+        $("#crudActionDialog .modal-footer .nt-btn-action-save").removeAttr("disabled");
+        $("#crudActionDialog .modal-footer .nt-btn-action-delete").hide();
     }
     else if (action == "DELETE") {
-        $("#crudActionDialog .modal-footer .nt-btn-delete").data("nt-postbackurl", postbackurl);
-        $("#crudActionDialog .modal-footer .nt-btn-delete").show();
-        $("#crudActionDialog .modal-footer .nt-btn-delete").removeAttr("disabled");
-        $("#crudActionDialog .modal-footer .nt-btn-save").hide();
+        $("#crudActionDialog .modal-footer .nt-btn-action-delete").data("nt-postbackurl", postbackurl);
+        $("#crudActionDialog .modal-footer .nt-btn-action-delete").show();
+        $("#crudActionDialog .modal-footer .nt-btn-action-delete").removeAttr("disabled");
+        $("#crudActionDialog .modal-footer .nt-btn-action-save").hide();
     }
     else {
-        $("#crudActionDialog .modal-footer .nt-btn-delete").hide();
-        $("#crudActionDialog .modal-footer .nt-btn-save").hide();
+        $("#crudActionDialog .modal-footer .nt-btn-action-delete").hide();
+        $("#crudActionDialog .modal-footer .nt-btn-action-save").hide();
     }
 }
