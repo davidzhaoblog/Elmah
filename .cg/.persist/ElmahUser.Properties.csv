@@ -1,0 +1,4 @@
+﻿TypeDeclarationContextName,DataView,Name,Enabled,Expression,ProcessStatus,PropertyGroupKey,KnownPropertyName,DefaultOrder,PropertyType,DefaultValue,IsNullable,IsDbGenerated,PropertyCategory,EntityReferenceSimplePath,IsForeignKey,SourcePropertyName,ForeignKeyPropertyCategory
+ElmahModel.ElmahUser,,User,True,,FromDefault,,Unknown,0,SystemString,,False,False,Identifier,,False,,NotForeignKey
+ElmahModel.ElmahUser,NameValuePair,Value,True,(SystemString)Value=User,Error,nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting,Unknown,1,SystemString,"",False,False,Unknown,,False,User,NotForeignKey
+ElmahModel.ElmahUser,NameValuePair,Name,True,(SystemString)Name=User~Name,Error,nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting,Unknown,1,SystemString,"",False,False,Name,,False,User,NotForeignKey
