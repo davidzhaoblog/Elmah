@@ -7,7 +7,6 @@
   </PropertyGroup>
 <ItemGroup>
     <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj" />
-    <ProjectReference Include="..\ModelContracts\Elmah.ModelContracts.csproj" />
     <ProjectReference Include="..\Resx\Elmah.Resx.csproj" />
 </ItemGroup>
 

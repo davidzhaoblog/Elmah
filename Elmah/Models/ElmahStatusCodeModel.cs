@@ -1,10 +1,9 @@
-using Elmah.ModelContracts;
 using Elmah.Resx.Resources;
 using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
-    public partial class ElmahStatusCodeModel : IElmahStatusCode
+    public partial class ElmahStatusCodeModel
     {
         [Display(Name = "StatusCode", ResourceType = typeof(UIStrings))]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="StatusCode_is_required")]

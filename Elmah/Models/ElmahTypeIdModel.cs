@@ -1,8 +1,6 @@
-using Elmah.ModelContracts;
-
 namespace Elmah.Models
 {
-    public partial class ElmahTypeIdModel : IElmahTypeIdentifier
+    public partial class ElmahTypeIdModel
     {
         public string Type { get; set; } = String.Empty;
     }
