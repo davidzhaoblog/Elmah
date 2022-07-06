@@ -45,28 +45,28 @@
       "dataQueryPerQueryKnownKey": 1,
       "sourceTypeDeclarationFullName": "ElmahModel.ElmahError",
       "conditionOperator": 0,
-      "hasStringContainsDataQueryPerQueryUnitSettingForAll": true,
-      "queryUnits": [
+      "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
+      "queryUnitGroups": [
         {
-          "key": "AdvancedQuery",
-          "dataQueryPerQueryUnitSettingType": 3,
+          "key": "EntityReference",
+          "dataQueryPerQueryUnitSettingType": 5,
           "outterConditionOperator": 0,
           "conditionOperator": 0,
-          "value": "Application=\\Application:Application.Equals;Host=\\Host:Host.Equals;Source=\\Source:Source.Equals;StatusCode=\\StatusCode:StatusCode.Equals;Type=\\Type:Type.Equals;User=\\User:User.Equals"
+          "name": "Query by EntityReference"
         },
         {
-          "key": "AdvancedQuery",
-          "dataQueryPerQueryUnitSettingType": 0,
+          "key": "DateTimeRange",
+          "dataQueryPerQueryUnitSettingType": 6,
           "outterConditionOperator": 0,
-          "conditionOperator": 1,
-          "value": "Message=:Message.Contains;AllXml=:AllXml.Contains"
+          "conditionOperator": 0,
+          "name": "Query by DateTime Range"
         },
         {
-          "key": "AdvancedQuery",
-          "dataQueryPerQueryUnitSettingType": 0,
+          "key": "StringQuery",
+          "dataQueryPerQueryUnitSettingType": 7,
           "outterConditionOperator": 0,
-          "conditionOperator": 1,
-          "value": "TimeUtcRange=:TimeUtc.Range"
+          "conditionOperator": 0,
+          "name": "Query by String Contains,StartsWith, EndsWith"
         }
       ]
     },
@@ -76,13 +76,13 @@
       "sourceTypeDeclarationFullName": "ElmahModel.ElmahError",
       "conditionOperator": 1,
       "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
-      "queryUnits": [
+      "queryUnitGroups": [
         {
           "key": "Identifier",
           "dataQueryPerQueryUnitSettingType": 1,
           "outterConditionOperator": 0,
           "conditionOperator": 0,
-          "value": "ErrorId=:ErrorId.Equals"
+          "name": "Query by Identifier"
         }
       ]
     }

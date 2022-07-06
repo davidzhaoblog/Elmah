@@ -28,14 +28,6 @@ namespace Elmah.Models
         // PredicateType:Equals
         public string? User { get; set; }
 
-        // PredicateType:Contains
-        public string? Message { get; set; }
-        public TextSearchTypes MessageSearchType { get; set; } = TextSearchTypes.Contains;
-
-        // PredicateType:Contains
-        public string? AllXml { get; set; }
-        public TextSearchTypes AllXmlSearchType { get; set; } = TextSearchTypes.Contains;
-
         public string? TimeUtcRange { get; set; }
         // PredicateType:Range - Lower Bound
         [DataType(DataType.Date)]
@@ -43,6 +35,14 @@ namespace Elmah.Models
         // PredicateType:Range - Upper Bound
         [DataType(DataType.Date)]
         public System.DateTime? TimeUtcRangeUpper { get; set; }
+
+        // PredicateType:Contains
+        public string? Message { get; set; }
+        public TextSearchTypes MessageSearchType { get; set; } = TextSearchTypes.Contains;
+
+        // PredicateType:Contains
+        public string? AllXml { get; set; }
+        public TextSearchTypes AllXmlSearchType { get; set; } = TextSearchTypes.Contains;
 
     }
 
