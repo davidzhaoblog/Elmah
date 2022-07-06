@@ -9,16 +9,16 @@ namespace Elmah.ServiceContracts
             ElmahTypeAdvancedQuery query);
 
         Task<ElmahTypeCompositeModel> GetCompositeModel(
-            ElmahTypeIdModel id, ElmahTypeCompositeDataOptions[]? dataOptions = null);
+            ElmahTypeIdentifier id, ElmahTypeCompositeDataOptions[]? dataOptions = null);
 
         Task<Response<ElmahTypeModel>> Update(ElmahTypeModel input);
 
-        Task<Response<ElmahTypeModel>> Get(ElmahTypeIdModel id);
+        Task<Response<ElmahTypeModel>> Get(ElmahTypeIdentifier id);
 
         Task<Response<ElmahTypeModel>> Create(ElmahTypeModel input);
         ElmahTypeModel GetDefault();
 
-        Task<Response> Delete(ElmahTypeIdModel id);
+        Task<Response> Delete(ElmahTypeIdentifier id);
 
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahTypeAdvancedQuery query);

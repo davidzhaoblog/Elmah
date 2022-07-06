@@ -98,7 +98,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             string template,
-            ElmahErrorIdModel id)
+            ElmahErrorIdentifier id)
         {
             ElmahErrorModel.DefaultView? result;
             if (template == ViewItemTemplateNames.Create.ToString())
@@ -162,7 +162,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            [FromRoute] ElmahErrorIdModel id)
+            [FromRoute] ElmahErrorIdentifier id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)
@@ -180,7 +180,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            ElmahErrorIdModel id,
+            ElmahErrorIdentifier id,
             [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (id.ErrorId != input.ErrorId)
@@ -202,7 +202,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError/Edit/{ErrorId}
         //[HttpGet, ActionName("Edit")]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdentifier id)
         {
             if (id == null)
             {
@@ -225,7 +225,7 @@ namespace Elmah.MvcWebApp.Controllers
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
         public async Task<IActionResult> Edit(
-            [FromRoute]ElmahErrorIdModel id,
+            [FromRoute]ElmahErrorIdentifier id,
             [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (id.ErrorId != input.ErrorId)
@@ -251,7 +251,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Details/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdentifier id)
         {
             var result = await _thisService.Get(id);
             ViewBag.Status = result.Status;
@@ -293,7 +293,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Delete/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdentifier id)
         {
             var result = await _thisService.Get(id);
             ViewBag.Status = result.Status;
@@ -305,7 +305,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdModel id)
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdentifier id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)

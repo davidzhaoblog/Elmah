@@ -32,7 +32,7 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
-        public async Task<ElmahUserCompositeModel> GetCompositeModel(ElmahUserIdModel id, ElmahUserCompositeDataOptions[]? dataOptions = null)
+        public async Task<ElmahUserCompositeModel> GetCompositeModel(ElmahUserIdentifier id, ElmahUserCompositeDataOptions[]? dataOptions = null)
         {
             var masterResponse = await this._thisRepository.Get(id);
             if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
@@ -86,7 +86,7 @@ namespace Elmah.Services
             return await _thisRepository.Update(input);
         }
 
-        public async Task<Response<ElmahUserModel>> Get(ElmahUserIdModel id)
+        public async Task<Response<ElmahUserModel>> Get(ElmahUserIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
@@ -102,7 +102,7 @@ namespace Elmah.Services
             return new ElmahUserModel();
         }
 
-        public async Task<Response> Delete(ElmahUserIdModel id)
+        public async Task<Response> Delete(ElmahUserIdentifier id)
         {
             return await _thisRepository.Delete(id);
         }

@@ -73,7 +73,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser/Dashboard/{User}
         [HttpGet, ActionName("Dashboard")]
         [Route("[controller]/[action]/{User}")]
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahUserIdModel id)
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahUserIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
@@ -86,7 +86,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             string template,
-            ElmahUserIdModel id)
+            ElmahUserIdentifier id)
         {
             ElmahUserModel? result;
             if (template == ViewItemTemplateNames.Create.ToString())
@@ -150,7 +150,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            [FromRoute] ElmahUserIdModel id)
+            [FromRoute] ElmahUserIdentifier id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)
@@ -168,7 +168,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            ElmahUserIdModel id,
+            ElmahUserIdentifier id,
             [Bind("User")] ElmahUserModel input)
         {
             if (id.User != input.User)

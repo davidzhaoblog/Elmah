@@ -4,6 +4,13 @@ using System.ComponentModel.DataAnnotations;
 namespace Elmah.Models
 {
 
+    public class ElmahErrorIdentifier
+    {
+
+        // PredicateType:Equals
+        public System.Guid? ErrorId { get; set; }
+    }
+
     public class ElmahErrorAdvancedQuery: BaseQuery
     {
         // will query all text columns in this table, ||
@@ -44,13 +51,5 @@ namespace Elmah.Models
         public string? AllXml { get; set; }
         public TextSearchTypes AllXmlSearchType { get; set; } = TextSearchTypes.Contains;
     }
-
-    public class ElmahErrorIdentifier
-    {
-
-        // PredicateType:Equals
-        public System.Guid? ErrorId { get; set; }
-    }
-
 }
 

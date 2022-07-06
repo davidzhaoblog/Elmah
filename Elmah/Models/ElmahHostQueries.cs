@@ -3,6 +3,13 @@ using Framework.Models;
 namespace Elmah.Models
 {
 
+    public class ElmahHostIdentifier
+    {
+
+        // PredicateType:Equals
+        public string? Host { get; set; }
+    }
+
     public class ElmahHostAdvancedQuery: BaseQuery
     {
         // will query all text columns in this table, ||
@@ -21,13 +28,5 @@ namespace Elmah.Models
         // PredicateType:GeographyIntersects
         public Microsoft.Spatial.GeographyPolygon? SpatialLocationGeographyIntersects { get; set; }
     }
-
-    public class ElmahHostIdentifier
-    {
-
-        // PredicateType:Equals
-        public string? Host { get; set; }
-    }
-
 }
 

@@ -10,11 +10,11 @@ namespace Elmah.RepositoryContracts
 
         Task<Response<ElmahSourceModel>> Update(ElmahSourceModel input);
 
-        Task<Response<ElmahSourceModel>> Get(ElmahSourceIdModel id);
+        Task<Response<ElmahSourceModel>> Get(ElmahSourceIdentifier id);
 
         Task<Response<ElmahSourceModel>> Create(ElmahSourceModel input);
 
-        Task<Response> Delete(ElmahSourceIdModel id);
+        Task<Response> Delete(ElmahSourceIdentifier id);
 
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahSourceAdvancedQuery query);

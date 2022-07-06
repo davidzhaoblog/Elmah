@@ -9,16 +9,16 @@ namespace Elmah.ServiceContracts
             ElmahApplicationAdvancedQuery query);
 
         Task<ElmahApplicationCompositeModel> GetCompositeModel(
-            ElmahApplicationIdModel id, ElmahApplicationCompositeDataOptions[]? dataOptions = null);
+            ElmahApplicationIdentifier id, ElmahApplicationCompositeDataOptions[]? dataOptions = null);
 
         Task<Response<ElmahApplicationModel>> Update(ElmahApplicationModel input);
 
-        Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdModel id);
+        Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdentifier id);
 
         Task<Response<ElmahApplicationModel>> Create(ElmahApplicationModel input);
         ElmahApplicationModel GetDefault();
 
-        Task<Response> Delete(ElmahApplicationIdModel id);
+        Task<Response> Delete(ElmahApplicationIdentifier id);
 
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahApplicationAdvancedQuery query);

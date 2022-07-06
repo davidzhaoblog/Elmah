@@ -73,7 +73,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahHost/Dashboard/{Host}
         [HttpGet, ActionName("Dashboard")]
         [Route("[controller]/[action]/{Host}")]
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahHostIdModel id)
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahHostIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
@@ -86,7 +86,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             string template,
-            ElmahHostIdModel id)
+            ElmahHostIdentifier id)
         {
             ElmahHostModel? result;
             if (template == ViewItemTemplateNames.Create.ToString())
@@ -150,7 +150,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            [FromRoute] ElmahHostIdModel id)
+            [FromRoute] ElmahHostIdentifier id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)
@@ -168,7 +168,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            ElmahHostIdModel id,
+            ElmahHostIdentifier id,
             [Bind("Host,SpatialLocation")] ElmahHostModel input)
         {
             if (id.Host != input.Host)

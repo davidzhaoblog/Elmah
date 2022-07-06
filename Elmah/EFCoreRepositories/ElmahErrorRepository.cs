@@ -207,7 +207,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id)
+        public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             if (id == null)
                 return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.BadRequest });
@@ -337,7 +337,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response> Delete(ElmahErrorIdModel id)
+        public async Task<Response> Delete(ElmahErrorIdentifier id)
         {
             if (id == null)
                 return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });

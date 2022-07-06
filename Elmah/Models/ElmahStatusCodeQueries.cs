@@ -3,6 +3,13 @@ using Framework.Models;
 namespace Elmah.Models
 {
 
+    public class ElmahStatusCodeIdentifier
+    {
+
+        // PredicateType:Equals
+        public int? StatusCode { get; set; }
+    }
+
     public class ElmahStatusCodeAdvancedQuery: BaseQuery
     {
         // will query all text columns in this table, ||
@@ -13,13 +20,5 @@ namespace Elmah.Models
         public string? Name { get; set; }
         public TextSearchTypes NameSearchType { get; set; } = TextSearchTypes.Contains;
     }
-
-    public class ElmahStatusCodeIdentifier
-    {
-
-        // PredicateType:Equals
-        public int? StatusCode { get; set; }
-    }
-
 }
 
