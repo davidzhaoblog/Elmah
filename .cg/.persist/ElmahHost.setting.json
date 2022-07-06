@@ -6,21 +6,7 @@
       "key": "NameValuePair",
       "dataViewKnownCategory": 4,
       "isGroupByResult": false,
-      "defaultOrderByPropertyName": null,
-      "properties": [
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewProjectionColumnSetting",
-          "value": "(SystemString)Value=Host;(SystemString)Name=Host~Name"
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewCalculatedColumnWithValueTypeInputSetting",
-          "value": ""
-        },
-        {
-          "key": "nTierCraft.CodeGen.Settings.DataViewDatabaseQueryResultColumnSetting",
-          "value": ""
-        }
-      ]
+      "defaultOrderByPropertyName": null
     }
   ],
   "criteriaCollection": [
@@ -53,28 +39,21 @@
       "dataQueryPerQueryKnownKey": 1,
       "sourceTypeDeclarationFullName": "ElmahModel.ElmahHost",
       "conditionOperator": 0,
-      "hasStringContainsDataQueryPerQueryUnitSettingForAll": true,
-      "queryUnits": [
+      "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
+      "queryUnitGroups": [
         {
-          "key": "AdvancedQuery",
-          "dataQueryPerQueryUnitSettingType": 0,
+          "key": "StringQuery",
+          "dataQueryPerQueryUnitSettingType": 7,
           "outterConditionOperator": 0,
           "conditionOperator": 0,
-          "value": ""
+          "name": "Query by String Contains,StartsWith, EndsWith"
         },
         {
-          "key": "AdvancedQuery",
-          "dataQueryPerQueryUnitSettingType": 0,
+          "key": "GeographyQuery",
+          "dataQueryPerQueryUnitSettingType": 8,
           "outterConditionOperator": 0,
-          "conditionOperator": 1,
-          "value": "Host=:Host.Contains;SpatialLocation=:SpatialLocation.GeographyRange;SpatialLocationGeographyIntersects=:SpatialLocation.GeographyIntersects"
-        },
-        {
-          "key": "AdvancedQuery",
-          "dataQueryPerQueryUnitSettingType": 0,
-          "outterConditionOperator": 0,
-          "conditionOperator": 1,
-          "value": ""
+          "conditionOperator": 0,
+          "name": "Query by Geography: Range, Intersects in This Table"
         }
       ]
     },
@@ -84,13 +63,13 @@
       "sourceTypeDeclarationFullName": "ElmahModel.ElmahHost",
       "conditionOperator": 1,
       "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
-      "queryUnits": [
+      "queryUnitGroups": [
         {
           "key": "Identifier",
           "dataQueryPerQueryUnitSettingType": 1,
           "outterConditionOperator": 0,
           "conditionOperator": 0,
-          "value": "Host=:Host.Equals"
+          "name": "Query by Identifier"
         }
       ]
     }

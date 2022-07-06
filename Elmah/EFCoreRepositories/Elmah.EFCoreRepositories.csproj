@@ -19,7 +19,6 @@
 <ItemGroup>
     <ProjectReference Include="..\EFCoreContext\Elmah.EFCoreContext.csproj" />
     <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj" />
-    <ProjectReference Include="..\ModelContracts\Elmah.ModelContracts.csproj" />
     <ProjectReference Include="..\Models\Elmah.Models.csproj" />
     <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj" />
 </ItemGroup>

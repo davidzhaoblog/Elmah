@@ -54,6 +54,8 @@ namespace Elmah.EFCoreRepositories
                     &&
                     (string.IsNullOrEmpty(query.User) || User.User == query.User)
                     &&
+                    (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
+                    &&
                     (string.IsNullOrEmpty(query.Message) ||
                             query.MessageSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Message!, "%" + query.Message + "%") ||
                             query.MessageSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Message!, query.Message + "%") ||
@@ -63,8 +65,6 @@ namespace Elmah.EFCoreRepositories
                             query.AllXmlSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.AllXml!, "%" + query.AllXml + "%") ||
                             query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml!, query.AllXml + "%") ||
                             query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml!, "%" + query.AllXml))
-                    &&
-                    (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
 
                 select new ElmahErrorModel.DefaultView
                 {

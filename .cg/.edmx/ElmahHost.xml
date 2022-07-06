@@ -18,6 +18,8 @@
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Host</Name>
         <DefaultOrder>0</DefaultOrder>
@@ -64,6 +66,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>SpatialLocation</Name>
         <DefaultOrder>100</DefaultOrder>

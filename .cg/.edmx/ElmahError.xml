@@ -151,6 +151,8 @@
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>ErrorId</Name>
         <DefaultOrder>0</DefaultOrder>
@@ -194,6 +196,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Application</Name>
         <DefaultOrder>100</DefaultOrder>
@@ -241,6 +245,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Host</Name>
         <DefaultOrder>200</DefaultOrder>
@@ -288,6 +294,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Type</Name>
         <DefaultOrder>300</DefaultOrder>
@@ -335,6 +343,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Source</Name>
         <DefaultOrder>400</DefaultOrder>
@@ -382,6 +392,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Message</Name>
         <DefaultOrder>500</DefaultOrder>
@@ -428,6 +440,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>User</Name>
         <DefaultOrder>600</DefaultOrder>
@@ -475,6 +489,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>StatusCode</Name>
         <DefaultOrder>700</DefaultOrder>
@@ -519,6 +535,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>TimeUtc</Name>
         <DefaultOrder>800</DefaultOrder>
@@ -562,6 +580,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Sequence</Name>
         <DefaultOrder>900</DefaultOrder>
@@ -578,7 +598,7 @@
         </PropertyType>
         <IsNullable>false</IsNullable>
         <IsDbGenerated>true</IsDbGenerated>
-        <PropertyCategory>Identifier</PropertyCategory>
+        <PropertyCategory>Identity</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
       <DBColumnSetting>
@@ -599,6 +619,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>AllXml</Name>
         <DefaultOrder>1000</DefaultOrder>

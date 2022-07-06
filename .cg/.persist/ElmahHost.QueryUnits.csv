@@ -1,0 +1,5 @@
+﻿TypeDeclarationContextName,Query,QueryUnitGroup,QueryPropertyName,Enabled,ProcessStatus,QueryUnitSettingType,TargetTypeDeclarationFullName,TargetEntityKey,TargetPropertyName,TargetPropertyType,FKPropertyName,EntityReferenceSimpleFullPath,TargetPropertyFullPath,PredicateKnownType
+ElmahModel.ElmahHost,AdvancedQuery,StringQuery,Host,True,FromDefault,StringQuery,ElmahModel.ElmahHost,t,Host,SystemString,,,,Contains
+ElmahModel.ElmahHost,AdvancedQuery,GeographyQuery,SpatialLocation,True,FromDefault,GeographyQuery,ElmahModel.ElmahHost,t,SpatialLocation,Geography,,,,GeographyRange
+ElmahModel.ElmahHost,AdvancedQuery,GeographyQuery,SpatialLocationGeographyIntersects,True,FromDefault,GeographyQuery,ElmahModel.ElmahHost,t,SpatialLocation,Geography,,,,GeographyIntersects
+ElmahModel.ElmahHost,Identifier,Identifier,Host,True,FromDefault,Identifier,ElmahModel.ElmahHost,t,Host,SystemString,,,,Equals
