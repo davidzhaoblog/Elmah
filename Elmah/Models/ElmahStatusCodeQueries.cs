@@ -12,7 +12,13 @@ namespace Elmah.Models
         // PredicateType:Contains
         public string? Name { get; set; }
         public TextSearchTypes NameSearchType { get; set; } = TextSearchTypes.Contains;
+    }
 
+    public class ElmahStatusCodeIdentifier
+    {
+
+        // PredicateType:Equals
+        public int? StatusCode { get; set; }
     }
 
 }

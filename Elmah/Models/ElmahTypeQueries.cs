@@ -12,7 +12,13 @@ namespace Elmah.Models
         // PredicateType:Contains
         public string? Type { get; set; }
         public TextSearchTypes TypeSearchType { get; set; } = TextSearchTypes.Contains;
+    }
 
+    public class ElmahTypeIdentifier
+    {
+
+        // PredicateType:Equals
+        public string? Type { get; set; }
     }
 
 }

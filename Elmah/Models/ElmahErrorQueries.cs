@@ -43,7 +43,13 @@ namespace Elmah.Models
         // PredicateType:Contains
         public string? AllXml { get; set; }
         public TextSearchTypes AllXmlSearchType { get; set; } = TextSearchTypes.Contains;
+    }
 
+    public class ElmahErrorIdentifier
+    {
+
+        // PredicateType:Equals
+        public System.Guid? ErrorId { get; set; }
     }
 
 }

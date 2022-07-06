@@ -36,7 +36,7 @@
   "queryCollection": [
     {
       "key": "AdvancedQuery",
-      "dataQueryPerQueryKnownKey": 1,
+      "dataQueryPerQueryKnownKey": 2,
       "sourceTypeDeclarationFullName": "ElmahModel.ElmahType",
       "conditionOperator": 0,
       "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
@@ -52,7 +52,7 @@
     },
     {
       "key": "Identifier",
-      "dataQueryPerQueryKnownKey": 2,
+      "dataQueryPerQueryKnownKey": 1,
       "sourceTypeDeclarationFullName": "ElmahModel.ElmahType",
       "conditionOperator": 1,
       "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
