@@ -91,7 +91,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeModel input)
+        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeIdentifier id, ElmahTypeModel input)
         {
             if (input == null)
                 return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
@@ -132,7 +132,12 @@ namespace Elmah.EFCoreRepositories
 
             try
             {
-                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
+                var existing = _dbcontext.ElmahType.SingleOrDefault(
+                    t =>
+
+                    !string.IsNullOrEmpty(id.Type) && t.Type == id.Type
+                );
+
                 if (existing == null)
                     return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.NotFound });
 
@@ -190,7 +195,11 @@ namespace Elmah.EFCoreRepositories
 
             try
             {
-                var existing = _dbcontext.ElmahType.SingleOrDefault(t => t.Type == id.Type);
+                var existing = _dbcontext.ElmahType.SingleOrDefault(
+                    t =>
+
+                    !string.IsNullOrEmpty(id.Type) && t.Type == id.Type
+                );
 
                 if (existing == null)
                     return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });

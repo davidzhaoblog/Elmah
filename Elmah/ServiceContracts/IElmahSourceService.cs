@@ -11,7 +11,7 @@ namespace Elmah.ServiceContracts
         Task<ElmahSourceCompositeModel> GetCompositeModel(
             ElmahSourceIdentifier id, ElmahSourceCompositeDataOptions[]? dataOptions = null);
 
-        Task<Response<ElmahSourceModel>> Update(ElmahSourceModel input);
+        Task<Response<ElmahSourceModel>> Update(ElmahSourceIdentifier id, ElmahSourceModel input);
 
         Task<Response<ElmahSourceModel>> Get(ElmahSourceIdentifier id);
 

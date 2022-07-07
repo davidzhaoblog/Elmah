@@ -38,9 +38,9 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorModel input)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorModel input)
         {
-            var serviceResponse = await _thisService.Update(input);
+            var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 

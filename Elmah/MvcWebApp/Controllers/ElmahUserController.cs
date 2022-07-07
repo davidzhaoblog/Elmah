@@ -178,7 +178,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _thisService.Update(input);
+                var result = await _thisService.Update(id, input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
                     return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });

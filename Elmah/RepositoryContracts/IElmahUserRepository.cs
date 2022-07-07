@@ -8,7 +8,7 @@ namespace Elmah.RepositoryContracts
         Task<PagedResponse<ElmahUserModel[]>> Search(
             ElmahUserAdvancedQuery query);
 
-        Task<Response<ElmahUserModel>> Update(ElmahUserModel input);
+        Task<Response<ElmahUserModel>> Update(ElmahUserIdentifier id, ElmahUserModel input);
 
         Task<Response<ElmahUserModel>> Get(ElmahUserIdentifier id);
 

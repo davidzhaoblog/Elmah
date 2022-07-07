@@ -8,7 +8,7 @@ namespace Elmah.RepositoryContracts
         Task<PagedResponse<ElmahHostModel[]>> Search(
             ElmahHostAdvancedQuery query);
 
-        Task<Response<ElmahHostModel>> Update(ElmahHostModel input);
+        Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input);
 
         Task<Response<ElmahHostModel>> Get(ElmahHostIdentifier id);
 

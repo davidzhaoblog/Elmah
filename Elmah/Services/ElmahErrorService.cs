@@ -32,9 +32,9 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorModel input)
+        public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)
         {
-            return await _thisRepository.Update(input);
+            return await _thisRepository.Update(id, input);
         }
 
         public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)

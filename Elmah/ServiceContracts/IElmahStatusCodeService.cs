@@ -11,7 +11,7 @@ namespace Elmah.ServiceContracts
         Task<ElmahStatusCodeCompositeModel> GetCompositeModel(
             ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeDataOptions[]? dataOptions = null);
 
-        Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeModel input);
+        Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeModel input);
 
         Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdentifier id);
 

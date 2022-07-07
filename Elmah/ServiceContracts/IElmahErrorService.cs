@@ -8,7 +8,7 @@ namespace Elmah.ServiceContracts
         Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query);
 
-        Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorModel input);
+        Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input);
 
         Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id);
 

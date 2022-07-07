@@ -11,7 +11,7 @@ namespace Elmah.ServiceContracts
         Task<ElmahHostCompositeModel> GetCompositeModel(
             ElmahHostIdentifier id, ElmahHostCompositeDataOptions[]? dataOptions = null);
 
-        Task<Response<ElmahHostModel>> Update(ElmahHostModel input);
+        Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input);
 
         Task<Response<ElmahHostModel>> Get(ElmahHostIdentifier id);
 

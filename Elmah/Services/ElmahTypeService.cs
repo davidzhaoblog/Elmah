@@ -81,9 +81,9 @@ namespace Elmah.Services
             return successResponse;
         }
 
-        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeModel input)
+        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeIdentifier id, ElmahTypeModel input)
         {
-            return await _thisRepository.Update(input);
+            return await _thisRepository.Update(id, input);
         }
 
         public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdentifier id)
