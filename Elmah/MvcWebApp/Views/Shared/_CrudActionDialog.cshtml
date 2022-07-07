@@ -22,17 +22,31 @@
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
-
-                <div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                
+                <div class="btn-group btn-group-nt-action-save">
+                    <div>
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
                         <i class="fa-solid fa-circle-xmark"></i><span class="ms-1 submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Close")</span>
                     </button>
-                    <button type="button" class="btn btn-primary btn-nt-action-save" style="display: none;">
+                    </div>
+                    <div>
+                    <button type="button" class="btn btn-primary btn-nt-action-save">
                         <i class="fa-solid fa-check-circle"></i><span class="ms-1 submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Save")</span>
                     </button>
-                    <button type="button" class="btn btn-primary btn-nt-action-delete" style="display: none;">
-                        <i class="fa fa-trash"></i><span class="ms-1 submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Delete")</span>
+                    </div>
+                </div>
+
+                <div class="btn-group btn-group-nt-action-delete">
+                    <div>
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-circle-xmark"></i><span class="ms-1 submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Close")</span>
                     </button>
+                    </div>
+                    <form>
+                        <button type="button" class="btn btn-primary btn-nt-action-delete">
+                            <i class="fa fa-trash"></i><span class="ms-1 submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Delete")</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

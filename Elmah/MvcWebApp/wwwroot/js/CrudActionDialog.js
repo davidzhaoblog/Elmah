@@ -124,6 +124,9 @@ function attachCrudActionDialog() {
         // 3. removeData data-nt-* attribute in this modal.
         $("#crudActionDialog").removeData("nt-action nt-view nt-container nt-template nt-postbackurl");
 
+        // 4. hide Save/Delete button groups
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-save").hide();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").hide();
     })
 }
 
@@ -208,17 +211,15 @@ function initializeModal(button, action, view, container, template, postbackurl)
     // 3.1. show/hide button based on CRUD Action Types
     if (action === "PUT" || action === "POST") // EDIT || CREATE
     {
-        $("#crudActionDialog .modal-footer .btn-nt-action-save").show();
-        $("#crudActionDialog .modal-footer .btn-nt-action-save").removeAttr("disabled");
-        $("#crudActionDialog .modal-footer .btn-nt-action-delete").hide();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-save").show();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").hide();
     }
     else if (action == "DELETE") {
-        $("#crudActionDialog .modal-footer .btn-nt-action-delete").show();
-        $("#crudActionDialog .modal-footer .btn-nt-action-delete").removeAttr("disabled");
-        $("#crudActionDialog .modal-footer .btn-nt-action-save").hide();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-save").hide();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").show();
     }
     else {
-        $("#crudActionDialog .modal-footer .btn-nt-action-delete").hide();
-        $("#crudActionDialog .modal-footer .btn-nt-action-save").hide();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-save").hide();
+        $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").hide();
     }
 }
