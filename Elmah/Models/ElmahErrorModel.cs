@@ -1,10 +1,9 @@
-using Elmah.ModelContracts;
 using Elmah.Resx.Resources;
 using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
-    public partial class ElmahErrorModel : IElmahError
+    public partial class ElmahErrorModel
     {
         [Display(Name = "ErrorId", ResourceType = typeof(UIStrings))]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="ErrorId_is_required")]
@@ -49,14 +48,10 @@ namespace Elmah.Models
         [Display(Name = "AllXml", ResourceType = typeof(UIStrings))]
         public string AllXml { get; set; } = null!;
 
-        public partial class DefaultView
+        public partial class DefaultView: ElmahErrorModel
         {
             [Display(Name = "Application", ResourceType = typeof(UIStrings))]
             public string? Application_Name { get; set; }
-
-            [Display(Name = "ErrorId", ResourceType = typeof(UIStrings))]
-            [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="ErrorId_is_required")]
-            public System.Guid ErrorId { get; set; }
 
             [Display(Name = "Host", ResourceType = typeof(UIStrings))]
             public string? Host_Name { get; set; }
@@ -72,39 +67,6 @@ namespace Elmah.Models
 
             [Display(Name = "User", ResourceType = typeof(UIStrings))]
             public string? User_Name { get; set; }
-
-            [Display(Name = "ElmahApplication", ResourceType = typeof(UIStrings))]
-            public string Application { get; set; } = null!;
-
-            [Display(Name = "ElmahHost", ResourceType = typeof(UIStrings))]
-            public string Host { get; set; } = null!;
-
-            [Display(Name = "ElmahType", ResourceType = typeof(UIStrings))]
-            public string Type { get; set; } = null!;
-
-            [Display(Name = "ElmahSource", ResourceType = typeof(UIStrings))]
-            public string Source { get; set; } = null!;
-
-            [Display(Name = "Message", ResourceType = typeof(UIStrings))]
-            [StringLength(500, ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="The_length_of_Message_should_be_1_to_500", MinimumLength = 1)]
-            public string Message { get; set; } = null!;
-
-            [Display(Name = "ElmahUser", ResourceType = typeof(UIStrings))]
-            public string User { get; set; } = null!;
-
-            [Display(Name = "ElmahStatusCode", ResourceType = typeof(UIStrings))]
-            public int StatusCode { get; set; }
-
-            [Display(Name = "TimeUtc", ResourceType = typeof(UIStrings))]
-            [DataType(DataType.DateTime)]
-            [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="TimeUtc_is_required")]
-            public System.DateTime TimeUtc { get; set; }
-
-            [Display(Name = "Sequence", ResourceType = typeof(UIStrings))]
-            public int Sequence { get; set; }
-
-            [Display(Name = "AllXml", ResourceType = typeof(UIStrings))]
-            public string AllXml { get; set; } = null!;
         }
 
     }

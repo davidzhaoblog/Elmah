@@ -3,6 +3,13 @@ using Framework.Models;
 namespace Elmah.Models
 {
 
+    public class ElmahApplicationIdentifier
+    {
+
+        // PredicateType:Equals
+        public string? Application { get; set; }
+    }
+
     public class ElmahApplicationAdvancedQuery: BaseQuery
     {
         // will query all text columns in this table, ||
@@ -12,8 +19,6 @@ namespace Elmah.Models
         // PredicateType:Contains
         public string? Application { get; set; }
         public TextSearchTypes ApplicationSearchType { get; set; } = TextSearchTypes.Contains;
-
     }
-
 }
 

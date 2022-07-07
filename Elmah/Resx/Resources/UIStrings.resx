@@ -343,11 +343,11 @@
   <data name="Value" xml:space="preserve">
     <value>Value</value>
   </data>
-  <data name="ElmahApplication" xml:space="preserve">
-    <value>Elmah Application</value>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="ElmahApplication" xml:space="preserve">
+    <value>Elmah Application</value>
   </data>
   <data name="ElmahHost" xml:space="preserve">
     <value>Elmah Host</value>

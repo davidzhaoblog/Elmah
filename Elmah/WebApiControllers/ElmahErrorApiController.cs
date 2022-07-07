@@ -46,7 +46,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id)
+        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -62,7 +62,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahErrorIdModel id)
+        public async Task<ActionResult> Delete(ElmahErrorIdentifier id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);

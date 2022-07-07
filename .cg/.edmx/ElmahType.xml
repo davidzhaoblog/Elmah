@@ -18,6 +18,8 @@
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Type</Name>
         <DefaultOrder>0</DefaultOrder>

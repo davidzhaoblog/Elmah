@@ -36,6 +36,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Application!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Application!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Application) ||
                             query.ApplicationSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Application!, "%" + query.Application + "%") ||
                             query.ApplicationSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Application!, query.Application + "%") ||
@@ -124,7 +125,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdModel id)
+        public async Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdentifier id)
         {
             if (id == null)
                 return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.BadRequest });
@@ -182,7 +183,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response> Delete(ElmahApplicationIdModel id)
+        public async Task<Response> Delete(ElmahApplicationIdentifier id)
         {
             if (id == null)
                 return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
@@ -223,6 +224,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Application!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Application!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Application) ||
                             query.ApplicationSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Application!, "%" + query.Application + "%") ||
                             query.ApplicationSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Application!, query.Application + "%") ||

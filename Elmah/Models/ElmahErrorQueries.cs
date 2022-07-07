@@ -4,6 +4,13 @@ using System.ComponentModel.DataAnnotations;
 namespace Elmah.Models
 {
 
+    public class ElmahErrorIdentifier
+    {
+
+        // PredicateType:Equals
+        public System.Guid? ErrorId { get; set; }
+    }
+
     public class ElmahErrorAdvancedQuery: BaseQuery
     {
         // will query all text columns in this table, ||
@@ -28,14 +35,6 @@ namespace Elmah.Models
         // PredicateType:Equals
         public string? User { get; set; }
 
-        // PredicateType:Contains
-        public string? Message { get; set; }
-        public TextSearchTypes MessageSearchType { get; set; } = TextSearchTypes.Contains;
-
-        // PredicateType:Contains
-        public string? AllXml { get; set; }
-        public TextSearchTypes AllXmlSearchType { get; set; } = TextSearchTypes.Contains;
-
         public string? TimeUtcRange { get; set; }
         // PredicateType:Range - Lower Bound
         [DataType(DataType.Date)]
@@ -44,7 +43,13 @@ namespace Elmah.Models
         [DataType(DataType.Date)]
         public System.DateTime? TimeUtcRangeUpper { get; set; }
 
-    }
+        // PredicateType:Contains
+        public string? Message { get; set; }
+        public TextSearchTypes MessageSearchType { get; set; } = TextSearchTypes.Contains;
 
+        // PredicateType:Contains
+        public string? AllXml { get; set; }
+        public TextSearchTypes AllXmlSearchType { get; set; } = TextSearchTypes.Contains;
+    }
 }
 

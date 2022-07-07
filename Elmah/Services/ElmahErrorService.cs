@@ -37,7 +37,7 @@ namespace Elmah.Services
             return await _thisRepository.Update(input);
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id)
+        public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
@@ -53,7 +53,7 @@ namespace Elmah.Services
             return new ElmahErrorModel.DefaultView();
         }
 
-        public async Task<Response> Delete(ElmahErrorIdModel id)
+        public async Task<Response> Delete(ElmahErrorIdentifier id)
         {
             return await _thisRepository.Delete(id);
         }

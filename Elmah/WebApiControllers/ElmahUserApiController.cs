@@ -38,7 +38,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahUserCompositeModel>> GetCompositeModel(ElmahUserIdModel id)
+        public async Task<ActionResult<ElmahUserCompositeModel>> GetCompositeModel(ElmahUserIdentifier id)
         {
             var serviceResponse = await _thisService.GetCompositeModel(id, null);
             return Ok(serviceResponse);

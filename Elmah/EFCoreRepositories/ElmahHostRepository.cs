@@ -40,11 +40,13 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Host!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Host!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Host) ||
                             query.HostSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Host!, "%" + query.Host + "%") ||
                             query.HostSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Host!, query.Host + "%") ||
                             query.HostSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Host!, "%" + query.Host))
                     &&
+
                     (query.SpatialLocation == null || query.SpatialLocation.IsEmpty || !query.SpatialLocationRadius.HasValue || t.SpatialLocation____ != null && t.SpatialLocation____!.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
                     (query.SpatialLocationGeographyIntersects == null || query.SpatialLocationGeographyIntersects.IsEmpty || t.SpatialLocation____ != null && geoQueryValue.SpatialLocationGeographyIntersects != null && geoQueryValue.SpatialLocationGeographyIntersects.Contains(t.SpatialLocation____))
@@ -135,7 +137,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdModel id)
+        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdentifier id)
         {
             if (id == null)
                 return await Task<Response<ElmahHostModel>>.FromResult(new Response<ElmahHostModel> { Status = HttpStatusCode.BadRequest });
@@ -196,7 +198,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response> Delete(ElmahHostIdModel id)
+        public async Task<Response> Delete(ElmahHostIdentifier id)
         {
             if (id == null)
                 return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
@@ -241,11 +243,13 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Host!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Host!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Host) ||
                             query.HostSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Host!, "%" + query.Host + "%") ||
                             query.HostSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Host!, query.Host + "%") ||
                             query.HostSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Host!, "%" + query.Host))
                     &&
+
                     (query.SpatialLocation == null || query.SpatialLocation.IsEmpty || !query.SpatialLocationRadius.HasValue || t.SpatialLocation____ != null && t.SpatialLocation____!.IsWithinDistance(geoQueryValue.SpatialLocation, query.SpatialLocationRadius ?? 5.0))
                     &&
                     (query.SpatialLocationGeographyIntersects == null || query.SpatialLocationGeographyIntersects.IsEmpty || t.SpatialLocation____ != null && geoQueryValue.SpatialLocationGeographyIntersects != null && geoQueryValue.SpatialLocationGeographyIntersects.Contains(t.SpatialLocation____))

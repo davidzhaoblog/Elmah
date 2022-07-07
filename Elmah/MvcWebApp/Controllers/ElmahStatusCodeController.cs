@@ -73,7 +73,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahStatusCode/Dashboard/{StatusCode}
         [HttpGet, ActionName("Dashboard")]
         [Route("[controller]/[action]/{StatusCode}")]
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahStatusCodeIdModel id)
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahStatusCodeIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
@@ -86,7 +86,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             string template,
-            ElmahStatusCodeIdModel id)
+            ElmahStatusCodeIdentifier id)
         {
             ElmahStatusCodeModel? result;
             if (template == ViewItemTemplateNames.Create.ToString())
@@ -150,7 +150,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            [FromRoute] ElmahStatusCodeIdModel id)
+            [FromRoute] ElmahStatusCodeIdentifier id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)
@@ -168,7 +168,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            ElmahStatusCodeIdModel id,
+            ElmahStatusCodeIdentifier id,
             [Bind("StatusCode,Name")] ElmahStatusCodeModel input)
         {
             if (id.StatusCode != input.StatusCode)

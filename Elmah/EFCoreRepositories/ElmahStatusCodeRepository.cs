@@ -36,6 +36,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Name!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Name!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Name) ||
                             query.NameSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Name!, "%" + query.Name + "%") ||
                             query.NameSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Name!, query.Name + "%") ||
@@ -127,7 +128,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdModel id)
+        public async Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdentifier id)
         {
             if (id == null)
                 return await Task<Response<ElmahStatusCodeModel>>.FromResult(new Response<ElmahStatusCodeModel> { Status = HttpStatusCode.BadRequest });
@@ -188,7 +189,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response> Delete(ElmahStatusCodeIdModel id)
+        public async Task<Response> Delete(ElmahStatusCodeIdentifier id)
         {
             if (id == null)
                 return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
@@ -229,6 +230,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Name!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Name!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Name) ||
                             query.NameSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Name!, "%" + query.Name + "%") ||
                             query.NameSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Name!, query.Name + "%") ||

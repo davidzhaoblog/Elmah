@@ -18,6 +18,8 @@
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>StatusCode</Name>
         <DefaultOrder>0</DefaultOrder>
@@ -61,6 +63,8 @@
     </PropertyContext>
     <PropertyContext>
       <Setting>
+        <Enabled>true</Enabled>
+        <ProcessStatus>FromDefault</ProcessStatus>
         <KnownPropertyName>Unknown</KnownPropertyName>
         <Name>Name</Name>
         <DefaultOrder>100</DefaultOrder>

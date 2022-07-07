@@ -1,22 +1,21 @@
 using System;
 using System.Collections.Generic;
 using NetTopologySuite.Geometries;
-using Elmah.ModelContracts;
 
 namespace Elmah.EFCoreContext
 {
 
-    public partial class ElmahError : IElmahError
+    public partial class ElmahError
     {
 
     }
 
-    public partial class ElmahApplication : IElmahApplication
+    public partial class ElmahApplication
     {
 
     }
 
-    public partial class ElmahHost : IElmahHost
+    public partial class ElmahHost
     {
         public Microsoft.Spatial.Geography? SpatialLocation
         {
@@ -41,22 +40,22 @@ namespace Elmah.EFCoreContext
 
     }
 
-    public partial class ElmahSource : IElmahSource
+    public partial class ElmahSource
     {
 
     }
 
-    public partial class ElmahStatusCode : IElmahStatusCode
+    public partial class ElmahStatusCode
     {
 
     }
 
-    public partial class ElmahType : IElmahType
+    public partial class ElmahType
     {
 
     }
 
-    public partial class ElmahUser : IElmahUser
+    public partial class ElmahUser
     {
 
     }

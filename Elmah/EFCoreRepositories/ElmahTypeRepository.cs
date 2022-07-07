@@ -36,6 +36,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Type!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Type!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Type) ||
                             query.TypeSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Type!, "%" + query.Type + "%") ||
                             query.TypeSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Type!, query.Type + "%") ||
@@ -124,7 +125,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdModel id)
+        public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdentifier id)
         {
             if (id == null)
                 return await Task<Response<ElmahTypeModel>>.FromResult(new Response<ElmahTypeModel> { Status = HttpStatusCode.BadRequest });
@@ -182,7 +183,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response> Delete(ElmahTypeIdModel id)
+        public async Task<Response> Delete(ElmahTypeIdentifier id)
         {
             if (id == null)
                 return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
@@ -223,6 +224,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Type!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Type!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Type) ||
                             query.TypeSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Type!, "%" + query.Type + "%") ||
                             query.TypeSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Type!, query.Type + "%") ||

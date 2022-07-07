@@ -10,12 +10,12 @@ namespace Elmah.ServiceContracts
 
         Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorModel input);
 
-        Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdModel id);
+        Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id);
 
         Task<Response<ElmahErrorModel.DefaultView>> Create(ElmahErrorModel input);
         ElmahErrorModel.DefaultView GetDefault();
 
-        Task<Response> Delete(ElmahErrorIdModel id);
+        Task<Response> Delete(ElmahErrorIdentifier id);
 
     }
 }
