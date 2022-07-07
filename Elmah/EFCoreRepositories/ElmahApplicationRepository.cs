@@ -36,6 +36,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Application!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Application!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Application) ||
                             query.ApplicationSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Application!, "%" + query.Application + "%") ||
                             query.ApplicationSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Application!, query.Application + "%") ||
@@ -223,6 +224,7 @@ namespace Elmah.EFCoreRepositories
                         query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Application!, query.TextSearch + "%")) ||
                         query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Application!, "%" + query.TextSearch)))
                     &&
+
                     (string.IsNullOrEmpty(query.Application) ||
                             query.ApplicationSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Application!, "%" + query.Application + "%") ||
                             query.ApplicationSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Application!, query.Application + "%") ||
