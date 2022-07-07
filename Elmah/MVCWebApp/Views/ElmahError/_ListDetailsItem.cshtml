@@ -3,6 +3,34 @@
 @using Elmah.Resx;
 @model ElmahErrorModel.DefaultView
 @inject IUIStrings localizor;
+<td class="p-0">
+    <div class="btn-group">
+        <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="Model?.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
+            <i class="fa fa-briefcase"></i>
+        </a>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Details")"
+            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+            data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+            <i class="fa fa-briefcase"></i>
+        </button>
+        <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+            <i class="fa fa-edit"></i>
+        </a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+            <i class="fa fa-edit"></i>
+        </button>
+        <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="Model?.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+            <i class="fa fa-trash"></i>
+        </a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
+</td>
 <td class="pt-0 pb-0">@Model?.ErrorId</td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model?.Host">@Model?.Host_Name</a></td>

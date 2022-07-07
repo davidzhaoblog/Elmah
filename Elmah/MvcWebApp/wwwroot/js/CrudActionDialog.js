@@ -110,7 +110,18 @@ function attachCrudActionDialog() {
     // 2. Hide Modal
     crudActionDialog.addEventListener('hide.bs.modal', function (event) {
         // 1.1. clear .nt-editing on all .nt-listitem, then set .nt-editing to current item,
-        $(".nt-listitem").removeClass("nt-editing");
+        let currentItem = $(".nt-listitem.nt-editing");
+        const action = $("#crudActionDialog").data("nt-action");
+        $('.nt-listitem.nt-editing').fadeOut(500).fadeIn(1500, blink);
+        setTimeout(() => {
+            if (action == "PUT" || action == "POST") { // Edit/Create, remove special border after 2 seconds
+                $(".nt-listitem.nt-editing").removeClass("border-warning border-5");
+                $(".nt-listitem").removeClass("nt-editing");
+            }
+            else if (action == "DELETE") {
+
+            }
+        }, 2000)
         // 1.2. clear .nt-editing to .nt-list-container-submit
         $(".nt-list-container-submit").removeClass("nt-editing");
         // 1.3. clear .nt-editing to .nt-list-wrapper
@@ -148,7 +159,7 @@ $(document).ready(function () {
         formData.append("view", view);
         formData.append("container", container);
         formData.append("template", template);
-        const action = $("#crudActionDialog").data("nt-action");
+
         $.ajax({
             type: "POST",
             url: postbackurl,
@@ -169,8 +180,11 @@ $(document).ready(function () {
                 // response part #1.1 TODO: should have a timer to auto hide after a few seconds.
 
                 // response part #2, to update the item which is updated/created.
-                if (splitResponse.length > 1) {
-                    $(".nt-listitem .nt-editing").html(splitResponse[1]);
+                const action = $("#crudActionDialog").data("nt-action");
+                if (action === "PUT") { // EDIT - update existing item 
+                    if (splitResponse.length > 1) {
+                        $(".nt-listitem.nt-editing").html(splitResponse[1]);
+                    }
                 }
             },
             failure: function (response) {
@@ -188,13 +202,17 @@ $(document).ready(function () {
 function initializeModal(button, action, view, container, template, postbackurl) {
     // 1.1. clear .nt-editing on all .nt-listitem, then set .nt-editing to current item,
     $(".nt-listitem").removeClass("nt-editing");
-    $(button).closest(".nt-listitem").addClass("nt-editing");
     // 1.2. set .nt-editing to .nt-list-container-submit
     $(".nt-list-container-submit").removeClass("nt-editing");
-    $(button).closest(".nt-list-container-submit").addClass("nt-editing");
     // 1.3. set .nt-editing to .nt-list-wrapper
     $(".nt-list-wrapper").removeClass("nt-editing");
-    $(button).closest(".nt-list-wrapper").addClass("nt-editing");
+    if (action != "POST") { // set .nt-editing when not Create
+        $(button).closest(".nt-listitem").addClass("nt-editing");
+        $(button).closest(".nt-listitem").addClass("border-warning border-5");
+        
+        $(button).closest(".nt-list-container-submit").addClass("nt-editing");
+        $(button).closest(".nt-list-wrapper").addClass("nt-editing");
+    }
     // 2. load the item partial view from .data-nt-partialurl
     const sizeCss = $(button).closest(".nt-list-wrapper").data("nt-bs-modalsize");
     if (!!sizeCss) {
