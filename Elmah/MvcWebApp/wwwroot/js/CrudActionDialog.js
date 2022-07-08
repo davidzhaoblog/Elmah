@@ -130,7 +130,7 @@ $(document).ready(function () {
         if (direction === "PREV") { // previous item
             let prevItem = $(".nt-listitem.nt-current").prev(".nt-listitem");
             if (prevItem.length === 0) {
-                prevItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem").last();
+                prevItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem:last");
             }
             $(".nt-listitem.nt-current").removeClass("nt-current border-info border-5");
             $(prevItem).addClass("nt-current border-info border-5");
@@ -140,7 +140,7 @@ $(document).ready(function () {
         else { // next item
             let nextItem = $(".nt-listitem.nt-current").next(".nt-listitem");
             if (nextItem.length === 0) {
-                nextItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem").first();
+                nextItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem:first");
             }
             $(".nt-listitem.nt-current").removeClass("nt-current border-info border-5");
             $(nextItem).addClass("nt-current border-info border-5");
