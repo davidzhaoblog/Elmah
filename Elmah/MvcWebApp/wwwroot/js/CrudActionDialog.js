@@ -12,7 +12,8 @@
  * data-nt-container // from $(button)
  * data-nt-template // from $(button)
  * data-nt-postbackurl // calculated
- *
+ * data-nt-pagination PREV/NEXT on .btn-nt-pagination
+ * 
  * 1.2. data-nt- in $(wrapper) .nt-list-wrapper
  * data-nt-bs-modalsize // .modal-sm (NONE) .modal-lg .modal-xl this is bootstrap modal size
  * data-nt-loaditem-url
@@ -32,8 +33,7 @@
  * 2.1. only in this modal
  * .nt-status
  * .nt-modal-body
- * .btn-nt-pagination-previous
- * .btn-nt-pagination-next
+ * .btn-nt-pagination
  * .btn-nt-action
  * .btn-group-nt-action-pagination
  * .btn-group-nt-action-createanotherone
@@ -63,32 +63,32 @@ function attachCrudActionDialog() {
         let button = event.relatedTarget;
 
         const wrapper = $(button).closest(".nt-list-wrapper");
-        let routeId = ""
         const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
         const container = $(button).data("nt-container");
         const template = $(button).data("nt-template");
         const action = $(button).data("nt-action");
         let postbackurl = "";
+        let routeid = ""
         if (action == "PUT") { // Edit
-            routeId = $(button).closest(".nt-listitem").data("nt-route-id");
-            postbackurl = $(wrapper).data("nt-updateitem-url") + "/" + routeId;
+            routeid = $(button).closest(".nt-listitem").data("nt-route-id");
+            postbackurl = $(wrapper).data("nt-updateitem-url");
         }
         else if (action == "POST") { // Create
-            routeId = $(button).data("nt-route-id");
+            routeid = $(button).data("nt-route-id");
             postbackurl = $(wrapper).data("nt-createitem-url");
         }
         else if (action == "DELETE") {
-            routeId = $(button).closest(".nt-listitem").data("nt-route-id");
-            postbackurl = $(wrapper).data("nt-deleteitem-url") + "/" + routeId;
+            routeid = $(button).closest(".nt-listitem").data("nt-route-id");
+            postbackurl = $(wrapper).data("nt-deleteitem-url");
         }
         else {
-            routeId = $(button).closest(".nt-listitem").data("nt-route-id");
+            routeid = $(button).closest(".nt-listitem").data("nt-route-id");
         }
-        const loadItemUrl = $(wrapper).data("nt-loaditem-url") + "/" + routeId;
+        const loadItemUrl = $(wrapper).data("nt-loaditem-url");
         
-        initializeModal(button, action, view, container, template, loadItemUrl, postbackurl)
+        initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid)
         // 3. Ajax to get htmls
-        ajaxLoadItem(loadItemUrl, view, container, template, action);
+        ajaxLoadItem(loadItemUrl + "/" + routeid, view, container, template, action);
     })
 
     // 2. Hide Modal
@@ -108,6 +108,7 @@ $(document).ready(function () {
         const view = $("#crudActionDialog").data("nt-view");
         const container = $("#crudActionDialog").data("nt-container");
         const template = $("#crudActionDialog").data("nt-template");
+        const routeid = $("#crudActionDialog").data("nt-route-id");
         // Get FormData if there are in this dialog
         const form = $("#crudActionDialog form")
         let formData = [];
@@ -118,7 +119,45 @@ $(document).ready(function () {
         formData.append("container", container);
         formData.append("template", template);
 
-        ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container, template);
+        ajaxPostback(postbackurl + "/" + routeid, formData, self, view, loadItemUrl + "/" + routeid, container, template);
+    });
+
+    $("#crudActionDialog .btn-nt-pagination").click(function (e) {
+        let button = event.currentTarget;
+        const direction = $(button).data("nt-pagination");
+        let routeid = "";
+        
+        if (direction === "PREV") { // previous item
+            let prevItem = $(".nt-listitem.nt-current").prev(".nt-listitem");
+            if (prevItem.length === 0) {
+                prevItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem").last();
+            }
+            $(".nt-listitem.nt-current").removeClass("nt-current border-info border-5");
+            $(prevItem).addClass("nt-current border-info border-5");
+            $(prevItem).get(0).scrollIntoView();
+            routeid = $(prevItem).data("nt-route-id");
+        }
+        else { // next item
+            let nextItem = $(".nt-listitem.nt-current").next(".nt-listitem");
+            if (nextItem.length === 0) {
+                nextItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem").first();
+            }
+            $(".nt-listitem.nt-current").removeClass("nt-current border-info border-5");
+            $(nextItem).addClass("nt-current border-info border-5");
+            $(nextItem).get(0).scrollIntoView();
+            routeid = $(nextItem).data("nt-route-id");
+        }
+        $("#crudActionDialog").data("nt-route-id", routeid);
+
+        const loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
+
+        const action = $("#crudActionDialog").data("nt-action");
+        const view = $("#crudActionDialog").data("nt-view");
+        const container = $("#crudActionDialog").data("nt-container");
+        const template = $("#crudActionDialog").data("nt-template");
+
+        // 3. Ajax to get htmls
+        ajaxLoadItem(loadItemUrl + "/" + routeid, view, container, template, action);
     });
 });
 
@@ -247,7 +286,7 @@ function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container,
     });
 }
 
-function initializeModal(button, action, view, container, template, loadItemUrl, postbackurl) {
+function initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid) {
     // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
     $(".nt-listitem").removeClass("nt-current");
     // 1.2. set .nt-current to .nt-list-container-submit
@@ -272,7 +311,8 @@ function initializeModal(button, action, view, container, template, loadItemUrl,
     $("#crudActionDialog").data("nt-template", template);
     $("#crudActionDialog").data("nt-loadItemUrl", loadItemUrl);
     $("#crudActionDialog").data("nt-postbackurl", postbackurl);
-     
+    $("#crudActionDialog").data("nt-route-id", routeid);
+
     // 2.1. Create: get id of the table wrapper .nt-list-wrapper
     if (action === "POST") { 
         $("#crudActionDialog").data("nt-list-wrapper-id", "#"+$(button).closest(".nt-list-wrapper").attr("id"));
