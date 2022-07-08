@@ -276,7 +276,7 @@ namespace Elmah.EFCoreRepositories
             {
                 var toInsert = new ElmahError
                 {
-                            ErrorId = input.ErrorId,
+                            ErrorId = Guid.NewGuid(),
                             Application = input.Application,
                             Host = input.Host,
                             Type = input.Type,

@@ -141,14 +141,25 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+            [Bind("Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Create(input);
 
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", 
+                        new AjaxResponseViewModel 
+                        { 
+                            Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>> {
+                            new Tuple<string, object>("~/Views/ElmahError/_ListItemTr.cshtml", 
+                                new Elmah.MvcWebApp.Models.ListItemTrViewModal<Elmah.Models.ElmahErrorModel.DefaultView>{ 
+                                    Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                    IsCurrentItem = true,
+                                    Model = result.ResponseBody! 
+                                })
+                        }});
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 

@@ -32,8 +32,10 @@
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Details")"
-                                data-nt-partialurl="@Url.Action("AjaxLoadItem", "ElmahError", new { view = PagedViewOptions.List.ToString(), container = CrudViewContainers.Dialog.ToString(), template = ViewItemTemplateNames.Details.ToString(),  ErrorId = Model.ResponseBody![i].ErrorId })">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Details.ToString()"
+                                >
                                     <i class="fa fa-briefcase"></i>
                                 </button>
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
