@@ -98,7 +98,13 @@ namespace Elmah.EFCoreRepositories
 
             try
             {
-                var existing = _dbcontext.ElmahSource.SingleOrDefault(t => t.Source == input.Source);
+                var existing =
+                    (from t in _dbcontext.ElmahSource
+
+                     where
+
+                    t.Source == id.Source
+                     select t).SingleOrDefault();
 
                 // TODO: can create a new record here.
                 if (existing == null)
@@ -135,7 +141,7 @@ namespace Elmah.EFCoreRepositories
                 var existing = _dbcontext.ElmahSource.SingleOrDefault(
                     t =>
 
-                    !string.IsNullOrEmpty(id.Source) && t.Source == id.Source
+                    t.Source == id.Source
                 );
 
                 if (existing == null)
@@ -195,11 +201,13 @@ namespace Elmah.EFCoreRepositories
 
             try
             {
-                var existing = _dbcontext.ElmahSource.SingleOrDefault(
-                    t =>
+                var existing =
+                    (from t in _dbcontext.ElmahSource
 
-                    !string.IsNullOrEmpty(id.Source) && t.Source == id.Source
-                );
+                     where
+
+                    t.Source == id.Source
+                     select t).SingleOrDefault();
 
                 if (existing == null)
                     return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });

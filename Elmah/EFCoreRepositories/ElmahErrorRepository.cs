@@ -141,7 +141,13 @@ namespace Elmah.EFCoreRepositories
 
             try
             {
-                var existing = _dbcontext.ELMAH_Error.SingleOrDefault(t => t.ErrorId == id.ErrorId);
+                var existing =
+                    (from t in _dbcontext.ELMAH_Error
+
+                     where
+
+                    t.ErrorId == id.ErrorId
+                     select t).SingleOrDefault();
 
                 // TODO: can create a new record here.
                 if (existing == null)
@@ -171,9 +177,7 @@ namespace Elmah.EFCoreRepositories
                     join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
-                    where
-
-                     t.ErrorId == existing.ErrorId
+                    where t.ErrorId == existing.ErrorId
 
                     select new ElmahErrorModel.DefaultView
                     {
@@ -230,9 +234,7 @@ namespace Elmah.EFCoreRepositories
                     join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
-                    where
-
-                        id.ErrorId.HasValue && t.ErrorId == id.ErrorId
+                    where t.ErrorId == id.ErrorId
 
                     select new ElmahErrorModel.DefaultView
                     {
@@ -305,9 +307,7 @@ namespace Elmah.EFCoreRepositories
                     join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
-                    where
-
-                        t.ErrorId == toInsert.ErrorId
+                    where t.ErrorId == toInsert.ErrorId
 
                     select new ElmahErrorModel.DefaultView
                     {
@@ -353,11 +353,13 @@ namespace Elmah.EFCoreRepositories
 
             try
             {
-                var existing = _dbcontext.ELMAH_Error.SingleOrDefault(
-                    t =>
+                var existing =
+                    (from t in _dbcontext.ELMAH_Error
 
-                    id.ErrorId.HasValue && t.ErrorId == id.ErrorId
-                );
+                     where
+
+                    t.ErrorId == id.ErrorId
+                     select t).SingleOrDefault();
 
                 if (existing == null)
                     return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.NotFound });
