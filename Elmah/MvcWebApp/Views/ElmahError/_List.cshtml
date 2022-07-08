@@ -34,8 +34,7 @@
                                 </a>
                                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
                                 data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Details.ToString()"
-                                >
+                                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
                                     <i class="fa fa-briefcase"></i>
                                 </button>
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
@@ -46,12 +45,22 @@
                                 data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
                                     <i class="fa fa-edit"></i>
                                 </button>
+                                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                                    <i class="fa fa-edit"></i>
+                                </button>
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
                                 </a>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>
@@ -79,6 +88,20 @@
                 </tr>
             }
         </tbody>
+        <!--only for inline editing-->
+        <tfoot>
+            <tr>
+                <td colspan="100">
+                    <button type="button" class="btn btn-primary btn-nt-inline-editing w-100" title="@localizor.Get("Create_New")"
+                            data-nt-action="@HttpMethods.Post"
+                            data-nt-route-id="@(System.Guid.NewGuid())"
+                            data-nt-container="@CrudViewContainers.Inline.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                        <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+                    </button>
+                </td>
+            </tr>
+        </tfoot>
     </table>
     @if (Model != null && Model.Pagination != null)
     {
