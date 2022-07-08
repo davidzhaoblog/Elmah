@@ -40,12 +40,15 @@
  * .btn-group-nt-action-save
  * .btn-group-nt-action-delete
  * .btn-group-nt-action-details
+ * .nt-created, with .border-warning .border-3
+ * .nt-updated, with .border-success .border-3
+ * .nt-deleted, with .border-danger .border-3
  *  
  * 2.2. consumed css classes from where this modal is launched.
  * .nt-list-wrapper, shared with other .js files
  * .nt-list-container-submit, shared with other .js files
  * .nt-listitem
- * .nt-editing // will be set on .nt-list-wrapper .nt-list-container-submit and .nt-listitem
+ * .nt-current // with on .nt-list-wrapper and .nt-list-container-submit, .nt-listitem(with .border-info .border-5)
  * .nt-paged-view-options: // read value for data-nt-view in this modal
  * 
  * 2.3. in ajax response html
@@ -90,7 +93,7 @@ function attachCrudActionDialog() {
 
     // 2. Hide Modal
     crudActionDialog.addEventListener('hide.bs.modal', function (event) {
-        // 1.1. clear .nt-editing on all .nt-listitem, then set .nt-editing to current item,
+        // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
         closeModal();
     })
 }
@@ -115,84 +118,27 @@ $(document).ready(function () {
         formData.append("container", container);
         formData.append("template", template);
 
-        $.ajax({
-            type: "POST",
-            url: postbackurl,
-            data: formData,
-            async: false,
-            processData: false,
-            contentType: false,
-            dataType: "html",
-            success: function (response) {
-                // console.log(response);
-                const splitResponse = response.split("===---------===");
-                // response part #1, status html
-                if (splitResponse.length > 0) {
-                    $("#crudActionDialog .nt-status").html(splitResponse[0]);
-                    $("#crudActionDialog .nt-status").show();
-                }
-                // response part #1.1 TODO: should have a timer to auto hide after a few seconds.
-
-                // response part #2, to update the item which is updated/created.
-                const action = $("#crudActionDialog").data("nt-action");
-                if (action === "PUT") { // EDIT 
-                    if (splitResponse.length > 1) {
-                        $(".nt-listitem.nt-editing").html(splitResponse[1]);
-                    }
-                    $(self).removeAttr("disabled");
-                }
-                else if (action === "POST") { // Create
-                    if (splitResponse.length > 1) {
-                        if (view === "List") { // html table
-                            let theTbody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
-                            theTbody.prepend(splitResponse[1]);
-                        }
-                    }
-
-                    const createAnotherOneChecked = $("#crudActionDialog .modal-footer .btn-group-nt-action-createanotherone input").is(':checked');
-                    if (createAnotherOneChecked) {
-                        $(self).removeAttr("disabled");
-                        ajaxLoadItem(loadItemUrl, view, container, template, action);
-                    }
-                }
-                else if (action === "DELETE") {
-                    const deleteSuccess = !!$("#crudActionDialog .nt-status .text-success");
-                    if (deleteSuccess) {
-                        // Mark as deleted. will be deleted when Dialog/Modal closed
-                        $(".nt-listitem.nt-editing").addClass("nt-deleted");
-                    }
-                }
-            },
-            failure: function (response) {
-                // console.log(response);
-                $(self).removeAttr("disabled");
-            },
-            error: function (response) {
-                // console.log(response);
-                $(self).removeAttr("disabled");
-            }
-        });
+        ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container, template);
     });
 });
 
 function closeModal() {
-    let currentItem = $(".nt-listitem.nt-editing");
+    $(".nt-listitem").removeClass("nt-current border-info border-5");
     const action = $("#crudActionDialog").data("nt-action");
     setTimeout(() => {
         if (action === "PUT" || action === "POST") { // Edit/Create, remove special border after 2 seconds
-            // remove styling for Updated/Created items with .nt-editing after 2s Modal closed
-            $(".nt-listitem.nt-editing").removeClass("border-warning border-5");
-            $(".nt-listitem").removeClass("nt-editing");
+            // remove styling for Updated/Created items with .nt-current after 2s Modal closed
+
         }
         else if (action === "DELETE") {
             // remove deleted items after 1s Modal closed
-            $(".nt-listitem.nt-editing.nt-deleted").remove();
+            $(".nt-listitem.nt-deleted").remove();
         }
     }, action === "DELETE" ? 1000 : 2000);
-    // 1.2. clear .nt-editing to .nt-list-container-submit
-    $(".nt-list-container-submit").removeClass("nt-editing");
-    // 1.3. clear .nt-editing to .nt-list-wrapper
-    $(".nt-list-wrapper").removeClass("nt-editing");
+    // 1.2. clear .nt-current to .nt-list-container-submit
+    $(".nt-list-container-submit").removeClass("nt-current");
+    // 1.3. clear .nt-current to .nt-list-wrapper
+    $(".nt-list-wrapper").removeClass("nt-current");
 
     // 2.1. hide status section
     $("#crudActionDialog .nt-result").hide();
@@ -236,19 +182,84 @@ function ajaxLoadItem(loadItemUrl, view, container, template, action) {
     });
 }
 
+function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container, template) {
+    $.ajax({
+        type: "POST",
+        url: postbackurl,
+        data: formData,
+        async: false,
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        success: function (response) {
+            // console.log(response);
+            const splitResponse = response.split("===---------===");
+            // response part #1, status html
+            if (splitResponse.length > 0) {
+                $("#crudActionDialog .nt-status").html(splitResponse[0]);
+                $("#crudActionDialog .nt-status").show();
+            }
+            // response part #1.1 TODO: should have a timer to auto hide after a few seconds.
+            // response part #2, to update the item which is updated/created.
+            const action = $("#crudActionDialog").data("nt-action");
+            const actionSuccess = !!$("#crudActionDialog .nt-status .text-success");
+            if (action === "PUT") { // EDIT 
+                if (actionSuccess) {
+                    // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
+                    $(".nt-listitem.nt-current").removeClass("border-info border-5");
+                    $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
+                }
+                if (splitResponse.length > 1) {
+                    $(".nt-listitem.nt-current").html(splitResponse[1]);
+                }
+                $(self).removeAttr("disabled");
+            }
+            else if (action === "POST") { // Create
+                // .nt-created .border-warning .border-4 added in the response
+                if (splitResponse.length > 1) {
+                    if (view === "List") { // html table
+                        let theTbody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
+                        theTbody.prepend(splitResponse[1]);
+                    }
+                }
+
+                const createAnotherOneChecked = $("#crudActionDialog .modal-footer .btn-group-nt-action-createanotherone input").is(':checked');
+                if (createAnotherOneChecked) {
+                    $(self).removeAttr("disabled");
+                    ajaxLoadItem(loadItemUrl, view, container, template, action);
+                }
+            }
+            else if (action === "DELETE") {
+                if (actionSuccess) {
+                    // Mark as .nt-deleted .border-danger .border-5. will be deleted when Dialog/Modal closed
+                    $(".nt-listitem.nt-current").addClass("nt-deleted border-danger border-3");
+                }
+            }
+        },
+        failure: function (response) {
+            // console.log(response);
+            $(self).removeAttr("disabled");
+        },
+        error: function (response) {
+            // console.log(response);
+            $(self).removeAttr("disabled");
+        }
+    });
+}
+
 function initializeModal(button, action, view, container, template, loadItemUrl, postbackurl) {
-    // 1.1. clear .nt-editing on all .nt-listitem, then set .nt-editing to current item,
-    $(".nt-listitem").removeClass("nt-editing");
-    // 1.2. set .nt-editing to .nt-list-container-submit
-    $(".nt-list-container-submit").removeClass("nt-editing");
-    // 1.3. set .nt-editing to .nt-list-wrapper
-    $(".nt-list-wrapper").removeClass("nt-editing");
-    if (action != "POST") { // set .nt-editing when not Create
-        $(button).closest(".nt-listitem").addClass("nt-editing");
-        $(button).closest(".nt-listitem").addClass("border-warning border-5");
+    // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
+    $(".nt-listitem").removeClass("nt-current");
+    // 1.2. set .nt-current to .nt-list-container-submit
+    $(".nt-list-container-submit").removeClass("nt-current");
+    // 1.3. set .nt-current to .nt-list-wrapper
+    $(".nt-list-wrapper").removeClass("nt-current");
+    if (action != "POST") { // set .nt-current when not Create
+        $(button).closest(".nt-listitem").addClass("nt-current");
+        $(button).closest(".nt-listitem").addClass("border-info border-5");
         
-        $(button).closest(".nt-list-container-submit").addClass("nt-editing");
-        $(button).closest(".nt-list-wrapper").addClass("nt-editing");
+        $(button).closest(".nt-list-container-submit").addClass("nt-current");
+        $(button).closest(".nt-list-wrapper").addClass("nt-current");
     }
     // 2. load the item partial view from .data-nt-partialurl
     const sizeCss = $(button).closest(".nt-list-wrapper").data("nt-bs-modalsize");

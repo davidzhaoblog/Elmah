@@ -14,7 +14,7 @@
 }
 else
 {
-    <input class="nt-hidden-modal-title" value="@Model.Application" type="hidden" />
+    <input class="nt-hidden-modal-title" value="@string.Format(localizor.Get("Format_Creating"), @localizor.Get("ElmahError"))" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 @*    <div class="form-group">
         <label asp-for="ErrorId" class="control-label"></label>
