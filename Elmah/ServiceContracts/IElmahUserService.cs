@@ -9,7 +9,7 @@ namespace Elmah.ServiceContracts
             ElmahUserAdvancedQuery query);
 
         Task<ElmahUserCompositeModel> GetCompositeModel(
-            ElmahUserIdentifier id, ElmahUserCompositeDataOptions[]? dataOptions = null);
+            ElmahUserIdentifier id, ElmahUserCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response<ElmahUserModel>> Update(ElmahUserIdentifier id, ElmahUserModel input);
 

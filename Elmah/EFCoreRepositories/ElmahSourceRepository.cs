@@ -100,7 +100,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahSource
-
                      where
 
                     t.Source == id.Source
@@ -203,7 +202,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahSource
-
                      where
 
                     t.Source == id.Source

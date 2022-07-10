@@ -9,7 +9,7 @@ namespace Elmah.ServiceContracts
             ElmahHostAdvancedQuery query);
 
         Task<ElmahHostCompositeModel> GetCompositeModel(
-            ElmahHostIdentifier id, ElmahHostCompositeDataOptions[]? dataOptions = null);
+            ElmahHostIdentifier id, ElmahHostCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input);
 

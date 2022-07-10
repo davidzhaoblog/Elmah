@@ -101,7 +101,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahStatusCode
-
                      where
 
                     t.StatusCode == id.StatusCode
@@ -209,7 +208,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahStatusCode
-
                      where
 
                     t.StatusCode == id.StatusCode

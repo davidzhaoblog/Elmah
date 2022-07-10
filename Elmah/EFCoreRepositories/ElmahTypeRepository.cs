@@ -100,7 +100,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahType
-
                      where
 
                     t.Type == id.Type
@@ -203,7 +202,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahType
-
                      where
 
                     t.Type == id.Type

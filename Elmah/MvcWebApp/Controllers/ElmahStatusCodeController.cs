@@ -70,18 +70,18 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("_SlideShow", result);
         }
 
-        // GET: ElmahStatusCode/Dashboard/{StatusCode}
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
         [HttpGet, ActionName("Dashboard")]
-        [Route("[controller]/[action]/{StatusCode}")]
+        // GET: ElmahStatusCode/Dashboard/{StatusCode}
         public async Task<IActionResult> Dashboard([FromRoute]ElmahStatusCodeIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
         }
 
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
         // GET: ElmahStatusCode/AjaxLoadItem/{StatusCode}
         [HttpGet, ActionName("AjaxLoadItem")]
-        [Route("[controller]/[action]/{StatusCode}")]
         public async Task<IActionResult> AjaxLoadItem(
             PagedViewOptions view,
             CrudViewContainers container,
@@ -143,9 +143,9 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: ElmahStatusCode/AjaxDelete/{StatusCode}
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
         [HttpPost, ActionName("AjaxDelete")]
-        [Route("[controller]/[action]/{StatusCode}")]
+        // POST: ElmahStatusCode/AjaxDelete/{StatusCode}
         public async Task<IActionResult> AjaxDelete(
             PagedViewOptions view,
             CrudViewContainers container,
@@ -160,10 +160,11 @@ namespace Elmah.MvcWebApp.Controllers
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // POST: ElmahStatusCode/AjaxEdit/{StatusCode}
+
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
         [HttpPost, ActionName("AjaxEdit")]
+        // POST: ElmahStatusCode/AjaxEdit/{StatusCode}
         //[ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{StatusCode}")]
         public async Task<IActionResult> AjaxEdit(
             PagedViewOptions view,
             CrudViewContainers container,
@@ -171,7 +172,8 @@ namespace Elmah.MvcWebApp.Controllers
             ElmahStatusCodeIdentifier id,
             [Bind("StatusCode,Name")] ElmahStatusCodeModel input)
         {
-            if (id.StatusCode != input.StatusCode)
+            if (!id.StatusCode.HasValue ||
+                id.StatusCode.HasValue && id.StatusCode != input.StatusCode)
             {
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }

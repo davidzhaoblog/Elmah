@@ -16,7 +16,7 @@
         <div class="tab-content" id="dashboardTabContent">
             <div class="tab-pane fade show active" id="lists" role="tabpanel" aria-labelledby="lists-tab">
                 <div class="accordion" id="listsPanels">
-                    @if (Model!.Responses.ContainsKey(ElmahApplicationCompositeDataOptions.ElmahErrors))
+                    @if (Model!.Responses.ContainsKey(ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors))
                     {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-heading-elmahErrors">
@@ -32,7 +32,7 @@
                                             @localizor.Get("Search")
                                         </a>
                                     </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors].StatusMessage })
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="col-12 col-md-4">
-        <!-- ElmahApplicationCompositeDataOptions.__Master__ -->
+        <!-- ElmahApplicationCompositeModel.__DataOptions__.__Master__ -->
         <div class="card-group">
             <div class="card">
                 <div class="card-header">
@@ -50,7 +50,7 @@
                         @localizor.Get("ElmahApplication")
                     </h3>
                 </div>
-                @if (Model!.Responses[ElmahApplicationCompositeDataOptions.__Master__].Status == System.Net.HttpStatusCode.OK && Model!.__Master__ != null)
+                @if (Model!.Responses[ElmahApplicationCompositeModel.__DataOptions__.__Master__].Status == System.Net.HttpStatusCode.OK && Model!.__Master__ != null)
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
@@ -78,12 +78,12 @@
                             <span class="fa fa-search"></span>
                         </a>
                     </div>
-                    <div class="text-danger">@Model!.Responses[ElmahApplicationCompositeDataOptions.__Master__]</div>
+                    <div class="text-danger">@Model!.Responses[ElmahApplicationCompositeModel.__DataOptions__.__Master__]</div>
                     <div class="btn-group">
                     </div>
                 }
             </div>
         </div>
-        <!-- ElmahApplicationCompositeDataOptions.__Master__ -->
+        <!-- ElmahApplicationCompositeModel.__DataOptions__.__Master__ -->
     </div>
 </div>

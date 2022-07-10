@@ -9,7 +9,7 @@ namespace Elmah.ServiceContracts
             ElmahStatusCodeAdvancedQuery query);
 
         Task<ElmahStatusCodeCompositeModel> GetCompositeModel(
-            ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeDataOptions[]? dataOptions = null);
+            ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeModel input);
 

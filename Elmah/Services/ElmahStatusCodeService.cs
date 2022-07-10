@@ -32,25 +32,25 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
-        public async Task<ElmahStatusCodeCompositeModel> GetCompositeModel(ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeDataOptions[]? dataOptions = null)
+        public async Task<ElmahStatusCodeCompositeModel> GetCompositeModel(ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null)
         {
             var masterResponse = await this._thisRepository.Get(id);
             if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
             {
                 var failedResponse = new ElmahStatusCodeCompositeModel();
-                failedResponse.Responses.Add(ElmahStatusCodeCompositeDataOptions.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
+                failedResponse.Responses.Add(ElmahStatusCodeCompositeModel.__DataOptions__.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
                 return failedResponse;
             }
 
             var successResponse = new ElmahStatusCodeCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahStatusCodeCompositeDataOptions, Response>();
-            responses.TryAdd(ElmahStatusCodeCompositeDataOptions.__Master__, new Response { Status = HttpStatusCode.OK });
+            var responses = new ConcurrentDictionary<ElmahStatusCodeCompositeModel.__DataOptions__, Response>();
+            responses.TryAdd(ElmahStatusCodeCompositeModel.__DataOptions__.__Master__, new Response { Status = HttpStatusCode.OK });
 
             var tasks = new List<Task>();
 
             // 4. ListTable = 4,
 
-            if (dataOptions == null || dataOptions.Contains(ElmahStatusCodeCompositeDataOptions.ElmahErrors))
+            if (dataOptions == null || dataOptions.Contains(ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors))
             {
                 tasks.Add(Task.Run(async () =>
                 {
@@ -59,7 +59,7 @@ namespace Elmah.Services
                         var _elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
                         var query = new ElmahErrorAdvancedQuery { StatusCode = id.StatusCode, PageIndex = 1, PageSize = 5, OrderBys="TimeUtc~DESC" };
                         var response = await _elmahErrorRepository.Search(query);
-                        responses.TryAdd(ElmahStatusCodeCompositeDataOptions.ElmahErrors, new Response { Status = response.Status, StatusMessage = response.StatusMessage });
+                        responses.TryAdd(ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors, new Response { Status = response.Status, StatusMessage = response.StatusMessage });
                         if (response.Status == HttpStatusCode.OK)
                         {
                             successResponse.ElmahErrors = response.ResponseBody;
@@ -77,7 +77,7 @@ namespace Elmah.Services
                 }
                 catch { }
             }
-            successResponse.Responses = new Dictionary<ElmahStatusCodeCompositeDataOptions, Response>(responses);
+            successResponse.Responses = new Dictionary<ElmahStatusCodeCompositeModel.__DataOptions__, Response>(responses);
             return successResponse;
         }
 

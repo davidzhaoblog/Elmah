@@ -70,18 +70,18 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("_SlideShow", result);
         }
 
-        // GET: ElmahUser/Dashboard/{User}
+        [Route("[controller]/[action]/{User}")] // Primary
         [HttpGet, ActionName("Dashboard")]
-        [Route("[controller]/[action]/{User}")]
+        // GET: ElmahUser/Dashboard/{User}
         public async Task<IActionResult> Dashboard([FromRoute]ElmahUserIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
             return View(result);
         }
 
+        [Route("[controller]/[action]/{User}")] // Primary
         // GET: ElmahUser/AjaxLoadItem/{User}
         [HttpGet, ActionName("AjaxLoadItem")]
-        [Route("[controller]/[action]/{User}")]
         public async Task<IActionResult> AjaxLoadItem(
             PagedViewOptions view,
             CrudViewContainers container,
@@ -143,9 +143,9 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: ElmahUser/AjaxDelete/{User}
+        [Route("[controller]/[action]/{User}")] // Primary
         [HttpPost, ActionName("AjaxDelete")]
-        [Route("[controller]/[action]/{User}")]
+        // POST: ElmahUser/AjaxDelete/{User}
         public async Task<IActionResult> AjaxDelete(
             PagedViewOptions view,
             CrudViewContainers container,
@@ -160,10 +160,11 @@ namespace Elmah.MvcWebApp.Controllers
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // POST: ElmahUser/AjaxEdit/{User}
+
+        [Route("[controller]/[action]/{User}")] // Primary
         [HttpPost, ActionName("AjaxEdit")]
+        // POST: ElmahUser/AjaxEdit/{User}
         //[ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{User}")]
         public async Task<IActionResult> AjaxEdit(
             PagedViewOptions view,
             CrudViewContainers container,
@@ -171,7 +172,8 @@ namespace Elmah.MvcWebApp.Controllers
             ElmahUserIdentifier id,
             [Bind("User")] ElmahUserModel input)
         {
-            if (id.User != input.User)
+            if (string.IsNullOrEmpty(id.User) ||
+                !string.IsNullOrEmpty(id.User) && id.User != input.User)
             {
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }

@@ -16,7 +16,7 @@
         <div class="tab-content" id="dashboardTabContent">
             <div class="tab-pane fade show active" id="lists" role="tabpanel" aria-labelledby="lists-tab">
                 <div class="accordion" id="listsPanels">
-                    @if (Model!.Responses.ContainsKey(ElmahStatusCodeCompositeDataOptions.ElmahErrors))
+                    @if (Model!.Responses.ContainsKey(ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors))
                     {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-heading-elmahErrors">
@@ -32,7 +32,7 @@
                                             @localizor.Get("Search")
                                         </a>
                                     </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahStatusCodeCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahStatusCodeCompositeDataOptions.ElmahErrors].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors].StatusMessage })
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="col-12 col-md-4">
-        <!-- ElmahStatusCodeCompositeDataOptions.__Master__ -->
+        <!-- ElmahStatusCodeCompositeModel.__DataOptions__.__Master__ -->
         <div class="card-group">
             <div class="card">
                 <div class="card-header">
@@ -50,7 +50,7 @@
                         @localizor.Get("ElmahStatusCode")
                     </h3>
                 </div>
-                @if (Model!.Responses[ElmahStatusCodeCompositeDataOptions.__Master__].Status == System.Net.HttpStatusCode.OK && Model!.__Master__ != null)
+                @if (Model!.Responses[ElmahStatusCodeCompositeModel.__DataOptions__.__Master__].Status == System.Net.HttpStatusCode.OK && Model!.__Master__ != null)
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
@@ -82,12 +82,12 @@
                             <span class="fa fa-search"></span>
                         </a>
                     </div>
-                    <div class="text-danger">@Model!.Responses[ElmahStatusCodeCompositeDataOptions.__Master__]</div>
+                    <div class="text-danger">@Model!.Responses[ElmahStatusCodeCompositeModel.__DataOptions__.__Master__]</div>
                     <div class="btn-group">
                     </div>
                 }
             </div>
         </div>
-        <!-- ElmahStatusCodeCompositeDataOptions.__Master__ -->
+        <!-- ElmahStatusCodeCompositeModel.__DataOptions__.__Master__ -->
     </div>
 </div>

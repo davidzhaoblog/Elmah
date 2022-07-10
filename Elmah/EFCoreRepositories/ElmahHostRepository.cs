@@ -110,7 +110,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahHost
-
                      where
 
                     t.Host == id.Host
@@ -218,7 +217,6 @@ namespace Elmah.EFCoreRepositories
             {
                 var existing =
                     (from t in _dbcontext.ElmahHost
-
                      where
 
                     t.Host == id.Host
