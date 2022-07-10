@@ -182,7 +182,7 @@ namespace Elmah.MvcWebApp.Controllers
             CrudViewContainers container,
             ViewItemTemplateNames template,
             ElmahErrorIdentifier id,
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel.DefaultView input)
         {
             if (!id.ErrorId.HasValue ||
                 id.ErrorId.HasValue && id.ErrorId != input.ErrorId)
@@ -229,7 +229,7 @@ namespace Elmah.MvcWebApp.Controllers
         // POST: ElmahError/Edit/{ErrorId}
         public async Task<IActionResult> Edit(
             [FromRoute]ElmahErrorIdentifier id,
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel.DefaultView input)
         {
             if (!id.ErrorId.HasValue ||
                 id.ErrorId.HasValue && id.ErrorId != input.ErrorId)
