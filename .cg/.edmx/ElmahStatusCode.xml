@@ -69,7 +69,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <PropertyKnownName>Unknown</PropertyKnownName>
+        <PropertyKnownName>Name</PropertyKnownName>
         <Name>Name</Name>
         <DefaultOrder>100</DefaultOrder>
         <PropertyType>
