@@ -20,7 +20,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>StatusCode</Name>
         <DefaultOrder>0</DefaultOrder>
         <PropertyType>
@@ -39,6 +39,11 @@
         <PropertyCategory>Identifier</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>StatusCode</Name>
         <DbType>Int</DbType>
@@ -65,7 +70,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Name</Name>
         <DefaultOrder>100</DefaultOrder>
         <PropertyType>
@@ -84,6 +89,11 @@
         <PropertyCategory>Unknown</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Name</Name>
         <DbType>NVarChar(50)</DbType>
