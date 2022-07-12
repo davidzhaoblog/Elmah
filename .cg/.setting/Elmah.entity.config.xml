@@ -3,7 +3,7 @@
   <Table Name="ELMAH_Error" Member="ELMAH_Error">
     <Type Name="ELMAH_Error">
       <KeyDatabaseTableTypeSetting HasRootDatabaseRecord="false" RootDatabaseRecordID="0" CurrentInUse="true">
-        <TableCategory>DetailsTable</TableCategory>
+        <TableCategory>CrossReferenceTable</TableCategory>
         <TableType>OtherTable</TableType>
         <MasterEntityReferences>
           <MasterEntityReference ChildEntityReferenceSimplePath="\Application" ParentEntityReferenceSimplePath="" />
@@ -22,6 +22,7 @@
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>
+      <PropertySettings />
     </Type>
   </Table>
   <Table Name="ElmahHost" Member="ElmahHost">
@@ -30,6 +31,7 @@
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>
+      <PropertySettings />
     </Type>
   </Table>
   <Table Name="ElmahSource" Member="ElmahSource">
@@ -38,14 +40,17 @@
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>
+      <PropertySettings />
     </Type>
   </Table>
   <Table Name="ElmahStatusCode" Member="ElmahStatusCode">
     <Type Name="ElmahStatusCode">
       <KeyDatabaseTableTypeSetting HasRootDatabaseRecord="false" RootDatabaseRecordID="0" CurrentInUse="true">
+        <NamePropertyOfNameValuePairDataView>Name</NamePropertyOfNameValuePairDataView>
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>
+      <PropertySettings />
     </Type>
   </Table>
   <Table Name="ElmahType" Member="ElmahType">
@@ -54,6 +59,7 @@
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>
+      <PropertySettings />
     </Type>
   </Table>
   <Table Name="ElmahUser" Member="ElmahUser">
@@ -62,6 +68,7 @@
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>
+      <PropertySettings />
     </Type>
   </Table>
 </Database>

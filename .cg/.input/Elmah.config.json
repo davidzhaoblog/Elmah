@@ -8,12 +8,12 @@
     "subRootFolder": "Elmah",
     "swaggerRootFolder": "APIs",
     "codeVersion": "1.0.0.0",
-    "startPort": 7900,
+    "startPort": 7800,
     "excludedTables": null
   },
   "companyConfig": {
     "name": "Elmah",
-    "emailDomainName": "Elmah.com"
+    "emailDomainName": "url"
   },
   "databaseSetting": {
     "connectionStringName": "Elmah",
@@ -23,20 +23,35 @@
   "excludedTables": [
     "aspnet_*",
     "__RefactorLog",
-    "__MigrationHistory"
+    "__MigrationHistory",
+    "DatabaseLog",
+    "ErrorLog",
+    "TransactionHistoryArchive",
+    ""
   ],
-  "coreTables": null,
-  "detailsTables": null,
-  "codeListTables": null,
-  "lookupTables": null,
-  "listTables": null,
-  "crossReferenceTables": null,
+  "coreTables": [],
+  "detailsTables": [
+    "ElmahApplication",
+    "ElmahHost",
+    "ElmahSource",
+    "ElmahStatusCode",
+    "ElmahType",
+    "ElmahUser"
+  ],
+  "codeListTables": [],
+  "lookupTables": [],
+  "listTables": [],
+  "crossReferenceTables": [
+    "ELMAH_Error"
+  ],
   "stageTables": null,
   "operationTables": null,
   "functionalTables": null,
   "dispositionTables": null,
   "archiveTables": null,
   "otherTables": null,
-  "abstractTables": null,
-  "globalMapConfig": null
+  "abstractTables": [],
+  "globalMapConfig": {
+    "globalMapItemConfigs": []
+  }
 }
