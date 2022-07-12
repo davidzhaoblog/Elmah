@@ -13,7 +13,6 @@
     <Name />
     <PropertyList>Host</PropertyList>
     <PropertyTypeList>Host</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>

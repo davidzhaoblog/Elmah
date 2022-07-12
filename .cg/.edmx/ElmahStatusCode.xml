@@ -13,7 +13,6 @@
     <Name />
     <PropertyList>StatusCode</PropertyList>
     <PropertyTypeList>StatusCode</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>

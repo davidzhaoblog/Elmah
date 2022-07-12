@@ -13,7 +13,6 @@
     <Name />
     <PropertyList>Application</PropertyList>
     <PropertyTypeList>Application</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>

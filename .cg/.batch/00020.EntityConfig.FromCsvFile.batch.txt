@@ -1,1 +1,0 @@
-entityconfig -t C:\Github\Elmah_Generated --fromcsvfile

@@ -13,7 +13,6 @@
     <Name />
     <PropertyList>Source</PropertyList>
     <PropertyTypeList>Source</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>

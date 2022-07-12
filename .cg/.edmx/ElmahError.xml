@@ -146,7 +146,6 @@
     <Name />
     <PropertyList>ErrorId</PropertyList>
     <PropertyTypeList>ErrorId</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>

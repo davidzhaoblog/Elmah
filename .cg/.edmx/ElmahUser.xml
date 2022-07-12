@@ -13,7 +13,6 @@
     <Name />
     <PropertyList>User</PropertyList>
     <PropertyTypeList>User</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>
