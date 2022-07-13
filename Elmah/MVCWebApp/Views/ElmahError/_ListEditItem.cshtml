@@ -6,81 +6,71 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
-{
-    <div class="row">
-        <div class="text-danger">@ViewBag.StatusMessage</div>
+<td class="p-0">
+    <div class="btn-group btn-group-nt-action-save">
+        <button type="button" class="btn btn-secondary btn-nt-action-cancel">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Put"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+            <i class="fa-solid fa-check-circle"></i>
+        </button>
     </div>
-}
-else
-{
-    <input class="hidden-modal-title" value="@Model.Application" type="hidden" />
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="ErrorId" class="control-label"></label>
-        <input asp-for="ErrorId" class="form-control" />
-        <span asp-validation-for="ErrorId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Application" class="control-label"></label>
-        <select asp-for="Application" class="form-control form-select" asp-items="ViewBag.ApplicationList" >
-            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahApplication"))</option>
-        </select>
-        <span asp-validation-for="Application" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Host" class="control-label"></label>
-        <select asp-for="Host" class="form-control form-select" asp-items="ViewBag.HostList" >
-            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahHost"))</option>
-        </select>
-        <span asp-validation-for="Host" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Type" class="control-label"></label>
-        <select asp-for="Type" class="form-control form-select" asp-items="ViewBag.TypeList" >
-            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahType"))</option>
-        </select>
-        <span asp-validation-for="Type" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Source" class="control-label"></label>
-        <select asp-for="Source" class="form-control form-select" asp-items="ViewBag.SourceList" >
-            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahSource"))</option>
-        </select>
-        <span asp-validation-for="Source" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Message" class="control-label"></label>
-        <input asp-for="Message" class="form-control" />
-        <span asp-validation-for="Message" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="User" class="control-label"></label>
-        <select asp-for="User" class="form-control form-select" asp-items="ViewBag.UserList" >
-            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahUser"))</option>
-        </select>
-        <span asp-validation-for="User" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StatusCode" class="control-label"></label>
-        <select asp-for="StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList" >
-            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahStatusCode"))</option>
-        </select>
-        <span asp-validation-for="StatusCode" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="TimeUtc" class="control-label"></label>
-        <input asp-for="TimeUtc" class="form-control" />
-        <span asp-validation-for="TimeUtc" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Sequence" class="control-label"></label>
-        <input asp-for="Sequence" class="form-control" />
-        <span asp-validation-for="Sequence" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="AllXml" class="control-label"></label>
-        <input asp-for="AllXml" class="form-control" />
-        <span asp-validation-for="AllXml" class="text-danger"></span>
-    </div>
-}
+</td>
+<td class="pt-0 pb-0">
+    <input asp-for="ErrorId" class="form-control" />
+    <span asp-validation-for="ErrorId" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <select asp-for="Application" class="form-control form-select" asp-items="ViewBag.ApplicationList">
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahApplication"))</option>
+    </select>
+    <span asp-validation-for="Application" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <select asp-for="Host" class="form-control form-select" asp-items="ViewBag.HostList">
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahHost"))</option>
+    </select>
+    <span asp-validation-for="Host" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <select asp-for="Type" class="form-control form-select" asp-items="ViewBag.TypeList">
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahType"))</option>
+    </select>
+    <span asp-validation-for="Type" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <select asp-for="Source" class="form-control form-select" asp-items="ViewBag.SourceList">
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahSource"))</option>
+    </select>
+    <span asp-validation-for="Source" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <input asp-for="Message" class="form-control" />
+    <span asp-validation-for="Message" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <select asp-for="User" class="form-control form-select" asp-items="ViewBag.UserList">
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahUser"))</option>
+    </select>
+    <span asp-validation-for="User" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <select asp-for="StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList">
+        <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahStatusCode"))</option>
+    </select>
+    <span asp-validation-for="StatusCode" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <input asp-for="TimeUtc" class="form-control" />
+    <span asp-validation-for="TimeUtc" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <input asp-for="Sequence" class="form-control" />
+    <span asp-validation-for="Sequence" class="text-danger"></span>
+</td>
+<td class="pt-0 pb-0">
+    <input asp-for="AllXml" class="form-control" />
+    <span asp-validation-for="AllXml" class="text-danger"></span>
+</td>

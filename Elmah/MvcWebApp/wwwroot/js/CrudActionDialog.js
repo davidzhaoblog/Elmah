@@ -165,9 +165,7 @@ function closeModal() {
     $(".nt-listitem").removeClass("nt-current border-info border-5");
     const action = $("#crudActionDialog").data("nt-action");
     setTimeout(() => {
-        if (action === "PUT" || action === "POST") { // Edit/Create, remove special border after 2 seconds
-            // remove styling for Updated/Created items with .nt-current after 2s Modal closed
-
+        if (action === "PUT" || action === "POST") { // Edit/Create, do nothing
         }
         else if (action === "DELETE") {
             // remove deleted items after 1s Modal closed

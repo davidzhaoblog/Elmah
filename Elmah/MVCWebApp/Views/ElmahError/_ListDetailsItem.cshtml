@@ -9,8 +9,8 @@
             <i class="fa fa-briefcase"></i>
         </a>
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Details")"
-            data-nt-container="@CrudViewContainers.Dialog.ToString()"
-            data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
             <i class="fa fa-briefcase"></i>
         </button>
         <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
