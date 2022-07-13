@@ -175,13 +175,13 @@ function getDateRange(referenceDate, type) {
  * data-nt-updatetarget
  * data-nt-submittarget
  *
- * .nt-list-container-submit
+ * .nt-list-wrapper
  * .nt-selectchange-submit
  */
 $(document).ready($(function () {
     $(".page-link").click(function (e) {
-        $($(this).closest(".nt-list-container-submit").data("nt-updatetarget")).val($(this).data("nt-pageindex"));
-        $($(this).closest(".nt-list-container-submit").data("nt-submittarget")).submit();
+        $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
     });
 }));
 
@@ -246,8 +246,8 @@ $(document).ready($(function () {
                 //console.log("success", response);
                 // attach pagination event handler again.
                 $(".page-link").on("click", function (e) {
-                    $($(this).closest(".nt-list-container-submit").data("nt-updatetarget")).val($(this).data("nt-pageindex"));
-                    $($(this).closest(".nt-list-container-submit").data("nt-submittarget")).submit();
+                    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+                    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
                 });
             },
             failure: function (response) {
@@ -289,8 +289,8 @@ $(document).ready($(function () {
                 //console.log("success", response);
                 // attach pagination event handler again.
                 $(".page-link").on("click", function (e) {
-                    $($(this).closest(".nt-list-container-submit").data("nt-updatetarget")).val($(this).data("nt-pageindex"));
-                    $($(this).closest(".nt-list-container-submit").data("nt-submittarget")).submit();
+                    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+                    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
                 });
             },
             failure: function (response) {
