@@ -162,7 +162,6 @@ namespace Elmah.EFCoreRepositories
                 existing.User = input.User;
                 existing.StatusCode = input.StatusCode;
                 existing.TimeUtc = input.TimeUtc;
-                existing.Sequence = input.Sequence;
                 existing.AllXml = input.AllXml;
                 await _dbcontext.SaveChangesAsync();
 
@@ -292,7 +291,6 @@ namespace Elmah.EFCoreRepositories
                             User = input.User,
                             StatusCode = input.StatusCode,
                             TimeUtc = input.TimeUtc,
-                            Sequence = input.Sequence,
                             AllXml = input.AllXml,
                 };
                 await _dbcontext.ELMAH_Error.AddAsync(toInsert);

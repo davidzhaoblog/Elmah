@@ -229,7 +229,7 @@ namespace Elmah.MvcWebApp.Controllers
         // POST: ElmahError/Edit/{ErrorId}
         public async Task<IActionResult> Edit(
             [FromRoute]ElmahErrorIdentifier id,
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel.DefaultView input)
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel.DefaultView input)
         {
             if (!id.ErrorId.HasValue ||
                 id.ErrorId.HasValue && id.ErrorId != input.ErrorId)
@@ -277,7 +277,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel input)
         {
             if (ModelState.IsValid)
             {

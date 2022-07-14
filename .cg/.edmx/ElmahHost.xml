@@ -72,7 +72,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <PropertyKnownName>Unknown</PropertyKnownName>
+        <PropertyKnownName>SpatialLocation</PropertyKnownName>
         <Name>SpatialLocation</Name>
         <DefaultOrder>100</DefaultOrder>
         <PropertyType>
