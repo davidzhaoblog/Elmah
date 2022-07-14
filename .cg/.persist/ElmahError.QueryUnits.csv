@@ -1,11 +1,11 @@
 ﻿TypeDeclarationContextName,Query,QueryUnitGroup,QueryPropertyName,Enabled,ProcessStatus,QueryUnitSettingType,TargetTypeDeclarationFullName,TargetEntityKey,TargetPropertyName,TargetPropertyType,FKPropertyName,EntityReferenceSimpleFullPath,TargetPropertyFullPath,PredicateKnownType
+ElmahModel.ElmahError,AdvancedQuery,DateTimeRange,TimeUtcRange,True,FromDefault,Range,ElmahModel.ElmahError,t,TimeUtc,SystemDateTime,,,,Range
 ElmahModel.ElmahError,AdvancedQuery,EntityReference,Application,True,FromDefault,EntityReference,ElmahModel.ElmahApplication,Application,Application,SystemString,Application,\Application,,Equals
 ElmahModel.ElmahError,AdvancedQuery,EntityReference,Host,True,FromDefault,EntityReference,ElmahModel.ElmahHost,Host,Host,SystemString,Host,\Host,,Equals
 ElmahModel.ElmahError,AdvancedQuery,EntityReference,Source,True,FromDefault,EntityReference,ElmahModel.ElmahSource,Source,Source,SystemString,Source,\Source,,Equals
 ElmahModel.ElmahError,AdvancedQuery,EntityReference,StatusCode,True,FromDefault,EntityReference,ElmahModel.ElmahStatusCode,StatusCode,StatusCode,SystemInt32,StatusCode,\StatusCode,,Equals
 ElmahModel.ElmahError,AdvancedQuery,EntityReference,Type,True,FromDefault,EntityReference,ElmahModel.ElmahType,Type,Type,SystemString,Type,\Type,,Equals
 ElmahModel.ElmahError,AdvancedQuery,EntityReference,User,True,FromDefault,EntityReference,ElmahModel.ElmahUser,User,User,SystemString,User,\User,,Equals
-ElmahModel.ElmahError,AdvancedQuery,DateTimeRange,TimeUtcRange,True,FromDefault,Range,ElmahModel.ElmahError,t,TimeUtc,SystemDateTime,,,,Range
 ElmahModel.ElmahError,AdvancedQuery,StringQuery,Message,True,FromDefault,StringQuery,ElmahModel.ElmahError,t,Message,SystemString,,,,Contains
 ElmahModel.ElmahError,AdvancedQuery,StringQuery,AllXml,True,FromDefault,StringQuery,ElmahModel.ElmahError,t,AllXml,SystemString,,,,Contains
 ElmahModel.ElmahError,Identifier,Identifier,ErrorId,True,FromDefault,Identifier,ElmahModel.ElmahError,t,ErrorId,SystemGuid,,,,Equals

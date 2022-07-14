@@ -13,14 +13,13 @@
     <Name />
     <PropertyList>Host</PropertyList>
     <PropertyTypeList>Host</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Host</Name>
         <DefaultOrder>0</DefaultOrder>
         <PropertyType>
@@ -39,6 +38,11 @@
         <PropertyCategory>Identifier</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Host</Name>
         <DbType>NVarChar(50)</DbType>
@@ -68,7 +72,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>SpatialLocation</PropertyKnownName>
         <Name>SpatialLocation</Name>
         <DefaultOrder>100</DefaultOrder>
         <PropertyType>
@@ -87,6 +91,11 @@
         <PropertyCategory>Unknown</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>SpatialLocation</Name>
         <DbType>Geography</DbType>

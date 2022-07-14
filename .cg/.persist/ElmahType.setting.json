@@ -1,6 +1,5 @@
 {
   "name": "ElmahModel.ElmahType",
-  "entityDefinition": null,
   "dataViewCollection": [
     {
       "key": "NameValuePair",

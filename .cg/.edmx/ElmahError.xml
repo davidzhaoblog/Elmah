@@ -146,14 +146,13 @@
     <Name />
     <PropertyList>ErrorId</PropertyList>
     <PropertyTypeList>ErrorId</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>ErrorId</Name>
         <DefaultOrder>0</DefaultOrder>
         <PropertyType>
@@ -172,6 +171,11 @@
         <PropertyCategory>Identifier</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>ErrorId</Name>
         <DbType>UniqueIdentifier</DbType>
@@ -198,7 +202,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Application</Name>
         <DefaultOrder>100</DefaultOrder>
         <PropertyType>
@@ -218,6 +222,11 @@
         <EntityReferenceSimplePath>\Application</EntityReferenceSimplePath>
         <ForeignKeyPropertyCategory>Ancestor</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Application</Name>
         <DbType>NVarChar(60)</DbType>
@@ -247,7 +256,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Host</Name>
         <DefaultOrder>200</DefaultOrder>
         <PropertyType>
@@ -267,6 +276,11 @@
         <EntityReferenceSimplePath>\Host</EntityReferenceSimplePath>
         <ForeignKeyPropertyCategory>Ancestor</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Host</Name>
         <DbType>NVarChar(50)</DbType>
@@ -296,7 +310,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Type</Name>
         <DefaultOrder>300</DefaultOrder>
         <PropertyType>
@@ -316,6 +330,11 @@
         <EntityReferenceSimplePath>\Type</EntityReferenceSimplePath>
         <ForeignKeyPropertyCategory>Ancestor</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Type</Name>
         <DbType>NVarChar(100)</DbType>
@@ -345,7 +364,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Source</Name>
         <DefaultOrder>400</DefaultOrder>
         <PropertyType>
@@ -365,6 +384,11 @@
         <EntityReferenceSimplePath>\Source</EntityReferenceSimplePath>
         <ForeignKeyPropertyCategory>Ancestor</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Source</Name>
         <DbType>NVarChar(60)</DbType>
@@ -394,7 +418,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>Message</Name>
         <DefaultOrder>500</DefaultOrder>
         <PropertyType>
@@ -413,6 +437,11 @@
         <PropertyCategory>Unknown</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Message</Name>
         <DbType>NVarChar(500)</DbType>
@@ -442,7 +471,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>User</Name>
         <DefaultOrder>600</DefaultOrder>
         <PropertyType>
@@ -462,6 +491,11 @@
         <EntityReferenceSimplePath>\User</EntityReferenceSimplePath>
         <ForeignKeyPropertyCategory>Ancestor</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>User</Name>
         <DbType>NVarChar(50)</DbType>
@@ -491,7 +525,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>StatusCode</Name>
         <DefaultOrder>700</DefaultOrder>
         <PropertyType>
@@ -511,6 +545,11 @@
         <EntityReferenceSimplePath>\StatusCode</EntityReferenceSimplePath>
         <ForeignKeyPropertyCategory>Ancestor</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>StatusCode</Name>
         <DbType>Int</DbType>
@@ -537,7 +576,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>TimeUtc</Name>
         <DefaultOrder>800</DefaultOrder>
         <PropertyType>
@@ -556,6 +595,11 @@
         <PropertyCategory>Unknown</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>TimeUtc</Name>
         <DbType>DateTime</DbType>
@@ -582,7 +626,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>__AutoGeneratedNumericIdentity__</PropertyKnownName>
         <Name>Sequence</Name>
         <DefaultOrder>900</DefaultOrder>
         <PropertyType>
@@ -601,6 +645,11 @@
         <PropertyCategory>Identity</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>None</OnUIWhenCreate>
+        <OnUIWhenEdit>Display</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Sequence</Name>
         <DbType>Int</DbType>
@@ -621,7 +670,7 @@
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>AllXml</Name>
         <DefaultOrder>1000</DefaultOrder>
         <PropertyType>
@@ -640,6 +689,11 @@
         <PropertyCategory>Unknown</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>AllXml</Name>
         <DbType>NText</DbType>

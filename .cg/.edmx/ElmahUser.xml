@@ -13,14 +13,13 @@
     <Name />
     <PropertyList>User</PropertyList>
     <PropertyTypeList>User</PropertyTypeList>
-    <IsToBuildIdentifierClass>true</IsToBuildIdentifierClass>
   </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
         <Enabled>true</Enabled>
         <ProcessStatus>FromDefault</ProcessStatus>
-        <KnownPropertyName>Unknown</KnownPropertyName>
+        <PropertyKnownName>Unknown</PropertyKnownName>
         <Name>User</Name>
         <DefaultOrder>0</DefaultOrder>
         <PropertyType>
@@ -39,6 +38,11 @@
         <PropertyCategory>Identifier</PropertyCategory>
         <ForeignKeyPropertyCategory>NotForeignKey</ForeignKeyPropertyCategory>
       </Setting>
+      <PropertyCustomizationSetting>
+        <OnUIWhenView>Display</OnUIWhenView>
+        <OnUIWhenCreate>Editor</OnUIWhenCreate>
+        <OnUIWhenEdit>Editor</OnUIWhenEdit>
+      </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>User</Name>
         <DbType>NVarChar(50)</DbType>
