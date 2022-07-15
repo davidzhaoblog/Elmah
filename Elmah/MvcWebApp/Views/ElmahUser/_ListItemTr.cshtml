@@ -1,0 +1,15 @@
+@using Elmah.Resx;
+@using Elmah.MvcWebApp.Models;
+@using Framework.Models;
+@using Elmah.Models;
+@model ListItemTrViewModal<ElmahUserModel>
+@inject IUIStrings localizor;
+@{
+    var routeId = Model.Model?.User;
+}
+<tr class="pt-0 pb-0 nt-listitem@(Model.IsCurrentItem ? " nt-created border-warning border-3": "")" data-nt-route-id="@routeId">
+    @if (Model.Template == ViewItemTemplateNames.Details.ToString())
+    {
+        @await Html.PartialAsync("~/Views/ElmahUser/_ListDetailsItem.cshtml", Model.Model)
+    }
+</tr>

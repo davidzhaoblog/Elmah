@@ -44,7 +44,11 @@
     </div>
 </form>
 <hr />
-<div class="card">
+<div class="card" id="thisList"\r\n
+    data-nt-bs-modalsize="Large"
+    data-nt-pagination-updatetarget="#pageIndexH"
+    data-nt-bs-modalsize="Large"
+    data-nt-submittarget="#thisform">
     <div class="card-header">
         <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahType" asp-action="Index">@localizor.Get("ElmahType")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
@@ -60,7 +64,7 @@
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
         </div>
     </div>
-    <div class="card-body nt-list-container-submit row m-0 p-0" data-nt-updatetarget="#pageIndexH" data-nt-submittarget="#thisform">
+    <div class="card-body row m-0 p-0">
         @await Html.PartialAsync("~/Views/ElmahType/_List.cshtml", Model.Result)
     </div>
 </div>

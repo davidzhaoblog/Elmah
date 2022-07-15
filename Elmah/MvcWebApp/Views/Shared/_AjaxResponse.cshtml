@@ -2,21 +2,25 @@
 @using Elmah.Resx;
 @inject IUIStrings localizor;
 @model AjaxResponseViewModel
+@{
+    // This is the seperator between partial views, javascript is using the same string to split response into sections.
+    const string htmlSeperator = "===---------===";
+}
 @if(Model.Status == System.Net.HttpStatusCode.OK)
 {
-    <h2 class="text-success">@localizor.Get("HttpStatusCodeOKMessage")</h2>
+    <h5 class="text-success">@localizor.Get("HttpStatusCodeOKMessage")</h5>
 }
 else if(Model.Status == System.Net.HttpStatusCode.NotFound)
 {
-    <h2 class="text-danger">@localizor.Get("HttpStatusCodeNotFoundMessage")</h2>
+    <h5 class="text-danger">@localizor.Get("HttpStatusCodeNotFoundMessage")</h5>
 }
 else if(Model.Status == System.Net.HttpStatusCode.BadRequest)
 {
-    <h2 class="text-danger">@localizor.Get("HttpStatusCodeBadRequestMessage")</h2>
+    <h5 class="text-danger">@localizor.Get("HttpStatusCodeBadRequestMessage")</h5>
 }
 else //if(Model.Status == System.Net.HttpStatusCode.InternalServerError)
 {
-    <h2 class="text-danger">@localizor.Get("HttpStatusCode.InternalServerErrorMessage")</h2>
+    <h5 class="text-danger">@localizor.Get("HttpStatusCode.InternalServerErrorMessage")</h5>
 }
 @if (Model.ShowRequestId)
 {
@@ -24,6 +28,11 @@ else //if(Model.Status == System.Net.HttpStatusCode.InternalServerError)
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
     </p>
 }
-@{
-    ViewData["Title"] = "Error";
+@if(Model.PartialViews != null)
+{
+    foreach(var partialView in Model.PartialViews)
+    {
+@htmlSeperator
+@await Html.PartialAsync(partialView.Item1, partialView.Item2)
+    }
 }

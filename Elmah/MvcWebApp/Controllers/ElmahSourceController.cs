@@ -136,7 +136,20 @@ namespace Elmah.MvcWebApp.Controllers
                 var result = await _thisService.Create(input);
 
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                {
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
+                        new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>> {
+                            new Tuple<string, object>("~/Views/ElmahSource/_ListItemTr.cshtml",
+                                new ListItemTrViewModal<ElmahSourceModel>{
+                                    Template = ViewItemTemplateNames.Details.ToString(),
+                                    IsCurrentItem = true,
+                                    Model = result.ResponseBody!
+                                })
+                        }});
+                }
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
@@ -175,15 +188,23 @@ namespace Elmah.MvcWebApp.Controllers
             if (string.IsNullOrEmpty(id.Source) ||
                 !string.IsNullOrEmpty(id.Source) && id.Source != input.Source)
             {
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel {
+                    Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Update(id, input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
+                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                    {
+                        Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                        PartialViews = new List<Tuple<string, object>> {
+                            new Tuple<string, object>("~/Views/ElmahSource/_ListDetailsItem.cshtml", result.ResponseBody!)
+                        }
+                    });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel {
+                    Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
             }
 
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
