@@ -4,7 +4,7 @@
 @model ElmahErrorModel.DefaultView
 @inject IUIStrings localizor;
 <td class="p-0">
-    <div class="btn-group">
+    <div class="btn-group btn-group-nt-actions">
         <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="Model?.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
             <i class="fa fa-briefcase"></i>
         </a>

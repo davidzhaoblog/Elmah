@@ -88,13 +88,13 @@ function attachCrudActionDialog() {
         
         initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid)
         // 3. Ajax to get htmls
-        ajaxLoadItem(loadItemUrl + "/" + routeid, view, container, template, action);
+        ajaxLoadItemWhenDialog(loadItemUrl + "/" + routeid, view, container, template, action);
     })
 
     // 2. Hide Modal
     crudActionDialog.addEventListener('hide.bs.modal', function (event) {
         // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
-        closeModal();
+        closeDialog();
     })
 }
 
@@ -103,12 +103,16 @@ $(document).ready(function () {
     $("#crudActionDialog .btn-nt-action").click(function (e) {
         const self = this;
         $(this).attr("disabled", true); 
+        const action = $("#crudActionDialog").data("nt-action");
         const loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
         const postbackurl = $("#crudActionDialog").data("nt-postbackurl");
+        if (action != "Post") {
+            const routeid = $("#crudActionDialog").data("nt-route-id");
+            postbackurl = postbackurl + "/" + routeid;
+        }
         const view = $("#crudActionDialog").data("nt-view");
         const container = $("#crudActionDialog").data("nt-container");
         const template = $("#crudActionDialog").data("nt-template");
-        const routeid = $("#crudActionDialog").data("nt-route-id");
         // Get FormData if there are in this dialog
         const form = $("#crudActionDialog form")
         let formData = [];
@@ -119,7 +123,7 @@ $(document).ready(function () {
         formData.append("container", container);
         formData.append("template", template);
 
-        ajaxPostback(postbackurl + "/" + routeid, formData, self, view, loadItemUrl + "/" + routeid, container, template);
+        ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl + "/" + routeid, container, template);
     });
 
     $("#crudActionDialog .btn-nt-pagination").click(function (e) {
@@ -157,11 +161,11 @@ $(document).ready(function () {
         const template = $("#crudActionDialog").data("nt-template");
 
         // 3. Ajax to get htmls
-        ajaxLoadItem(loadItemUrl + "/" + routeid, view, container, template, action);
+        ajaxLoadItemWhenDialog(loadItemUrl + "/" + routeid, view, container, template, action);
     });
 });
 
-function closeModal() {
+function closeDialog() {
     $(".nt-listitem").removeClass("nt-current border-info border-5");
     const action = $("#crudActionDialog").data("nt-action");
     setTimeout(() => {
@@ -190,7 +194,7 @@ function closeModal() {
     $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").hide();
 }
 
-function ajaxLoadItem(loadItemUrl, view, container, template, action) {
+function ajaxLoadItemWhenDialog(loadItemUrl, view, container, template, action) {
     $.ajax({
         type: "GET",
         url: loadItemUrl,
@@ -219,7 +223,7 @@ function ajaxLoadItem(loadItemUrl, view, container, template, action) {
     });
 }
 
-function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container, template) {
+function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, container, template) {
     $.ajax({
         type: "POST",
         url: postbackurl,
@@ -239,7 +243,7 @@ function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container,
             // response part #1.1 TODO: should have a timer to auto hide after a few seconds.
             // response part #2, to update the item which is updated/created.
             const action = $("#crudActionDialog").data("nt-action");
-            const actionSuccess = !!$("#crudActionDialog .nt-status .text-success");
+            const actionSuccess = !!($("#crudActionDialog .nt-status .text-success").length);
             if (action === "PUT") { // EDIT 
                 if (actionSuccess) {
                     // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
@@ -263,7 +267,7 @@ function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container,
                 const createAnotherOneChecked = $("#crudActionDialog .modal-footer .btn-group-nt-action-createanotherone input").is(':checked');
                 if (createAnotherOneChecked) {
                     $(self).removeAttr("disabled");
-                    ajaxLoadItem(loadItemUrl, view, container, template, action);
+                    ajaxLoadItemWhenDialog(loadItemUrl, view, container, template, action);
                 }
             }
             else if (action === "DELETE") {

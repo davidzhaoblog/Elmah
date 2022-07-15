@@ -6,9 +6,19 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
+<td class="p-0">
+    <div class="btn-group btn-group-nt-action-save">
+        <button type="button" class="btn btn-secondary btn-nt-action-cancel">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Post"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+            <i class="fa-solid fa-check-circle"></i>
+        </button>
+    </div>
+</td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="ErrorId" class="form-control" />
-    <span asp-validation-for="ErrorId" class="text-danger"></span>
 </td>
 <td class="form-group pt-0 pb-0">
     <select asp-for="Application" class="form-control form-select" asp-items="ViewBag.ApplicationList" >

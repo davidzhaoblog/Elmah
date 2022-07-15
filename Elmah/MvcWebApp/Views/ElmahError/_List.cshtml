@@ -30,7 +30,7 @@
                 {
                     <tr class="pt-0 pb-0 nt-listitem" data-nt-route-id="@Model.ResponseBody![i].ErrorId">
                         <td class="p-0">
-                            <div class="btn-group">
+                            <div class="btn-group btn-group-nt-actions">
                                 <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
@@ -92,11 +92,11 @@
         </tbody>
         <!--only for inline editing-->
         <tfoot>
-            <tr>
-                <td colspan="100">
+            <tr class="pt-0 pb-0 nt-listitem" data-nt-route-id="">
+                <td class="nt-createnew-button-container" colspan="100">
                     <button type="button" class="btn btn-primary btn-nt-inline-editing w-100" title="@localizor.Get("Create_New")"
                             data-nt-action="@HttpMethods.Post"
-                            data-nt-route-id="@(System.Guid.NewGuid())"
+                            data-nt-route-id="@(System.Guid.Empty)"
                             data-nt-container="@CrudViewContainers.Inline.ToString()"
                             data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                         <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>

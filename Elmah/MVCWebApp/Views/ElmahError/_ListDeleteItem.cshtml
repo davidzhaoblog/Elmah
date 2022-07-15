@@ -3,6 +3,18 @@
 @using Elmah.Resx;
 @model ElmahErrorModel.DefaultView
 @inject IUIStrings localizor;
+<td class="p-0">
+    <div class="btn-group btn-group-nt-action-save">
+        <button type="button" class="btn btn-secondary btn-nt-action-cancel">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Delete"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+</td>
 <td class="pt-0 pb-0">@Model?.ErrorId</td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model?.Host">@Model?.Host_Name</a></td>
