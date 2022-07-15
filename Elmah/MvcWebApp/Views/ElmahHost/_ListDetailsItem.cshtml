@@ -1,0 +1,7 @@
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahHostModel
+@inject IUIStrings localizor;
+<td class="pt-0 pb-0">@Model?.Host</td>
+<td class="pt-0 pb-0">@Model?.SpatialLocation</td>

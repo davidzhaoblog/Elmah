@@ -1,0 +1,12 @@
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahUserModel
+@inject IUIStrings localizor;
+@{
+    var format_Please_Select = localizor.Get("Format_Please_Select");
+}
+<td class="form-group pt-0 pb-0">
+    <input asp-for="User" class="form-control" />
+    <span asp-validation-for="User" class="text-danger"></span>
+</td>

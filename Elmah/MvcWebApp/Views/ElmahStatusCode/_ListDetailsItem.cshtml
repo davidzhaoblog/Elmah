@@ -1,0 +1,7 @@
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahStatusCodeModel
+@inject IUIStrings localizor;
+<td class="pt-0 pb-0">@Model?.StatusCode</td>
+<td class="pt-0 pb-0">@Model?.Name</td>
