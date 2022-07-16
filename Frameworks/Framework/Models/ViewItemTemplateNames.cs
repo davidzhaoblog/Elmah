@@ -6,6 +6,7 @@ namespace Framework.Models
         Delete,
         Details,
         Edit,
+        DetailsSummary, // In Mvc: _DetailsSummary.cshtml(For Tiles), _ListDetailsSummaryItem.cshtml
     }
 }
 

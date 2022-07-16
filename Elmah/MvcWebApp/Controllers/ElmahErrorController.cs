@@ -154,7 +154,7 @@ namespace Elmah.MvcWebApp.Controllers
                             Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                             PartialViews = new List<Tuple<string, object>> {
                             new Tuple<string, object>("~/Views/ElmahError/_ListItemTr.cshtml", 
-                                new Elmah.MvcWebApp.Models.ListItemTrViewModal<Elmah.Models.ElmahErrorModel.DefaultView>{ 
+                                new Elmah.MvcWebApp.Models.ListItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>{ 
                                     Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
                                     IsCurrentItem = true,
                                     Model = result.ResponseBody! 
