@@ -9,11 +9,6 @@
   <DataQueryPerQuerySettingCollection />
   <ChainedDataQuerySettingCollection />
   <DataViewContextCollection />
-  <EntityIdentifierSetting>
-    <Name />
-    <PropertyList>StatusCode</PropertyList>
-    <PropertyTypeList>StatusCode</PropertyTypeList>
-  </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
@@ -42,6 +37,7 @@
         <OnUIWhenView>Display</OnUIWhenView>
         <OnUIWhenCreate>Editor</OnUIWhenCreate>
         <OnUIWhenEdit>Editor</OnUIWhenEdit>
+        <OnUIWhenSummary>Display</OnUIWhenSummary>
       </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>StatusCode</Name>
@@ -92,6 +88,7 @@
         <OnUIWhenView>Display</OnUIWhenView>
         <OnUIWhenCreate>Editor</OnUIWhenCreate>
         <OnUIWhenEdit>Editor</OnUIWhenEdit>
+        <OnUIWhenSummary>Display</OnUIWhenSummary>
       </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Name</Name>
@@ -118,8 +115,6 @@
       </ValidatorContainer>
     </PropertyContext>
   </PropertyContextCollection>
-  <UniqueConstraintSettingCollection />
-  <PropertyNameListSettingCollection />
   <TableSetting>
     <Schema>dbo</Schema>
     <Name>ElmahStatusCode</Name>

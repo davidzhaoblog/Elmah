@@ -115,7 +115,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-05T00:00:00"
+        "createdDate": "2022-07-17T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -130,8 +130,8 @@
       "key2": "t",
       "propertyName_Origin_InThisType": "Application",
       "childEntityReferenceSimpleFullPath": null,
-      "bottomChildTypeName": null,
-      "bottomChildEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahApplication",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Application",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Application",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahApplication",
       "inUIEdit": true,
@@ -157,7 +157,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-05T00:00:00"
+        "createdDate": "2022-07-17T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -172,8 +172,8 @@
       "key2": "t",
       "propertyName_Origin_InThisType": "Host",
       "childEntityReferenceSimpleFullPath": null,
-      "bottomChildTypeName": null,
-      "bottomChildEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahHost",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Host",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Host",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahHost",
       "inUIEdit": true,
@@ -199,7 +199,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-05T00:00:00"
+        "createdDate": "2022-07-17T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -214,8 +214,8 @@
       "key2": "t",
       "propertyName_Origin_InThisType": "Source",
       "childEntityReferenceSimpleFullPath": null,
-      "bottomChildTypeName": null,
-      "bottomChildEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahSource",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Source",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Source",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahSource",
       "inUIEdit": true,
@@ -241,7 +241,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-05T00:00:00"
+        "createdDate": "2022-07-17T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -256,8 +256,8 @@
       "key2": "t",
       "propertyName_Origin_InThisType": "StatusCode",
       "childEntityReferenceSimpleFullPath": null,
-      "bottomChildTypeName": null,
-      "bottomChildEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahStatusCode",
+      "bottomChildEntityReferenceSimpleFullPath": "\\StatusCode",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.StatusCode",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahStatusCode",
       "inUIEdit": true,
@@ -283,7 +283,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-05T00:00:00"
+        "createdDate": "2022-07-17T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -298,8 +298,8 @@
       "key2": "t",
       "propertyName_Origin_InThisType": "Type",
       "childEntityReferenceSimpleFullPath": null,
-      "bottomChildTypeName": null,
-      "bottomChildEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahType",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Type",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Type",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahType",
       "inUIEdit": true,
@@ -325,7 +325,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-05T00:00:00"
+        "createdDate": "2022-07-17T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -340,8 +340,8 @@
       "key2": "t",
       "propertyName_Origin_InThisType": "User",
       "childEntityReferenceSimpleFullPath": null,
-      "bottomChildTypeName": null,
-      "bottomChildEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahUser",
+      "bottomChildEntityReferenceSimpleFullPath": "\\User",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.User",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahUser",
       "inUIEdit": true,

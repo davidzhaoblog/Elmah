@@ -46,7 +46,6 @@
   <Table Name="ElmahStatusCode" Member="ElmahStatusCode">
     <Type Name="ElmahStatusCode">
       <KeyDatabaseTableTypeSetting HasRootDatabaseRecord="false" RootDatabaseRecordID="0" CurrentInUse="true">
-        <NamePropertyOfNameValuePairDataView>Name</NamePropertyOfNameValuePairDataView>
         <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
       </KeyDatabaseTableTypeSetting>

@@ -9,11 +9,6 @@
   <DataQueryPerQuerySettingCollection />
   <ChainedDataQuerySettingCollection />
   <DataViewContextCollection />
-  <EntityIdentifierSetting>
-    <Name />
-    <PropertyList>Application</PropertyList>
-    <PropertyTypeList>Application</PropertyTypeList>
-  </EntityIdentifierSetting>
   <PropertyContextCollection>
     <PropertyContext>
       <Setting>
@@ -42,6 +37,7 @@
         <OnUIWhenView>Display</OnUIWhenView>
         <OnUIWhenCreate>Editor</OnUIWhenCreate>
         <OnUIWhenEdit>Editor</OnUIWhenEdit>
+        <OnUIWhenSummary>Display</OnUIWhenSummary>
       </PropertyCustomizationSetting>
       <DBColumnSetting>
         <Name>Application</Name>
@@ -69,8 +65,6 @@
       </ValidatorContainer>
     </PropertyContext>
   </PropertyContextCollection>
-  <UniqueConstraintSettingCollection />
-  <PropertyNameListSettingCollection />
   <TableSetting>
     <Schema>dbo</Schema>
     <Name>ElmahApplication</Name>
