@@ -3,6 +3,6 @@
 @using Framework.Models;
 @model Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
-<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 nt-listitem@(Model.IsCurrentItem ? " nt-created": "")" data-nt-route-id="@Model.Model?.ErrorId">
+<div class="d-flex align-items-stretch col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 nt-listitem@(Model.IsCurrentItem ? " nt-created": "")" data-nt-route-id="@Model.Model?.ErrorId">
     @await Html.PartialAsync("~/Views/ElmahError/_TileDetailsItem.cshtml", Model)
 </div>

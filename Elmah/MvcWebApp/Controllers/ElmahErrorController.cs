@@ -54,6 +54,15 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]// form post formdata
         public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query)
         {
+            if(query.PagedViewOption == Framework.Models.PagedViewOptions.Tiles)
+            {
+                query.PaginationOption = Framework.Models.PaginationOptions.LoadMore;
+            }
+            else if (query.PagedViewOption == Framework.Models.PagedViewOptions.List)
+            {
+                query.PaginationOption = Framework.Models.PaginationOptions.Paged;
+            }
+
             var result = await _thisService.Search(query);
             ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
 
