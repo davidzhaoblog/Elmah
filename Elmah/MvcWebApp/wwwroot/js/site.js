@@ -178,12 +178,12 @@ function getDateRange(referenceDate, type) {
  * .nt-list-wrapper
  * .nt-selectchange-submit
  */
-$(document).ready($(function () {
-    $(".page-link").click(function (e) {
-        $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-    });
-}));
+//$(document).ready($(function () {
+//    $(".page-link").click(function (e) {
+//        $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+//        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
+//    });
+//}));
 
 $(document).ready($(function () {
     $(".nt-selectchange-submit").change(function (e) {
@@ -219,7 +219,44 @@ $(document).ready($(function () {
  * .btn-nt-load-more
  * .nt-list-container-submit
  * 
- */ 
+ */
+
+function pageLinkClicked(self) {
+    $($(self).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(self).data("nt-pageindex"));
+    const theForm = $($(self).closest(".nt-list-wrapper").data("nt-submittarget"));
+    const url = $(theForm).data("nt-partial-url");
+    const updateTarget = $(theForm).data("nt-updatetarget");
+    var formData = new FormData($(theForm)[0]);
+    const pagedViewOption = $(theForm).children(".nt-paged-view-options").val();
+    const pageIndex = $(theForm).children(".nt-page-index").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: formData,
+        async: false,
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        success: function (response) {
+            if (pagedViewOption !== "Tiles" || pageIndex == 1) {
+                $(updateTarget).html(response);
+            }
+            else {
+                $(updateTarget).children(".btn-nt-load-more").remove()
+                $(updateTarget).append(response);
+            }
+            //console.log("success", response);
+        },
+        failure: function (response) {
+            // console.log("failure", response);
+        },
+        error: function (response) {
+            // console.log("error", response);
+        }
+    });
+    return false;
+}
+
 $(document).ready($(function () {
     $('.nt-ajax-partial-load-post-formdata').submit(function (e) {
         const url = $(this).data("nt-partial-url");
@@ -245,10 +282,11 @@ $(document).ready($(function () {
                 }
                 //console.log("success", response);
                 // attach pagination event handler again.
-                $(".page-link").on("click", function (e) {
-                    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-                    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-                });
+                //$(".page-link").on("click", function (e) {
+                //    e.preventDefault();
+                //    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+                //    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
+                //});
             },
             failure: function (response) {
                 // console.log("failure", response);
@@ -257,7 +295,6 @@ $(document).ready($(function () {
                 // console.log("error", response);
             }
         });
-        e.preventDefault();
     });
 
     $('.nt-ajax-partial-load-get').submit(function (e) {
@@ -288,10 +325,10 @@ $(document).ready($(function () {
                 }
                 //console.log("success", response);
                 // attach pagination event handler again.
-                $(".page-link").on("click", function (e) {
-                    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-                    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-                });
+                //$(".page-link").on("click", function (e) {
+                //    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+                //    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
+                //});
             },
             failure: function (response) {
                 // console.log("failure", response);
