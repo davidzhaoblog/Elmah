@@ -1,9 +1,10 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model Elmah.MvcWebApp.Models.ListItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+@model Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
-<tr class="pt-0 pb-0 nt-listitem@(Model.IsCurrentItem ? " nt-created border-warning border-3": "")" data-nt-route-id="@Model.Model?.ErrorId">
+<tr class="pt-0 pb-0 nt-listitem@(Model.IsCurrentItem ? " nt-created border-warning border-3": "")" 
+    data-nt-route-id="@Model.Model?.ErrorId">
     @if (Model.Template == Framework.Models.ViewItemTemplateNames.Details.ToString())
     {
         @await Html.PartialAsync("~/Views/ElmahError/_ListDetailsItem.cshtml", Model.Model)

@@ -61,7 +61,7 @@ namespace Elmah.MvcWebApp.Controllers
                 new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
                 new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
             });
-            if(string.IsNullOrEmpty(query.OrderBys))
+            if (string.IsNullOrEmpty(query.OrderBys))
             {
                 query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
             }
@@ -148,18 +148,47 @@ namespace Elmah.MvcWebApp.Controllers
                 var result = await _thisService.Create(input);
 
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", 
-                        new AjaxResponseViewModel 
-                        { 
-                            Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                {
+                    if (view == PagedViewOptions.List) // Html Table
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
+                        new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK,
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                             PartialViews = new List<Tuple<string, object>> {
-                            new Tuple<string, object>("~/Views/ElmahError/_ListItemTr.cshtml", 
-                                new Elmah.MvcWebApp.Models.ListItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>{ 
+                            new Tuple<string, object>("~/Views/ElmahError/_ListItemTr.cshtml",
+                                new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>{
                                     Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
                                     IsCurrentItem = true,
-                                    Model = result.ResponseBody! 
+                                    Model = result.ResponseBody!
                                 })
-                        }});
+                        }
+                        });
+                    }
+                    else // Tiles
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK,
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>>
+                            {
+                                new Tuple<string, object>("~/Views/ElmahError/_Tile.cshtml",
+                                    new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                                    {
+                                        Status = System.Net.HttpStatusCode.OK,
+                                        Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                        IsCurrentItem = true,
+                                        HtmlNamePrefix = "Model.ResponseBody",
+                                        HtmlNameUseArrayIndex = true,
+                                        IndexInArray = 1,
+                                        Model = result.ResponseBody!
+                                    })
+                            }
+                        });
+                    }
+                }
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
@@ -196,33 +225,73 @@ namespace Elmah.MvcWebApp.Controllers
         {
             if (id.ErrorId != input.ErrorId)
             {
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { 
-                    Status = System.Net.HttpStatusCode.NotFound, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                {
+                    Status = System.Net.HttpStatusCode.NotFound,
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
             }
 
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Update(input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
-                    { 
-                        Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                        PartialViews = new List<Tuple<string, object>> { 
-                            new Tuple<string, object>("~/Views/ElmahError/_ListDetailsItem.cshtml", result.ResponseBody!)
-                        }
-                    });
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { 
-                    Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
+                {
+                    if (view == PagedViewOptions.List) // Html Table
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK,
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>>
+                            {
+                                new Tuple<string, object>("~/Views/ElmahError/_ListDetailsItem.cshtml", result.ResponseBody!)
+                            }
+                        });
+                    }
+                    else
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK,
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>>
+                            {
+                                new Tuple<string, object>("~/Views/ElmahError/_TileDetailsItem.cshtml",
+                                    new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                                    {
+                                        Status = System.Net.HttpStatusCode.OK,
+                                        Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                        IsCurrentItem = true,
+                                        HtmlNamePrefix = "Model.ResponseBody",
+                                        HtmlNameUseArrayIndex = true,
+                                        IndexInArray = 1,
+                                        Model = result.ResponseBody!
+                                    })
+                            }
+                        });
+                    }
+                }
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                {
+                    Status = result.Status,
+                    Message = result.StatusMessage,
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    ShowRequestId = false
+                });
             }
 
-            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { 
-                Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+            {
+                Status = System.Net.HttpStatusCode.BadRequest,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
 
         // GET: ElmahError/Edit/{ErrorId}
         //[HttpGet, ActionName("Edit")]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Edit([FromRoute]ElmahErrorIdentifier id)
+        public async Task<IActionResult> Edit([FromRoute] ElmahErrorIdentifier id)
         {
             if (id == null)
             {
@@ -245,7 +314,7 @@ namespace Elmah.MvcWebApp.Controllers
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
         public async Task<IActionResult> Edit(
-            [FromRoute]ElmahErrorIdentifier id,
+            [FromRoute] ElmahErrorIdentifier id,
             [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,Sequence,AllXml")] ElmahErrorModel input)
         {
             if (id.ErrorId != input.ErrorId)
@@ -271,7 +340,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Details/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Details([FromRoute]ElmahErrorIdentifier id)
+        public async Task<IActionResult> Details([FromRoute] ElmahErrorIdentifier id)
         {
             var result = await _thisService.Get(id);
             ViewBag.Status = result.Status;
@@ -298,7 +367,7 @@ namespace Elmah.MvcWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Create(input);
-                if(result.Status == System.Net.HttpStatusCode.OK)
+                if (result.Status == System.Net.HttpStatusCode.OK)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -313,7 +382,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         // GET: ElmahError/Delete/{ErrorId}
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdentifier id)
+        public async Task<IActionResult> Delete([FromRoute] ElmahErrorIdentifier id)
         {
             var result = await _thisService.Get(id);
             ViewBag.Status = result.Status;
@@ -325,7 +394,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("[controller]/[action]/{ErrorId}")]
-        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahErrorIdentifier id)
+        public async Task<IActionResult> DeleteConfirmed([FromRoute] ElmahErrorIdentifier id)
         {
             var result = await _thisService.Delete(id);
             if (result.Status == System.Net.HttpStatusCode.OK)

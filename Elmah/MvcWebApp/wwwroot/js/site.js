@@ -320,6 +320,11 @@ $(document).ready($(function () {
         $($(this).data("nt-paginationoptionupdatetarget")).val($(this).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
         $($(this).data("nt-updatetarget")).val($(this).data("nt-value"));
         $($(this).data("nt-submittarget")).submit();
+        console.log($(location));
+        // Update QueryString - view with data-nt-value attribute
+        let queryParams = new URLSearchParams(window.location.search);
+        queryParams.set("PagedViewOption", $(this).data("nt-value"));
+        history.pushState(null, null, "?" + queryParams.toString());
     });
 }));
 // 6.End. PagedViewOptions clicked

@@ -2,17 +2,28 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @model PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
+@inject IHttpContextAccessor Accessor
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahError");
     var format_All = localizor.Get("Format_All");
+
+    string currentView = string.Empty;
+    if (Accessor.HttpContext != null)
+    {
+        currentView = Accessor.HttpContext.Request.Query["PagedViewOption"];
+    }
+    if (string.IsNullOrEmpty(currentView))
+    {
+        currentView = Model.Result.PagedViewOption.ToString();
+    }
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxMultiItems", "ElmahError")" data-nt-updatetarget=".nt-list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="nt-page-index" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
     <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
-    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" />
+    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" value="@currentView" />
     <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
     <div class="d-flex flex-row-reverse pt-1">
         <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
@@ -21,11 +32,11 @@
         </button>
     </div>
     <hr />
-        <div class="input-group">
-            <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
-            </select>
-            <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
-        </div>
+    <div class="input-group">
+        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+        </select>
+        <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
+    </div>
     <div class="row pt-1">
         <div class="col-lg-6">
             <div class="input-group">
@@ -40,7 +51,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahUser")</label>
-                <select asp-for="Query.User" class="form-control form-select" asp-items="ViewBag.UserList" >
+                <select asp-for="Query.User" class="form-control form-select" asp-items="ViewBag.UserList">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahUser"))</option>
                 </select>
             </div>
@@ -48,7 +59,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahType")</label>
-                <select asp-for="Query.Type" class="form-control form-select" asp-items="ViewBag.TypeList" >
+                <select asp-for="Query.Type" class="form-control form-select" asp-items="ViewBag.TypeList">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahType"))</option>
                 </select>
             </div>
@@ -56,7 +67,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahStatusCode")</label>
-                <select asp-for="Query.StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList" >
+                <select asp-for="Query.StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahStatusCode"))</option>
                 </select>
             </div>
@@ -64,7 +75,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahSource")</label>
-                <select asp-for="Query.Source" class="form-control form-select" asp-items="ViewBag.SourceList" >
+                <select asp-for="Query.Source" class="form-control form-select" asp-items="ViewBag.SourceList">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahSource"))</option>
                 </select>
             </div>
@@ -72,7 +83,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahHost")</label>
-                <select asp-for="Query.Host" class="form-control form-select" asp-items="ViewBag.HostList" >
+                <select asp-for="Query.Host" class="form-control form-select" asp-items="ViewBag.HostList">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahHost"))</option>
                 </select>
             </div>
@@ -80,7 +91,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahApplication")</label>
-                <select asp-for="Query.Application" class="form-control form-select" asp-items="ViewBag.ApplicationList" >
+                <select asp-for="Query.Application" class="form-control form-select" asp-items="ViewBag.ApplicationList">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahApplication"))</option>
                 </select>
             </div>
@@ -112,23 +123,23 @@
     </div>
 </form>
 <hr />
-<div class="card nt-list-wrapper" 
-    id="thisList"
-    data-nt-pagination-updatetarget="#pageIndexH" 
-    data-nt-submittarget="#thisform"
-    data-nt-bs-modalsize=""
-    data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahError")" 
-    data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")" 
-    data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")"  
-    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahError")">
+<div class="card nt-list-wrapper"
+     id="thisList"
+     data-nt-pagination-updatetarget="#pageIndexH"
+     data-nt-submittarget="#thisform"
+     data-nt-bs-modalsize=""
+     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahError")"
+     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")"
+     data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")"
+     data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahError")">
     <div class="card-header">
-        <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
+        <h3 class="card-title float-start m-0"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(currentView.ToLower()==PagedViewOptions.List.ToString().ToLower() ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="LoadMore" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="LoadMore" @(currentView.ToLower()==PagedViewOptions.Tiles.ToString().ToLower() ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" @(currentView.ToLower()==PagedViewOptions.SlideShow.ToString().ToLower() ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
@@ -140,16 +151,27 @@
                 <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
             </a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                data-nt-action="@HttpMethods.Post"
-                data-nt-route-id="@(System.Guid.NewGuid())"
-                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                    data-nt-action="@HttpMethods.Post"
+                    data-nt-route-id="@(System.Guid.NewGuid())"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                 <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
             </button>
         </div>
     </div>
     <div class="card-body nt-list-container-submit row m-0 p-0">
-        @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", Model.Result)
+        @if (currentView.ToLower() == Framework.Models.PagedViewOptions.Tiles.ToString().ToLower())
+        {
+            @await Html.PartialAsync("~/Views/ElmahError/_Tiles.cshtml", Model.Result)
+        }
+        else if (currentView.ToLower() == Framework.Models.PagedViewOptions.SlideShow.ToString().ToLower())
+        {
+            @await Html.PartialAsync("~/Views/ElmahError/_SlideShow.cshtml", Model.Result)
+        }
+        else
+        {
+            @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", Model.Result)
+        }
     </div>
 </div>
 <partial name="~/Views/Shared/_CrudActionDialog.cshtml" />

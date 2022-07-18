@@ -104,11 +104,12 @@ $(document).ready(function () {
         const self = this;
         $(this).attr("disabled", true); 
         const action = $("#crudActionDialog").data("nt-action");
-        const loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
-        const postbackurl = $("#crudActionDialog").data("nt-postbackurl");
-        if (action != "Post") {
+        let loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
+        let postbackurl = $("#crudActionDialog").data("nt-postbackurl");
+        if (action != "POST") {
             const routeid = $("#crudActionDialog").data("nt-route-id");
             postbackurl = postbackurl + "/" + routeid;
+            loadItemUrl = loadItemUrl + "/" + routeid;
         }
         const view = $("#crudActionDialog").data("nt-view");
         const container = $("#crudActionDialog").data("nt-container");
@@ -123,7 +124,7 @@ $(document).ready(function () {
         formData.append("container", container);
         formData.append("template", template);
 
-        ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl + "/" + routeid, container, template);
+        ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, container, template);
     });
 
     $("#crudActionDialog .btn-nt-pagination").click(function (e) {
@@ -166,7 +167,13 @@ $(document).ready(function () {
 });
 
 function closeDialog() {
-    $(".nt-listitem").removeClass("nt-current border-info border-5");
+    //if (view == "List") {
+    //    $(".nt-listitem").removeClass("nt-current border-info border-5");
+    //}
+    //else { // Tiles
+    //    $(".nt-listitem .card").removeClass("border-info border-5");
+    //    $(".nt-listitem").removeClass("nt-current");
+    //}
     const action = $("#crudActionDialog").data("nt-action");
     setTimeout(() => {
         if (action === "PUT" || action === "POST") { // Edit/Create, do nothing
@@ -247,11 +254,21 @@ function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, 
             if (action === "PUT") { // EDIT 
                 if (actionSuccess) {
                     // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
-                    $(".nt-listitem.nt-current").removeClass("border-info border-5");
-                    $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
+                    if (view == "List") {
+                        $(".nt-listitem.nt-current").removeClass("border-info border-5");
+                        $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
+                    }
+                    else { // Tiles
+                        $(".nt-listitem.nt-current .card").removeClass("border-info border-5");
+                        $(".nt-listitem.nt-current").addClass("nt-updated");
+                        $(".nt-listitem.nt-current .card").addClass("border-success border-4");
+                    }
                 }
                 if (splitResponse.length > 1) {
                     $(".nt-listitem.nt-current").html(splitResponse[1]);
+                    if (view == "Tiles") {
+                        $(".nt-listitem.nt-current .card").addClass("border-success border-4");
+                    }
                 }
                 $(self).removeAttr("disabled");
             }
@@ -259,8 +276,12 @@ function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, 
                 // .nt-created .border-warning .border-4 added in the response
                 if (splitResponse.length > 1) {
                     if (view === "List") { // html table
-                        let theTbody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
-                        theTbody.prepend(splitResponse[1]);
+                        let theBody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
+                        theBody.prepend(splitResponse[1]);
+                    }
+                    else { // Tile
+                        let theBody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " .nt-list-container-submit");
+                        theBody.prepend(splitResponse[1]);
                     }
                 }
 
@@ -273,7 +294,13 @@ function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, 
             else if (action === "DELETE") {
                 if (actionSuccess) {
                     // Mark as .nt-deleted .border-danger .border-5. will be deleted when Dialog/Modal closed
-                    $(".nt-listitem.nt-current").addClass("nt-deleted border-danger border-3");
+                    if (view == "List") {
+                        $(".nt-listitem.nt-current").addClass("nt-deleted border-danger border-3");
+                    }
+                    else { // Tiles
+                        $(".nt-listitem.nt-current").addClass("nt-deleted");
+                        $(".nt-listitem.nt-current .card").addClass("border-danger border-3");
+                    }
                 }
             }
         },
@@ -297,7 +324,12 @@ function initializeModal(button, action, view, container, template, loadItemUrl,
     $(".nt-list-wrapper").removeClass("nt-current");
     if (action != "POST") { // set .nt-current when not Create
         $(button).closest(".nt-listitem").addClass("nt-current");
-        $(button).closest(".nt-listitem").addClass("border-info border-5");
+        if (view == "List") {
+            $(button).closest(".nt-listitem").addClass("border-info border-5");
+        }
+        else { // Tiles
+            $(button).closest(".nt-listitem .card").addClass("border-info border-5");
+        }
         
         $(button).closest(".nt-list-container-submit").addClass("nt-current");
         $(button).closest(".nt-list-wrapper").addClass("nt-current");
@@ -341,4 +373,5 @@ function initializeModal(button, action, view, container, template, loadItemUrl,
         $("#crudActionDialog .modal-footer .btn-group-nt-action-details").show();
         $("#crudActionDialog .modal-footer .btn-group-nt-action-pagination").show();
     }
+    $("#crudActionDialog .modal-footer .btn-group").removeAttr("disabled");
 }

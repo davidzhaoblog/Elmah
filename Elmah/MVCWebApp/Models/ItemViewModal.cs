@@ -1,6 +1,6 @@
 namespace Elmah.MvcWebApp.Models
 {
-    public class ListItemViewModal<TModel>
+    public class ItemViewModal<TModel>
         where TModel : class
     {
         public System.Net.HttpStatusCode Status { get; set; }
