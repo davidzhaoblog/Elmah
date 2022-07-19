@@ -6,7 +6,7 @@
  * data-nt-queryparamname
  * 
  * .nt-ddlcascading
- */ 
+ */
 $(".nt-ddlcascading").change(function (e) {
     const childlisturl = $(this).data("childlisturl");
     const targetchild = $(this).data("targetchild");
@@ -16,7 +16,7 @@ $(".nt-ddlcascading").change(function (e) {
     };
 
     var sameTargetChilds = $('select[data-targetchild="' + targetchild + '"]');
-    console.log(sameTargetChilds);
+    // console.log(sameTargetChilds);
     $.each(sameTargetChilds, function (index, item) {
         const selectedValue = $(item).find(":selected").val();
         const queryparamname = $(item).data("nt-queryparamname");
@@ -32,9 +32,9 @@ $(".nt-ddlcascading").change(function (e) {
         dataType: "html",
         success: function (response) {
             if (response.status == 200 && !!response.responseBody) {
-                console.log($('select[name="' + targetchild + '"]'));
+                // console.log($('select[name="' + targetchild + '"]'));
                 let firstOption = $('select[name="' + targetchild + '"] option:first-child').attr("selected", 'selected')
-                console.log(firstOption);
+                // console.log(firstOption);
                 $('select[name="' + targetchild + '"]').empty();
                 $('select[name="' + targetchild + '"]').append(firstOption);
                 $.each(response.responseBody, function (index, item) {
@@ -197,7 +197,7 @@ $(document).ready($(function () {
 /*
  * .nt-advanced-search-button
  * .nt-advanced-search-field
- */ 
+ */
 $(document).ready($(function () {
     $('.nt-advanced-search-button').click(function (e) {
         $('.nt-advanced-search-field div div select').val('')
@@ -357,7 +357,7 @@ $(document).ready($(function () {
         $($(this).data("nt-paginationoptionupdatetarget")).val($(this).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
         $($(this).data("nt-updatetarget")).val($(this).data("nt-value"));
         $($(this).data("nt-submittarget")).submit();
-        console.log($(location));
+        // console.log($(location));
         // Update QueryString - view with data-nt-value attribute
         let queryParams = new URLSearchParams(window.location.search);
         queryParams.set("PagedViewOption", $(this).data("nt-value"));

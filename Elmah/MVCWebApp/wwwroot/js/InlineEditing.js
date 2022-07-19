@@ -55,17 +55,20 @@
  * .nt-hidden-modal-title, server side render modal title to a hidden field, will set to .modal-title // not in inline-editing
  */
 
-
 $(document).ready(function () {
+    attachInlineEditingLaunchButtonClickEvent();
+})
+
+function attachInlineEditingLaunchButtonClickEvent() {
     $(".btn-nt-inline-editing").click(function (e) {
-        let button = event.currentTarget;
+        let button = e.currentTarget;
         const currentListItem = $(button).closest(".nt-listitem");
         const wrapper = $(button).closest(".nt-list-wrapper");
         const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
         const container = $(button).data("nt-container");
         const template = $(button).data("nt-template");
         const action = $(button).data("nt-action");
-        //let postbackurl = "";
+
         let routeid = ""
         if (action == "POST") { // Create
             routeid = $(button).data("nt-route-id");
@@ -79,9 +82,33 @@ $(document).ready(function () {
         // 3. Ajax to get htmls
         ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action);
     });
+}
 
+function attachInlineEditingCancelButtonClickEvent() {
+    $(".nt-listitem.nt-current .btn-nt-action-cancel").click(function (e) {
+        const self = this;
+        $(this).attr("disabled", true);
+        let button = e.currentTarget;
+        const currentListItem = $(button).closest(".nt-listitem");
+        const wrapper = $(button).closest(".nt-list-wrapper");
+        const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
+        const container = "Inline";
+        const template = "Details";
+        const action = $(button).data("nt-action");
+        
+        let routeid = ""
+        if (action == "POST") { // Create
+            routeid = $(button).data("nt-route-id");
+        }
+        else {
+            routeid = $(button).closest(".nt-listitem").data("nt-route-id");
+        }
 
-});
+        const loadItemUrl = $(wrapper).data("nt-loaditem-url");
+
+        ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action);
+    });
+}
 
 function attachInlineEditingActionButtonClickEvent_InTable() {
     $(".nt-listitem.nt-current .btn-nt-action").click(function (e) {
@@ -269,21 +296,27 @@ function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container
         async: false,
         contentType: "application/json",
         success: function (response) {
-            // 3.1. add response html to .nt-listitem.nt-current
-            if (action == "PUT" || action == "POST") {
-                if (action == "POST") { // Create, keep the current <td> which contains the Create <button>
-                    $(currentListItem).find(".nt-createnew-button-container").hide();
-                }
+            // 1. add response html to .nt-listitem.nt-current
+            // 2.1. when List POST/Create, PUT/Edit, no <form>...</form>, because html DOM doesn't allow <form>...</form> around <td/> or <tr/>
+            // 2.2. when Tiles POST/Create, PUT/Edit, <form>...</form> is around .card-body and .card-footer
+            // 2.3. when Lists/Tiles DELETE/Delete, <form>...</form> is round the button with hidden input which contains value of identifier query property.
+            if (action == "POST") { // Create, keep the current, .nt-createnew-button-container, <td> when List, which contains the Create <button>
+                $(currentListItem).find(".nt-createnew-button-container").hide();
                 currentListItem.prepend(response);
+            }
+            else if (action == "PUT") {
+                currentListItem.html(response);
             }
             else { // DELETE, <form>...</form> wrapped around .nt-btn-action-delete
                 currentListItem.html(response);
             }
-            if (view === "List") {// InTable
+            if (view === "List") {// In HtmlTable
                 attachInlineEditingActionButtonClickEvent_InTable();
+                attachInlineEditingCancelButtonClickEvent();
             }
-            else { // InTiles
+            else { // In Tiles
                 attachInlineEditingActionButtonClickEvent_InTiles();
+                attachInlineEditingCancelButtonClickEvent();
             }
             // console.log(response);
         },

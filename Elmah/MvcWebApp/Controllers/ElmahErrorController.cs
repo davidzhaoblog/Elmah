@@ -129,12 +129,28 @@ namespace Elmah.MvcWebApp.Controllers
                 await LoadIndexViewTopLevelSelectLists();
             }
 
-            ViewBag.Template = template;
             if (view == PagedViewOptions.List && container == CrudViewContainers.Inline)
             {
+                ViewBag.Template = template;
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
                 return PartialView($"_List{template}Item", result);
+            }
+            if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
+            {
+                // By Default: _List{template}Item.cshtml
+                // Developer can customize template name
+                return PartialView($"_Tile{template}Item", 
+                    new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                    {
+                        Status = System.Net.HttpStatusCode.OK,
+                        Template = template,
+                        IsCurrentItem = true,
+                        HtmlNamePrefix = "Model.ResponseBody",
+                        HtmlNameUseArrayIndex = true,
+                        IndexInArray = 1,
+                        Model = result
+                    });
             }
             // By Default: _{template}.cshtml
             // Developer can customize template name
