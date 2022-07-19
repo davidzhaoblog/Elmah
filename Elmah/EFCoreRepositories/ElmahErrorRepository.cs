@@ -72,13 +72,7 @@ namespace Elmah.EFCoreRepositories
                 select new ElmahErrorModel.DefaultView
                 {
 
-                        Application_Name = Application.Application,
                         ErrorId = t.ErrorId,
-                        Host_Name = Host.Host,
-                        Source_Name = Source.Source,
-                        StatusCode_Name = StatusCode.Name,
-                        Type_Name = Type.Type,
-                        User_Name = User.User,
                         Application = t.Application,
                         Host = t.Host,
                         Type = t.Type,
@@ -89,6 +83,12 @@ namespace Elmah.EFCoreRepositories
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
+                        Application_Name = Application.Application,
+                        Host_Name = Host.Host,
+                        Source_Name = Source.Source,
+                        StatusCode_Name = StatusCode.Name,
+                        Type_Name = Type.Type,
+                        User_Name = User.User,
                 };
 
             // 1. Without Paging And OrderBy
@@ -180,13 +180,7 @@ namespace Elmah.EFCoreRepositories
                     select new ElmahErrorModel.DefaultView
                     {
 
-                        Application_Name = Application.Application,
                         ErrorId = t.ErrorId,
-                        Host_Name = Host.Host,
-                        Source_Name = Source.Source,
-                        StatusCode_Name = StatusCode.Name,
-                        Type_Name = Type.Type,
-                        User_Name = User.User,
                         Application = t.Application,
                         Host = t.Host,
                         Type = t.Type,
@@ -197,6 +191,12 @@ namespace Elmah.EFCoreRepositories
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
+                        Application_Name = Application.Application,
+                        Host_Name = Host.Host,
+                        Source_Name = Source.Source,
+                        StatusCode_Name = StatusCode.Name,
+                        Type_Name = Type.Type,
+                        User_Name = User.User,
 
                     }).First();
 
@@ -239,13 +239,7 @@ namespace Elmah.EFCoreRepositories
                     select new ElmahErrorModel.DefaultView
                     {
 
-                        Application_Name = Application.Application,
                         ErrorId = t.ErrorId,
-                        Host_Name = Host.Host,
-                        Source_Name = Source.Source,
-                        StatusCode_Name = StatusCode.Name,
-                        Type_Name = Type.Type,
-                        User_Name = User.User,
                         Application = t.Application,
                         Host = t.Host,
                         Type = t.Type,
@@ -256,6 +250,12 @@ namespace Elmah.EFCoreRepositories
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
+                        Application_Name = Application.Application,
+                        Host_Name = Host.Host,
+                        Source_Name = Source.Source,
+                        StatusCode_Name = StatusCode.Name,
+                        Type_Name = Type.Type,
+                        User_Name = User.User,
 
                     }).First();
                 if (responseBody == null)
@@ -311,13 +311,7 @@ namespace Elmah.EFCoreRepositories
                     select new ElmahErrorModel.DefaultView
                     {
 
-                        Application_Name = Application.Application,
                         ErrorId = t.ErrorId,
-                        Host_Name = Host.Host,
-                        Source_Name = Source.Source,
-                        StatusCode_Name = StatusCode.Name,
-                        Type_Name = Type.Type,
-                        User_Name = User.User,
                         Application = t.Application,
                         Host = t.Host,
                         Type = t.Type,
@@ -328,6 +322,12 @@ namespace Elmah.EFCoreRepositories
                         TimeUtc = t.TimeUtc,
                         Sequence = t.Sequence,
                         AllXml = t.AllXml,
+                        Application_Name = Application.Application,
+                        Host_Name = Host.Host,
+                        Source_Name = Source.Source,
+                        StatusCode_Name = StatusCode.Name,
+                        Type_Name = Type.Type,
+                        User_Name = User.User,
 
                     }).First();
 

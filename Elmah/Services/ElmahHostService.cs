@@ -50,7 +50,7 @@ namespace Elmah.Services
 
             // 4. ListTable = 4,
 
-            if (dataOptions == null || dataOptions.Contains(ElmahHostCompositeModel.__DataOptions__.ElmahErrors))
+            if (dataOptions == null || dataOptions.Contains(ElmahHostCompositeModel.__DataOptions__.ElmahErrors_Via_Host))
             {
                 tasks.Add(Task.Run(async () =>
                 {
@@ -59,10 +59,10 @@ namespace Elmah.Services
                         var _elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
                         var query = new ElmahErrorAdvancedQuery { Host = id.Host, PageIndex = 1, PageSize = 5, OrderBys="TimeUtc~DESC" };
                         var response = await _elmahErrorRepository.Search(query);
-                        responses.TryAdd(ElmahHostCompositeModel.__DataOptions__.ElmahErrors, new Response { Status = response.Status, StatusMessage = response.StatusMessage });
+                        responses.TryAdd(ElmahHostCompositeModel.__DataOptions__.ElmahErrors_Via_Host, new Response { Status = response.Status, StatusMessage = response.StatusMessage });
                         if (response.Status == HttpStatusCode.OK)
                         {
-                            successResponse.ElmahErrors = response.ResponseBody;
+                            successResponse.ElmahErrors_Via_Host = response.ResponseBody;
                         }
                     }
                 }));

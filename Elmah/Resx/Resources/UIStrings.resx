@@ -367,14 +367,29 @@
   <data name="Tab_Lists" xml:space="preserve">
     <value>Lists</value>
   </data>
-  <data name="Section_ElmahErrors" xml:space="preserve">
-    <value>Elmah Errors</value>
+  <data name="Section_ElmahErrors_Via_Application" xml:space="preserve">
+    <value>Elmah Errors  Via  Application</value>
   </data>
   <data name="SpatialLocation" xml:space="preserve">
     <value>Spatial Location</value>
   </data>
+  <data name="Section_ElmahErrors_Via_Host" xml:space="preserve">
+    <value>Elmah Errors  Via  Host</value>
+  </data>
+  <data name="Section_ElmahErrors_Via_Source" xml:space="preserve">
+    <value>Elmah Errors  Via  Source</value>
+  </data>
   <data name="The_length_of_Name_should_be_0_to_50" xml:space="preserve">
     <value>The length of Name should be 0 to 50</value>
+  </data>
+  <data name="Section_ElmahErrors_Via_StatusCode" xml:space="preserve">
+    <value>Elmah Errors  Via  Status Code</value>
+  </data>
+  <data name="Section_ElmahErrors_Via_Type" xml:space="preserve">
+    <value>Elmah Errors  Via  Type</value>
+  </data>
+  <data name="Section_ElmahErrors_Via_User" xml:space="preserve">
+    <value>Elmah Errors  Via  User</value>
   </data>
 
 </root>

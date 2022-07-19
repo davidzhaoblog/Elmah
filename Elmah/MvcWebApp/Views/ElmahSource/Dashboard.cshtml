@@ -16,15 +16,15 @@
         <div class="tab-content" id="dashboardTabContent">
             <div class="tab-pane fade show active" id="lists" role="tabpanel" aria-labelledby="lists-tab">
                 <div class="accordion" id="listsPanels">
-                    @if (Model!.Responses.ContainsKey(ElmahSourceCompositeModel.__DataOptions__.ElmahErrors))
+                    @if (Model!.Responses.ContainsKey(ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source))
                     {
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-heading-elmahErrors">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-elmahErrors" aria-expanded="true" aria-controls="panelsStayOpen-elmahErrors">
-                                    @localizor.Get("Section_ElmahErrors")
+                            <h2 class="accordion-header" id="panelsStayOpen-heading-elmahErrors_Via_Source">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-elmahErrors_Via_Source" aria-expanded="true" aria-controls="panelsStayOpen-elmahErrors_Via_Source">
+                                    @localizor.Get("Section_ElmahErrors_Via_Source")
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapse-elmahErrors" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors">
+                            <div id="panelsStayOpen-collapse-elmahErrors_Via_Source" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors_Via_Source">
                                 <div class="accordion-body p-0">
                                     <div class="btn-group float-end">
                                         <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
@@ -32,7 +32,7 @@
                                             @localizor.Get("Search")
                                         </a>
                                     </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors_Via_Source, Status = Model.Responses[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source].Status, StatusMessage= Model.Responses[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source].StatusMessage })
                                 </div>
                             </div>
                         </div>

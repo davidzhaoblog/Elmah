@@ -807,11 +807,11 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "Elmah Errors"".
+        ///   Looks up a localized string similar to "Elmah Errors  Via  Application"".
         /// </summary>
-        public static string Section_ElmahErrors {
+        public static string Section_ElmahErrors_Via_Application {
             get {
-                return ResourceManager.GetString("Section_ElmahErrors", resourceCulture);
+                return ResourceManager.GetString("Section_ElmahErrors_Via_Application", resourceCulture);
             }
         }
 
@@ -825,11 +825,56 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Elmah Errors  Via  Host"".
+        /// </summary>
+        public static string Section_ElmahErrors_Via_Host {
+            get {
+                return ResourceManager.GetString("Section_ElmahErrors_Via_Host", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Elmah Errors  Via  Source"".
+        /// </summary>
+        public static string Section_ElmahErrors_Via_Source {
+            get {
+                return ResourceManager.GetString("Section_ElmahErrors_Via_Source", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "The length of Name should be 0 to 50"".
         /// </summary>
         public static string The_length_of_Name_should_be_0_to_50 {
             get {
                 return ResourceManager.GetString("The_length_of_Name_should_be_0_to_50", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Elmah Errors  Via  Status Code"".
+        /// </summary>
+        public static string Section_ElmahErrors_Via_StatusCode {
+            get {
+                return ResourceManager.GetString("Section_ElmahErrors_Via_StatusCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Elmah Errors  Via  Type"".
+        /// </summary>
+        public static string Section_ElmahErrors_Via_Type {
+            get {
+                return ResourceManager.GetString("Section_ElmahErrors_Via_Type", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Elmah Errors  Via  User"".
+        /// </summary>
+        public static string Section_ElmahErrors_Via_User {
+            get {
+                return ResourceManager.GetString("Section_ElmahErrors_Via_User", resourceCulture);
             }
         }
 

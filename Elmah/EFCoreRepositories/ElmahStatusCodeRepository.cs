@@ -254,8 +254,8 @@ namespace Elmah.EFCoreRepositories
                 select new NameValuePair
                 {
 
-                        Value = t.StatusCode.ToString(),
                         Name = t.Name,
+                        Value = t.StatusCode.ToString(),
                 };
 
             // 1. Without Paging And OrderBy
