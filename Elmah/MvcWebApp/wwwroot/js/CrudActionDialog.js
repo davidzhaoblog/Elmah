@@ -199,6 +199,8 @@ function closeDialog() {
     // 4. hide Save/Delete button groups
     $("#crudActionDialog .modal-footer .btn-group-nt-action-save").hide();
     $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").hide();
+
+    // 5. 
 }
 
 function ajaxLoadItemWhenDialog(loadItemUrl, view, container, template, action) {

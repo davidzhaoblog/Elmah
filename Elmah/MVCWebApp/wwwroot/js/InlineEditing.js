@@ -56,11 +56,11 @@
  */
 
 $(document).ready(function () {
-    attachInlineEditingLaunchButtonClickEvent();
+    attachInlineEditingLaunchButtonClickEvent(".btn-nt-inline-editing"); // all
 })
 
-function attachInlineEditingLaunchButtonClickEvent() {
-    $(".btn-nt-inline-editing").click(function (e) {
+function attachInlineEditingLaunchButtonClickEvent(selector) {
+    $(selector).click(function (e) {
         let button = e.currentTarget;
         const currentListItem = $(button).closest(".nt-listitem");
         const wrapper = $(button).closest(".nt-list-wrapper");
@@ -95,7 +95,7 @@ function attachInlineEditingCancelButtonClickEvent() {
         const container = "Inline";
         const template = "Details";
         const action = $(button).data("nt-action");
-        
+
         let routeid = ""
         if (action == "POST") { // Create
             routeid = $(button).data("nt-route-id");
@@ -197,25 +197,23 @@ function ajaxPostbackInlineEditing_InTable(postbackurl, formData, self, view, lo
                     if (actionSuccess) {
                         if (action === "PUT") { // EDIT
                             // When EDIT, insert a new tr after ".nt-listitem.nt-current", then remove it after 3 seconds.
-                            if (actionSuccess) {
-                                // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
-                                $(".nt-listitem.nt-current").removeClass("border-info border-5");
-                                $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
-                            }
+                            // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
+                            $(".nt-listitem.nt-current").removeClass("border-info border-5");
+                            $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
                             if (splitResponse.length > 1) {
                                 $(".nt-listitem.nt-current").html(splitResponse[1]);
+                                attachInlineEditingLaunchButtonClickEvent(".nt-listitem.nt-current .btn-nt-inline-editing");
                             }
                             $(self).removeAttr("disabled");
                         }
                         else if (action === "POST") { // Create
                             // .nt-created .border-warning .border-4 added in the response
                             if (splitResponse.length > 1) {
-                                if (view === "List") { // html table
-                                    const toAppend = $(splitResponse[1]);
-                                    let theTbody = $(self).closest("table").find("tbody");
-                                    theTbody.prepend($(toAppend));
-                                    $(toAppend).get(0).scrollIntoView();
-                                }
+                                const toAppend = $(splitResponse[1]);
+                                let theTbody = $(self).closest("table").find("tbody");
+                                theTbody.append($(toAppend)); // new item at the last place
+                                $(toAppend).get(0).scrollIntoView();
+                                attachInlineEditingLaunchButtonClickEvent($(toAppend).children(".btn-nt-inline-editing"));
                             }
                             const createNewButton = $(self).closest(".nt-listitem").find(".nt-createnew-button-container");
                             const listItem = $(self).closest(".nt-listitem");
@@ -357,29 +355,34 @@ function ajaxPostbackInlineEditing_InTiles(postbackurl, formData, self, view, lo
                 const actionSuccess = !!($(".popover .popover-body .text-success").length); // not exists when length=0
                 setTimeout(() => {
                     $(self).popover('hide')
-                    if (action === "PUT") { // EDIT
-                        // When EDIT, insert a new tr after ".nt-listitem.nt-current", then remove it after 3 seconds.
-                        if (actionSuccess) {
+                    $(self).removeAttr("disabled");
+                    if (actionSuccess) {
+                        if (action === "PUT") { // EDIT
+                            // When EDIT, insert a new tr after ".nt-listitem.nt-current", then remove it after 3 seconds.
                             // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
                             $(".nt-listitem.nt-current").removeClass("border-info border-5");
                             $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
-                        }
-                        if (splitResponse.length > 1) {
-                            $(".nt-listitem.nt-current").html(splitResponse[1]);
-                        }
-                        $(self).removeAttr("disabled");
-                    }
-                    else if (action === "POST") { // Create
-                        // .nt-created .border-warning .border-4 added in the response
-                        if (splitResponse.length > 1) {
-                            if (view === "List") { // html table
-                                let theTbody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
-                                theTbody.prepend(splitResponse[1]);
+                            if (splitResponse.length > 1) {
+                                $(".nt-listitem.nt-current").html(splitResponse[1]);
+                                attachInlineEditingLaunchButtonClickEvent(".nt-listitem.nt-current .btn-nt-inline-editing");
                             }
+                            $(self).removeAttr("disabled");
                         }
-                    }
-                    else if (action === "DELETE") {
-                        if (actionSuccess) {
+                        else if (action === "POST") { // Create
+                            // .nt-created .border-warning .border-4 added in the response
+                            if (splitResponse.length > 1) {
+                                const toAppend = $(splitResponse[1]);
+                                const thisListItem = $(self).closest(".nt-listitem");
+                                toAppend.insertBefore(thisListItem);
+                                attachInlineEditingLaunchButtonClickEvent($(toAppend).children(".btn-nt-inline-editing"));
+                            }
+                            const createNewButton = $(self).closest(".nt-listitem").find(".nt-createnew-button-container");
+                            const listItem = $(self).closest(".nt-listitem");
+                            const createNewFormControls = $(listItem).children(":not(.nt-createnew-button-container)");
+                            createNewFormControls.remove();
+                            $(createNewButton).show();
+                        }
+                        else if (action === "DELETE") {
                             // Mark as .nt-deleted .border-danger .border-5. will be deleted when Dialog/Modal closed
                             $(".nt-listitem.nt-current").addClass("nt-deleted border-danger border-3");
                         }

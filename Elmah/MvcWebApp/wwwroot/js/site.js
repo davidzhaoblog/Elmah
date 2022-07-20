@@ -362,6 +362,9 @@ $(document).ready($(function () {
         let queryParams = new URLSearchParams(window.location.search);
         queryParams.set("PagedViewOption", $(this).data("nt-value"));
         history.pushState(null, null, "?" + queryParams.toString());
+
+        $(".btn-nt-inline-editing").off();
+        attachInlineEditingLaunchButtonClickEvent(".btn-nt-inline-editing");
     });
 }));
 // 6.End. PagedViewOptions clicked
