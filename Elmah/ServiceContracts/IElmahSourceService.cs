@@ -22,7 +22,6 @@ namespace Elmah.ServiceContracts
 
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahSourceAdvancedQuery query);
-
     }
 }
 

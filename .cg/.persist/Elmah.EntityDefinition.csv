@@ -1,8 +1,8 @@
-﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,IsEnum,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,UIPrimaryRouteId,CompositeQueryIdentifiers,CreatedDate,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,DownwardListTableOfListTable
-dbo,ELMAH_Error,TRUE,CrossReferenceTable,,,FALSE,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
-dbo,ElmahApplication,TRUE,DetailsTable,,,FALSE,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
-dbo,ElmahHost,TRUE,DetailsTable,,,FALSE,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
-dbo,ElmahSource,TRUE,DetailsTable,,,FALSE,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
-dbo,ElmahStatusCode,TRUE,DetailsTable,,,FALSE,Name,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
-dbo,ElmahType,TRUE,DetailsTable,,,FALSE,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
-dbo,ElmahUser,TRUE,DetailsTable,,,FALSE,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,NameDefinition,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,UIPrimaryRouteId,CompositeQueryIdentifiers,CreatedDate,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,DownwardListTableOfListTable
+dbo,ELMAH_Error,TRUE,CrossReferenceTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahApplication,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahHost,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahSource,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahStatusCode,TRUE,DetailsTable,,,,Name,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahType,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahUser,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,

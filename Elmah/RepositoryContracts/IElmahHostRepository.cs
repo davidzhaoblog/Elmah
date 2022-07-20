@@ -18,7 +18,6 @@ namespace Elmah.RepositoryContracts
 
         Task<PagedResponse<NameValuePair[]>> GetCodeList(
             ElmahHostAdvancedQuery query);
-
     }
 }
 

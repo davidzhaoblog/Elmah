@@ -57,7 +57,6 @@ namespace Elmah.Services
         {
             return await _thisRepository.Delete(id);
         }
-
     }
 }
 

@@ -112,7 +112,6 @@ namespace Elmah.Services
         {
             return await _thisRepository.GetCodeList(query);
         }
-
     }
 }
 
