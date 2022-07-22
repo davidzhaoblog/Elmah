@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
+using EFCore.BulkExtensions;
 
 namespace Elmah.EFCoreRepositories
 {
@@ -29,12 +30,12 @@ namespace Elmah.EFCoreRepositories
             var queryable =
                 from t in _dbcontext.ELMAH_Error
 
-                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
-                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
-                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
-                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
-                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
-                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
+                join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                 where
 
                     (string.IsNullOrEmpty(query.TextSearch) ||
@@ -72,23 +73,23 @@ namespace Elmah.EFCoreRepositories
                 select new ElmahErrorModel.DefaultView
                 {
 
-                        Application_Name = Application.Application,
-                        ErrorId = t.ErrorId,
-                        Host_Name = Host.Host,
-                        Source_Name = Source.Source,
-                        StatusCode_Name = StatusCode.Name,
-                        Type_Name = Type.Type,
-                        User_Name = User.User,
-                        Application = t.Application,
-                        Host = t.Host,
-                        Type = t.Type,
-                        Source = t.Source,
-                        Message = t.Message,
-                        User = t.User,
-                        StatusCode = t.StatusCode,
-                        TimeUtc = t.TimeUtc,
-                        Sequence = t.Sequence,
-                        AllXml = t.AllXml,
+                    Application_Name = Application.Application,
+                    ErrorId = t.ErrorId,
+                    Host_Name = Host.Host,
+                    Source_Name = Source.Source,
+                    StatusCode_Name = StatusCode.Name,
+                    Type_Name = Type.Type,
+                    User_Name = User.User,
+                    Application = t.Application,
+                    Host = t.Host,
+                    Type = t.Type,
+                    Source = t.Source,
+                    Message = t.Message,
+                    User = t.User,
+                    StatusCode = t.StatusCode,
+                    TimeUtc = t.TimeUtc,
+                    Sequence = t.Sequence,
+                    AllXml = t.AllXml,
                 };
 
             // 1. Without Paging And OrderBy
@@ -120,7 +121,7 @@ namespace Elmah.EFCoreRepositories
                 return new PagedResponse<ElmahErrorModel.DefaultView[]>
                 {
                     Status = HttpStatusCode.OK,
-                    Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
+                    Pagination = new PaginationResponse(totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
                     ResponseBody = result,
                 };
             }
@@ -276,17 +277,17 @@ namespace Elmah.EFCoreRepositories
             {
                 var toInsert = new ElmahError
                 {
-                            ErrorId = Guid.NewGuid(),
-                            Application = input.Application,
-                            Host = input.Host,
-                            Type = input.Type,
-                            Source = input.Source,
-                            Message = input.Message,
-                            User = input.User,
-                            StatusCode = input.StatusCode,
-                            TimeUtc = input.TimeUtc,
-                            Sequence = input.Sequence,
-                            AllXml = input.AllXml,
+                    ErrorId = Guid.NewGuid(),
+                    Application = input.Application,
+                    Host = input.Host,
+                    Type = input.Type,
+                    Source = input.Source,
+                    Message = input.Message,
+                    User = input.User,
+                    StatusCode = input.StatusCode,
+                    TimeUtc = input.TimeUtc,
+                    Sequence = input.Sequence,
+                    AllXml = input.AllXml,
                 };
                 await _dbcontext.ELMAH_Error.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
@@ -367,6 +368,43 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
+        private IQueryable<Elmah.EFCoreContext.ElmahError> GetByIdentifierQueryListQuery(
+            List<ElmahErrorIdentifier> ids)
+        {
+            var idList = ids.Select(t => t.ErrorId).ToList();
+
+            var queryable =
+                from t in _dbcontext.ELMAH_Error
+
+                join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                join User in _dbcontext.ElmahUser on t.User equals User.User// \User
+                where idList.Contains(t.ErrorId)
+                select t;
+
+            return queryable;
+        }
+
+        public async Task<Response> BatchDelete(List<ElmahErrorIdentifier> ids)
+        {
+            try
+            {
+                var querable = GetByIdentifierQueryListQuery(ids);
+                var result = await querable.BatchDeleteAsync();
+
+                return await Task<Response>.FromResult(
+                    new Response
+                    {
+                        Status = HttpStatusCode.OK,
+                    });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
     }
 }
-

@@ -3,12 +3,12 @@
 @*only one CrudActionDialog instance is allowed on the same page*@
 @inject IUIStrings localizor;
 <div class="modal fade" id="simpleActionConfirmationDialog" tabindex="-1" aria-labelledby="simpleActionConfirmationDialogLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body nt-modal-body">
             </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <div class="btn-group btn-group-nt-action-save">
+            <div class="modal-footer">
+                <div class="btn-group d-flex justify-content-end">
                     <div>
                         <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
                             <i class="fa-solid fa-circle-xmark"></i><span class="ms-1 submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Close")</span>

@@ -241,7 +241,10 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> AjaxBatchDelete(
             [FromForm] Framework.Models.BatchActionViewModel<ElmahErrorIdentifier> data)
         {
-            return await Task.FromResult(PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { }));
+            var result = await _thisService.BatchDelete(data.Ids);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.

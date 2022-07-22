@@ -58,6 +58,11 @@ namespace Elmah.Services
             return await _thisRepository.Delete(id);
         }
 
+        public async Task<Response> BatchDelete(List<ElmahErrorIdentifier> ids)
+        {
+            return await _thisRepository.BatchDelete(ids);
+        }
+
     }
 }
 

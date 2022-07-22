@@ -16,6 +16,7 @@ namespace Elmah.RepositoryContracts
 
         Task<Response> Delete(ElmahErrorIdentifier id);
 
+        Task<Response> BatchDelete(List<ElmahErrorIdentifier> ids);
     }
 }
 
