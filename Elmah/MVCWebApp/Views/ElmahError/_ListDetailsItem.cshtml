@@ -3,6 +3,9 @@
 @using Elmah.Resx;
 @model ElmahErrorModel.DefaultView
 @inject IUIStrings localizor;
+<td class="pt-0 pb-0 nt-list-batchselect">
+    <input class="form-check-input ms-1" type="checkbox" value="">
+</td>
 <td class="p-0">
     <div class="btn-group btn-group-nt-actions">
         <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="Model?.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
@@ -21,6 +24,11 @@
                 data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
             <i class="fa fa-edit"></i>
         </button>
+        <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+            <i class="fa fa-edit"></i>
+        </button>
         <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="Model?.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
             <i class="fa fa-trash"></i>
         </a>
@@ -29,10 +37,15 @@
                 data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
             <i class="fa fa-trash"></i>
         </button>
+        <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+            <i class="fa fa-trash"></i>
+        </button>
     </div>
 </td>
 <td class="pt-0 pb-0">@Model?.ErrorId</td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
+<td class="pt-0 pb-0" data-nt-filter-Application="@Model?.Application"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model?.Host">@Model?.Host_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model?.Type">@Model?.Type_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model?.Source">@Model?.Source_Name</a></td>

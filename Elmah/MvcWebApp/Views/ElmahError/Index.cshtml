@@ -128,12 +128,14 @@
      data-nt-pagination-updatetarget="#pageIndexH"
      data-nt-submittarget="#thisform"
      data-nt-bs-modalsize=""
+     data-nt-route-id-def="ErrorId"
      data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahError")"
      data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")"
      data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")"
-     data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahError")">
+     data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahError")"
+     data-nt-batchdelete-url="@Url.Action("AjaxBatchDelete", "ElmahError")">
     <div class="card-header">
-        <h3 class="card-title float-start m-0"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
+        <h3 class="card-title float-start"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(currentView.ToLower()==PagedViewOptions.List.ToString().ToLower() ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
@@ -146,7 +148,7 @@
             <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#pageSizeH" data-nt-submittarget="#thisform"></select>
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
         </div>
-        <div class="btn-group float-end mt-1">
+        <div class="btn-group float-end mt-1 ms-3">
             <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
                 <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
             </a>
@@ -156,6 +158,11 @@
                     data-nt-container="@CrudViewContainers.Dialog.ToString()"
                     data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                 <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </button>
+        </div>
+        <div class="btn-group float-end mt-1">
+            <button type="button" class="btn btn-secondary nt-batch-action-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog" title="@localizor.Get("Delete")">
+                <i class="fa fa-trash"></i>
             </button>
         </div>
     </div>
@@ -175,3 +182,4 @@
     </div>
 </div>
 <partial name="~/Views/Shared/_CrudActionDialog.cshtml" />
+<partial name="~/Views/Shared/_SimpleActionConfirmationDialog.cshtml" />

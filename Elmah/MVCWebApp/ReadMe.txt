@@ -16,6 +16,6 @@
 6.2. add one "OnUISummary".
 
 
-<label class="control-label" for="ResponseBody_0__Sequence">Sequence</label>
-<label class="control-label" for="ResponseBody_0__TimeUtc">Sequence</label>
-<input class="form-control" readonly="" type="number" data-val="true" data-val-required="The Sequence field is required." id="ResponseBody_0__Sequence" name="ResponseBody[0].Sequence" value="1">
+<i class="fa-regular fa-square-check"></i>
+<i class="fa-regular fa-square"></i>
+<i class="fa-regular fa-square-minus"></i>

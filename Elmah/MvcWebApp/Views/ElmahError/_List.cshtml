@@ -4,108 +4,85 @@
 @model PagedResponse<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
-                        <form>
-
-    <table class="table table-hover table-bordered table-striped">
-        <thead class="table-dark">
-            <tr class="pt-0 pb-0">
-                <th class="p-0"></th>
-                <th class="pt-0 pb-0">@localizor.Get("ErrorId")</th>
-                <th class="pt-0 pb-0">@localizor.Get("Application")</th>
-                <th class="pt-0 pb-0">@localizor.Get("Host")</th>
-                <th class="pt-0 pb-0">@localizor.Get("Type")</th>
-                <th class="pt-0 pb-0">@localizor.Get("Source")</th>
-                <th class="pt-0 pb-0">@localizor.Get("Message")</th>
-                <th class="pt-0 pb-0">@localizor.Get("User")</th>
-                <th class="pt-0 pb-0">@localizor.Get("StatusCode")</th>
-                <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
-                <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
-                <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
-            {
-                for (var i = 0; i < Model.ResponseBody.Length; i++)
+    <form>
+        <table class="table table-hover table-bordered table-striped">
+            <thead class="table-dark">
+                <tr class="pt-0 pb-0">
+                    <th class="p-0 nt-batchselect-filter">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-dark btn-nt-batchselect-status" data-nt-batchselect-status="None">
+                                <!--None/Some/All-->
+                                <i class="fa-regular fa-square"></i>
+                                <i class="fa-regular fa-square-minus d-none"></i>
+                                <i class="fa-regular fa-square-check d-none"></i>
+                            </button>
+                            <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item nt-quickselect" href="#" data-nt-filtername="Application" data-nt-filtervalue="Test Application 1" data-nt-checkbox-checked="true">Test Application 1</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </th>
+                    <th class="p-0"></th>
+                    <th class="pt-0 pb-0">@localizor.Get("ErrorId")</th>
+                    <th class="pt-0 pb-0" data-nt-target="Application">@localizor.Get("Application")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("Host")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("Type")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("Source")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("Message")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("User")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("StatusCode")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
+                    <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
                 {
-                    <tr class="pt-0 pb-0 nt-listitem" data-nt-route-id="@Model.ResponseBody![i].ErrorId">
-                        <td class="p-0">
-                            <div class="btn-group btn-group-nt-actions">
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                                    <i class="fa fa-briefcase"></i>
-                                </a>
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                                    <i class="fa fa-briefcase"></i>
-                                </button>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                                data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.ResponseBody![i].ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                                data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
+                    for (var i = 0; i < Model.ResponseBody.Length; i++)
+                    {
+                        @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                            {
+                                Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                Model = Model.ResponseBody[i],
+                                Status = System.Net.HttpStatusCode.OK,
+                                IndexInArray = i,
+                                HtmlNamePrefix = "Model.ResponseBody",
+                                HtmlNameUseArrayIndex = true,
+                            })
+                    }
+                }
+                else if (Model != null)
+                {
+                    <tr>
+                        <td colspan="50">
+                            <div class="text-danger">@Model.StatusMessage</div>
                         </td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody![i].ErrorId</td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.ResponseBody![i].Application">@Model.ResponseBody![i].Application_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host">@Model.ResponseBody![i].Host_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ResponseBody![i].Type">@Model.ResponseBody![i].Type_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.ResponseBody![i].Source">@Model.ResponseBody![i].Source_Name</a></td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody![i].Message</td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody![i].User">@Model.ResponseBody![i].User_Name</a></td>
-                        <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.ResponseBody![i].StatusCode">@Model.ResponseBody![i].StatusCode_Name</a></td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody![i].TimeUtc</td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody![i].Sequence</td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody![i].AllXml</td>
                     </tr>
                 }
-            }
-            else if (Model != null)
-            {
-                <tr>
-                    <td colspan="50">
-                        <div class="text-danger">@Model.StatusMessage</div>
+            </tbody>
+            <!--only for inline editing-->
+            <tfoot>
+                <tr class="pt-0 pb-0 nt-listitem" data-nt-route-id="">
+                    <td class="nt-createnew-button-container" colspan="100">
+                        <button type="button" class="btn btn-primary btn-nt-inline-editing w-100" title="@localizor.Get("Create_New")"
+                                data-nt-action="@HttpMethods.Post"
+                                data-nt-route-id="@(System.Guid.Empty)"
+                                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                            <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+                        </button>
                     </td>
                 </tr>
-            }
-        </tbody>
-        <!--only for inline editing-->
-        <tfoot>
-            <tr class="pt-0 pb-0 nt-listitem" data-nt-route-id="">
-                <td class="nt-createnew-button-container" colspan="100">
-                    <button type="button" class="btn btn-primary btn-nt-inline-editing w-100" title="@localizor.Get("Create_New")"
-                            data-nt-action="@HttpMethods.Post"
-                            data-nt-route-id="@(System.Guid.Empty)"
-                            data-nt-container="@CrudViewContainers.Inline.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                        <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
-                    </button>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-                    </form>
+            </tfoot>
+        </table>
+    </form>
     @if (Model != null && Model.Pagination != null)
     {
         @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)

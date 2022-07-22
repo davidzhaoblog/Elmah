@@ -2,9 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 /*
- * single dialog instance with id="crudActionDialog"
- * #crudActionDialog
- *
  * 1. data-nt- 
  * 1.1. data-nt- in this modal
  * data-nt-action

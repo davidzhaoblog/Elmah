@@ -55,6 +55,12 @@
  * .nt-hidden-modal-title, server side render modal title to a hidden field, will set to .modal-title 
  */
 
+$(document).ready(function () {
+    attachCrudActionDialog();
+    attachCrudActionDialogActionEventHandler();
+    attachCrudActionDialogPaginationEventHandler();
+});
+
 function attachCrudActionDialog() {
     let crudActionDialog = document.getElementById('crudActionDialog');
 
@@ -86,52 +92,24 @@ function attachCrudActionDialog() {
         }
         const loadItemUrl = $(wrapper).data("nt-loaditem-url");
         
-        initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid)
+        initializeCrudActionDialog(button, action, view, container, template, loadItemUrl, postbackurl, routeid)
         // 3. Ajax to get htmls
-        ajaxLoadItemWhenDialog(loadItemUrl + "/" + routeid, view, container, template, action);
+        ajaxLoadItemWhenCrudActionDialog(loadItemUrl + "/" + routeid, view, container, template, action);
     })
 
     // 2. Hide Modal
     crudActionDialog.addEventListener('hide.bs.modal', function (event) {
         // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
-        closeDialog();
+        closeCrudActionDialog();
     })
 }
 
-$(document).ready(function () {
-    attachCrudActionDialog();
-    $("#crudActionDialog .btn-nt-action").click(function (e) {
-        const self = this;
-        $(this).attr("disabled", true); 
-        const action = $("#crudActionDialog").data("nt-action");
-        let loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
-        let postbackurl = $("#crudActionDialog").data("nt-postbackurl");
-        if (action != "POST") {
-            const routeid = $("#crudActionDialog").data("nt-route-id");
-            postbackurl = postbackurl + "/" + routeid;
-            loadItemUrl = loadItemUrl + "/" + routeid;
-        }
-        const view = $("#crudActionDialog").data("nt-view");
-        const container = $("#crudActionDialog").data("nt-container");
-        const template = $("#crudActionDialog").data("nt-template");
-        // Get FormData if there are in this dialog
-        const form = $("#crudActionDialog form")
-        let formData = [];
-        if (!!form) {
-            formData = new FormData($(form)[0]);
-        }
-        formData.append("view", view);
-        formData.append("container", container);
-        formData.append("template", template);
-
-        ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, container, template);
-    });
-
+function attachCrudActionDialogPaginationEventHandler() {
     $("#crudActionDialog .btn-nt-pagination").click(function (e) {
         let button = event.currentTarget;
         const direction = $(button).data("nt-pagination");
         let routeid = "";
-        
+
         if (direction === "PREV") { // previous item
             let prevItem = $(".nt-listitem.nt-current").prev(".nt-listitem");
             if (prevItem.length === 0) {
@@ -162,11 +140,40 @@ $(document).ready(function () {
         const template = $("#crudActionDialog").data("nt-template");
 
         // 3. Ajax to get htmls
-        ajaxLoadItemWhenDialog(loadItemUrl + "/" + routeid, view, container, template, action);
+        ajaxLoadItemWhenCrudActionDialog(loadItemUrl + "/" + routeid, view, container, template, action);
     });
-});
+}
 
-function closeDialog() {
+function attachCrudActionDialogActionEventHandler() {
+    $("#crudActionDialog .btn-nt-action").click(function (e) {
+        const self = this;
+        $(this).attr("disabled", true);
+        const action = $("#crudActionDialog").data("nt-action");
+        let loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
+        let postbackurl = $("#crudActionDialog").data("nt-postbackurl");
+        if (action != "POST") {
+            const routeid = $("#crudActionDialog").data("nt-route-id");
+            postbackurl = postbackurl + "/" + routeid;
+            loadItemUrl = loadItemUrl + "/" + routeid;
+        }
+        const view = $("#crudActionDialog").data("nt-view");
+        const container = $("#crudActionDialog").data("nt-container");
+        const template = $("#crudActionDialog").data("nt-template");
+        // Get FormData if there are in this dialog
+        const form = $("#crudActionDialog form");
+        let formData = [];
+        if (!!form) {
+            formData = new FormData($(form)[0]);
+        }
+        formData.append("view", view);
+        formData.append("container", container);
+        formData.append("template", template);
+
+        ajaxPostbackWhenCrudActionDialog(postbackurl, formData, self, view, loadItemUrl, container, template);
+    });
+}
+
+function closeCrudActionDialog() {
     //if (view == "List") {
     //    $(".nt-listitem").removeClass("nt-current border-info border-5");
     //}
@@ -203,7 +210,7 @@ function closeDialog() {
     // 5. 
 }
 
-function ajaxLoadItemWhenDialog(loadItemUrl, view, container, template, action) {
+function ajaxLoadItemWhenCrudActionDialog(loadItemUrl, view, container, template, action) {
     $.ajax({
         type: "GET",
         url: loadItemUrl,
@@ -232,7 +239,7 @@ function ajaxLoadItemWhenDialog(loadItemUrl, view, container, template, action) 
     });
 }
 
-function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, container, template) {
+function ajaxPostbackWhenCrudActionDialog(postbackurl, formData, self, view, loadItemUrl, container, template) {
     $.ajax({
         type: "POST",
         url: postbackurl,
@@ -290,7 +297,7 @@ function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, 
                 const createAnotherOneChecked = $("#crudActionDialog .modal-footer .btn-group-nt-action-createanotherone input").is(':checked');
                 if (createAnotherOneChecked) {
                     $(self).removeAttr("disabled");
-                    ajaxLoadItemWhenDialog(loadItemUrl, view, container, template, action);
+                    ajaxLoadItemWhenCrudActionDialog(loadItemUrl, view, container, template, action);
                 }
             }
             else if (action === "DELETE") {
@@ -317,7 +324,7 @@ function ajaxPostbackWhenDialog(postbackurl, formData, self, view, loadItemUrl, 
     });
 }
 
-function initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid) {
+function initializeCrudActionDialog(button, action, view, container, template, loadItemUrl, postbackurl, routeid) {
     // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
     $(".nt-listitem").removeClass("nt-current");
     // 1.2. set .nt-current to .nt-list-container-submit
