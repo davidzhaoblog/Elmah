@@ -3,7 +3,7 @@
   <Table Name="ELMAH_Error" Member="ELMAH_Error">
     <Type Name="ELMAH_Error">
       <KeyDatabaseTableTypeSetting HasRootDatabaseRecord="false" RootDatabaseRecordID="0" CurrentInUse="true">
-        <TableCategory>CrossReferenceTable</TableCategory>
+        <TableCategory>DetailsTable</TableCategory>
         <TableType>OtherTable</TableType>
         <MasterEntityReferences>
           <MasterEntityReference ChildEntityReferenceSimplePath="\Application" ParentEntityReferenceSimplePath="" />

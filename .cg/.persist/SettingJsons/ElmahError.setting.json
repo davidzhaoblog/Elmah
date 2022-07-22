@@ -1,0 +1,359 @@
+{
+  "name": "ElmahModel.ElmahError",
+  "dataViewCollection": [
+    {
+      "key": "NameValuePair",
+      "dataViewKnownCategory": 4,
+      "isGroupByResult": false,
+      "defaultOrderByPropertyName": null
+    },
+    {
+      "key": "DefaultView",
+      "dataViewKnownCategory": 1,
+      "isGroupByResult": false,
+      "defaultOrderByPropertyName": null
+    }
+  ],
+  "criteriaCollection": [
+    {
+      "key": "Identifier",
+      "description": "Query by Identifier/UniqueConstraint/CompositeIdentifier",
+      "sourceTypeFullName": "ElmahModel.ElmahError",
+      "queries": [
+        {
+          "key": "",
+          "value": "Identifier"
+        }
+      ]
+    },
+    {
+      "key": "AdvancedQuery",
+      "description": "Query by EntityReference, String, Bool, Order By DateTime",
+      "sourceTypeFullName": "ElmahModel.ElmahError",
+      "queries": [
+        {
+          "key": "",
+          "value": "AdvancedQuery"
+        }
+      ]
+    }
+  ],
+  "queryCollection": [
+    {
+      "key": "Identifier",
+      "dataQueryPerQueryKnownKey": 1,
+      "sourceTypeDeclarationFullName": "ElmahModel.ElmahError",
+      "conditionOperator": 1,
+      "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
+      "queryUnitGroups": [
+        {
+          "key": "Identifier",
+          "dataQueryPerQueryUnitSettingType": 1,
+          "outterConditionOperator": 0,
+          "conditionOperator": 0,
+          "name": "Query by Identifier"
+        }
+      ]
+    },
+    {
+      "key": "AdvancedQuery",
+      "dataQueryPerQueryKnownKey": 2,
+      "sourceTypeDeclarationFullName": "ElmahModel.ElmahError",
+      "conditionOperator": 0,
+      "hasStringContainsDataQueryPerQueryUnitSettingForAll": false,
+      "queryUnitGroups": [
+        {
+          "key": "EntityReference",
+          "dataQueryPerQueryUnitSettingType": 5,
+          "outterConditionOperator": 0,
+          "conditionOperator": 0,
+          "name": "Query by EntityReference"
+        },
+        {
+          "key": "DateTimeRange",
+          "dataQueryPerQueryUnitSettingType": 6,
+          "outterConditionOperator": 0,
+          "conditionOperator": 0,
+          "name": "Query by DateTime Range"
+        },
+        {
+          "key": "StringQuery",
+          "dataQueryPerQueryUnitSettingType": 7,
+          "outterConditionOperator": 0,
+          "conditionOperator": 0,
+          "name": "Query by String Contains,StartsWith, EndsWith"
+        }
+      ]
+    }
+  ],
+  "queryResultCollection": [
+    {
+      "key": "Search",
+      "criteriaKey": "AdvancedQuery",
+      "dataViewKey": "",
+      "orderBys": ""
+    },
+    {
+      "key": "GetCodeList",
+      "criteriaKey": "AdvancedQuery",
+      "dataViewKey": "NameValuePair",
+      "orderBys": ""
+    }
+  ],
+  "entityReferenceResultForPersistAliasCollection": [
+    {
+      "foreignKeySetting": {
+        "tablE_SCHEMA": "dbo",
+        "tablE_NAME": "ElmahError",
+        "entityReferenceSimpleFullPath": "\\Application",
+        "pkTypeDeclarationContextName": "ElmahApplication",
+        "duplicateIDPropertyFullPath": null,
+        "isLeftJoin": false,
+        "inLinqJoin": true,
+        "idInCriteria": true,
+        "idInDefaultDataView": true,
+        "uniqueConstraintInDefaultDataView": true,
+        "propertiesInDefaultDataView": null,
+        "createdDate": "2022-07-22T00:00:00"
+      },
+      "tablE_SCHEMA": "dbo",
+      "tablE_NAME": "ELMAH_Error",
+      "entityReferenceSimpleFullPath": "\\Application",
+      "result": "Application",
+      "isTop": true,
+      "pkTypeFullName": "ElmahModel.ElmahApplication",
+      "pkPropertyName": "Application",
+      "key": "ElmahModel.ElmahError",
+      "fkPropertyName": "Application",
+      "key1": "FK_ELMAH_Error_ElmahApplication",
+      "key2": "t",
+      "propertyName_Origin_InThisType": "Application",
+      "childEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahApplication",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Application",
+      "entityReferenceFullPath": "\\ElmahModel.ElmahError.Application",
+      "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahApplication",
+      "inUIEdit": true,
+      "inUIDisplay": true,
+      "inUIHidden": false,
+      "inUICriteria": true,
+      "entityReferenceResultType": "DownTree",
+      "isJoinFromPKToFK": false,
+      "defaultOrder": 1,
+      "fkTypeFullNameOnTheOtherSide": null,
+      "createdDate": "0001-01-01T00:00:00"
+    },
+    {
+      "foreignKeySetting": {
+        "tablE_SCHEMA": "dbo",
+        "tablE_NAME": "ElmahError",
+        "entityReferenceSimpleFullPath": "\\Host",
+        "pkTypeDeclarationContextName": "ElmahHost",
+        "duplicateIDPropertyFullPath": null,
+        "isLeftJoin": false,
+        "inLinqJoin": true,
+        "idInCriteria": true,
+        "idInDefaultDataView": true,
+        "uniqueConstraintInDefaultDataView": true,
+        "propertiesInDefaultDataView": null,
+        "createdDate": "2022-07-22T00:00:00"
+      },
+      "tablE_SCHEMA": "dbo",
+      "tablE_NAME": "ELMAH_Error",
+      "entityReferenceSimpleFullPath": "\\Host",
+      "result": "Host",
+      "isTop": true,
+      "pkTypeFullName": "ElmahModel.ElmahHost",
+      "pkPropertyName": "Host",
+      "key": "ElmahModel.ElmahError",
+      "fkPropertyName": "Host",
+      "key1": "FK_ELMAH_Error_ElmahHost",
+      "key2": "t",
+      "propertyName_Origin_InThisType": "Host",
+      "childEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahHost",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Host",
+      "entityReferenceFullPath": "\\ElmahModel.ElmahError.Host",
+      "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahHost",
+      "inUIEdit": true,
+      "inUIDisplay": true,
+      "inUIHidden": false,
+      "inUICriteria": true,
+      "entityReferenceResultType": "DownTree",
+      "isJoinFromPKToFK": false,
+      "defaultOrder": 1,
+      "fkTypeFullNameOnTheOtherSide": null,
+      "createdDate": "0001-01-01T00:00:00"
+    },
+    {
+      "foreignKeySetting": {
+        "tablE_SCHEMA": "dbo",
+        "tablE_NAME": "ElmahError",
+        "entityReferenceSimpleFullPath": "\\Source",
+        "pkTypeDeclarationContextName": "ElmahSource",
+        "duplicateIDPropertyFullPath": null,
+        "isLeftJoin": false,
+        "inLinqJoin": true,
+        "idInCriteria": true,
+        "idInDefaultDataView": true,
+        "uniqueConstraintInDefaultDataView": true,
+        "propertiesInDefaultDataView": null,
+        "createdDate": "2022-07-22T00:00:00"
+      },
+      "tablE_SCHEMA": "dbo",
+      "tablE_NAME": "ELMAH_Error",
+      "entityReferenceSimpleFullPath": "\\Source",
+      "result": "Source",
+      "isTop": true,
+      "pkTypeFullName": "ElmahModel.ElmahSource",
+      "pkPropertyName": "Source",
+      "key": "ElmahModel.ElmahError",
+      "fkPropertyName": "Source",
+      "key1": "FK_ELMAH_Error_ElmahSource",
+      "key2": "t",
+      "propertyName_Origin_InThisType": "Source",
+      "childEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahSource",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Source",
+      "entityReferenceFullPath": "\\ElmahModel.ElmahError.Source",
+      "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahSource",
+      "inUIEdit": true,
+      "inUIDisplay": true,
+      "inUIHidden": false,
+      "inUICriteria": true,
+      "entityReferenceResultType": "DownTree",
+      "isJoinFromPKToFK": false,
+      "defaultOrder": 1,
+      "fkTypeFullNameOnTheOtherSide": null,
+      "createdDate": "0001-01-01T00:00:00"
+    },
+    {
+      "foreignKeySetting": {
+        "tablE_SCHEMA": "dbo",
+        "tablE_NAME": "ElmahError",
+        "entityReferenceSimpleFullPath": "\\StatusCode",
+        "pkTypeDeclarationContextName": "ElmahStatusCode",
+        "duplicateIDPropertyFullPath": null,
+        "isLeftJoin": false,
+        "inLinqJoin": true,
+        "idInCriteria": true,
+        "idInDefaultDataView": true,
+        "uniqueConstraintInDefaultDataView": true,
+        "propertiesInDefaultDataView": null,
+        "createdDate": "2022-07-22T00:00:00"
+      },
+      "tablE_SCHEMA": "dbo",
+      "tablE_NAME": "ELMAH_Error",
+      "entityReferenceSimpleFullPath": "\\StatusCode",
+      "result": "StatusCode",
+      "isTop": true,
+      "pkTypeFullName": "ElmahModel.ElmahStatusCode",
+      "pkPropertyName": "StatusCode",
+      "key": "ElmahModel.ElmahError",
+      "fkPropertyName": "StatusCode",
+      "key1": "FK_ELMAH_Error_ElmahStatusCode",
+      "key2": "t",
+      "propertyName_Origin_InThisType": "StatusCode",
+      "childEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahStatusCode",
+      "bottomChildEntityReferenceSimpleFullPath": "\\StatusCode",
+      "entityReferenceFullPath": "\\ElmahModel.ElmahError.StatusCode",
+      "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahStatusCode",
+      "inUIEdit": true,
+      "inUIDisplay": true,
+      "inUIHidden": false,
+      "inUICriteria": true,
+      "entityReferenceResultType": "DownTree",
+      "isJoinFromPKToFK": false,
+      "defaultOrder": 1,
+      "fkTypeFullNameOnTheOtherSide": null,
+      "createdDate": "0001-01-01T00:00:00"
+    },
+    {
+      "foreignKeySetting": {
+        "tablE_SCHEMA": "dbo",
+        "tablE_NAME": "ElmahError",
+        "entityReferenceSimpleFullPath": "\\Type",
+        "pkTypeDeclarationContextName": "ElmahType",
+        "duplicateIDPropertyFullPath": null,
+        "isLeftJoin": false,
+        "inLinqJoin": true,
+        "idInCriteria": true,
+        "idInDefaultDataView": true,
+        "uniqueConstraintInDefaultDataView": true,
+        "propertiesInDefaultDataView": null,
+        "createdDate": "2022-07-22T00:00:00"
+      },
+      "tablE_SCHEMA": "dbo",
+      "tablE_NAME": "ELMAH_Error",
+      "entityReferenceSimpleFullPath": "\\Type",
+      "result": "Type",
+      "isTop": true,
+      "pkTypeFullName": "ElmahModel.ElmahType",
+      "pkPropertyName": "Type",
+      "key": "ElmahModel.ElmahError",
+      "fkPropertyName": "Type",
+      "key1": "FK_ELMAH_Error_ElmahType",
+      "key2": "t",
+      "propertyName_Origin_InThisType": "Type",
+      "childEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahType",
+      "bottomChildEntityReferenceSimpleFullPath": "\\Type",
+      "entityReferenceFullPath": "\\ElmahModel.ElmahError.Type",
+      "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahType",
+      "inUIEdit": true,
+      "inUIDisplay": true,
+      "inUIHidden": false,
+      "inUICriteria": true,
+      "entityReferenceResultType": "DownTree",
+      "isJoinFromPKToFK": false,
+      "defaultOrder": 1,
+      "fkTypeFullNameOnTheOtherSide": null,
+      "createdDate": "0001-01-01T00:00:00"
+    },
+    {
+      "foreignKeySetting": {
+        "tablE_SCHEMA": "dbo",
+        "tablE_NAME": "ElmahError",
+        "entityReferenceSimpleFullPath": "\\User",
+        "pkTypeDeclarationContextName": "ElmahUser",
+        "duplicateIDPropertyFullPath": null,
+        "isLeftJoin": false,
+        "inLinqJoin": true,
+        "idInCriteria": true,
+        "idInDefaultDataView": true,
+        "uniqueConstraintInDefaultDataView": true,
+        "propertiesInDefaultDataView": null,
+        "createdDate": "2022-07-22T00:00:00"
+      },
+      "tablE_SCHEMA": "dbo",
+      "tablE_NAME": "ELMAH_Error",
+      "entityReferenceSimpleFullPath": "\\User",
+      "result": "User",
+      "isTop": true,
+      "pkTypeFullName": "ElmahModel.ElmahUser",
+      "pkPropertyName": "User",
+      "key": "ElmahModel.ElmahError",
+      "fkPropertyName": "User",
+      "key1": "FK_ELMAH_Error_ElmahUser",
+      "key2": "t",
+      "propertyName_Origin_InThisType": "User",
+      "childEntityReferenceSimpleFullPath": null,
+      "bottomChildTypeName": "ElmahUser",
+      "bottomChildEntityReferenceSimpleFullPath": "\\User",
+      "entityReferenceFullPath": "\\ElmahModel.ElmahError.User",
+      "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahUser",
+      "inUIEdit": true,
+      "inUIDisplay": true,
+      "inUIHidden": false,
+      "inUICriteria": true,
+      "entityReferenceResultType": "DownTree",
+      "isJoinFromPKToFK": false,
+      "defaultOrder": 1,
+      "fkTypeFullNameOnTheOtherSide": null,
+      "createdDate": "0001-01-01T00:00:00"
+    }
+  ],
+  "entityReferenceResultForPersistAliasCollectionOfBridged": null,
+  "entityReferenceResultForPersistAliasCollectionOfCrossJoined": null
+}
