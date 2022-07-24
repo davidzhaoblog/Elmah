@@ -81,6 +81,11 @@ namespace Elmah.Services
             return successResponse;
         }
 
+        public async Task<Response> BulkDelete(List<ElmahApplicationIdentifier> ids)
+        {
+            return await _thisRepository.BulkDelete(ids);
+        }
+
         public async Task<Response<ElmahApplicationModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationModel input)
         {
             return await _thisRepository.Update(id, input);

@@ -59,13 +59,13 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container-fluid">
             &copy; 2022 - Elmah - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
@@ -77,6 +77,10 @@
     <script src="~/lib/font-awesome//js/all.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/CrudActionDialog.js"></script>
+    <script src="~/js/InlineEditing.js"></script>
+    <script src="~/js/HtmlTableBatchSelection.js"></script>
+    <script src="~/js/SimpleActionConfirmationDialog.js"></script>
+    <script src="~/js/BatchActions.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

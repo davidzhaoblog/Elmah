@@ -8,6 +8,8 @@ namespace Elmah.RepositoryContracts
         Task<PagedResponse<ElmahUserModel[]>> Search(
             ElmahUserAdvancedQuery query);
 
+        Task<Response> BulkDelete(List<ElmahUserIdentifier> ids);
+
         Task<Response<ElmahUserModel>> Update(ElmahUserIdentifier id, ElmahUserModel input);
 
         Task<Response<ElmahUserModel>> Get(ElmahUserIdentifier id);

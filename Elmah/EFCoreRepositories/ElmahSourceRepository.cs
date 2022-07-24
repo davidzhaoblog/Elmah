@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
+using EFCore.BulkExtensions; // BulkDelete/BulkUpdate/BulkInsert
 
 namespace Elmah.EFCoreRepositories
 {
@@ -88,6 +89,37 @@ namespace Elmah.EFCoreRepositories
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
                 });
+            }
+        }
+
+        private IQueryable<ElmahSource> GetByIdentifierQueryListQuery(
+            List<ElmahSourceIdentifier> ids)
+        {
+            var idList = ids.Select(t => t.Source).ToList();
+            var queryable =
+                from t in _dbcontext.ElmahSource
+                where idList.Contains(t.Source)
+                select t;
+
+            return queryable;
+        }
+
+        public async Task<Response> BulkDelete(List<ElmahSourceIdentifier> ids)
+        {
+            try
+            {
+                var queryable = GetByIdentifierQueryListQuery(ids);
+                var result = await queryable.BatchDeleteAsync();
+
+                return await Task<Response>.FromResult(
+                    new Response
+                    {
+                        Status = HttpStatusCode.OK,
+                    });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 

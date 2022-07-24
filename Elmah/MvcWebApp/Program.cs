@@ -21,6 +21,8 @@ builder.Services.AddControllersWithViews()
         options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(Elmah.Resx.Resources.UIStrings));
     });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
 // http://blog.mohnady.com/2017/05/how-to-aspnet-core-resource-files-in.html

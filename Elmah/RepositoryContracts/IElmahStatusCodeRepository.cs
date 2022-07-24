@@ -8,6 +8,8 @@ namespace Elmah.RepositoryContracts
         Task<PagedResponse<ElmahStatusCodeModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query);
 
+        Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids);
+
         Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeModel input);
 
         Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdentifier id);

@@ -32,6 +32,11 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
+        public async Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids)
+        {
+            return await _thisRepository.BulkDelete(ids);
+        }
+
         public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)
         {
             return await _thisRepository.Update(id, input);

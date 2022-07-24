@@ -36,6 +36,15 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]// form post formdata
         public async Task<IActionResult> Index(ElmahUserAdvancedQuery query)
         {
+            if (query.PagedViewOption == PagedViewOptions.Tiles)
+            {
+                query.PaginationOption = PaginationOptions.LoadMore;
+            }
+            else if (query.PagedViewOption == PagedViewOptions.List)
+            {
+                query.PaginationOption = PaginationOptions.Paged;
+            }
+
             var result = await _thisService.Search(query);
             ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
 
@@ -43,7 +52,7 @@ namespace Elmah.MvcWebApp.Controllers
                 new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("User")), Value = "User~ASC" },
                 new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("User")), Value = "User~DESC" },
             });
-            if(string.IsNullOrEmpty(query.OrderBys))
+            if (string.IsNullOrEmpty(query.OrderBys))
             {
                 query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
             }
@@ -113,7 +122,24 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
+                ViewBag.Template = template;
                 return PartialView($"_List{template}Item", result);
+            }
+            if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
+            {
+                // By Default: _List{template}Item.cshtml
+                // Developer can customize template name
+                return PartialView($"_Tile{template}Item",
+                    new ItemViewModel<ElmahUserModel>
+                    {
+                        Status = System.Net.HttpStatusCode.OK,
+                        Template = template,
+                        IsCurrentItem = true,
+                        HtmlNamePrefix = "Model.ResponseBody",
+                        HtmlNameUseArrayIndex = true,
+                        IndexInArray = 1,
+                        Model = result
+                    });
             }
             // By Default: _{template}.cshtml
             // Developer can customize template name
@@ -137,18 +163,44 @@ namespace Elmah.MvcWebApp.Controllers
 
                 if (result.Status == System.Net.HttpStatusCode.OK)
                 {
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
-                        new AjaxResponseViewModel
-                        {
-                            Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                            PartialViews = new List<Tuple<string, object>> {
-                            new Tuple<string, object>("~/Views/ElmahUser/_ListItemTr.cshtml",
-                                new ListItemTrViewModal<ElmahUserModel>{
-                                    Template = ViewItemTemplateNames.Details.ToString(),
-                                    IsCurrentItem = true,
-                                    Model = result.ResponseBody!
-                                })
-                        }});
+                    if (view == PagedViewOptions.List) // Html Table
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
+                            new AjaxResponseViewModel
+                            {
+                                Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                                PartialViews = new List<Tuple<string, object>> {
+                                new Tuple<string, object>("~/Views/ElmahUser/_ListItemTr.cshtml",
+                                    new ItemViewModel<ElmahUserModel>{
+                                        Template = ViewItemTemplateNames.Details.ToString(),
+                                        IsCurrentItem = true,
+                                        Model = result.ResponseBody!
+                                    })
+                            }});
+                    }
+                    //else // Tiles
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
+                            new AjaxResponseViewModel
+                            {
+                                Status = System.Net.HttpStatusCode.OK,
+                                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                                PartialViews = new List<Tuple<string, object>>
+                                {
+                                    new Tuple<string, object>("~/Views/_Tile_cshtmlElmahUser.cshtml",
+                                        new ItemViewModel<ElmahUserModel>
+                                        {
+                                            Status = System.Net.HttpStatusCode.OK,
+                                            Template = ViewItemTemplateNames.Details.ToString(),
+                                            IsCurrentItem = true,
+                                            HtmlNamePrefix = "Model.ResponseBody",
+                                            HtmlNameUseArrayIndex = true,
+                                            IndexInArray = 1,
+                                            Model = result.ResponseBody!
+                                        })
+                                }
+                            });
+                    }
                 }
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
@@ -210,6 +262,17 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // POST: ElmahUser//AjaxBulkDelete
+        [HttpPost, ActionName("AjaxBulkDelete")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxBulkDelete(
+            [FromForm] BatchActionViewModel<ElmahUserIdentifier> data)
+        {
+            var result = await _thisService.BulkDelete(data.Ids);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
 

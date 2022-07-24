@@ -8,6 +8,8 @@ namespace Elmah.RepositoryContracts
         Task<PagedResponse<ElmahSourceModel[]>> Search(
             ElmahSourceAdvancedQuery query);
 
+        Task<Response> BulkDelete(List<ElmahSourceIdentifier> ids);
+
         Task<Response<ElmahSourceModel>> Update(ElmahSourceIdentifier id, ElmahSourceModel input);
 
         Task<Response<ElmahSourceModel>> Get(ElmahSourceIdentifier id);

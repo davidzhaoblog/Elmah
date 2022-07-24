@@ -11,6 +11,8 @@ namespace Elmah.ServiceContracts
         Task<ElmahTypeCompositeModel> GetCompositeModel(
             ElmahTypeIdentifier id, ElmahTypeCompositeModel.__DataOptions__[]? dataOptions = null);
 
+        Task<Response> BulkDelete(List<ElmahTypeIdentifier> ids);
+
         Task<Response<ElmahTypeModel>> Update(ElmahTypeIdentifier id, ElmahTypeModel input);
 
         Task<Response<ElmahTypeModel>> Get(ElmahTypeIdentifier id);
