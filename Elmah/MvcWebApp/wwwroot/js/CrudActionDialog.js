@@ -55,6 +55,12 @@
  * .nt-hidden-modal-title, server side render modal title to a hidden field, will set to .modal-title 
  */
 
+$(document).ready(function () {
+    attachCrudActionDialog();
+    attachCrudActionDialogActionEventHandler();
+    attachCrudActionDialogPaginationEventHandler();
+});
+
 function attachCrudActionDialog() {
     let crudActionDialog = document.getElementById('crudActionDialog');
 
@@ -86,51 +92,28 @@ function attachCrudActionDialog() {
         }
         const loadItemUrl = $(wrapper).data("nt-loaditem-url");
         
-        initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid)
+        initializeCrudActionDialog(button, action, view, container, template, loadItemUrl, postbackurl, routeid)
         // 3. Ajax to get htmls
-        ajaxLoadItem(loadItemUrl + "/" + routeid, view, container, template, action);
+        ajaxLoadItemWhenCrudActionDialog(loadItemUrl + "/" + routeid, view, container, template, action);
     })
 
     // 2. Hide Modal
     crudActionDialog.addEventListener('hide.bs.modal', function (event) {
         // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
-        closeModal();
+        closeCrudActionDialog();
     })
 }
 
-$(document).ready(function () {
-    attachCrudActionDialog();
-    $("#crudActionDialog .btn-nt-action").click(function (e) {
-        const self = this;
-        $(this).attr("disabled", true); 
-        const loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
-        const postbackurl = $("#crudActionDialog").data("nt-postbackurl");
-        const view = $("#crudActionDialog").data("nt-view");
-        const container = $("#crudActionDialog").data("nt-container");
-        const template = $("#crudActionDialog").data("nt-template");
-        const routeid = $("#crudActionDialog").data("nt-route-id");
-        // Get FormData if there are in this dialog
-        const form = $("#crudActionDialog form")
-        let formData = [];
-        if (!!form) {
-            formData = new FormData($(form)[0]);
-        }
-        formData.append("view", view);
-        formData.append("container", container);
-        formData.append("template", template);
-
-        ajaxPostback(postbackurl + "/" + routeid, formData, self, view, loadItemUrl + "/" + routeid, container, template);
-    });
-
+function attachCrudActionDialogPaginationEventHandler() {
     $("#crudActionDialog .btn-nt-pagination").click(function (e) {
         let button = event.currentTarget;
         const direction = $(button).data("nt-pagination");
         let routeid = "";
-        
+
         if (direction === "PREV") { // previous item
             let prevItem = $(".nt-listitem.nt-current").prev(".nt-listitem");
             if (prevItem.length === 0) {
-                prevItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem").last();
+                prevItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem:last");
             }
             $(".nt-listitem.nt-current").removeClass("nt-current border-info border-5");
             $(prevItem).addClass("nt-current border-info border-5");
@@ -140,7 +123,7 @@ $(document).ready(function () {
         else { // next item
             let nextItem = $(".nt-listitem.nt-current").next(".nt-listitem");
             if (nextItem.length === 0) {
-                nextItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem").first();
+                nextItem = $(".nt-listitem.nt-current").closest(".nt-list-container-submit").find(".nt-listitem:first");
             }
             $(".nt-listitem.nt-current").removeClass("nt-current border-info border-5");
             $(nextItem).addClass("nt-current border-info border-5");
@@ -157,17 +140,50 @@ $(document).ready(function () {
         const template = $("#crudActionDialog").data("nt-template");
 
         // 3. Ajax to get htmls
-        ajaxLoadItem(loadItemUrl + "/" + routeid, view, container, template, action);
+        ajaxLoadItemWhenCrudActionDialog(loadItemUrl + "/" + routeid, view, container, template, action);
     });
-});
+}
 
-function closeModal() {
-    $(".nt-listitem").removeClass("nt-current border-info border-5");
+function attachCrudActionDialogActionEventHandler() {
+    $("#crudActionDialog .btn-nt-action").click(function (e) {
+        const self = this;
+        $(this).attr("disabled", true);
+        const action = $("#crudActionDialog").data("nt-action");
+        let loadItemUrl = $("#crudActionDialog").data("nt-loadItemUrl");
+        let postbackurl = $("#crudActionDialog").data("nt-postbackurl");
+        if (action != "POST") {
+            const routeid = $("#crudActionDialog").data("nt-route-id");
+            postbackurl = postbackurl + "/" + routeid;
+            loadItemUrl = loadItemUrl + "/" + routeid;
+        }
+        const view = $("#crudActionDialog").data("nt-view");
+        const container = $("#crudActionDialog").data("nt-container");
+        const template = $("#crudActionDialog").data("nt-template");
+        // Get FormData if there are in this dialog
+        const form = $("#crudActionDialog form");
+        let formData = [];
+        if (!!form) {
+            formData = new FormData($(form)[0]);
+        }
+        formData.append("view", view);
+        formData.append("container", container);
+        formData.append("template", template);
+
+        ajaxPostbackWhenCrudActionDialog(postbackurl, formData, self, view, loadItemUrl, container, template);
+    });
+}
+
+function closeCrudActionDialog() {
+    //if (view == "List") {
+    //    $(".nt-listitem").removeClass("nt-current border-info border-5");
+    //}
+    //else { // Tiles
+    //    $(".nt-listitem .card").removeClass("border-info border-5");
+    //    $(".nt-listitem").removeClass("nt-current");
+    //}
     const action = $("#crudActionDialog").data("nt-action");
     setTimeout(() => {
-        if (action === "PUT" || action === "POST") { // Edit/Create, remove special border after 2 seconds
-            // remove styling for Updated/Created items with .nt-current after 2s Modal closed
-
+        if (action === "PUT" || action === "POST") { // Edit/Create, do nothing
         }
         else if (action === "DELETE") {
             // remove deleted items after 1s Modal closed
@@ -190,9 +206,11 @@ function closeModal() {
     // 4. hide Save/Delete button groups
     $("#crudActionDialog .modal-footer .btn-group-nt-action-save").hide();
     $("#crudActionDialog .modal-footer .btn-group-nt-action-delete").hide();
+
+    // 5. 
 }
 
-function ajaxLoadItem(loadItemUrl, view, container, template, action) {
+function ajaxLoadItemWhenCrudActionDialog(loadItemUrl, view, container, template, action) {
     $.ajax({
         type: "GET",
         url: loadItemUrl,
@@ -221,7 +239,7 @@ function ajaxLoadItem(loadItemUrl, view, container, template, action) {
     });
 }
 
-function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container, template) {
+function ajaxPostbackWhenCrudActionDialog(postbackurl, formData, self, view, loadItemUrl, container, template) {
     $.ajax({
         type: "POST",
         url: postbackurl,
@@ -241,15 +259,25 @@ function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container,
             // response part #1.1 TODO: should have a timer to auto hide after a few seconds.
             // response part #2, to update the item which is updated/created.
             const action = $("#crudActionDialog").data("nt-action");
-            const actionSuccess = !!$("#crudActionDialog .nt-status .text-success");
+            const actionSuccess = !!($("#crudActionDialog .nt-status .text-success").length);
             if (action === "PUT") { // EDIT 
                 if (actionSuccess) {
                     // Mark as .nt-updated .border-success .border-4. will be deleted when Dialog/Modal closed
-                    $(".nt-listitem.nt-current").removeClass("border-info border-5");
-                    $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
+                    if (view == "List") {
+                        $(".nt-listitem.nt-current").removeClass("border-info border-5");
+                        $(".nt-listitem.nt-current").addClass("nt-updated border-success border-4");
+                    }
+                    else { // Tiles
+                        $(".nt-listitem.nt-current .card").removeClass("border-info border-5");
+                        $(".nt-listitem.nt-current").addClass("nt-updated");
+                        $(".nt-listitem.nt-current .card").addClass("border-success border-4");
+                    }
                 }
                 if (splitResponse.length > 1) {
                     $(".nt-listitem.nt-current").html(splitResponse[1]);
+                    if (view == "Tiles") {
+                        $(".nt-listitem.nt-current .card").addClass("border-success border-4");
+                    }
                 }
                 $(self).removeAttr("disabled");
             }
@@ -257,21 +285,31 @@ function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container,
                 // .nt-created .border-warning .border-4 added in the response
                 if (splitResponse.length > 1) {
                     if (view === "List") { // html table
-                        let theTbody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
-                        theTbody.prepend(splitResponse[1]);
+                        let theBody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " tbody");
+                        theBody.prepend(splitResponse[1]);
+                    }
+                    else { // Tile
+                        let theBody = $($("#crudActionDialog").data("nt-list-wrapper-id") + " .nt-list-container-submit");
+                        theBody.prepend(splitResponse[1]);
                     }
                 }
 
                 const createAnotherOneChecked = $("#crudActionDialog .modal-footer .btn-group-nt-action-createanotherone input").is(':checked');
                 if (createAnotherOneChecked) {
                     $(self).removeAttr("disabled");
-                    ajaxLoadItem(loadItemUrl, view, container, template, action);
+                    ajaxLoadItemWhenCrudActionDialog(loadItemUrl, view, container, template, action);
                 }
             }
             else if (action === "DELETE") {
                 if (actionSuccess) {
                     // Mark as .nt-deleted .border-danger .border-5. will be deleted when Dialog/Modal closed
-                    $(".nt-listitem.nt-current").addClass("nt-deleted border-danger border-3");
+                    if (view == "List") {
+                        $(".nt-listitem.nt-current").addClass("nt-deleted border-danger border-3");
+                    }
+                    else { // Tiles
+                        $(".nt-listitem.nt-current").addClass("nt-deleted");
+                        $(".nt-listitem.nt-current .card").addClass("border-danger border-3");
+                    }
                 }
             }
         },
@@ -286,7 +324,7 @@ function ajaxPostback(postbackurl, formData, self, view, loadItemUrl, container,
     });
 }
 
-function initializeModal(button, action, view, container, template, loadItemUrl, postbackurl, routeid) {
+function initializeCrudActionDialog(button, action, view, container, template, loadItemUrl, postbackurl, routeid) {
     // 1.1. clear .nt-current on all .nt-listitem, then set .nt-current to current item,
     $(".nt-listitem").removeClass("nt-current");
     // 1.2. set .nt-current to .nt-list-container-submit
@@ -295,7 +333,12 @@ function initializeModal(button, action, view, container, template, loadItemUrl,
     $(".nt-list-wrapper").removeClass("nt-current");
     if (action != "POST") { // set .nt-current when not Create
         $(button).closest(".nt-listitem").addClass("nt-current");
-        $(button).closest(".nt-listitem").addClass("border-info border-5");
+        if (view == "List") {
+            $(button).closest(".nt-listitem").addClass("border-info border-5");
+        }
+        else { // Tiles
+            $(button).closest(".nt-listitem .card").addClass("border-info border-5");
+        }
         
         $(button).closest(".nt-list-container-submit").addClass("nt-current");
         $(button).closest(".nt-list-wrapper").addClass("nt-current");
@@ -339,4 +382,5 @@ function initializeModal(button, action, view, container, template, loadItemUrl,
         $("#crudActionDialog .modal-footer .btn-group-nt-action-details").show();
         $("#crudActionDialog .modal-footer .btn-group-nt-action-pagination").show();
     }
+    $("#crudActionDialog .modal-footer .btn-group").removeAttr("disabled");
 }

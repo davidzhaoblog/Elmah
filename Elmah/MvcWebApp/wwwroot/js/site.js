@@ -6,7 +6,7 @@
  * data-nt-queryparamname
  * 
  * .nt-ddlcascading
- */ 
+ */
 $(".nt-ddlcascading").change(function (e) {
     const childlisturl = $(this).data("childlisturl");
     const targetchild = $(this).data("targetchild");
@@ -16,7 +16,7 @@ $(".nt-ddlcascading").change(function (e) {
     };
 
     var sameTargetChilds = $('select[data-targetchild="' + targetchild + '"]');
-    console.log(sameTargetChilds);
+    // console.log(sameTargetChilds);
     $.each(sameTargetChilds, function (index, item) {
         const selectedValue = $(item).find(":selected").val();
         const queryparamname = $(item).data("nt-queryparamname");
@@ -32,9 +32,9 @@ $(".nt-ddlcascading").change(function (e) {
         dataType: "html",
         success: function (response) {
             if (response.status == 200 && !!response.responseBody) {
-                console.log($('select[name="' + targetchild + '"]'));
+                // console.log($('select[name="' + targetchild + '"]'));
                 let firstOption = $('select[name="' + targetchild + '"] option:first-child').attr("selected", 'selected')
-                console.log(firstOption);
+                // console.log(firstOption);
                 $('select[name="' + targetchild + '"]').empty();
                 $('select[name="' + targetchild + '"]').append(firstOption);
                 $.each(response.responseBody, function (index, item) {
@@ -178,12 +178,12 @@ function getDateRange(referenceDate, type) {
  * .nt-list-wrapper
  * .nt-selectchange-submit
  */
-$(document).ready($(function () {
-    $(".page-link").click(function (e) {
-        $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-    });
-}));
+//$(document).ready($(function () {
+//    $(".page-link").click(function (e) {
+//        $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+//        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
+//    });
+//}));
 
 $(document).ready($(function () {
     $(".nt-selectchange-submit").change(function (e) {
@@ -197,7 +197,7 @@ $(document).ready($(function () {
 /*
  * .nt-advanced-search-button
  * .nt-advanced-search-field
- */ 
+ */
 $(document).ready($(function () {
     $('.nt-advanced-search-button').click(function (e) {
         $('.nt-advanced-search-field div div select').val('')
@@ -219,7 +219,44 @@ $(document).ready($(function () {
  * .btn-nt-load-more
  * .nt-list-container-submit
  * 
- */ 
+ */
+
+function pageLinkClicked(self) {
+    $($(self).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(self).data("nt-pageindex"));
+    const theForm = $($(self).closest(".nt-list-wrapper").data("nt-submittarget"));
+    const url = $(theForm).data("nt-partial-url");
+    const updateTarget = $(theForm).data("nt-updatetarget");
+    var formData = new FormData($(theForm)[0]);
+    const pagedViewOption = $(theForm).children(".nt-paged-view-options").val();
+    const pageIndex = $(theForm).children(".nt-page-index").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: formData,
+        async: false,
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        success: function (response) {
+            if (pagedViewOption !== "Tiles" || pageIndex == 1) {
+                $(updateTarget).html(response);
+            }
+            else {
+                $(updateTarget).children(".btn-nt-load-more").remove()
+                $(updateTarget).append(response);
+            }
+            //console.log("success", response);
+        },
+        failure: function (response) {
+            // console.log("failure", response);
+        },
+        error: function (response) {
+            // console.log("error", response);
+        }
+    });
+    return false;
+}
+
 $(document).ready($(function () {
     $('.nt-ajax-partial-load-post-formdata').submit(function (e) {
         const url = $(this).data("nt-partial-url");
@@ -245,10 +282,11 @@ $(document).ready($(function () {
                 }
                 //console.log("success", response);
                 // attach pagination event handler again.
-                $(".page-link").on("click", function (e) {
-                    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-                    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-                });
+                //$(".page-link").on("click", function (e) {
+                //    e.preventDefault();
+                //    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+                //    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
+                //});
             },
             failure: function (response) {
                 // console.log("failure", response);
@@ -257,7 +295,6 @@ $(document).ready($(function () {
                 // console.log("error", response);
             }
         });
-        e.preventDefault();
     });
 
     $('.nt-ajax-partial-load-get').submit(function (e) {
@@ -288,10 +325,10 @@ $(document).ready($(function () {
                 }
                 //console.log("success", response);
                 // attach pagination event handler again.
-                $(".page-link").on("click", function (e) {
-                    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-                    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-                });
+                //$(".page-link").on("click", function (e) {
+                //    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
+                //    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
+                //});
             },
             failure: function (response) {
                 // console.log("failure", response);
@@ -320,6 +357,14 @@ $(document).ready($(function () {
         $($(this).data("nt-paginationoptionupdatetarget")).val($(this).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
         $($(this).data("nt-updatetarget")).val($(this).data("nt-value"));
         $($(this).data("nt-submittarget")).submit();
+        // console.log($(location));
+        // Update QueryString - view with data-nt-value attribute
+        let queryParams = new URLSearchParams(window.location.search);
+        queryParams.set("PagedViewOption", $(this).data("nt-value"));
+        history.pushState(null, null, "?" + queryParams.toString());
+
+        $(".btn-nt-inline-editing").off();
+        attachInlineEditingLaunchButtonClickEvent(".btn-nt-inline-editing");
     });
 }));
 // 6.End. PagedViewOptions clicked

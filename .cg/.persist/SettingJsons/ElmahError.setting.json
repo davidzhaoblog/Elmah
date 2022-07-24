@@ -114,7 +114,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-23T00:00:00"
+        "createdDate": "2022-07-24T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -133,10 +133,6 @@
       "bottomChildEntityReferenceSimpleFullPath": "\\Application",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Application",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahApplication",
-      "inUIEdit": true,
-      "inUIDisplay": true,
-      "inUIHidden": false,
-      "inUICriteria": true,
       "entityReferenceResultType": "DownTree",
       "isJoinFromPKToFK": false,
       "defaultOrder": 1,
@@ -156,7 +152,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-23T00:00:00"
+        "createdDate": "2022-07-24T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -175,10 +171,6 @@
       "bottomChildEntityReferenceSimpleFullPath": "\\Host",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Host",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahHost",
-      "inUIEdit": true,
-      "inUIDisplay": true,
-      "inUIHidden": false,
-      "inUICriteria": true,
       "entityReferenceResultType": "DownTree",
       "isJoinFromPKToFK": false,
       "defaultOrder": 1,
@@ -198,7 +190,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-23T00:00:00"
+        "createdDate": "2022-07-24T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -217,10 +209,6 @@
       "bottomChildEntityReferenceSimpleFullPath": "\\Source",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Source",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahSource",
-      "inUIEdit": true,
-      "inUIDisplay": true,
-      "inUIHidden": false,
-      "inUICriteria": true,
       "entityReferenceResultType": "DownTree",
       "isJoinFromPKToFK": false,
       "defaultOrder": 1,
@@ -240,7 +228,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-23T00:00:00"
+        "createdDate": "2022-07-24T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -259,10 +247,6 @@
       "bottomChildEntityReferenceSimpleFullPath": "\\StatusCode",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.StatusCode",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahStatusCode",
-      "inUIEdit": true,
-      "inUIDisplay": true,
-      "inUIHidden": false,
-      "inUICriteria": true,
       "entityReferenceResultType": "DownTree",
       "isJoinFromPKToFK": false,
       "defaultOrder": 1,
@@ -282,7 +266,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-23T00:00:00"
+        "createdDate": "2022-07-24T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -301,10 +285,6 @@
       "bottomChildEntityReferenceSimpleFullPath": "\\Type",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.Type",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahType",
-      "inUIEdit": true,
-      "inUIDisplay": true,
-      "inUIHidden": false,
-      "inUICriteria": true,
       "entityReferenceResultType": "DownTree",
       "isJoinFromPKToFK": false,
       "defaultOrder": 1,
@@ -324,7 +304,7 @@
         "idInDefaultDataView": true,
         "uniqueConstraintInDefaultDataView": true,
         "propertiesInDefaultDataView": null,
-        "createdDate": "2022-07-23T00:00:00"
+        "createdDate": "2022-07-24T00:00:00"
       },
       "tablE_SCHEMA": "dbo",
       "tablE_NAME": "ELMAH_Error",
@@ -343,10 +323,6 @@
       "bottomChildEntityReferenceSimpleFullPath": "\\User",
       "entityReferenceFullPath": "\\ElmahModel.ElmahError.User",
       "entityReferenceForeignKeyPath": "\\FK_ELMAH_Error_ElmahUser",
-      "inUIEdit": true,
-      "inUIDisplay": true,
-      "inUIHidden": false,
-      "inUICriteria": true,
       "entityReferenceResultType": "DownTree",
       "isJoinFromPKToFK": false,
       "defaultOrder": 1,
