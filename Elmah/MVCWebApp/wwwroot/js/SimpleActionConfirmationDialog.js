@@ -38,8 +38,11 @@ function attachSimpleActionConfirmationDialog() {
         $("#simpleActionConfirmationDialog .btn-nt-action-confirm").off();
         $("#simpleActionConfirmationDialog .btn-nt-action-confirm").click(function (e) {
             // 1. Batch Delete
-            if ($(sourceButton).hasClass("nt-batch-action-delete")) {
-                batchDelete(sourceButton);
+            if ($(sourceButton).hasClass("nt-bulk-delete")) {
+                bulkDelete(sourceButton);
+            }
+            else if ($(sourceButton).hasClass("nt-bulk-update-fixedvalue")) {
+                bulkUpdateFixedValue(sourceButton);
             }
         });
     })

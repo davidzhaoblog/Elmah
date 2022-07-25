@@ -25,13 +25,18 @@
     <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
     <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" value="@currentView" />
     <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
-    <div class="d-flex flex-row-reverse pt-1">
-        <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
-            <i class="fa fa-search"></i>
-            @localizor.Get("Search")
-        </button>
+    <div class="d-flex justify-content-between pt-1">
+        <div>
+            <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">you are working on <strong>@localizor.Get("ElmahError")</strong></a></span>
+        </div>
+        <div>
+            <button class="btn btn-primary mt-1 pt-1" role="button" type="submit" title="@localizor.Get("Search")">
+                <i class="fa fa-search"></i>
+                @localizor.Get("Search")
+            </button>
+        </div>
     </div>
-    <hr />
+    <hr class="mt-1" />
     <div class="input-group">
         <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
         </select>
@@ -115,14 +120,19 @@
             </div>
         </div>
     </div>
-    <div class="d-flex flex-row-reverse pt-2 pb-2">
-        <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
-            <i class="fa fa-search"></i>
-            @localizor.Get("Search")
-        </button>
+    <div class="d-flex justify-content-between pt-1">
+        <div>
+            <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">you are working on <strong>@localizor.Get("ElmahError")</strong></a></span>
+        </div>
+        <div>
+            <button class="btn btn-primary mt-1 pt-1" role="button" type="submit" title="@localizor.Get("Search")">
+                <i class="fa fa-search"></i>
+                @localizor.Get("Search")
+            </button>
+        </div>
     </div>
 </form>
-<hr />
+<hr class="mt-1" />
 <div class="card nt-list-wrapper"
      id="thisList"
      data-nt-pagination-updatetarget="#pageIndexH"
@@ -133,9 +143,9 @@
      data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")"
      data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")"
      data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahError")"
-     data-nt-batchdelete-url="@Url.Action("AjaxBatchDelete", "ElmahError")">
+     data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahError")"
+     data-nt-bulk-update-url="@Url.Action("AjaxBulkUpdate", "ElmahError")">
     <div class="card-header">
-        <h3 class="card-title float-start"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(currentView.ToLower()==PagedViewOptions.List.ToString().ToLower() ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
@@ -148,22 +158,49 @@
             <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#pageSizeH" data-nt-submittarget="#thisform"></select>
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
         </div>
-        <div class="btn-group float-end mt-1 ms-3">
-            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
-            </a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                    data-nt-action="@HttpMethods.Post"
-                    data-nt-route-id="@(System.Guid.NewGuid())"
-                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+        <div class="btn-group m-0 p-0 float-start nt-bulk-select-filter">
+            <button type="button" class="btn btn-default m-0 p-0 btn-nt-bulk-select-status" data-nt-bulk-select-status="None">
+                <!--None/Some/All-->
+                <i class="fa-regular fa-square"></i>
+                <i class="fa-regular fa-square-minus d-none"></i>
+                <i class="fa-regular fa-square-check d-none"></i>
             </button>
+            <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item nt-quick-bulk-select" href="#" data-nt-filtername="Application" data-nt-filtervalue="Test Application 1" data-nt-checkbox-checked="true">Test Application 1</a></li>
+@*                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Separated link</a></li>*@
+            </ul>
         </div>
-        <div class="btn-group float-end mt-1">
-            <button type="button" class="btn btn-secondary nt-batch-action-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog" data-nt-confirmation-message="@string.Format(localizor.Get("Please confirm you want to delete selected "), localizor.Get("ElmahError"))" title="@localizor.Get("Delete")">
+        <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
+            <button type="button" class="btn btn-default nt-bulk-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog" data-nt-confirmation-message="@string.Format(localizor.Get("Please confirm you want to delete selected "), localizor.Get("ElmahError"))" title="@localizor.Get("Delete")">
                 <i class="fa fa-trash"></i>
             </button>
+            <div class="dropdown nt-bulk-update-container">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMoveTo" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMoveTo">
+                    <li>
+                        <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
+                           data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                           data-nt-confirmation-message="@string.Format(localizor.Get("Please confirm you going to move selected items to {0}"), "Test Application 1")"
+                           data-nt-actionname = "Application"
+                           data-nt-namevalue="Application:Test Application 1">Move To: Test Application 1</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item nt-bulk-update-fixedvalue" href="#" 
+                           data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                           data-nt-confirmation-message="@string.Format(localizor.Get("Please confirm you going to move selected items to {0}"), "Test Application 2")"
+                           data-nt-actionname = "Application"
+                           data-nt-namevalue="Application:Test Application 2">Move To: Test Application 2</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="card-body nt-list-container-submit row m-0 p-0">
@@ -179,6 +216,33 @@
         {
             @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", Model.Result)
         }
+    </div>
+    <div class="fixed-bottom">
+        <div class="btn-group float-start m-4">
+            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
+                    data-nt-action="@HttpMethods.Post"
+                    data-nt-route-id="@(System.Guid.NewGuid())"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </button>
+        </div>
+
+        <div class="btn-group float-end m-4">
+            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
+                    data-nt-action="@HttpMethods.Post"
+                    data-nt-route-id="@(System.Guid.NewGuid())"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </button>
+        </div>
     </div>
 </div>
 <partial name="~/Views/Shared/_CrudActionDialog.cshtml" />

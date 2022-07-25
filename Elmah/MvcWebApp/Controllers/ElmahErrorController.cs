@@ -235,18 +235,6 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: ElmahError/AjaxBatchDelete
-        [HttpPost, ActionName("AjaxBatchDelete")]
-        [Route("[controller]/[action]")]
-        public async Task<IActionResult> AjaxBatchDelete(
-            [FromForm] Framework.Models.BatchActionViewModel<ElmahErrorIdentifier> data)
-        {
-            var result = await _thisService.BatchDelete(data.Ids);
-            if (result.Status == System.Net.HttpStatusCode.OK)
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         // POST: ElmahError/AjaxEdit/{ErrorId}
@@ -325,6 +313,31 @@ namespace Elmah.MvcWebApp.Controllers
             });
         }
 
+
+        // POST: ElmahError/AjaxBulkDelete
+        [HttpPost, ActionName("AjaxBulkDelete")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxBulkDelete(
+            [FromForm] Framework.Models.BatchActionViewModel<ElmahErrorIdentifier> data)
+        {
+            var result = await _thisService.BatchDelete(data.Ids);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        // POST: ElmahError/AjaxBulkUpdateApplication
+        [HttpPost, ActionName("AjaxBulkUpdateApplication")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxBulkUpdateApplication(
+            [FromForm] List<ElmahErrorIdentifier> ids, [Bind("Application")] [FromForm] Elmah.Models.ElmahErrorModel.DefaultView data)
+        {
+            var result = await _thisService.BulkUpdate(new BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> { Ids = ids, ActionName = "UpdateApplication", ActionData = data });
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
         // GET: ElmahError/Edit/{ErrorId}
         //[HttpGet, ActionName("Edit")]
         [Route("[controller]/[action]/{ErrorId}")]

@@ -406,5 +406,23 @@ namespace Elmah.EFCoreRepositories
                 return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
+
+        public async Task<Framework.Models.Response> BulkUpdate(Framework.Models.BatchActionViewModel<ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> data)
+        {
+            if (data.ActionData == null)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+            }
+            try
+            {
+                var querable = GetByIdentifierQueryListQuery(data.Ids);
+                var result = await querable.BatchUpdateAsync(new Elmah.EFCoreContext.ElmahError { Application = data.ActionData.Application });
+                return await Task<Response>.FromResult(new Response{ Status = HttpStatusCode.OK });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
     }
 }

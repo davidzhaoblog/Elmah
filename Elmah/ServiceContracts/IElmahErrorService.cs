@@ -16,8 +16,9 @@ namespace Elmah.ServiceContracts
         ElmahErrorModel.DefaultView GetDefault();
 
         Task<Response> Delete(ElmahErrorIdentifier id);
-        Task<Response> BatchDelete(List<ElmahErrorIdentifier>? ids);
+        Task<Response> BatchDelete(List<ElmahErrorIdentifier> ids);
 
+        Task<Framework.Models.Response> BulkUpdate(Framework.Models.BatchActionViewModel<ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> data);
     }
 }
 
