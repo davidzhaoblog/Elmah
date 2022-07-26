@@ -1,0 +1,50 @@
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahUserModel
+@inject IUIStrings localizor;
+@{
+    ViewData["Title"] = localizor.Get("Delete");
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1>@localizor.Get("Delete")</h1>
+                <h4>@localizor.Get("ElmahUser")</h4>
+                <h3>@localizor.Get("Are_you_sure_you_want_to_delete_this_")</h3>
+            </div>
+            @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+            {
+                <div class="card-body">
+                    <div class="text-danger">@ViewBag.StatusMessage</div>
+                </div>
+            }
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.User)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.User)
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group" role="group" aria-label="...">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="User" />
+                        <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
+                            <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
+                        </button>
+                    </form>
+                    <a asp-area="" asp-controller="ElmahUser" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Reset")">
+                        <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Reset")</span>
+                    </a>
+                    <a asp-area="" asp-controller="ElmahUser" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
+                        <i class="fa-solid fa-arrow-left"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Back_to_List")</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

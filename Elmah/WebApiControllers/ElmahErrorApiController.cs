@@ -37,6 +37,14 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<ElmahErrorCompositeModel>> GetCompositeModel(ElmahErrorIdentifier id)
+        {
+            var serviceResponse = await _thisService.GetCompositeModel(id, null);
+            return Ok(serviceResponse);
+        }
+
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorModel input)
         {

@@ -101,6 +101,15 @@ namespace Elmah.MvcWebApp.Controllers
         }
 
         [Route("[controller]/[action]/{ErrorId}")] // Primary
+        [HttpGet, ActionName("Dashboard")]
+        // GET: ElmahError/Dashboard/{ErrorId}
+        public async Task<IActionResult> Dashboard([FromRoute]ElmahErrorIdentifier id)
+        {
+            var result = await _thisService.GetCompositeModel(id);
+            return View(result);
+        }
+
+        [Route("[controller]/[action]/{ErrorId}")] // Primary
         // GET: ElmahError/AjaxLoadItem/{ErrorId}
         [HttpGet, ActionName("AjaxLoadItem")]
         public async Task<IActionResult> AjaxLoadItem(
@@ -199,7 +208,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                                 PartialViews = new List<Tuple<string, object>>
                                 {
-                                    new Tuple<string, object>("~/Views/_Tile_cshtmlElmahError.cshtml",
+                                    new Tuple<string, object>("~/Views/ElmahError/_Tile.cshtml",
                                         new ItemViewModel<ElmahErrorModel.DefaultView>
                                         {
                                             Status = System.Net.HttpStatusCode.OK,

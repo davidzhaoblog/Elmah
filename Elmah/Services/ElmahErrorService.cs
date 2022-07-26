@@ -32,6 +32,35 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
+        public async Task<ElmahErrorCompositeModel> GetCompositeModel(ElmahErrorIdentifier id, ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null)
+        {
+            var masterResponse = await this._thisRepository.Get(id);
+            if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
+            {
+                var failedResponse = new ElmahErrorCompositeModel();
+                failedResponse.Responses.Add(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
+                return failedResponse;
+            }
+
+            var successResponse = new ElmahErrorCompositeModel { __Master__ = masterResponse.ResponseBody };
+            var responses = new ConcurrentDictionary<ElmahErrorCompositeModel.__DataOptions__, Response>();
+            responses.TryAdd(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response { Status = HttpStatusCode.OK });
+
+            var tasks = new List<Task>();
+
+            if (tasks.Count > 0)
+            {
+                Task t = Task.WhenAll(tasks.ToArray());
+                try
+                {
+                    await t;
+                }
+                catch { }
+            }
+            successResponse.Responses = new Dictionary<ElmahErrorCompositeModel.__DataOptions__, Response>(responses);
+            return successResponse;
+        }
+
         public async Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids)
         {
             return await _thisRepository.BulkDelete(ids);
@@ -61,6 +90,12 @@ namespace Elmah.Services
         public async Task<Response> Delete(ElmahErrorIdentifier id)
         {
             return await _thisRepository.Delete(id);
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahErrorAdvancedQuery query)
+        {
+            return await _thisRepository.GetCodeList(query);
         }
     }
 }

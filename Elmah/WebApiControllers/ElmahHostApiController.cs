@@ -44,6 +44,38 @@ namespace Elmah.WebApiControllers
             return Ok(serviceResponse);
         }
 
+        // [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<ElmahHostModel>> Post(ElmahHostIdentifier id, ElmahHostModel input)
+        {
+            var serviceResponse = await _thisService.Update(id, input);
+            return ReturnResultOnlyActionResult(serviceResponse);
+        }
+
+        // [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<ElmahHostModel>> Get(ElmahHostIdentifier id)
+        {
+            var serviceResponse = await _thisService.Get(id);
+            return ReturnResultOnlyActionResult(serviceResponse);
+        }
+
+        // [Authorize]
+        [HttpPut]
+        public async Task<ActionResult<ElmahHostModel>> Put(ElmahHostModel input)
+        {
+            var serviceResponse = await _thisService.Create(input);
+            return ReturnResultOnlyActionResult(serviceResponse);
+        }
+
+        // [Authorize]
+        [HttpDelete]
+        public async Task<ActionResult> Delete(ElmahHostIdentifier id)
+        {
+            var serviceResponse = await _thisService.Delete(id);
+            return ReturnWithoutBodyActionResult(serviceResponse);
+        }
+
         /*
         // [Authorize]
         [HttpGet, ActionName("HeartBeat")]

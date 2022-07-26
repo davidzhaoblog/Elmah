@@ -119,7 +119,8 @@
     data-nt-submittarget="#thisform"
     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahError")"
     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")"
-    data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")">
+    data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")"
+    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahError")">
     <div class="card-header">
         <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">@localizor.Get("ElmahError")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
@@ -140,7 +141,7 @@
             </a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
                 data-nt-action="@HttpMethods.Post"
-                data-nt-route-id="@(default(System.Guid))"
+                data-nt-route-id=""
                 data-nt-container="@CrudViewContainers.Dialog.ToString()"
                 data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                 <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>

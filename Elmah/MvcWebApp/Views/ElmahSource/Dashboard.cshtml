@@ -54,6 +54,33 @@
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
+                            <a asp-area="" asp-controller="ElmahSource" asp-action="Edit" asp-route-source="@Model?.__Master__.Source" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                                data-nt-action="@HttpMethods.Put"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <a asp-area="" asp-controller="ElmahSource" asp-action="Details" asp-route-source="@Model?.__Master__.Source" class="btn btn-light" role="button" title="@localizor.Get("Details")">
+                                <i class="fa fa-briefcase"></i>
+                            </a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
+                                data-nt-action="@HttpMethods.Get"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                                <i class="fa fa-briefcase"></i>
+                            </button>
+                            <a asp-area="" asp-controller="ElmahSource" asp-action="Delete" asp-route-source="@Model?.__Master__.Source" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
+                                data-nt-action="@HttpMethods.Delete"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                                <i class="fa fa-trash"></i>
+                            </button>
                             <a asp-area="" asp-controller="ElmahSource" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
                                 <span class="fa fa-search"></span>
                             </a>
@@ -74,6 +101,16 @@
                 else
                 {
                     <div class="btn-group">
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
+                            data-nt-action="@HttpMethods.Post"
+                            data-nt-route-id=""
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                            <i class="fa fa-plus"></i>
+                        </button>
                         <a asp-area="" asp-controller="ElmahSource" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
                             <span class="fa fa-search"></span>
                         </a>

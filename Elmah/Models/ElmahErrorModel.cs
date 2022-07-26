@@ -59,7 +59,7 @@ namespace Elmah.Models
             [Display(Name = "Source", ResourceType = typeof(UIStrings))]
             public string? Source_Name { get; set; }
 
-            [Display(Name = "Name", ResourceType = typeof(UIStrings))]
+            [Display(Name = "ElmahStatusCode", ResourceType = typeof(UIStrings))]
             public string? StatusCode_Name { get; set; }
 
             [Display(Name = "Type", ResourceType = typeof(UIStrings))]

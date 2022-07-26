@@ -17,6 +17,9 @@ namespace Elmah.RepositoryContracts
         Task<Response<ElmahErrorModel.DefaultView>> Create(ElmahErrorModel input);
 
         Task<Response> Delete(ElmahErrorIdentifier id);
+
+        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahErrorAdvancedQuery query);
     }
 }
 

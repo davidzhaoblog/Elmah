@@ -1,0 +1,26 @@
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahSourceModel
+@inject IUIStrings localizor;
+@{
+    var format_Please_Select = localizor.Get("Format_Please_Select");
+}
+@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+{
+    <div class="row">
+        <div class="text-danger">@ViewBag.StatusMessage</div>
+    </div>
+}
+else
+{
+    <input class="hidden-modal-title" value="@Model.Source" type="hidden" />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Source)
+        </dd>
+    </dl>
+}

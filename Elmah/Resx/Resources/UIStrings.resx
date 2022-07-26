@@ -196,6 +196,12 @@
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="Please_confirm_you_going_to_set_selected_items_to" xml:space="preserve">
+    <value>Please confirm you going to move selected items to {0}</value>
+  </data>
+  <data name="Please_confirm_you_want_to_delete_selected" xml:space="preserve">
+    <value>Please confirm you want to delete selected {0}</value>
+  </data>
   <data name="PreDefinedDateTimeRanges_Custom" xml:space="preserve">
     <value>Custom</value>
   </data>

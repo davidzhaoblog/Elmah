@@ -1,3 +1,0 @@
-﻿TypeDeclarationContextName,Query,QueryUnitGroup,QueryPropertyName,Enabled,ProcessStatus,QueryUnitSettingType,TargetTypeDeclarationFullName,TargetEntityKey,TargetPropertyName,TargetPropertyType,FKPropertyName,EntityReferenceSimpleFullPath,TargetPropertyFullPath,PredicateKnownType
-ElmahModel.ElmahStatusCode,AdvancedQuery,StringQuery,Name,True,FromDefault,StringQuery,ElmahModel.ElmahStatusCode,t,Name,SystemString,,,,Contains
-ElmahModel.ElmahStatusCode,Identifier,Identifier,StatusCode,True,FromDefault,Identifier,ElmahModel.ElmahStatusCode,t,StatusCode,SystemInt32,,,,Equals

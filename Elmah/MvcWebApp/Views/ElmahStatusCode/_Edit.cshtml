@@ -1,0 +1,30 @@
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahStatusCodeModel
+@inject IUIStrings localizor;
+@{
+    var format_Please_Select = localizor.Get("Format_Please_Select");
+}
+@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+{
+    <div class="row">
+        <div class="text-danger">@ViewBag.StatusMessage</div>
+    </div>
+}
+else
+{
+    <input class="hidden-modal-title" value="@Model.Name" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="StatusCode" />
+    <div class="form-group">
+        <label asp-for="StatusCode" class="control-label"></label>
+        <input asp-for="StatusCode" class="form-control" />
+        <span asp-validation-for="StatusCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+}

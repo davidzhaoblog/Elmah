@@ -409,6 +409,103 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
+        private IQueryable<NameValuePair> GetCodeListQuery(
+            ElmahErrorAdvancedQuery query, bool withPagingAndOrderBy)
+        {
+
+            var queryable =
+                from t in _dbcontext.ELMAH_Error
+
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
+                where
+
+                    (string.IsNullOrEmpty(query.TextSearch) ||
+                        query.TextSearchType == TextSearchTypes.Contains && (EF.Functions.Like(t.Message!, "%" + query.TextSearch + "%") || EF.Functions.Like(t.AllXml!, "%" + query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.StartsWith && (EF.Functions.Like(t.Message!, query.TextSearch + "%") || EF.Functions.Like(t.AllXml!, query.TextSearch + "%")) ||
+                        query.TextSearchType == TextSearchTypes.EndsWith && (EF.Functions.Like(t.Message!, "%" + query.TextSearch) || EF.Functions.Like(t.AllXml!, "%" + query.TextSearch)))
+                    &&
+
+                    (string.IsNullOrEmpty(query.Application) || Application.Application == query.Application)
+                    &&
+                    (string.IsNullOrEmpty(query.Host) || Host.Host == query.Host)
+                    &&
+                    (string.IsNullOrEmpty(query.Source) || Source.Source == query.Source)
+                    &&
+                    (!query.StatusCode.HasValue || StatusCode.StatusCode == query.StatusCode)
+                    &&
+                    (string.IsNullOrEmpty(query.Type) || Type.Type == query.Type)
+                    &&
+                    (string.IsNullOrEmpty(query.User) || User.User == query.User)
+                    &&
+
+                    (!query.TimeUtcRangeLower.HasValue && !query.TimeUtcRangeUpper.HasValue || (!query.TimeUtcRangeLower.HasValue || t.TimeUtc >= query.TimeUtcRangeLower) && (!query.TimeUtcRangeLower.HasValue || t.TimeUtc <= query.TimeUtcRangeUpper))
+                    &&
+
+                    (string.IsNullOrEmpty(query.Message) ||
+                            query.MessageSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.Message!, "%" + query.Message + "%") ||
+                            query.MessageSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Message!, query.Message + "%") ||
+                            query.MessageSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Message!, "%" + query.Message))
+                    &&
+                    (string.IsNullOrEmpty(query.AllXml) ||
+                            query.AllXmlSearchType == TextSearchTypes.Contains && EF.Functions.Like(t.AllXml!, "%" + query.AllXml + "%") ||
+                            query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml!, query.AllXml + "%") ||
+                            query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml!, "%" + query.AllXml))
+
+                select new NameValuePair
+                {
+
+                        Value = t.ErrorId.ToString(),
+                        Name = t.Application,
+                };
+
+            // 1. Without Paging And OrderBy
+            if (!withPagingAndOrderBy)
+                return queryable;
+
+            // 2. With Paging And OrderBy
+            var orderBys = QueryOrderBySetting.Parse(query.OrderBys);
+            if (orderBys.Any())
+            {
+                queryable = queryable.OrderBy(QueryOrderBySetting.GetOrderByExpression(orderBys));
+            }
+
+            queryable = queryable.Skip((query.PageIndex - 1) * query.PageSize).Take(query.PageSize);
+
+            return queryable;
+        }
+
+        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahErrorAdvancedQuery query)
+        {
+            try
+            {
+                var queryableOfTotalCount = GetCodeListQuery(query, false);
+                var totalCount = queryableOfTotalCount.Count();
+
+                var queryable = GetCodeListQuery(query, true);
+                var result = await queryable.ToDynamicArrayAsync<NameValuePair>();
+                return new PagedResponse<NameValuePair[]>
+                {
+                    Status = HttpStatusCode.OK,
+                    Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
+                    ResponseBody = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return await Task<PagedResponse<NameValuePair[]>>.FromResult(new PagedResponse<NameValuePair[]>
+                {
+                    Status = HttpStatusCode.InternalServerError,
+                    StatusMessage = ex.Message
+                });
+            }
+        }
+
     }
 }
 

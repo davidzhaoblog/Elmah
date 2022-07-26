@@ -294,6 +294,24 @@ namespace Elmah.Resx.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Please confirm you going to move selected items to {0}"".
+        /// </summary>
+        public static string Please_confirm_you_going_to_set_selected_items_to {
+            get {
+                return ResourceManager.GetString("Please_confirm_you_going_to_set_selected_items_to", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Please confirm you want to delete selected {0}"".
+        /// </summary>
+        public static string Please_confirm_you_want_to_delete_selected {
+            get {
+                return ResourceManager.GetString("Please_confirm_you_want_to_delete_selected", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Custom"".
         /// </summary>
         public static string PreDefinedDateTimeRanges_Custom {

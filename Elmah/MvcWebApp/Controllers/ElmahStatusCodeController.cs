@@ -187,7 +187,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                                 PartialViews = new List<Tuple<string, object>>
                                 {
-                                    new Tuple<string, object>("~/Views/_Tile_cshtmlElmahStatusCode.cshtml",
+                                    new Tuple<string, object>("~/Views/ElmahStatusCode/_Tile.cshtml",
                                         new ItemViewModel<ElmahStatusCodeModel>
                                         {
                                             Status = System.Net.HttpStatusCode.OK,
@@ -272,6 +272,125 @@ namespace Elmah.MvcWebApp.Controllers
             if (result.Status == System.Net.HttpStatusCode.OK)
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
+        //[HttpGet, ActionName("Edit")]
+        // GET: ElmahStatusCode/Edit/{StatusCode}
+        public async Task<IActionResult> Edit([FromRoute]ElmahStatusCodeIdentifier id)
+        {
+            if (!id.StatusCode.HasValue)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+                return View();
+            }
+
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+
+            return View(result.ResponseBody);
+        }
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
+        // POST: ElmahStatusCode/Edit/{StatusCode}
+        public async Task<IActionResult> Edit(
+            [FromRoute]ElmahStatusCodeIdentifier id,
+            [Bind("StatusCode,Name")] ElmahStatusCodeModel input)
+        {
+            if (!id.StatusCode.HasValue ||
+                id.StatusCode.HasValue && id.StatusCode != input.StatusCode)
+            {
+                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
+                ViewBag.StatusMessage = "Not Found";
+
+                return View(input);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Update(id, input);
+                if (result.Status == System.Net.HttpStatusCode.OK)
+                    return RedirectToAction(nameof(Index));
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            return View(input);
+        }
+
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
+        // GET: ElmahStatusCode/Details/{StatusCode}
+        public async Task<IActionResult> Details([FromRoute]ElmahStatusCodeIdentifier id)
+        {
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            return View(result.ResponseBody);
+        }
+
+        // GET: ElmahStatusCode/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Status = System.Net.HttpStatusCode.OK;
+
+            return View();
+        }
+
+        // POST: ElmahStatusCode/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(
+            [Bind("StatusCode,Name")] ElmahStatusCodeModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _thisService.Create(input);
+                if(result.Status == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewBag.Status = result.Status;
+                ViewBag.StatusMessage = result.StatusMessage;
+            }
+
+            return View(input);
+        }
+
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
+        // GET: ElmahStatusCode/Delete/{StatusCode}
+        public async Task<IActionResult> Delete([FromRoute]ElmahStatusCodeIdentifier id)
+        {
+            var result = await _thisService.Get(id);
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+            return View(result.ResponseBody);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+
+        [Route("[controller]/[action]/{StatusCode}")] // Primary
+        // POST: ElmahStatusCode/Delete/{StatusCode}
+        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahStatusCodeIdentifier id)
+        {
+            var result = await _thisService.Delete(id);
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return RedirectToAction(nameof(Index));
+            ViewBag.Status = result.Status;
+            ViewBag.StatusMessage = result.StatusMessage;
+
+            var result1 = await _thisService.Get(id);
+            return View(result1.ResponseBody);
         }
     }
 }

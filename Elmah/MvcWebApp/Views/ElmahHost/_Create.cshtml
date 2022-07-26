@@ -1,0 +1,29 @@
+@using Framework.Models;
+@using Elmah.Models;
+@using Elmah.Resx;
+@model ElmahHostModel
+@inject IUIStrings localizor;
+@{
+    var format_Please_Select = localizor.Get("Format_Please_Select");
+}
+@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+{
+    <div class="row">
+        <div class="text-danger">@ViewBag.StatusMessage</div>
+    </div>
+}
+else
+{
+    <input class="hidden-modal-title" value="@Model.Host" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Host" class="control-label"></label>
+        <input asp-for="Host" class="form-control" />
+        <span asp-validation-for="Host" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SpatialLocation" class="control-label"></label>
+        <input asp-for="SpatialLocation" class="form-control" />
+        <span asp-validation-for="SpatialLocation" class="text-danger"></span>
+    </div>
+}

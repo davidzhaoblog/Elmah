@@ -8,6 +8,9 @@ namespace Elmah.ServiceContracts
         Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query);
 
+        Task<ElmahErrorCompositeModel> GetCompositeModel(
+            ElmahErrorIdentifier id, ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null);
+
         Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids);
 
         Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input);
@@ -18,6 +21,9 @@ namespace Elmah.ServiceContracts
         ElmahErrorModel.DefaultView GetDefault();
 
         Task<Response> Delete(ElmahErrorIdentifier id);
+
+        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+            ElmahErrorAdvancedQuery query);
     }
 }
 

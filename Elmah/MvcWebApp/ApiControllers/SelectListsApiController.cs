@@ -22,6 +22,18 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
+        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahErrorCodeList(
+            [FromQuery]ElmahErrorAdvancedQuery query)
+        {
+            using (var scope = _serviceScopeFactor.CreateScope())
+            {
+                var elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
+                var serviceResponse = await elmahErrorRepository.GetCodeList(query);
+                return serviceResponse;
+            }
+        }
+
+        // [Authorize]
         public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahApplicationCodeList(
             [FromQuery]ElmahApplicationAdvancedQuery query)
         {

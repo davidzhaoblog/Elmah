@@ -44,11 +44,15 @@
     </div>
 </form>
 <hr />
-<div class="card" id="thisList"\r\n
+<div class="card nt-list-wrapper" id="thisList"\r\n
     data-nt-bs-modalsize="Large"
     data-nt-pagination-updatetarget="#pageIndexH"
     data-nt-bs-modalsize="Large"
-    data-nt-submittarget="#thisform">
+    data-nt-submittarget="#thisform"
+    data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahUser")"
+    data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahUser")"
+    data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahUser")"
+    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahUser")">
     <div class="card-header">
         <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahUser" asp-action="Index">@localizor.Get("ElmahUser")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
@@ -63,8 +67,20 @@
             <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#pageSizeH" data-nt-submittarget="#thisform"></select>
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
         </div>
+        <div class="btn-group float-end mt-1">
+            <a asp-area="" asp-controller="ElmahUser" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                <i class="fa fa-plus"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
+                data-nt-action="@HttpMethods.Post"
+                data-nt-route-id=""
+                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+            </button>
+        </div>
     </div>
-    <div class="card-body row m-0 p-0">
+    <div class="card-body nt-list-container-submit row m-0 p-0">
         @await Html.PartialAsync("~/Views/ElmahUser/_List.cshtml", Model.Result)
     </div>
 </div>
