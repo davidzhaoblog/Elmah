@@ -1,8 +1,8 @@
-﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,IsEnum,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,BaseTableUniqueConstraint,CompositeQueryIdentifiers,CreatedDateProperty,ModifiedDateProperty,RowguidProperty,CreatedDate,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,DownwardListTableOfListTable
-dbo,ELMAH_Error,True,CrossReferenceTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
-dbo,ElmahApplication,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
-dbo,ElmahHost,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
-dbo,ElmahSource,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
-dbo,ElmahStatusCode,True,DetailsTable,,,False,Name,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
-dbo,ElmahType,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
-dbo,ElmahUser,True,DetailsTable,,,False,,False,,,,,,,,,,,7/2/2022 9:40:21 AM,,False,0,True,
+﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,EnumDefinition,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,MasterEntityReferences,AddressProperties,DerivedTables,UIPrimaryRouteId,CompositeQueryIdentifiers,CreatedDate,ExtraPropertiesInDefaultDataView,HasRootDatabaseRecord,RootDatabaseRecordID,CurrentInUse,DownwardListTableOfListTable
+dbo,ELMAH_Error,TRUE,CrossReferenceTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahApplication,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahHost,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahSource,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahStatusCode,TRUE,CodeListTable,,,Name,Name,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahType,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,
+dbo,ElmahUser,TRUE,DetailsTable,,,,,FALSE,,,,,,,,7/2/2022 9:40,,FALSE,0,TRUE,

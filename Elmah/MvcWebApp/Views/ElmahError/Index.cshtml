@@ -185,20 +185,16 @@
                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMoveTo">
-                    <li>
-                        <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
-                           data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                           data-nt-confirmation-message="@string.Format(localizor.Get("Please confirm you going to move selected items to {0}"), "Test Application 1")"
-                           data-nt-actionname = "Application"
-                           data-nt-namevalue="Application:Test Application 1">Move To: Test Application 1</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item nt-bulk-update-fixedvalue" href="#" 
-                           data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                           data-nt-confirmation-message="@string.Format(localizor.Get("Please confirm you going to move selected items to {0}"), "Test Application 2")"
-                           data-nt-actionname = "Application"
-                           data-nt-namevalue="Application:Test Application 2">Move To: Test Application 2</a>
-                    </li>
+                    @foreach (var item in ViewBag.ApplicationList)
+                    {
+                        <li>
+                            <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
+                               data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                               data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Text)"
+                               data-nt-actionname = "Application"
+                               data-nt-namevalue="Application:@item.Value">Move To: @item.Text</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

@@ -1,0 +1,2 @@
+﻿OriginalInput,UseTypeFullName,RootNamespace,SolutionName,SubRootFolder,SwaggerRootFolder,CodeVersion,StartPort,ExcludedTables,CompanyName,EmailDomainName,ConnectionStringName,DatabaseSever,DatabaseName
+D:\Test4\WhatEverII\trunk\Projects\Elmah\DB\Edmx\Elmah.edmx,False,Elmah,Elmah,Elmah,APIs,1.0.0.0,7800,aspnet_*;__RefactorLog;__MigrationHistory,Elmah,url,Elmah,,Elmah
