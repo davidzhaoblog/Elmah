@@ -295,6 +295,25 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // POST: ElmahError/AjaxBulkUpdateStatusCode
+        [HttpPost, ActionName("AjaxBulkUpdateStatusCode")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxBulkUpdateStatusCode(
+            [FromForm] List<ElmahErrorIdentifier> ids,
+            [Bind("StatusCode")] [FromForm] ElmahErrorModel.DefaultView data)
+        {
+            var result = await _thisService.BulkUpdate(
+                new BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>
+                {
+                    Ids = ids,
+                    ActionName = "StatusCode",
+                    ActionData = data
+                });
+            if (result.Status == System.Net.HttpStatusCode.OK)
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
         [Route("[controller]/[action]/{ErrorId}")] // Primary
         //[HttpGet, ActionName("Edit")]
         // GET: ElmahError/Edit/{ErrorId}

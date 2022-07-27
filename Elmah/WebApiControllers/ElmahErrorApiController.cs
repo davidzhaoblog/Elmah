@@ -45,6 +45,22 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [HttpDelete]
+        public async Task<ActionResult> BulkDelete(List<ElmahErrorIdentifier> ids)
+        {
+            var serviceResponse = await _thisService.BulkDelete(ids);
+            return ReturnWithoutBodyActionResult(serviceResponse);
+        }
+
+        // [Authorize]
+        [HttpPut]
+        public async Task<ActionResult> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        {
+            var serviceResponse = await _thisService.BulkUpdate(data);
+            return ReturnWithoutBodyActionResult(serviceResponse);
+        }
+
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorModel input)
         {

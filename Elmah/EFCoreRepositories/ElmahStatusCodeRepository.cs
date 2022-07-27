@@ -93,7 +93,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahStatusCode> GetByIdentifierQueryListQuery(
+        private IQueryable<ElmahStatusCode> GetByPrimaryIdentifierQueryListQuery(
             List<ElmahStatusCodeIdentifier> ids)
         {
             var idList = ids.Select(t => t.StatusCode).ToList();
@@ -109,7 +109,7 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryable = GetByIdentifierQueryListQuery(ids);
+                var queryable = GetByPrimaryIdentifierQueryListQuery(ids);
                 var result = await queryable.BatchDeleteAsync();
 
                 return await Task<Response>.FromResult(

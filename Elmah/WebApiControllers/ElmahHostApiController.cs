@@ -45,6 +45,14 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [HttpDelete]
+        public async Task<ActionResult> BulkDelete(List<ElmahHostIdentifier> ids)
+        {
+            var serviceResponse = await _thisService.BulkDelete(ids);
+            return ReturnWithoutBodyActionResult(serviceResponse);
+        }
+
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult<ElmahHostModel>> Post(ElmahHostIdentifier id, ElmahHostModel input)
         {

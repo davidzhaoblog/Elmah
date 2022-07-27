@@ -135,7 +135,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahError> GetByIdentifierQueryListQuery(
+        private IQueryable<ElmahError> GetByPrimaryIdentifierQueryListQuery(
             List<ElmahErrorIdentifier> ids)
         {
             var idList = ids.Select(t => t.ErrorId).ToList();
@@ -151,7 +151,7 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryable = GetByIdentifierQueryListQuery(ids);
+                var queryable = GetByPrimaryIdentifierQueryListQuery(ids);
                 var result = await queryable.BatchDeleteAsync();
 
                 return await Task<Response>.FromResult(
@@ -159,6 +159,32 @@ namespace Elmah.EFCoreRepositories
                     {
                         Status = HttpStatusCode.OK,
                     });
+            }
+            catch (Exception ex)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+            }
+        }
+
+        public async Task<Response> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        {
+            if (data.ActionData == null)
+            {
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+            }
+            try
+            {
+                var querable = GetByPrimaryIdentifierQueryListQuery(data.Ids);
+
+                if (data.ActionName == "StatusCode")
+                {
+                    var result = await querable.BatchUpdateAsync(
+                        new ElmahError
+                        {
+                            StatusCode = data.ActionData.StatusCode,
+                        });
+                }
+                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.OK });
             }
             catch (Exception ex)
             {

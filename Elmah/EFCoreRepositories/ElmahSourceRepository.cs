@@ -92,7 +92,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahSource> GetByIdentifierQueryListQuery(
+        private IQueryable<ElmahSource> GetByPrimaryIdentifierQueryListQuery(
             List<ElmahSourceIdentifier> ids)
         {
             var idList = ids.Select(t => t.Source).ToList();
@@ -108,7 +108,7 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryable = GetByIdentifierQueryListQuery(ids);
+                var queryable = GetByPrimaryIdentifierQueryListQuery(ids);
                 var result = await queryable.BatchDeleteAsync();
 
                 return await Task<Response>.FromResult(

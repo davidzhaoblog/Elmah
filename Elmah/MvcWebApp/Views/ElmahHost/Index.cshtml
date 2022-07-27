@@ -6,21 +6,33 @@
 @{
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahHost");
     var format_All = localizor.Get("Format_All");
+    string currentView = string.Empty;
+    if (Accessor.HttpContext != null)
+    {
+        currentView = Accessor.HttpContext.Request.Query["PagedViewOption"];
+    }
+    if (string.IsNullOrEmpty(currentView))
+    {
+        currentView = Model.Result.PagedViewOption.ToString();
+    }
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxMultiItems", "ElmahHost")" data-nt-updatetarget=".nt-list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="nt-page-index" />
     <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
     <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
     <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
-    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" />
+    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" value="@currentView" />
     <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
-    <div class="d-flex flex-row-reverse pt-1">
+    <div class="d-flex justify-content-between pt-1">
+        <div>
+            <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahHost" asp-action="Index">you are working on <strong>@localizor.Get("ElmahHost")</strong></a></span>
+        </div>
         <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
             <i class="fa fa-search"></i>
             @localizor.Get("Search")
         </button>
     </div>
-    <hr />
+    <hr class="mt-1" />
         <div class="input-group">
             <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
             </select>
@@ -36,23 +48,27 @@
             </div>
         </div>
     </div>
-    <div class="d-flex flex-row-reverse pt-2 pb-2">
+    <div class="d-flex justify-content-between pt-1">
+        <div>
+            <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahHost" asp-action="Index">you are working on <strong>@localizor.Get("ElmahHost")</strong></a></span>
+        </div>
         <button class="btn btn-primary me-1 ms-1" role="button" type="submit" title="@localizor.Get("Search")">
             <i class="fa fa-search"></i>
             @localizor.Get("Search")
         </button>
     </div>
 </form>
-<hr />
-<div class="card nt-list-wrapper" id="thisList"\r\n
+<hr class="mt-1" />
+<div class="card nt-list-wrapper"
+    id="thisList"
     data-nt-bs-modalsize="Large"
     data-nt-pagination-updatetarget="#pageIndexH"
-    data-nt-bs-modalsize="Large"
     data-nt-submittarget="#thisform"
     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahHost")"
     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahHost")"
     data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahHost")"
-    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahHost")">
+    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahHost")"
+    data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahHost")">
     <div class="card-header">
         <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahHost" asp-action="Index">@localizor.Get("ElmahHost")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
@@ -67,21 +83,54 @@
             <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#pageSizeH" data-nt-submittarget="#thisform"></select>
             <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
         </div>
-        <div class="btn-group float-end mt-1">
+        <div class="btn-group m-0 p-0 float-start nt-bulk-select-filter">
+            <button type="button" class="btn btn-default m-0 p-0 btn-nt-bulk-select-status" data-nt-bulk-select-status="None">
+                <!--None/Some/All-->
+                <i class="fa-regular fa-square"></i>
+                <i class="fa-regular fa-square-minus d-none"></i>
+                <i class="fa-regular fa-square-check d-none"></i>
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+            </ul>
+        </div>
+        <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
+            <button type="button" class="btn btn-default nt-bulk-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_delete_selected"), localizor.Get("ElmahHost"))" title="@localizor.Get("Delete")">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body nt-list-container-submit row m-0 p-0">
+        @if (currentView.ToLower() == PagedViewOptions.Tiles.ToString().ToLower())
+        {
+            @await Html.PartialAsync("~/Views/ElmahHost/_Tiles.cshtml", Model.Result)
+        }
+        else if (currentView.ToLower() == PagedViewOptions.SlideShow.ToString().ToLower())
+        {
+            @await Html.PartialAsync("~/Views/ElmahHost/_SlideShow.cshtml", Model.Result)
+        }
+        else
+        {
+            @await Html.PartialAsync("~/Views/ElmahHost/_List.cshtml", Model.Result)
+        }
+    </div>
+    <div class="fixed-bottom">
+        <div class="btn-group float-end m-4">
             <a asp-area="" asp-controller="ElmahHost" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                <i class="fa fa-plus"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+                <i class="fa fa-plus"></i>
             </a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
                 data-nt-action="@HttpMethods.Post"
                 data-nt-route-id=""
                 data-nt-container="@CrudViewContainers.Dialog.ToString()"
                 data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+                <i class="fa fa-plus"></i>
             </button>
         </div>
     </div>
-    <div class="card-body nt-list-container-submit row m-0 p-0">
-        @await Html.PartialAsync("~/Views/ElmahHost/_List.cshtml", Model.Result)
-    </div>
 </div>
 <partial name="~/Views/Shared/_CrudActionDialog.cshtml" />
+<partial name="~/Views/Shared/_SimpleActionConfirmationDialog.cshtml" />
