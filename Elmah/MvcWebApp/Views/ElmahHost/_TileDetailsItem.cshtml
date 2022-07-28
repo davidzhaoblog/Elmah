@@ -1,6 +1,7 @@
 @using Elmah.Resx;
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
+@using Framework.Models;
 @model ItemViewModel<ElmahHostModel>
 @inject IUIStrings localizor;
 @{
@@ -8,44 +9,52 @@
 }
 <div class="card w-100@(Model.IsCurrentItem ? " border-warning border-3": "")">
     <div class="card-header">
-        <h5 class="card-title">Please Customize title</h5>
-        <p class="card-text">Please Customize sub-title</p>
+        <h5 class="card-title">@Model.Model?.Host</h5>
+        @*<p class="card-text">Please Customize sub-title</p>*@
     </div>
     <div class="card-header ms-auto">
         <div class="btn-toolbar w-100">
-            <div class="btn-group w-100 btn-group-nt-actions">
-                <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
+            <div class="btn-group">
+                <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Model?.Host" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                    <i class="fa-solid fa-folder-tree"></i>
+                </a>
+                <a asp-area="" asp-controller="ElmahHost" asp-action="Details" asp-route-host="@Model.Model?.Host" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                     <i class="fa fa-briefcase"></i>
                 </a>
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
+                    data-nt-action="@HttpMethods.Get"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Details.ToString()">
                     <i class="fa fa-briefcase"></i>
                 </button>
-                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model.Model?.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                     <i class="fa fa-edit"></i>
                 </a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                    data-nt-action="@HttpMethods.Put"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
                     <i class="fa fa-edit"></i>
                 </button>
-                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                        data-nt-container="@CrudViewContainers.Inline.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Edit")"
+                    data-nt-action="@HttpMethods.Put"
+                    data-nt-container="@CrudViewContainers.Inline.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
                     <i class="fa fa-edit"></i>
                 </button>
-                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+                <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model.Model?.Host" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
                     <i class="fa fa-trash"></i>
                 </a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
+                    data-nt-action="@HttpMethods.Delete"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
                     <i class="fa fa-trash"></i>
                 </button>
-                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                        data-nt-container="@CrudViewContainers.Inline.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Delete")"
+                    data-nt-action="@HttpMethods.Delete"
+                    data-nt-container="@CrudViewContainers.Inline.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>

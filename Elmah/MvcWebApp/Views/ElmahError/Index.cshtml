@@ -2,6 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @model PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
+@inject IHttpContextAccessor Accessor
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahError");

@@ -62,21 +62,7 @@ function attachBulkSelectStatusClickEventHandler(selector) {
 
 function attachIndividualSelectCheckboxClickEventHandler(selector) {
     $(selector).click(function (e) {
-        const checked = $(e.currentTarget).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked");
-        const notChecked = $(e.currentTarget).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:not(:checked)");
-        const bulkSelectStatus = $(e.currentTarget).closest(".nt-list-wrapper").find(".nt-bulk-select-filter .btn-nt-bulk-select-status");
-        if (checked.length === 0 && notChecked.length !== 0) {
-            bulkSelectStatus.data("nt-bulk-select-status", "None")
-            bulkSelectStatus.html('<i class="fa-regular fa-square"></i>');
-        }
-        else if (checked.length !== 0 && notChecked.length === 0) {
-            bulkSelectStatus.data("nt-bulk-select-status", "All")
-            bulkSelectStatus.html('<i class="fa-regular fa-square-check"></i>');
-        }
-        else {
-            bulkSelectStatus.data("nt-bulk-select-status", "Some")
-            bulkSelectStatus.html('<i class="fa-regular fa-square-minus"></i>');
-        }
+        setStatusDataAndIcon($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleListItemBackground($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleBulkActionButtons($(e.currentTarget).closest(".nt-list-wrapper"));
     })
@@ -88,10 +74,31 @@ function attachQuickSelectClickEventHandler(selector) {
         const filterValue = $(e.currentTarget).data("nt-filtervalue");
         const setCheckedTo = $(e.currentTarget).data("nt-checkbox-checked");
         $(e.currentTarget).closest(".nt-list-wrapper").find(".nt-listitem .nt-quick-bulk-select[data-nt-filter-" + filterName + "='" + filterValue + "']").closest(".nt-listitem").find(".nt-list-bulk-select .form-check-input").prop("checked", setCheckedTo);
+        setStatusDataAndIcon($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleListItemBackground($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleBulkActionButtons($(e.currentTarget).closest(".nt-list-wrapper"));
     })
 }
+
+function setStatusDataAndIcon(parentelector) {
+    const checked = $(parentelector).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked");
+    const notChecked = $(parentelector).find(".nt-listitem .nt-list-bulk-select .form-check-input:not(:checked)");
+    const bulkSelectStatus = $(parentelector).find(".nt-bulk-select-filter .btn-nt-bulk-select-status");
+    if (checked.length === 0 && notChecked.length !== 0) {
+        bulkSelectStatus.data("nt-bulk-select-status", "None")
+        bulkSelectStatus.html('<i class="fa-regular fa-square"></i>');
+    }
+    else if (checked.length !== 0 && notChecked.length === 0) {
+        bulkSelectStatus.data("nt-bulk-select-status", "All")
+        bulkSelectStatus.html('<i class="fa-regular fa-square-check"></i>');
+    }
+    else {
+        bulkSelectStatus.data("nt-bulk-select-status", "Some")
+        bulkSelectStatus.html('<i class="fa-regular fa-square-minus"></i>');
+    }
+ }
+
+
 function toggleListItemBackground(parentelector) {
     $(parentelector).find(".nt-listitem:not(.nt-new) .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").addClass("bg-info");
     $(parentelector).find(".nt-listitem:not(.nt-new) .nt-list-bulk-select .form-check-input:not(:checked)").closest(".nt-listitem").removeClass("bg-info");

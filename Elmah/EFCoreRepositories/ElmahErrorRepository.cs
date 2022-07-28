@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
-using EFCore.BulkExtensions; // BulkDelete/BulkUpdate/BulkInsert
 
 namespace Elmah.EFCoreRepositories
 {
@@ -179,7 +178,7 @@ namespace Elmah.EFCoreRepositories
                 if (data.ActionName == "StatusCode")
                 {
                     var result = await querable.BatchUpdateAsync(
-                        new ElmahError
+                        t => new ElmahError
                         {
                             StatusCode = data.ActionData.StatusCode,
                         });

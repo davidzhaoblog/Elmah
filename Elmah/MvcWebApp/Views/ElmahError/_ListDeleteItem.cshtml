@@ -3,6 +3,23 @@
 @using Elmah.Resx;
 @model ElmahErrorModel.DefaultView
 @inject IUIStrings localizor;
+<td class="pt-0 pb-0 nt-list-bulk-select"></td>
+<td class="p-0">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="ErrorId" />
+                            <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
+                                <span class="fa-solid fa-trash"></span>
+                            </button>
+                        </form>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Reset")">
+                            <i class="fa-solid fa-refresh"></i>
+                        </a>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </div>
+</td>
 <td class="pt-0 pb-0">@Model?.ErrorId</td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model?.Host">@Model?.Host_Name</a></td>

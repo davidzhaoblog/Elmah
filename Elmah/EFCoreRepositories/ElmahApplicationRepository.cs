@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
-using EFCore.BulkExtensions; // BulkDelete/BulkUpdate/BulkInsert
 
 namespace Elmah.EFCoreRepositories
 {

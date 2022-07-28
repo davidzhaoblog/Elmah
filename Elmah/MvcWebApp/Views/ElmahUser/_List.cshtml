@@ -1,12 +1,14 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
+@using Elmah.MvcWebApp.Models;
 @model PagedResponse<ElmahUserModel[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
     <table class="table table-hover table-bordered table-striped">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
+                <th class="p-0"></th>
                 <th class="p-0"></th>
                 <th class="pt-0 pb-0">@localizor.Get("User")</th>
             </tr>
@@ -16,55 +18,15 @@
             {
                 for (var i = 0; i < Model.ResponseBody.Length; i++)
                 {
-                    <tr class="pt-0 pb-0 nt-listitem" data-nt-route-id="@(Model.ResponseBody![i].User)">
-                        <td class="p-0">
-                            <div class="btn-group">
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
-                                    <i class="fa-solid fa-folder-tree"></i>
-                                </a>
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                                    <i class="fa fa-briefcase"></i>
-                                </a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
-                                    data-nt-action="@HttpMethods.Get"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                                    <i class="fa fa-briefcase"></i>
-                                </button>
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                                    data-nt-action="@HttpMethods.Put"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Edit")"
-                                    data-nt-action="@HttpMethods.Put"
-                                    data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model.ResponseBody![i].User" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
-                                    data-nt-action="@HttpMethods.Delete"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                                <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Delete")"
-                                    data-nt-action="@HttpMethods.Delete"
-                                    data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="pt-0 pb-0">@Model.ResponseBody![i].User</td>
-                    </tr>
+                        @await Html.PartialAsync("~/Views/ElmahUser/_ListItemTr.cshtml",new ItemViewModel<ElmahUserModel>
+                            {
+                                Template = ViewItemTemplateNames.Details.ToString(),
+                                Model = Model.ResponseBody[i],
+                                Status = System.Net.HttpStatusCode.OK,
+                                IndexInArray = i,
+                                HtmlNamePrefix = "Model.ResponseBody",
+                                HtmlNameUseArrayIndex = true,
+                            })
                 }
             }
             else if (Model != null)
@@ -76,6 +38,20 @@
                 </tr>
             }
         </tbody>
+            <!--only for inline editing-->
+            <tfoot>
+                <tr class="pt-0 pb-0 nt-listitem nt-new" data-nt-route-id="">
+                    <td class="nt-createnew-button-container" colspan="100">
+                        <button type="button" class="btn btn-primary btn-nt-inline-editing w-100 h-100" title="@localizor.Get("Create_New")"
+                            data-nt-action="@HttpMethods.Post"
+                            data-nt-route-id=""
+                            data-nt-container="@CrudViewContainers.Inline.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                            <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+                        </button>
+                    </td>
+                </tr>
+            </tfoot>
     </table>
     @if (Model != null && Model.Pagination != null)
     {

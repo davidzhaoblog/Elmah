@@ -1,78 +1,42 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
+@using Elmah.MvcWebApp.Models;
 @model PagedResponse<ElmahHostModel[]>
 @inject IUIStrings localizor;
+@{
+    ViewBag.Status = Model.Status;
+    ViewBag.StatusMessage = Model.StatusMessage;
+}
 @if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
 {
     @for (var i = 0; i < Model.ResponseBody.Length; i++)
     {
-        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3  p-1">
-            <div class="card">
-                @*<img class="card-img-top" src="..." alt="Card image cap">*@
-                <div class="card-header">
-                    <h5 class="card-title">Please Customize title</h5>
-                    <p class="card-text">Please Customize sub-title</p>
-                </div>
-                <div class="card-body">
-                <div class="form-group">
-                    <label asp-for="ResponseBody![i].Host" class="control-label"></label>
-                    <input asp-for="ResponseBody![i].Host" class="form-control" readonly />
-                </div>
-                <div class="form-group">
-                    <label asp-for="ResponseBody![i].SpatialLocation" class="control-label"></label>
-                    <input asp-for="ResponseBody![i].SpatialLocation" class="form-control" readonly />
-                </div>
-                </div>
-                <div class="card-footer text-muted">
-                <div class="btn-group">
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
-                        <i class="fa-solid fa-folder-tree"></i>
-                    </a>
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Details" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                        <i class="fa fa-briefcase"></i>
-                    </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
-                        data-nt-action="@HttpMethods.Get"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                        <i class="fa fa-briefcase"></i>
-                    </button>
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                        data-nt-action="@HttpMethods.Put"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Edit")"
-                        data-nt-action="@HttpMethods.Put"
-                        data-nt-container="@CrudViewContainers.Inline.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model.ResponseBody![i].Host" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
-                        data-nt-action="@HttpMethods.Delete"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Delete")"
-                        data-nt-action="@HttpMethods.Delete"
-                        data-nt-container="@CrudViewContainers.Inline.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </div>
-                </div>
+        @await Html.PartialAsync("~/Views/ElmahHost/_Tile.cshtml",
+            new ItemViewModel<ElmahHostModel>
+            {
+                 Status = System.Net.HttpStatusCode.OK,
+                 Model = Model.ResponseBody[i],
+                 Template = Model.PagedViewOption.ToString(),
+                 HtmlNamePrefix = "Model.ResponseBody",
+                 HtmlNameUseArrayIndex = true,
+                 IndexInArray = i,
+                 IsCurrentItem = false
+            })
+    }
+    <div class="d-flex align-items-stretch col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 nt-listitem nt-new" data-nt-route-id="">
+        <div class="card nt-createnew-button-container w-100">
+            <div class="card-body w-100 h-100 d-flex flex-column">
+                <button type="button" class="btn btn-primary btn-nt-inline-editing w-100 h-100" title="@localizor.Get("Create_New")"
+                    data-nt-action="@HttpMethods.Post"
+                    data-nt-route-id=""
+                    data-nt-container="@CrudViewContainers.Inline.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                    <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
+                </button>
             </div>
         </div>
-    }
+    </div>
 }
 else if (Model != null)
 {
