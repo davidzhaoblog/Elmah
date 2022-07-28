@@ -56,6 +56,7 @@ function bulkDelete(sourceButton, dialog) {
             const modal = bootstrap.Modal.getInstance(dialog);
             modal.hide();
             setStatusDataAndIcon($(sourceButton).closest(".nt-list-wrapper"));
+            showSingletonMessagePopup(response);
         },
         failure: function (response) {
             // console.log(response);
@@ -119,6 +120,7 @@ function bulkUpdateFixedValue(sourceButton, dialog) {
                 attachInlineEditingLaunchButtonClickEvent($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").find(".btn-nt-inline-editing"));
                 const modal = bootstrap.Modal.getInstance(dialog);
                 modal.hide();
+                showSingletonMessagePopup(splitResponse[0]);
             }
         },
         failure: function (response) {

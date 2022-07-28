@@ -214,17 +214,7 @@
         }
     </div>
     <div class="fixed-bottom">
-        <div class="btn-group float-start m-4">
-            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
-            </a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                    data-nt-action="@HttpMethods.Post"
-                    data-nt-route-id="@(System.Guid.NewGuid())"
-                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
-            </button>
+        <div class="float-start ms-5 ps-5 border-2 nt-singlton-message-popup bg-info" style="display:none">
         </div>
 
         <div class="btn-group float-end m-4">
