@@ -45,7 +45,7 @@
     </div>
 </td>
 <td class="pt-0 pb-0">@Model?.ErrorId</td>
-<td class="pt-0 pb-0" data-nt-filter-Application="@Model?.Application"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
+<td class="pt-0 pb-0 nt-quick-bulk-select" data-nt-filter-Application="@Model?.Application"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model?.Host">@Model?.Host_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model?.Type">@Model?.Type_Name</a></td>
 <td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model?.Source">@Model?.Source_Name</a></td>

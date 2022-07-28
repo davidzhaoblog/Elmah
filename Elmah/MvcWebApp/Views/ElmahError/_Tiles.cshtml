@@ -14,8 +14,13 @@
         @await Html.PartialAsync("~/Views/ElmahError/_Tile.cshtml",
             new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
             {
-                 Status = System.Net.HttpStatusCode.OK, Model = Model.ResponseBody[i],  Template = Model.PagedViewOption.ToString(),
-                  HtmlNamePrefix = "Model.ResponseBody", HtmlNameUseArrayIndex = true, IndexInArray = i, IsCurrentItem = false
+                 Status = System.Net.HttpStatusCode.OK, 
+                 Model = Model.ResponseBody[i], 
+                 Template = Model.PagedViewOption.ToString(),
+                 HtmlNamePrefix = "Model.ResponseBody", 
+                 HtmlNameUseArrayIndex = true, 
+                 IndexInArray = i, 
+                 IsCurrentItem = false
             })
     }
     <div class="d-flex align-items-stretch col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1 nt-listitem nt-new" data-nt-route-id="">

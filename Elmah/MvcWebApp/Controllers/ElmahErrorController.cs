@@ -331,12 +331,12 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("AjaxBulkUpdateApplication")]
         [Route("[controller]/[action]")]
         public async Task<IActionResult> AjaxBulkUpdateApplication(
-            [FromForm] List<ElmahErrorIdentifier> ids, [Bind("Application")] [FromForm] Elmah.Models.ElmahErrorModel.DefaultView data)
+            [FromForm] List<Elmah.Models.ElmahErrorIdentifier> ids, [Bind("Application")] [FromForm] Elmah.Models.ElmahErrorModel.DefaultView data)
         {
-            var result = await _thisService.BulkUpdate(new BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> { Ids = ids, ActionName = "UpdateApplication", ActionData = data });
+            var result = await _thisService.BulkUpdate(new Framework.Models.BatchActionViewModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> { Ids = ids, ActionName = "UpdateApplication", ActionData = data });
             if (result.Status == System.Net.HttpStatusCode.OK)
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         // GET: ElmahError/Edit/{ErrorId}
         //[HttpGet, ActionName("Edit")]

@@ -74,8 +74,8 @@
                         <button type="button" class="btn btn-primary btn-nt-inline-editing w-100" title="@localizor.Get("Create_New")"
                                 data-nt-action="@HttpMethods.Post"
                                 data-nt-route-id="@(System.Guid.Empty)"
-                                data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                                data-nt-container="@Framework.Models.CrudViewContainers.Inline.ToString()"
+                                data-nt-template="@Framework.Models.ViewItemTemplateNames.Create.ToString()">
                             <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
                         </button>
                     </td>

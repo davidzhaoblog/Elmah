@@ -368,7 +368,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<Elmah.EFCoreContext.ElmahError> GetByIdentifierQueryListQuery(
+        private IQueryable<Elmah.EFCoreContext.ElmahError> GetByPrimaryIdentifierQueryListQuery(
             List<ElmahErrorIdentifier> ids)
         {
             var idList = ids.Select(t => t.ErrorId).ToList();
@@ -392,7 +392,7 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var querable = GetByIdentifierQueryListQuery(ids);
+                var querable = GetByPrimaryIdentifierQueryListQuery(ids);
                 var result = await querable.BatchDeleteAsync();
 
                 return await Task<Response>.FromResult(
@@ -411,17 +411,24 @@ namespace Elmah.EFCoreRepositories
         {
             if (data.ActionData == null)
             {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+                return await Task<Framework.Models.Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
             }
             try
             {
-                var querable = GetByIdentifierQueryListQuery(data.Ids);
-                var result = await querable.BatchUpdateAsync(new Elmah.EFCoreContext.ElmahError { Application = data.ActionData.Application });
-                return await Task<Response>.FromResult(new Response{ Status = HttpStatusCode.OK });
+                var querable = GetByPrimaryIdentifierQueryListQuery(data.Ids);
+                if (data.ActionName == "Application")
+                {
+                    var result = await querable.BatchUpdateAsync(
+                        new Elmah.EFCoreContext.ElmahError 
+                        { 
+                            Application = data.ActionData.Application 
+                        });
+                }
+                return await Task<Framework.Models.Response>.FromResult(new Framework.Models.Response { Status = HttpStatusCode.OK });
             }
             catch (Exception ex)
             {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Framework.Models.Response>.FromResult(new Framework.Models.Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
     }
