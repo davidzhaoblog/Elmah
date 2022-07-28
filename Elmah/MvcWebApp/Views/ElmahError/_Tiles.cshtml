@@ -12,7 +12,7 @@
     @for (var i = 0; i < Model.ResponseBody.Length; i++)
     {
         @await Html.PartialAsync("~/Views/ElmahError/_Tile.cshtml",
-            new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+            new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
             {
                  Status = System.Net.HttpStatusCode.OK, 
                  Model = Model.ResponseBody[i], 

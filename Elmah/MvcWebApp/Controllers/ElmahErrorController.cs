@@ -134,14 +134,24 @@ namespace Elmah.MvcWebApp.Controllers
                 ViewBag.Template = template;
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
-                return PartialView($"_List{template}Item", result);
+                return PartialView($"_List{template}Item",
+                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+                    {
+                        Status = System.Net.HttpStatusCode.OK,
+                        Template = template,
+                        IsCurrentItem = true,
+                        HtmlNamePrefix = "Model.ResponseBody",
+                        HtmlNameUseArrayIndex = true,
+                        IndexInArray = 1,
+                        Model = result
+                    });
             }
             if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
             {
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
                 return PartialView($"_Tile{template}Item", 
-                    new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                     {
                         Status = System.Net.HttpStatusCode.OK,
                         Template = template,
@@ -183,7 +193,7 @@ namespace Elmah.MvcWebApp.Controllers
                             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                             PartialViews = new List<Tuple<string, object>> {
                             new Tuple<string, object>("~/Views/ElmahError/_ListItemTr.cshtml",
-                                new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>{
+                                new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>{
                                     Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
                                     IsCurrentItem = true,
                                     Model = result.ResponseBody!
@@ -200,7 +210,7 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahError/_Tile.cshtml",
-                                    new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
@@ -270,7 +280,17 @@ namespace Elmah.MvcWebApp.Controllers
                             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                             PartialViews = new List<Tuple<string, object>>
                             {
-                                new Tuple<string, object>("~/Views/ElmahError/_ListDetailsItem.cshtml", result.ResponseBody!)
+                                new Tuple<string, object>("~/Views/ElmahError/_ListDetailsItem.cshtml",
+                                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+                                    {
+                                        Status = System.Net.HttpStatusCode.OK,
+                                        Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                        IsCurrentItem = true,
+                                        HtmlNamePrefix = "Model.ResponseBody",
+                                        HtmlNameUseArrayIndex = true,
+                                        IndexInArray = 1,
+                                        Model = result.ResponseBody!
+                                    })
                             }
                         });
                     }
@@ -283,7 +303,7 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahError/_TileDetailsItem.cshtml",
-                                    new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
@@ -343,7 +363,7 @@ namespace Elmah.MvcWebApp.Controllers
                             select new Tuple<string, object>
                             (
                                 "~/Views/ElmahError/_ListItemTr.cshtml",
-                                new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                                new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                                 {
                                     Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
                                     Model = t,

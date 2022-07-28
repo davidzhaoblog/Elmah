@@ -99,9 +99,22 @@ function bulkUpdateFixedValue(sourceButton, dialog) {
         dataType: "html",
         success: function (response) {
             //$(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
-            console.log(response);
-            const modal = bootstrap.Modal.getInstance(dialog);
-            modal.hide();
+            const splitResponse = response.split("===---------===");
+            // response part #1, status html
+            if (splitResponse.length > 0) {
+                $(dialog).find(".modal-body").append(splitResponse[0]);
+            }
+            const actionSuccess = !!($(dialog).find(".text-success").length);
+            if (actionSuccess) {
+                if (splitResponse.length > 1) {
+                    for (i = 1; i < splitResponse.length; i++) {
+                        const responseRoutId = $(splitResponse[i]).data("nt-route-id");
+                        $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem[data-nt-route-id='" + responseRoutId + "']").html($(splitResponse[i]).html())
+                    }
+                }
+                const modal = bootstrap.Modal.getInstance(dialog);
+                modal.hide();
+            }
         },
         failure: function (response) {
             // console.log(response);

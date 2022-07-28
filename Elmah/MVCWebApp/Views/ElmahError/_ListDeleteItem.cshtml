@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahErrorModel.DefaultView
+@model Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
 <td class="pt-0 pb-0 nt-list-bulk-select"></td>
 <td class="p-0">
@@ -16,14 +16,14 @@
         </button>
     </div>
 </td>
-<td class="pt-0 pb-0">@Model?.ErrorId</td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model?.Application">@Model?.Application_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model?.Host">@Model?.Host_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model?.Type">@Model?.Type_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model?.Source">@Model?.Source_Name</a></td>
-<td class="pt-0 pb-0">@Model?.Message</td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model?.User">@Model?.User_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model?.StatusCode">@Model?.StatusCode_Name</a></td>
-<td class="pt-0 pb-0">@Model?.TimeUtc</td>
-<td class="pt-0 pb-0">@Model?.Sequence</td>
-<td class="pt-0 pb-0">@Model?.AllXml</td>
+<td class="pt-0 pb-0">@Model.Model!.ErrorId</td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.Model!.Application">@Model.Model!.Application_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Model!.Host">@Model.Model!.Host_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Model!.Type">@Model.Model!.Type_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.Model!.Source">@Model.Model!.Source_Name</a></td>
+<td class="pt-0 pb-0">@Model.Model!.Message</td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.Model!.User">@Model.Model!.User_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.Model!.StatusCode">@Model.Model!.StatusCode_Name</a></td>
+<td class="pt-0 pb-0">@Model.Model!.TimeUtc</td>
+<td class="pt-0 pb-0">@Model.Model!.Sequence</td>
+<td class="pt-0 pb-0">@Model.Model!.AllXml</td>
