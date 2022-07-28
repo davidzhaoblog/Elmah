@@ -63,7 +63,7 @@ builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
 builder.Services.AddScoped<SelectListHelper>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => x.UseNetTopologySuite()), ServiceLifetime.Scoped);
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => { x.UseNetTopologySuite(); x.UseBulk(); }), ServiceLifetime.Scoped);
 
 var app = builder.Build();
 

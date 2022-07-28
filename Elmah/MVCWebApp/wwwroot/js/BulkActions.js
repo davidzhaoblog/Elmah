@@ -32,7 +32,7 @@
  * table tbody
  */
 
-function bulkDelete(sourceButton) {
+function bulkDelete(sourceButton, dialog) {
     // composite id when data-nt-route-id-def is null, ids is a string array, only one property name(in identifier query) is allowed in data-nt-route-id-def
     const routeIdDef = $(sourceButton).closest(".nt-list-wrapper").data("nt-route-id-def");
     const routeIds = $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").map((i, x) => $(x).data("nt-route-id"));
@@ -52,20 +52,25 @@ function bulkDelete(sourceButton) {
         dataType: "html",
         success: function (response) {
             $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
-            console.log(response);
+            // console.log(response);
+            const modal = bootstrap.Modal.getInstance(dialog);
+            modal.hide();
+            setStatusDataAndIcon($(sourceButton).closest(".nt-list-wrapper"));
         },
         failure: function (response) {
             // console.log(response);
+            $(dialog).find(".modal-body").append(response);
             $(sourceButton).removeAttr("disabled");
         },
         error: function (response) {
             // console.log(response);
+            $(dialog).find(".modal-body").append(response);
             $(sourceButton).removeAttr("disabled");
         }
     });
 }
 
-function bulkUpdateFixedValue(sourceButton) {
+function bulkUpdateFixedValue(sourceButton, dialog) {
     // composite id when data-nt-route-id-def is null, ids is a string array, only one property name(in identifier query) is allowed in data-nt-route-id-def
     const routeIdDef = $(sourceButton).closest(".nt-list-wrapper").data("nt-route-id-def");
     const routeIds = $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").map((i, x) => $(x).data("nt-route-id"));
@@ -95,6 +100,8 @@ function bulkUpdateFixedValue(sourceButton) {
         success: function (response) {
             //$(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
             console.log(response);
+            const modal = bootstrap.Modal.getInstance(dialog);
+            modal.hide();
         },
         failure: function (response) {
             // console.log(response);

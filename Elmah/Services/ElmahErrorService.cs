@@ -62,7 +62,7 @@ namespace Elmah.Services
         {
             return await _thisRepository.BatchDelete(ids);
         }
-        public async Task<Framework.Models.Response> BulkUpdate(Framework.Models.BatchActionViewModel<ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> data)
+        public async Task<Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>>> BulkUpdate(Framework.Models.BatchActionViewModel<ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> data)
         {
             return await _thisRepository.BulkUpdate(data);
         }

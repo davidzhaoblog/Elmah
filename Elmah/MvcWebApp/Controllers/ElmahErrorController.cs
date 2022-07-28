@@ -333,9 +333,28 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> AjaxBulkUpdateApplication(
             [FromForm] List<Elmah.Models.ElmahErrorIdentifier> ids, [Bind("Application")] [FromForm] Elmah.Models.ElmahErrorModel.DefaultView data)
         {
-            var result = await _thisService.BulkUpdate(new Framework.Models.BatchActionViewModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> { Ids = ids, ActionName = "UpdateApplication", ActionData = data });
+            var result = await _thisService.BulkUpdate(new Framework.Models.BatchActionViewModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> { Ids = ids, ActionName = "Application", ActionData = data });
             if (result.Status == System.Net.HttpStatusCode.OK)
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", 
+                    new Elmah.MvcWebApp.Models.AjaxResponseViewModel {
+                        Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                        PartialViews =
+                            (from t in result.ResponseBody
+                            select new Tuple<string, object>
+                            (
+                                "~/Views/ElmahError/_ListItemTr.cshtml",
+                                new Elmah.MvcWebApp.Models.ItemViewModal<Elmah.Models.ElmahErrorModel.DefaultView>
+                                {
+                                    Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                    Model = t,
+                                    Status = System.Net.HttpStatusCode.OK,
+                                    IndexInArray = result.ResponseBody?.IndexOf(t) ?? 0,
+                                    HtmlNamePrefix = "Model.ResponseBody",
+                                    HtmlNameUseArrayIndex = true,
+                                    BulkSelected = true,
+                                }
+                            )).ToList()
+                    });;
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new Elmah.MvcWebApp.Models.AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         // GET: ElmahError/Edit/{ErrorId}

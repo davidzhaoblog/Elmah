@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
-using EFCore.BulkExtensions;
 
 namespace Elmah.EFCoreRepositories
 {
@@ -368,7 +367,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<Elmah.EFCoreContext.ElmahError> GetByPrimaryIdentifierQueryListQuery(
+        private IQueryable<Elmah.EFCoreContext.ElmahError> GetIQueryableByPrimaryIdentifierList(
             List<ElmahErrorIdentifier> ids)
         {
             var idList = ids.Select(t => t.ErrorId).ToList();
@@ -392,7 +391,7 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var querable = GetByPrimaryIdentifierQueryListQuery(ids);
+                var querable = GetIQueryableByPrimaryIdentifierList(ids);
                 var result = await querable.BatchDeleteAsync();
 
                 return await Task<Response>.FromResult(
@@ -407,28 +406,78 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Framework.Models.Response> BulkUpdate(Framework.Models.BatchActionViewModel<ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> data)
+
+        private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateResponse(
+            List<ElmahErrorIdentifier> ids)
+        {
+            var idList = ids.Select(t => t.ErrorId).ToList();
+            var queryable =
+                from t in _dbcontext.ELMAH_Error
+
+                join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                join User in _dbcontext.ElmahUser on t.User equals User.User// \User
+                where idList.Contains(t.ErrorId)
+                select new ElmahErrorModel.DefaultView
+                {
+
+                    Application_Name = Application.Application,
+                    ErrorId = t.ErrorId,
+                    Host_Name = Host.Host,
+                    Source_Name = Source.Source,
+                    StatusCode_Name = StatusCode.Name,
+                    Type_Name = Type.Type,
+                    User_Name = User.User,
+                    Application = t.Application,
+                    Host = t.Host,
+                    Type = t.Type,
+                    Source = t.Source,
+                    Message = t.Message,
+                    User = t.User,
+                    StatusCode = t.StatusCode,
+                    TimeUtc = t.TimeUtc,
+                    Sequence = t.Sequence,
+                    AllXml = t.AllXml,
+                };
+
+            return queryable;
+        }
+
+        public async Task<Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>>> BulkUpdate(Framework.Models.BatchActionViewModel<ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> data)
         {
             if (data.ActionData == null)
             {
-                return await Task<Framework.Models.Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+                return await Task<Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>>>.FromResult(
+                    new Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>> { Status = HttpStatusCode.BadRequest });
             }
             try
             {
-                var querable = GetByPrimaryIdentifierQueryListQuery(data.Ids);
+                var querable = GetIQueryableByPrimaryIdentifierList(data.Ids);
                 if (data.ActionName == "Application")
                 {
-                    var result = await querable.BatchUpdateAsync(
+                    var result = await querable.BatchUpdateAsync(t =>
                         new Elmah.EFCoreContext.ElmahError 
                         { 
                             Application = data.ActionData.Application 
                         });
+                    var responseBody = GetIQueryableAsBulkUpdateResponse(data.Ids);
+                    return await Task<Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>>>.FromResult(
+                        new Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>> { 
+                            Status = HttpStatusCode.OK,
+                            ResponseBody = responseBody.ToList(),
+                        });
                 }
-                return await Task<Framework.Models.Response>.FromResult(new Framework.Models.Response { Status = HttpStatusCode.OK });
+
+                return await Task<Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>>>.FromResult(
+                    new Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>> { Status = HttpStatusCode.BadRequest });
             }
             catch (Exception ex)
             {
-                return await Task<Framework.Models.Response>.FromResult(new Framework.Models.Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>>>.FromResult(
+                    new Framework.Models.PagedResponse<List<Elmah.Models.ElmahErrorModel.DefaultView>> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
     }
