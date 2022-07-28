@@ -238,13 +238,16 @@ function pageLinkClicked(self) {
         contentType: false,
         dataType: "html",
         success: function (response) {
+            const toAppend = $(response);
             if (pagedViewOption !== "Tiles" || pageIndex == 1) {
-                $(updateTarget).html(response);
+                $(updateTarget).html(toAppend);
             }
             else {
                 $(updateTarget).children(".btn-nt-load-more").remove()
-                $(updateTarget).append(response);
+                $(updateTarget).append(toAppend);
             }
+            attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+            attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
             //console.log("success", response);
         },
         failure: function (response) {
@@ -273,20 +276,16 @@ $(document).ready($(function () {
             contentType: false,
             dataType: "html",
             success: function (response) {
+                const toAppend = $(response);
                 if (pagedViewOption !== "Tiles" || pageIndex == 1) {
-                    $(updateTarget).html(response);
+                    $(updateTarget).html(toAppend);
                 }
                 else {
                     $(updateTarget).children(".btn-nt-load-more").remove()
-                    $(updateTarget).append(response);
+                    $(updateTarget).append(toAppend);
                 }
-                //console.log("success", response);
-                // attach pagination event handler again.
-                //$(".page-link").on("click", function (e) {
-                //    e.preventDefault();
-                //    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-                //    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-                //});
+                attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+                attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
             },
             failure: function (response) {
                 // console.log("failure", response);
@@ -316,19 +315,16 @@ $(document).ready($(function () {
             async: false,
             dataType: "html",
             success: function (response) {
+                const toAppend = $(response);
                 if (pagedViewOption !== "Tiles" || pageIndex == 1) {
-                    $(updateTarget).html(response);
+                    $(updateTarget).html(toAppend);
                 }
                 else {
                     $(updateTarget).children(".btn-nt-load-more").remove()
-                    $(updateTarget).append(response);
+                    $(updateTarget).append(toAppend);
                 }
-                //console.log("success", response);
-                // attach pagination event handler again.
-                //$(".page-link").on("click", function (e) {
-                //    $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-                //    $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-                //});
+                attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+                attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
             },
             failure: function (response) {
                 // console.log("failure", response);
