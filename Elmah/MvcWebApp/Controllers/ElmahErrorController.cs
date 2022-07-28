@@ -351,6 +351,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("AjaxBulkUpdateApplication")]
         [Route("[controller]/[action]")]
         public async Task<IActionResult> AjaxBulkUpdateApplication(
+            [FromQuery] Framework.Models.PagedViewOptions view,
             [FromForm] List<Elmah.Models.ElmahErrorIdentifier> ids, [Bind("Application")] [FromForm] Elmah.Models.ElmahErrorModel.DefaultView data)
         {
             var result = await _thisService.BulkUpdate(new Framework.Models.BatchActionViewModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> { Ids = ids, ActionName = "Application", ActionData = data });
@@ -362,7 +363,9 @@ namespace Elmah.MvcWebApp.Controllers
                             (from t in result.ResponseBody
                             select new Tuple<string, object>
                             (
-                                "~/Views/ElmahError/_ListItemTr.cshtml",
+                                view == Framework.Models.PagedViewOptions.Tiles
+                                    ? "~/Views/ElmahError/_Tile.cshtml"
+                                    : "~/Views/ElmahError/_ListItemTr.cshtml",
                                 new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                                 {
                                     Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),

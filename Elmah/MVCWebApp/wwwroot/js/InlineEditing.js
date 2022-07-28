@@ -200,6 +200,7 @@ function ajaxPostbackInlineEditing_InTable(postbackurl, formData, self, view, lo
                             if (splitResponse.length > 1) {
                                 $(".nt-listitem.nt-current").html(splitResponse[1]);
                                 attachInlineEditingLaunchButtonClickEvent(".nt-listitem.nt-current .btn-nt-inline-editing");
+                                attachIndividualSelectCheckboxClickEventHandler($(".nt-listitem.nt-current .nt-list-bulk-select .form-check-input"));
                             }
                             $(self).removeAttr("disabled");
                         }
@@ -211,6 +212,7 @@ function ajaxPostbackInlineEditing_InTable(postbackurl, formData, self, view, lo
                                 theTbody.append($(toAppend)); // new item at the last place
                                 $(toAppend).get(0).scrollIntoView();
                                 attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+                                attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
                             }
                             const createNewButton = $(self).closest(".nt-listitem").find(".nt-createnew-button-container");
                             const listItem = $(self).closest(".nt-listitem");
@@ -320,9 +322,12 @@ function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container
                 attachInlineEditingCancelButtonClickEvent();
             }
 
-            const selector = $(responseHtml).find(".btn-nt-inline-editing");
-            $(selector).off();
-            attachInlineEditingLaunchButtonClickEvent(selector); // all in currentListItem
+            const selectorOfInlineEditingButtons = $(responseHtml).find(".btn-nt-inline-editing");
+            $(selectorOfInlineEditingButtons).off();
+            attachInlineEditingLaunchButtonClickEvent(selectorOfInlineEditingButtons); // all in currentListItem
+            const selectorOfIndividualSelectCheckBoxes = $(responseHtml).find(".nt-list-bulk-select .form-check-input");
+            $(selectorOfIndividualSelectCheckBoxes).off();
+            attachIndividualSelectCheckboxClickEventHandler(selectorOfIndividualSelectCheckBoxes);
             // console.log(response);
         },
         failure: function (response) {
@@ -372,6 +377,7 @@ function ajaxPostbackInlineEditing_InTiles(postbackurl, formData, self, view, lo
                             if (splitResponse.length > 1) {
                                 $(".nt-listitem.nt-current").html(splitResponse[1]);
                                 attachInlineEditingLaunchButtonClickEvent(".nt-listitem.nt-current .btn-nt-inline-editing");
+                                attachIndividualSelectCheckboxClickEventHandler($(".nt-listitem.nt-current .nt-list-bulk-select .form-check-input"));
                             }
                             $(self).removeAttr("disabled");
                         }
@@ -382,6 +388,7 @@ function ajaxPostbackInlineEditing_InTiles(postbackurl, formData, self, view, lo
                                 const thisListItem = $(self).closest(".nt-listitem");
                                 toAppend.insertBefore(thisListItem);
                                 attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+                                attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
                             }
                             const createNewButton = $(self).closest(".nt-listitem").find(".nt-createnew-button-container");
                             const listItem = $(self).closest(".nt-listitem");

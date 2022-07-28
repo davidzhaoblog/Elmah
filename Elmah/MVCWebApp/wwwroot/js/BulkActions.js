@@ -71,6 +71,8 @@ function bulkDelete(sourceButton, dialog) {
 }
 
 function bulkUpdateFixedValue(sourceButton, dialog) {
+    const wrapper = $(sourceButton).closest(".nt-list-wrapper");
+    const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
     // composite id when data-nt-route-id-def is null, ids is a string array, only one property name(in identifier query) is allowed in data-nt-route-id-def
     const routeIdDef = $(sourceButton).closest(".nt-list-wrapper").data("nt-route-id-def");
     const routeIds = $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").map((i, x) => $(x).data("nt-route-id"));
@@ -88,7 +90,8 @@ function bulkUpdateFixedValue(sourceButton, dialog) {
         }
     });
     // e.g. ~ElmahError/BulkUpdate + Application(ActionName)
-    const postbackurl = $(sourceButton).closest(".nt-list-wrapper").data("nt-bulk-update-url") + $(sourceButton).data("nt-actionname");
+    let postbackurl = $(sourceButton).closest(".nt-list-wrapper").data("nt-bulk-update-url") + $(sourceButton).data("nt-actionname");
+    postbackurl = postbackurl + "?view=" + view; 
     $.ajax({
         type: "POST",
         url: postbackurl,
@@ -112,6 +115,8 @@ function bulkUpdateFixedValue(sourceButton, dialog) {
                         $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem[data-nt-route-id='" + responseRoutId + "']").html($(splitResponse[i]).html())
                     }
                 }
+                attachIndividualSelectCheckboxClickEventHandler($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked"));
+                attachInlineEditingLaunchButtonClickEvent($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").find(".btn-nt-inline-editing"));
                 const modal = bootstrap.Modal.getInstance(dialog);
                 modal.hide();
             }
