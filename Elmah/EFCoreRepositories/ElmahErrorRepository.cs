@@ -215,6 +215,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                 where idList.Contains(t.ErrorId)
+
                 select new ElmahErrorModel.DefaultView
                 {
                         ErrorId = t.ErrorId,
