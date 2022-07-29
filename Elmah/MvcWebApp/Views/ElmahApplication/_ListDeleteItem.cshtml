@@ -1,13 +1,13 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahApplicationModel
+@model ItemViewModel<ElmahApplicationModel>
 @inject IUIStrings localizor;
 <td class="pt-0 pb-0 nt-list-bulk-select"></td>
 <td class="p-0">
                     <div class="btn-group" role="group" aria-label="...">
                         <form asp-action="Delete">
-                            <input type="hidden" asp-for="Application" />
+                            <input type="hidden" asp-for="Model!.Application" />
                             <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                                 <span class="fa-solid fa-trash"></span>
                             </button>
@@ -20,4 +20,4 @@
                         </a>
                     </div>
 </td>
-<td class="pt-0 pb-0">@Model?.Application</td>
+<td class="pt-0 pb-0">@Model.Model!.Application</td>

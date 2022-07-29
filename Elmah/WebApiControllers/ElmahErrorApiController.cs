@@ -54,10 +54,10 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        public async Task<ActionResult<PagedResponse<ElmahErrorModel.DefaultView[]>>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
         {
             var serviceResponse = await _thisService.BulkUpdate(data);
-            return ReturnWithoutBodyActionResult(serviceResponse);
+            return ReturnActionResult(serviceResponse);
         }
 
         // [Authorize]

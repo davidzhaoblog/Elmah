@@ -32,7 +32,7 @@
  * table tbody
  */
 
-function bulkDelete(sourceButton) {
+function bulkDelete(sourceButton, dialog) {
     // composite id when data-nt-route-id-def is null, ids is a string array, only one property name(in identifier query) is allowed in data-nt-route-id-def
     const routeIdDef = $(sourceButton).closest(".nt-list-wrapper").data("nt-route-id-def");
     const routeIds = $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").map((i, x) => $(x).data("nt-route-id"));
@@ -52,20 +52,28 @@ function bulkDelete(sourceButton) {
         dataType: "html",
         success: function (response) {
             $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
-            console.log(response);
+            // console.log(response);
+            const modal = bootstrap.Modal.getInstance(dialog);
+            modal.hide();
+            setStatusDataAndIcon($(sourceButton).closest(".nt-list-wrapper"));
+            showSingletonMessagePopup(response);
         },
         failure: function (response) {
             // console.log(response);
+            $(dialog).find(".modal-body").append(response);
             $(sourceButton).removeAttr("disabled");
         },
         error: function (response) {
             // console.log(response);
+            $(dialog).find(".modal-body").append(response);
             $(sourceButton).removeAttr("disabled");
         }
     });
 }
 
-function bulkUpdateFixedValue(sourceButton) {
+function bulkUpdateFixedValue(sourceButton, dialog) {
+    const wrapper = $(sourceButton).closest(".nt-list-wrapper");
+    const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
     // composite id when data-nt-route-id-def is null, ids is a string array, only one property name(in identifier query) is allowed in data-nt-route-id-def
     const routeIdDef = $(sourceButton).closest(".nt-list-wrapper").data("nt-route-id-def");
     const routeIds = $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").map((i, x) => $(x).data("nt-route-id"));
@@ -83,7 +91,8 @@ function bulkUpdateFixedValue(sourceButton) {
         }
     });
     // e.g. ~ElmahError/BulkUpdate + Application(ActionName)
-    const postbackurl = $(sourceButton).closest(".nt-list-wrapper").data("nt-bulk-update-url") + $(sourceButton).data("nt-actionname");
+    let postbackurl = $(sourceButton).closest(".nt-list-wrapper").data("nt-bulk-update-url") + $(sourceButton).data("nt-actionname");
+    postbackurl = postbackurl + "?view=" + view; 
     $.ajax({
         type: "POST",
         url: postbackurl,
@@ -94,7 +103,25 @@ function bulkUpdateFixedValue(sourceButton) {
         dataType: "html",
         success: function (response) {
             //$(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
-            console.log(response);
+            const splitResponse = response.split("===---------===");
+            // response part #1, status html
+            if (splitResponse.length > 0) {
+                $(dialog).find(".modal-body").append(splitResponse[0]);
+            }
+            const actionSuccess = !!($(dialog).find(".text-success").length);
+            if (actionSuccess) {
+                if (splitResponse.length > 1) {
+                    for (i = 1; i < splitResponse.length; i++) {
+                        const responseRoutId = $(splitResponse[i]).data("nt-route-id");
+                        $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem[data-nt-route-id='" + responseRoutId + "']").html($(splitResponse[i]).html())
+                    }
+                }
+                attachIndividualSelectCheckboxClickEventHandler($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked"));
+                attachInlineEditingLaunchButtonClickEvent($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").find(".btn-nt-inline-editing"));
+                const modal = bootstrap.Modal.getInstance(dialog);
+                modal.hide();
+                showSingletonMessagePopup(splitResponse[0]);
+            }
         },
         failure: function (response) {
             // console.log(response);

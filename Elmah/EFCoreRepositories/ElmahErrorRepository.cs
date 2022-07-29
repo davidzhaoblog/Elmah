@@ -134,7 +134,7 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        private IQueryable<ElmahError> GetByPrimaryIdentifierQueryListQuery(
+        private IQueryable<ElmahError> GetIQueryableByPrimaryIdentifierList(
             List<ElmahErrorIdentifier> ids)
         {
             var idList = ids.Select(t => t.ErrorId).ToList();
@@ -150,7 +150,7 @@ namespace Elmah.EFCoreRepositories
         {
             try
             {
-                var queryable = GetByPrimaryIdentifierQueryListQuery(ids);
+                var queryable = GetIQueryableByPrimaryIdentifierList(ids);
                 var result = await queryable.BatchDeleteAsync();
 
                 return await Task<Response>.FromResult(
@@ -165,30 +165,78 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> BulkUpdate(
+            BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
         {
             if (data.ActionData == null)
             {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.BadRequest });
+                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
+                    new PagedResponse<ElmahErrorModel.DefaultView[]> { Status = HttpStatusCode.BadRequest });
             }
             try
             {
-                var querable = GetByPrimaryIdentifierQueryListQuery(data.Ids);
+                var querable = GetIQueryableByPrimaryIdentifierList(data.Ids);
 
                 if (data.ActionName == "StatusCode")
                 {
-                    var result = await querable.BatchUpdateAsync(
-                        t => new ElmahError
+                    var result = await querable.BatchUpdateAsync(t =>
+                        new ElmahError
                         {
                             StatusCode = data.ActionData.StatusCode,
                         });
+                    var responseBody = GetIQueryableAsBulkUpdateResponse(data.Ids);
+                    return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
+                        new PagedResponse<ElmahErrorModel.DefaultView[]> {
+                            Status = HttpStatusCode.OK,
+                            ResponseBody = responseBody.ToArray(),
+                        });
                 }
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.OK });
+
+                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
+                    new PagedResponse<ElmahErrorModel.DefaultView[]> { Status = HttpStatusCode.BadRequest });
             }
             catch (Exception ex)
             {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
+                    new PagedResponse<ElmahErrorModel.DefaultView[]> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
+        }
+
+private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateResponse(
+            List<ElmahErrorIdentifier> ids)
+        {
+            var idList = ids.Select(t => t.ErrorId).ToList();
+            var queryable =
+                from t in _dbcontext.ELMAH_Error
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
+                where idList.Contains(t.ErrorId)
+                select new ElmahErrorModel.DefaultView
+                {
+                        ErrorId = t.ErrorId,
+                        Application = t.Application,
+                        Host = t.Host,
+                        Type = t.Type,
+                        Source = t.Source,
+                        Message = t.Message,
+                        User = t.User,
+                        StatusCode = t.StatusCode,
+                        TimeUtc = t.TimeUtc,
+                        Sequence = t.Sequence,
+                        AllXml = t.AllXml,
+                        Application_Name = Application.Application,
+                        Host_Name = Host.Host,
+                        Source_Name = Source.Source,
+                        StatusCode_Name = StatusCode.Name,
+                        Type_Name = Type.Type,
+                        User_Name = User.User,
+                };
+
+            return queryable;
         }
 
         public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)

@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahApplicationModel
+@model ItemViewModel<ElmahApplicationModel>
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -12,7 +12,7 @@
                         <button class="btn btn-primary" role="button" type="submit">
                             <i class="fa-solid fa-check-circle"></i>
                         </button>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model?.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model.Model!.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                             <i class="fa-solid fa-refresh"></i>
                         </a>
                         <a asp-area="" asp-controller="ElmahApplication" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
@@ -21,6 +21,6 @@
                     </div>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Application" class="form-control" />
-    <span asp-validation-for="Application" class="text-danger"></span>
+    <input asp-for="Model!.Application" class="form-control" />
+    <span asp-validation-for="Model!.Application" class="text-danger"></span>
 </td>

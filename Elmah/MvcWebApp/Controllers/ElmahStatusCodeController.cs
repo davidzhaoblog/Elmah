@@ -123,7 +123,17 @@ namespace Elmah.MvcWebApp.Controllers
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
                 ViewBag.Template = template;
-                return PartialView($"_List{template}Item", result);
+                return PartialView($"_List{template}Item",
+                    new ItemViewModel<ElmahStatusCodeModel>
+                    {
+                        Status = System.Net.HttpStatusCode.OK,
+                        Template = template,
+                        IsCurrentItem = true,
+                        HtmlNamePrefix = "Model.ResponseBody",
+                        HtmlNameUseArrayIndex = true,
+                        IndexInArray = 1,
+                        Model = result
+                    });
             }
             if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
             {
@@ -248,13 +258,52 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 var result = await _thisService.Update(id, input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
-                    return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                {
+                    if (view == PagedViewOptions.List) // Html Table
                     {
-                        Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                        PartialViews = new List<Tuple<string, object>> {
-                            new Tuple<string, object>("~/Views/ElmahStatusCode/_ListDetailsItem.cshtml", result.ResponseBody!)
-                        }
-                    });
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK,
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>>
+                            {
+                                new Tuple<string, object>("~/Views/ElmahStatusCode/_ListDetailsItem.cshtml",
+                                    new ItemViewModel<ElmahStatusCodeModel>
+                                    {
+                                        Status = System.Net.HttpStatusCode.OK,
+                                        Template = ViewItemTemplateNames.Details.ToString(),
+                                        IsCurrentItem = true,
+                                        HtmlNamePrefix = "Model.ResponseBody",
+                                        HtmlNameUseArrayIndex = true,
+                                        IndexInArray = 1,
+                                        Model = result.ResponseBody!
+                                    })
+                            }
+                        });
+                    }
+                    else // Tiles
+                    {
+                        return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
+                        {
+                            Status = System.Net.HttpStatusCode.OK,
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            PartialViews = new List<Tuple<string, object>>
+                            {
+                                new Tuple<string, object>("~/Views/ElmahStatusCode/_TileDetailsItem.cshtml",
+                                    new ItemViewModel<ElmahStatusCodeModel>
+                                    {
+                                        Status = System.Net.HttpStatusCode.OK,
+                                        Template = ViewItemTemplateNames.Details.ToString(),
+                                        IsCurrentItem = true,
+                                        HtmlNamePrefix = "Model.ResponseBody",
+                                        HtmlNameUseArrayIndex = true,
+                                        IndexInArray = 1,
+                                        Model = result.ResponseBody!
+                                    })
+                            }
+                        });
+                    }
+                }
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel {
                     Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, ShowRequestId = false });
             }

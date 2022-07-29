@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahSourceModel
+@model ItemViewModel<ElmahSourceModel>
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -21,6 +21,6 @@
                     </div>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Source" class="form-control" />
-    <span asp-validation-for="Source" class="text-danger"></span>
+    <input asp-for="Model!.Source" class="form-control" />
+    <span asp-validation-for="Model!.Source" class="text-danger"></span>
 </td>

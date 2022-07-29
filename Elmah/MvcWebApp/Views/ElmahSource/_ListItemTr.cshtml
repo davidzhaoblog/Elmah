@@ -10,6 +10,6 @@
 <tr class="pt-0 pb-0 nt-listitem@(Model.IsCurrentItem ? " nt-created border-warning border-3": "")" data-nt-route-id="@routeId">
     @if (Model.Template == ViewItemTemplateNames.Details.ToString())
     {
-        @await Html.PartialAsync("~/Views/ElmahSource/_ListDetailsItem.cshtml", Model.Model)
+        @await Html.PartialAsync("~/Views/ElmahSource/_ListDetailsItem.cshtml", Model)
     }
 </tr>

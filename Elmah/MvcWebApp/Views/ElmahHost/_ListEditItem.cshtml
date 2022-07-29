@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahHostModel
+@model ItemViewModel<ElmahHostModel>
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -12,7 +12,7 @@
                         <button class="btn btn-primary" role="button" type="submit">
                             <i class="fa-solid fa-check-circle"></i>
                         </button>
-                        <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model?.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model.Model!.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                             <i class="fa-solid fa-refresh"></i>
                         </a>
                         <a asp-area="" asp-controller="ElmahHost" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
@@ -21,10 +21,10 @@
                     </div>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Host" class="form-control" />
-    <span asp-validation-for="Host" class="text-danger"></span>
+    <input asp-for="Model!.Host" class="form-control" />
+    <span asp-validation-for="Model!.Host" class="text-danger"></span>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="SpatialLocation" class="form-control" />
-    <span asp-validation-for="SpatialLocation" class="text-danger"></span>
+    <input asp-for="Model!.SpatialLocation" class="form-control" />
+    <span asp-validation-for="Model!.SpatialLocation" class="text-danger"></span>
 </td>

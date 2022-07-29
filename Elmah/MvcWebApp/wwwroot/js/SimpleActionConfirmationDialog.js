@@ -36,13 +36,15 @@ function attachSimpleActionConfirmationDialog() {
         const confirmationMessage = $(sourceButton).data("nt-confirmation-message");
         $("#simpleActionConfirmationDialog .modal-body").html(confirmationMessage);
         $("#simpleActionConfirmationDialog .btn-nt-action-confirm").off();
+        $("#simpleActionConfirmationDialog .btn-nt-action-confirm").removeAttr("disabled");
         $("#simpleActionConfirmationDialog .btn-nt-action-confirm").click(function (e) {
+            $(this).attr("disabled", true);
             // 1. Batch Delete
             if ($(sourceButton).hasClass("nt-bulk-delete")) {
-                bulkDelete(sourceButton);
+                bulkDelete(sourceButton, simpleActionConfirmationDialog);
             }
             else if ($(sourceButton).hasClass("nt-bulk-update-fixedvalue")) {
-                bulkUpdateFixedValue(sourceButton);
+                bulkUpdateFixedValue(sourceButton, simpleActionConfirmationDialog);
             }
         });
     })

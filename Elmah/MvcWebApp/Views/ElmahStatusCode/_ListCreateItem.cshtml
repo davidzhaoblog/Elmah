@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahStatusCodeModel
+@model ItemViewModel<ElmahStatusCodeModel>
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -21,10 +21,10 @@
                     </div>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="StatusCode" class="form-control" />
-    <span asp-validation-for="StatusCode" class="text-danger"></span>
+    <input asp-for="Model!.StatusCode" class="form-control" />
+    <span asp-validation-for="Model!.StatusCode" class="text-danger"></span>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Name" class="form-control" />
-    <span asp-validation-for="Name" class="text-danger"></span>
+    <input asp-for="Model!.Name" class="form-control" />
+    <span asp-validation-for="Model!.Name" class="text-danger"></span>
 </td>

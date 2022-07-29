@@ -13,7 +13,7 @@ namespace Elmah.ServiceContracts
 
         Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids);
 
-        Task<Response> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data);
+        Task<PagedResponse<ElmahErrorModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data);
 
         Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input);
 

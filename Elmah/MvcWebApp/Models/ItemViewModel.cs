@@ -20,6 +20,7 @@ namespace Elmah.MvcWebApp.Models
         public bool HtmlNameUseArrayIndex { get; set; } = false;
         public int IndexInArray { get; set; }
         public string? HtmlNamePrefix { get; set; }
+        public bool BulkSelected { get; set; } = false;
 
         /// <summary>
         /// Item1 is the partial view url

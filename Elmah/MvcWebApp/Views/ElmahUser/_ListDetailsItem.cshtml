@@ -1,17 +1,17 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahUserModel
+@model ItemViewModel<ElmahUserModel>
 @inject IUIStrings localizor;
 <td class="pt-0 pb-0 nt-list-bulk-select">
     <input class="form-check-input ms-1" type="checkbox" value="">
 </td>
 <td class="p-0">
     <div class="btn-group">
-        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model?.User" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.Model!.User" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
             <i class="fa-solid fa-folder-tree"></i>
         </a>
-        <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model?.User" class="btn btn-light" role="button" title="@localizor.Get("Details")">
+        <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model.Model!.User" class="btn btn-light" role="button" title="@localizor.Get("Details")">
             <i class="fa fa-briefcase"></i>
         </a>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
@@ -20,7 +20,7 @@
             data-nt-template="@ViewItemTemplateNames.Details.ToString()">
             <i class="fa fa-briefcase"></i>
         </button>
-        <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model?.User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+        <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model.Model!.User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
             <i class="fa fa-edit"></i>
         </a>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
@@ -35,7 +35,7 @@
             data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
             <i class="fa fa-edit"></i>
         </button>
-        <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model?.User" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+        <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model.Model!.User" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
             <i class="fa fa-trash"></i>
         </a>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
@@ -52,4 +52,4 @@
         </button>
     </div>
 </td>
-<td class="pt-0 pb-0">@Model?.User</td>
+<td class="pt-0 pb-0">@Model.Model!.User</td>
