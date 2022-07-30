@@ -11,32 +11,14 @@ namespace Elmah.Services
 {
     public class DropDownListService : Elmah.ServiceContracts.IDropDownListService
     {
-        private readonly IElmahApplicationRepository _elmahApplicationRepository;
-        private readonly IElmahHostRepository _elmahHostRepository;
-        private readonly IElmahSourceRepository _elmahSourceRepository;
-        private readonly IElmahStatusCodeRepository _elmahStatusCodeRepository;
-        private readonly IElmahTypeRepository _elmahTypeRepository;
-        private readonly IElmahUserRepository _elmahUserRepository;
-        private readonly IServiceScopeFactory _serviceScopeFactor;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly ILogger<ElmahErrorService> _logger;
 
         public DropDownListService(
-            IElmahApplicationRepository elmahApplicationRepository,
-            IElmahHostRepository elmahHostRepository,
-            IElmahSourceRepository elmahSourceRepository,
-            IElmahStatusCodeRepository elmahStatusCodeRepository,
-            IElmahTypeRepository elmahTypeRepository,
-            IElmahUserRepository elmahUserRepository,
-            IServiceScopeFactory serviceScopeFactor,
+            IServiceScopeFactory serviceScopeFactory,
             ILogger<ElmahErrorService> logger)
         {
-            _elmahApplicationRepository = elmahApplicationRepository;
-            _elmahHostRepository = elmahHostRepository;
-            _elmahSourceRepository = elmahSourceRepository;
-            _elmahStatusCodeRepository = elmahStatusCodeRepository;
-            _elmahTypeRepository = elmahTypeRepository;
-            _elmahUserRepository = elmahUserRepository;
-            _serviceScopeFactor = serviceScopeFactor;
+            _serviceScopeFactory = serviceScopeFactory;
             _logger = logger;
 
         }
@@ -56,10 +38,15 @@ namespace Elmah.Services
             {
                 tasks.Add(Task.Run(async () =>
                 {
-                    var oneList = await _elmahApplicationRepository.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-                    if (oneList.Status == HttpStatusCode.OK)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahApplication.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        var _elmahApplicationRepository = scope.ServiceProvider.GetRequiredService<IElmahApplicationRepository>();
+
+                        var oneList = await _elmahApplicationRepository.GetCodeList(new ElmahApplicationAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+                        if (oneList.Status == HttpStatusCode.OK)
+                        {
+                            dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahApplication.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        }
                     }
                 }));
             }
@@ -68,10 +55,15 @@ namespace Elmah.Services
             {
                 tasks.Add(Task.Run(async () =>
                 {
-                    var oneList = await _elmahHostRepository.GetCodeList(new ElmahHostAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-                    if (oneList.Status == HttpStatusCode.OK)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahHost.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        var _elmahHostRepository = scope.ServiceProvider.GetRequiredService<IElmahHostRepository>();
+
+                        var oneList = await _elmahHostRepository.GetCodeList(new ElmahHostAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+                        if (oneList.Status == HttpStatusCode.OK)
+                        {
+                            dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahHost.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        }
                     }
                 }));
             }
@@ -80,10 +72,15 @@ namespace Elmah.Services
             {
                 tasks.Add(Task.Run(async () =>
                 {
-                    var oneList = await _elmahSourceRepository.GetCodeList(new ElmahSourceAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-                    if (oneList.Status == HttpStatusCode.OK)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahSource.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        var _elmahSourceRepository = scope.ServiceProvider.GetRequiredService<IElmahSourceRepository>();
+
+                        var oneList = await _elmahSourceRepository.GetCodeList(new ElmahSourceAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+                        if (oneList.Status == HttpStatusCode.OK)
+                        {
+                            dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahSource.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        }
                     }
                 }));
             }
@@ -92,10 +89,14 @@ namespace Elmah.Services
             {
                 tasks.Add(Task.Run(async () =>
                 {
-                    var oneList = await _elmahStatusCodeRepository.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-                    if (oneList.Status == HttpStatusCode.OK)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahStatusCode.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        var _elmahStatusCodeRepository = scope.ServiceProvider.GetRequiredService<IElmahStatusCodeRepository>();
+                        var oneList = await _elmahStatusCodeRepository.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+                        if (oneList.Status == HttpStatusCode.OK)
+                        {
+                            dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahStatusCode.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        }
                     }
                 }));
             }
@@ -104,10 +105,14 @@ namespace Elmah.Services
             {
                 tasks.Add(Task.Run(async () =>
                 {
-                    var oneList = await _elmahStatusCodeRepository.GetCodeList(new ElmahStatusCodeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-                    if (oneList.Status == HttpStatusCode.OK)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        var _elmahTypeRepository = scope.ServiceProvider.GetRequiredService<IElmahTypeRepository>();
+                        var oneList = await _elmahTypeRepository.GetCodeList(new ElmahTypeAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+                        if (oneList.Status == HttpStatusCode.OK)
+                        {
+                            dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        }
                     }
                 }));
             }
@@ -116,10 +121,14 @@ namespace Elmah.Services
             {
                 tasks.Add(Task.Run(async () =>
                 {
-                    var oneList = await _elmahUserRepository.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
-                    if (oneList.Status == HttpStatusCode.OK)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahUser.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        var _elmahUserRepository = scope.ServiceProvider.GetRequiredService<IElmahUserRepository>();
+                        var oneList = await _elmahUserRepository.GetCodeList(new ElmahUserAdvancedQuery { PageIndex = 1, PageSize = 10000 });
+                        if (oneList.Status == HttpStatusCode.OK)
+                        {
+                            dropDownLists.TryAdd(Elmah.Models.Definitions.TopLevelDropDownLists.ElmahUser.ToString(), oneList?.ResponseBody?.ToList() ?? new List<NameValuePair>());
+                        }
                     }
                 }));
             }

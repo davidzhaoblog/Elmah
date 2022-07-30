@@ -9,6 +9,8 @@ namespace Framework.Models
         public bool AdvancedQuery { get; set; } = false;
         public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.List;
         public PaginationOptions PaginationOption { get; set; } = PaginationOptions.Paged;
+        public Framework.Models.ViewItemTemplateNames Template { get; set; } = Framework.Models.ViewItemTemplateNames.Details;
+        
     }
 }
 

@@ -1,7 +1,7 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model PagedResponse<ElmahErrorModel.DefaultView[]>
+@model PagedViewModel<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
     <form>
@@ -44,26 +44,28 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+                @if (Model != null && Model.Result != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
                 {
-                    for (var i = 0; i < Model.ResponseBody.Length; i++)
+                    for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
                     {
                         @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                             {
-                                Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
-                                Model = Model.ResponseBody[i],
                                 Status = System.Net.HttpStatusCode.OK,
+                                StatusMessage = Model.Result.StatusMessage,
+                                Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                                Model = Model.Result.ResponseBody[i],
+                                TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                                 IndexInArray = i,
                                 HtmlNamePrefix = "Model.ResponseBody",
                                 HtmlNameUseArrayIndex = true,
                             })
                     }
                 }
-                else if (Model != null)
+                else if (Model != null && Model.Result != null)
                 {
                     <tr>
                         <td colspan="50">
-                            <div class="text-danger">@Model.StatusMessage</div>
+                            <div class="text-danger">@Model.Result.StatusMessage</div>
                         </td>
                     </tr>
                 }
@@ -84,8 +86,8 @@
             </tfoot>
         </table>
     </form>
-    @if (Model != null && Model.Pagination != null)
+    @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
     {
-        @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)
+        @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
     }
 </div>

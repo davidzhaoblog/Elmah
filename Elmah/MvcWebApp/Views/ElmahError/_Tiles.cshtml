@@ -1,22 +1,20 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model PagedResponse<ElmahErrorModel.DefaultView[]>
+@model PagedViewModel<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
-@{
-    ViewBag.Status = Model.Status;
-    ViewBag.StatusMessage = Model.StatusMessage;
-}
-@if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+@if (Model != null && Model.Result != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
 {
-    @for (var i = 0; i < Model.ResponseBody.Length; i++)
+    @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
     {
         @await Html.PartialAsync("~/Views/ElmahError/_Tile.cshtml",
             new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
             {
                  Status = System.Net.HttpStatusCode.OK, 
-                 Model = Model.ResponseBody[i], 
-                 Template = Model.PagedViewOption.ToString(),
+                 StatusMessage = Model.Result.StatusMessage,
+                 Model = Model.Result.ResponseBody[i], 
+                 Template = Model.Result.PagedViewOption.ToString(),
+                 TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                  HtmlNamePrefix = "Model.ResponseBody", 
                  HtmlNameUseArrayIndex = true, 
                  IndexInArray = i, 
@@ -37,11 +35,11 @@
         </div>
     </div>
 }
-else if (Model != null)
+else if (Model != null && Model.Result != null)
 {
-    <div class="text-danger">@Model.StatusMessage</div>
+    <div class="text-danger">@Model!.Result!.StatusMessage</div>
 }
-@if (Model != null && Model.Pagination != null)
+@if (Model != null && Model.Result != null && Model.Result.Pagination != null)
 {
-    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)
+    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
 }
