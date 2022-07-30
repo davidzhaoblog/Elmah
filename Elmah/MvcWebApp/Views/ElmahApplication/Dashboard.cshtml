@@ -7,7 +7,7 @@
     ViewData["Title"] = localizor.Get("Dashboard");
 }
 <div class="row">
-    <div class="col-12 col-md-8 nopadding">
+    <div class="col-12 col-md-9 nopadding">
         <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="lists-tab" data-bs-toggle="tab" data-bs-target="#lists" type="button" role="tab" aria-controls="lists" aria-selected="true"><i class="fa fa-list me-2"></i>@localizor.Get("Tab_Lists")</button>
@@ -26,13 +26,7 @@
                             </h2>
                             <div id="panelsStayOpen-collapse-elmahErrors" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors">
                                 <div class="accordion-body p-0">
-                                    <div class="btn-group float-end">
-                                        <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
-                                            <span class="fa fa-search"></span>
-                                            @localizor.Get("Search")
-                                        </a>
-                                    </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_ListBatchEdit.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors, Status = Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].Status, StatusMessage= Model.Responses[ElmahApplicationCompositeDataOptions.ElmahErrors].StatusMessage })
                                 </div>
                             </div>
                         </div>
@@ -41,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-3">
         <!-- ElmahApplicationCompositeDataOptions.__Master__ -->
         <div class="card-group">
             <div class="card">

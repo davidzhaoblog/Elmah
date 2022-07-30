@@ -9,4 +9,8 @@
     {
         @await Html.PartialAsync("~/Views/ElmahError/_ListDetailsItem.cshtml", Model)
     }
+    else if (Model.Template == Framework.Models.ViewItemTemplateNames.Edit.ToString())
+    {
+        @await Html.PartialAsync("~/Views/ElmahError/_ListEditItem.cshtml", Model)
+    }
 </tr>

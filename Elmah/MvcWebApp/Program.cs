@@ -59,6 +59,9 @@ builder.Services.AddScoped<IElmahStatusCodeService, ElmahStatusCodeService>();
 builder.Services.AddScoped<IElmahTypeService, ElmahTypeService>();
 builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
 
+builder.Services.AddScoped<Elmah.ServiceContracts.IDropDownListService, Elmah.Services.DropDownListService>();
+
+
 // 1.3. Other Services
 builder.Services.AddScoped<SelectListHelper>();
 

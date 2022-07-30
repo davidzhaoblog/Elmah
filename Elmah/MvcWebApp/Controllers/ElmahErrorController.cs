@@ -20,6 +20,7 @@ namespace Elmah.MvcWebApp.Controllers
         private readonly IElmahTypeService _elmahTypeService;
         private readonly IElmahUserService _elmahUserService;
         private readonly SelectListHelper _selectListHelper;
+        private readonly Elmah.ServiceContracts.IDropDownListService _dropDownListService;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahErrorController> _logger;
 
@@ -33,6 +34,7 @@ namespace Elmah.MvcWebApp.Controllers
             IElmahTypeService elmahTypeService,
             IElmahUserService elmahUserService,
             SelectListHelper selectListHelper,
+            Elmah.ServiceContracts.IDropDownListService dropDownListService,
             IUIStrings localizor,
             ILogger<ElmahErrorController> logger)
         {
@@ -45,6 +47,7 @@ namespace Elmah.MvcWebApp.Controllers
             _elmahTypeService = elmahTypeService;
             _elmahUserService = elmahUserService;
             _selectListHelper = selectListHelper;
+            _dropDownListService = dropDownListService;
             _localizor = localizor;
             _logger = logger;
         }
@@ -79,8 +82,16 @@ namespace Elmah.MvcWebApp.Controllers
 
             ViewBag.TimeUtcRangeList = _selectListHelper.GetDefaultPredefinedDateTimeRange();
 
-            await LoadIndexViewTopLevelSelectLists();
-            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> { Query = query, Result = result });
+            var dropdownLists = await _dropDownListService.GetTopLevelDropDownListsFromDatabase( 
+                new Elmah.Models.Definitions.TopLevelDropDownLists[] { 
+                    Elmah.Models.Definitions.TopLevelDropDownLists.ElmahApplication, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahHost, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahSource, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahStatusCode, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType });
+            
+            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]> 
+            { 
+                Query = query,
+                TopLevelDropDownListsFromDatabase = dropdownLists,
+                Result = result 
+            });
         }
 
         // GET: ElmahError/AjaxMultiItems
@@ -123,10 +134,23 @@ namespace Elmah.MvcWebApp.Controllers
                 ViewBag.StatusMessage = response.StatusMessage;
             }
 
+            var itemViewModel = new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+            {
+                Status = System.Net.HttpStatusCode.OK,
+                Template = template,
+                IsCurrentItem = true,
+                HtmlNamePrefix = "Model.ResponseBody",
+                HtmlNameUseArrayIndex = true,
+                IndexInArray = 1,
+                Model = result
+            };
+
             // TODO: Maybe some special for Edit/Create
             if (template == ViewItemTemplateNames.Edit.ToString() || template == ViewItemTemplateNames.Create.ToString())
             {
-                await LoadIndexViewTopLevelSelectLists();
+                itemViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(
+                    new Elmah.Models.Definitions.TopLevelDropDownLists[] {
+                        Elmah.Models.Definitions.TopLevelDropDownLists.ElmahApplication, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahHost, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahSource, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahStatusCode, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType });
             }
 
             if (view == PagedViewOptions.List && container == CrudViewContainers.Inline)
@@ -134,33 +158,13 @@ namespace Elmah.MvcWebApp.Controllers
                 ViewBag.Template = template;
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
-                return PartialView($"_List{template}Item",
-                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
-                    {
-                        Status = System.Net.HttpStatusCode.OK,
-                        Template = template,
-                        IsCurrentItem = true,
-                        HtmlNamePrefix = "Model.ResponseBody",
-                        HtmlNameUseArrayIndex = true,
-                        IndexInArray = 1,
-                        Model = result
-                    });
+                return PartialView($"_List{template}Item", itemViewModel);
             }
             if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
             {
-                // By Default: _List{template}Item.cshtml
+                // By Default: _Tile{template}Item.cshtml
                 // Developer can customize template name
-                return PartialView($"_Tile{template}Item", 
-                    new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
-                    {
-                        Status = System.Net.HttpStatusCode.OK,
-                        Template = template,
-                        IsCurrentItem = true,
-                        HtmlNamePrefix = "Model.ResponseBody",
-                        HtmlNameUseArrayIndex = true,
-                        IndexInArray = 1,
-                        Model = result
-                    });
+                return PartialView($"_Tile{template}Item", itemViewModel);
             }
             // By Default: _{template}.cshtml
             // Developer can customize template name
@@ -443,9 +447,22 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Status = System.Net.HttpStatusCode.OK;
-            await LoadIndexViewTopLevelSelectLists();
-            return View();
+            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(
+                new Elmah.Models.Definitions.TopLevelDropDownLists[] {
+                    Elmah.Models.Definitions.TopLevelDropDownLists.ElmahApplication, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahHost, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahSource, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahStatusCode, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType, Elmah.Models.Definitions.TopLevelDropDownLists.ElmahType });
+
+            var itemViewModel = new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+            {
+                Status = System.Net.HttpStatusCode.OK,
+                Template = Framework.Models.ViewItemTemplateNames.Create.ToString(),
+                IsCurrentItem = true,
+                HtmlNamePrefix = "Model.ResponseBody",
+                HtmlNameUseArrayIndex = true,
+                IndexInArray = 1,
+                Model = _thisService.GetDefault(),
+                TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
+            };
+            return View(itemViewModel);
         }
 
         // POST: ElmahError/Create

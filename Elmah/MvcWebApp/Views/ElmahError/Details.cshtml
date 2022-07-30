@@ -1,6 +1,6 @@
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahErrorModel.DefaultView
+@model Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Details");
@@ -12,105 +12,101 @@
                 <h1>@localizor.Get("Details")</h1>
                 <h4>@localizor.Get("ElmahError")</h4>
             </div>
-            @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+            @if (Model.Status != System.Net.HttpStatusCode.OK)
             {
                 <div class="card-body">
-                    <div class="text-danger">@ViewBag.StatusMessage</div>
+                    <div class="text-danger">@Model.StatusMessage</div>
                 </div>
             }
             else
             {
                 <div class="card-body">
-                    @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
-                    {
-                        <div class="text-danger">@ViewBag.StatusMessage</div>
-                    }
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.ErrorId)
+                            @Html.DisplayNameFor(model => model!.Model!.ErrorId)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ErrorId)
+                            @Html.DisplayFor(model => model!.Model!.ErrorId)
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Application)
+                            @Html.DisplayNameFor(model => model!.Model!.Application)
                         </dt>
                         <dd class="col-sm-10">
-                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.Application">@Model.Application_Name</a>
+                            <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.Model.Application">@Model.Model.Application_Name</a>
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Host)
+                            @Html.DisplayNameFor(model => model!.Model!.Host)
                         </dt>
                         <dd class="col-sm-10">
-                            <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Host">@Model.Host_Name</a>
+                            <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Model.Host">@Model.Model.Host_Name</a>
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Type)
+                            @Html.DisplayNameFor(model => model!.Model!.Type)
                         </dt>
                         <dd class="col-sm-10">
-                            <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Type">@Model.Type_Name</a>
+                            <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Model.Type">@Model.Model.Type_Name</a>
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Source)
+                            @Html.DisplayNameFor(model => model!.Model!.Source)
                         </dt>
                         <dd class="col-sm-10">
-                            <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.Source">@Model.Source_Name</a>
+                            <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.Model.Source">@Model.Model.Source_Name</a>
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Message)
+                            @Html.DisplayNameFor(model => model!.Model!.Message)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Message)
+                            @Html.DisplayFor(model => model!.Model!.Message)
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.User)
+                            @Html.DisplayNameFor(model => model!.Model!.User)
                         </dt>
                         <dd class="col-sm-10">
-                            <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.User">@Model.User_Name</a>
+                            <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.Model.User">@Model.Model.User_Name</a>
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.StatusCode)
+                            @Html.DisplayNameFor(model => model!.Model!.StatusCode)
                         </dt>
                         <dd class="col-sm-10">
-                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.StatusCode">@Model.StatusCode_Name</a>
+                            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.Model.StatusCode">@Model.Model.StatusCode_Name</a>
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.TimeUtc)
+                            @Html.DisplayNameFor(model => model!.Model!.TimeUtc)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.TimeUtc)
+                            @Html.DisplayFor(model => model!.Model!.TimeUtc)
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Sequence)
+                            @Html.DisplayNameFor(model => model!.Model!.Sequence)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Sequence)
+                            @Html.DisplayFor(model => model!.Model!.Sequence)
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.AllXml)
+                            @Html.DisplayNameFor(model => model!.Model!.AllXml)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.AllXml)
+                            @Html.DisplayFor(model => model!.Model!.AllXml)
                         </dd>
                     </dl>
                 </div>

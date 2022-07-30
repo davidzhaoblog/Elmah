@@ -15,7 +15,6 @@ namespace Elmah.Services
         private readonly IElmahErrorRepository _thisRepository;
         private readonly IServiceScopeFactory _serviceScopeFactor;
         private readonly ILogger<ElmahErrorService> _logger;
-
         public ElmahErrorService(
             IElmahErrorRepository thisRepository,
             IServiceScopeFactory serviceScopeFactor,
@@ -24,6 +23,7 @@ namespace Elmah.Services
             _thisRepository = thisRepository;
             _serviceScopeFactor = serviceScopeFactor;
             _logger = logger;
+
         }
 
         public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
