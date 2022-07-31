@@ -1,7 +1,7 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+@model Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
  @*col-md-6 col-lg-4 col-xl-3*@
 <div class="d-flex align-items-stretch col-sm-12 col-md-6 p-1 nt-listitem@(Model.IsCurrentItem ? " nt-created": "")" data-nt-route-id="@Model.Model?.ErrorId">

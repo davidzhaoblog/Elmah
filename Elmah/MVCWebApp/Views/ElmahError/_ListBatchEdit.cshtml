@@ -48,7 +48,7 @@
                 {
                     for (var i = 0; i < Model.ResponseBody.Length; i++)
                     {
-                        @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+                        @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",new Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                             {
                                 Template = Framework.Models.ViewItemTemplateNames.Edit.ToString(),
                                 Model = Model.ResponseBody[i],

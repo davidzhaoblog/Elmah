@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+@model Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
 <tr class="pt-0 pb-0 nt-listitem@(Model.IsCurrentItem ? " nt-created border-warning border-3": "")" 
     data-nt-route-id="@Model.Model?.ErrorId">

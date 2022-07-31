@@ -8,7 +8,7 @@
     @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
     {
         @await Html.PartialAsync("~/Views/ElmahError/_Tile.cshtml",
-            new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+            new Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
             {
                  Status = System.Net.HttpStatusCode.OK, 
                  StatusMessage = Model.Result.StatusMessage,

@@ -1,13 +1,13 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+@model Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
 <td class="pt-0 pb-0 nt-list-bulk-select">
     <input class="form-check-input ms-1" type="checkbox" value="" @(Model.BulkSelected ? "checked" : "")>
 </td>
 <td class="p-0">
-    <div class="btn-group btn-group-nt-actions">
+    <div class="btn-group btn-group-nt-actions ">
         <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.Model!.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
             <i class="fa fa-briefcase"></i>
         </a>
@@ -56,60 +56,105 @@
 <td class="pt-0 pb-0">@Model.Model!.Sequence</td>
 <td class="pt-0 pb-0">@Model.Model!.AllXml</td>
 <td class="pt-0 pb-0">@Model.Model!.Sequence</td>
-<td class="pt-0 pb-0 position-relative">       
-            <div class="btn-group-lg dropdown dropstart  btn-group-nt-actions">
-                <a class="nav-link btn btn-default" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
-                <ul class="dropdown-menu" style="min-width:400px">
-                    <li class="d-inline-block">
-                        <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                            <i class="fa fa-briefcase"></i>
-                        </a>
-                    </li>
-                    <li class="d-inline-block">
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                            <i class="fa fa-briefcase"></i>
-                        </button>
-                    </li>
-                    <li class="d-inline-block">
-                        <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                    </li>
-                    <li class="d-inline-block">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </li>
-                    <li class="d-inline-block">
-                        <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
-                                data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </li>
-                    <li class="d-inline-block">
-                        <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li class="d-inline-block">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </li>
-                    <li class="d-inline-block">
-                        <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
-                                data-nt-container="@CrudViewContainers.Inline.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </td>
+<td class="pt-1 pb-0 position-relative">
+    <div class="btn-group-lg dropdown dropstart btn-group-nt-actions">
+        <button class="btn btn-default btn-sm mt-0 mb-0 pt-0 pb-0" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+        <ul class="dropdown-menu border-0 bg-transparent m-0 p-0">
+            <li class="d-inline-block">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-default" role="button" title="@localizor.Get("Details")">
+                        <i class="fa fa-briefcase"></i>
+                    </a>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                        <i class="fa fa-briefcase"></i>
+                    </button>
+                    <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                            data-nt-container="@CrudViewContainers.Inline.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                            data-nt-container="@CrudViewContainers.Inline.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</td>
+<td class="pt-0 pb-0 position-relative">
+    <div class="btn-group-lg dropdown dropstart btn-group-nt-actions">
+        <a class="nav-link btn btn-default" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+        <ul class="dropdown-menu border-0 bg-transparent" style="min-width:380px">
+            <li class="d-inline-block">
+                <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-default" role="button" title="@localizor.Get("Details")">
+                    <i class="fa fa-briefcase"></i>
+                </a>
+            </li>
+            <li class="d-inline-block">
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Get" title="@localizor.Get("Details")"
+                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                        data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                    <i class="fa fa-briefcase"></i>
+                </button>
+            </li>
+            <li class="d-inline-block">
+                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                    <i class="fa fa-edit"></i>
+                </a>
+            </li>
+            <li class="d-inline-block">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                    <i class="fa fa-edit"></i>
+                </button>
+            </li>
+            <li class="d-inline-block">
+                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Put" title="@localizor.Get("Edit")"
+                        data-nt-container="@CrudViewContainers.Inline.ToString()"
+                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                    <i class="fa fa-edit"></i>
+                </button>
+            </li>
+            <li class="d-inline-block">
+                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </li>
+            <li class="d-inline-block">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </li>
+            <li class="d-inline-block">
+                <button type="button" class="btn btn-primary btn-nt-inline-editing" data-nt-action="@HttpMethods.Delete" title="@localizor.Get("Delete")"
+                        data-nt-container="@CrudViewContainers.Inline.ToString()"
+                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</td>

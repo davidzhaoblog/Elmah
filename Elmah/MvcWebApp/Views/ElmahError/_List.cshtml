@@ -1,7 +1,7 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model PagedViewModel<ElmahErrorModel.DefaultView[]>
+@model Framework.Models.PagedViewModel<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
     <form>
@@ -40,7 +40,8 @@
                     <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
                     <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
                     <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
-                    <th class="pt-0 pb-0 "></th>
+                    <th class="pt-0 pb-0"></th>
+                    <th class="pt-0 pb-0"></th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +49,7 @@
                 {
                     for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
                     {
-                        @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",new Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+                        @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",new Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
                             {
                                 Status = System.Net.HttpStatusCode.OK,
                                 StatusMessage = Model.Result.StatusMessage,

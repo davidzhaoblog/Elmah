@@ -1,7 +1,7 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model Elmah.MvcWebApp.Models.ItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
+@model Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
 @{
     ViewBag.Status = Model.Status;
@@ -23,8 +23,8 @@
                 </button>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link btn btn-default" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
-                <ul class="dropdown-menu">
+                <a class="btn btn-default" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                         <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model.Model?.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                             <i class="fa fa-briefcase"></i>

@@ -1,6 +1,6 @@
 namespace Elmah.MvcWebApp.Models
 {
-    public class ItemViewModel<TModel>: Framework.Models.ItemViewModel<TModel>
+    public class MvcItemViewModel<TModel>: Framework.Models.ItemViewModel<TModel>
         where TModel : class
     {
         /// <summary>

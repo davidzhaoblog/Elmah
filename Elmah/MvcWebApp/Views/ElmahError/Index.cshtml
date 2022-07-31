@@ -170,11 +170,20 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
+                @foreach (var item in Model!.TopLevelDropDownListsFromDatabase![Elmah.Models.Definitions.TopLevelDropDownLists.ElmahApplication.ToString()])
+                {
+                    <li>
+                        <a class="dropdown-item nt-quick-bulk-select" href="#" 
+                            data-nt-filtername="Application" 
+                            data-nt-filtervalue="@item.Value" 
+                            data-nt-checkbox-checked="true">@item.Name</a>
+                    </li>
+                }
                 <li><a class="dropdown-item nt-quick-bulk-select" href="#" data-nt-filtername="Application" data-nt-filtervalue="Test Application 1" data-nt-checkbox-checked="true">Test Application 1</a></li>
-@*                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>*@
+                @*                <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>*@
             </ul>
         </div>
         <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
@@ -190,10 +199,10 @@
                     {
                         <li>
                             <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
-                               data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                               data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
-                               data-nt-actionname = "Application"
-                               data-nt-namevalue="Application:@item.Value">Move To: @item.Name</a>
+                           data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                           data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
+                           data-nt-actionname="Application"
+                           data-nt-namevalue="Application:@item.Value">Move To: @item.Name</a>
                         </li>
                     }
                 </ul>
