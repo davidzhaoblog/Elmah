@@ -13,7 +13,7 @@
     @for (var i = 0; i < Model.ResponseBody.Length; i++)
     {
         @await Html.PartialAsync("~/Views/ElmahUser/_Tile.cshtml",
-            new ItemViewModel<ElmahUserModel>
+            new MvcItemViewModel<ElmahUserModel>
             {
                  Status = System.Net.HttpStatusCode.OK,
                  Model = Model.ResponseBody[i],

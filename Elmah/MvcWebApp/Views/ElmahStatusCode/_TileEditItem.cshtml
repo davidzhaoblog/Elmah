@@ -2,7 +2,7 @@
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Framework.Models;
-@model ItemViewModel<ElmahStatusCodeModel>
+@model MvcItemViewModel<ElmahStatusCodeModel>
 @inject IUIStrings localizor;
 @{
     ViewBag.Status = Model.Status;
@@ -17,16 +17,15 @@
             @await Html.PartialAsync("~/Views/ElmahStatusCode/_Edit.cshtml", Model.Model)
         </div>
         <div class="card-footer text-muted btn-toolbar">
-            <div class="btn-group" role="group" aria-label="...">
-                <button class="btn btn-primary" role="button" type="submit">
-                    <i class="fa-solid fa-check-circle"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
+            <div class="btn-group btn-group-nt-action-save">
+                <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
+                    <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
                 </button>
-                <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Edit" asp-route-statuscode="@Model.Model?.StatusCode" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
-                    <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
-                </a>
-                <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
-                    <i class="fa-solid fa-arrow-left"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Back_to_List")</span>
-                </a>
+                <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Put"
+                    data-nt-container="@CrudViewContainers.Inline.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                    <i class="fa-solid fa-check-circle"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
+                </button>
             </div>
         </div>
     </form>

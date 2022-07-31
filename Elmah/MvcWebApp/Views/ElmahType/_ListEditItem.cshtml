@@ -1,24 +1,23 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ItemViewModel<ElmahTypeModel>
+@model MvcItemViewModel<ElmahTypeModel>
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
 <td class="pt-0 pb-0 nt-list-bulk-select"></td>
 <td class="p-0">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button class="btn btn-primary" role="button" type="submit">
-                            <i class="fa-solid fa-check-circle"></i>
-                        </button>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Edit" asp-route-type="@Model.Model!.Type" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
-                            <i class="fa-solid fa-refresh"></i>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </a>
-                    </div>
+    <div class="btn-group btn-group-nt-action-save">
+        <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Put"
+            data-nt-container="@CrudViewContainers.Inline.ToString()"
+            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+            <i class="fa-solid fa-check-circle"></i>
+        </button>
+    </div>
 </td>
 <td class="form-group pt-0 pb-0">
     <input asp-for="Model!.Type" class="form-control" />

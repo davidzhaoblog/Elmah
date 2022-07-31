@@ -1,6 +1,7 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
+@using Elmah.Models.Definitions;
 @model PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
 @inject IHttpContextAccessor Accessor
 @inject IUIStrings localizor;
@@ -71,7 +72,6 @@
     data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahSource")"
     data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahSource")">
     <div class="card-header">
-        <h3 class="card-title float-start m-0" ><a class="nav-link text-dark" asp-area="" asp-controller="ElmahSource" asp-action="Index">@localizor.Get("ElmahSource")</a></h3>
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
@@ -95,6 +95,11 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
+                <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                </ul>
             </ul>
         </div>
         <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">

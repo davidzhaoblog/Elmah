@@ -1,6 +1,7 @@
 using Elmah.ServiceContracts;
 using Elmah.MvcWebApp.Models;
 using Elmah.Resx;
+using Elmah.Models.Definitions;
 using Elmah.Models;
 using Framework.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,21 +13,21 @@ namespace Elmah.MvcWebApp.Controllers
     public class ElmahSourceController : Controller
     {
         private readonly IElmahSourceService _thisService;
-
         private readonly SelectListHelper _selectListHelper;
+        private readonly IDropDownListService _dropDownListService;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahSourceController> _logger;
 
         public ElmahSourceController(
             IElmahSourceService thisService,
-
             SelectListHelper selectListHelper,
+            IDropDownListService dropDownListService,
             IUIStrings localizor,
             ILogger<ElmahSourceController> logger)
         {
             _thisService = thisService;
-
             _selectListHelper = selectListHelper;
+            _dropDownListService = dropDownListService;
             _localizor = localizor;
             _logger = logger;
         }
@@ -59,7 +60,12 @@ namespace Elmah.MvcWebApp.Controllers
 
             ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]> { Query = query, Result = result });
+            return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
+            {
+                Query = query,
+
+                Result = result
+            });
         }
 
         // GET: ElmahSource/AjaxMultiItems
@@ -68,15 +74,24 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> AjaxMultiItems(ElmahSourceAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
+            var pagedViewModel = new PagedViewModel<ElmahSourceModel[]>
+            {
+                Result = result,
+            };
+
+            if(query.Template == ViewItemTemplateNames.Create || query.Template == ViewItemTemplateNames.Edit)
+            {
+            }
+
             if (query.PagedViewOption == PagedViewOptions.List)
             {
-                return PartialView("_List", result);
+                return PartialView("_List", pagedViewModel);
             }
             else if (query.PagedViewOption == PagedViewOptions.Tiles)
             {
-                return PartialView("_Tiles", result);
+                return PartialView("_Tiles", pagedViewModel);
             }
-            return PartialView("_SlideShow", result);
+            return PartialView("_SlideShow", pagedViewModel);
         }
 
         [Route("[controller]/[action]/{Source}")] // Primary
@@ -107,9 +122,18 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 var response = await _thisService.Get(id);
                 result = response.ResponseBody;
-                ViewBag.Status = response.Status;
-                ViewBag.StatusMessage = response.StatusMessage;
             }
+
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = System.Net.HttpStatusCode.OK,
+                Template = template,
+                IsCurrentItem = true,
+                HtmlNamePrefix = "Model.ResponseBody",
+                HtmlNameUseArrayIndex = true,
+                IndexInArray = 1,
+                Model = result
+            };
 
             // TODO: Maybe some special for Edit/Create
             if (template == ViewItemTemplateNames.Edit.ToString() || template == ViewItemTemplateNames.Create.ToString())
@@ -122,38 +146,17 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
-                ViewBag.Template = template;
-                return PartialView($"_List{template}Item",
-                    new ItemViewModel<ElmahSourceModel>
-                    {
-                        Status = System.Net.HttpStatusCode.OK,
-                        Template = template,
-                        IsCurrentItem = true,
-                        HtmlNamePrefix = "Model.ResponseBody",
-                        HtmlNameUseArrayIndex = true,
-                        IndexInArray = 1,
-                        Model = result
-                    });
+                return PartialView($"_List{template}Item", itemViewModel);
             }
             if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
             {
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
-                return PartialView($"_Tile{template}Item",
-                    new ItemViewModel<ElmahSourceModel>
-                    {
-                        Status = System.Net.HttpStatusCode.OK,
-                        Template = template,
-                        IsCurrentItem = true,
-                        HtmlNamePrefix = "Model.ResponseBody",
-                        HtmlNameUseArrayIndex = true,
-                        IndexInArray = 1,
-                        Model = result
-                    });
+                return PartialView($"_Tile{template}Item", itemViewModel);
             }
             // By Default: _{template}.cshtml
             // Developer can customize template name
-            return PartialView($"_{template}", result);
+            return PartialView($"_{template}", itemViewModel);
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -181,7 +184,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                                 PartialViews = new List<Tuple<string, object>> {
                                 new Tuple<string, object>("~/Views/ElmahSource/_ListItemTr.cshtml",
-                                    new ItemViewModel<ElmahSourceModel>{
+                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>{
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
@@ -198,7 +201,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 PartialViews = new List<Tuple<string, object>>
                                 {
                                     new Tuple<string, object>("~/Views/ElmahSource/_Tile.cshtml",
-                                        new ItemViewModel<ElmahSourceModel>
+                                        new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
                                         {
                                             Status = System.Net.HttpStatusCode.OK,
                                             Template = ViewItemTemplateNames.Details.ToString(),
@@ -268,7 +271,7 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahSource/_ListDetailsItem.cshtml",
-                                    new ItemViewModel<ElmahSourceModel>
+                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
@@ -290,7 +293,7 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahSource/_TileDetailsItem.cshtml",
-                                    new ItemViewModel<ElmahSourceModel>
+                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
@@ -330,16 +333,25 @@ namespace Elmah.MvcWebApp.Controllers
         {
             if (string.IsNullOrEmpty(id.Source))
             {
-                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
-                ViewBag.StatusMessage = "Not Found";
-                return View();
+                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+                {
+                    Status = System.Net.HttpStatusCode.NotFound,
+                    StatusMessage = "Not Found",
+                    Template = ViewItemTemplateNames.Edit.ToString(),
+                };
+                return View(itemViewModel1);
             }
 
             var result = await _thisService.Get(id);
-            ViewBag.Status = result.Status;
-            ViewBag.StatusMessage = result.StatusMessage;
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = result.Status,
+                StatusMessage = result.StatusMessage,
+                Template = ViewItemTemplateNames.Edit.ToString(),
 
-            return View(result.ResponseBody);
+                Model = result.ResponseBody
+            };
+            return View(itemViewModel);
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -356,22 +368,40 @@ namespace Elmah.MvcWebApp.Controllers
             if (string.IsNullOrEmpty(id.Source) ||
                 !string.IsNullOrEmpty(id.Source) && id.Source != input.Source)
             {
-                ViewBag.Status = System.Net.HttpStatusCode.NotFound;
-                ViewBag.StatusMessage = "Not Found";
+                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+                {
+                    Status = System.Net.HttpStatusCode.NotFound,
+                    StatusMessage = "Not Found",
+                    Template = ViewItemTemplateNames.Edit.ToString(),
 
-                return View(input);
+                    Model = input, // should GetbyId again and merge content not in postback
+                };
+                return View(itemViewModel1);
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var result = await _thisService.Update(id, input);
-                if (result.Status == System.Net.HttpStatusCode.OK)
-                    return RedirectToAction(nameof(Index));
-                ViewBag.Status = result.Status;
-                ViewBag.StatusMessage = result.StatusMessage;
+                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+                {
+                    Status = System.Net.HttpStatusCode.BadRequest,
+                    StatusMessage = "Bad Request",
+                    Template = ViewItemTemplateNames.Edit.ToString(),
+
+                    Model = input, // should GetbyId again and merge content not in postback
+                };
+                return View(itemViewModel1);
             }
 
-            return View(input);
+            var result = await _thisService.Update(id, input);
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = result.Status,
+                StatusMessage = result.StatusMessage,
+                Template = ViewItemTemplateNames.Edit.ToString(),
+
+                Model = result.ResponseBody,
+            };
+            return View(itemViewModel);
         }
 
         [Route("[controller]/[action]/{Source}")] // Primary
@@ -379,17 +409,27 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Details([FromRoute]ElmahSourceIdentifier id)
         {
             var result = await _thisService.Get(id);
-            ViewBag.Status = result.Status;
-            ViewBag.StatusMessage = result.StatusMessage;
-            return View(result.ResponseBody);
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = result.Status,
+                StatusMessage = result.StatusMessage,
+                Template = ViewItemTemplateNames.Details.ToString(),
+                Model = result.ResponseBody,
+            };
+            return View(itemViewModel);
         }
 
         // GET: ElmahSource/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Status = System.Net.HttpStatusCode.OK;
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = System.Net.HttpStatusCode.OK,
+                Template = ViewItemTemplateNames.Create.ToString(),
+                Model = _thisService.GetDefault(),
 
-            return View();
+            };
+            return View(itemViewModel);
         }
 
         // POST: ElmahSource/Create
@@ -403,16 +443,26 @@ namespace Elmah.MvcWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Create(input);
-                if(result.Status == System.Net.HttpStatusCode.OK)
+                var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
                 {
-                    return RedirectToAction(nameof(Index));
-                }
+                    Status = result.Status,
+                    StatusMessage = result.StatusMessage,
+                    Template = ViewItemTemplateNames.Create.ToString(),
+                    Model = result.ResponseBody,
 
-                ViewBag.Status = result.Status;
-                ViewBag.StatusMessage = result.StatusMessage;
+                };
+                return View(itemViewModel);
             }
 
-            return View(input);
+            var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = System.Net.HttpStatusCode.BadRequest,
+                StatusMessage = "Bad Request",
+                Template = ViewItemTemplateNames.Create.ToString(),
+                Model = input, // should GetbyId again and merge content not in postback
+
+            };
+            return View(itemViewModel1);
         }
 
         [Route("[controller]/[action]/{Source}")] // Primary
@@ -420,9 +470,14 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Delete([FromRoute]ElmahSourceIdentifier id)
         {
             var result = await _thisService.Get(id);
-            ViewBag.Status = result.Status;
-            ViewBag.StatusMessage = result.StatusMessage;
-            return View(result.ResponseBody);
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = result.Status,
+                StatusMessage = result.StatusMessage,
+                Template = ViewItemTemplateNames.Delete.ToString(),
+                Model = result.ResponseBody,
+            };
+            return View(itemViewModel);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -432,14 +487,16 @@ namespace Elmah.MvcWebApp.Controllers
         // POST: ElmahSource/Delete/{Source}
         public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahSourceIdentifier id)
         {
-            var result = await _thisService.Delete(id);
-            if (result.Status == System.Net.HttpStatusCode.OK)
-                return RedirectToAction(nameof(Index));
-            ViewBag.Status = result.Status;
-            ViewBag.StatusMessage = result.StatusMessage;
-
             var result1 = await _thisService.Get(id);
-            return View(result1.ResponseBody);
+            var result = await _thisService.Delete(id);
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
+            {
+                Status = result.Status,
+                StatusMessage = result.StatusMessage,
+                Template = ViewItemTemplateNames.Delete.ToString(),
+                Model = result1.ResponseBody,
+            };
+            return View(itemViewModel);
         }
     }
 }

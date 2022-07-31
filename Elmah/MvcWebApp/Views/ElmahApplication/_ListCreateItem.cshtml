@@ -1,24 +1,23 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ItemViewModel<ElmahApplicationModel>
+@model MvcItemViewModel<ElmahApplicationModel>
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
 <td class="pt-0 pb-0 nt-list-bulk-select"></td>
 <td class="p-0">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button class="btn btn-primary" role="button" type="submit">
-                            <i class="fa-solid fa-check-circle"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create")</span>
-                        </button>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Reset")">
-                            <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Reset")</span>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
-                            <i class="fa-solid fa-arrow-left"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline">@localizor.Get("Back_to_List")</span>
-                        </a>
-                    </div>
+    <div class="btn-group btn-group-nt-action-save">
+        <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
+            <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Post"
+            data-nt-container="@CrudViewContainers.Inline.ToString()"
+            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+            <i class="fa-solid fa-check-circle"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
+        </button>
+    </div>
 </td>
 <td class="form-group pt-0 pb-0">
     <input asp-for="Model!.Application" class="form-control" />

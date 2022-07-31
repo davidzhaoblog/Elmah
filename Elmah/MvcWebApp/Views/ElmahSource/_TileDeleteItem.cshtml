@@ -2,7 +2,7 @@
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Framework.Models;
-@model ItemViewModel<ElmahSourceModel>
+@model MvcItemViewModel<ElmahSourceModel>
 @inject IUIStrings localizor;
 @{
     ViewBag.Status = Model.Status;
@@ -16,19 +16,15 @@
         @await Html.PartialAsync("~/Views/ElmahSource/_Delete.cshtml", Model.Model)
     </div>
     <div class="card-footer text-muted btn-toolbar">
-        <div class="btn-group" role="group" aria-label="...">
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="Model!.Source" />
-                <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
-                    <span class="fa-solid fa-trash"></span>
-                </button>
-            </form>
-            <a asp-area="" asp-controller="ElmahSource" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Reset")">
-                <i class="fa-solid fa-refresh"></i>
-            </a>
-            <a asp-area="" asp-controller="ElmahSource" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
+        <div class="btn-group btn-group-nt-action-save">
+            <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Delete"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                <i class="fa-solid fa-check-circle"></i>
+            </button>
         </div>
     </div>
 </div>

@@ -70,6 +70,7 @@ function attachIndividualSelectCheckboxClickEventHandler(selector) {
 
 function attachQuickSelectClickEventHandler(selector) {
     $(selector).click(function (e) {
+        $(e.currentTarget).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input").prop("checked", false);
         const filterName = $(e.currentTarget).data("nt-filtername");
         const filterValue = $(e.currentTarget).data("nt-filtervalue");
         const setCheckedTo = $(e.currentTarget).data("nt-checkbox-checked");

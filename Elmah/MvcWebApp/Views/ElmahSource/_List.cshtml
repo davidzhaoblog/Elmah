@@ -18,7 +18,7 @@
             {
                 for (var i = 0; i < Model.ResponseBody.Length; i++)
                 {
-                        @await Html.PartialAsync("~/Views/ElmahSource/_ListItemTr.cshtml",new ItemViewModel<ElmahSourceModel>
+                        @await Html.PartialAsync("~/Views/ElmahSource/_ListItemTr.cshtml",new MvcItemViewModel<ElmahSourceModel>
                             {
                                 Template = ViewItemTemplateNames.Details.ToString(),
                                 Model = Model.ResponseBody[i],

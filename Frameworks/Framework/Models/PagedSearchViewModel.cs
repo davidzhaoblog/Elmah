@@ -1,10 +1,9 @@
 namespace Framework.Models
 {
-    public class PagedSearchViewModel<TQuery, TResponseBody>
+    public class PagedSearchViewModel<TQuery, TResponseBody>: PagedViewModel<TResponseBody>
         where TQuery : class
     {
         public TQuery Query { get; set; } = null!;
-        public PagedResponse<TResponseBody> Result { get; set; } = null!;
     }
 }
 

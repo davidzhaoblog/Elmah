@@ -1,24 +1,20 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ItemViewModel<ElmahStatusCodeModel>
+@model MvcItemViewModel<ElmahStatusCodeModel>
 @inject IUIStrings localizor;
 <td class="pt-0 pb-0 nt-list-bulk-select"></td>
 <td class="p-0">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <form asp-action="Delete">
-                            <input type="hidden" asp-for="Model!.StatusCode" />
-                            <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
-                                <span class="fa-solid fa-trash"></span>
-                            </button>
-                        </form>
-                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Reset")">
-                            <i class="fa-solid fa-refresh"></i>
-                        </a>
-                        <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </a>
-                    </div>
+    <div class="btn-group btn-group-nt-action-save">
+        <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Delete"
+            data-nt-container="@CrudViewContainers.Inline.ToString()"
+            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+            <i class="fa-solid fa-check-circle"></i>
+        </button>
+    </div>
 </td>
 <td class="pt-0 pb-0">@Model.Model!.StatusCode</td>
 <td class="pt-0 pb-0">@Model.Model!.Name</td>

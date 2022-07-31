@@ -1,27 +1,25 @@
-namespace Elmah.MvcWebApp.Models
+namespace Framework.Models
 {
     public class ItemViewModel<TModel>
         where TModel : class
     {
         public System.Net.HttpStatusCode Status { get; set; }
+        public string? StatusMessage { get; set; }
 
         /// <summary>
         /// It is a ToString() for known TemplateName
-        /// <seealso cref="Framework.Models.ViewItemTemplateNames"/>
+        /// <seealso cref="ViewItemTemplateNames"/>
         /// </summary>
         public string? Template { get; set; }
 
         // this is used for inline-editing
         public bool IsCurrentItem { get; set; } = false;
 
-        /// <summary>
-        /// The following 3 is used for batch editing, to construct Html Name attribute of form-control/form-select/form-check-input.
-        /// </summary>
-        public bool HtmlNameUseArrayIndex { get; set; } = false;
-        public int IndexInArray { get; set; }
-        public string? HtmlNamePrefix { get; set; }
         public bool BulkSelected { get; set; } = false;
-
+        /// <summary>
+        /// the Key comes from {SolutionName}.Models.Definitions.TopLevelDropDownLists
+        /// </summary>
+        public Dictionary<string, List<NameValuePair>>? TopLevelDropDownListsFromDatabase { get; set; }
         /// <summary>
         /// Item1 is the partial view url
         /// Item2 is the Modal
