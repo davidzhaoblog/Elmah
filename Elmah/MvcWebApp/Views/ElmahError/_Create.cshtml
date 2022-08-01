@@ -1,15 +1,18 @@
 @using Framework.Models;
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahErrorModel.DefaultView
+@model MvcItemViewModel<ElmahErrorModel.DefaultView>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+@if (Model.Status != System.Net.HttpStatusCode.OK)
 {
     <div class="row">
-        <div class="text-danger">@ViewBag.StatusMessage</div>
+        <div class="text-danger">@Model.StatusMessage</div>
     </div>
 }
 else
@@ -23,28 +26,28 @@ else
     </div>
     <div class="form-group">
         <label asp-for="Application" class="control-label"></label>
-        <select asp-for="Application" class="form-control form-select" asp-items="ViewBag.ApplicationList" >
+        <select asp-for="Application" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahApplication.ToString()])" >
             <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahApplication"))</option>
         </select>
         <span asp-validation-for="Application" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Host" class="control-label"></label>
-        <select asp-for="Host" class="form-control form-select" asp-items="ViewBag.HostList" >
+        <select asp-for="Host" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahHost.ToString()])" >
             <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahHost"))</option>
         </select>
         <span asp-validation-for="Host" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Type" class="control-label"></label>
-        <select asp-for="Type" class="form-control form-select" asp-items="ViewBag.TypeList" >
+        <select asp-for="Type" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahType.ToString()])" >
             <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahType"))</option>
         </select>
         <span asp-validation-for="Type" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Source" class="control-label"></label>
-        <select asp-for="Source" class="form-control form-select" asp-items="ViewBag.SourceList" >
+        <select asp-for="Source" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahSource.ToString()])" >
             <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahSource"))</option>
         </select>
         <span asp-validation-for="Source" class="text-danger"></span>
@@ -56,14 +59,14 @@ else
     </div>
     <div class="form-group">
         <label asp-for="User" class="control-label"></label>
-        <select asp-for="User" class="form-control form-select" asp-items="ViewBag.UserList" >
+        <select asp-for="User" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahUser.ToString()])" >
             <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahUser"))</option>
         </select>
         <span asp-validation-for="User" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="StatusCode" class="control-label"></label>
-        <select asp-for="StatusCode" class="form-control form-select" asp-items="ViewBag.StatusCodeList" >
+        <select asp-for="StatusCode" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahStatusCode.ToString()])" >
             <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahStatusCode"))</option>
         </select>
         <span asp-validation-for="StatusCode" class="text-danger"></span>

@@ -1,6 +1,9 @@
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahStatusCodeModel
+@model MvcItemViewModel<ElmahStatusCodeModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Edit");
@@ -14,10 +17,10 @@
                     <h1>@localizor.Get("Edit")</h1>
                     <h4>@localizor.Get("ElmahError")</h4>
                 </div>
-                @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+                @if (Model.Status != System.Net.HttpStatusCode.OK)
                 {
                     <div class="card-body">
-                        <div class="text-danger">@ViewBag.StatusMessage</div>
+                        <div class="text-danger">@Model.StatusMessage</div>
                     </div>
                 }
                 <div class="card-body">

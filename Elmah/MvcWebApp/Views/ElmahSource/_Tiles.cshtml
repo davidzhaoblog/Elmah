@@ -2,22 +2,18 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedResponse<ElmahSourceModel[]>
+@model PagedViewModel<ElmahSourceModel[]>
 @inject IUIStrings localizor;
-@{
-    ViewBag.Status = Model.Status;
-    ViewBag.StatusMessage = Model.StatusMessage;
-}
-@if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+@if (Model != null && Model.Result != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
 {
-    @for (var i = 0; i < Model.ResponseBody.Length; i++)
+    @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
     {
         @await Html.PartialAsync("~/Views/ElmahSource/_Tile.cshtml",
             new MvcItemViewModel<ElmahSourceModel>
             {
                  Status = System.Net.HttpStatusCode.OK,
-                 Model = Model.ResponseBody[i],
-                 Template = Model.PagedViewOption.ToString(),
+                 Model = Model.Result.ResponseBody[i],
+                 Template = Model.Result.PagedViewOption.ToString(),
                  HtmlNamePrefix = "Model.ResponseBody",
                  HtmlNameUseArrayIndex = true,
                  IndexInArray = i,
@@ -42,7 +38,7 @@ else if (Model != null)
 {
     <div class="text-danger">@Model.StatusMessage</div>
 }
-@if (Model != null && Model.Pagination != null)
+@if (Model != null && Model.Result != null && Model.Result.Pagination != null)
 {
-    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Pagination)
+    @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
 }
