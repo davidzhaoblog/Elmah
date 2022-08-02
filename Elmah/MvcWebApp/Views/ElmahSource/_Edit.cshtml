@@ -19,10 +19,10 @@ else
 {
     <input class="hidden-modal-title" value="@Model!.Model!.Source" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Model!.Source" />
+    <input type="hidden" asp-for="Model!.Source" id="@Model.HtmlId(nameof(ElmahSourceModel.Source))" name="@Model.HtmlName(nameof(ElmahSourceModel.Source))"/>
     <div class="form-group">
-        <label asp-for="Model!.Source" class="control-label"></label>
-        <input asp-for="Model!.Source" class="form-control" />
-        <span asp-validation-for="Model!.Source" class="text-danger"></span>
+        <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahSourceModel.Source))"></label>
+        <input asp-for="Model!.Source" class="form-control"  id="@Model.HtmlId(nameof(ElmahSourceModel.Source))"  name="@Model.HtmlName(nameof(ElmahSourceModel.Source))"/>
+        <span asp-validation-for="Model!.Source" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahSourceModel.Source))"></span>
     </div>
 }

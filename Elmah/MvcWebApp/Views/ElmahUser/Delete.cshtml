@@ -35,7 +35,7 @@
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="Model!.User" />
+                        <input type="hidden" asp-for="Model!.User" id="@Model.HtmlId(nameof(ElmahUserModel.User))" name="@Model.HtmlName(nameof(ElmahUserModel.User))"/>
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>

@@ -109,15 +109,15 @@
     <div class="card-body nt-list-container-submit row m-0 p-0">
         @if (currentView.ToLower() == PagedViewOptions.Tiles.ToString().ToLower())
         {
-            @await Html.PartialAsync("~/Views/ElmahSource/_Tiles.cshtml", Model.Result)
+            @await Html.PartialAsync("~/Views/ElmahSource/_Tiles.cshtml", Model)
         }
         else if (currentView.ToLower() == PagedViewOptions.SlideShow.ToString().ToLower())
         {
-            @await Html.PartialAsync("~/Views/ElmahSource/_SlideShow.cshtml", Model.Result)
+            @await Html.PartialAsync("~/Views/ElmahSource/_SlideShow.cshtml", Model)
         }
         else
         {
-            @await Html.PartialAsync("~/Views/ElmahSource/_List.cshtml", Model.Result)
+            @await Html.PartialAsync("~/Views/ElmahSource/_List.cshtml", Model)
         }
     </div>
     <div class="fixed-bottom">

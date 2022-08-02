@@ -25,11 +25,11 @@
                 }
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Model!.Application" />
+                    <input type="hidden" asp-for="Model!.Application" id="@Model.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model.HtmlName(nameof(ElmahApplicationModel.Application))"/>
                 <div class="form-group">
-                    <label asp-for="Model!.Application" class="control-label"></label>
-                    <input asp-for="Model!.Application" class="form-control" />
-                    <span asp-validation-for="Model!.Application" class="text-danger"></span>
+                    <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))"></label>
+                    <input asp-for="Model!.Application" class="form-control"  id="@Model.HtmlId(nameof(ElmahApplicationModel.Application))"  name="@Model.HtmlName(nameof(ElmahApplicationModel.Application))"/>
+                    <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"></span>
                 </div>
                 </div>
                 <div class="card-footer">

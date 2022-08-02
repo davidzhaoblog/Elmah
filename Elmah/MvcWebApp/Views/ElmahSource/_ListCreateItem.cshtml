@@ -23,6 +23,6 @@
     </div>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Model!.Source" class="form-control" />
-    <span asp-validation-for="Model!.Source" class="text-danger"></span>
+    <input asp-for="Model!.Source" class="form-control" id="@Model!.HtmlId(nameof(ElmahSourceModel.Source))" name="@Model!.HtmlName(nameof(ElmahSourceModel.Source))"/>
+    <span asp-validation-for="Model!.Source" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahSourceModel.Source))"></span>
 </td>

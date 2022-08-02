@@ -20,13 +20,13 @@ else
     <input class="hidden-modal-title" value="@Model!.Model!.Name" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="Model!.StatusCode" class="control-label"></label>
-        <input asp-for="Model!.StatusCode" class="form-control" />
-        <span asp-validation-for="Model!.StatusCode" class="text-danger"></span>
+        <label asp-for="Model!.StatusCode" class="control-label" for="@Model!.HtmlId(nameof(ElmahStatusCodeModel.StatusCode))"></label>
+        <input asp-for="Model!.StatusCode" class="form-control"  id="@Model.HtmlId(nameof(ElmahStatusCodeModel.StatusCode))"  name="@Model.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"/>
+        <span asp-validation-for="Model!.StatusCode" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Model!.Name" class="control-label"></label>
-        <input asp-for="Model!.Name" class="form-control" />
-        <span asp-validation-for="Model!.Name" class="text-danger"></span>
+        <label asp-for="Model!.Name" class="control-label" for="@Model!.HtmlId(nameof(ElmahStatusCodeModel.Name))"></label>
+        <input asp-for="Model!.Name" class="form-control"  id="@Model.HtmlId(nameof(ElmahStatusCodeModel.Name))"  name="@Model.HtmlName(nameof(ElmahStatusCodeModel.Name))"/>
+        <span asp-validation-for="Model!.Name" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeModel.Name))"></span>
     </div>
 }
