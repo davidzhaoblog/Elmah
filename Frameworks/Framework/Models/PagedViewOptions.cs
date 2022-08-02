@@ -6,6 +6,7 @@ namespace Framework.Models
         List,
         Tiles,
         SlideShow,
+        BatchEditableList,
     }
 }
 

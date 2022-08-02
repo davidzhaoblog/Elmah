@@ -97,15 +97,15 @@ namespace Elmah.MvcWebApp.Controllers
             {                pagedViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
             }
 
-            if (query.PagedViewOption == PagedViewOptions.List)
-            {
-                return PartialView("_List", pagedViewModel);
-            }
-            else if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (query.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            return PartialView("_SlideShow", pagedViewModel);
+            else if (query.PagedViewOption == PagedViewOptions.Tiles)
+            {
+                return PartialView("_SlideShow", pagedViewModel);
+            }
+            return PartialView("_List", pagedViewModel);
         }
 
         [Route("[controller]/[action]/{ErrorId}")] // Primary
