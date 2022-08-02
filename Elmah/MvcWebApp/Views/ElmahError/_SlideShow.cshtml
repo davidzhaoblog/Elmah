@@ -1,31 +1,31 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model PagedResponse<ElmahErrorModel.DefaultView[]>
+@model PagedViewModel<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
-@if (Model != null && Model.Status == System.Net.HttpStatusCode.OK && Model.ResponseBody != null)
+@if (Model != null && Model.Result != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
 {
     <!-- Carousel -->
     <div id="slideshow-elmaherror" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
-            @for (var i = 0; i < Model.ResponseBody.Length; i++)
+            @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
             {
                 <button type="button" data-bs-target="#slideshow-elmaherror" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
             }
         </div>
         <!-- The slideshow/carousel -->
         <div class="carousel-inner">
-            @for (var i = 0; i < Model.ResponseBody.Length; i++)
+            @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
             {
                 <div class="carousel-item@(i == 0 ? " active" : "")">
-                    <img src="images/Background@(i.ToString("d2")).png" alt="@Model.ResponseBody[i].Application" class="d-block w-100">
+                    <img src="images/Background@(i.ToString("d2")).png" alt="@Model.Result.ResponseBody[i].Application" class="d-block w-100">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 class="card-title">@Model.ResponseBody[i].Application</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@Model.ResponseBody[i].Application</h6>
-                        <p class="card-text">@Model.ResponseBody[i].Application</p>
-                        <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.ResponseBody![i].ErrorId" title="@Model.ResponseBody[i].Application">
-                             @Model.ResponseBody[i].Application
+                        <h5 class="card-title">@Model.Result.ResponseBody[i].Application</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@Model.Result.ResponseBody[i].Application</h6>
+                        <p class="card-text">@Model.Result.ResponseBody[i].Application</p>
+                        <a asp-area="" asp-controller="ElmahError" asp-action="Dashboard" asp-route-errorid="@Model.Result.ResponseBody![i].ErrorId" title="@Model.Result.ResponseBody[i].Application">
+                             @Model.Result.ResponseBody[i].Application
                         </a>
                     </div>
                 </div>

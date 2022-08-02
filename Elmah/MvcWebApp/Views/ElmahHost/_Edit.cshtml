@@ -1,7 +1,10 @@
 @using Framework.Models;
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahHostModel
+@model MvcItemViewModel<ElmahHostModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -14,17 +17,17 @@
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model.Host" type="hidden" />
+    <input class="hidden-modal-title" value="@Model!.Model!.Host" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Host" />
+    <input type="hidden" asp-for="Model!.Host" id="@Model.HtmlId(nameof(ElmahHostModel.Host))" name="@Model.HtmlName(nameof(ElmahHostModel.Host))"/>
     <div class="form-group">
-        <label asp-for="Host" class="control-label"></label>
-        <input asp-for="Host" class="form-control" />
-        <span asp-validation-for="Host" class="text-danger"></span>
+        <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostModel.Host))"></label>
+        <input asp-for="Model!.Host" class="form-control"  id="@Model.HtmlId(nameof(ElmahHostModel.Host))"  name="@Model.HtmlName(nameof(ElmahHostModel.Host))"/>
+        <span asp-validation-for="Model!.Host" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahHostModel.Host))"></span>
     </div>
     <div class="form-group">
-        <label asp-for="SpatialLocation" class="control-label"></label>
-        <input asp-for="SpatialLocation" class="form-control" />
-        <span asp-validation-for="SpatialLocation" class="text-danger"></span>
+        <label asp-for="Model!.SpatialLocation" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostModel.SpatialLocation))"></label>
+        <input asp-for="Model!.SpatialLocation" class="form-control"  id="@Model.HtmlId(nameof(ElmahHostModel.SpatialLocation))"  name="@Model.HtmlName(nameof(ElmahHostModel.SpatialLocation))"/>
+        <span asp-validation-for="Model!.SpatialLocation" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahHostModel.SpatialLocation))"></span>
     </div>
 }

@@ -2,8 +2,10 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @model PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
 @inject IHttpContextAccessor Accessor
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahSource");
@@ -95,11 +97,6 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                </ul>
             </ul>
         </div>
         <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
@@ -112,15 +109,15 @@
     <div class="card-body nt-list-container-submit row m-0 p-0">
         @if (currentView.ToLower() == PagedViewOptions.Tiles.ToString().ToLower())
         {
-            @await Html.PartialAsync("~/Views/ElmahSource/_Tiles.cshtml", Model.Result)
+            @await Html.PartialAsync("~/Views/ElmahSource/_Tiles.cshtml", Model)
         }
         else if (currentView.ToLower() == PagedViewOptions.SlideShow.ToString().ToLower())
         {
-            @await Html.PartialAsync("~/Views/ElmahSource/_SlideShow.cshtml", Model.Result)
+            @await Html.PartialAsync("~/Views/ElmahSource/_SlideShow.cshtml", Model)
         }
         else
         {
-            @await Html.PartialAsync("~/Views/ElmahSource/_List.cshtml", Model.Result)
+            @await Html.PartialAsync("~/Views/ElmahSource/_List.cshtml", Model)
         }
     </div>
     <div class="fixed-bottom">

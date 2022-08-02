@@ -143,9 +143,6 @@ namespace Elmah.MvcWebApp.Controllers
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
-                HtmlNamePrefix = "Model.ResponseBody",
-                HtmlNameUseArrayIndex = true,
-                IndexInArray = 1,
                 Model = result
             };
 
@@ -220,9 +217,6 @@ namespace Elmah.MvcWebApp.Controllers
                                             Status = System.Net.HttpStatusCode.OK,
                                             Template = ViewItemTemplateNames.Details.ToString(),
                                             IsCurrentItem = true,
-                                            HtmlNamePrefix = "Model.ResponseBody",
-                                            HtmlNameUseArrayIndex = true,
-                                            IndexInArray = 1,
                                             Model = result.ResponseBody!
                                         })
                                 }
@@ -290,9 +284,6 @@ namespace Elmah.MvcWebApp.Controllers
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
-                                        HtmlNamePrefix = "Model.ResponseBody",
-                                        HtmlNameUseArrayIndex = true,
-                                        IndexInArray = 1,
                                         Model = result.ResponseBody!
                                     })
                             }
@@ -312,9 +303,6 @@ namespace Elmah.MvcWebApp.Controllers
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
-                                        HtmlNamePrefix = "Model.ResponseBody",
-                                        HtmlNameUseArrayIndex = true,
-                                        IndexInArray = 1,
                                         Model = result.ResponseBody!
                                     })
                             }
@@ -375,9 +363,6 @@ namespace Elmah.MvcWebApp.Controllers
                                     Template = ViewItemTemplateNames.Details.ToString(),
                                     Model = t,
                                     Status = System.Net.HttpStatusCode.OK,
-                                    IndexInArray = result.ResponseBody?.ToList().IndexOf(t) ?? 0,
-                                    HtmlNamePrefix = "Model.ResponseBody",
-                                    HtmlNameUseArrayIndex = true,
                                     BulkSelected = true,
                                 }
                             )).ToList()

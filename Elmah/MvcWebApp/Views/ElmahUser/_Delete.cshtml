@@ -1,26 +1,29 @@
 @using Framework.Models;
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahUserModel
+@model MvcItemViewModel<ElmahUserModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+@if (Model.Status != System.Net.HttpStatusCode.OK)
 {
     <div class="row">
-        <div class="text-danger">@ViewBag.StatusMessage</div>
+        <div class="text-danger">@Model.StatusMessage</div>
     </div>
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model.User" type="hidden" />
+    <input class="hidden-modal-title" value="@Model!.Model!.User" type="hidden" />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Model!.User)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User)
+            @Html.DisplayFor(model => model.Model!.User)
         </dd>
     </dl>
 }

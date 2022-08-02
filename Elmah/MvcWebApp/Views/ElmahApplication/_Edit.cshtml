@@ -1,7 +1,10 @@
 @using Framework.Models;
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahApplicationModel
+@model MvcItemViewModel<ElmahApplicationModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -14,12 +17,12 @@
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model.Application" type="hidden" />
+    <input class="hidden-modal-title" value="@Model!.Model!.Application" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Application" />
+    <input type="hidden" asp-for="Model!.Application" id="@Model.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model.HtmlName(nameof(ElmahApplicationModel.Application))"/>
     <div class="form-group">
-        <label asp-for="Application" class="control-label"></label>
-        <input asp-for="Application" class="form-control" />
-        <span asp-validation-for="Application" class="text-danger"></span>
+        <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))"></label>
+        <input asp-for="Model!.Application" class="form-control"  id="@Model.HtmlId(nameof(ElmahApplicationModel.Application))"  name="@Model.HtmlName(nameof(ElmahApplicationModel.Application))"/>
+        <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"></span>
     </div>
 }

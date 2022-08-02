@@ -1,6 +1,9 @@
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahStatusCodeModel
+@model MvcItemViewModel<ElmahStatusCodeModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Delete");
@@ -13,34 +16,34 @@
                 <h4>@localizor.Get("ElmahStatusCode")</h4>
                 <h3>@localizor.Get("Are_you_sure_you_want_to_delete_this_")</h3>
             </div>
-            @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+            @if (Model.Status != System.Net.HttpStatusCode.OK)
             {
                 <div class="card-body">
-                    <div class="text-danger">@ViewBag.StatusMessage</div>
+                    <div class="text-danger">@Model.StatusMessage</div>
                 </div>
             }
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.StatusCode)
+                        @Html.DisplayNameFor(model => model.Model!.StatusCode)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.StatusCode)
+                        @Html.DisplayFor(model => model.Model!.StatusCode)
                     </dd>
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Name)
+                        @Html.DisplayNameFor(model => model.Model!.Name)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Name)
+                        @Html.DisplayFor(model => model.Model!.Name)
                     </dd>
                 </dl>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="StatusCode" />
+                        <input type="hidden" asp-for="Model!.StatusCode" id="@Model.HtmlId(nameof(ElmahStatusCodeModel.StatusCode))" name="@Model.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"/>
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>

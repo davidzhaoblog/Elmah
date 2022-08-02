@@ -1,7 +1,10 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
+@using Elmah.MvcWebApp.Models;
+@using Elmah.Models.Definitions;
 @model MvcItemViewModel<ElmahUserModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
@@ -20,6 +23,6 @@
     </div>
 </td>
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Model!.User" class="form-control" />
-    <span asp-validation-for="Model!.User" class="text-danger"></span>
+    <input asp-for="Model!.User" class="form-control" id="@Model!.HtmlId(nameof(ElmahUserModel.User))" name="@Model!.HtmlName(nameof(ElmahUserModel.User))"/>
+    <span asp-validation-for="Model!.User" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahUserModel.User))"></span>
 </td>

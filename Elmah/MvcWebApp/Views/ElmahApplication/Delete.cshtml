@@ -1,6 +1,9 @@
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahApplicationModel
+@model MvcItemViewModel<ElmahApplicationModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Delete");
@@ -13,26 +16,26 @@
                 <h4>@localizor.Get("ElmahApplication")</h4>
                 <h3>@localizor.Get("Are_you_sure_you_want_to_delete_this_")</h3>
             </div>
-            @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+            @if (Model.Status != System.Net.HttpStatusCode.OK)
             {
                 <div class="card-body">
-                    <div class="text-danger">@ViewBag.StatusMessage</div>
+                    <div class="text-danger">@Model.StatusMessage</div>
                 </div>
             }
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Application)
+                        @Html.DisplayNameFor(model => model.Model!.Application)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Application)
+                        @Html.DisplayFor(model => model.Model!.Application)
                     </dd>
                 </dl>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="Application" />
+                        <input type="hidden" asp-for="Model!.Application" id="@Model.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model.HtmlName(nameof(ElmahApplicationModel.Application))"/>
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>

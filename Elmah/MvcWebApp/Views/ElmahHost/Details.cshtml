@@ -1,6 +1,9 @@
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahHostModel
+@model MvcItemViewModel<ElmahHostModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Details");
@@ -12,46 +15,42 @@
                 <h1>@localizor.Get("Details")</h1>
                 <h4>@localizor.Get("ElmahHost")</h4>
             </div>
-            @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+            @if (Model.Status != System.Net.HttpStatusCode.OK)
             {
                 <div class="card-body">
-                    <div class="text-danger">@ViewBag.StatusMessage</div>
+                    <div class="text-danger">@Model.StatusMessage</div>
                 </div>
             }
             else
             {
                 <div class="card-body">
-                    @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
-                    {
-                        <div class="text-danger">@ViewBag.StatusMessage</div>
-                    }
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Host)
+                            @Html.DisplayNameFor(model => model.Model!.Host)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Host)
+                            @Html.DisplayFor(model => model.Model!.Host)
                         </dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.SpatialLocation)
+                            @Html.DisplayNameFor(model => model.Model!.SpatialLocation)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.SpatialLocation)
+                            @Html.DisplayFor(model => model.Model!.SpatialLocation)
                         </dd>
                     </dl>
                 </div>
             }
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Details" asp-route-host="@Model?.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                    <a asp-area="" asp-controller="ElmahHost" asp-action="Details" asp-route-host="@Model!.Model!.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                         <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
                     </a>
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model?.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
+                    <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model!.Model!.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                         <i class="fa fa-edit"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
                     </a>
-                    <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model?.Host" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
+                    <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model!.Model!.Host" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
                         <i class="fa fa-trash"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                     </a>
                     <a asp-area="" asp-controller="ElmahHost" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">

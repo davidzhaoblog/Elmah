@@ -4,9 +4,6 @@
 @using Framework.Models;
 @model MvcItemViewModel<ElmahSourceModel>
 @inject IUIStrings localizor;
-@{
-    ViewBag.Status = Model.Status;
-}
 <div class="card w-100@(Model.IsCurrentItem ? " border-warning border-3": "")">
     <div class="card-header">
         <h5 class="card-title">@localizor.Get("Creating")" @localizor.Get("ElmahSource")"</h5>

@@ -1,6 +1,9 @@
+@using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model ElmahTypeModel
+@model MvcItemViewModel<ElmahTypeModel>
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Edit");
@@ -14,19 +17,19 @@
                     <h1>@localizor.Get("Edit")</h1>
                     <h4>@localizor.Get("ElmahError")</h4>
                 </div>
-                @if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+                @if (Model.Status != System.Net.HttpStatusCode.OK)
                 {
                     <div class="card-body">
-                        <div class="text-danger">@ViewBag.StatusMessage</div>
+                        <div class="text-danger">@Model.StatusMessage</div>
                     </div>
                 }
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Type" />
+                    <input type="hidden" asp-for="Model!.Type" id="@Model.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model.HtmlName(nameof(ElmahTypeModel.Type))"/>
                 <div class="form-group">
-                    <label asp-for="Type" class="control-label"></label>
-                    <input asp-for="Type" class="form-control" />
-                    <span asp-validation-for="Type" class="text-danger"></span>
+                    <label asp-for="Model!.Type" class="control-label" for="@Model!.HtmlId(nameof(ElmahTypeModel.Type))"></label>
+                    <input asp-for="Model!.Type" class="form-control"  id="@Model.HtmlId(nameof(ElmahTypeModel.Type))"  name="@Model.HtmlName(nameof(ElmahTypeModel.Type))"/>
+                    <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"></span>
                 </div>
                 </div>
                 <div class="card-footer">
@@ -34,7 +37,7 @@
                         <button class="btn btn-primary" role="button" type="submit">
                             <i class="fa-solid fa-check-circle"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
                         </button>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Edit" asp-route-type="@Model?.Type" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <a asp-area="" asp-controller="ElmahType" asp-action="Edit" asp-route-type="@Model!.Model!.Type" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                             <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
                         </a>
                         <a asp-area="" asp-controller="ElmahType" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">
