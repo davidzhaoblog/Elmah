@@ -37,10 +37,10 @@ namespace Elmah.Models
 
         public string? TimeUtcRange { get; set; }
         // PredicateType:Range - Lower Bound
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public System.DateTime? TimeUtcRangeLower { get; set; }
         // PredicateType:Range - Upper Bound
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public System.DateTime? TimeUtcRangeUpper { get; set; }
 
         // PredicateType:Contains

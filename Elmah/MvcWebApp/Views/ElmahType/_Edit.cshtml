@@ -9,10 +9,10 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-@if (ViewBag.Status != System.Net.HttpStatusCode.OK)
+@if (Model.Status != System.Net.HttpStatusCode.OK)
 {
     <div class="row">
-        <div class="text-danger">@ViewBag.StatusMessage</div>
+        <div class="text-danger">@Model.StatusMessage</div>
     </div>
 }
 else
