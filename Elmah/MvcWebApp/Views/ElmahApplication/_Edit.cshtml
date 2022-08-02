@@ -17,12 +17,12 @@
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model.Application" type="hidden" />
+    <input class="hidden-modal-title" value="@Model!.Model!.Application" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Application" />
+    <input type="hidden" asp-for="Model!.Application" />
     <div class="form-group">
-        <label asp-for="Application" class="control-label"></label>
-        <input asp-for="Application" class="form-control" />
-        <span asp-validation-for="Application" class="text-danger"></span>
+        <label asp-for="Model!.Application" class="control-label"></label>
+        <input asp-for="Model!.Application" class="form-control" />
+        <span asp-validation-for="Model!.Application" class="text-danger"></span>
     </div>
 }

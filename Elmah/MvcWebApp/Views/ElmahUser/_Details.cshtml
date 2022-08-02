@@ -17,13 +17,13 @@
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model.User" type="hidden" />
+    <input class="hidden-modal-title" value="@Model!.Model!.User" type="hidden" />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Model!.User)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User)
+            @Html.DisplayFor(model => model.Model!.User)
         </dd>
     </dl>
 }

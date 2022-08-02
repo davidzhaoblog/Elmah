@@ -25,11 +25,11 @@
                 }
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Application" />
+                    <input type="hidden" asp-for="Model!.Application" />
                 <div class="form-group">
-                    <label asp-for="Application" class="control-label"></label>
-                    <input asp-for="Application" class="form-control" />
-                    <span asp-validation-for="Application" class="text-danger"></span>
+                    <label asp-for="Model!.Application" class="control-label"></label>
+                    <input asp-for="Model!.Application" class="form-control" />
+                    <span asp-validation-for="Model!.Application" class="text-danger"></span>
                 </div>
                 </div>
                 <div class="card-footer">
@@ -37,7 +37,7 @@
                         <button class="btn btn-primary" role="button" type="submit">
                             <i class="fa-solid fa-check-circle"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
                         </button>
-                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model?.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model!.Model!.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                             <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
                         </a>
                         <a asp-area="" asp-controller="ElmahApplication" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">

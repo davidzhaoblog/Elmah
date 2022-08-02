@@ -25,16 +25,16 @@
                 }
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Host" />
+                    <input type="hidden" asp-for="Model!.Host" />
                 <div class="form-group">
-                    <label asp-for="Host" class="control-label"></label>
-                    <input asp-for="Host" class="form-control" />
-                    <span asp-validation-for="Host" class="text-danger"></span>
+                    <label asp-for="Model!.Host" class="control-label"></label>
+                    <input asp-for="Model!.Host" class="form-control" />
+                    <span asp-validation-for="Model!.Host" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="SpatialLocation" class="control-label"></label>
-                    <input asp-for="SpatialLocation" class="form-control" />
-                    <span asp-validation-for="SpatialLocation" class="text-danger"></span>
+                    <label asp-for="Model!.SpatialLocation" class="control-label"></label>
+                    <input asp-for="Model!.SpatialLocation" class="form-control" />
+                    <span asp-validation-for="Model!.SpatialLocation" class="text-danger"></span>
                 </div>
                 </div>
                 <div class="card-footer">
@@ -42,7 +42,7 @@
                         <button class="btn btn-primary" role="button" type="submit">
                             <i class="fa-solid fa-check-circle"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
                         </button>
-                        <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model?.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model!.Model!.Host" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                             <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
                         </a>
                         <a asp-area="" asp-controller="ElmahHost" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">

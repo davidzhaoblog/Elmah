@@ -14,9 +14,6 @@
                  Status = System.Net.HttpStatusCode.OK,
                  Model = Model.Result.ResponseBody[i],
                  Template = Model.Result.PagedViewOption.ToString(),
-                 HtmlNamePrefix = "Model.ResponseBody",
-                 HtmlNameUseArrayIndex = true,
-                 IndexInArray = i,
                  IsCurrentItem = false
             })
     }
@@ -34,9 +31,9 @@
         </div>
     </div>
 }
-else if (Model != null)
+else if (Model != null && Model.Result != null)
 {
-    <div class="text-danger">@Model.StatusMessage</div>
+    <div class="text-danger">@Model.Result.StatusMessage</div>
 }
 @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
 {

@@ -25,25 +25,25 @@
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.StatusCode)
+                        @Html.DisplayNameFor(model => model.Model!.StatusCode)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.StatusCode)
+                        @Html.DisplayFor(model => model.Model!.StatusCode)
                     </dd>
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Name)
+                        @Html.DisplayNameFor(model => model.Model!.Name)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Name)
+                        @Html.DisplayFor(model => model.Model!.Name)
                     </dd>
                 </dl>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="StatusCode" />
+                        <input type="hidden" asp-for="Model!.StatusCode" />
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>

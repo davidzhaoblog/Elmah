@@ -17,21 +17,21 @@
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model.Host" type="hidden" />
+    <input class="hidden-modal-title" value="@Model!.Model!.Host" type="hidden" />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Host)
+            @Html.DisplayNameFor(model => model.Model!.Host)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Host)
+            @Html.DisplayFor(model => model.Model!.Host)
         </dd>
     </dl>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SpatialLocation)
+            @Html.DisplayNameFor(model => model.Model!.SpatialLocation)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SpatialLocation)
+            @Html.DisplayFor(model => model.Model!.SpatialLocation)
         </dd>
     </dl>
 }

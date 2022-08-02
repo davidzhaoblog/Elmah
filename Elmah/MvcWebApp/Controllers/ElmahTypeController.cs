@@ -129,9 +129,6 @@ namespace Elmah.MvcWebApp.Controllers
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
-                HtmlNamePrefix = "Model.ResponseBody",
-                HtmlNameUseArrayIndex = true,
-                IndexInArray = 1,
                 Model = result
             };
 
@@ -206,9 +203,6 @@ namespace Elmah.MvcWebApp.Controllers
                                             Status = System.Net.HttpStatusCode.OK,
                                             Template = ViewItemTemplateNames.Details.ToString(),
                                             IsCurrentItem = true,
-                                            HtmlNamePrefix = "Model.ResponseBody",
-                                            HtmlNameUseArrayIndex = true,
-                                            IndexInArray = 1,
                                             Model = result.ResponseBody!
                                         })
                                 }
@@ -276,9 +270,6 @@ namespace Elmah.MvcWebApp.Controllers
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
-                                        HtmlNamePrefix = "Model.ResponseBody",
-                                        HtmlNameUseArrayIndex = true,
-                                        IndexInArray = 1,
                                         Model = result.ResponseBody!
                                     })
                             }
@@ -298,9 +289,6 @@ namespace Elmah.MvcWebApp.Controllers
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
-                                        HtmlNamePrefix = "Model.ResponseBody",
-                                        HtmlNameUseArrayIndex = true,
-                                        IndexInArray = 1,
                                         Model = result.ResponseBody!
                                     })
                             }

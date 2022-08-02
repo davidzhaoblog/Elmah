@@ -26,14 +26,14 @@
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Host" class="control-label"></label>
-                        <input asp-for="Host" class="form-control" />
-                        <span asp-validation-for="Host" class="text-danger"></span>
+                        <label asp-for="Model!.Host" class="control-label"></label>
+                        <input asp-for="Model!.Host" class="form-control" />
+                        <span asp-validation-for="Model!.Host" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="SpatialLocation" class="control-label"></label>
-                        <input asp-for="SpatialLocation" class="form-control" />
-                        <span asp-validation-for="SpatialLocation" class="text-danger"></span>
+                        <label asp-for="Model!.SpatialLocation" class="control-label"></label>
+                        <input asp-for="Model!.SpatialLocation" class="form-control" />
+                        <span asp-validation-for="Model!.SpatialLocation" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="card-footer">

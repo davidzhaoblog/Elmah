@@ -25,11 +25,11 @@
                 }
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Source" />
+                    <input type="hidden" asp-for="Model!.Source" />
                 <div class="form-group">
-                    <label asp-for="Source" class="control-label"></label>
-                    <input asp-for="Source" class="form-control" />
-                    <span asp-validation-for="Source" class="text-danger"></span>
+                    <label asp-for="Model!.Source" class="control-label"></label>
+                    <input asp-for="Model!.Source" class="form-control" />
+                    <span asp-validation-for="Model!.Source" class="text-danger"></span>
                 </div>
                 </div>
                 <div class="card-footer">
@@ -37,7 +37,7 @@
                         <button class="btn btn-primary" role="button" type="submit">
                             <i class="fa-solid fa-check-circle"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
                         </button>
-                        <a asp-area="" asp-controller="ElmahSource" asp-action="Edit" asp-route-source="@Model?.Source" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
+                        <a asp-area="" asp-controller="ElmahSource" asp-action="Edit" asp-route-source="@Model!.Model!.Source" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                             <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
                         </a>
                         <a asp-area="" asp-controller="ElmahSource" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Back_to_List")">

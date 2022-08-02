@@ -2,8 +2,10 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @model PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>
 @inject IHttpContextAccessor Accessor
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahStatusCode");

@@ -9,7 +9,7 @@
     <div id="slideshow-elmahtype" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
-            @for (var i = 0; i < Model.ResponseBody.Length; i++)
+            @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
             {
                 <button type="button" data-bs-target="#slideshow-elmahtype" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
             }
@@ -24,7 +24,7 @@
                         <h5 class="card-title">@Model.Result.ResponseBody[i].Type</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@Model.Result.ResponseBody[i].Type</h6>
                         <p class="card-text">@Model.Result.ResponseBody[i].Type</p>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.ResponseBody![i].Type" title="@Model.ResponseBody[i].Type">
+                        <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Result.ResponseBody![i].Type" title="@Model.Result.ResponseBody[i].Type">
                              @Model.Result.ResponseBody[i].Type
                         </a>
                     </div>

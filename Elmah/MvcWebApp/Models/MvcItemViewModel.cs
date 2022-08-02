@@ -9,6 +9,15 @@ namespace Elmah.MvcWebApp.Models
         public bool HtmlNameUseArrayIndex { get; set; } = false;
         public int IndexInArray { get; set; }
         public string? HtmlNamePrefix { get; set; }
+
+        public string HtmlId(string propertyName)
+        {
+            return propertyName;
+        }
+        public string HtmlName(string propertyName)
+        {
+            return propertyName;
+        }
     }
 }
 

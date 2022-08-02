@@ -2,8 +2,10 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.Models.Definitions;
+@using Elmah.MvcWebApp.Models;
 @model PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
 @inject IHttpContextAccessor Accessor
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = @localizor.Get("Search") + " " + localizor.Get("ElmahError");
@@ -190,9 +192,9 @@
                         <li>
                             <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
                                 data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                                data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Text)"
+                                data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
                                 data-nt-actionname = "StatusCode"
-                                data-nt-namevalue="StatusCode:@item.Value">localizor.Get("MoveTo"): @item.Text</a>
+                                data-nt-namevalue="StatusCode:@item.Value">localizor.Get("MoveTo"): @item.Name</a>
                         </li>
                     }
                 </ul>
