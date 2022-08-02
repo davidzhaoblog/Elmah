@@ -83,15 +83,16 @@ namespace Elmah.MvcWebApp.Controllers
             {
             }
 
-            if (query.PagedViewOption == PagedViewOptions.List)
-            {
-                return PartialView("_List", pagedViewModel);
-            }
-            else if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (query.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            return PartialView("_SlideShow", pagedViewModel);
+            else if (query.PagedViewOption == PagedViewOptions.SlideShow)
+            {
+                return PartialView("_SlideShow", pagedViewModel);
+            }
+
+            return PartialView("_List", pagedViewModel);
         }
 
         [Route("[controller]/[action]/{User}")] // Primary
