@@ -101,7 +101,7 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            else if (query.PagedViewOption == PagedViewOptions.Tiles)
+            else if (query.PagedViewOption == PagedViewOptions.SlideShow)
             {
                 return PartialView("_SlideShow", pagedViewModel);
             }

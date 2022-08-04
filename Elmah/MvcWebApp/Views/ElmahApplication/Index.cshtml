@@ -22,11 +22,11 @@
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxMultiItems", "ElmahApplication")" data-nt-updatetarget=".nt-list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="nt-page-index" />
-    <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
-    <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
-    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
-    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" value="@currentView" />
-    <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
+    <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" class="nt-page-size" />
+    <input type="hidden" asp-for="Query.OrderBys" id="orderByH" class="nt-order-by" />
+    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" class="nt-advanced-query" />
+    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-option-field" value="@currentView" />
+    <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" class="nt-pagination-option-field" />
     <div class="d-flex justify-content-between pt-1">
         <div>
             <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahApplication" asp-action="Index">you are working on <strong>@localizor.Get("ElmahApplication")</strong></a></span>
@@ -37,11 +37,11 @@
         </button>
     </div>
     <hr class="mt-1" />
-        <div class="input-group">
-            <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
-            </select>
-            <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
-        </div>
+    <div class="input-group">
+        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+        </select>
+        <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
+    </div>
     <div class="row pt-1">
         <div class="col-md-6">
             <div class="input-group">
@@ -64,22 +64,22 @@
 </form>
 <hr class="mt-1" />
 <div class="card nt-list-wrapper"
-    id="thisList"
-    data-nt-bs-modalsize="Large"
-    data-nt-pagination-updatetarget="#pageIndexH"
-    data-nt-submittarget="#thisform"
-    data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahApplication")"
-    data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahApplication")"
-    data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahApplication")"
-    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahApplication")"
-    data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahApplication")">
+     id="thisList"
+     data-nt-bs-modalsize="Large"
+     data-nt-pagination-updatetarget="#pageIndexH"
+     data-nt-submittarget="#thisform"
+     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahApplication")"
+     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahApplication")"
+     data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahApplication")"
+     data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahApplication")"
+     data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahApplication")">
     <div class="card-header">
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="LoadMore" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="LoadMore" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
@@ -99,9 +99,9 @@
             <ul class="dropdown-menu">
             </ul>
         </div>
-        <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
+        <div class="btn-group float-start ps-4 nt-bulk-actions-container" style="display:none">
             <button type="button" class="btn btn-default nt-bulk-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_delete_selected"), localizor.Get("ElmahApplication"))" title="@localizor.Get("Delete")">
+                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_delete_selected"), localizor.Get("ElmahApplication"))" title="@localizor.Get("Delete")">
                 <i class="fa fa-trash"></i>
             </button>
         </div>
@@ -128,10 +128,10 @@
                 <i class="fa fa-plus"></i>
             </a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                data-nt-action="@HttpMethods.Post"
-                data-nt-route-id=""
-                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                    data-nt-action="@HttpMethods.Post"
+                    data-nt-route-id=""
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                 <i class="fa fa-plus"></i>
             </button>
         </div>

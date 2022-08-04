@@ -22,11 +22,11 @@
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxMultiItems", "ElmahError")" data-nt-updatetarget=".nt-list-container-submit">
     <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="nt-page-index" />
-    <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
-    <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
-    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
-    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" value="@currentView" />
-    <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
+    <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" class="nt-page-size" />
+    <input type="hidden" asp-for="Query.OrderBys" id="orderByH" class="nt-order-by" />
+    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" class="nt-advanced-query" />
+    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-option-field" value="@currentView" />
+    <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" class="nt-pagination-option-field" />
     <div class="d-flex justify-content-between pt-1">
         <div>
             <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahError" asp-action="Index">you are working on <strong>@localizor.Get("ElmahError")</strong></a></span>
@@ -144,18 +144,18 @@
     data-nt-bulk-update-url="@Url.Action("AjaxBulkUpdate", "ElmahError")">
     <div class="card-header">
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="LoadMore" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatevalue="LoadMore" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-BatchEditableList" autocomplete="off" data-nt-value="BatchEditableList" data-nt-updatetarget="#pagedViewOptionH" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.BatchEditableList ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-BatchEditableList" title="BatchEditableList" aria-label="BatchEditableList"><i class="fa-solid fa-circle-play"></i></label>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off" data-nt-value="EditableList" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.Query.PagedViewOption==PagedViewOptions.EditableList ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-rectangle-list"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
-            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#pageSizeH" data-nt-submittarget="#thisform"></select>
-            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
+            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit" data-nt-submittarget="#thisform"></select>
+            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit" data-nt-submittarget="#thisform"></select>
         </div>
         <div class="btn-group m-0 p-0 float-start nt-bulk-select-filter">
             <button type="button" class="btn btn-default m-0 p-0 btn-nt-bulk-select-status" data-nt-bulk-select-status="None">
@@ -179,7 +179,7 @@
                 }
             </ul>
         </div>
-        <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
+        <div class="btn-group float-start ps-4 nt-bulk-actions-container" style="display:none">
             <button type="button" class="btn btn-default nt-bulk-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
                 data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_delete_selected"), localizor.Get("ElmahError"))" title="@localizor.Get("Delete")">
                 <i class="fa fa-trash"></i>
@@ -196,11 +196,21 @@
                                 data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
                                 data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
                                 data-nt-actionname = "StatusCode"
-                                data-nt-namevalue="StatusCode:@item.Value">localizor.Get("MoveTo"): @item.Name</a>
+                                data-nt-namevalue="StatusCode:@item.Value">@localizor.Get("MoveTo"): @item.Name</a>
                         </li>
                     }
                 </ul>
             </div>
+        </div>
+        <div class="btn-group float-start ps-4 nt-editable-list-buttons" style="display:none">
+            <button type="button" class="btn btn-default nt-editable-list-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahApplication"))" title="@localizor.Get("Save")">
+                <i class="fa-solid fa-floppy-disk"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
+            </button>
+            <button type="button" class="btn btn-default nt-editable-list-cancel" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahApplication"))" title="@localizor.Get("Save")">
+                <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
+            </button>
         </div>
     </div>
     <div class="card-body nt-list-container-submit row m-0 p-0">

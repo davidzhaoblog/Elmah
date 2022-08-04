@@ -33,7 +33,7 @@
                         {
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model.Result.PagedViewOption != Framework.Models.PagedViewOptions.BatchEditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString() ,
+                            Template = Model.Result.PagedViewOption != Framework.Models.PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString() ,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                         })

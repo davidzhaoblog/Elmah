@@ -170,24 +170,23 @@ function getDateRange(referenceDate, type) {
 
 // 3.Start Pagination and OrderBy
 /* 
- * data-nt-targetchild
- * data-nt-pageindex
- * data-nt-updatetarget
  * data-nt-submittarget
  *
- * .nt-list-wrapper
- * .nt-selectchange-submit
+ * .nt-page-size-submit
+ * .nt-order-by-submit
+ * .nt-page-size
+ * .nt-order-by
+ * 
  */
-//$(document).ready($(function () {
-//    $(".page-link").click(function (e) {
-//        $($(this).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(this).data("nt-pageindex"));
-//        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
-//    });
-//}));
-
 $(document).ready($(function () {
-    $(".nt-selectchange-submit").change(function (e) {
-        $($(this).data("nt-updatetarget")).val(e.target.value);
+    $(".nt-page-size-submit").change(function (e) {
+        $($(this).data("nt-submittarget")).find(".nt-page-size").val(e.target.value);
+        $($(this).data("nt-submittarget")).submit();
+    });
+}));
+$(document).ready($(function () {
+    $(".nt-order-by-submit").change(function (e) {
+        $($(this).data("nt-submittarget")).find(".nt-order-by").val(e.target.value);
         $($(this).data("nt-submittarget")).submit();
     });
 }));
@@ -214,16 +213,16 @@ $(document).ready($(function () {
  * 
  * .nt-ajax-partial-load-post-formdata
  * .nt-ajax-partial-load-get
- * .nt-paged-view-options
- * .nt-page-index
- * .btn-nt-load-more
  * .nt-list-container-submit
- * 
+ * .nt-page-index
+ * .nt-paged-view-options
+ * .btn-nt-load-more
+ *
  */
 
 function pageLinkClicked(self) {
-    $($(self).closest(".nt-list-wrapper").data("nt-pagination-updatetarget")).val($(self).data("nt-pageindex"));
     const theForm = $($(self).closest(".nt-list-wrapper").data("nt-submittarget"));
+    $(theForm).find(".nt-page-index").val($(self).data("nt-pageindex"));
     const url = $(theForm).data("nt-partial-url");
     const updateTarget = $(theForm).data("nt-updatetarget");
     var formData = new FormData($(theForm)[0]);
@@ -340,18 +339,31 @@ $(document).ready($(function () {
 
 // 6.Start. PagedViewOptions clicked
 /*
- * data-nt-updatetarget
- * data-nt-submittarget
- * data-nt-paginationoptionupdatetarget
- * data-nt-paginationoptionupdatevalue
- * data-nt-value
+ * data-nt-submittarget - e.g. #thisForm
+ * data-nt-paginationoptionupdatevalue - e.g. // List-Pagination, Tiles-More, Slideshow-NoPagination
+ * data-nt-value - PagedViewOption - List/Tile/Slideshow/EditableList
  * 
- * .nt-radio-pagedviewoption-submit
+ * .nt-radio-pagedviewoption
+ * 
+ * nt-pagination-option-field
+ * nt-paged-view-option-field
+ * 
+ * nt-submittarget
  */
 $(document).ready($(function () {
-    $('.nt-radio-pagedviewoption-submit').click(function (e) {
-        $($(this).data("nt-paginationoptionupdatetarget")).val($(this).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
-        $($(this).data("nt-updatetarget")).val($(this).data("nt-value"));
+    $('.nt-radio-pagedviewoption').click(function (e) {
+        const submitTarget = $(this).data("nt-submittarget");
+        const pagedViewOption = $(this).data("nt-value");
+        if (pagedViewOption === "EditableList") {
+            $(this).closest(".nt-list-wrapper").find(".nt-editable-list-buttons").show();
+        }
+        else {
+            $(this).closest(".nt-list-wrapper").find(".nt-editable-list-buttons").hide();
+        }
+        // 1. update pagination-option
+        $(submitTarget).find(".nt-pagination-option-field").val($(this).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
+        // 2. update paged-view-option
+        $(submitTarget).find(".nt-paged-view-option-field").val(pagedViewOption); // List-Pagination, Tiles-More, Slideshow-NoPagination
         $($(this).data("nt-submittarget")).submit();
         // console.log($(location));
         // Update QueryString - view with data-nt-value attribute
