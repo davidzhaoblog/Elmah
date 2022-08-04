@@ -21,12 +21,12 @@
     }
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxMultiItems", "ElmahSource")" data-nt-updatetarget=".nt-list-container-submit">
-    <input type="hidden" asp-for="Query.PageIndex" id="pageIndexH" class="nt-page-index" />
-    <input type="hidden" asp-for="Query.PageSize" id="pageSizeH" />
-    <input type="hidden" asp-for="Query.OrderBys" id="orderByH" />
-    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" />
-    <input type="hidden" asp-for="Query.PagedViewOption" id="pagedViewOptionH" class="nt-paged-view-options" value="@currentView" />
-    <input type="hidden" asp-for="Query.PaginationOption" id="paginationOptionH" />
+    <input type="hidden" asp-for="Query.PageIndex" class="nt-page-index" />
+    <input type="hidden" asp-for="Query.PageSize" class="nt-page-size" />
+    <input type="hidden" asp-for="Query.OrderBys" class="nt-order-by" />
+    <input type="hidden" asp-for="Query.AdvancedQuery" id="advancedQueryH" class="nt-advanced-query" />
+    <input type="hidden" asp-for="Query.PagedViewOption" class="nt-paged-view-option-field" value="@currentView" />
+    <input type="hidden" asp-for="Query.PaginationOption" class="nt-pagination-option-field" />
     <div class="d-flex justify-content-between pt-1">
         <div>
             <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahSource" asp-action="Index">you are working on <strong>@localizor.Get("ElmahSource")</strong></a></span>
@@ -66,7 +66,6 @@
 <div class="card nt-list-wrapper"
     id="thisList"
     data-nt-bs-modalsize="Large"
-    data-nt-pagination-updatetarget="#pageIndexH"
     data-nt-submittarget="#thisform"
     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahSource")"
     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahSource")"
@@ -75,18 +74,18 @@
     data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahSource")">
     <div class="card-header">
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="LoadMore" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption-submit" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-value="Tiles" data-nt-updatetarget="#pagedViewOptionH" data-nt-paginationoptionupdatetarget="#paginationOptionH" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model.Query.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
-            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#pageSizeH" data-nt-submittarget="#thisform"></select>
-            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-selectchange-submit" data-nt-updatetarget="#orderByH" data-nt-submittarget="#thisform"></select>
+            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit" data-nt-submittarget="#thisform"></select>
+            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit" data-nt-submittarget="#thisform"></select>
         </div>
         <div class="btn-group m-0 p-0 float-start nt-bulk-select-filter">
             <button type="button" class="btn btn-default m-0 p-0 btn-nt-bulk-select-status" data-nt-bulk-select-status="None">

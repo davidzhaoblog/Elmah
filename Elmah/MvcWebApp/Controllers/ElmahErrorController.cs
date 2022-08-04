@@ -51,7 +51,7 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (query.PagedViewOption == PagedViewOptions.List)
+            else if (query.PagedViewOption == PagedViewOptions.List || query.PagedViewOption == PagedViewOptions.EditableList)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
