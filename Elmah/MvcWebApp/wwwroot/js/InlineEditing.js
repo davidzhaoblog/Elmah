@@ -119,17 +119,21 @@ function attachInlineEditingActionButtonClickEvent_InTable() {
         const template = $(button).data("nt-template");
         const action = $(button).data("nt-action");
         // Not <form>...</form>, create FormData
-        const form = $(".nt-listitem.nt-current form")
-        let formData = new FormData();
-        $(".nt-listitem.nt-current input.form-control").each((index, element) => {
-            formData.append($(element).attr("name"), $(element).val());
-        });
-        $(".nt-listitem.nt-current input.form-check-input").each((index, element) => {
-            formData.append($(element).attr("name"), $(element).is(":checked"));
-        });
-        $(".nt-listitem.nt-current select.form-control").each((index, element) => {
-            formData.append($(element).attr("name"), $(element).find(":selected").val());
-        });
+        const form = $(this).closest("form");
+        let formData = [];
+        if (!!form) {
+            formData = new FormData($(form)[0]);
+        }
+        //let formData = new FormData();
+        //$(".nt-listitem.nt-current input.form-control").each((index, element) => {
+        //    formData.append($(element).attr("name"), $(element).val());
+        //});
+        //$(".nt-listitem.nt-current input.form-check-input").each((index, element) => {
+        //    formData.append($(element).attr("name"), $(element).is(":checked"));
+        //});
+        //$(".nt-listitem.nt-current select.form-control").each((index, element) => {
+        //    formData.append($(element).attr("name"), $(element).find(":selected").val());
+        //});
         formData.append("view", view);
         formData.append("container", container);
         formData.append("template", template);
