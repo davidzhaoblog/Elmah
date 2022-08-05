@@ -35,13 +35,13 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> Index(ElmahUserAdvancedQuery query)
+        public async Task<IActionResult> Index(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcUIListSetting uiSetting)
         {
-            if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (query.PagedViewOption == PagedViewOptions.List)
+            else if (uiSetting.PagedViewOption == PagedViewOptions.List)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
@@ -60,10 +60,10 @@ namespace Elmah.MvcWebApp.Controllers
 
             ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>
+            return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, Elmah.MvcWebApp.Models.MvcUIListSetting, ElmahUserModel[]>
             {
                 Query = query,
-
+                UISetting = uiSetting,
                 Result = result
             });
         }
@@ -71,7 +71,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> AjaxMultiItems(ElmahUserAdvancedQuery query)
+        public async Task<IActionResult> AjaxMultiItems(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcUIListSetting uiSetting)
         {
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahUserModel[]>
@@ -79,15 +79,15 @@ namespace Elmah.MvcWebApp.Controllers
                 Result = result,
             };
 
-            if(query.Template == ViewItemTemplateNames.Create || query.Template == ViewItemTemplateNames.Edit)
+            if(uiSetting.Template == ViewItemTemplateNames.Create || uiSetting.Template == ViewItemTemplateNames.Edit)
             {
             }
 
-            if (query.PagedViewOption == PagedViewOptions.List)
+            if (uiSetting.PagedViewOption == PagedViewOptions.List)
             {
                 return PartialView("_List", pagedViewModel);
             }
-            else if (query.PagedViewOption == PagedViewOptions.Tiles)
+            else if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }

@@ -45,13 +45,13 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query)
+        public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query, Elmah.MvcWebApp.Models.MvcUIListSetting uiSetting)
         {
-            if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (query.PagedViewOption == PagedViewOptions.List)
+            else if (uiSetting.PagedViewOption == PagedViewOptions.List)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
@@ -74,9 +74,10 @@ namespace Elmah.MvcWebApp.Controllers
 
             var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
 
-            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
+            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, Elmah.MvcWebApp.Models.MvcUIListSetting, ElmahErrorModel.DefaultView[]>
             {
                 Query = query,
+                UISetting = uiSetting,
                                 TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
                 Result = result
             });
@@ -85,23 +86,24 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> AjaxMultiItems(ElmahErrorAdvancedQuery query)
+        public async Task<IActionResult> AjaxMultiItems(ElmahErrorAdvancedQuery query, Elmah.MvcWebApp.Models.MvcUIListSetting uiSetting)
         {
             var result = await _thisService.Search(query);
-            var pagedViewModel = new PagedViewModel<ElmahErrorModel.DefaultView[]>
+            var pagedViewModel = new PagedViewModel<Elmah.MvcWebApp.Models.MvcUIListSetting, ElmahErrorModel.DefaultView[]>
             {
+                UISetting = uiSetting,
                 Result = result,
             };
 
-            if(query.Template == ViewItemTemplateNames.Create || query.Template == ViewItemTemplateNames.Edit)
+            if(uiSetting.Template == ViewItemTemplateNames.Create || uiSetting.Template == ViewItemTemplateNames.Edit)
             {                pagedViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
             }
 
-            if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            else if (query.PagedViewOption == PagedViewOptions.SlideShow)
+            else if (uiSetting.PagedViewOption == PagedViewOptions.SlideShow)
             {
                 return PartialView("_SlideShow", pagedViewModel);
             }
