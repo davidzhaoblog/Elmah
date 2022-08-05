@@ -35,7 +35,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> Index(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcUIListSetting uiSetting)
+        public async Task<IActionResult> Index(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcListSetting uiSetting)
         {
             if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
@@ -60,7 +60,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, Elmah.MvcWebApp.Models.MvcUIListSetting, ElmahUserModel[]>
+            return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, Elmah.MvcWebApp.Models.MvcListSetting, ElmahUserModel[]>
             {
                 Query = query,
                 UISetting = uiSetting,
@@ -71,7 +71,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> AjaxMultiItems(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcUIListSetting uiSetting)
+        public async Task<IActionResult> AjaxMultiItems(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcListSetting uiSetting)
         {
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahUserModel[]>

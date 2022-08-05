@@ -3,16 +3,20 @@ namespace Elmah.MvcWebApp.Models
     public class MvcItemViewModel<TModel>: Framework.Models.ItemViewModel<TModel>
         where TModel : class
     {
-        /// <summary>
-        /// The following 3 is used for batch editing, to construct Html Name attribute of form-control/form-select/form-check-input.
-        /// </summary>
-        public bool UseArrayIndex { get; set; } = false;
+
+        public Elmah.MvcWebApp.Models.MvcListSetting? ListSetting { get; set; }
+        public Elmah.MvcWebApp.Models.MvcListConfiguration? ListConfiguration { get; set; }
+
         public int IndexInArray { get; set; }
-        public string? BindingPath { get; set; }
 
         public string HtmlId(string propertyName)
         {
-            return propertyName;
+            if (ListConfiguration == null || !ListConfiguration.UseArrayIndex || string.IsNullOrEmpty(ListConfiguration?.BindingPath))
+            {
+                return propertyName;
+            }
+
+            return "";
         }
         public string HtmlName(string propertyName)
         {
