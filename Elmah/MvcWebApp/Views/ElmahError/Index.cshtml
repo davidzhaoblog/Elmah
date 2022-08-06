@@ -167,15 +167,6 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                @foreach (var item in Model!.TopLevelDropDownListsFromDatabase![TopLevelDropDownLists.ElmahStatusCode.ToString()])
-                {
-                    <li>
-                        <a class="dropdown-item nt-quick-bulk-select" href="#"
-                            data-nt-filtername="StatusCode"
-                            data-nt-filtervalue="@item.Value"
-                            data-nt-checkbox-checked="true">@item.Name</a>
-                    </li>
-                }
             </ul>
         </div>
         <div class="btn-group float-start ps-4 nt-bulk-actions-container d-none">
@@ -195,7 +186,7 @@
                                 data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
                                 data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
                                 data-nt-actionname = "StatusCode"
-                                data-nt-namevalue="StatusCode:@item.Value">localizor.Get("MoveTo"): @item.Name</a>
+                                data-nt-namevalue="StatusCode:@item.Value">@localizor.Get("MoveTo"): @item.Name</a>
                         </li>
                     }
                 </ul>
