@@ -4,8 +4,8 @@ namespace Elmah.MvcWebApp.Models
         where TModel : class
     {
 
-        public Elmah.MvcWebApp.Models.MvcListSetting? ListSetting { get; set; }
-        public Elmah.MvcWebApp.Models.MvcListConfiguration? ListConfiguration { get; set; }
+        public Elmah.MvcWebApp.Models.MvcListSetting ListSetting { get; set; } = null!;
+        public Elmah.MvcWebApp.Models.MvcListFeatures? ListFeatures { get; set; }
 
         public int IndexInArray { get; set; }
 
@@ -16,18 +16,22 @@ namespace Elmah.MvcWebApp.Models
         }
         public string HtmlName(string propertyName)
         {
-            if (ListConfiguration == null || !ListConfiguration.UseArrayIndex && string.IsNullOrEmpty(ListConfiguration?.BindingPath))
+            if (ListFeatures == null)
             {
                 return propertyName;
             }
 
-            if(!ListConfiguration.UseArrayIndex)
+            if (string.IsNullOrEmpty(ListFeatures?.BindingPath) && ListSetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList)
             {
-                return string.Format("{0}.{1}", ListConfiguration.BindingPath, propertyName);
+                return propertyName;
             }
 
-            return string.Format("{0}[{1}].{2}", ListConfiguration.BindingPath, IndexInArray, propertyName);
+            if (ListSetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList)
+            {
+                return string.Format("{0}.{1}", ListFeatures!.BindingPath, propertyName);
+            }
+
+            return string.Format("{0}[{1}].{2}", ListFeatures!.BindingPath, IndexInArray, propertyName);
         }
     }
 }
-

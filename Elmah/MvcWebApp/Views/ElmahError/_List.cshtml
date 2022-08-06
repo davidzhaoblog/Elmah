@@ -2,7 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<Elmah.MvcWebApp.Models.MvcListSetting, ElmahErrorModel.DefaultView[]>
+@model PagedViewModel<Elmah.MvcWebApp.Models.MvcListSetting, Elmah.MvcWebApp.Models.MvcListFeatures, ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
     <form>
@@ -33,11 +33,12 @@
                         new MvcItemViewModel<ElmahErrorModel.DefaultView>
                         {
                             ListSetting = Model.UISetting,
-                            ListConfiguration = Elmah.MvcWebApp.Models.IndexViewConfiguration.GetElmahErrorEditableList(),
+                            ListFeatures = Model.UIFeatures,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
                             Template = Model.UISetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString() ,
                             Model = Model.Result.ResponseBody[i],
+                            IndexInArray = i,
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                         })
                 }

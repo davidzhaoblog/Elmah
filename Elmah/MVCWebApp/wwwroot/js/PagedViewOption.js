@@ -16,11 +16,11 @@ $(document).ready($(function () {
         const submitTarget = $(this).data("nt-submittarget");
         const pagedViewOption = $(this).data("nt-value");
         if (pagedViewOption === "EditableList") {
-            $(this).closest(".nt-list-wrapper").find(".nt-editable-list-buttons").show();
+            $(this).closest(".nt-list-wrapper").find(".nt-multiitem-editing-buttons").show();
             $(submitTarget).find(".nt-template-field").val("Edit");
         }
         else {
-            $(this).closest(".nt-list-wrapper").find(".nt-editable-list-buttons").hide();
+            $(this).closest(".nt-list-wrapper").find(".nt-multiitem-editing-buttons").hide();
             $(submitTarget).find(".nt-template-field").val("Details");
         }
         // 1. update pagination-option

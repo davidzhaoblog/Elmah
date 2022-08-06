@@ -6,7 +6,7 @@ namespace Elmah.MvcWebApp.Models
     /// <seealso cref="Elmah.MvcWebApp.Models.MvcListSetting"/>
     /// this class is used by developer to enable/disable features.
     /// </summary>
-    public class MvcListConfiguration
+    public class MvcListFeatures
     {
         ///// <summary>
         ///// Show/Hide Toolbar above the list:
@@ -35,10 +35,10 @@ namespace Elmah.MvcWebApp.Models
         /// 2. not empty when EditableList, for array binding, e.g. "Data" when EditableList in Index.cshtml, then id/name="Data[i].{property name}"
         /// </summary>
         public string? BindingPath { get; set; }
-        /// <summary>
-        /// The following 3 is used for batch editing, to construct Html Name attribute of form-control/form-select/form-check-input.
-        /// </summary>
-        public bool UseArrayIndex { get; set; } = false;
+        ///// <summary>
+        ///// The following 3 is used for batch editing, to construct Html Name attribute of form-control/form-select/form-check-input.
+        ///// </summary>
+        //public bool UseArrayIndex { get; set; } = false;
         ///// <summary>
         ///// The first item is default
         ///// </summary>

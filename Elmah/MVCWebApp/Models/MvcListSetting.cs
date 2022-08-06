@@ -3,7 +3,7 @@ using Framework.Models;
 namespace Elmah.MvcWebApp.Models
 {
     /// <summary>
-    /// <seealso cref="Elmah.MvcWebApp.Models.MvcListConfiguration"/>
+    /// <seealso cref="Elmah.MvcWebApp.Models.MvcListFeatures"/>
     /// This class is used to pass Mvc List Settings between .cshtml and controller.
     /// </summary>
     public class MvcListSetting

@@ -2,14 +2,14 @@ using Framework.Models;
 
 namespace Elmah.MvcWebApp.Models
 {
-    public static class IndexViewConfiguration
+    public static class IndexViewFeatures
     {
-        public static Elmah.MvcWebApp.Models.MvcListConfiguration GetElmahErrorEditableList()
+        public static Elmah.MvcWebApp.Models.MvcListFeatures GetElmahErrorEditableList()
         {
-            return new MvcListConfiguration 
+            return new MvcListFeatures 
             {
                  //AvailablePagedViewOptions = new Framework.Models.PagedViewOptions[] { Framework.Models.PagedViewOptions.EditableList, PagedViewOptions.List, Framework.Models.PagedViewOptions.Tiles, PagedViewOptions.SlideShow },
-                 BindingPath = "Data", 
+                 BindingPath = "",
                 //HasBulkActions = true, ShowCRUDButtons = true, ShowToolbar = true
             };
         }
