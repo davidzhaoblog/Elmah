@@ -78,7 +78,7 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 Query = query,
                 UISetting = uiSetting,
-                                TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
+                TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
                 Result = result
             });
         }

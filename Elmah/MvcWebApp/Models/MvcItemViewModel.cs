@@ -11,16 +11,22 @@ namespace Elmah.MvcWebApp.Models
 
         public string HtmlId(string propertyName)
         {
-            if (ListConfiguration == null || !ListConfiguration.UseArrayIndex || string.IsNullOrEmpty(ListConfiguration?.BindingPath))
+            var name = HtmlName(propertyName);
+            return name.Replace("[", "_").Replace("]", "_").Replace(".", "_");
+        }
+        public string HtmlName(string propertyName)
+        {
+            if (ListConfiguration == null || !ListConfiguration.UseArrayIndex && string.IsNullOrEmpty(ListConfiguration?.BindingPath))
             {
                 return propertyName;
             }
 
-            return "";
-        }
-        public string HtmlName(string propertyName)
-        {
-            return propertyName;
+            if(!ListConfiguration.UseArrayIndex)
+            {
+                return string.Format("{0}.{1}", ListConfiguration.BindingPath, propertyName);
+            }
+
+            return string.Format("{0}[{1}].{2}", ListConfiguration.BindingPath, IndexInArray, propertyName);
         }
     }
 }

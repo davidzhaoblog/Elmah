@@ -4,7 +4,7 @@ namespace Elmah.MvcWebApp.Models
 {
     public static class IndexViewConfiguration
     {
-        public static Elmah.MvcWebApp.Models.MvcListConfiguration GetElmahError()
+        public static Elmah.MvcWebApp.Models.MvcListConfiguration GetElmahErrorEditableList()
         {
             return new MvcListConfiguration 
             {

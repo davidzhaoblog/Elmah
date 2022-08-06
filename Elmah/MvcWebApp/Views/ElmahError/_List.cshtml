@@ -33,7 +33,7 @@
                         new MvcItemViewModel<ElmahErrorModel.DefaultView>
                         {
                             ListSetting = Model.UISetting,
-                            ListConfiguration = Elmah.MvcWebApp.Models.IndexViewConfiguration.GetElmahError(),
+                            ListConfiguration = Elmah.MvcWebApp.Models.IndexViewConfiguration.GetElmahErrorEditableList(),
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
                             Template = Model.UISetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString() ,
