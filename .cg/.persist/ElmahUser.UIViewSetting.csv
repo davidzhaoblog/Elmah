@@ -1,0 +1,3 @@
+﻿TypeDeclarationContextName,TargetProjectKnownCategory,Enabled,CreateViewEnabled,DetailsViewEnabled,DeleteViewEnabled,EditEnabled,DisplayPartialViewEnabled,EditPartialViewEnabled,SearchViewEnabled,ListViewEnabled,TilesViewEnabled,SlideShowEnabled,BatchEditViewEnabled,DashboardEnabled
+ElmahUser,MvcWebApp,True,False,False,False,False,False,False,True,True,True,True,True,True
+ElmahUser,WebApiApp,True,False,False,False,False,False,False,True,True,True,True,True,True

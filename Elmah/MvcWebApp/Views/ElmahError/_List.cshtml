@@ -2,10 +2,10 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<Elmah.MvcWebApp.Models.MvcListSetting, Elmah.MvcWebApp.Models.MvcListFeatures, ElmahErrorModel.DefaultView[]>
+@model PagedViewModel<ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
+<form>
 <div class="table-responsive p-0">
-    <form>
     <table class="table table-hover table-bordered table-striped">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
@@ -29,16 +29,13 @@
             {
                 for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
                 {
-                        @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",
+                    @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",
                         new MvcItemViewModel<ElmahErrorModel.DefaultView>
                         {
-                            ListSetting = Model.UISetting,
-                            ListFeatures = Model.UIFeatures,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model.UISetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString() ,
+                            Template = Model.Result.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
                             Model = Model.Result.ResponseBody[i],
-                            IndexInArray = i,
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                         })
                 }
@@ -58,7 +55,7 @@
                     <td class="nt-createnew-button-container" colspan="100">
                         <button type="button" class="btn btn-primary btn-nt-inline-editing w-100 h-100" title="@localizor.Get("Create_New")"
                             data-nt-action="@HttpMethods.Post"
-                            data-nt-route-id="@(Guid.Empty.ToString("D").ToUpper())"
+                            data-nt-route-id=""
                             data-nt-container="@CrudViewContainers.Inline.ToString()"
                             data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                             <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
@@ -67,9 +64,9 @@
                 </tr>
             </tfoot>
     </table>
-    </form>
     @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
     {
         @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
     }
 </div>
+<form>

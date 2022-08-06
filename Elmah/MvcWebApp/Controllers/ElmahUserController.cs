@@ -35,13 +35,13 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> Index(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcListSetting uiSetting)
+        public async Task<IActionResult> Index(ElmahUserAdvancedQuery query)
         {
-            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
+            if (query.PagedViewOption == PagedViewOptions.Tiles)
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (uiSetting.PagedViewOption == PagedViewOptions.List)
+            else if (query.PagedViewOption == PagedViewOptions.List || query.PagedViewOption == PagedViewOptions.EditableList)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
@@ -60,18 +60,18 @@ namespace Elmah.MvcWebApp.Controllers
 
             ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, Elmah.MvcWebApp.Models.MvcListSetting, string, ElmahUserModel[]>
+            return View(new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>
             {
                 Query = query,
-                UISetting = uiSetting,
+
                 Result = result
             });
         }
 
-        // GET: ElmahUser/AjaxLoadItems
+        // GET: ElmahUser/AjaxMultiItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> AjaxLoadItems(ElmahUserAdvancedQuery query, Elmah.MvcWebApp.Models.MvcListSetting uiSetting)
+        public async Task<IActionResult> AjaxMultiItems(ElmahUserAdvancedQuery query)
         {
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahUserModel[]>
@@ -79,19 +79,20 @@ namespace Elmah.MvcWebApp.Controllers
                 Result = result,
             };
 
-            if(uiSetting.Template == ViewItemTemplateNames.Create || uiSetting.Template == ViewItemTemplateNames.Edit)
+            if(query.Template == ViewItemTemplateNames.Create || query.Template == ViewItemTemplateNames.Edit)
             {
             }
 
-            if (uiSetting.PagedViewOption == PagedViewOptions.List)
-            {
-                return PartialView("_List", pagedViewModel);
-            }
-            else if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
+            if (query.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            return PartialView("_SlideShow", pagedViewModel);
+            else if (query.PagedViewOption == PagedViewOptions.SlideShow)
+            {
+                return PartialView("_SlideShow", pagedViewModel);
+            }
+
+            return PartialView("_List", pagedViewModel);
         }
 
         [Route("[controller]/[action]/{User}")] // Primary
