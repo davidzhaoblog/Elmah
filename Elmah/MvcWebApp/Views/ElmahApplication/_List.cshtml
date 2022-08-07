@@ -2,7 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<ElmahApplicationModel[]>
+@model PagedViewModel<MvcListSetting, MvcListFeatures, ElmahApplicationModel[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
     <form>
@@ -22,9 +22,12 @@
                     @await Html.PartialAsync("~/Views/ElmahApplication/_ListItemTr.cshtml",
                         new MvcItemViewModel<ElmahApplicationModel>
                         {
+                            ListSetting = Model.UISetting,
+                            ListFeatures = Model.UIFeatures,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model.Result.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            Template = Model.UISetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            IndexInArray = i,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                         })

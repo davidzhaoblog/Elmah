@@ -3,7 +3,7 @@
 @using Framework.Models;
 @using Elmah.Models.Definitions;
 @using Elmah.MvcWebApp.Models;
-@model PagedSearchViewModel<ElmahErrorAdvancedQuery, Elmah.MvcWebApp.Models.MvcListSetting, Elmah.MvcWebApp.Models.MvcListFeatures, ElmahErrorModel.DefaultView[]>
+@model PagedSearchViewModel<ElmahErrorAdvancedQuery, MvcListSetting, MvcListFeatures, ElmahErrorModel.DefaultView[]>
 @inject IHttpContextAccessor Accessor
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
@@ -17,7 +17,7 @@
     }
     if (string.IsNullOrEmpty(currentView))
     {
-        currentView = Model.Result.PagedViewOption.ToString();
+        currentView = Model.UISetting.PagedViewOption.ToString();
     }
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahError")" data-nt-updatetarget=".nt-list-container-submit">
@@ -135,7 +135,6 @@
 <div class="card nt-list-wrapper"
     id="thisList"
     data-nt-bs-modalsize="Large"
-    data-nt-pagination-updatetarget="#pageIndexH"
     data-nt-submittarget="#thisform"
     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahError")"
     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")"
@@ -147,13 +146,13 @@
     <div class="card-header">
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.UISetting.PagedViewOption==PagedViewOptions.List ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-list"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatevalue="LoadMore" @(Model.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-cells"></i></label>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" data-nt-submittarget="#thisform" @(Model.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off" data-nt-value="EditableList" data-nt-submittarget="#thisform" data-nt-paginationoptionupdatevalue="NoPagination" @(Model.UISetting.PagedViewOption==PagedViewOptions.EditableList ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-rectangle-list"></i></label>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off" data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model.UISetting.PagedViewOption==PagedViewOptions.EditableList ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-table"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
             <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit" data-nt-submittarget="#thisform"></select>
@@ -170,15 +169,6 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                @foreach (var item in Model!.TopLevelDropDownListsFromDatabase![TopLevelDropDownLists.ElmahStatusCode.ToString()])
-                {
-                    <li>
-                        <a class="dropdown-item nt-quick-bulk-select" href="#"
-                            data-nt-filtername="StatusCode"
-                            data-nt-filtervalue="@item.Value"
-                            data-nt-checkbox-checked="true">@item.Name</a>
-                    </li>
-                }
             </ul>
         </div>
         <div class="btn-group float-start ps-4 nt-bulk-actions-container" style="display:none">
@@ -206,11 +196,11 @@
         </div>
         <div class="btn-group float-start ps-4 nt-multiitem-editing-buttons" style="display:none">
             <button type="button" class="btn btn-default btn-nt-multiitems-editing-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahApplication"))" title="@localizor.Get("Save")">
+                data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahError"))" title="@localizor.Get("Save")">
                 <i class="fa-solid fa-floppy-disk"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
             </button>
             <button type="button" class="btn btn-default btn-nt-multiitems-editing-cancel" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahApplication"))" title="@localizor.Get("Save")">
+                data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahError"))" title="@localizor.Get("Save")">
                 <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
             </button>
         </div>

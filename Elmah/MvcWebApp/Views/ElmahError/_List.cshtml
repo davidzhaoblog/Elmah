@@ -2,7 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<Elmah.MvcWebApp.Models.MvcListSetting, Elmah.MvcWebApp.Models.MvcListFeatures, ElmahErrorModel.DefaultView[]>
+@model PagedViewModel<MvcListSetting, MvcListFeatures, ElmahErrorModel.DefaultView[]>
 @inject IUIStrings localizor;
 <div class="table-responsive p-0">
     <form>
@@ -36,9 +36,9 @@
                             ListFeatures = Model.UIFeatures,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model.UISetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString() ,
-                            Model = Model.Result.ResponseBody[i],
+                            Template = Model.UISetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
                             IndexInArray = i,
+                            Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                         })
                 }
@@ -68,7 +68,6 @@
             </tfoot>
     </table>
     </form>
-
     @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
     {
         @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)

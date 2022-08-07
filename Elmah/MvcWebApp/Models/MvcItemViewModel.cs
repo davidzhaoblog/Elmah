@@ -1,11 +1,12 @@
+using Framework.Models;
+
 namespace Elmah.MvcWebApp.Models
 {
-    public class MvcItemViewModel<TModel>: Framework.Models.ItemViewModel<TModel>
+    public class MvcItemViewModel<TModel>: ItemViewModel<TModel>
         where TModel : class
     {
-
-        public Elmah.MvcWebApp.Models.MvcListSetting ListSetting { get; set; } = null!;
-        public Elmah.MvcWebApp.Models.MvcListFeatures? ListFeatures { get; set; }
+        public MvcListSetting ListSetting { get; set; } = null!;
+        public MvcListFeatures? ListFeatures { get; set; }
 
         public int IndexInArray { get; set; }
 
@@ -21,12 +22,12 @@ namespace Elmah.MvcWebApp.Models
                 return propertyName;
             }
 
-            if (string.IsNullOrEmpty(ListFeatures?.BindingPath) && ListSetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList)
+            if (string.IsNullOrEmpty(ListFeatures?.BindingPath) && ListSetting.PagedViewOption != PagedViewOptions.EditableList)
             {
                 return propertyName;
             }
 
-            if (ListSetting.PagedViewOption != Framework.Models.PagedViewOptions.EditableList)
+            if (ListSetting.PagedViewOption != PagedViewOptions.EditableList)
             {
                 return string.Format("{0}.{1}", ListFeatures!.BindingPath, propertyName);
             }
@@ -35,3 +36,4 @@ namespace Elmah.MvcWebApp.Models
         }
     }
 }
+
