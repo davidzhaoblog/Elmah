@@ -6,10 +6,10 @@ namespace Framework.Models
         public int PageIndex { get; set; } = 1; // start from 1
         public string? OrderBys { get; set; }
 
-        public bool AdvancedQuery { get; set; } = false;
-        public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.List;
+        // public bool AdvancedQuery { get; set; } = false;
+        // public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.List;
         public PaginationOptions PaginationOption { get; set; } = PaginationOptions.Paged;
-        public ViewItemTemplateNames Template { get; set; } = ViewItemTemplateNames.Details;
+        // public ViewItemTemplateNames Template { get; set; } = ViewItemTemplateNames.Details;
     }
 }
 

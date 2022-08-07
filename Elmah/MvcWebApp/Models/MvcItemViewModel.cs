@@ -1,22 +1,38 @@
+using Framework.Models;
+
 namespace Elmah.MvcWebApp.Models
 {
-    public class MvcItemViewModel<TModel>: Framework.Models.ItemViewModel<TModel>
+    public class MvcItemViewModel<TModel>: ItemViewModel<TModel>
         where TModel : class
     {
-        /// <summary>
-        /// The following 3 is used for batch editing, to construct Html Name attribute of form-control/form-select/form-check-input.
-        /// </summary>
-        public bool HtmlNameUseArrayIndex { get; set; } = false;
+        public MvcListSetting ListSetting { get; set; } = null!;
+        public MvcListFeatures? ListFeatures { get; set; }
+
         public int IndexInArray { get; set; }
-        public string? HtmlNamePrefix { get; set; }
 
         public string HtmlId(string propertyName)
         {
-            return propertyName;
+            var name = HtmlName(propertyName);
+            return name.Replace("[", "_").Replace("]", "_").Replace(".", "_");
         }
         public string HtmlName(string propertyName)
         {
-            return propertyName;
+            if (ListFeatures == null)
+            {
+                return propertyName;
+            }
+
+            if (string.IsNullOrEmpty(ListFeatures?.BindingPath) && ListSetting.PagedViewOption != PagedViewOptions.EditableList)
+            {
+                return propertyName;
+            }
+
+            if (ListSetting.PagedViewOption != PagedViewOptions.EditableList)
+            {
+                return string.Format("{0}.{1}", ListFeatures!.BindingPath, propertyName);
+            }
+
+            return string.Format("{0}[{1}].{2}", ListFeatures!.BindingPath, IndexInArray, propertyName);
         }
     }
 }

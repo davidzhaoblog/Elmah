@@ -120,7 +120,6 @@ namespace Elmah.EFCoreRepositories
                 return new PagedResponse<ElmahErrorModel.DefaultView[]>
                 {
                     Status = HttpStatusCode.OK,
-                    PagedViewOption = query.PagedViewOption,
                     Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
                     ResponseBody = result,
                 };
@@ -567,7 +566,6 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                 return new PagedResponse<NameValuePair[]>
                 {
                     Status = HttpStatusCode.OK,
-                    PagedViewOption = query.PagedViewOption,
                     Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
                     ResponseBody = result,
                 };

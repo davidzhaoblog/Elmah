@@ -2,10 +2,10 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<ElmahHostModel[]>
+@model PagedViewModel<MvcListSetting, MvcListFeatures, ElmahHostModel[]>
 @inject IUIStrings localizor;
-<form>
 <div class="table-responsive p-0">
+    <form>
     <table class="table table-hover table-bordered table-striped">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
@@ -23,9 +23,12 @@
                     @await Html.PartialAsync("~/Views/ElmahHost/_ListItemTr.cshtml",
                         new MvcItemViewModel<ElmahHostModel>
                         {
+                            ListSetting = Model.UISetting,
+                            ListFeatures = Model.UIFeatures,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model.Result.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            Template = Model.UISetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            IndexInArray = i,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
                         })
@@ -55,9 +58,9 @@
                 </tr>
             </tfoot>
     </table>
+    </form>
     @if (Model != null && Model.Result != null && Model.Result.Pagination != null)
     {
         @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
     }
 </div>
-<form>

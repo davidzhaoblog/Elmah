@@ -1,5 +1,5 @@
-using Elmah.ServiceContracts;
 using Elmah.MvcWebApp.Models;
+using Elmah.ServiceContracts;
 using Elmah.Resx;
 using Elmah.Models.Definitions;
 using Elmah.Models;
@@ -35,13 +35,13 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahApplication
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> Index(ElmahApplicationAdvancedQuery query)
+        public async Task<IActionResult> Index(ElmahApplicationAdvancedQuery query, MvcListSetting uiSetting)
         {
-            if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (query.PagedViewOption == PagedViewOptions.List || query.PagedViewOption == PagedViewOptions.EditableList)
+            else if (uiSetting.PagedViewOption == PagedViewOptions.List || uiSetting.PagedViewOption == PagedViewOptions.EditableList)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
@@ -60,34 +60,38 @@ namespace Elmah.MvcWebApp.Controllers
 
             ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            return View(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]>
+            return View(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, MvcListSetting, MvcListFeatures, ElmahApplicationModel[]>
             {
                 Query = query,
+                UISetting = uiSetting,
+                UIFeatures = uiSetting.PagedViewOption == PagedViewOptions.EditableList ? IndexViewFeatures.GetElmahErrorEditableList() : null,
 
                 Result = result
             });
         }
 
-        // GET: ElmahApplication/AjaxMultiItems
+        // GET: ElmahApplication/AjaxLoadItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> AjaxMultiItems(ElmahApplicationAdvancedQuery query)
+        public async Task<IActionResult> AjaxLoadItems(ElmahApplicationAdvancedQuery query, MvcListSetting uiSetting)
         {
             var result = await _thisService.Search(query);
-            var pagedViewModel = new PagedViewModel<ElmahApplicationModel[]>
+            var pagedViewModel = new PagedViewModel<MvcListSetting, MvcListFeatures, ElmahApplicationModel[]>
             {
+                UISetting = uiSetting,
+                UIFeatures = uiSetting.PagedViewOption == PagedViewOptions.EditableList ? IndexViewFeatures.GetElmahErrorEditableList() : null,
                 Result = result,
             };
 
-            if(query.Template == ViewItemTemplateNames.Create || query.Template == ViewItemTemplateNames.Edit)
+            if(uiSetting.Template == ViewItemTemplateNames.Create || uiSetting.Template == ViewItemTemplateNames.Edit)
             {
             }
 
-            if (query.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            else if (query.PagedViewOption == PagedViewOptions.SlideShow)
+            else if (uiSetting.PagedViewOption == PagedViewOptions.SlideShow)
             {
                 return PartialView("_SlideShow", pagedViewModel);
             }
@@ -313,6 +317,16 @@ namespace Elmah.MvcWebApp.Controllers
             if (result.Status == System.Net.HttpStatusCode.OK)
                 return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // POST: ElmahApplication/AjaxMultiItemsSubmit
+        [HttpPost, ActionName("AjaxMultiItemsSubmit")]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> AjaxMultiItemsSubmit(
+            [FromQuery] PagedViewOptions view,
+            [FromForm] List<ElmahApplicationModel> data)
+        {
+            return View();
         }
 
         [Route("[controller]/[action]/{Application}")] // Primary

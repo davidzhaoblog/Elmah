@@ -1,7 +1,8 @@
 @using Elmah.Models;
 @using Elmah.Resx;
 @using Framework.Models;
-@model PagedViewModel<ElmahApplicationModel[]>
+@using Elmah.MvcWebApp.Models;
+@model PagedViewModel<MvcListSetting, MvcListFeatures, ElmahApplicationModel[]>
 @inject IUIStrings localizor;
 @if (Model != null && Model.Result != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
 {

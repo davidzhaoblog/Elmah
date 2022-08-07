@@ -8,7 +8,7 @@
  * 1. data-nt- 
  * 1.1. data-nt- in this modal
  * data-nt-action
- * data-nt-view // from $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
+ * data-nt-view // from $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-option-field").val();
  * data-nt-container // from $(button)
  * data-nt-template // from $(button)
  * data-nt-postbackurl // calculated
@@ -49,7 +49,7 @@
  * .nt-list-container-submit, shared with other .js files
  * .nt-listitem
  * .nt-current // with on .nt-list-wrapper and .nt-list-container-submit, .nt-listitem(with .border-info .border-5)
- * .nt-paged-view-options: // read value for data-nt-view in this modal
+ * .nt-paged-view-option-field: // read value for data-nt-view in this modal
  * 
  * 2.3. in ajax response html
  * .nt-hidden-modal-title, server side render modal title to a hidden field, will set to .modal-title 
@@ -69,7 +69,7 @@ function attachCrudActionDialog() {
         let button = event.relatedTarget;
 
         const wrapper = $(button).closest(".nt-list-wrapper");
-        const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-options").val();
+        const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-option-field").val();
         const container = $(button).data("nt-container");
         const template = $(button).data("nt-template");
         const action = $(button).data("nt-action");
