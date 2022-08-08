@@ -3,7 +3,7 @@ using Framework.Models;
 namespace Elmah.MvcWebApp.Models
 {
     /// <summary>
-    /// <seealso cref="Elmah.MvcWebApp.Models.MvcListSetting"/>
+    /// <seealso cref="MvcListSetting"/>
     /// this class is used by developer to enable/disable features.
     /// </summary>
     public class MvcListFeatures
@@ -42,7 +42,7 @@ namespace Elmah.MvcWebApp.Models
         ///// <summary>
         ///// The first item is default
         ///// </summary>
-        //public Framework.Models.PagedViewOptions[]? AvailablePagedViewOptions { get; set; }
+        //public PagedViewOptions[]? AvailablePagedViewOptions { get; set; }
     }
 }
 

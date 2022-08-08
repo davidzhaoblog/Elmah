@@ -4,11 +4,11 @@ namespace Elmah.MvcWebApp.Models
 {
     public static class IndexViewFeatures
     {
-        public static Elmah.MvcWebApp.Models.MvcListFeatures GetElmahErrorEditableList()
+        public static MvcListFeatures GetElmahErrorEditableList()
         {
-            return new MvcListFeatures 
+            return new MvcListFeatures
             {
-                 //AvailablePagedViewOptions = new Framework.Models.PagedViewOptions[] { Framework.Models.PagedViewOptions.EditableList, PagedViewOptions.List, Framework.Models.PagedViewOptions.Tiles, PagedViewOptions.SlideShow },
+                 //AvailablePagedViewOptions = new PagedViewOptions[] { PagedViewOptions.EditableList, PagedViewOptions.List, PagedViewOptions.Tiles, PagedViewOptions.SlideShow },
                  BindingPath = "",
                 //HasBulkActions = true, ShowCRUDButtons = true, ShowToolbar = true
             };
