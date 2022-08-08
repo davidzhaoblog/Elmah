@@ -9,19 +9,25 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-<td class="pt-0 pb-0 nt-list-bulk-select"></td>
-<td class="p-0">
-    <div class="btn-group btn-group-nt-action-save">
-        <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Put">
-            <i class="fa-solid fa-circle-xmark"></i>
-        </button>
-        <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Put"
-            data-nt-container="@CrudViewContainers.Inline.ToString()"
-            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-            <i class="fa-solid fa-check-circle"></i>
-        </button>
-    </div>
-</td>
+@if (Model.ListSetting.ShowListBulkActionRelated(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-list-bulk-select"></td>
+}
+@if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
+{
+    <td class="p-0">
+        <div class="btn-group btn-group-nt-action-save">
+            <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Put">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Put"
+                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                <i class="fa-solid fa-check-circle"></i>
+            </button>
+        </div>
+    </td>
+}
 <td class="form-group pt-0 pb-0">
     <input asp-for="Model!.ErrorId" class="form-control" data-nt-value="@Model.Model!.ErrorId" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"/>
     <span asp-validation-for="Model!.ErrorId" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"></span>
@@ -84,3 +90,9 @@
     <input asp-for="Model!.AllXml" class="form-control" data-nt-value="@Model.Model!.AllXml" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.AllXml))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.AllXml))"/>
     <span asp-validation-for="Model!.AllXml" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.AllXml))"></span>
 </td>
+@if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-editablelist-delete-select">
+        <input class="form-check-input ms-1" type="checkbox" value="">
+    </td>
+}

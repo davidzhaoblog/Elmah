@@ -78,8 +78,8 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 Query = query,
                 UISetting = uiSetting,
-                UIFeatures = uiSetting.PagedViewOption == PagedViewOptions.EditableList ? IndexViewFeatures.GetElmahErrorEditableList() : null,
-                                TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
+                UIFeatures = Elmah.MvcWebApp.Models.IndexViewFeatures.GetElmahErrorEditableList(),
+                TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
                 Result = result
             });
         }

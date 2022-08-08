@@ -12,6 +12,7 @@
  * nt-submittarget
  */
 $(document).ready($(function () {
+    showHidePagedViewOptionsRelatedButtons("#thisform");
     $('.nt-radio-pagedviewoption').click(function (e) {
         const submitTarget = $(this).data("nt-submittarget");
         const pagedViewOption = $(this).data("nt-value");
@@ -38,4 +39,26 @@ $(document).ready($(function () {
         attachInlineEditingLaunchButtonClickEvent(".btn-nt-inline-editing");
     });
 }));
+
+
+function showHidePagedViewOptionsRelatedButtons(wrapperSelector) {
+    const thePagedViewOptionField = $(wrapperSelector).find(".nt-paged-view-option-field");
+    const currentView = $(thePagedViewOptionField).val();
+    const listWrapper = $($(thePagedViewOptionField).closest(".nt-ajax-partial-load-post-formdata").data("nt-updatetarget")).
+        closest(".nt-list-wrapper");
+    const editableListButtons = $(listWrapper).find(".nt-multiitem-editing-buttons");
+    const listBulkSelectFilter = $(listWrapper).find(".nt-bulk-select-filter");
+    const listBulkActionContainer = $(listWrapper).find(".nt-bulk-actions-container");
+    if (currentView == "EditableList") {
+        // 1. show EditableList Buttons
+        editableListButtons.show();
+        listBulkSelectFilter.hide();
+        listBulkActionContainer.hide();
+    }
+    else {
+        editableListButtons.hide();
+        listBulkSelectFilter.show();
+    }
+}
+
 // 6.End. PagedViewOptions clicked

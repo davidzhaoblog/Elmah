@@ -11,6 +11,34 @@ namespace Elmah.MvcWebApp.Models
         public bool AdvancedQuery { get; set; } = false;
         public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.List;
         public ViewItemTemplateNames Template { get; set; } = ViewItemTemplateNames.Details;
+
+        public bool HasListBulkActionRelated(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        {
+            return listFeatures != null && listFeatures.HasBulkActions;
+        }
+
+        public bool ShowListBulkActionRelated(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        {
+            return HasListBulkActionRelated(listFeatures) && PagedViewOption != Framework.Models.PagedViewOptions.EditableList;
+        }
+
+        public bool HasEditableList(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        {
+            return listFeatures != null && listFeatures.AvailablePagedViewOptions != null &&
+                listFeatures.AvailablePagedViewOptions.Contains(Framework.Models.PagedViewOptions.EditableList);
+        }
+
+        public bool ShowEditableListDeleteSelect(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        {
+            return HasEditableList(listFeatures) &&
+                PagedViewOption == Framework.Models.PagedViewOptions.EditableList &&
+                listFeatures != null && listFeatures.CanDelete;
+        }
+
+        public bool ShowItemButtons(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        {
+            return PagedViewOption != Framework.Models.PagedViewOptions.EditableList;
+        }
     }
 }
 

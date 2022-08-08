@@ -18,13 +18,17 @@ namespace Elmah.MvcWebApp.Models
         ///// 6. EditableList: Save/Cancel buttons.
         ///// </summary>
         //public bool ShowToolbar { get; set; } = true;
-        ///// <summary>
-        ///// 1. show Bulk Select Checkbox
-        ///// 1.1. show QuickSelect
-        ///// 2. show BulkDelete and BulkActions
-        ///// 3. show individual Select checkbox
-        ///// </summary>
-        //public bool HasBulkActions { get; set; } = true;
+        /// <summary>
+        /// 1. show Bulk Select Checkbox
+        /// 1.1. show QuickSelect
+        /// 2. show BulkDelete and BulkActions
+        /// 3. show individual Select checkbox
+        /// </summary>
+        public bool HasBulkActions { get; set; } = true;
+        /// <summary>
+        /// Show/hide Launch CRUD buttons and CRUD submit buttons column in html table.
+        /// </summary>
+        public bool CanDelete { get; set; } = true;
         ///// <summary>
         ///// Show/hide Launch CRUD buttons and CRUD submit buttons column in html table.
         ///// </summary>
@@ -39,10 +43,10 @@ namespace Elmah.MvcWebApp.Models
         ///// The following 3 is used for batch editing, to construct Html Name attribute of form-control/form-select/form-check-input.
         ///// </summary>
         //public bool UseArrayIndex { get; set; } = false;
-        ///// <summary>
-        ///// The first item is default
-        ///// </summary>
-        //public PagedViewOptions[]? AvailablePagedViewOptions { get; set; }
+        /// <summary>
+        /// The first item is default
+        /// </summary>
+        public PagedViewOptions[]? AvailablePagedViewOptions { get; set; }
     }
 }
 
