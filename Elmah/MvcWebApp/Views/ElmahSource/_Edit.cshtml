@@ -22,7 +22,7 @@ else
     <input type="hidden" asp-for="Model!.Source" id="@Model.HtmlId(nameof(ElmahSourceModel.Source))" name="@Model.HtmlName(nameof(ElmahSourceModel.Source))"/>
     <div class="form-group">
         <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahSourceModel.Source))"></label>
-        <input asp-for="Model!.Source" class="form-control"  id="@Model.HtmlId(nameof(ElmahSourceModel.Source))"  name="@Model.HtmlName(nameof(ElmahSourceModel.Source))"/>
+        <input asp-for="Model!.Source" class="form-control" data-nt-value="@Model!.Model!.Source" id="@Model.HtmlId(nameof(ElmahSourceModel.Source))"  name="@Model.HtmlName(nameof(ElmahSourceModel.Source))"/>
         <span asp-validation-for="Model!.Source" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahSourceModel.Source))"></span>
     </div>
 }
