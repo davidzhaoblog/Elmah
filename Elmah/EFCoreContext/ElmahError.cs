@@ -10,7 +10,7 @@ namespace Elmah.EFCoreContext
         {
 
         }
-        public System.Guid ErrorId { get; set; }
+        public System.Guid? ErrorId { get; set; }
 
         public string Application { get; set; } = null!;
 

@@ -89,7 +89,7 @@ namespace Elmah.Services
         public ElmahErrorModel.DefaultView GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahErrorModel.DefaultView();
+            return new ElmahErrorModel.DefaultView { Status______ = Framework.Models.ItemStatus.New };
         }
 
         public async Task<Response> Delete(ElmahErrorIdentifier id)

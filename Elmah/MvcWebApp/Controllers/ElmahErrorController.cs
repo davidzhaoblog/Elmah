@@ -129,6 +129,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             string template,
+            int? index, // for EditableList
             ElmahErrorIdentifier id)
         {
             ElmahErrorModel.DefaultView? result;
@@ -148,6 +149,9 @@ namespace Elmah.MvcWebApp.Controllers
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
+                ListSetting = new MvcListSetting { PagedViewOption = view, Template = Enum.Parse<Framework.Models.ViewItemTemplateNames>(template) },
+                ListFeatures = Elmah.MvcWebApp.Models.IndexViewFeatures.GetElmahErrorEditableList(),
+                IndexInArray = index ?? 10,
                 Model = result
             };
 
@@ -158,7 +162,7 @@ namespace Elmah.MvcWebApp.Controllers
             }
 
             ViewBag.Template = template;
-            if (view == PagedViewOptions.List && container == CrudViewContainers.Inline)
+            if ((view == PagedViewOptions.List || view == PagedViewOptions.EditableList) && container == CrudViewContainers.Inline)
             {
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name

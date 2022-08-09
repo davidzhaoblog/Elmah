@@ -29,6 +29,7 @@
     </td>
 }
 <td class="form-group pt-0 pb-0">
+    <input asp-for="Model!.Status______" type="hidden" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Status______))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Status______))" />
     <input asp-for="Model!.ErrorId" class="form-control" data-nt-value="@Model.Model!.ErrorId" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))" />
     <span asp-validation-for="Model!.ErrorId" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"></span>
 </td>
@@ -93,6 +94,6 @@
 @if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
 {
     <td class="pt-0 pb-0 nt-editablelist-delete-select">
-        <input class="form-check-input ms-1" type="checkbox" value="">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Status______))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Status______))">
     </td>
 }
