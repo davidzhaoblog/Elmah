@@ -28,6 +28,13 @@ namespace Elmah.MvcWebApp.Models
                 listFeatures.AvailablePagedViewOptions.Contains(Framework.Models.PagedViewOptions.EditableList);
         }
 
+
+        public bool ShowItemUIStatus(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        {
+            return HasEditableList(listFeatures)
+                && listFeatures != null && PagedViewOption == Framework.Models.PagedViewOptions.EditableList;
+        }
+
         public bool ShowEditableListDeleteSelect(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
         {
             return HasEditableList(listFeatures) &&

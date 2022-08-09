@@ -1,6 +1,6 @@
 namespace Framework.Models
 {
-    public enum ItemStatus
+    public enum ItemUIStatus
     {
         NoChange, // when item loaded from database
         New, // when try to create a new item

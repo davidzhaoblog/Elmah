@@ -5,7 +5,7 @@ namespace Elmah.Models
 {
     public partial class ElmahErrorModel
     {
-        public Framework.Models.ItemStatus Status______ { get; set; } = Framework.Models.ItemStatus.New;
+        public Framework.Models.ItemUIStatus ItemUIStatus______ { get; set; } = Framework.Models.ItemUIStatus.NoChange;
         public bool IsDeleted______ { get; set; } = false;
 
         [Display(Name = "ErrorId", ResourceType = typeof(UIStrings))]

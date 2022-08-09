@@ -28,6 +28,10 @@
                     <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
                     <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
                     <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
+                    @if (Model.UISetting.ShowItemUIStatus(Model.UIFeatures))
+                    {
+                        <th class="p-0"></th>
+                    }
                     @if (Model.UISetting.ShowEditableListDeleteSelect(Model.UIFeatures))
                     {
                         <th class="p-0"></th>
