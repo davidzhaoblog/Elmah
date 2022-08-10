@@ -14,7 +14,6 @@
     <td class="pt-0 pb-0 nt-list-bulk-select">
     </td>
 }
->
 @if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
 {
     <td class="p-0">
@@ -30,19 +29,19 @@
     </div>
     </td>
 }
-<td class="form-group pt-0 pb-0">
+<td class="form-group p-0">
     <input asp-for="Model!.Type" class="form-control" data-nt-value="@Model!.Model!.Type" id="@Model!.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"/>
     <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"></span>
 </td>
 @if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
 {
-    <td class="form-group pt-0 pb-0">
-        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahTypeModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.ItemUIStatus______))" />
+    <td class="form-group p-0">
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahTypeModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.ItemUIStatus______))" readonly />
     </td>
 }
 @if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
 {
-    <td class="pt-0 pb-0 nt-editablelist-delete-select">
+    <td class="pb-0 nt-editablelist-delete-select">
         <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahTypeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.IsDeleted______))">
     </td>
 }

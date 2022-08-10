@@ -145,13 +145,21 @@
     data-nt-multiitems-submit-url="@Url.Action("AjaxMultiItemsSubmit", "ElmahError")">
     <div class="card-header">
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off" data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off"
+                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
+                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-cells"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off" data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off"
+                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
+                data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off" data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off"
+                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
+                data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off" data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.EditableList ? "checked": "")>
+            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off"
+                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
+                data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption == PagedViewOptions.EditableList ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-table"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">

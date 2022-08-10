@@ -161,12 +161,18 @@ namespace Elmah.MvcWebApp.Controllers
                 itemViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
             }
 
-            ViewBag.Template = template;
             if ((view == PagedViewOptions.List || view == PagedViewOptions.EditableList ) && container == CrudViewContainers.Inline)
             {
-                // By Default: _List{template}Item.cshtml
-                // Developer can customize template name
-                return PartialView($"_List{template}Item", itemViewModel);
+                if (template == ViewItemTemplateNames.Create.ToString())
+                {
+                    return PartialView($"_ListItemTr", itemViewModel);
+                }
+                else
+                {
+                    // By Default: _List{template}Item.cshtml
+                    // Developer can customize template name
+                    return PartialView($"_List{template}Item", itemViewModel);
+                }
             }
             if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
             {
