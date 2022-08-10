@@ -149,7 +149,7 @@ namespace Elmah.MvcWebApp.Controllers
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
-                ListSetting = new MvcListSetting { PagedViewOption = view, Template = Enum.Parse<Framework.Models.ViewItemTemplateNames>(template) },
+                ListSetting = new Elmah.MvcWebApp.Models.MvcListSetting { PagedViewOption = view, Template = Enum.Parse<Framework.Models.ViewItemTemplateNames>(template) },
                 ListFeatures = Elmah.MvcWebApp.Models.IndexViewFeatures.GetElmahErrorEditableList(),
                 IndexInArray = index ?? 10,
                 Model = result
