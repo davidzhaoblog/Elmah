@@ -61,7 +61,15 @@
     </header>
     <div class="container-fluid">
         <main role="main" class="pb-3">
+            @*<div class="loading">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>*@
             @RenderBody()
+            <partial name="~/Views/Shared/_FullScreenLoading.cshtml" />
         </main>
     </div>
     <footer class="border-top footer text-muted">
@@ -73,7 +81,7 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/moment.js/moment.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/font-awesome//js/all.js"></script>
     <script src="~/js/DDLCascading.js" asp-append-version="true"></script>
     <script src="~/js/PredefinedDateTimeRange.js" asp-append-version="true"></script>
@@ -87,6 +95,7 @@
     <script src="~/js/BulkActions.js" asp-append-version="true"></script>
     <script src="~/js/MultiItemsEditing.js" asp-append-version="true"></script>
     <script src="~/js/SingletonMessagePopup.js" asp-append-version="true"></script>
+    <script src="~/js/FullScreenLoading.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

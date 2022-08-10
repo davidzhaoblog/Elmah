@@ -66,52 +66,23 @@ function pageLinkClicked(self) {
 }
 
 $(document).ready($(function () {
-    $('.nt-ajax-partial-load-post-formdata').submit(function (e) {
-        const url = $(this).data("nt-partial-url");
-        const updateTarget = $(this).data("nt-updatetarget");
-        var formData = new FormData($(this)[0]);
-        const pagedViewOption = $(this).children(".nt-paged-view-option-field").val();
-        const pageIndex = $(this).children(".nt-page-index").val();
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: formData,
-            async: false,
-            processData: false,
-            contentType: false,
-            dataType: "html",
-            success: function (response) {
-                const toAppend = $(response);
-                if (pagedViewOption !== "Tiles" || pageIndex == 1) {
-                    $(updateTarget).html(toAppend);
-                }
-                else {
-                    $(updateTarget).children(".btn-nt-load-more").remove()
-                    $(updateTarget).append(toAppend);
-                }
-                attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
-                attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
-            },
-            failure: function (response) {
-                // console.log("failure", response);
-            },
-            error: function (response) {
-                // console.log("error", response);
-            }
-        });
-    });
+    //$('.nt-ajax-partial-load-post-formdata').submit(function (e) {
+    //    const theForm = this;
+    //    indexSearchSubmit(theForm);
+    //});
 
     $('.nt-ajax-partial-load-get').submit(function (e) {
-        const url = $(this).data("nt-partial-url");
-        const updateTarget = $(this).data("nt-updatetarget");
-        var data = $(this)
+        const theForm = this;
+        const url = $(theForm).data("nt-partial-url");
+        const updateTarget = $(theForm).data("nt-updatetarget");
+        var data = $(theForm)
             //.filter(function (index, element) {
             //    console.log($(element).val());
             //    return !!$(element).val();
             //})
             .serialize();
-        const pagedViewOption = $(this).children(".nt-paged-view-option-field").val();
-        const pageIndex = $(this).children(".nt-page-index").val();
+        const pagedViewOption = $(theForm).children(".nt-paged-view-option-field").val();
+        const pageIndex = $(theForm).children(".nt-page-index").val();
         //console.log(data);
         $.ajax({
             type: "GET",
@@ -141,4 +112,48 @@ $(document).ready($(function () {
         e.preventDefault();
     });
 }));
+
+function indexSearchSubmit(theForm) {
+    const url = $(theForm).data("nt-partial-url");
+    const updateTarget = $(theForm).data("nt-updatetarget");
+    var formData = new FormData($(theForm)[0]);
+    const pagedViewOption = $(theForm).children(".nt-paged-view-option-field").val();
+    const pageIndex = $(theForm).children(".nt-page-index").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: formData,
+        async: false,
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        success: function (response) {
+            const toAppend = $(response);
+            if (pagedViewOption !== "Tiles" || pageIndex == 1) {
+                $(updateTarget).html(toAppend);
+            }
+            else {
+                $(updateTarget).children(".btn-nt-load-more").remove();
+                $(updateTarget).append(toAppend);
+            }
+            attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+            attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
+            setTimeout(() => {
+                bootstrap.Modal.getOrCreateInstance(document.getElementById('fullScreenLoading')).hide();
+            }, 1000);
+        },
+        failure: function(response) {
+            // console.log("failure", response);
+            setTimeout(() => {
+                bootstrap.Modal.getOrCreateInstance(document.getElementById('fullScreenLoading')).hide();
+            }, 1000);
+        },
+        error: function(response) {
+            // console.log("error", response);
+            setTimeout(() => {
+                bootstrap.Modal.getOrCreateInstance(document.getElementById('fullScreenLoading')).hide();
+            }, 1000);
+        }
+    });
+}
 // 5.end form ajax-submit
