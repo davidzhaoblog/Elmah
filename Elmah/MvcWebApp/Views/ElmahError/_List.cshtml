@@ -9,8 +9,14 @@
     <table class="table table-hover table-bordered table-striped">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
-                <th class="p-0"></th>
-                <th class="p-0"></th>
+                @if (Model!.UISetting.ShowListBulkActionRelated(Model.UIFeatures))
+                {
+                    <th class="p-0"></th>
+                }
+                @if (Model!.UISetting.ShowItemButtons(Model.UIFeatures))
+                {
+                    <th class="p-0"></th>
+                }
                 <th class="pt-0 pb-0">@localizor.Get("ErrorId")</th>
                 <th class="pt-0 pb-0">@localizor.Get("Application")</th>
                 <th class="pt-0 pb-0">@localizor.Get("Host")</th>
@@ -22,6 +28,14 @@
                 <th class="pt-0 pb-0">@localizor.Get("TimeUtc")</th>
                 <th class="pt-0 pb-0">@localizor.Get("Sequence")</th>
                 <th class="pt-0 pb-0">@localizor.Get("AllXml")</th>
+                @if (Model!.UISetting.ShowItemUIStatus(Model.UIFeatures))
+                {
+                    <th class="p-0"></th>
+                }
+                @if (Model!.UISetting.ShowEditableListDeleteSelect(Model.UIFeatures))
+                {
+                    <th class="p-0"></th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -32,11 +46,11 @@
                     @await Html.PartialAsync("~/Views/ElmahError/_ListItemTr.cshtml",
                         new MvcItemViewModel<ElmahErrorModel.DefaultView>
                         {
-                            ListSetting = Model.UISetting,
+                            ListSetting = Model!.UISetting,
                             ListFeatures = Model.UIFeatures,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model.UISetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            Template = Model!.UISetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
                             IndexInArray = i,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
@@ -58,7 +72,7 @@
                     <td class="nt-createnew-button-container" colspan="100">
                         <button type="button" class="btn btn-primary btn-nt-inline-editing w-100 h-100" title="@localizor.Get("Create_New")"
                             data-nt-action="@HttpMethods.Post"
-                            data-nt-route-id=""
+                            data-nt-route-id="@(default(System.Guid))"
                             data-nt-container="@CrudViewContainers.Inline.ToString()"
                             data-nt-template="@ViewItemTemplateNames.Create.ToString()">
                             <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>

@@ -104,7 +104,7 @@ namespace Elmah.Services
         public ElmahStatusCodeModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahStatusCodeModel();
+            return new ElmahStatusCodeModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahStatusCodeIdentifier id)

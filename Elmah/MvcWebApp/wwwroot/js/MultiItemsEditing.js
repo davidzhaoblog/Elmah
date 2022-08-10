@@ -20,39 +20,32 @@
  * 
  */
 
-$(document).ready(function () {
-    attachMultiItemsSubmitButtonClickEvent(".btn-nt-multiitems-editing-submit");
-    attachMultiItemsCancelButtonClickEvent(".btn-nt-multiitems-editing-cancel");
-})
+function multiItemsSubmitButtonClickEvent(sourceButton, dialog) {
+    const currentListItem = $(sourceButton).closest(".nt-listitem");
+    const wrapper = $(sourceButton).closest(".nt-list-wrapper");
+    const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-option-field").val();
+    const container = $(sourceButton).data("nt-container");
+    const template = $(sourceButton).data("nt-template");
+    const action = $(sourceButton).data("nt-action");
 
-function attachMultiItemsSubmitButtonClickEvent(selector) {
-    $(selector).click(function (e) {
-        let button = e.currentTarget;
-        const currentListItem = $(button).closest(".nt-listitem");
-        const wrapper = $(button).closest(".nt-list-wrapper");
-        const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-option-field").val();
-        const container = $(button).data("nt-container");
-        const template = $(button).data("nt-template");
-        const action = $(button).data("nt-action");
+    const multiitemsSubmitUrl = $(wrapper).data("nt-multiitems-submit-url");
 
-        const multiitemsSubmitUrl = $(wrapper).data("nt-multiitems-submit-url");
+    const form = $(wrapper).find("form");
+    let formData = [];
+    if (!!form) {
+        formData = new FormData($(form)[0]);
+    }
 
-        const form = $(wrapper).find("form");
-        let formData = [];
-        if (!!form) {
-            formData = new FormData($(form)[0]);
-        }
-
-        $.ajax({
-            type: "POST",
-            url: multiitemsSubmitUrl,
-            data: formData,
-            async: false,
-            processData: false,
-            contentType: false,
-            dataType: "html",
-            success: function (response) {
-                console.log(response);
+    $.ajax({
+        type: "POST",
+        url: multiitemsSubmitUrl,
+        data: formData,
+        async: false,
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        success: function (response) {
+            console.log(response);
             //    //$(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
             //    const splitResponse = response.split("===---------===");
             //    // response part #1, status html
@@ -73,16 +66,26 @@ function attachMultiItemsSubmitButtonClickEvent(selector) {
             //        modal.hide();
             //        showSingletonMessagePopup(splitResponse[0]);
             //    }
-            },
-            failure: function (response) {
-                // console.log(response);
-                // $(sourceButton).removeAttr("disabled");
-            },
-            error: function (response) {
-                // console.log(response);
-                // $(sourceButton).removeAttr("disabled");
-            }
-        });
+        },
+        failure: function (response) {
+            // console.log(response);
+            // $(sourceButton).removeAttr("disabled");
+        },
+        error: function (response) {
+        }
+    });
+}
+
+//$(document).ready(function () {
+//    attachMultiItemsSubmitButtonClickEvent(".btn-nt-multiitems-editing-submit");
+//    attachMultiItemsCancelButtonClickEvent(".btn-nt-multiitems-editing-cancel");
+//})
+
+function attachMultiItemsSubmitButtonClickEvent(selector) {
+    $(selector).click(function (e) {
+        let button = e.currentTarget;
+        multiItemsSubmitButtonClickEvent();
+
     });
 }
 

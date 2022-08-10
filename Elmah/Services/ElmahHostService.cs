@@ -104,7 +104,7 @@ namespace Elmah.Services
         public ElmahHostModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahHostModel();
+            return new ElmahHostModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahHostIdentifier id)

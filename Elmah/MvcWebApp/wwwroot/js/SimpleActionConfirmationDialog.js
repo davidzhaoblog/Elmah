@@ -39,12 +39,17 @@ function attachSimpleActionConfirmationDialog() {
         $("#simpleActionConfirmationDialog .btn-nt-action-confirm").removeAttr("disabled");
         $("#simpleActionConfirmationDialog .btn-nt-action-confirm").click(function (e) {
             $(this).attr("disabled", true);
-            // 1. Batch Delete
             if ($(sourceButton).hasClass("nt-bulk-delete")) {
+                // 1. Batch Delete
                 bulkDelete(sourceButton, simpleActionConfirmationDialog);
             }
             else if ($(sourceButton).hasClass("nt-bulk-update-fixedvalue")) {
+                // 2. Batch Action: Update Fixed Value
                 bulkUpdateFixedValue(sourceButton, simpleActionConfirmationDialog);
+            }
+            else if ($(sourceButton).hasClass("btn-nt-multiitems-editing-submit")) {
+                // 3. EditableList: Create/Update/Delete
+                multiItemsSubmitButtonClickEvent(sourceButton, simpleActionConfirmationDialog);
             }
         });
     })

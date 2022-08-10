@@ -3,27 +3,46 @@
 @using Elmah.Resx;
 @model MvcItemViewModel<ElmahErrorModel.DefaultView>
 @inject IUIStrings localizor;
-<td class="pt-0 pb-0 nt-list-bulk-select"></td>
-<td class="p-0">
+@if (Model.ListSetting.ShowListBulkActionRelated(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-list-bulk-select">
+    </td>
+}
+@if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
+{
+    <td class="p-0">
     <div class="btn-group btn-group-nt-action-save">
         <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Delete">
-            <i class="fa-solid fa-circle-xmark"></i>
+            <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
         </button>
         <button type="button" class="btn btn-primary btn-nt-action" data-nt-action="@HttpMethods.Delete"
             data-nt-container="@CrudViewContainers.Inline.ToString()"
             data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-            <i class="fa-solid fa-check-circle"></i>
+            <i class="fa-solid fa-check-circle"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
         </button>
     </div>
-</td>
-<td class="pt-0 pb-0">@Model.Model!.ErrorId</td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model.Model!.Application">@Model.Model!.Application_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model.Model!.Host">@Model.Model!.Host_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Model!.Type">@Model.Model!.Type_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model.Model!.Source">@Model.Model!.Source_Name</a></td>
-<td class="pt-0 pb-0">@Model.Model!.Message</td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model.Model!.User">@Model.Model!.User_Name</a></td>
-<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model.Model!.StatusCode">@Model.Model!.StatusCode_Name</a></td>
-<td class="pt-0 pb-0">@Model.Model!.TimeUtc</td>
-<td class="pt-0 pb-0">@Model.Model!.Sequence</td>
-<td class="pt-0 pb-0">@Model.Model!.AllXml</td>
+    </td>
+}
+<td class="pt-0 pb-0">@Model!.Model!.ErrorId</td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model!.Model!.Application">@Model!.Model!.Application_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model!.Model!.Host">@Model!.Model!.Host_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model!.Model!.Type">@Model!.Model!.Type_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model!.Model!.Source">@Model!.Model!.Source_Name</a></td>
+<td class="pt-0 pb-0">@Model!.Model!.Message</td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model!.Model!.User">@Model!.Model!.User_Name</a></td>
+<td class="pt-0 pb-0"><a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model!.Model!.StatusCode">@Model!.Model!.StatusCode_Name</a></td>
+<td class="pt-0 pb-0">@Model!.Model!.TimeUtc</td>
+<td class="pt-0 pb-0">@Model!.Model!.Sequence</td>
+<td class="pt-0 pb-0">@Model!.Model!.AllXml</td>
+@if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
+{
+    <td class="form-group pt-0 pb-0">
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ItemUIStatus______))" />
+    </td>
+}
+@if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-editablelist-delete-select">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.IsDeleted______))">
+    </td>
+}

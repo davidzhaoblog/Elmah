@@ -8,8 +8,10 @@ namespace Elmah.MvcWebApp.Models
         {
             return new MvcListFeatures
             {
-                 //AvailablePagedViewOptions = new PagedViewOptions[] { PagedViewOptions.EditableList, PagedViewOptions.List, PagedViewOptions.Tiles, PagedViewOptions.SlideShow },
-                 BindingPath = "",
+                AvailablePagedViewOptions = new PagedViewOptions[] { PagedViewOptions.EditableList, PagedViewOptions.List, PagedViewOptions.Tiles, PagedViewOptions.SlideShow },
+                BindingPath = "",
+                HasBulkActions = true,
+                CanDelete = true,
                 //HasBulkActions = true, ShowCRUDButtons = true, ShowToolbar = true
             };
         }

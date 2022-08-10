@@ -104,7 +104,7 @@ namespace Elmah.Services
         public ElmahSourceModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahSourceModel();
+            return new ElmahSourceModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahSourceIdentifier id)

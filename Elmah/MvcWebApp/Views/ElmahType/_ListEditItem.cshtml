@@ -9,8 +9,14 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-<td class="pt-0 pb-0 nt-list-bulk-select"></td>
-<td class="p-0">
+@if (Model.ListSetting.ShowListBulkActionRelated(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-list-bulk-select">
+    </td>
+}
+@if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
+{
+    <td class="p-0">
     <div class="btn-group btn-group-nt-action-save">
         <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Put">
             <i class="fa-solid fa-circle-xmark"></i>
@@ -21,8 +27,21 @@
             <i class="fa-solid fa-check-circle"></i>
         </button>
     </div>
-</td>
+    </td>
+}
 <td class="form-group pt-0 pb-0">
-    <input asp-for="Model!.Type" class="form-control" data-nt-value="@Model.Model!.Type" id="@Model!.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"/>
+    <input asp-for="Model!.Type" class="form-control" data-nt-value="@Model!.Model!.Type" id="@Model!.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"/>
     <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"></span>
 </td>
+@if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
+{
+    <td class="form-group pt-0 pb-0">
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahTypeModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.ItemUIStatus______))" />
+    </td>
+}
+@if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-editablelist-delete-select">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahTypeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.IsDeleted______))">
+    </td>
+}

@@ -302,9 +302,16 @@ function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container
             // 2.2. when Tiles POST/Create, PUT/Edit, <form>...</form> is around .card-body and .card-footer
             // 2.3. when Lists/Tiles DELETE/Delete, <form>...</form> is round the button with hidden input which contains value of identifier query property.
             const responseHtml = $(response);
-            if (action == "POST") { // Create, keep the current, .nt-createnew-button-container, <td> when List, which contains the Create <button>
-                $(currentListItem).find(".nt-createnew-button-container").hide();
-                currentListItem.prepend(responseHtml);
+            if (action == "POST") { 
+                if (view === "EditableList") {
+                    // Create, if "EditableList", append to <tbody>
+                    $(currentListItem).closest("table").find("tbody").append(responseHtml);
+                }
+                else {
+                    // Create, if not "EditableList", keep the current, .nt-createnew-button-container, <td> when List, which contains the Create <button>
+                    $(currentListItem).find(".nt-createnew-button-container").hide();
+                    currentListItem.prepend(responseHtml);
+                }
             }
             else if (action == "PUT") {
                 currentListItem.html(responseHtml);
