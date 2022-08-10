@@ -12,7 +12,7 @@ namespace Elmah.MvcWebApp.Models
                 BindingPath = "",
                 HasBulkActions = true,
                 CanDelete = true,
-                //, ShowCRUDButtons = true, ShowToolbar = true
+                //HasBulkActions = true, ShowCRUDButtons = true, ShowToolbar = true
             };
         }
     }
