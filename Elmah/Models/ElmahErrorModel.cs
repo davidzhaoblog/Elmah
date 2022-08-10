@@ -1,16 +1,17 @@
 using Elmah.Resx.Resources;
+using Framework.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
     public partial class ElmahErrorModel
     {
-        public Framework.Models.ItemUIStatus ItemUIStatus______ { get; set; } = Framework.Models.ItemUIStatus.NoChange;
+        public ItemUIStatus ItemUIStatus______ { get; set; } = ItemUIStatus.NoChange;
         public bool IsDeleted______ { get; set; } = false;
 
         [Display(Name = "ErrorId", ResourceType = typeof(UIStrings))]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="ErrorId_is_required")]
-        public System.Guid? ErrorId { get; set; }
+        public System.Guid ErrorId { get; set; }
 
         [Display(Name = "ElmahApplication", ResourceType = typeof(UIStrings))]
         [StringLength(60, ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="The_length_of_Application_should_be_1_to_60", MinimumLength = 1)]

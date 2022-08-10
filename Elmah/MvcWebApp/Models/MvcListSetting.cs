@@ -12,39 +12,38 @@ namespace Elmah.MvcWebApp.Models
         public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.List;
         public ViewItemTemplateNames Template { get; set; } = ViewItemTemplateNames.Details;
 
-        public bool HasListBulkActionRelated(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        public bool HasListBulkActionRelated(MvcListFeatures? listFeatures)
         {
             return listFeatures != null && listFeatures.HasBulkActions;
         }
 
-        public bool ShowListBulkActionRelated(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        public bool ShowListBulkActionRelated(MvcListFeatures? listFeatures)
         {
-            return HasListBulkActionRelated(listFeatures) && PagedViewOption != Framework.Models.PagedViewOptions.EditableList;
+            return HasListBulkActionRelated(listFeatures) && PagedViewOption != PagedViewOptions.EditableList;
         }
 
-        public bool HasEditableList(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        public bool HasEditableList(MvcListFeatures? listFeatures)
         {
             return listFeatures != null && listFeatures.AvailablePagedViewOptions != null &&
-                listFeatures.AvailablePagedViewOptions.Contains(Framework.Models.PagedViewOptions.EditableList);
+                listFeatures.AvailablePagedViewOptions.Contains(PagedViewOptions.EditableList);
         }
 
-
-        public bool ShowItemUIStatus(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        public bool ShowItemUIStatus(MvcListFeatures? listFeatures)
         {
             return HasEditableList(listFeatures)
-                && listFeatures != null && PagedViewOption == Framework.Models.PagedViewOptions.EditableList;
+                && listFeatures != null && PagedViewOption == PagedViewOptions.EditableList;
         }
 
-        public bool ShowEditableListDeleteSelect(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        public bool ShowEditableListDeleteSelect(MvcListFeatures? listFeatures)
         {
             return HasEditableList(listFeatures) &&
-                PagedViewOption == Framework.Models.PagedViewOptions.EditableList &&
+                PagedViewOption == PagedViewOptions.EditableList &&
                 listFeatures != null && listFeatures.CanDelete;
         }
 
-        public bool ShowItemButtons(Elmah.MvcWebApp.Models.MvcListFeatures? listFeatures)
+        public bool ShowItemButtons(MvcListFeatures? listFeatures)
         {
-            return PagedViewOption != Framework.Models.PagedViewOptions.EditableList;
+            return PagedViewOption != PagedViewOptions.EditableList;
         }
     }
 }

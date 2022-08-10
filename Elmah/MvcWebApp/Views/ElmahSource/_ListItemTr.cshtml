@@ -16,4 +16,8 @@
     {
         @await Html.PartialAsync("~/Views/ElmahSource/_ListEditItem.cshtml", Model)
     }
+    else if (Model.Template == ViewItemTemplateNames.Create.ToString())
+    {
+        @await Html.PartialAsync("~/Views/ElmahSource/_ListCreateItem.cshtml", Model)
+    }
 </tr>

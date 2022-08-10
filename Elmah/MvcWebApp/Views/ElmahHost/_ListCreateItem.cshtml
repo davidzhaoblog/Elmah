@@ -9,8 +9,14 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-<td class="pt-0 pb-0 nt-list-bulk-select"></td>
-<td class="p-0">
+@if (Model.ListSetting.ShowListBulkActionRelated(Model.ListFeatures))
+{
+    <td class="pt-0 pb-0 nt-list-bulk-select">
+    </td>
+}
+@if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
+{
+    <td class="p-0">
     <div class="btn-group btn-group-nt-action-save">
         <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
             <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
@@ -21,12 +27,25 @@
             <i class="fa-solid fa-check-circle"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
         </button>
     </div>
-</td>
-<td class="form-group pt-0 pb-0">
-    <input asp-for="Model!.Host" class="form-control" data-nt-value="@Model.Model!.Host" id="@Model!.HtmlId(nameof(ElmahHostModel.Host))" name="@Model!.HtmlName(nameof(ElmahHostModel.Host))"/>
+    </td>
+}
+<td class="form-group p-0">
+    <input asp-for="Model!.Host" class="form-control" data-nt-value="@Model!.Model!.Host" id="@Model!.HtmlId(nameof(ElmahHostModel.Host))" name="@Model!.HtmlName(nameof(ElmahHostModel.Host))"/>
     <span asp-validation-for="Model!.Host" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahHostModel.Host))"></span>
 </td>
-<td class="form-group pt-0 pb-0">
-    <input asp-for="Model!.SpatialLocation" class="form-control" data-nt-value="@Model.Model!.SpatialLocation" id="@Model!.HtmlId(nameof(ElmahHostModel.SpatialLocation))" name="@Model!.HtmlName(nameof(ElmahHostModel.SpatialLocation))"/>
+<td class="form-group p-0">
+    <input asp-for="Model!.SpatialLocation" class="form-control" data-nt-value="@Model!.Model!.SpatialLocation" id="@Model!.HtmlId(nameof(ElmahHostModel.SpatialLocation))" name="@Model!.HtmlName(nameof(ElmahHostModel.SpatialLocation))"/>
     <span asp-validation-for="Model!.SpatialLocation" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahHostModel.SpatialLocation))"></span>
 </td>
+@if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
+{
+    <td class="form-group p-0">
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahHostModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahHostModel.ItemUIStatus______))" readonly />
+    </td>
+}
+@if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
+{
+    <td class="pb-0 nt-editablelist-delete-select">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))">
+    </td>
+}

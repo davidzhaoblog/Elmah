@@ -1,10 +1,14 @@
 using Elmah.Resx.Resources;
+using Framework.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
     public partial class ElmahStatusCodeModel
     {
+        public ItemUIStatus ItemUIStatus______ { get; set; } = ItemUIStatus.NoChange;
+        public bool IsDeleted______ { get; set; } = false;
+
         [Display(Name = "StatusCode", ResourceType = typeof(UIStrings))]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="StatusCode_is_required")]
         public int StatusCode { get; set; }
