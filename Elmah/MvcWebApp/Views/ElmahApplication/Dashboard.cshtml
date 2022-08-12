@@ -2,6 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @model ElmahApplicationCompositeModel;
+@inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Dashboard");
@@ -26,13 +27,28 @@
                             </h2>
                             <div id="panelsStayOpen-collapse-elmahErrors_Via_Application" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors_Via_Application">
                                 <div class="accordion-body p-0">
-                                    <div class="btn-group float-end">
-                                        <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
-                                            <span class="fa fa-search"></span>
-                                            @localizor.Get("Search")
-                                        </a>
-                                    </div>
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors_Via_Application, Status = Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application].Status, StatusMessage= Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml",
+                                        new Framework.Models.PagedViewModel<Elmah.MvcWebApp.Models.MvcListSetting, Elmah.MvcWebApp.Models.MvcListFeatures, Elmah.Models.ElmahErrorModel.DefaultView[]>
+                                        { 
+                                            TopLevelDropDownListsFromDatabase = 
+                                            Result = new Framework.Models.PagedResponse<Elmah.Models.ElmahErrorModel.DefaultView[]>
+                                            {
+                                                ResponseBody = Model.ElmahErrors_Via_Application,
+                                                
+                                                Status = Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application].Status,
+                                                StatusMessage= Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application].StatusMessage
+                                            },
+                                            UISetting = new Elmah.MvcWebApp.Models.MvcListSetting
+                                            {
+                                                 AdvancedQuery = false,
+                                                 PagedViewOption = Framework.Models.PagedViewOptions.EditableList,
+                                                 Template = Framework.Models.ViewItemTemplateNames.Edit, 
+                                            },
+                                            UIFeatures = new Elmah.MvcWebApp.Models.MvcListFeatures 
+                                            {
+                                                 CanDelete = false, HasBulkActions = false, 
+                                            }
+                                        })
                                 </div>
                             </div>
                         </div>
@@ -93,10 +109,10 @@
                         </div>
                     </div>
                     @*
-                    <div class="card-footer">
-                        <div class="btn-group">
-                        </div>
-                    </div>*@
+                <div class="card-footer">
+                <div class="btn-group">
+                </div>
+                </div>*@
                 }
                 else
                 {
