@@ -12,6 +12,9 @@ namespace Elmah.RepositoryContracts
 
         Task<PagedResponse<ElmahErrorModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data);
 
+        Task<Framework.Models.Response<Framework.Models.MultiItemsCUDModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView>>> MultiItemsCUD(
+            Framework.Models.MultiItemsCUDModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> input);
+
         Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input);
 
         Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id);

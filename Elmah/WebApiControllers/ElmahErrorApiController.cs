@@ -61,6 +61,15 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [HttpPut]
+        public async Task<ActionResult<Framework.Models.Response<Framework.Models.MultiItemsCUDModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView>>>> MultiItemsCUD(
+            Framework.Models.MultiItemsCUDModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView> input)
+        {
+            var serviceResponse = await _thisService.MultiItemsCUD(input);
+            return ReturnActionResult(serviceResponse);
+        }
+
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorModel input)
         {

@@ -11,7 +11,7 @@ namespace Elmah.Models
 
         [Display(Name = "ErrorId", ResourceType = typeof(UIStrings))]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="ErrorId_is_required")]
-        public System.Guid ErrorId { get; set; }
+        public System.Guid? ErrorId { get; set; }
 
         [Display(Name = "ElmahApplication", ResourceType = typeof(UIStrings))]
         [StringLength(60, ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="The_length_of_Application_should_be_1_to_60", MinimumLength = 1)]

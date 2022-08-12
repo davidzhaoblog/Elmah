@@ -1,6 +1,6 @@
 namespace Framework.Models
 {
-    public class MultiItemsCUDViewModel<TIdentifier, TItem>
+    public class MultiItemsCUDModel<TIdentifier, TItem>
         where TIdentifier : class
         where TItem : class
     {

@@ -52,5 +52,16 @@ function attachSimpleActionConfirmationDialog() {
                 multiItemsSubmitButtonClickEvent(sourceButton, simpleActionConfirmationDialog);
             }
         });
+
+        $("#simpleActionConfirmationDialog .btn-nt-action-cancel").click(function (e) {
+            if ($(sourceButton).hasClass("btn-nt-multiitems-editing-submit")) {
+                // 3. EditableList: reload if Success
+                const actionSuccess = !!($(simpleActionConfirmationDialog).find(".text-success").length);
+                if (actionSuccess) {
+                    indexSearchSubmit($($(sourceButton).closest(".nt-list-wrapper").data("nt-submittarget")));
+                    $(sourceButton).prop("disabled", true);
+                }
+            }
+        });
     })
 }

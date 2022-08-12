@@ -54,7 +54,7 @@ namespace Elmah.EFCoreContext
 
                 entity.Property(e => e.ErrorId)
                     .HasColumnName("ErrorId")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Application)
                     .HasColumnName("Application")

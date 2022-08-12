@@ -22,6 +22,10 @@ else //if(Model.Status == System.Net.HttpStatusCode.InternalServerError)
 {
     <h5 class="text-danger">@localizor.Get("HttpStatusCode.InternalServerErrorMessage")</h5>
 }
+@if (Model.ShowMessage && !string.IsNullOrEmpty(Model.Message))
+{
+    <span class="text-info">@Model.Message</span>
+}
 @if (Model.ShowRequestId)
 {
     <p>

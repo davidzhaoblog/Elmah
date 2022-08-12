@@ -4,6 +4,7 @@ namespace Elmah.MvcWebApp.Models
     {
         public System.Net.HttpStatusCode Status { get; set; }
         public string? Message { get; set; }
+        public bool ShowMessage { get; set; } = false;
         public string? RequestId { get; set; }
         public bool ShowRequestId { get; set; }
 

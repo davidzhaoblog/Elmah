@@ -11,34 +11,28 @@
  * 
  * nt-submittarget
  */
-//$(document).ready($(function () {
-//    showHidePagedViewOptionsRelatedButtons("#thisform");
-//    $('.nt-radio-pagedviewoption').click(function (e) {
-//        pageViewOptionsClickedEventHandler(this);
-//    });
-//}));
-
-
 function pageViewOptionsClickedEventHandler(sourceButton) {
-    const submitTarget = $(sourceButton).data("nt-submittarget");
+    const submitTarget = $(sourceButton).closest(".nt-list-wrapper").data("nt-submittarget");
     const pagedViewOption = $(sourceButton).data("nt-value");
     if (pagedViewOption === "EditableList") {
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-multiitem-editing-buttons").show();
         $(submitTarget).find(".nt-template-field").val("Edit");
+        $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter").hide();
+        $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-actions-container").hide();
+        $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter .btn-nt-bulk-select-status").val("None");
     }
     else {
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-multiitem-editing-buttons").hide();
         $(submitTarget).find(".nt-template-field").val("Details");
+        $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter").show();
     }
-    //var fullScreenLoadingModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('fullScreenLoading'));
-    //fullScreenLoadingModal.show();
+
     // 1. update pagination-option
     $(submitTarget).find(".nt-pagination-option-field").val($(sourceButton).data("nt-paginationoptionupdatevalue")); // List-Pagination, Tiles-More, Slideshow-NoPagination
 
     // 2. update paged-view-option
     $(submitTarget).find(".nt-paged-view-option-field").val(pagedViewOption); // List-Pagination, Tiles-More, Slideshow-NoPagination
-    //$($(sourceButton).data("nt-submittarget")).submit();
-    indexSearchSubmit($($(sourceButton).data("nt-submittarget")));
+    indexSearchSubmit($($(sourceButton).closest(".nt-list-wrapper").data("nt-submittarget")));
     // console.log($(location));
     // Update QueryString - view with data-nt-value attribute
     let queryParams = new URLSearchParams(window.location.search);

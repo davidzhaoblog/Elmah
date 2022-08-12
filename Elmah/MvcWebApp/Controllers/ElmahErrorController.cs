@@ -93,7 +93,7 @@ namespace Elmah.MvcWebApp.Controllers
             var pagedViewModel = new PagedViewModel<MvcListSetting, MvcListFeatures, ElmahErrorModel.DefaultView[]>
             {
                 UISetting = uiSetting,
-                UIFeatures = uiSetting.PagedViewOption == PagedViewOptions.EditableList ? IndexViewFeatures.GetElmahErrorEditableList() : null,
+                UIFeatures = IndexViewFeatures.GetElmahErrorEditableList(),
                 Result = result,
             };
 
@@ -392,10 +392,47 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("AjaxMultiItemsSubmit")]
         [Route("[controller]/[action]")]
         public async Task<IActionResult> AjaxMultiItemsSubmit(
-            [FromQuery] PagedViewOptions view,
-            [FromForm] List<ElmahErrorModel.DefaultView> data)
+            [FromQuery] Framework.Models.PagedViewOptions view,
+            [FromForm] List<Elmah.Models.ElmahErrorModel.DefaultView> data)
         {
-            return View();
+            if(data == null || !data.Any(t=> t.IsDeleted______ && t.ItemUIStatus______ != Framework.Models.ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == Framework.Models.ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == Framework.Models.ItemUIStatus.Updated))
+            {
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", 
+                    new Elmah.MvcWebApp.Models.AjaxResponseViewModel 
+                    { 
+                        Status = System.Net.HttpStatusCode.NoContent, 
+                        Message = "NoContent", 
+                        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier 
+                    });
+            }
+
+            var multiItemsCUDModel = new Framework.Models.MultiItemsCUDModel<Elmah.Models.ElmahErrorIdentifier, Elmah.Models.ElmahErrorModel.DefaultView>
+            {
+                DeleteItems =
+                    (from t in data
+                    where t.IsDeleted______ && t.ItemUIStatus______ != Framework.Models.ItemUIStatus.New
+                    select new Elmah.Models.ElmahErrorIdentifier { ErrorId = t.ErrorId }).ToList(),
+                NewItems =
+                    (from t in data
+                     where !t.IsDeleted______ && t.ItemUIStatus______ == Framework.Models.ItemUIStatus.New
+                     select t).ToList(),
+                UpdateItems = 
+                    (from t in data
+                     where !t.IsDeleted______ && t.ItemUIStatus______ == Framework.Models.ItemUIStatus.Updated
+                     select t).ToList(),
+            };
+
+            // although we have the NewItems and UpdatedITems in result, but we have to Mvc Core JQuery/Ajax refresh the whole list because array binding. 
+            var result = await _thisService.MultiItemsCUD(multiItemsCUDModel);
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", 
+                new Elmah.MvcWebApp.Models.AjaxResponseViewModel 
+                { 
+                    Status = result.Status,
+                    ShowMessage = result.Status == System.Net.HttpStatusCode.OK,
+                    Message = result.Status == System.Net.HttpStatusCode.OK ? _localizor.Get("Click Close To Reload this List") : result.StatusMessage, 
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier 
+                });
         }
 
         [Route("[controller]/[action]/{ErrorId}")] // Primary
