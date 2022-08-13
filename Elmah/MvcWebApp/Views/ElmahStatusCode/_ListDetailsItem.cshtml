@@ -69,13 +69,13 @@
 <td class="pt-0 pb-0">@Model!.Model!.Name</td>
 @if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
 {
-    <td class="form-group p-0">
+    <td class="form-group nt-item-status p-0">
         <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.ItemUIStatus______))" readonly />
     </td>
 }
 @if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
 {
     <td class="pb-0 nt-editablelist-delete-select">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-data ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.IsDeleted______))">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.IsDeleted______))">
     </td>
 }

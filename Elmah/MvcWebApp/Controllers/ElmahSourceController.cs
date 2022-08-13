@@ -79,7 +79,7 @@ namespace Elmah.MvcWebApp.Controllers
             var pagedViewModel = new PagedViewModel<MvcListSetting, MvcListFeatures, ElmahSourceModel[]>
             {
                 UISetting = uiSetting,
-                UIFeatures = uiSetting.PagedViewOption == PagedViewOptions.EditableList ? IndexViewFeatures.GetElmahErrorEditableList() : null,
+                UIFeatures = IndexViewFeatures.GetElmahErrorEditableList(),
                 Result = result,
             };
 
