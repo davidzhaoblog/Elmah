@@ -329,10 +329,10 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: ElmahType/AjaxMultiItemsSubmit
-        [HttpPost, ActionName("AjaxMultiItemsSubmit")]
+        // POST: ElmahType/AjaxMultiItemsCUDSubmit
+        [HttpPost, ActionName("AjaxMultiItemsCUDSubmit")]
         [Route("[controller]/[action]")]
-        public async Task<IActionResult> AjaxMultiItemsSubmit(
+        public async Task<IActionResult> AjaxMultiItemsCUDSubmit(
             [FromQuery] PagedViewOptions view,
             [FromForm] List<ElmahTypeModel> data)
         {
