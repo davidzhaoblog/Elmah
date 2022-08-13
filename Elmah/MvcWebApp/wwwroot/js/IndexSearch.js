@@ -25,7 +25,6 @@ $(document).ready($(function () {
  * .btn-nt-load-more
  *
  */
-
 function pageLinkClicked(self) {
     const theForm = $($(self).closest(".nt-list-wrapper").data("nt-submittarget"));
     $(theForm).find(".nt-page-index").val($(self).data("nt-pageindex"));
@@ -66,11 +65,6 @@ function pageLinkClicked(self) {
 }
 
 $(document).ready($(function () {
-    //$('.nt-ajax-partial-load-post-formdata').submit(function (e) {
-    //    const theForm = this;
-    //    indexSearchSubmit(theForm);
-    //});
-
     $('.nt-ajax-partial-load-get').submit(function (e) {
         const theForm = this;
         const url = $(theForm).data("nt-partial-url");
@@ -138,6 +132,8 @@ function indexSearchSubmit(theForm) {
             }
             attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
             attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
+            attachFormDataChanged($(toAppend).find("form"));
+            attachMultiItemsDeleteCheckboxEvent($(toAppend).find("form"));
             setTimeout(() => {
                 bootstrap.Modal.getOrCreateInstance(document.getElementById('fullScreenLoading')).hide();
             }, 1000);

@@ -30,11 +30,11 @@
     </td>
 }
 <td class="form-group p-0">
-    <input asp-for="Model!.StatusCode" class="form-control" data-nt-value="@Model!.Model!.StatusCode" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.StatusCode))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"/>
+    <input asp-for="Model!.StatusCode" class="form-control nt-form-data" data-nt-value="@Model!.Model!.StatusCode" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.StatusCode))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"/>
     <span asp-validation-for="Model!.StatusCode" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"></span>
 </td>
 <td class="form-group p-0">
-    <input asp-for="Model!.Name" class="form-control" data-nt-value="@Model!.Model!.Name" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.Name))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.Name))"/>
+    <input asp-for="Model!.Name" class="form-control nt-form-data" data-nt-value="@Model!.Model!.Name" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.Name))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.Name))"/>
     <span asp-validation-for="Model!.Name" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeModel.Name))"></span>
 </td>
 @if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
@@ -46,6 +46,6 @@
 @if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
 {
     <td class="pb-0 nt-editablelist-delete-select">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.IsDeleted______))">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-data ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.IsDeleted______))">
     </td>
 }

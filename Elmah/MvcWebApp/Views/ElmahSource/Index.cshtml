@@ -73,29 +73,29 @@
     data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahSource")"
     data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahSource")"
     data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahSource")"
-    data-nt-multiitems-submit-url="@Url.Action("AjaxMultiItemsSubmit", "ElmahSource")">
+    data-nt-multiitems-submit-url="@Url.Action("AjaxMultiItemsCUDSubmit", "ElmahSource")">
     <div class="card-header">
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UISetting.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-cells"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+                data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" @(Model!.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+                data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" @(Model!.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" data-nt-submittarget="#thisform" @(Model!.UISetting.PagedViewOption == PagedViewOptions.EditableList ? "checked": "")>
+                data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UISetting.PagedViewOption == PagedViewOptions.EditableList ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-table"></i></label>
         </div>
         <div class="btn-group float-end mt-1 ms-3 me-3">
-            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit" data-nt-submittarget="#thisform"></select>
-            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit" data-nt-submittarget="#thisform"></select>
+            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit"></select>
+            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit"></select>
         </div>
         @if (Model!.UISetting.HasListBulkActionRelated(Model.UIFeatures))
         {
@@ -124,8 +124,8 @@
         }
         @if (Model!.UISetting.HasEditableList(Model!.UIFeatures))
         {
-            <div class="btn-group float-start ps-4 nt-multiitem-editing-buttons" style="display:none">
-                <button type="button" class="btn btn-default btn-nt-multiitems-editing-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+            <div class="btn-group float-start ps-4 nt-multiitem-editing-buttons" style="display:none;">
+                <button disabled type="button" class="btn btn-default btn-nt-multiitems-editing-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
                     data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahSource"))" title="@localizor.Get("Save")">
                     <i class="fa-solid fa-floppy-disk"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
                 </button>
@@ -169,3 +169,13 @@
 </div>
 <partial name="~/Views/Shared/_CrudActionDialog.cshtml" />
 <partial name="~/Views/Shared/_SimpleActionConfirmationDialog.cshtml" />
+@section Scripts
+    {
+    <script>
+        $(document).ready($(function() {
+            showHidePagedViewOptionsRelatedButtons("#thisform");
+            attachFormDataChanged($("#thisList form"));
+            attachMultiItemsDeleteCheckboxEvent($("#thisList form"));
+        }))
+    </script>
+}

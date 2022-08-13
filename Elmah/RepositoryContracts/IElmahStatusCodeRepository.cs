@@ -10,6 +10,9 @@ namespace Elmah.RepositoryContracts
 
         Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids);
 
+        Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel> input);
+
         Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeModel input);
 
         Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdentifier id);

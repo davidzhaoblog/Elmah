@@ -13,6 +13,9 @@ namespace Elmah.ServiceContracts
 
         Task<Response> BulkDelete(List<ElmahTypeIdentifier> ids);
 
+        Task<Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel> input);
+
         Task<Response<ElmahTypeModel>> Update(ElmahTypeIdentifier id, ElmahTypeModel input);
 
         Task<Response<ElmahTypeModel>> Get(ElmahTypeIdentifier id);

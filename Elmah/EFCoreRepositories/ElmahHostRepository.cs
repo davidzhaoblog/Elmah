@@ -132,6 +132,123 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
+        public async Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel> input)
+        {
+            // 1. DeleteItems, return if Failed
+            if (input.DeleteItems != null)
+            {
+                var responseOfDeleteItems = await this.BulkDelete(input.DeleteItems);
+                if (responseOfDeleteItems != null && responseOfDeleteItems.Status != HttpStatusCode.OK)
+                {
+                    return new Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
+                }
+            }
+
+            // 2. return OK, if no more NewItems and UpdateItems
+            if (!(input.NewItems != null && input.NewItems.Count > 0 ||
+                input.UpdateItems != null && input.UpdateItems.Count > 0))
+            {
+                return new Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>> { Status = HttpStatusCode.OK };
+            }
+
+            // 3. NewItems and UpdateItems
+            try
+            {
+                // 3.1.1. NewItems if any
+                List<ElmahHost> newEFItems = new List<ElmahHost>();
+                if (input.NewItems != null && input.NewItems.Count > 0)
+                {
+                    foreach (var item in input.NewItems)
+                    {
+                        var toInsert = new ElmahHost
+                        {
+                            Host = item.Host,
+                            SpatialLocation = item.SpatialLocation,
+                        };
+                        _dbcontext.ElmahHost.Add(toInsert);
+                        newEFItems.Add(toInsert);
+                    }
+                }
+
+                // 3.1.2. UpdateItems if any
+                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
+                {
+                    foreach (var item in input.UpdateItems)
+                    {
+                        var existing =
+                            (from t in _dbcontext.ElmahHost
+                             where
+
+                             t.Host == item.Host
+                             select t).SingleOrDefault();
+
+                        if (existing != null)
+                        {
+                            // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
+                existing.Host = item.Host;
+                existing.SpatialLocation = item.SpatialLocation;
+                        }
+                    }
+                }
+                await _dbcontext.SaveChangesAsync();
+
+                // 3.2 Load Response
+                var identifierListToloadResponseItems = new List<string>();
+
+                if (input.NewItems != null && input.NewItems.Count > 0)
+                {
+                    identifierListToloadResponseItems.AddRange(
+                        from t in newEFItems
+                        select t.Host);
+                }
+                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
+                {
+                    identifierListToloadResponseItems.AddRange(
+                        from t in input.UpdateItems
+                        select t.Host);
+                }
+
+                var responseBodyWithNewAndUpdatedItems =
+                    (from t in _dbcontext.ElmahHost
+                    where identifierListToloadResponseItems.Contains(t.Host)
+
+                    select new ElmahHostModel
+                    {
+
+                        Host = t.Host,
+                        SpatialLocation = t.SpatialLocation,
+
+                    }).ToList();
+
+                // 3.3. Final Response
+                var response = new Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>
+                {
+                    Status = HttpStatusCode.OK,
+                    ResponseBody = new MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>
+                    {
+                        NewItems =
+                            input.NewItems != null && input.NewItems.Count > 0
+                                ? responseBodyWithNewAndUpdatedItems.Where(t => newEFItems.Any(t1 => t1.Host == t.Host)).ToList()
+                                : null,
+                        UpdateItems =
+                            input.UpdateItems != null && input.UpdateItems.Count > 0
+                                ? responseBodyWithNewAndUpdatedItems.Where(t => input.UpdateItems.Any(t1 => t1.Host == t.Host)).ToList()
+                                : null,
+                    }
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>
+                {
+                    Status = HttpStatusCode.InternalServerError,
+                    StatusMessage = "Create And/Or Update Failed. " + ex.Message
+                });
+            }
+        }
+
         public async Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input)
         {
             if (input == null)

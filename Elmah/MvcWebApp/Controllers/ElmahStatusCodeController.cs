@@ -329,14 +329,51 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: ElmahStatusCode/AjaxMultiItemsSubmit
-        [HttpPost, ActionName("AjaxMultiItemsSubmit")]
+        // POST: ElmahStatusCode/AjaxMultiItemsCUDSubmit
+        [HttpPost, ActionName("AjaxMultiItemsCUDSubmit")]
         [Route("[controller]/[action]")]
-        public async Task<IActionResult> AjaxMultiItemsSubmit(
+        public async Task<IActionResult> AjaxMultiItemsCUDSubmit(
             [FromQuery] PagedViewOptions view,
             [FromForm] List<ElmahStatusCodeModel> data)
         {
-            return View();
+            if(data == null || !data.Any(t=> t.IsDeleted______ && t.ItemUIStatus______ != ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.Updated))
+            {
+                return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
+                    new AjaxResponseViewModel
+                    {
+                        Status = System.Net.HttpStatusCode.NoContent,
+                        Message = "NoContent",
+                        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                    });
+            }
+
+            var multiItemsCUDModel = new MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel>
+            {
+                DeleteItems =
+                    (from t in data
+                    where t.IsDeleted______ && t.ItemUIStatus______ != ItemUIStatus.New
+                    select new ElmahStatusCodeIdentifier { StatusCode = t.StatusCode }).ToList(),
+                NewItems =
+                    (from t in data
+                     where !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.New
+                     select t).ToList(),
+                UpdateItems =
+                    (from t in data
+                     where !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.Updated
+                     select t).ToList(),
+            };
+
+            // although we have the NewItems and UpdatedITems in result, but we have to Mvc Core JQuery/Ajax refresh the whole list because array binding.
+            var result = await _thisService.MultiItemsCUD(multiItemsCUDModel);
+
+            return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
+                new AjaxResponseViewModel
+                {
+                    Status = result.Status,
+                    ShowMessage = result.Status == System.Net.HttpStatusCode.OK,
+                    Message = result.Status == System.Net.HttpStatusCode.OK ? _localizor.Get("Click Close To Reload this List") : result.StatusMessage,
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
         }
 
         [Route("[controller]/[action]/{StatusCode}")] // Primary

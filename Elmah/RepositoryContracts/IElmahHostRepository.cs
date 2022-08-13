@@ -10,6 +10,9 @@ namespace Elmah.RepositoryContracts
 
         Task<Response> BulkDelete(List<ElmahHostIdentifier> ids);
 
+        Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel> input);
+
         Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input);
 
         Task<Response<ElmahHostModel>> Get(ElmahHostIdentifier id);

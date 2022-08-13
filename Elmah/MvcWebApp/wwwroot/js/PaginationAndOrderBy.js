@@ -10,14 +10,14 @@
  */
 $(document).ready($(function () {
     $(".nt-page-size-submit").change(function (e) {
-        $($(this).data("nt-submittarget")).find(".nt-page-size").val(e.target.value);
-        $($(this).data("nt-submittarget")).submit();
+        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).find(".nt-page-size").val(e.target.value);
+        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
     });
 }));
 $(document).ready($(function () {
     $(".nt-order-by-submit").change(function (e) {
-        $($(this).data("nt-submittarget")).find(".nt-order-by").val(e.target.value);
-        $($(this).data("nt-submittarget")).submit();
+        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).find(".nt-order-by").val(e.target.value);
+        $($(this).closest(".nt-list-wrapper").data("nt-submittarget")).submit();
     });
 }));
 // 3.End Pagination and OrderBy

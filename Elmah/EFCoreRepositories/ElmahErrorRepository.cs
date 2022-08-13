@@ -240,6 +240,160 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             return queryable;
         }
 
+        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> input)
+        {
+            // 1. DeleteItems, return if Failed
+            if (input.DeleteItems != null)
+            {
+                var responseOfDeleteItems = await this.BulkDelete(input.DeleteItems);
+                if (responseOfDeleteItems != null && responseOfDeleteItems.Status != HttpStatusCode.OK)
+                {
+                    return new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
+                }
+            }
+
+            // 2. return OK, if no more NewItems and UpdateItems
+            if (!(input.NewItems != null && input.NewItems.Count > 0 ||
+                input.UpdateItems != null && input.UpdateItems.Count > 0))
+            {
+                return new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>> { Status = HttpStatusCode.OK };
+            }
+
+            // 3. NewItems and UpdateItems
+            try
+            {
+                // 3.1.1. NewItems if any
+                List<ElmahError> newEFItems = new List<ElmahError>();
+                if (input.NewItems != null && input.NewItems.Count > 0)
+                {
+                    foreach (var item in input.NewItems)
+                    {
+                        var toInsert = new ElmahError
+                        {
+                            ErrorId = item.ErrorId,
+                            Application = item.Application,
+                            Host = item.Host,
+                            Type = item.Type,
+                            Source = item.Source,
+                            Message = item.Message,
+                            User = item.User,
+                            StatusCode = item.StatusCode,
+                            TimeUtc = item.TimeUtc,
+                            AllXml = item.AllXml,
+                        };
+                        _dbcontext.ELMAH_Error.Add(toInsert);
+                        newEFItems.Add(toInsert);
+                    }
+                }
+
+                // 3.1.2. UpdateItems if any
+                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
+                {
+                    foreach (var item in input.UpdateItems)
+                    {
+                        var existing =
+                            (from t in _dbcontext.ELMAH_Error
+                             where
+
+                             t.ErrorId == item.ErrorId
+                             select t).SingleOrDefault();
+
+                        if (existing != null)
+                        {
+                            // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
+                existing.ErrorId = item.ErrorId;
+                existing.Application = item.Application;
+                existing.Host = item.Host;
+                existing.Type = item.Type;
+                existing.Source = item.Source;
+                existing.Message = item.Message;
+                existing.User = item.User;
+                existing.StatusCode = item.StatusCode;
+                existing.TimeUtc = item.TimeUtc;
+                existing.AllXml = item.AllXml;
+                        }
+                    }
+                }
+                await _dbcontext.SaveChangesAsync();
+
+                // 3.2 Load Response
+                var identifierListToloadResponseItems = new List<System.Guid>();
+
+                if (input.NewItems != null && input.NewItems.Count > 0)
+                {
+                    identifierListToloadResponseItems.AddRange(
+                        from t in newEFItems
+                        select t.ErrorId);
+                }
+                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
+                {
+                    identifierListToloadResponseItems.AddRange(
+                        from t in input.UpdateItems
+                        select t.ErrorId);
+                }
+
+                var responseBodyWithNewAndUpdatedItems =
+                    (from t in _dbcontext.ELMAH_Error
+                    join Application in _dbcontext.ElmahApplication on t.Application equals Application.Application// \Application
+                    join Host in _dbcontext.ElmahHost on t.Host equals Host.Host// \Host
+                    join Source in _dbcontext.ElmahSource on t.Source equals Source.Source// \Source
+                    join StatusCode in _dbcontext.ElmahStatusCode on t.StatusCode equals StatusCode.StatusCode// \StatusCode
+                    join Type in _dbcontext.ElmahType on t.Type equals Type.Type// \Type
+                    join User in _dbcontext.ElmahUser on t.User equals User.User// \User
+                    where identifierListToloadResponseItems.Contains(t.ErrorId)
+
+                    select new ElmahErrorModel.DefaultView
+                    {
+
+                        ErrorId = t.ErrorId,
+                        Application = t.Application,
+                        Host = t.Host,
+                        Type = t.Type,
+                        Source = t.Source,
+                        Message = t.Message,
+                        User = t.User,
+                        StatusCode = t.StatusCode,
+                        TimeUtc = t.TimeUtc,
+                        Sequence = t.Sequence,
+                        AllXml = t.AllXml,
+                        Application_Name = Application.Application,
+                        Host_Name = Host.Host,
+                        Source_Name = Source.Source,
+                        StatusCode_Name = StatusCode.Name,
+                        Type_Name = Type.Type,
+                        User_Name = User.User,
+
+                    }).ToList();
+
+                // 3.3. Final Response
+                var response = new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>
+                {
+                    Status = HttpStatusCode.OK,
+                    ResponseBody = new MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>
+                    {
+                        NewItems =
+                            input.NewItems != null && input.NewItems.Count > 0
+                                ? responseBodyWithNewAndUpdatedItems.Where(t => newEFItems.Any(t1 => t1.ErrorId == t.ErrorId)).ToList()
+                                : null,
+                        UpdateItems =
+                            input.UpdateItems != null && input.UpdateItems.Count > 0
+                                ? responseBodyWithNewAndUpdatedItems.Where(t => input.UpdateItems.Any(t1 => t1.ErrorId == t.ErrorId)).ToList()
+                                : null,
+                    }
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>
+                {
+                    Status = HttpStatusCode.InternalServerError,
+                    StatusMessage = "Create And/Or Update Failed. " + ex.Message
+                });
+            }
+        }
+
         public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)
         {
             if (input == null)

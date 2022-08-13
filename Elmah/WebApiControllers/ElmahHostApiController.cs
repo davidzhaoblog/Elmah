@@ -53,6 +53,15 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [HttpPut]
+        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel> input)
+        {
+            var serviceResponse = await _thisService.MultiItemsCUD(input);
+            return ReturnActionResult(serviceResponse);
+        }
+
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult<ElmahHostModel>> Post(ElmahHostIdentifier id, ElmahHostModel input)
         {

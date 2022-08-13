@@ -66,9 +66,13 @@ function attachInlineEditingLaunchButtonClickEvent(selector) {
         const template = $(button).data("nt-template");
         const action = $(button).data("nt-action");
 
-        let routeid = ""
+        let routeid = "";
+        let index = ""; // for Editable List/Create
         if (action == "POST") { // Create
             routeid = $(button).data("nt-route-id");
+            if ($(wrapper).find(".nt-list-count").length > 0) {
+                index = $(wrapper).find(".nt-list-count").val();
+            }
         }
         else {
             routeid = $(button).closest(".nt-listitem").data("nt-route-id");
@@ -77,7 +81,7 @@ function attachInlineEditingLaunchButtonClickEvent(selector) {
 
         initializeInlineEditing(button, action)
         // 3. Ajax to get htmls
-        ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action);
+        ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action, index);
     });
 }
 
@@ -93,9 +97,13 @@ function attachInlineEditingCancelButtonClickEvent() {
         const template = "Details";
         const action = $(button).data("nt-action");
 
-        let routeid = ""
+        let routeid = "";
+        let index = "";
         if (action == "POST") { // Create
             routeid = $(button).data("nt-route-id");
+            if ($(wrapper).find(".nt-list-count").length > 0) {
+                index = $(wrapper).find(".nt-list-count").val();
+            }
         }
         else {
             routeid = $(button).closest(".nt-listitem").data("nt-route-id");
@@ -103,7 +111,7 @@ function attachInlineEditingCancelButtonClickEvent() {
 
         const loadItemUrl = $(wrapper).data("nt-loaditem-url");
 
-        ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action);
+        ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action, index);
     });
 }
 
@@ -289,11 +297,11 @@ function attachInlineEditingActionButtonClickEvent_InTiles() {
     });
 }
 
-function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container, template, action) {
+function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container, template, action, index) {
     $.ajax({
         type: "GET",
         url: loadItemUrl,
-        data: { view, container, template },
+        data: { view, container, template, index },
         async: false,
         contentType: "application/json",
         success: function (response) {
@@ -306,6 +314,8 @@ function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container
                 if (view === "EditableList") {
                     // Create, if "EditableList", append to <tbody>
                     $(currentListItem).closest("table").find("tbody").append(responseHtml);
+                    attachMultiItemsDeleteCheckboxEvent(responseHtml);
+                    increateListCountBy1(currentListItem);
                 }
                 else {
                     // Create, if not "EditableList", keep the current, .nt-createnew-button-container, <td> when List, which contains the Create <button>
@@ -348,7 +358,6 @@ function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container
         }
     });
 }
-
 
 function ajaxPostbackInlineEditing_InTiles(postbackurl, formData, self, view, loadItemUrl, container, template) {
     $.ajax({

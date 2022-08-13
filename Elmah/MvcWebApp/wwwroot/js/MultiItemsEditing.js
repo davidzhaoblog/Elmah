@@ -46,26 +46,12 @@ function multiItemsSubmitButtonClickEvent(sourceButton, dialog) {
         dataType: "html",
         success: function (response) {
             console.log(response);
-            //    //$(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").remove();
-            //    const splitResponse = response.split("===---------===");
-            //    // response part #1, status html
-            //    if (splitResponse.length > 0) {
-            //        $(dialog).find(".modal-body").append(splitResponse[0]);
-            //    }
-            //    const actionSuccess = !!($(dialog).find(".text-success").length);
-            //    if (actionSuccess) {
-            //        if (splitResponse.length > 1) {
-            //            for (i = 1; i < splitResponse.length; i++) {
-            //                const responseRoutId = $(splitResponse[i]).data("nt-route-id");
-            //                $(sourceButton).closest(".nt-list-wrapper").find(".nt-listitem[data-nt-route-id='" + responseRoutId + "']").html($(splitResponse[i]).html())
-            //            }
-            //        }
-            //        attachIndividualSelectCheckboxClickEventHandler($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked"));
-            //        attachInlineEditingLaunchButtonClickEvent($(wrapper).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").find(".btn-nt-inline-editing"));
-            //        const modal = bootstrap.Modal.getInstance(dialog);
-            //        modal.hide();
-            //        showSingletonMessagePopup(splitResponse[0]);
-            //    }
+            $(dialog).find(".modal-body").html(response);
+            const actionSuccess = !!($(dialog).find(".text-success").length);
+            if (actionSuccess) {
+                // disable save button
+                $(sourceButton).prop("disable", true);
+            }
         },
         failure: function (response) {
             // console.log(response);
@@ -76,40 +62,30 @@ function multiItemsSubmitButtonClickEvent(sourceButton, dialog) {
     });
 }
 
-//$(document).ready(function () {
-//    attachMultiItemsSubmitButtonClickEvent(".btn-nt-multiitems-editing-submit");
-//    attachMultiItemsCancelButtonClickEvent(".btn-nt-multiitems-editing-cancel");
-//})
-
 function attachMultiItemsSubmitButtonClickEvent(selector) {
     $(selector).click(function (e) {
         let button = e.currentTarget;
         multiItemsSubmitButtonClickEvent();
-
     });
 }
 
-function attachMultiItemsCancelButtonClickEvent(selector) {
-    $(selector).click(function (e) {
-        let button = e.currentTarget;
-        const currentListItem = $(button).closest(".nt-listitem");
-        const wrapper = $(button).closest(".nt-list-wrapper");
-        const view = $($(wrapper).data("nt-submittarget")).children(".nt-paged-view-option-field").val();
-        const container = $(button).data("nt-container");
-        const template = $(button).data("nt-template");
-        const action = $(button).data("nt-action");
-
-        let routeid = ""
-        if (action == "POST") { // Create
-            routeid = $(button).data("nt-route-id");
-        }
-        else {
-            routeid = $(button).closest(".nt-listitem").data("nt-route-id");
-        }
-        const loadItemUrl = $(wrapper).data("nt-loaditem-url");
-
-        initializeInlineEditing(button, action)
-        // 3. Ajax to get htmls
-        ajaxLoadItemInlineEditing(loadItemUrl + "/" + routeid, currentListItem, view, container, template, action);
+// nt-list-container-submit
+function attachMultiItemsDeleteCheckboxEvent(selector) {
+    $(selector).on('keyup change paste', 'td.nt-editablelist-delete-select input.nt-form-check', function () {
+        const self = this;
+        $(self).closest(".nt-listitem").find("input.nt-form-data").prop("readonly", $(self).is(':checked'));
+        $(self).closest(".nt-listitem").find("textarea.nt-form-data").prop("readonly", $(self).is(':checked'));
+        $(self).closest(".nt-listitem").find("select.nt-form-data").attr("readonly", $(self).is(':checked'));
+        $(self).closest(".nt-listitem").find("select.nt-form-data option:not(:selected)").prop("disabled", $(self).is(':checked'));
+        $(self).closest(".nt-listitem").find("input.nt-form-check").prop("readonly", $(self).is(':checked'));
+        $(self).prop("readonly", false);
     });
+}
+
+function increateListCountBy1(selector) {
+    const theHidden = $(selector).closest(".nt-list-container-submit").find(".nt-list-count");
+    if (!!theHidden) {
+        const current = parseInt(theHidden.val());
+        theHidden.val(current + 1);
+    }
 }

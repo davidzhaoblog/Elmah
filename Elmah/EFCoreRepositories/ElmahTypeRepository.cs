@@ -122,6 +122,120 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
+        public async Task<Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel> input)
+        {
+            // 1. DeleteItems, return if Failed
+            if (input.DeleteItems != null)
+            {
+                var responseOfDeleteItems = await this.BulkDelete(input.DeleteItems);
+                if (responseOfDeleteItems != null && responseOfDeleteItems.Status != HttpStatusCode.OK)
+                {
+                    return new Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
+                }
+            }
+
+            // 2. return OK, if no more NewItems and UpdateItems
+            if (!(input.NewItems != null && input.NewItems.Count > 0 ||
+                input.UpdateItems != null && input.UpdateItems.Count > 0))
+            {
+                return new Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>> { Status = HttpStatusCode.OK };
+            }
+
+            // 3. NewItems and UpdateItems
+            try
+            {
+                // 3.1.1. NewItems if any
+                List<ElmahType> newEFItems = new List<ElmahType>();
+                if (input.NewItems != null && input.NewItems.Count > 0)
+                {
+                    foreach (var item in input.NewItems)
+                    {
+                        var toInsert = new ElmahType
+                        {
+                            Type = item.Type,
+                        };
+                        _dbcontext.ElmahType.Add(toInsert);
+                        newEFItems.Add(toInsert);
+                    }
+                }
+
+                // 3.1.2. UpdateItems if any
+                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
+                {
+                    foreach (var item in input.UpdateItems)
+                    {
+                        var existing =
+                            (from t in _dbcontext.ElmahType
+                             where
+
+                             t.Type == item.Type
+                             select t).SingleOrDefault();
+
+                        if (existing != null)
+                        {
+                            // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
+                existing.Type = item.Type;
+                        }
+                    }
+                }
+                await _dbcontext.SaveChangesAsync();
+
+                // 3.2 Load Response
+                var identifierListToloadResponseItems = new List<string>();
+
+                if (input.NewItems != null && input.NewItems.Count > 0)
+                {
+                    identifierListToloadResponseItems.AddRange(
+                        from t in newEFItems
+                        select t.Type);
+                }
+                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
+                {
+                    identifierListToloadResponseItems.AddRange(
+                        from t in input.UpdateItems
+                        select t.Type);
+                }
+
+                var responseBodyWithNewAndUpdatedItems =
+                    (from t in _dbcontext.ElmahType
+                    where identifierListToloadResponseItems.Contains(t.Type)
+
+                    select new ElmahTypeModel
+                    {
+
+                        Type = t.Type,
+
+                    }).ToList();
+
+                // 3.3. Final Response
+                var response = new Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>>
+                {
+                    Status = HttpStatusCode.OK,
+                    ResponseBody = new MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>
+                    {
+                        NewItems =
+                            input.NewItems != null && input.NewItems.Count > 0
+                                ? responseBodyWithNewAndUpdatedItems.Where(t => newEFItems.Any(t1 => t1.Type == t.Type)).ToList()
+                                : null,
+                        UpdateItems =
+                            input.UpdateItems != null && input.UpdateItems.Count > 0
+                                ? responseBodyWithNewAndUpdatedItems.Where(t => input.UpdateItems.Any(t1 => t1.Type == t.Type)).ToList()
+                                : null,
+                    }
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>>
+                {
+                    Status = HttpStatusCode.InternalServerError,
+                    StatusMessage = "Create And/Or Update Failed. " + ex.Message
+                });
+            }
+        }
+
         public async Task<Response<ElmahTypeModel>> Update(ElmahTypeIdentifier id, ElmahTypeModel input)
         {
             if (input == null)

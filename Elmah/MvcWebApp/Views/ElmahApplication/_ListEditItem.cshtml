@@ -30,7 +30,7 @@
     </td>
 }
 <td class="form-group p-0">
-    <input asp-for="Model!.Application" class="form-control" data-nt-value="@Model!.Model!.Application" id="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"/>
+    <input asp-for="Model!.Application" class="form-control nt-form-data" data-nt-value="@Model!.Model!.Application" id="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"/>
     <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"></span>
 </td>
 @if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
@@ -42,6 +42,6 @@
 @if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
 {
     <td class="pb-0 nt-editablelist-delete-select">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahApplicationModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.IsDeleted______))">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-data ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahApplicationModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.IsDeleted______))">
     </td>
 }

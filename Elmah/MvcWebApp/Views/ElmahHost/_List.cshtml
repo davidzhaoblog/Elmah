@@ -4,6 +4,8 @@
 @using Elmah.MvcWebApp.Models;
 @model PagedViewModel<MvcListSetting, MvcListFeatures, ElmahHostModel[]>
 @inject IUIStrings localizor;
+<!--for EditableList "Create New" for now, can copy to Tiles -->
+<input type="hidden" class="nt-list-count" value="@Model!.Result!.ResponseBody!.Count()" />
 <div class="table-responsive p-0">
     <form>
     <table class="table table-hover table-bordered table-striped">

@@ -71,6 +71,12 @@ namespace Elmah.Services
             return await _thisRepository.BulkUpdate(data);
         }
 
+        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> input)
+        {
+            return await _thisRepository.MultiItemsCUD(input);
+        }
+
         public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)
         {
             return await _thisRepository.Update(id, input);

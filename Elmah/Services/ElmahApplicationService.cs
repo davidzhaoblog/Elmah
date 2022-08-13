@@ -86,6 +86,12 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
+        public async Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel> input)
+        {
+            return await _thisRepository.MultiItemsCUD(input);
+        }
+
         public async Task<Response<ElmahApplicationModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationModel input)
         {
             return await _thisRepository.Update(id, input);
