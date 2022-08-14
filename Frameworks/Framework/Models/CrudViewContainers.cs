@@ -2,9 +2,11 @@ namespace Framework.Models
 {
     public enum CrudViewContainers
     {
+        None,
         StandaloneView,
         Dialog,
-        Inline,
+        Inline, // always inline if PagedViewOptions.EditableList
+        // EditableList,
     }
 }
 
