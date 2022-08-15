@@ -23,13 +23,13 @@
                             <i class="fa-solid fa-folder-tree"></i>
                         </a>
                     }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
                     {
                             <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model!.Model!.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
                                 <i class="fa fa-briefcase"></i>
                             </a>
                     }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
                         {
 
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
@@ -39,13 +39,13 @@
                                 <i class="fa fa-briefcase"></i>
                             </button>
                         }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
                     {
                         <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model!.Model!.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
                         <i class="fa fa-edit"></i>
                     </a>
                     }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
                         {
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
                         data-nt-action="@HttpMethods.Put"
@@ -54,7 +54,7 @@
                                 <i class="fa fa-edit"></i>
                             </button>
                         }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Inline)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Inline)
                         {
                         <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Edit")"
                         data-nt-action="@HttpMethods.Put"
@@ -63,13 +63,13 @@
                         <i class="fa fa-edit"></i>
                     </button>
                         }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
                         {
                     <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model!.Model!.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
                         <i class="fa fa-trash"></i>
                     </a>
                         }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
                         {
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
                         data-nt-action="@HttpMethods.Delete"
@@ -78,7 +78,7 @@
                         <i class="fa fa-trash"></i>
                     </button>
                         }
-                        @if (Model.UIListSetting != null && Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Inline)
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Inline)
                         {
                     <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Delete")"
                         data-nt-action="@HttpMethods.Delete"

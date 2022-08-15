@@ -16,7 +16,7 @@ namespace Framework.Models
 
     public class PagedViewModel<TResponseBody>
     {
-        public UIListSettingModel UIListSetting { get; set; } = null!;
+        public Framework.Models.UIListSettingModel UIListSetting { get; set; } = null!;
 
         public PagedResponse<TResponseBody> Result { get; set; } = null!;
         /// <summary>
