@@ -13,6 +13,8 @@ namespace Elmah.MvcWebApp.Models
                 // 2. Customized By Developer
                 UIListFeatures = new Framework.Models.UIListFeatures
                 {
+                    ListWrapperId = "thisList",
+                    SearchFormId = "thisForm",
                     PrimayCreateViewContainer = Framework.Models.CrudViewContainers.Dialog,
                     PrimayDeleteViewContainer = Framework.Models.CrudViewContainers.Dialog,
                     PrimayDetailsViewContainer = Framework.Models.CrudViewContainers.Dialog,

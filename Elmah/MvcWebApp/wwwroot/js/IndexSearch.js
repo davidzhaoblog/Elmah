@@ -29,7 +29,7 @@ function pageLinkClicked(self) {
     const theForm = $($(self).closest(".nt-list-wrapper").data("nt-submittarget"));
     $(theForm).find(".nt-page-index").val($(self).data("nt-pageindex"));
     const url = $(theForm).data("nt-partial-url");
-    const updateTarget = $(theForm).data("nt-updatetarget");
+    const updateTarget = $($(theForm).data("nt-updatetarget")).find(".nt-list-container-submit");
     var formData = new FormData($(theForm)[0]);
     const pagedViewOption = $(theForm).children(".nt-paged-view-option-field").val();
     const pageIndex = $(theForm).children(".nt-page-index").val();
@@ -68,7 +68,7 @@ $(document).ready($(function () {
     $('.nt-ajax-partial-load-get').submit(function (e) {
         const theForm = this;
         const url = $(theForm).data("nt-partial-url");
-        const updateTarget = $(theForm).data("nt-updatetarget");
+        const updateTarget = $($(theForm).data("nt-updatetarget")).find(".nt-list-container-submit");
         var data = $(theForm)
             //.filter(function (index, element) {
             //    console.log($(element).val());
@@ -107,9 +107,15 @@ $(document).ready($(function () {
     });
 }));
 
+function attachIndexSearchSubmit(selector) {
+    $(selector).submit(function (e) {
+        indexSearchSubmit(this);
+    });
+}
+
 function indexSearchSubmit(theForm) {
     const url = $(theForm).data("nt-partial-url");
-    const updateTarget = $(theForm).data("nt-updatetarget");
+    const updateTarget = $($(theForm).data("nt-updatetarget")).find(".nt-list-container-submit");
     var formData = new FormData($(theForm)[0]);
     const pagedViewOption = $(theForm).children(".nt-paged-view-option-field").val();
     const pageIndex = $(theForm).children(".nt-page-index").val();

@@ -20,7 +20,9 @@
         currentView = Model.UIListSetting.UIParams.PagedViewOption.ToString();
     }
 }
-<form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahError")" data-nt-updatetarget=".nt-list-container-submit">
+<form id="@Model!.UIListSetting.UIListFeatures.SearchFormId" method="post" class="nt-ajax-partial-load-post-formdata" 
+    data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahError")"
+    data-nt-updatetarget="#@Model!.UIListSetting.UIListFeatures.ListWrapperId">
     <input type="hidden" asp-for="Query.PageIndex" class="nt-page-index" />
     <input type="hidden" asp-for="Query.PageSize" class="nt-page-size" />
     <input type="hidden" asp-for="Query.OrderBys" class="nt-order-by" />
@@ -132,10 +134,9 @@
     </div>
 </form>
 <hr class="mt-1" />
-<div class="card nt-list-wrapper"
-    id="thisList"
+<div class="card nt-list-wrapper" id="@Model!.UIListSetting.UIListFeatures.ListWrapperId"
     data-nt-bs-modalsize="Large"
-    data-nt-submittarget="#thisform"
+    data-nt-submittarget="#@Model!.UIListSetting.UIListFeatures.SearchFormId"
     data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahError")"
     data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahError")"
     data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahError")"
@@ -274,10 +275,13 @@
 @section Scripts
     {
     <script>
+        const searchFormId = "@Model.UIListSetting.UIListFeatures.SearchFormId";
+        const listWrapperId = "@Model.UIListSetting.UIListFeatures.ListWrapperId";
         $(document).ready($(function() {
-            showHidePagedViewOptionsRelatedButtons("#thisform");
-            attachFormDataChanged($("#thisList form"));
-            attachMultiItemsDeleteCheckboxEvent($("#thisList form"));
+            showHidePagedViewOptionsRelatedButtons("#" + searchFormId);
+            attachFormDataChanged($("#" + listWrapperId + " form"));
+            attachMultiItemsDeleteCheckboxEvent($("#" + listWrapperId + " form"));
+            attachIndexSearchSubmit("#" + searchFormId);
         }))
     </script>
 }

@@ -34,5 +34,7 @@
         /// </summary>
         public bool IsArrayBinding { get; set; } = false;
         public string? BindingPath { get; set; }
+        public string ListWrapperId { get; set; } = null!;
+        public string SearchFormId { get; set; } = null!;
     }
 }
