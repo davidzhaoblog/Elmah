@@ -7,7 +7,7 @@ namespace Framework.Models
         public string? OrderBys { get; set; }
 
         // public bool AdvancedQuery { get; set; } = false;
-        // public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.List;
+        // public PagedViewOptions PagedViewOption { get; set; } = PagedViewOptions.Table;
         public PaginationOptions PaginationOption { get; set; } = PaginationOptions.Paged;
         // public ViewItemTemplateNames Template { get; set; } = ViewItemTemplateNames.Details;
     }

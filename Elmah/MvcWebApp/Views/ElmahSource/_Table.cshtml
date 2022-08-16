@@ -2,7 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<ElmahApplicationModel[]>
+@model PagedViewModel<ElmahSourceModel[]>
 @inject IUIStrings localizor;
 <!--for EditableList "Create New" for now, can copy to Tiles -->
 <input type="hidden" class="nt-list-count" value="@Model!.Result!.ResponseBody!.Count()" />
@@ -19,7 +19,7 @@
                 {
                     <th class="p-0" style="width: 1% !important;"></th>
                 }
-                <th class="pt-0 pb-0">@localizor.Get("Application")</th>
+                <th class="pt-0 pb-0">@localizor.Get("Source")</th>
                 @if (Model!.UIListSetting.ShowItemUIStatus())
                 {
                     <th class="p-0" style="width: 1% !important;"></th>
@@ -35,13 +35,13 @@
             {
                 for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
                 {
-                    @await Html.PartialAsync("~/Views/ElmahApplication/_ListItemTr.cshtml",
-                        new MvcItemViewModel<ElmahApplicationModel>
+                    @await Html.PartialAsync("~/Views/ElmahSource/_TableItemTr.cshtml",
+                        new MvcItemViewModel<ElmahSourceModel>
                         {
                             UIListSetting = Model.UIListSetting,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model!.UIListSetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            Template = Model!.UIListSetting.UIParams.PagedViewOption != PagedViewOptions.EditableTable ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
                             IndexInArray = i,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
@@ -59,7 +59,7 @@
         </tbody>
             <!--only for inline editing-->
             <tfoot>
-                @if (Model!.UIListSetting != null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Inline))
+                @if (Model!.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Inline))
                 {
                     <tr class="pt-0 pb-0 nt-listitem nt-new">
                         <td class="nt-createnew-button-container" colspan="100">

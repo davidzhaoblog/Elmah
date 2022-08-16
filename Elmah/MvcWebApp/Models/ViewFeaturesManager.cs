@@ -49,20 +49,20 @@ namespace Elmah.MvcWebApp.Models
 
                     CanGotoDashboard = true,
                     CanBulkDelete = false,
+                    CanBulkActions = false,
 
-                    BulkActions = null,
                     AvailableListViews = new List<PagedViewOptions>
                     {
-                        PagedViewOptions.List,
+                        PagedViewOptions.Table,
                         PagedViewOptions.Tiles,
                         PagedViewOptions.SlideShow,
-                        // PagedViewOptions.EditableList,
+                        // PagedViewOptions.EditableTable,
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.AvailableListViews[0]);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableList;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
 
             return result;
         }
@@ -97,20 +97,20 @@ namespace Elmah.MvcWebApp.Models
 
                     CanGotoDashboard = true,
                     CanBulkDelete = true,
+                    CanBulkActions = true,
 
-                    BulkActions = null,
                     AvailableListViews = new List<PagedViewOptions>
                     {
-                        PagedViewOptions.List,
+                        PagedViewOptions.Table,
                         PagedViewOptions.Tiles,
                         PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableList,
+                        PagedViewOptions.EditableTable,
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.AvailableListViews[0]);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableList;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
 
             return result;
         }
@@ -121,7 +121,7 @@ namespace Elmah.MvcWebApp.Models
             {
                 AdvancedQuery = false, //
                 PagedViewOption = defaultPagedViewOption,
-                Template = defaultPagedViewOption == PagedViewOptions.EditableList
+                Template = defaultPagedViewOption == PagedViewOptions.EditableTable
                         ? ViewItemTemplateNames.Edit
                         : ViewItemTemplateNames.Details,
             };

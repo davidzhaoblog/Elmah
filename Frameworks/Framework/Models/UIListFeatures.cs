@@ -16,9 +16,9 @@ namespace Framework.Models
         public bool CanGotoDashboard { get; set; } = false;
 
         public bool CanBulkDelete { get; set; } = false;
+        public bool CanBulkActions { get; set; } = false;
 
         public List<string>? BulkActions { get; set; }
-        public bool CanBulkActions { get { return BulkActions != null && BulkActions.Count > 0; } }
 
         /// <summary>
         /// The first is default

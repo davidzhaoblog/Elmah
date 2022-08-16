@@ -26,7 +26,7 @@
                             </h2>
                             <div id="panelsStayOpen-collapse-elmahErrors_Via_User" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors_Via_User">
                                 <div class="accordion-body p-0">
-                                    @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors_Via_User, Status = Model.Responses[ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User].Status, StatusMessage= Model.Responses[ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_Table.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors_Via_User, Status = Model.Responses[ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User].Status, StatusMessage= Model.Responses[ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User].StatusMessage })
                                 </div>
                             </div>
                         </div>

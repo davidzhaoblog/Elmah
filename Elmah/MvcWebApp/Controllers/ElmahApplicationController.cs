@@ -44,7 +44,7 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (uiParams.PagedViewOption == PagedViewOptions.List || uiParams.PagedViewOption == PagedViewOptions.EditableList)
+            else if (uiParams.PagedViewOption == PagedViewOptions.Table || uiParams.PagedViewOption == PagedViewOptions.EditableTable)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
@@ -88,16 +88,18 @@ namespace Elmah.MvcWebApp.Controllers
             {
             }
 
-            if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiParams.PagedViewOption == PagedViewOptions.Table || uiParams.PagedViewOption == PagedViewOptions.EditableTable)
             {
-                return PartialView("_Tiles", pagedViewModel);
+                return PartialView("~/Views/ElmahApplication/_Table.cshtml", pagedViewModel);
             }
-            else if (uiParams.PagedViewOption == PagedViewOptions.SlideShow)
+            else if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
             {
-                return PartialView("_SlideShow", pagedViewModel);
+                return PartialView("~/Views/ElmahApplication/_Tiles.cshtml", pagedViewModel);
             }
+            //else // if (uiParams.PagedViewOption == PagedViewOptions.SlideShow)
+            // SlideShow
+            return PartialView("~/Views/ElmahApplication/_SlideShow.cshtml", pagedViewModel);
 
-            return PartialView("_List", pagedViewModel);
         }
 
         [Route("[controller]/[action]/{Application}")] // Primary
@@ -147,7 +149,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             }
 
-            if ((view == PagedViewOptions.List || view == PagedViewOptions.EditableList ) && container == CrudViewContainers.Inline)
+            if ((view == PagedViewOptions.Table || view == PagedViewOptions.EditableTable) && container == CrudViewContainers.Inline)
             {
                 if (template == ViewItemTemplateNames.Create.ToString())
                 {
@@ -188,14 +190,14 @@ namespace Elmah.MvcWebApp.Controllers
 
                 if (result.Status == System.Net.HttpStatusCode.OK)
                 {
-                    if (view == PagedViewOptions.List) // Html Table
+                    if (view == PagedViewOptions.Table) // Html Table
                     {
                         return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
                             new AjaxResponseViewModel
                             {
                                 Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                                 PartialViews = new List<Tuple<string, object>> {
-                                new Tuple<string, object>("~/Views/ElmahApplication/_ListItemTr.cshtml",
+                                new Tuple<string, object>("~/Views/ElmahApplication/_TableItemTr.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationModel>{
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
@@ -271,7 +273,7 @@ namespace Elmah.MvcWebApp.Controllers
                 var result = await _thisService.Update(id, input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
                 {
-                    if (view == PagedViewOptions.List) // Html Table
+                    if (view == PagedViewOptions.Table) // Html Table
                     {
                         return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
                         {
@@ -279,7 +281,7 @@ namespace Elmah.MvcWebApp.Controllers
                             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                             PartialViews = new List<Tuple<string, object>>
                             {
-                                new Tuple<string, object>("~/Views/ElmahApplication/_ListDetailsItem.cshtml",
+                                new Tuple<string, object>("~/Views/ElmahApplication/_TableDetailsItem.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationModel>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,

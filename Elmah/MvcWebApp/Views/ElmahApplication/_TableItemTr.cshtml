@@ -2,22 +2,22 @@
 @using Elmah.MvcWebApp.Models;
 @using Framework.Models;
 @using Elmah.Models;
-@model MvcItemViewModel<ElmahHostModel>
+@model MvcItemViewModel<ElmahApplicationModel>
 @inject IUIStrings localizor;
 @{
-    var routeId = Model.Model?.Host;
+    var routeId = Model.Model?.Application;
 }
 <tr class="pt-0 pb-0 nt-listitem@(Model.IsCurrentItem ? " nt-created border-warning border-3": "")" data-nt-route-id="@routeId">
     @if (Model.Template == ViewItemTemplateNames.Details.ToString())
     {
-        @await Html.PartialAsync("~/Views/ElmahHost/_ListDetailsItem.cshtml", Model)
+        @await Html.PartialAsync("~/Views/ElmahApplication/_TableDetailsItem.cshtml", Model)
     }
     else if (Model.Template == ViewItemTemplateNames.Edit.ToString())
     {
-        @await Html.PartialAsync("~/Views/ElmahHost/_ListEditItem.cshtml", Model)
+        @await Html.PartialAsync("~/Views/ElmahApplication/_TableEditItem.cshtml", Model)
     }
     else if (Model.Template == ViewItemTemplateNames.Create.ToString())
     {
-        @await Html.PartialAsync("~/Views/ElmahHost/_ListCreateItem.cshtml", Model)
+        @await Html.PartialAsync("~/Views/ElmahApplication/_TableCreateItem.cshtml", Model)
     }
 </tr>

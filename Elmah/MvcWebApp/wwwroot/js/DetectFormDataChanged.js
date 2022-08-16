@@ -54,7 +54,7 @@ function enableSaveButton(listWrapperSelector, formDataChanged) {
     // 2. update paged-view-option
     const submitTarget = $(listWrapperSelector).data("nt-submittarget");
     const view = $(submitTarget).find(".nt-paged-view-option-field").val();
-    if (view === "EditableList") {
+    if (view === "EditableTable") {
         $(listWrapperSelector).find(".nt-multiitem-editing-buttons .btn-nt-multiitems-editing-submit").prop("disabled", !formDataChanged);
     }
     else {

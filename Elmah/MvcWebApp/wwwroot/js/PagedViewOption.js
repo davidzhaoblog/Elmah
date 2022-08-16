@@ -2,7 +2,7 @@
 /*
  * data-nt-submittarget - e.g. #thisForm
  * data-nt-paginationoptionupdatevalue - e.g. // List-Pagination, Tiles-More, Slideshow-NoPagination
- * data-nt-value - PagedViewOption - List/Tile/Slideshow/EditableList
+ * data-nt-value - PagedViewOption - List/Tile/Slideshow/EditableTable
  * 
  * .nt-radio-pagedviewoption
  * 
@@ -14,7 +14,7 @@
 function pageViewOptionsClickedEventHandler(sourceButton) {
     const submitTarget = $(sourceButton).closest(".nt-list-wrapper").data("nt-submittarget");
     const pagedViewOption = $(sourceButton).data("nt-value");
-    if (pagedViewOption === "EditableList") {
+    if (pagedViewOption === "EditableTable") {
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-multiitem-editing-buttons").show();
         $(submitTarget).find(".nt-template-field").val("Edit");
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter").hide();
@@ -53,8 +53,8 @@ function showHidePagedViewOptionsRelatedButtons(wrapperSelector) {
     const listBulkSelectFilter = $(listWrapper).find(".nt-bulk-select-filter");
     const listBulkActionContainer = $(listWrapper).find(".nt-bulk-actions-container");
     const createNewButtonFloat = $(listWrapper).find(".btn-nt-create-new-float");
-    if (currentView == "EditableList") {
-        // 1. show EditableList Buttons
+    if (currentView == "EditableTable") {
+        // 1. show EditableTable Buttons
         editableListButtons.show();
         listBulkSelectFilter.hide();
         listBulkActionContainer.hide();

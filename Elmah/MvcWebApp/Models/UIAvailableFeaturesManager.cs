@@ -21,10 +21,10 @@ namespace Elmah.MvcWebApp.Models
                 BulkActions = null,
                 AvailableListViewFeatures = new Dictionary<PagedViewOptions, ViewItemTemplateNames[]>
                 {
-                    { PagedViewOptions.List, new ViewItemTemplateNames[] { ViewItemTemplateNames.Create, ViewItemTemplateNames.Delete, ViewItemTemplateNames.Details, ViewItemTemplateNames.Edit } },
+                    { PagedViewOptions.Table, new ViewItemTemplateNames[] { ViewItemTemplateNames.Create, ViewItemTemplateNames.Delete, ViewItemTemplateNames.Details, ViewItemTemplateNames.Edit } },
                     { PagedViewOptions.Tiles, new ViewItemTemplateNames[] { ViewItemTemplateNames.Create, ViewItemTemplateNames.Delete, ViewItemTemplateNames.Details, ViewItemTemplateNames.Edit } },
                     { PagedViewOptions.SlideShow, new ViewItemTemplateNames[] { ViewItemTemplateNames.Details } },
-                    { PagedViewOptions.EditableList, new ViewItemTemplateNames[] { ViewItemTemplateNames.Create, ViewItemTemplateNames.Edit } },
+                    { PagedViewOptions.EditableTable, new ViewItemTemplateNames[] { ViewItemTemplateNames.Create, ViewItemTemplateNames.Edit } },
                 },
             };
         }

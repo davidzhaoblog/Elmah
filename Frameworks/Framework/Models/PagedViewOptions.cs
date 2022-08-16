@@ -2,11 +2,11 @@ namespace Framework.Models
 {
     public enum PagedViewOptions
     {
-        Single,
-        List,
+        Card,
+        Table,
         Tiles,
         SlideShow,
-        EditableList,
+        EditableTable,
     }
 }
 

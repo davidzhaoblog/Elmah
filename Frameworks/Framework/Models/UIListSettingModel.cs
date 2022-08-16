@@ -12,34 +12,34 @@ namespace Framework.Models
 
         public bool ShowListBulkActionRelated(bool withBulkDelete)
         {
-            return (UIParams.PagedViewOption == PagedViewOptions.List || UIParams.PagedViewOption == PagedViewOptions.Tiles) &&
+            return (UIParams.PagedViewOption == PagedViewOptions.Table || UIParams.PagedViewOption == PagedViewOptions.Tiles) &&
                 (withBulkDelete && UIListFeatures.CanBulkDelete || UIListFeatures.CanBulkActions);
-            //return (UIParams.PagedViewOption == PagedViewOptions.List || UIParams.PagedViewOption == PagedViewOptions.Tiles) &&
+            //return (UIParams.PagedViewOption == PagedViewOptions.Table || UIParams.PagedViewOption == PagedViewOptions.Tiles) &&
             //    (withBulkDelete && UIListFeatures.CanBulkDelete || UIListFeatures.CanBulkActions) &&
-            //    UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Any(t=> t == PagedViewOptions.List && t != PagedViewOptions.Tiles) &&
-            //    (UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || (UIAvailableFeatures.HasBulkDelete || UIAvailableFeatures.HasBulkActions) && UIAvailableFeatures.AvailableListViewFeatures!.Any(t=>t.Key != PagedViewOptions.EditableList && t.Key != PagedViewOptions.Single));
+            //    UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Any(t=> t == PagedViewOptions.Table && t != PagedViewOptions.Tiles) &&
+            //    (UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || (UIAvailableFeatures.HasBulkDelete || UIAvailableFeatures.HasBulkActions) && UIAvailableFeatures.AvailableListViewFeatures!.Any(t=>t.Key != PagedViewOptions.EditableTable && t.Key != PagedViewOptions.Card));
         }
 
         public bool HasEditableList()
         {
-            return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableList);
-            //return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableList) &&
-            //    (UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || UIAvailableFeatures.AvailableListViewFeatures.ContainsKey(PagedViewOptions.EditableList));
+            return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableTable);
+            //return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableTable) &&
+            //    (UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || UIAvailableFeatures.AvailableListViewFeatures.ContainsKey(PagedViewOptions.EditableTable));
         }
 
         public bool ShowItemUIStatus()
         {
-            return UIParams.PagedViewOption == PagedViewOptions.EditableList && HasEditableList();
+            return UIParams.PagedViewOption == PagedViewOptions.EditableTable && HasEditableList();
         }
 
         public bool ShowEditableListDeleteSelect()
         {
-            return UIParams.PagedViewOption == PagedViewOptions.EditableList && UIListFeatures.CanBulkDelete && HasEditableList();
+            return UIParams.PagedViewOption == PagedViewOptions.EditableTable && UIListFeatures.CanBulkDelete && HasEditableList();
         }
 
         public bool ShowItemButtons()
         {
-            return UIParams.PagedViewOption != PagedViewOptions.EditableList;
+            return UIParams.PagedViewOption != PagedViewOptions.EditableTable;
         }
 
         public List<PagedViewOptions> GetAvailablePagedViewOptions()
@@ -52,8 +52,8 @@ namespace Framework.Models
 
         public bool CanGotoCreate(CrudViewContainers crudViewContainers)
         {
-            return (UIParams.PagedViewOption == PagedViewOptions.List || UIParams.PagedViewOption == PagedViewOptions.Tiles) && UIListFeatures.PrimayEditViewContainer == crudViewContainers ||
-                UIParams.PagedViewOption == PagedViewOptions.EditableList && crudViewContainers == CrudViewContainers.Inline;
+            return (UIParams.PagedViewOption == PagedViewOptions.Table || UIParams.PagedViewOption == PagedViewOptions.Tiles) && UIListFeatures.PrimayEditViewContainer == crudViewContainers ||
+                UIParams.PagedViewOption == PagedViewOptions.EditableTable && crudViewContainers == CrudViewContainers.Inline;
         }
 
         // 1.end List/Editable list related

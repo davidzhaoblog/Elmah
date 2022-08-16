@@ -5,7 +5,7 @@ namespace Framework.Models
         None,
         StandaloneView,
         Dialog,
-        Inline, // always inline if PagedViewOptions.EditableList
+        Inline, // always inline if PagedViewOptions.EditableTable
         // EditableList,
     }
 }
