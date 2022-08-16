@@ -8,25 +8,25 @@
 <input type="hidden" class="nt-list-count" value="@Model!.Result!.ResponseBody!.Count()" />
 <div class="table-responsive p-0">
     <form>
-    <table class="table table-hover table-bordered table-striped">
+    <table class="table table-hover table-bordered table-striped align-middle">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
                 @if (Model!.UISetting.ShowListBulkActionRelated(Model.UIFeatures))
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
                 @if (Model!.UISetting.ShowItemButtons(Model.UIFeatures))
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
                 <th class="pt-0 pb-0">@localizor.Get("Application")</th>
                 @if (Model!.UISetting.ShowItemUIStatus(Model.UIFeatures))
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
                 @if (Model!.UISetting.ShowEditableListDeleteSelect(Model.UIFeatures))
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
             </tr>
         </thead>

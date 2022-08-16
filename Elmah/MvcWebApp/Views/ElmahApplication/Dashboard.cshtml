@@ -26,12 +26,6 @@
                             </h2>
                             <div id="panelsStayOpen-collapse-elmahErrors_Via_Application" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors_Via_Application">
                                 <div class="accordion-body p-0">
-                                    <div class="btn-group float-end">
-                                        <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("Search")">
-                                            <span class="fa fa-search"></span>
-                                            @localizor.Get("Search")
-                                        </a>
-                                    </div>
                                     @await Html.PartialAsync("~/Views/ElmahError/_List.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors_Via_Application, Status = Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application].Status, StatusMessage= Model.Responses[ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application].StatusMessage })
                                 </div>
                             </div>

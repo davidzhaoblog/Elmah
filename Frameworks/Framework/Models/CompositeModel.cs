@@ -6,6 +6,7 @@ namespace Framework.Models
     {
         public TMaster __Master__ { get; set; } = null!;
         public Dictionary<TPropertyEnum, Response> Responses { get; set; } = new Dictionary<TPropertyEnum, Response>();
+
         /// <summary>
         /// This property will be populated in UI layer
         /// </summary>
