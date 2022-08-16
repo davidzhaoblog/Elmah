@@ -167,13 +167,13 @@ namespace Elmah.MvcWebApp.Controllers
             {
                 if (template == ViewItemTemplateNames.Create.ToString())
                 {
-                    return PartialView($"_ListItemTr", itemViewModel);
+                    return PartialView($"_TableItemTr", itemViewModel);
                 }
                 else
                 {
-                    // By Default: _List{template}Item.cshtml
+                    // By Default: _Table{template}Item.cshtml
                     // Developer can customize template name
-                    return PartialView($"_List{template}Item", itemViewModel);
+                    return PartialView($"_Table{template}Item", itemViewModel);
                 }
             }
             if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
