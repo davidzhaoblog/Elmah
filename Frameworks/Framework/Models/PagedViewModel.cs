@@ -1,11 +1,8 @@
 namespace Framework.Models
 {
-    public class PagedViewModel<TUISetting, TUIFeatures, TResponseBody>
-        where TUISetting : class
-        where TUIFeatures : class
+    public class PagedViewModel<TResponseBody>
     {
-        public TUISetting UISetting { get; set; } = null!;
-        public TUIFeatures? UIFeatures { get; set; }
+        public UIListSettingModel UIListSetting { get; set; } = null!;
 
         public PagedResponse<TResponseBody> Result { get; set; } = null!;
         /// <summary>

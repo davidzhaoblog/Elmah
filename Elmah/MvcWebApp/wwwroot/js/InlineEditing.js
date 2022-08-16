@@ -316,6 +316,7 @@ function ajaxLoadItemInlineEditing(loadItemUrl, currentListItem, view, container
                     $(currentListItem).closest("table").find("tbody").append(responseHtml);
                     attachMultiItemsDeleteCheckboxEvent(responseHtml);
                     increateListCountBy1(currentListItem);
+                    enableSaveButton($(currentListItem).closest(".nt-list-wrapper"), true);
                 }
                 else {
                     // Create, if not "EditableList", keep the current, .nt-createnew-button-container, <td> when List, which contains the Create <button>

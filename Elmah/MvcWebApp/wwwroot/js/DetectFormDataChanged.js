@@ -16,10 +16,14 @@ function attachFormDataChanged(theForm) {
                 $(self).closest(".form-group").removeClass("nt-form-data-changed border-danger border-2");
             }
 
-            const newItemStatus = $(self).closest(".nt-listitem").find(".nt-form-data-changed").length === 0 ? "NoChange" : "Updated";
-            $(itemStatusField).val(newItemStatus);
+            if (!$(self).closest(".form-group").hasClass("nt-editablelist-delete-select")) {
+                const newItemStatus = $(self).closest(".nt-listitem").find(".nt-form-data-changed").length === 0 ? "NoChange" : "Updated";
+                $(itemStatusField).val(newItemStatus);
+            }
         }
-        enableSaveButton(this);
+        const formDataChanged = $(self).closest(".nt-list-wrapper").find(".nt-form-data-changed").length > 0 ||
+            $(self).closest(".nt-list-wrapper").find(".nt-item-status input[data-nt-value='New']") > 0;
+        enableSaveButton($(self).closest(".nt-list-wrapper"), formDataChanged);
     });
 
     $(theForm).on('keyup change paste', 'input.nt-form-check', function () {
@@ -28,24 +32,25 @@ function attachFormDataChanged(theForm) {
         const currentItemStatus = $(itemStatusField).val();
         // 1. add/remove field changed css classes - nt-form-data-changed border-danger border-2
         if (currentItemStatus !== "New") { // not NoChange or Updated, see C# Framework.Models.ItemUIStatus
-            const thisFieldChanged = $(self).is(':checked').toString() !== $(self).data("nt-value").toLowerCase();
+            const thisFieldChanged = $(self).is(':checked').toString() !== $(self).data("nt-value").toString().toLowerCase();
             if (thisFieldChanged) {
                 $(self).closest(".form-group").addClass("nt-form-data-changed border-danger border-2");
             }
             else {
                 $(self).closest(".form-group").removeClass("nt-form-data-changed border-danger border-2");
             }
-
-            const newItemStatus = $(self).closest(".nt-listitem").find(".nt-form-data-changed").length === 0 ? "NoChange" : "Updated";
-            $(itemStatusField).val(newItemStatus);
+            if (!$(self).closest(".form-group").hasClass("nt-editablelist-delete-select")) {
+                const newItemStatus = $(self).closest(".nt-listitem").find(".nt-form-data-changed").length === 0 ? "NoChange" : "Updated";
+                $(itemStatusField).val(newItemStatus);
+            }
         }
-        enableSaveButton(this);
+        const formDataChanged = $(self).closest(".nt-list-wrapper").find(".nt-form-data-changed").length > 0 ||
+            $(self).closest(".nt-list-wrapper").find(".nt-item-status input[data-nt-value='New']") > 0;
+        enableSaveButton($(self).closest(".nt-list-wrapper"), formDataChanged);
     });
 }
 
-function enableSaveButton(changedSelf) {
-    const listWrapperSelector = $(changedSelf).closest(".nt-list-wrapper");
-    const formDataChanged = $(listWrapperSelector).find(".nt-form-data-changed").length > 0;
+function enableSaveButton(listWrapperSelector, formDataChanged) {
     // 2. update paged-view-option
     const submitTarget = $(listWrapperSelector).data("nt-submittarget");
     const view = $(submitTarget).find(".nt-paged-view-option-field").val();

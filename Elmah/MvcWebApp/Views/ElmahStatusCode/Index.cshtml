@@ -3,7 +3,7 @@
 @using Framework.Models;
 @using Elmah.Models.Definitions;
 @using Elmah.MvcWebApp.Models;
-@model PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, MvcListSetting, MvcListFeatures, ElmahStatusCodeModel[]>
+@model PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>
 @inject IHttpContextAccessor Accessor
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
@@ -17,7 +17,7 @@
     }
     if (string.IsNullOrEmpty(currentView))
     {
-        currentView = Model!.UISetting.PagedViewOption.ToString();
+        currentView = Model.UIListSetting.UIParams.PagedViewOption.ToString();
     }
 }
 <form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahStatusCode")" data-nt-updatetarget=".nt-list-container-submit">
@@ -25,9 +25,9 @@
     <input type="hidden" asp-for="Query.PageSize" class="nt-page-size" />
     <input type="hidden" asp-for="Query.OrderBys" class="nt-order-by" />
     <input type="hidden" asp-for="Query.PaginationOption" class="nt-pagination-option-field" />
-    <input type="hidden" asp-for="UISetting.AdvancedQuery" id="advancedQueryH" class="nt-advanced-query" />
-    <input type="hidden" asp-for="UISetting.PagedViewOption" class="nt-paged-view-option-field" value="@currentView" />
-    <input type="hidden" asp-for="UISetting.Template" class="nt-template-field" />
+    <input type="hidden" asp-for="UIListSetting.UIParams.AdvancedQuery" id="advancedQueryH" class="nt-advanced-query" id="AdvancedQuery" name="AdvancedQuery" />
+    <input type="hidden" asp-for="UIListSetting.UIParams.PagedViewOption" class="nt-paged-view-option-field" value="@currentView" id="PagedViewOption" name="PagedViewOption" />
+    <input type="hidden" asp-for="UIListSetting.UIParams.Template" class="nt-template-field" id="Template" name="Template" />
     <div class="d-flex justify-content-between pt-1">
         <div>
             <span class="h5"><a class="nav-link text-dark" asp-area="" asp-controller="ElmahStatusCode" asp-action="Index">you are working on <strong>@localizor.Get("ElmahStatusCode")</strong></a></span>
@@ -78,26 +78,35 @@
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UISetting.PagedViewOption==PagedViewOptions.List ? "checked": "")>
+                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.List ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-cells"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" @(Model!.UISetting.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
+                data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" @(Model!.UISetting.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
+                data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UISetting.PagedViewOption == PagedViewOptions.EditableList ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-table"></i></label>
+                data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption == PagedViewOptions.EditableList ? "checked": "")>
+            <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-pen-ruler"></i></label>
         </div>
-        <div class="btn-group float-end mt-1 ms-3 me-3">
-            <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit"></select>
-            <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit"></select>
-        </div>
-        @if (Model!.UISetting.HasListBulkActionRelated(Model.UIFeatures))
+        @if (Model.UIListSetting.UIListFeatures.HasPageSizeList || Model.UIListSetting.UIListFeatures.HasOrderByList)
+        {
+            <div class="btn-group float-end mt-1 ms-3 me-3">
+                @if (Model.UIListSetting.UIListFeatures.HasPageSizeList)
+                {
+                    <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit"></select>
+                }
+                @if (Model.UIListSetting.UIListFeatures.HasOrderByList)
+                {
+                    <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit"></select>
+                }
+            </div>
+        }
+        @if (Model!.UIListSetting.ShowListBulkActionRelated(true))
         {
             <div class="btn-group m-0 p-0 float-start nt-bulk-select-filter">
                 <button type="button" class="btn btn-default m-0 p-0 btn-nt-bulk-select-status" data-nt-bulk-select-status="None">
@@ -113,7 +122,7 @@
                 </ul>
             </div>
         }
-        @if (Model!.UISetting.HasListBulkActionRelated(Model.UIFeatures))
+        @if (Model!.UIListSetting.ShowListBulkActionRelated(false))
         {
             <div class="btn-group float-start ps-4 nt-bulk-actions-container" style="display:none">
                 <button type="button" class="btn btn-default nt-bulk-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
@@ -122,7 +131,7 @@
                 </button>
             </div>
         }
-        @if (Model!.UISetting.HasEditableList(Model!.UIFeatures))
+        @if (Model!.UIListSetting.HasEditableList())
         {
             <div class="btn-group float-start ps-4 nt-multiitem-editing-buttons" style="display:none;">
                 <button disabled type="button" class="btn btn-default btn-nt-multiitems-editing-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
@@ -137,6 +146,7 @@
         }
     </div>
     <div class="card-body nt-list-container-submit row m-0 p-0">
+        <!--Developer keep this logic same on all Index.cshtml, although the 3 views may not available for some tables-->
         @if (currentView.ToLower() == PagedViewOptions.Tiles.ToString().ToLower())
         {
             @await Html.PartialAsync("~/Views/ElmahStatusCode/_Tiles.cshtml", Model)
@@ -154,16 +164,22 @@
         <div class="float-start ms-5 ps-5 border-2 nt-singlton-message-popup bg-info" style="display:none">
         </div>
         <div class="btn-group float-end m-4">
-            <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                <i class="fa fa-plus"></i>
-            </a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                data-nt-action="@HttpMethods.Post"
-                data-nt-route-id="@(default(int))"
-                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                <i class="fa fa-plus"></i>
-            </button>
+            @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.StandaloneView))
+            {
+                <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                    <i class="fa fa-plus"></i>
+                </a>
+            }
+            @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
+            {
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
+                    data-nt-action="@HttpMethods.Post"
+                    data-nt-route-id="@(default(int))"
+                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                    <i class="fa fa-plus"></i>
+                </button>
+            }
         </div>
     </div>
 </div>

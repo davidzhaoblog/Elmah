@@ -60,8 +60,11 @@ builder.Services.AddScoped<IElmahTypeService, ElmahTypeService>();
 builder.Services.AddScoped<IElmahUserService, ElmahUserService>();
 
 // 1.3. Other Services
-builder.Services.AddScoped<SelectListHelper>();
 builder.Services.AddScoped<IDropDownListService, DropDownListService>();
+
+// 1.4. UI Related
+builder.Services.AddScoped<SelectListHelper>();
+builder.Services.AddScoped<IndexViewFeatureManager>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => { x.UseNetTopologySuite(); x.UseBulk(); }),  ServiceLifetime.Scoped);

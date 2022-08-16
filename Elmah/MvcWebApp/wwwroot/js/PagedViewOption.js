@@ -20,11 +20,13 @@ function pageViewOptionsClickedEventHandler(sourceButton) {
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter").hide();
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-actions-container").hide();
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter .btn-nt-bulk-select-status").val("None");
+        $(sourceButton).closest(".nt-list-wrapper").find(".btn-nt-create-new-float").hide();
     }
     else {
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-multiitem-editing-buttons").hide();
         $(submitTarget).find(".nt-template-field").val("Details");
         $(sourceButton).closest(".nt-list-wrapper").find(".nt-bulk-select-filter").show();
+        $(sourceButton).closest(".nt-list-wrapper").find(".btn-nt-create-new-float").hide();
     }
 
     // 1. update pagination-option
@@ -51,15 +53,18 @@ function showHidePagedViewOptionsRelatedButtons(wrapperSelector) {
     const editableListButtons = $(listWrapper).find(".nt-multiitem-editing-buttons");
     const listBulkSelectFilter = $(listWrapper).find(".nt-bulk-select-filter");
     const listBulkActionContainer = $(listWrapper).find(".nt-bulk-actions-container");
+    const createNewButtonFloat = $(listWrapper).find(".btn-nt-create-new-float");
     if (currentView == "EditableList") {
         // 1. show EditableList Buttons
         editableListButtons.show();
         listBulkSelectFilter.hide();
         listBulkActionContainer.hide();
+        createNewButtonFloat.hide();
     }
     else {
         editableListButtons.hide();
         listBulkSelectFilter.show();
+        createNewButtonFloat.show();
     }
 }
 

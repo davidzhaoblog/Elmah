@@ -22,64 +22,91 @@
                 <a class="btn btn-default" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Model?.Type" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
-                            <i class="fa-solid fa-folder-tree"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Dashboard")</span>
-                        </a>
+                        @if(Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.CanGotoDashboard)
+                        {
+                            <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model.Model?.Type" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                                <i class="fa-solid fa-folder-tree"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Dashboard")</span>
+                            </a>
+                        }
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Details" asp-route-type="@Model.Model?.Type" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                            <i class="fa fa-briefcase"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Details")</span>
-                        </a>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
+                        {
+                            <a asp-area="" asp-controller="ElmahType" asp-action="Details" asp-route-type="@Model.Model?.Type" class="btn btn-default" role="button" title="@localizor.Get("Details")">
+                                <i class="fa fa-briefcase"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Details")</span>
+                            </a>
+                        }
                     </li>
                     <li>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
-                            data-nt-action="@HttpMethods.Get"
-                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                            <i class="fa fa-briefcase"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Details")</span>
-                        </button>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
+                        {
+                            <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
+                                data-nt-action="@HttpMethods.Get"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                                <i class="fa fa-briefcase"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Details")</span>
+                            </button>
+                        }
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Edit" asp-route-type="@Model.Model?.Type" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                            <i class="fa fa-edit"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
-                        </a>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
+                        {
+                            <a asp-area="" asp-controller="ElmahType" asp-action="Edit" asp-route-type="@Model.Model?.Type" class="btn btn-default" role="button" title="@localizor.Get("Edit")">
+                                <i class="fa fa-edit"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
+                            </a>
+                        }
                     </li>
                     <li>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                            data-nt-action="@HttpMethods.Put"
-                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                            <i class="fa fa-edit"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
-                        </button>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
+                        {
+                            <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                                data-nt-action="@HttpMethods.Put"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                                <i class="fa fa-edit"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
+                            </button>
+                        }
                     </li>
                     <li>
-                        <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Edit")"
-                            data-nt-action="@HttpMethods.Put"
-                            data-nt-container="@CrudViewContainers.Inline.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                            <i class="fa fa-edit"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
-                        </button>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == @ViewItemTemplateNames.Inline)
+                        {
+                            <button type="button" class="btn btn-default btn-nt-inline-editing" title="@localizor.Get("Edit")"
+                                data-nt-action="@HttpMethods.Put"
+                                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                                <i class="fa fa-edit"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
+                            </button>
+                        }
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="ElmahType" asp-action="Delete" asp-route-type="@Model.Model?.Type" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                            <i class="fa fa-trash"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
-                        </a>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
+                        {
+                            <a asp-area="" asp-controller="ElmahType" asp-action="Delete" asp-route-type="@Model.Model?.Type" class="btn btn-default" role="button" title="@localizor.Get("Delete")">
+                                <i class="fa fa-trash"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
+                            </a>
+                        }
                     </li>
                     <li>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
-                            data-nt-action="@HttpMethods.Delete"
-                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                            <i class="fa fa-trash"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
-                        </button>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
+                        {
+                            <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
+                                data-nt-action="@HttpMethods.Delete"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                                <i class="fa fa-trash"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
+                            </button>
+                        }
                     </li>
                     <li>
-                        <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Delete")"
-                            data-nt-action="@HttpMethods.Delete"
-                            data-nt-container="@CrudViewContainers.Inline.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                            <i class="fa fa-trash"></i>
-                        </button>
+                        @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == @CrudViewContainers.Inline)
+                        {
+                            <button type="button" class="btn btn-default btn-nt-inline-editing" title="@localizor.Get("Delete")"
+                                data-nt-action="@HttpMethods.Delete"
+                                data-nt-container="@CrudViewContainers.Inline.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        }
                     </li>
                 </ul>
             </li>

@@ -3,12 +3,12 @@
 @using Elmah.Resx;
 @model MvcItemViewModel<ElmahHostModel>
 @inject IUIStrings localizor;
-@if (Model.ListSetting.ShowListBulkActionRelated(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowListBulkActionRelated(true))
 {
     <td class="pt-0 pb-0 nt-list-bulk-select">
     </td>
 }
-@if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowItemButtons())
 {
     <td class="p-0">
     <div class="btn-group btn-group-nt-action-save">
@@ -25,15 +25,15 @@
 }
 <td class="pt-0 pb-0">@Model!.Model!.Host</td>
 <td class="pt-0 pb-0">@Model!.Model!.SpatialLocation</td>
-@if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowItemUIStatus())
 {
     <td class="form-group nt-item-status p-0">
         <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahHostModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahHostModel.ItemUIStatus______))" readonly />
     </td>
 }
-@if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
 {
-    <td class="pb-0 nt-editablelist-delete-select">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))">
+    <td class="pb-0 form-group nt-editablelist-delete-select">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))" />
     </td>
 }

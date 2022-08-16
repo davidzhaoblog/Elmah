@@ -24,6 +24,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         private readonly IElmahErrorService _thisService;
         private readonly SelectListHelper _selectListHelper;
+        private readonly IndexViewFeatureManager _indexViewFeatureManager;
         private readonly IDropDownListService _dropDownListService;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahErrorController> _logger;
@@ -31,12 +32,14 @@ namespace Elmah.MvcWebApp.Controllers
         public ElmahErrorController(
             IElmahErrorService thisService,
             SelectListHelper selectListHelper,
+            IndexViewFeatureManager indexViewFeatureManager,
             IDropDownListService dropDownListService,
             IUIStrings localizor,
             ILogger<ElmahErrorController> logger)
         {
             _thisService = thisService;
             _selectListHelper = selectListHelper;
+            _indexViewFeatureManager = indexViewFeatureManager;
             _dropDownListService = dropDownListService;
             _localizor = localizor;
             _logger = logger;
@@ -45,13 +48,13 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query, MvcListSetting uiSetting)
+        public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query, UIParams uiParams)
         {
-            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
             {
                 query.PaginationOption = PaginationOptions.LoadMore;
             }
-            else if (uiSetting.PagedViewOption == PagedViewOptions.List || uiSetting.PagedViewOption == PagedViewOptions.EditableList)
+            else if (uiParams.PagedViewOption == PagedViewOptions.List || uiParams.PagedViewOption == PagedViewOptions.EditableList)
             {
                 query.PaginationOption = PaginationOptions.Paged;
             }
@@ -74,11 +77,10 @@ namespace Elmah.MvcWebApp.Controllers
 
             var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
 
-            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, MvcListSetting, MvcListFeatures, ElmahErrorModel.DefaultView[]>
+            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
             {
                 Query = query,
-                UISetting = uiSetting,
-                UIFeatures = IndexViewFeatures.GetElmahErrorEditableList(),
+                UIListSetting = _indexViewFeatureManager.GetElmahError(uiParams),
                 TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
                 Result = result
             });
@@ -87,25 +89,24 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError/AjaxLoadItems
         [HttpGet] // from query string
         [HttpPost]// form post formdata
-        public async Task<IActionResult> AjaxLoadItems(ElmahErrorAdvancedQuery query, MvcListSetting uiSetting)
+        public async Task<IActionResult> AjaxLoadItems(ElmahErrorAdvancedQuery query, UIParams uiParams)
         {
             var result = await _thisService.Search(query);
-            var pagedViewModel = new PagedViewModel<MvcListSetting, MvcListFeatures, ElmahErrorModel.DefaultView[]>
+            var pagedViewModel = new PagedViewModel<ElmahErrorModel.DefaultView[]>
             {
-                UISetting = uiSetting,
-                UIFeatures = IndexViewFeatures.GetElmahErrorEditableList(),
+                UIListSetting = _indexViewFeatureManager.GetElmahError(uiParams),
                 Result = result,
             };
 
-            if(uiSetting.Template == ViewItemTemplateNames.Create || uiSetting.Template == ViewItemTemplateNames.Edit)
+            if(uiParams.Template == ViewItemTemplateNames.Create || uiParams.Template == ViewItemTemplateNames.Edit)
             {                pagedViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
             }
 
-            if (uiSetting.PagedViewOption == PagedViewOptions.Tiles)
+            if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
             {
                 return PartialView("_Tiles", pagedViewModel);
             }
-            else if (uiSetting.PagedViewOption == PagedViewOptions.SlideShow)
+            else if (uiParams.PagedViewOption == PagedViewOptions.SlideShow)
             {
                 return PartialView("_SlideShow", pagedViewModel);
             }
@@ -146,12 +147,11 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
+                UIListSetting = _indexViewFeatureManager.GetElmahError(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
-                ListSetting = new MvcListSetting { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames>(template) },
-                ListFeatures = IndexViewFeatures.GetElmahErrorEditableList(),
-                IndexInArray = index ?? 10,
+                IndexInArray = index ?? 0,
                 Model = result
             };
 

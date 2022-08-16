@@ -26,33 +26,51 @@
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
-                            <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model?.__Master__.ErrorId" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                                data-nt-action="@HttpMethods.Put"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                                <i class="fa fa-edit"></i>
-                            </button>
-                            <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model?.__Master__.ErrorId" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                                <i class="fa fa-briefcase"></i>
-                            </a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
-                                data-nt-action="@HttpMethods.Get"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                                <i class="fa fa-briefcase"></i>
-                            </button>
-                            <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model?.__Master__.ErrorId" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
-                                data-nt-action="@HttpMethods.Delete"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                                <i class="fa fa-trash"></i>
-                            </button>
+                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
+                            {
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Edit" asp-route-errorid="@Model?.__Master__.ErrorId" class="btn btn-default" role="button" title="@localizor.Get("Edit")">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            }
+                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
+                            {
+                                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                                    data-nt-action="@HttpMethods.Put"
+                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            }
+                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
+                            {
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Details" asp-route-errorid="@Model?.__Master__.ErrorId" class="btn btn-default" role="button" title="@localizor.Get("Details")">
+                                    <i class="fa fa-briefcase"></i>
+                                </a>
+                            }
+                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
+                            {
+                                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
+                                    data-nt-action="@HttpMethods.Get"
+                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                    data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                                    <i class="fa fa-briefcase"></i>
+                                </button>
+                            }
+                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
+                            {
+                                <a asp-area="" asp-controller="ElmahError" asp-action="Delete" asp-route-errorid="@Model?.__Master__.ErrorId" class="btn btn-default" role="button" title="@localizor.Get("Delete")">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            }
+                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
+                            {
+                                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
+                                    data-nt-action="@HttpMethods.Delete"
+                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            }
                             <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
                                 <span class="fa fa-search"></span>
                             </a>
@@ -113,16 +131,22 @@
                 else
                 {
                     <div class="btn-group">
-                        <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                            data-nt-action="@HttpMethods.Post"
-                            data-nt-route-id="@(default(System.Guid))"
-                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                            <i class="fa fa-plus"></i>
-                        </button>
+                        @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.StandaloneView))
+                        {
+                            <a asp-area="" asp-controller="ElmahError" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        }
+                        @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
+                        {
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
+                                data-nt-action="@HttpMethods.Post"
+                                data-nt-route-id="@(default(System.Guid))"
+                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        }
                         <a asp-area="" asp-controller="ElmahError" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
                             <span class="fa fa-search"></span>
                         </a>

@@ -3,13 +3,13 @@
 @using Elmah.Resx;
 @model MvcItemViewModel<ElmahUserModel>
 @inject IUIStrings localizor;
-@if (Model.ListSetting.ShowListBulkActionRelated(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowListBulkActionRelated(true))
 {
     <td class="pt-0 pb-0 nt-list-bulk-select">
         <input class="form-check-input ms-1" type="checkbox" value="">
     </td>
 }
-@if (Model.ListSetting.ShowItemButtons(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowItemButtons())
 {
     <td class="p-0">
     <div class="btn-group-lg dropdown dropstart btn-group-nt-actions">
@@ -17,48 +17,75 @@
         <ul class="dropdown-menu border-0 bg-transparent m-0 p-0">
             <li class="d-inline-block">
                 <div class="btn-group" role="group" aria-label="Menu group">
-                    <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model!.Model!.User" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
-                        <i class="fa-solid fa-folder-tree"></i>
-                    </a>
-                    <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model!.Model!.User" class="btn btn-light" role="button" title="@localizor.Get("Details")">
-                        <i class="fa fa-briefcase"></i>
-                    </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
-                        data-nt-action="@HttpMethods.Get"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                        <i class="fa fa-briefcase"></i>
-                    </button>
-                    <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model!.Model!.User" class="btn btn-secondary" role="button" title="@localizor.Get("Edit")">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                        data-nt-action="@HttpMethods.Put"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Edit")"
-                        data-nt-action="@HttpMethods.Put"
-                        data-nt-container="@CrudViewContainers.Inline.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model!.Model!.User" class="btn btn-danger" role="button" title="@localizor.Get("Delete")">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
-                        data-nt-action="@HttpMethods.Delete"
-                        data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-nt-inline-editing" title="@localizor.Get("Delete")"
-                        data-nt-action="@HttpMethods.Delete"
-                        data-nt-container="@CrudViewContainers.Inline.ToString()"
-                        data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                        <i class="fa fa-trash"></i>
-                    </button>
+                    @if(Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.CanGotoDashboard)
+                    {
+                        <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model!.Model!.User" class="btn btn-info" role="button" title="@localizor.Get("Dashboard")">
+                            <i class="fa-solid fa-folder-tree"></i>
+                        </a>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
+                    {
+                        <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model!.Model!.User" class="btn btn-default" role="button" title="@localizor.Get("Details")">
+                            <i class="fa fa-briefcase"></i>
+                        </a>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
+                    {
+                        <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
+                            data-nt-action="@HttpMethods.Get"
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Details.ToString()">
+                            <i class="fa fa-briefcase"></i>
+                        </button>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
+                    {
+                        <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model!.Model!.User" class="btn btn-default" role="button" title="@localizor.Get("Edit")">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
+                    {
+                        <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
+                            data-nt-action="@HttpMethods.Put"
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == @ViewItemTemplateNames.Inline)
+                    {
+                        <button type="button" class="btn btn-default btn-nt-inline-editing" title="@localizor.Get("Edit")"
+                            data-nt-action="@HttpMethods.Put"
+                            data-nt-container="@CrudViewContainers.Inline.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
+                    {
+                        <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model!.Model!.User" class="btn btn-default" role="button" title="@localizor.Get("Delete")">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
+                    {
+                        <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
+                            data-nt-action="@HttpMethods.Delete"
+                            data-nt-container="@CrudViewContainers.Dialog.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    }
+                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == @CrudViewContainers.Inline)
+                    {
+                        <button type="button" class="btn btn-default btn-nt-inline-editing" title="@localizor.Get("Delete")"
+                            data-nt-action="@HttpMethods.Delete"
+                            data-nt-container="@CrudViewContainers.Inline.ToString()"
+                            data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    }
                 </div>
             </li>
         </ul>
@@ -66,15 +93,15 @@
     </td>
 }
 <td class="pt-0 pb-0">@Model!.Model!.User</td>
-@if (Model.ListSetting.ShowItemUIStatus(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowItemUIStatus())
 {
     <td class="form-group nt-item-status p-0">
         <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahUserModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahUserModel.ItemUIStatus______))" readonly />
     </td>
 }
-@if (Model.ListSetting.ShowEditableListDeleteSelect(Model.ListFeatures))
+@if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
 {
-    <td class="pb-0 nt-editablelist-delete-select">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahUserModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahUserModel.IsDeleted______))">
+    <td class="pb-0 form-group nt-editablelist-delete-select">
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahUserModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahUserModel.IsDeleted______))" />
     </td>
 }
