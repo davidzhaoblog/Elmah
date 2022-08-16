@@ -11,22 +11,22 @@
     <table class="table table-hover table-bordered table-striped">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
-                @if (Model!.UISetting.ShowListBulkActionRelated(Model.UIFeatures))
+                @if (Model!.UIListSetting.ShowListBulkActionRelated(true))
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
-                @if (Model!.UISetting.ShowItemButtons(Model.UIFeatures))
+                @if (Model!.UIListSetting.ShowItemButtons())
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
                 <th class="pt-0 pb-0">@localizor.Get("Source")</th>
-                @if (Model!.UISetting.ShowItemUIStatus(Model.UIFeatures))
+                @if (Model!.UIListSetting.ShowItemUIStatus())
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
-                @if (Model!.UISetting.ShowEditableListDeleteSelect(Model.UIFeatures))
+                @if (Model!.UIListSetting.ShowEditableListDeleteSelect())
                 {
-                    <th class="p-0"></th>
+                    <th class="p-0" style="width: 1% !important;"></th>
                 }
             </tr>
         </thead>
@@ -38,11 +38,10 @@
                     @await Html.PartialAsync("~/Views/ElmahSource/_ListItemTr.cshtml",
                         new MvcItemViewModel<ElmahSourceModel>
                         {
-                            ListSetting = Model!.UISetting,
-                            ListFeatures = Model.UIFeatures,
+                            UIListSetting = Model.UIListSetting,
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model!.UISetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            Template = Model!.UIListSetting.PagedViewOption != PagedViewOptions.EditableList ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
                             IndexInArray = i,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
@@ -60,7 +59,7 @@
         </tbody>
             <!--only for inline editing-->
             <tfoot>
-                @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.Inline))
+                @if (Model!.UIListSetting != null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Inline))
                 {
                     <tr class="pt-0 pb-0 nt-listitem nt-new">
                         <td class="nt-createnew-button-container" colspan="100">

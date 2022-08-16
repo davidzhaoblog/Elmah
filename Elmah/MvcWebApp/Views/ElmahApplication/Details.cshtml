@@ -1,3 +1,4 @@
+@using Framework.Models;
 @using Elmah.Models.Definitions;
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
@@ -39,13 +40,13 @@
                     <a asp-area="" asp-controller="ElmahApplication" asp-action="Details" asp-route-application="@Model!.Model!.Application" class="btn btn-secondary" role="button" title="@localizor.Get("Refresh")">
                         <i class="fa-solid fa-refresh"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Refresh")</span>
                     </a>
-                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
+                    @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
                     {
                         <a asp-area="" asp-controller="ElmahApplication" asp-action="Edit" asp-route-application="@Model!.Model!.Application" class="btn btn-default" role="button" title="@localizor.Get("Edit")">
                             <i class="fa fa-edit"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Edit")</span>
                         </a>
                     }
-                    @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
+                    @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
                     {
                         <a asp-area="" asp-controller="ElmahApplication" asp-action="Delete" asp-route-application="@Model!.Model!.Application" class="btn btn-default" role="button" title="@localizor.Get("Delete")">
                             <i class="fa fa-trash"></i><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>

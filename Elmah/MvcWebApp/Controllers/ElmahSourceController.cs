@@ -14,7 +14,7 @@ namespace Elmah.MvcWebApp.Controllers
     {
         private readonly IElmahSourceService _thisService;
         private readonly SelectListHelper _selectListHelper;
-        private readonly IndexViewFeatureManager _indexViewFeatureManager;
+        private readonly ViewFeaturesManager _viewFeatureManager;
         private readonly IDropDownListService _dropDownListService;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahSourceController> _logger;
@@ -22,14 +22,14 @@ namespace Elmah.MvcWebApp.Controllers
         public ElmahSourceController(
             IElmahSourceService thisService,
             SelectListHelper selectListHelper,
-            IndexViewFeatureManager indexViewFeatureManager,
+            ViewFeaturesManager viewFeatureManager,
             IDropDownListService dropDownListService,
             IUIStrings localizor,
             ILogger<ElmahSourceController> logger)
         {
             _thisService = thisService;
             _selectListHelper = selectListHelper;
-            _indexViewFeatureManager = indexViewFeatureManager;
+            _viewFeatureManager = viewFeatureManager;
             _dropDownListService = dropDownListService;
             _localizor = localizor;
             _logger = logger;
@@ -66,7 +66,7 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
             {
                 Query = query,
-                UIListSetting = _indexViewFeatureManager.GetElmahError(uiParams),
+                UIListSetting = _viewFeatureManager.GetDefaultEditable(uiParams),
 
                 Result = result
             });
@@ -80,7 +80,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahSourceModel[]>
             {
-                UIListSetting = _indexViewFeatureManager.GetElmahError(uiParams),
+                UIListSetting = _viewFeatureManager.GetDefaultEditable(uiParams),
                 Result = result,
             };
 
@@ -133,7 +133,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahSourceModel>
             {
-                UIListSetting = _indexViewFeatureManager.GetElmahError(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
+                UIListSetting = _viewFeatureManager.GetDefaultEditable(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,

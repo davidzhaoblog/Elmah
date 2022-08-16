@@ -20,7 +20,9 @@
         currentView = Model.UIListSetting.UIParams.PagedViewOption.ToString();
     }
 }
-<form id="thisform" method="post" class="nt-ajax-partial-load-post-formdata" data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahUser")" data-nt-updatetarget=".nt-list-container-submit">
+<form id="@Model!.UIListSetting.UIListFeatures.SearchFormId" method="post" class="nt-ajax-partial-load-post-formdata"
+    data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahUser")"
+    data-nt-updatetarget="#@Model!.UIListSetting.UIListFeatures.ListWrapperId">
     <input type="hidden" asp-for="Query.PageIndex" class="nt-page-index" />
     <input type="hidden" asp-for="Query.PageSize" class="nt-page-size" />
     <input type="hidden" asp-for="Query.OrderBys" class="nt-order-by" />
@@ -64,134 +66,19 @@
     </div>
 </form>
 <hr class="mt-1" />
-<div class="card nt-list-wrapper"
-    id="thisList"
-    data-nt-bs-modalsize="Large"
-    data-nt-submittarget="#thisform"
-    data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahUser")"
-    data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahUser")"
-    data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahUser")"
-    data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahUser")"
-    data-nt-bulk-delete-url="@Url.Action("AjaxBulkDelete", "ElmahUser")"
-    data-nt-multiitems-submit-url="@Url.Action("AjaxMultiItemsCUDSubmit", "ElmahUser")">
-    <div class="card-header">
-        <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off"
-                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.List ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-cells"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off"
-                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-Tiles" title="Tiles" aria-label="Tiles"><i class="fa-solid fa-grip"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-SlideShow" autocomplete="off"
-                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="SlideShow" data-nt-paginationoptionupdatevalue="NoPagination" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.SlideShow ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-SlideShow" title="SlideShow" aria-label="SlideShow"><i class="fa-solid fa-circle-play"></i></label>
-            <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableList" autocomplete="off"
-                data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="EditableList" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption == PagedViewOptions.EditableList ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-EditableList" title="EditableList" aria-label="EditableList"><i class="fa-solid fa-pen-ruler"></i></label>
-        </div>
-        @if (Model.UIListSetting.UIListFeatures.HasPageSizeList || Model.UIListSetting.UIListFeatures.HasOrderByList)
-        {
-            <div class="btn-group float-end mt-1 ms-3 me-3">
-                @if (Model.UIListSetting.UIListFeatures.HasPageSizeList)
-                {
-                    <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit"></select>
-                }
-                @if (Model.UIListSetting.UIListFeatures.HasOrderByList)
-                {
-                    <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit"></select>
-                }
-            </div>
-        }
-        @if (Model!.UIListSetting.ShowListBulkActionRelated(true))
-        {
-            <div class="btn-group m-0 p-0 float-start nt-bulk-select-filter">
-                <button type="button" class="btn btn-default m-0 p-0 btn-nt-bulk-select-status" data-nt-bulk-select-status="None">
-                    <!--None/Some/All-->
-                    <i class="fa-regular fa-square"></i>
-                    <i class="fa-regular fa-square-minus d-none"></i>
-                    <i class="fa-regular fa-square-check d-none"></i>
-                </button>
-                <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                </ul>
-            </div>
-        }
-        @if (Model!.UIListSetting.ShowListBulkActionRelated(false))
-        {
-            <div class="btn-group float-start ps-4 nt-bulk-actions-container" style="display:none">
-                <button type="button" class="btn btn-default nt-bulk-delete" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_delete_selected"), localizor.Get("ElmahUser"))" title="@localizor.Get("Delete")">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </div>
-        }
-        @if (Model!.UIListSetting.HasEditableList())
-        {
-            <div class="btn-group float-start ps-4 nt-multiitem-editing-buttons" style="display:none;">
-                <button disabled type="button" class="btn btn-default btn-nt-multiitems-editing-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahUser"))" title="@localizor.Get("Save")">
-                    <i class="fa-solid fa-floppy-disk"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
-                </button>
-                <button type="button" class="btn btn-default btn-nt-multiitems-editing-cancel" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                    data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahUser"))" title="@localizor.Get("Save")">
-                    <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
-                </button>
-            </div>
-        }
-    </div>
-    <div class="card-body nt-list-container-submit row m-0 p-0">
-        <!--Developer keep this logic same on all Index.cshtml, although the 3 views may not available for some tables-->
-        @if (currentView.ToLower() == PagedViewOptions.Tiles.ToString().ToLower())
-        {
-            @await Html.PartialAsync("~/Views/ElmahUser/_Tiles.cshtml", Model)
-        }
-        else if (currentView.ToLower() == PagedViewOptions.SlideShow.ToString().ToLower())
-        {
-            @await Html.PartialAsync("~/Views/ElmahUser/_SlideShow.cshtml", Model)
-        }
-        else
-        {
-            @await Html.PartialAsync("~/Views/ElmahUser/_List.cshtml", Model)
-        }
-    </div>
-    <div class="fixed-bottom">
-        <div class="float-start ms-5 ps-5 border-2 nt-singlton-message-popup bg-info" style="display:none">
-        </div>
-        <div class="btn-group float-end m-4">
-            @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.StandaloneView))
-            {
-                <a asp-area="" asp-controller="ElmahUser" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                    <i class="fa fa-plus"></i>
-                </a>
-            }
-            @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
-            {
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                    data-nt-action="@HttpMethods.Post"
-                    data-nt-route-id="@("_empty_")"
-                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                    data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                    <i class="fa fa-plus"></i>
-                </button>
-            }
-        </div>
-    </div>
-</div>
+@await Html.PartialAsync("~/Views/ElmahUser/_ListViewsContainer.cshtml", Model)
 <partial name="~/Views/Shared/_CrudActionDialog.cshtml" />
 <partial name="~/Views/Shared/_SimpleActionConfirmationDialog.cshtml" />
 @section Scripts
-    {
+{
     <script>
+        const searchFormId = "@Model.UIListSetting.UIListFeatures.SearchFormId";
+        const listWrapperId = "@Model.UIListSetting.UIListFeatures.ListWrapperId";
         $(document).ready($(function() {
-            showHidePagedViewOptionsRelatedButtons("#thisform");
-            attachFormDataChanged($("#thisList form"));
-            attachMultiItemsDeleteCheckboxEvent($("#thisList form"));
+            showHidePagedViewOptionsRelatedButtons("#" + searchFormId);
+            attachFormDataChanged($("#" + listWrapperId + " form"));
+            attachMultiItemsDeleteCheckboxEvent($("#" + listWrapperId + " form"));
+            attachIndexSearchSubmit("#" + searchFormId);
         }))
     </script>
 }

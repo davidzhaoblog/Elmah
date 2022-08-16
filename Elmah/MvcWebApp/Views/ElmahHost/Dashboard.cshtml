@@ -48,13 +48,13 @@
                 { // Item
                     <div class="card-header">
                         <div class="btn-group">
-                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
+                            @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.StandaloneView)
                             {
                                 <a asp-area="" asp-controller="ElmahHost" asp-action="Edit" asp-route-host="@Model?.__Master__.Host" class="btn btn-default" role="button" title="@localizor.Get("Edit")">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             }
-                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
+                            @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayEditViewContainer == CrudViewContainers.Dialog)
                             {
                                 <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
                                     data-nt-action="@HttpMethods.Put"
@@ -63,13 +63,13 @@
                                     <i class="fa fa-edit"></i>
                                 </button>
                             }
-                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
+                            @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
                             {
                                 <a asp-area="" asp-controller="ElmahHost" asp-action="Details" asp-route-host="@Model?.__Master__.Host" class="btn btn-default" role="button" title="@localizor.Get("Details")">
                                     <i class="fa fa-briefcase"></i>
                                 </a>
                             }
-                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
+                            @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayDetailsViewContainer == CrudViewContainers.Dialog)
                             {
                                 <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
                                     data-nt-action="@HttpMethods.Get"
@@ -78,13 +78,13 @@
                                     <i class="fa fa-briefcase"></i>
                                 </button>
                             }
-                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
+                            @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
                             {
                                 <a asp-area="" asp-controller="ElmahHost" asp-action="Delete" asp-route-host="@Model?.__Master__.Host" class="btn btn-default" role="button" title="@localizor.Get("Delete")">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             }
-                            @if (Model.UIListSetting == null || Model.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
+                            @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.PrimayDeleteViewContainer == CrudViewContainers.Dialog)
                             {
                                 <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
                                     data-nt-action="@HttpMethods.Delete"
@@ -117,13 +117,13 @@
                 else
                 {
                     <div class="btn-group">
-                        @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.StandaloneView))
+                        @if (Model!.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.StandaloneView))
                         {
                             <a asp-area="" asp-controller="ElmahHost" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
                                 <i class="fa fa-plus"></i>
                             </a>
                         }
-                        @if (Model.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
+                        @if (Model.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
                         {
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
                                 data-nt-action="@HttpMethods.Post"

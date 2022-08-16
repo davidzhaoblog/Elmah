@@ -11,12 +11,12 @@
 }
 @if (Model!.UIListSetting!.ShowListBulkActionRelated(true))
 {
-    <td class="pt-0 pb-0 nt-list-bulk-select">
+    <td class="pt-0 pb-0 nt-list-bulk-select" style="width: 1% !important;">
     </td>
 }
 @if (Model!.UIListSetting!.ShowItemButtons())
 {
-    <td class="p-0">
+    <td class="p-0" style="width: 1% !important;">
     <div class="btn-group btn-group-nt-action-save">
         <button type="button" class="btn btn-secondary btn-nt-action-cancel" data-nt-action="@HttpMethods.Post">
             <i class="fa-solid fa-circle-xmark"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Cancel")</span>
@@ -39,13 +39,13 @@
 </td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
-    <td class="form-group nt-item-status p-0">
+    <td class="form-group nt-item-status p-0" style="width: 1% !important;">
         <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahHostModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahHostModel.ItemUIStatus______))" readonly />
     </td>
 }
 @if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
 {
-    <td class="pb-0 form-group nt-editablelist-delete-select">
+    <td class="pb-0 form-group nt-editablelist-delete-select" style="width: 1% !important;">
         <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))" />
     </td>
 }

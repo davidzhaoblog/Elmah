@@ -48,8 +48,7 @@ function pageViewOptionsClickedEventHandler(sourceButton) {
 function showHidePagedViewOptionsRelatedButtons(wrapperSelector) {
     const thePagedViewOptionField = $(wrapperSelector).find(".nt-paged-view-option-field");
     const currentView = $(thePagedViewOptionField).val();
-    const listWrapper = $($(thePagedViewOptionField).closest(".nt-ajax-partial-load-post-formdata").data("nt-updatetarget")).
-        closest(".nt-list-wrapper");
+    const listWrapper = $($(thePagedViewOptionField).closest(".nt-ajax-partial-load-post-formdata").data("nt-updatetarget"));
     const editableListButtons = $(listWrapper).find(".nt-multiitem-editing-buttons");
     const listBulkSelectFilter = $(listWrapper).find(".nt-bulk-select-filter");
     const listBulkActionContainer = $(listWrapper).find(".nt-bulk-actions-container");

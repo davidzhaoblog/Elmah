@@ -13,8 +13,7 @@ namespace Framework.Models
         public bool ShowListBulkActionRelated(bool withBulkDelete)
         {
             return (UIParams.PagedViewOption == PagedViewOptions.List || UIParams.PagedViewOption == PagedViewOptions.Tiles) &&
-                (withBulkDelete && UIListFeatures.CanBulkDelete || UIListFeatures.CanBulkActions) &&
-                UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Any(t=> t == PagedViewOptions.List && t != PagedViewOptions.Tiles);
+                (withBulkDelete && UIListFeatures.CanBulkDelete || UIListFeatures.CanBulkActions);
             //return (UIParams.PagedViewOption == PagedViewOptions.List || UIParams.PagedViewOption == PagedViewOptions.Tiles) &&
             //    (withBulkDelete && UIListFeatures.CanBulkDelete || UIListFeatures.CanBulkActions) &&
             //    UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Any(t=> t == PagedViewOptions.List && t != PagedViewOptions.Tiles) &&
@@ -23,8 +22,7 @@ namespace Framework.Models
 
         public bool HasEditableList()
         {
-            return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableList) &&
-                (UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || UIAvailableFeatures.AvailableListViewFeatures.ContainsKey(PagedViewOptions.EditableList));
+            return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableList);
             //return UIListFeatures.AvailableListViews != null && UIListFeatures.AvailableListViews.Contains(PagedViewOptions.EditableList) &&
             //    (UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || UIAvailableFeatures.AvailableListViewFeatures.ContainsKey(PagedViewOptions.EditableList));
         }
@@ -46,9 +44,7 @@ namespace Framework.Models
 
         public List<PagedViewOptions> GetAvailablePagedViewOptions()
         {
-            return UIListFeatures.AvailableListViews != null
-                ? UIListFeatures.AvailableListViews.Where(t => UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || UIAvailableFeatures.AvailableListViewFeatures.ContainsKey(t)).ToList()
-                : Enumerable.Empty<PagedViewOptions>().ToList();
+            return UIListFeatures.AvailableListViews ?? Enumerable.Empty<PagedViewOptions>().ToList();
             //return UIListFeatures.AvailableListViews != null
             //    ? UIListFeatures.AvailableListViews.Where(t => UIAvailableFeatures == null || UIAvailableFeatures.AvailableListViewFeatures == null || UIAvailableFeatures.AvailableListViewFeatures.ContainsKey(t)).ToList()
             //    : Enumerable.Empty<PagedViewOptions>().ToList();
