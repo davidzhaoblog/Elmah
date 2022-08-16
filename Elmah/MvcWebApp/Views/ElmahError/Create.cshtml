@@ -34,7 +34,6 @@
                         <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Application))"></label>
                         <select asp-for="Model!.Application" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahApplication.ToString()])"
                             data-nt-value="@Model!.Model!.Application" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Application))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Application))">
-                            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahApplication"))</option>
                         </select>
                         <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Application))"></span>
                     </div>
@@ -42,7 +41,6 @@
                         <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Host))"></label>
                         <select asp-for="Model!.Host" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahHost.ToString()])"
                             data-nt-value="@Model!.Model!.Host" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Host))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Host))">
-                            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahHost"))</option>
                         </select>
                         <span asp-validation-for="Model!.Host" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Host))"></span>
                     </div>
@@ -50,7 +48,6 @@
                         <label asp-for="Model!.Type" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Type))"></label>
                         <select asp-for="Model!.Type" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahType.ToString()])"
                             data-nt-value="@Model!.Model!.Type" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Type))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Type))">
-                            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahType"))</option>
                         </select>
                         <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Type))"></span>
                     </div>
@@ -58,7 +55,6 @@
                         <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Source))"></label>
                         <select asp-for="Model!.Source" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahSource.ToString()])"
                             data-nt-value="@Model!.Model!.Source" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Source))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Source))">
-                            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahSource"))</option>
                         </select>
                         <span asp-validation-for="Model!.Source" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Source))"></span>
                     </div>
@@ -71,7 +67,6 @@
                         <label asp-for="Model!.User" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.User))"></label>
                         <select asp-for="Model!.User" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahUser.ToString()])"
                             data-nt-value="@Model!.Model!.User" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.User))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.User))">
-                            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahUser"))</option>
                         </select>
                         <span asp-validation-for="Model!.User" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.User))"></span>
                     </div>
@@ -79,7 +74,6 @@
                         <label asp-for="Model!.StatusCode" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.StatusCode))"></label>
                         <select asp-for="Model!.StatusCode" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahStatusCode.ToString()])"
                             data-nt-value="@Model!.Model!.StatusCode" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.StatusCode))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.StatusCode))">
-                            <option value="" selected>@string.Format(format_Please_Select, localizor.Get("ElmahStatusCode"))</option>
                         </select>
                         <span asp-validation-for="Model!.StatusCode" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.StatusCode))"></span>
                     </div>

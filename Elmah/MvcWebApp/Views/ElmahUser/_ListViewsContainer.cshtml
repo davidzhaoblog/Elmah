@@ -77,7 +77,7 @@
         }
         @if (Model!.UIListSetting == null || Model!.UIListSetting.HasEditableList())
         {
-            <div class="btn-group float-start ps-4 nt-multiitem-editing-buttons" style="display:none;">
+            <div class="btn-group float-start ps-0 nt-multiitem-editing-buttons" style="display:none;">
                 <button disabled type="button" class="btn btn-default btn-nt-multiitems-editing-submit" data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
                     data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_want_to_update_these_Data"), localizor.Get("ElmahUser"))" title="@localizor.Get("Save")">
                     <i class="fa-solid fa-floppy-disk"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Save")</span>
