@@ -24,7 +24,7 @@ namespace Elmah.MvcWebApp.Controllers
 
         private readonly IElmahErrorService _thisService;
         private readonly SelectListHelper _selectListHelper;
-        private readonly Elmah.MvcWebApp.Models.IndexViewFeatureManager _indexViewFeatureManager;
+        private readonly Elmah.MvcWebApp.Models.ViewFeaturesManager _indexViewFeatureManager;
         private readonly IDropDownListService _dropDownListService;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahErrorController> _logger;
@@ -32,7 +32,7 @@ namespace Elmah.MvcWebApp.Controllers
         public ElmahErrorController(
             IElmahErrorService thisService,
             SelectListHelper selectListHelper,
-            Elmah.MvcWebApp.Models.IndexViewFeatureManager indexViewFeatureManager,
+            Elmah.MvcWebApp.Models.ViewFeaturesManager indexViewFeatureManager,
             IDropDownListService dropDownListService,
             IUIStrings localizor,
             ILogger<ElmahErrorController> logger)
@@ -80,7 +80,7 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
             {
                 Query = query,
-                UIListSetting = _indexViewFeatureManager.GetElmahError(uiParams),
+                UIListSetting = _indexViewFeatureManager.GetDefaultEditableUIListSettingModel(uiParams),
                 TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
                 Result = result
             });
@@ -94,7 +94,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahErrorModel.DefaultView[]>
             {
-                UIListSetting = _indexViewFeatureManager.GetElmahError(uiParams),
+                UIListSetting = _indexViewFeatureManager.GetDefaultEditableUIListSettingModel(uiParams),
                 Result = result,
             };
 
@@ -147,7 +147,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
-                UIListSetting = _indexViewFeatureManager.GetElmahError(new Framework.Models.UIParams { PagedViewOption = view, Template = Enum.Parse<Framework.Models.ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
+                UIListSetting = _indexViewFeatureManager.GetDefaultEditableUIListSettingModel(new Framework.Models.UIParams { PagedViewOption = view, Template = Enum.Parse<Framework.Models.ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
