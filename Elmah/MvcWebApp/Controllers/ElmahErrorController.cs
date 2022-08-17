@@ -80,7 +80,7 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
             {
                 Query = query,
-                UIListSetting = _viewFeatureManager.GetDefaultEditable(uiParams),
+                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
                 TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
                 Result = result
             });
@@ -94,7 +94,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahErrorModel.DefaultView[]>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditable(uiParams),
+                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
                 Result = result,
             };
 
@@ -149,7 +149,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditable(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
+                UIListSetting = _viewFeatureManager.GetDefaultEditableList(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,

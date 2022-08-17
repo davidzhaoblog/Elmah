@@ -27,7 +27,7 @@ namespace Elmah.MvcWebApp.Models
         /// <param name="listWrapperId">default "thisList" for Index.cshtml, should be different in Dashboard.cshtml</param>
         /// <param name="searchFormId">default "thisForm" for Index.cshtml, should be different in Dashboard.cshtml</param>
         /// <returns></returns>
-        public UIListSettingModel GetDefaultReadonly(
+        public UIListSettingModel GetDefaultReadonlyList(
             UIParams? uiParams,
             CrudViewContainers primaryItemViewContainer = CrudViewContainers.None,
             string listWrapperId = "thisList",
@@ -75,7 +75,7 @@ namespace Elmah.MvcWebApp.Models
         /// <param name="listWrapperId">default "thisList" for Index.cshtml, should be different in Dashboard.cshtml</param>
         /// <param name="searchFormId">default "thisForm" for Index.cshtml, should be different in Dashboard.cshtml</param>
         /// <returns></returns>
-        public UIListSettingModel GetDefaultEditable(
+        public UIListSettingModel GetDefaultEditableList(
             UIParams? uiParams,
             CrudViewContainers primaryItemViewContainer = CrudViewContainers.Dialog,
             string listWrapperId = "thisList",
