@@ -23,14 +23,10 @@
                 </div>
             }
             <div class="card-body">
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Model!.User)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Model!.User)
-                    </dd>
-                </dl>
+                <div class="form-group">
+                    <label asp-for="Model!.User" class="control-label" for="@Model!.HtmlId(nameof(ElmahUserModel.User))"></label>
+                    @Html.DisplayFor(m=>m.Model!.User)
+                </div>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">

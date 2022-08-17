@@ -25,14 +25,10 @@
             else
             {
                 <div class="card-body">
-                    <dl class="row">
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Model!.Source)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Model!.Source)
-                        </dd>
-                    </dl>
+                    <div class="form-group">
+                        <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahSourceModel.Source))"></label>
+                        @Html.DisplayFor(m=>m.Model!.Source)
+                    </div>
                 </div>
             }
             <div class="card-footer">

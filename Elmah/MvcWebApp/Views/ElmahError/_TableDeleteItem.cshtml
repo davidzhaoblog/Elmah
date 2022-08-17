@@ -59,11 +59,11 @@
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
     <td class="form-group nt-item-status text-center" style="width: 1% !important;">
-        @if (Model.Model.ItemUIStatus______ == ItemUIStatus.NoChange)
+        @if (Model!.Model!.ItemUIStatus______ == ItemUIStatus.NoChange)
         {
                 <i class="fa-solid fa-circle-notch text-success"></i>
         }
-        else if (Model.Model.ItemUIStatus______ == ItemUIStatus.Updated) // Usually: will be changed by JQuery
+        else if (Model!.Model!.ItemUIStatus______ == ItemUIStatus.Updated) // Usually: will be changed by JQuery
         {
                 <i class="fa-solid fa-circle text-danger"></i>
         }
