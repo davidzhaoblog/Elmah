@@ -31,6 +31,7 @@
 }
 <td class="pt-0 pb-0">
     <input asp-for="Model!.Host" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahHostModel.Host))" name="@Model!.HtmlName(nameof(ElmahHostModel.Host))" data-nt-value="@Model!.Model!.Host"/>
+<span asp-validation-for="Model!.Host" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahHostModel.Host))"></span>
 </td>
 <td class="pt-0 pb-0">
     <input asp-for="Model!.SpatialLocation" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahHostModel.SpatialLocation))" name="@Model!.HtmlName(nameof(ElmahHostModel.SpatialLocation))" data-nt-value="@Model!.Model!.SpatialLocation"/>
