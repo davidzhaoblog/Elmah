@@ -54,7 +54,7 @@
 }
 @if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
 {
-    <td class="p-0 form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
+    <td class="form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
         <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
     </td>
 }
