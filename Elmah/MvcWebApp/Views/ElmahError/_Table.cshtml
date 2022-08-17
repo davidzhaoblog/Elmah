@@ -8,7 +8,7 @@
 <input type="hidden" class="nt-list-count" value="@Model!.Result!.ResponseBody!.Count()" />
 <div class="table-responsive p-0">
     <form>
-    <table class="table table-hover table-bordered table-striped">
+    <table class="table table-hover table-bordered table-striped align-middle">
         <thead class="table-dark">
             <tr class="pt-0 pb-0">
                 @if (Model!.UIListSetting.ShowListBulkActionRelated(true))
@@ -36,7 +36,7 @@
                 }
                 @if (Model!.UIListSetting.ShowEditableListDeleteSelect())
                 {
-                    <th class="p-0" style="width: 1% !important;"></th>
+                    <th class="p-0 text-center" style="width: 1% !important;"><i class="fa-thin fa-trash"></i></th>
                 }
             </tr>
         </thead>

@@ -35,13 +35,25 @@
 </td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
-    <td class="form-group nt-item-status p-0" style="width: 1% !important;">
-        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahUserModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahUserModel.ItemUIStatus______))" readonly />
+    <td class="form-group nt-item-status text-center p-0" style="width: 1% !important;">
+        @if (Model.Model.ItemUIStatus______ == ItemUIStatus.NoChange)
+        {
+                <i class="fa-solid fa-circle-notch text-success"></i>
+        }
+        else if (Model.Model.ItemUIStatus______ == ItemUIStatus.Updated) // Usually: will be changed by JQuery
+        {
+                <i class="fa-solid fa-circle text-danger"></i>
+        }
+        else // ItemUIStatus.New
+        {
+                    <i class="fa-solid fa-circle text-danger"></i>
+        }
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahUserModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahUserModel.ItemUIStatus______))" type="hidden" />
     </td>
 }
 @if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
 {
-    <td class="pb-0 form-group nt-editablelist-delete-select" style="width: 1% !important;">
+    <td class="p-0 form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
         <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahUserModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahUserModel.IsDeleted______))" />
     </td>
 }
