@@ -92,7 +92,9 @@
     </div>
     </td>
 }
-<td class="pt-0 pb-0">@Model!.Model!.User</td>
+<td class="pt-0 pb-0">
+    @Html.DisplayFor(m=>m.Model!.User)
+</td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
     <td class="form-group nt-item-status text-center" style="width: 1% !important;">

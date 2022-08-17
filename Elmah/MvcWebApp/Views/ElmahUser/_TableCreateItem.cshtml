@@ -29,9 +29,8 @@
     </div>
     </td>
 }
-<td class="form-group p-0">
-    <input asp-for="Model!.User" class="form-control nt-form-data" data-nt-value="@Model!.Model!.User" id="@Model!.HtmlId(nameof(ElmahUserModel.User))" name="@Model!.HtmlName(nameof(ElmahUserModel.User))"/>
-    <span asp-validation-for="Model!.User" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahUserModel.User))"></span>
+<td class="pt-0 pb-0">
+    <input asp-for="Model!.User" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahUserModel.User))" name="@Model!.HtmlName(nameof(ElmahUserModel.User))" data-nt-value="@Model!.Model!.User"/>
 </td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
