@@ -22,7 +22,7 @@ function attachFormDataChanged(theForm) {
             }
         }
         const formDataChanged = $(self).closest(".nt-list-wrapper").find(".nt-form-data-changed").length > 0 ||
-            $(self).closest(".nt-list-wrapper").find(".nt-item-status input[data-nt-value='New']") > 0;
+            $(self).closest(".nt-list-wrapper").find(".nt-item-status input[data-nt-value='New']").length > 0;
         enableSaveButton($(self).closest(".nt-list-wrapper"), formDataChanged);
     });
 
@@ -45,7 +45,7 @@ function attachFormDataChanged(theForm) {
             }
         }
         const formDataChanged = $(self).closest(".nt-list-wrapper").find(".nt-form-data-changed").length > 0 ||
-            $(self).closest(".nt-list-wrapper").find(".nt-item-status input[data-nt-value='New']") > 0;
+            $(self).closest(".nt-list-wrapper").find(".nt-item-status input[data-nt-value='New']").length > 0;
         enableSaveButton($(self).closest(".nt-list-wrapper"), formDataChanged);
     });
 }
