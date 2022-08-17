@@ -19,10 +19,9 @@ else
 {
     <input class="hidden-modal-title" value="@Model!.Model!.Type" type="hidden" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Model!.Type" id="@Model.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model.HtmlName(nameof(ElmahTypeModel.Type))"/>
     <div class="form-group">
         <label asp-for="Model!.Type" class="control-label" for="@Model!.HtmlId(nameof(ElmahTypeModel.Type))"></label>
-        <input asp-for="Model!.Type" class="form-control" data-nt-value="@Model!.Model!.Type" id="@Model.HtmlId(nameof(ElmahTypeModel.Type))"  name="@Model.HtmlName(nameof(ElmahTypeModel.Type))"/>
+        <input asp-for="Model!.Type" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model!.HtmlName(nameof(ElmahTypeModel.Type))" data-nt-value="@Model!.Model!.Type"/>
         <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"></span>
     </div>
 }
