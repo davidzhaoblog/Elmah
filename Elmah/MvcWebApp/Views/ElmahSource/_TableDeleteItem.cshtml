@@ -23,7 +23,9 @@
     </div>
     </td>
 }
-<td class="pt-0 pb-0">@Model!.Model!.Source</td>
+<td class="pt-0 pb-0">
+    @Html.DisplayFor(m=>m.Model!.Source)
+</td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
     <td class="form-group nt-item-status text-center" style="width: 1% !important;">
