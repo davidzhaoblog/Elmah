@@ -96,7 +96,7 @@
 <td class="pt-0 pb-0">@Model!.Model!.SpatialLocation</td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
-    <td class="form-group nt-item-status text-center p-0" style="width: 1% !important;">
+    <td class="form-group nt-item-status text-center" style="width: 1% !important;">
         @if (Model.Model.ItemUIStatus______ == ItemUIStatus.NoChange)
         {
                 <i class="fa-solid fa-circle-notch text-success"></i>
@@ -115,6 +115,6 @@
 @if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
 {
     <td class="p-0 form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))" />
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
     </td>
 }
