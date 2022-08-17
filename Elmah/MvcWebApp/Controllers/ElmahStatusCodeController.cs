@@ -66,7 +66,7 @@ namespace Elmah.MvcWebApp.Controllers
             return View(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>
             {
                 Query = query,
-                UIListSetting = _viewFeatureManager.GetDefaultEditable(uiParams),
+                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
 
                 Result = result
             });
@@ -80,7 +80,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahStatusCodeModel[]>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditable(uiParams),
+                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
                 Result = result,
             };
 
@@ -135,7 +135,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahStatusCodeModel>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditable(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
+                UIListSetting = _viewFeatureManager.GetDefaultEditableList(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
