@@ -31,7 +31,7 @@
 }
 <td class="pt-0 pb-0">
     <input asp-for="Model!.Application" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))" data-nt-value="@Model!.Model!.Application"/>
-<span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"></span>
+    <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"></span>
 </td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
