@@ -31,6 +31,7 @@
 }
 <td class="pt-0 pb-0">
     <input asp-for="Model!.Type" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model!.HtmlName(nameof(ElmahTypeModel.Type))" data-nt-value="@Model!.Model!.Type"/>
+    <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"></span>
 </td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {

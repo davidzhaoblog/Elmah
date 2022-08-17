@@ -31,6 +31,7 @@
 }
 <td class="pt-0 pb-0">
     <input asp-for="Model!.ErrorId" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))" data-nt-value="@Model!.Model!.ErrorId"/>
+    <span asp-validation-for="Model!.ErrorId" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"></span>
 </td>
 <td class="pt-0 pb-0">
     <select asp-for="Model!.Application" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahApplication.ToString()])"
@@ -54,6 +55,7 @@
 </td>
 <td class="pt-0 pb-0">
     <input asp-for="Model!.Message" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Message))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Message))" data-nt-value="@Model!.Model!.Message"/>
+    <span asp-validation-for="Model!.Message" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Message))"></span>
 </td>
 <td class="pt-0 pb-0">
     <select asp-for="Model!.User" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahUser.ToString()])"
@@ -67,11 +69,13 @@
 </td>
 <td class="pt-0 pb-0">
     <input asp-for="Model!.TimeUtc" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.TimeUtc))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.TimeUtc))" data-nt-value="@Model!.Model!.TimeUtc"/>
+    <span asp-validation-for="Model!.TimeUtc" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.TimeUtc))"></span>
 </td>
 <td class="pt-0 pb-0">
 </td>
 <td class="pt-0 pb-0">
     <input asp-for="Model!.AllXml" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.AllXml))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.AllXml))" data-nt-value="@Model!.Model!.AllXml"/>
+    <span asp-validation-for="Model!.AllXml" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.AllXml))"></span>
 </td>
 @if (Model!.UIListSetting!.ShowItemUIStatus())
 {
