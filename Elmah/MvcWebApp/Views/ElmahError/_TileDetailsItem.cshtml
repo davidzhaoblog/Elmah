@@ -7,7 +7,10 @@
 <div class="card w-100@(Model.IsCurrentItem ? " border-warning border-3": "")">
     <div class="card-header ps-0 d-flex justify-content-between">
         <div class="form-check nt-list-bulk-select mt-2 ms-0 ps-2">
-            <input class="form-check-input ms-1" type="checkbox" value="" id="bulkActionIndividualSelect" @(Model.BulkSelected ? "checked" : "")>
+            @if (Model!.UIItemFeatures.ShowListBulkSelectCheckbox)
+            {
+                <input class="form-check-input ms-1" type="checkbox" value="" id="bulkActionIndividualSelect" @(Model.BulkSelected ? "checked" : "")>
+            }
             <h5 class="form-check-label ps-4" for="bulkActionIndividualSelect">
                 Please Customize title
             </h5>

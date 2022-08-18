@@ -24,7 +24,7 @@
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
                 data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.Table ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-cells"></i></label>
+            <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-list"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
                 data-nt-value="Tiles" data-nt-paginationoptionupdatevalue="LoadMore" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.Tiles ? "checked": "")>
@@ -36,7 +36,7 @@
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-EditableTable" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
                 data-nt-value="EditableTable" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption == PagedViewOptions.EditableTable ? "checked": "")>
-            <label class="btn btn-outline-primary" for="btnradio-EditableTable" title="EditableTable" aria-label="EditableTable"><i class="fa-solid fa-square-pen"></i></label>
+            <label class="btn btn-outline-primary" for="btnradio-EditableTable" title="EditableTable" aria-label="EditableTable"><i class="fa-solid fa-pen-ruler"></i></label>
         </div>
         @if (Model!.UIListSetting == null || Model!.UIListSetting.UIListFeatures.HasPageSizeList || Model!.UIListSetting.UIListFeatures.HasOrderByList)
         {
@@ -67,6 +67,11 @@
                 </ul>
             </div>
         }
+        <div class="btn-group float-start nt-refresh-button-group">
+            <button type="button" class="btn btn-default btn-nt-fresh">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+        </div>
         @if (Model!.UIListSetting == null || Model!.UIListSetting.ShowListBulkActionRelated(false))
         {
             <div class="btn-group float-start ps-4 nt-bulk-actions-container" style="display:none">
@@ -81,15 +86,18 @@
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownStatusCode">
-                            @foreach (var item in Model!.TopLevelDropDownListsFromDatabase![TopLevelDropDownLists.ElmahStatusCode.ToString()])
+                            @if (Model!.TopLevelDropDownListsFromDatabase != null && Model!.TopLevelDropDownListsFromDatabase.ContainsKey(TopLevelDropDownLists.ElmahStatusCode.ToString()))
                             {
-                                <li>
-                                    <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
-                                        data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
-                                        data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
-                                        data-nt-actionname="StatusCode"
-                                        data-nt-namevalue="StatusCode:@item.Value">@localizor.Get("MoveTo"): @item.Name</a>
-                                </li>
+                                @foreach (var item in Model!.TopLevelDropDownListsFromDatabase![TopLevelDropDownLists.ElmahStatusCode.ToString()])
+                                {
+                                    <li>
+                                        <a class="dropdown-item nt-bulk-update-fixedvalue" href="#"
+                                            data-bs-toggle="modal" data-bs-target="#simpleActionConfirmationDialog"
+                                            data-nt-confirmation-message="@string.Format(localizor.Get("Please_confirm_you_going_to_set_selected_items_to"), item.Name)"
+                                            data-nt-actionname="StatusCode"
+                                            data-nt-namevalue="StatusCode:@item.Value">@localizor.Get("MoveTo"): @item.Name</a>
+                                    </li>
+                                }
                             }
                         </ul>
                     </div>

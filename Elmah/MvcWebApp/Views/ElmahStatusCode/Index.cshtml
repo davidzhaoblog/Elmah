@@ -75,10 +75,7 @@
         const searchFormId = "@Model.UIListSetting.UIListFeatures.SearchFormId";
         const listWrapperId = "@Model.UIListSetting.UIListFeatures.ListWrapperId";
         $(document).ready($(function() {
-            showHidePagedViewOptionsRelatedButtons("#" + searchFormId);
-            attachFormDataChanged($("#" + listWrapperId + " form"));
-            attachMultiItemsDeleteCheckboxEvent($("#" + listWrapperId + " form"));
-            attachIndexSearchSubmit("#" + searchFormId);
+            documentReadyForSearchList(searchFormId, listWrapperId);
         }))
     </script>
 }

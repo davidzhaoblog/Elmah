@@ -29,52 +29,52 @@
     </div>
     </td>
 }
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <input asp-for="Model!.ErrorId" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))" data-nt-value="@Model!.Model!.ErrorId"/>
     <span asp-validation-for="Model!.ErrorId" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"></span>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <select asp-for="Model!.Application" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahApplication.ToString()])"
         data-nt-value="@Model!.Model!.Application" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Application))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Application))">
     </select>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <select asp-for="Model!.Host" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahHost.ToString()])"
         data-nt-value="@Model!.Model!.Host" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Host))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Host))">
     </select>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <select asp-for="Model!.Type" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahType.ToString()])"
         data-nt-value="@Model!.Model!.Type" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Type))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Type))">
     </select>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <select asp-for="Model!.Source" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahSource.ToString()])"
         data-nt-value="@Model!.Model!.Source" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Source))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Source))">
     </select>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <input asp-for="Model!.Message" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Message))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Message))" data-nt-value="@Model!.Model!.Message"/>
     <span asp-validation-for="Model!.Message" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Message))"></span>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <select asp-for="Model!.User" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahUser.ToString()])"
         data-nt-value="@Model!.Model!.User" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.User))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.User))">
     </select>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <select asp-for="Model!.StatusCode" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahStatusCode.ToString()])"
         data-nt-value="@Model!.Model!.StatusCode" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.StatusCode))"  name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.StatusCode))">
     </select>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <input asp-for="Model!.TimeUtc" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.TimeUtc))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.TimeUtc))" data-nt-value="@Model!.Model!.TimeUtc"/>
     <span asp-validation-for="Model!.TimeUtc" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.TimeUtc))"></span>
 </td>
-<td class="pt-0 pb-0">
-    <input asp-for="Model!.Sequence" readonly class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Sequence))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Sequence))" data-nt-value="@Model!.Model!.Sequence"/>
+<td class="form-group p-0">
+    <input asp-for="Model!.Sequence" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Sequence))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.Sequence))" data-nt-value="@Model!.Model!.Sequence"/>
 </td>
-<td class="pt-0 pb-0">
+<td class="form-group p-0">
     <input asp-for="Model!.AllXml" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.AllXml))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.AllXml))" data-nt-value="@Model!.Model!.AllXml"/>
     <span asp-validation-for="Model!.AllXml" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.AllXml))"></span>
 </td>
