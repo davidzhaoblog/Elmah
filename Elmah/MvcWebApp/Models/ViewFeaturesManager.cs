@@ -19,6 +19,32 @@ namespace Elmah.MvcWebApp.Models
             _logger = logger;
         }
 
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="uiParams"></param>
+        /// <param name="primaryItemViewContainer"></param>
+        /// <param name="listWrapperId">default "thisList" for Index.cshtml, should be different in Dashboard.cshtml</param>
+        /// <param name="searchFormId">default "thisForm" for Index.cshtml, should be different in Dashboard.cshtml</param>
+        /// <returns></returns>
+        public Framework.Models.UIItemFeatures GetDefaultReadonlyUIItemFeatures(
+            CrudViewContainers primaryItemViewContainer = CrudViewContainers.Dialog)
+        {
+            var result = new Framework.Models.UIItemFeatures
+            {
+                PrimayCreateViewContainer = primaryItemViewContainer,
+                PrimayDeleteViewContainer = primaryItemViewContainer,
+                PrimayDetailsViewContainer = primaryItemViewContainer,
+                PrimayEditViewContainer = primaryItemViewContainer,
+
+                ShowItemButtons = true,
+                CanGotoDashboard = false,
+            };
+
+            return result;
+        }
+
         /// <summary>
         ///
         /// </summary>

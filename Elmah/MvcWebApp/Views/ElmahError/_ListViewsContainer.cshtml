@@ -81,6 +81,7 @@
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownStatusCode">
+                            @if (Model!.TopLevelDropDownListsFromDatabase != null && Model!.TopLevelDropDownListsFromDatabase.ContainsKey(TopLevelDropDownLists.ElmahStatusCode.ToString()))
                             @foreach (var item in Model!.TopLevelDropDownListsFromDatabase![TopLevelDropDownLists.ElmahStatusCode.ToString()])
                             {
                                 <li>
