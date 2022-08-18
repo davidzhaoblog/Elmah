@@ -50,6 +50,17 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]// form post formdata
         public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query, UIParams uiParams)
         {
+            if(!uiParams.PagedViewOption.HasValue)
+            {
+                uiParams.PagedViewOption = Framework.Models.PagedViewOptions.Table;
+                uiParams.Template = Framework.Models.ViewItemTemplateNames.Details;
+            }
+
+            if (uiParams.PagedViewOption == Framework.Models.PagedViewOptions.EditableTable)
+            {
+                uiParams.Template = Framework.Models.ViewItemTemplateNames.Edit;
+            }
+
             if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
             {
                 query.PaginationOption = PaginationOptions.LoadMore;

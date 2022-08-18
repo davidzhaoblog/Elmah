@@ -57,6 +57,7 @@ function attachBulkSelectStatusClickEventHandler(selector) {
         }
         toggleListItemBackground($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleBulkActionButtons($(e.currentTarget).closest(".nt-list-wrapper"));
+        toggleRefreshButton($(e.currentTarget).closest(".nt-list-wrapper"))
     })
 }
 
@@ -65,6 +66,7 @@ function attachIndividualSelectCheckboxClickEventHandler(selector) {
         setStatusDataAndIcon($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleListItemBackground($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleBulkActionButtons($(e.currentTarget).closest(".nt-list-wrapper"));
+        toggleRefreshButton($(e.currentTarget).closest(".nt-list-wrapper"))
     })
 }
 
@@ -78,13 +80,14 @@ function attachQuickSelectClickEventHandler(selector) {
         setStatusDataAndIcon($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleListItemBackground($(e.currentTarget).closest(".nt-list-wrapper"));
         toggleBulkActionButtons($(e.currentTarget).closest(".nt-list-wrapper"));
+        toggleRefreshButton($(e.currentTarget).closest(".nt-list-wrapper"))
     })
 }
 
-function setStatusDataAndIcon(parentelector) {
-    const checked = $(parentelector).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked");
-    const notChecked = $(parentelector).find(".nt-listitem .nt-list-bulk-select .form-check-input:not(:checked)");
-    const bulkSelectStatus = $(parentelector).find(".nt-bulk-select-filter .btn-nt-bulk-select-status");
+function setStatusDataAndIcon(parentselector) {
+    const checked = $(parentselector).find(".nt-listitem .nt-list-bulk-select .form-check-input:checked");
+    const notChecked = $(parentselector).find(".nt-listitem .nt-list-bulk-select .form-check-input:not(:checked)");
+    const bulkSelectStatus = $(parentselector).find(".nt-bulk-select-filter .btn-nt-bulk-select-status");
     if (checked.length === 0 && notChecked.length !== 0) {
         bulkSelectStatus.data("nt-bulk-select-status", "None")
         bulkSelectStatus.html('<i class="fa-regular fa-square"></i>');
@@ -100,18 +103,27 @@ function setStatusDataAndIcon(parentelector) {
  }
 
 
-function toggleListItemBackground(parentelector) {
-    $(parentelector).find(".nt-listitem:not(.nt-new) .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").addClass("bg-info");
-    $(parentelector).find(".nt-listitem:not(.nt-new) .nt-list-bulk-select .form-check-input:not(:checked)").closest(".nt-listitem").removeClass("bg-info");
+function toggleListItemBackground(parentselector) {
+    $(parentselector).find(".nt-listitem:not(.nt-new) .nt-list-bulk-select .form-check-input:checked").closest(".nt-listitem").addClass("bg-info");
+    $(parentselector).find(".nt-listitem:not(.nt-new) .nt-list-bulk-select .form-check-input:not(:checked)").closest(".nt-listitem").removeClass("bg-info");
 }
 
-function toggleBulkActionButtons(parentelector) {
-    const bulkSelectStatus = $(parentelector).find(".nt-bulk-select-filter .btn-nt-bulk-select-status").data("nt-bulk-select-status");
+function toggleBulkActionButtons(parentselector) {
+    const bulkSelectStatus = $(parentselector).find(".nt-bulk-select-filter .btn-nt-bulk-select-status").data("nt-bulk-select-status");
     if (bulkSelectStatus !== "None") {
-        $(parentelector).find(".nt-bulk-actions-container").removeClass("d-none");
-        $(parentelector).find(".nt-bulk-actions-container").show();
+        $(parentselector).find(".nt-bulk-actions-container").show();
     }
     else {
-        $(parentelector).find(".nt-bulk-actions-container").hide();
+        $(parentselector).find(".nt-bulk-actions-container").hide();
+    }
+}
+
+function toggleRefreshButton(parentselector) {
+    const bulkSelectStatus = $(parentselector).find(".nt-bulk-select-filter .btn-nt-bulk-select-status").data("nt-bulk-select-status");
+    if (bulkSelectStatus == "None") {
+        $(parentselector).find(".nt-refresh-button-group").show();
+    }
+    else {
+        $(parentselector).find(".nt-refresh-button-group").hide();
     }
 }
