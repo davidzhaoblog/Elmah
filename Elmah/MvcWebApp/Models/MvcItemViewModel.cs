@@ -5,8 +5,7 @@ namespace Elmah.MvcWebApp.Models
     public class MvcItemViewModel<TModel>: ItemViewModel<TModel>
         where TModel : class
     {
-        public UIListSettingModel? UIListSetting { get; set; }
-
+        public UIItemFeatures UIItemFeatures { get; set; } = null!;
         public int IndexInArray { get; set; }
 
         public string HtmlId(string propertyName)
@@ -16,21 +15,14 @@ namespace Elmah.MvcWebApp.Models
         }
         public string HtmlName(string propertyName)
         {
-            if(UIListSetting == null ||
-                UIListSetting.UIParams == null ||
-                UIListSetting.UIListFeatures == null)
+            if(!UIItemFeatures.IsArrayBinding)
             {
-                return propertyName;
-            }
-
-            if(!UIListSetting.UIListFeatures.IsArrayBinding)
-            {
-                return string.IsNullOrEmpty(UIListSetting.UIListFeatures.BindingPath)
+                return string.IsNullOrEmpty(UIItemFeatures.BindingPath)
                     ? propertyName
-                    : string.Format("{0}.{1}", UIListSetting.UIListFeatures.BindingPath, propertyName);
+                    : string.Format("{0}.{1}", UIItemFeatures.BindingPath, propertyName);
             }
 
-            return string.Format("{0}[{1}].{2}", UIListSetting.UIListFeatures.BindingPath, IndexInArray, propertyName);
+            return string.Format("{0}[{1}].{2}", UIItemFeatures.BindingPath, IndexInArray, propertyName);
         }
     }
 }

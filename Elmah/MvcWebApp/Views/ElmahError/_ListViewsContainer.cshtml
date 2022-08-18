@@ -136,7 +136,7 @@
                     <i class="fa fa-plus"></i>
                 </a>
             }
-            @if (Model.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
+            @if (Model!.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
             {
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
                     data-nt-action="@HttpMethods.Post"

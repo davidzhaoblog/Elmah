@@ -38,7 +38,7 @@
                     @await Html.PartialAsync("~/Views/ElmahUser/_TableItemTr.cshtml",
                         new MvcItemViewModel<ElmahUserModel>
                         {
-                            UIListSetting = Model.UIListSetting,
+                            UIItemFeatures = Model.UIListSetting.GetUIItemFeatures(),
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
                             Template = Model!.UIListSetting.UIParams.PagedViewOption != PagedViewOptions.EditableTable ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),

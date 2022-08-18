@@ -8,6 +8,24 @@ namespace Framework.Models
         // Use this if you want more control
         //public UIAvailableFeatures? UIAvailableFeatures { get; set; }
 
+        public UIItemFeatures GetUIItemFeatures()
+        {
+            return new UIItemFeatures
+            {
+                BindingPath = UIListFeatures.BindingPath,
+                CanGotoDashboard = UIListFeatures.CanGotoDashboard,
+                IsArrayBinding = UIListFeatures.IsArrayBinding,
+                PrimayCreateViewContainer = UIListFeatures.PrimayCreateViewContainer,
+                PrimayDeleteViewContainer = UIListFeatures.PrimayDeleteViewContainer,
+                PrimayDetailsViewContainer = UIListFeatures.PrimayDetailsViewContainer,
+                PrimayEditViewContainer = UIListFeatures.PrimayEditViewContainer,
+                ShowEditableListDeleteSelect = ShowEditableListDeleteSelect(),
+                ShowItemButtons = ShowItemButtons(),
+                ShowItemUIStatus = ShowItemUIStatus(),
+                ShowListBulkSelectCheckbox = this.ShowListBulkActionRelated(true),
+            };
+        }
+
         // 1.Start List/Editable list related
 
         public bool ShowListBulkActionRelated(bool withBulkDelete)

@@ -9,12 +9,12 @@
 @{
     var format_Please_Select = localizor.Get("Format_Please_Select");
 }
-@if (Model!.UIListSetting!.ShowListBulkActionRelated(true))
+@if (Model!.UIItemFeatures.ShowListBulkSelectCheckbox)
 {
     <td class="pt-0 pb-0 nt-list-bulk-select" style="width: 1% !important;">
     </td>
 }
-@if (Model!.UIListSetting!.ShowItemButtons())
+@if (Model!.UIItemFeatures.ShowItemButtons)
 {
     <td class="p-0" style="width: 1% !important;">
     <div class="btn-group btn-group-nt-action-save">
@@ -33,7 +33,7 @@
     <input asp-for="Model!.Type" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahTypeModel.Type))" name="@Model!.HtmlName(nameof(ElmahTypeModel.Type))" data-nt-value="@Model!.Model!.Type"/>
     <span asp-validation-for="Model!.Type" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahTypeModel.Type))"></span>
 </td>
-@if (Model!.UIListSetting!.ShowItemUIStatus())
+@if (Model!.UIItemFeatures.ShowItemUIStatus)
 {
     <td class="form-group nt-item-status text-center" style="width: 1% !important;">
         @if (Model!.Model!.ItemUIStatus______ == ItemUIStatus.NoChange)
@@ -51,7 +51,7 @@
         <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahTypeModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.ItemUIStatus______))" type="hidden" />
     </td>
 }
-@if (Model!.UIListSetting!.ShowEditableListDeleteSelect())
+@if (Model!.UIItemFeatures.ShowEditableListDeleteSelect)
 {
     <td class="form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
         <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahTypeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahTypeModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>

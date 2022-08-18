@@ -11,7 +11,7 @@
         @await Html.PartialAsync("~/Views/ElmahHost/_Tile.cshtml",
             new MvcItemViewModel<ElmahHostModel>
             {
-                UIListSetting = Model.UIListSetting,
+                UIItemFeatures = Model.UIListSetting.GetUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,
                 Model = Model.Result.ResponseBody[i],
                 IsCurrentItem = false
