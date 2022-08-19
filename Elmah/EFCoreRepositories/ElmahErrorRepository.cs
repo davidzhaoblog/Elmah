@@ -271,7 +271,6 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     {
                         var toInsert = new ElmahError
                         {
-                            ErrorId = item.ErrorId,
                             Application = item.Application,
                             Host = item.Host,
                             Type = item.Type,
@@ -302,7 +301,6 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                         if (existing != null)
                         {
                             // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
-                existing.ErrorId = item.ErrorId;
                 existing.Application = item.Application;
                 existing.Host = item.Host;
                 existing.Type = item.Type;
@@ -413,7 +411,6 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.NotFound });
 
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
-                existing.ErrorId = input.ErrorId;
                 existing.Application = input.Application;
                 existing.Host = input.Host;
                 existing.Type = input.Type;
@@ -542,7 +539,6 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             {
                 var toInsert = new ElmahError
                 {
-                            ErrorId = input.ErrorId,
                             Application = input.Application,
                             Host = input.Host,
                             Type = input.Type,

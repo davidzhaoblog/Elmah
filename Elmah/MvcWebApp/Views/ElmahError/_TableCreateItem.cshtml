@@ -30,8 +30,6 @@
     </td>
 }
 <td class="form-group p-0">
-    <input asp-for="Model!.ErrorId" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))" name="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))" data-nt-value="@Model!.Model!.ErrorId"/>
-    <span asp-validation-for="Model!.ErrorId" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"></span>
 </td>
 <td class="form-group p-0">
     <select asp-for="Model!.Application" class="form-control form-select nt-form-data" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahApplication.ToString()])"
