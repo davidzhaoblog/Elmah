@@ -19,6 +19,46 @@ namespace Elmah.MvcWebApp.Models
             _logger = logger;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key">for ListWrapperId and SearchFormId</param>
+        /// <param name="uiParams"></param>
+        /// <returns></returns>
+        public Framework.Models.UIListSettingModel GetElmahErrorUIListSetting(string key, Framework.Models.UIParams uiParams)
+        {
+            var result = new Framework.Models.UIListSettingModel
+            {
+                // 1. From UI, assigned at the end of this method with default values
+                UIParams = uiParams,
+                // 2. Customized By Developer
+                UIListFeatures = new Framework.Models.UIListFeatures
+                {
+                    ListWrapperId = key + "ListWrapper",
+                    SearchFormId = key + "SearchForm",
+                    PrimayCreateViewContainer = Framework.Models.CrudViewContainers.Dialog,
+                    PrimayDeleteViewContainer = Framework.Models.CrudViewContainers.Dialog,
+                    PrimayDetailsViewContainer = Framework.Models.CrudViewContainers.Dialog,
+                    PrimayEditViewContainer = Framework.Models.CrudViewContainers.Dialog,
+
+                    CanGotoDashboard = true,
+                    CanBulkDelete = false,
+                    CanBulkActions = false,
+
+                    AvailableListViews = new List<Framework.Models.PagedViewOptions>
+                    {
+                        PagedViewOptions.Table,
+                        PagedViewOptions.Tiles,
+                        PagedViewOptions.SlideShow,
+                        // PagedViewOptions.EditableTable,
+                    },
+                },
+            };
+
+            result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.AvailableListViews[0]);
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            return result;
+        }
 
         /// <summary>
         ///

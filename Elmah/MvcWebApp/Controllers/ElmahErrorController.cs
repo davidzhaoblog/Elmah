@@ -12,16 +12,6 @@ namespace Elmah.MvcWebApp.Controllers
 {
     public class ElmahErrorController : Controller
     {
-        private static readonly TopLevelDropDownLists[] _topLevelDropDownLists =
-            new [] {
-                TopLevelDropDownLists.ElmahApplication,
-                TopLevelDropDownLists.ElmahHost,
-                TopLevelDropDownLists.ElmahSource,
-                TopLevelDropDownLists.ElmahStatusCode,
-                TopLevelDropDownLists.ElmahType,
-                TopLevelDropDownLists.ElmahUser,
-            };
-
         private readonly IElmahErrorService _thisService;
         private readonly SelectListHelper _selectListHelper;
         private readonly ViewFeaturesManager _viewFeatureManager;
@@ -71,29 +61,32 @@ namespace Elmah.MvcWebApp.Controllers
             }
 
             var result = await _thisService.Search(query);
-            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
+            
+            var pageSizeList = _selectListHelper.GetDefaultPageSizeList();
 
-            ViewBag.OrderByList = new List<SelectListItem>(new[] {
-                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
-                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
+            var orderByList = new List<Framework.Models.NameValuePair>(new[] {
+                new Framework.Models.NameValuePair{ Name = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
+                new Framework.Models.NameValuePair{ Name = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
             });
             if (string.IsNullOrEmpty(query.OrderBys))
             {
-                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
+                query.OrderBys = orderByList.First().Value;
             }
 
-            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+            var textSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            ViewBag.TimeUtcRangeList = _selectListHelper.GetDefaultPredefinedDateTimeRange();
+            var otherDropDownLists = new Dictionary<string, List<Framework.Models.NameValuePair>>();
+            otherDropDownLists.Add(nameof(Elmah.Models.ElmahErrorAdvancedQuery.TimeUtcRange), _selectListHelper.GetDefaultPredefinedDateTimeRange());
 
-            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
             {
                 Query = query,
                 UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
+                Result = result,
                 TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
-                Result = result
+                OrderByList = orderByList, OtherDropDownLists = otherDropDownLists, PageSizeList = pageSizeList, TextSearchTypeList = textSearchTypeList
             });
         }
 
@@ -110,7 +103,7 @@ namespace Elmah.MvcWebApp.Controllers
             };
 
             if(uiParams.Template == ViewItemTemplateNames.Create || uiParams.Template == ViewItemTemplateNames.Edit)
-            {                pagedViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+            {                pagedViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
             }
 
             if (uiParams.PagedViewOption == PagedViewOptions.Table || uiParams.PagedViewOption == PagedViewOptions.EditableTable)
@@ -171,7 +164,7 @@ namespace Elmah.MvcWebApp.Controllers
             // TODO: Maybe some special for Edit/Create
             if (template == ViewItemTemplateNames.Edit.ToString() || template == ViewItemTemplateNames.Create.ToString())
             {
-                itemViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+                itemViewModel.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
             }
 
             if ((view == PagedViewOptions.Table || view == PagedViewOptions.EditableTable) && container == CrudViewContainers.Inline)
@@ -465,7 +458,7 @@ namespace Elmah.MvcWebApp.Controllers
             }
 
             var result = await _thisService.Get(id);
-            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
@@ -489,7 +482,7 @@ namespace Elmah.MvcWebApp.Controllers
             [FromRoute]ElmahErrorIdentifier id,
             [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel.DefaultView input)
         {
-            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             if (!id.ErrorId.HasValue ||
                 id.ErrorId.HasValue && id.ErrorId != input.ErrorId)
@@ -548,7 +541,7 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahError/Create
         public async Task<IActionResult> Create()
         {
-            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
@@ -568,7 +561,7 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Create(
             [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel.DefaultView input)
         {
-            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             if (ModelState.IsValid)
             {

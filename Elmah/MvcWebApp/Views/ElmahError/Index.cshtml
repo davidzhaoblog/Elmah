@@ -41,7 +41,7 @@
     </div>
     <hr class="mt-1" />
     <div class="input-group">
-        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+        <select asp-for="Query.TextSearchType" asp-items="@selectListHelper.GetSelectList(Model.TextSearchTypeList)" class="input-group-text text-start">
         </select>
         <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
     </div>
@@ -49,7 +49,7 @@
         <div class="col-lg-6">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("TimeUtcRange")</label>
-                <select asp-for="Query.TimeUtcRange" asp-items="ViewBag.TimeUtcRangeList" class="form-control form-select nt-datetime-predefinedrange"></select>
+                <select asp-for="Query.TimeUtcRange" asp-items="@selectListHelper.GetSelectList(Model.OtherDropDownLists[nameof(Elmah.Models.ElmahErrorAdvancedQuery.TimeUtcRange)])" class="form-control form-select nt-datetime-predefinedrange"></select>
                 <input asp-for="Query.TimeUtcRangeLower" class="form-control" readonly />
                 <input asp-for="Query.TimeUtcRangeUpper" class="form-control" readonly />
             </div>
@@ -109,7 +109,7 @@
         <div class="col-md-6">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("Message")</label>
-                <select asp-for="Query.MessageSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+                <select asp-for="Query.MessageSearchType" asp-items="@selectListHelper.GetSelectList(Model.TextSearchTypeList)" class="input-group-text text-start">
                 </select>
                 <input asp-for="Query.Message" class="form-control" placeholder="@string.Format(@localizor.Get("Format_SearchTextDescription"), @localizor.Get("Message"))" aria-label="@string.Format(@localizor.Get("Format_SearchTextDescription"), @localizor.Get("Message"))" />
             </div>
@@ -117,7 +117,7 @@
         <div class="col-md-6">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("AllXml")</label>
-                <select asp-for="Query.AllXmlSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+                <select asp-for="Query.AllXmlSearchType" asp-items="@selectListHelper.GetSelectList(Model.TextSearchTypeList)" class="input-group-text text-start">
                 </select>
                 <input asp-for="Query.AllXml" class="form-control" placeholder="@string.Format(@localizor.Get("Format_SearchTextDescription"), @localizor.Get("AllXml"))" aria-label="@string.Format(@localizor.Get("Format_SearchTextDescription"), @localizor.Get("AllXml"))" />
             </div>

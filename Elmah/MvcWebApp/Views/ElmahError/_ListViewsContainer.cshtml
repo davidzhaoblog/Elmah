@@ -43,11 +43,11 @@
             <div class="btn-group float-end mt-1 ms-3 me-3">
                 @if (Model!.UIListSetting == null || Model.UIListSetting.UIListFeatures.HasPageSizeList)
                 {
-                    <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit"></select>
+                    <select asp-for="Query.PageSize" asp-items="@selectListHelper.GetSelectList(Model.PageSizeList)" role="button" class="form-control form-select nt-page-size-submit"></select>
                 }
                 @if (Model!.UIListSetting == null || Model.UIListSetting.UIListFeatures.HasOrderByList)
                 {
-                    <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit"></select>
+                    <select asp-for="Query.OrderBys" asp-items="@selectListHelper.GetSelectList(Model.OrderByList)" role="button" class="form-control form-select nt-order-by-submit"></select>
                 }
             </div>
         }

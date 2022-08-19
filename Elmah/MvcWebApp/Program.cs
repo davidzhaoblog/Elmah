@@ -66,6 +66,7 @@ builder.Services.AddScoped<IDropDownListService, DropDownListService>();
 builder.Services.AddScoped<SelectListHelper>();
 builder.Services.AddScoped<UIAvailableFeaturesManager>();
 builder.Services.AddScoped<ViewFeaturesManager>();
+builder.Services.AddScoped<Elmah.MvcWebApp.Models.DashboardViewModelHelper>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => { x.UseNetTopologySuite(); x.UseBulk(); }),  ServiceLifetime.Scoped);
