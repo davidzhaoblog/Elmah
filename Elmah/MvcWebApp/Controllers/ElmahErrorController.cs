@@ -16,6 +16,9 @@ namespace Elmah.MvcWebApp.Controllers
         private readonly SelectListHelper _selectListHelper;
         private readonly ViewFeaturesManager _viewFeatureManager;
         private readonly IDropDownListService _dropDownListService;
+        private readonly Elmah.MvcWebApp.Models.OrderBysListHelper _orderBysListHelper;
+        private readonly Elmah.MvcWebApp.Models.MvcItemViewModelHelper _mvcItemViewModelHelper;
+        private readonly Elmah.MvcWebApp.Models.PagedSearchViewModelHelper _pagedSearchViewModelHelper;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahErrorController> _logger;
 
@@ -24,6 +27,9 @@ namespace Elmah.MvcWebApp.Controllers
             SelectListHelper selectListHelper,
             ViewFeaturesManager viewFeatureManager,
             IDropDownListService dropDownListService,
+            Elmah.MvcWebApp.Models.OrderBysListHelper orderBysListHelper,
+            Elmah.MvcWebApp.Models.MvcItemViewModelHelper mvcItemViewModelHelper,
+            Elmah.MvcWebApp.Models.PagedSearchViewModelHelper pagedSearchViewModelHelper,
             IUIStrings localizor,
             ILogger<ElmahErrorController> logger)
         {
@@ -31,6 +37,9 @@ namespace Elmah.MvcWebApp.Controllers
             _selectListHelper = selectListHelper;
             _viewFeatureManager = viewFeatureManager;
             _dropDownListService = dropDownListService;
+            _orderBysListHelper = orderBysListHelper;
+            _mvcItemViewModelHelper = mvcItemViewModelHelper;
+            _pagedSearchViewModelHelper = pagedSearchViewModelHelper;
             _localizor = localizor;
             _logger = logger;
         }
@@ -40,53 +49,47 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]// form post formdata
         public async Task<IActionResult> Index(ElmahErrorAdvancedQuery query, UIParams uiParams)
         {
-            if(!uiParams.PagedViewOption.HasValue)
-            {
-                uiParams.PagedViewOption = Framework.Models.PagedViewOptions.Table;
-                uiParams.Template = Framework.Models.ViewItemTemplateNames.Details;
-            }
-
-            if (uiParams.PagedViewOption == Framework.Models.PagedViewOptions.EditableTable)
-            {
-                uiParams.Template = Framework.Models.ViewItemTemplateNames.Edit;
-            }
-
-            if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
-            {
-                query.PaginationOption = PaginationOptions.LoadMore;
-            }
-            else if (uiParams.PagedViewOption == PagedViewOptions.Table || uiParams.PagedViewOption == PagedViewOptions.EditableTable)
-            {
-                query.PaginationOption = PaginationOptions.Paged;
-            }
-
-            var result = await _thisService.Search(query);
-            
-            var pageSizeList = _selectListHelper.GetDefaultPageSizeList();
-
-            var orderByList = new List<Framework.Models.NameValuePair>(new[] {
-                new Framework.Models.NameValuePair{ Name = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
-                new Framework.Models.NameValuePair{ Name = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
-            });
+            _viewFeatureManager.DefaultUIParamsIfNeeds(uiParams, Framework.Models.PagedViewOptions.EditableTable);
+            // UIParams.PagedViewOption is not null here
+            query.PaginationOption = _viewFeatureManager.HardCodePaginationOption(uiParams.PagedViewOption!.Value, query.PaginationOption);
             if (string.IsNullOrEmpty(query.OrderBys))
             {
-                query.OrderBys = orderByList.First().Value;
+                query.OrderBys = _orderBysListHelper.GetDefaultElmahErrorOrderBys();
             }
+            
+            var result = await _thisService.Search(query);
 
-            var textSearchTypeList = _selectListHelper.GetTextSearchTypeList();
+            //List<NameValuePair> orderByList = _orderBysListHelper.GetElmahErrorOrderBys();
 
-            var otherDropDownLists = new Dictionary<string, List<Framework.Models.NameValuePair>>();
-            otherDropDownLists.Add(nameof(Elmah.Models.ElmahErrorAdvancedQuery.TimeUtcRange), _selectListHelper.GetDefaultPredefinedDateTimeRange());
+            //var textSearchTypeList = _selectListHelper.GetTextSearchTypeList();
 
-            var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
+            //var otherDropDownLists = new Dictionary<string, List<Framework.Models.NameValuePair>>();
+            //otherDropDownLists.Add(nameof(Elmah.Models.ElmahErrorAdvancedQuery.TimeUtcRange), _selectListHelper.GetDefaultPredefinedDateTimeRange());
 
-            return View(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
-            {
-                Query = query,
-                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
-                Result = result,
-                TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
-                OrderByList = orderByList, OtherDropDownLists = otherDropDownLists, PageSizeList = pageSizeList, TextSearchTypeList = textSearchTypeList
+            //var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
+
+            //var vm = new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
+            //{
+            //    Query = query,
+            //    UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
+            //    Result = result,
+            //    TopLevelDropDownListsFromDatabase = topLevelDropDownListsFromDatabase,
+            //    OrderByList = orderByList,
+            //    OtherDropDownLists = otherDropDownLists,
+            //    PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
+            //    TextSearchTypeList = _selectListHelper.GetTextSearchTypeList()
+            //};
+
+            var vm = await _pagedSearchViewModelHelper.GetElmahErrorPagedSearchViewModel("index", uiParams, query, result, true, true);
+
+            return View(vm);
+        }
+
+        private List<NameValuePair> GetElmahErrorOrderBys()
+        {
+            return new List<Framework.Models.NameValuePair>(new[] {
+                new Framework.Models.NameValuePair{ Name = String.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
+                new Framework.Models.NameValuePair{ Name = String.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
             });
         }
 

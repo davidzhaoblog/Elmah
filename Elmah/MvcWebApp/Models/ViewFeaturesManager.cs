@@ -1,5 +1,7 @@
+using Elmah.Models;
 using Elmah.Resx;
 using Framework.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Elmah.MvcWebApp.Models
 {
@@ -19,6 +21,47 @@ namespace Elmah.MvcWebApp.Models
             _logger = logger;
         }
 
+        public void DefaultUIParamsIfNeeds(Framework.Models.UIParams uiParams, Framework.Models.PagedViewOptions defaultPagedViewOption)
+        {
+            if (!uiParams.PagedViewOption.HasValue)
+            {
+                uiParams.PagedViewOption = defaultPagedViewOption;
+            }
+            if (uiParams.PagedViewOption == Framework.Models.PagedViewOptions.EditableTable)
+            {
+                uiParams.Template = ViewItemTemplateNames.Edit;
+            }
+            else if(!uiParams.Template.HasValue)
+            {
+                uiParams.Template = Framework.Models.ViewItemTemplateNames.Delete;
+            }
+        }
+
+        public Framework.Models.PaginationOptions HardCodePaginationOption(Framework.Models.PagedViewOptions pagedViewOption, Framework.Models.PaginationOptions original)
+        {
+            if (original == Framework.Models.PaginationOptions.NoPagination)
+                return Framework.Models.PaginationOptions.NoPagination;
+            else if (pagedViewOption == Framework.Models.PagedViewOptions.Table || pagedViewOption == Framework.Models.PagedViewOptions.EditableTable)
+                return Framework.Models.PaginationOptions.Paged;
+            return original;
+        }
+
+        public Framework.Models.UIItemFeatures GetElmahApplicationUIItemFeatures()
+        {
+            var result = new Framework.Models.UIItemFeatures
+            {
+                PrimayCreateViewContainer = Framework.Models.CrudViewContainers.Dialog,
+                PrimayDeleteViewContainer = Framework.Models.CrudViewContainers.Dialog,
+                PrimayDetailsViewContainer = Framework.Models.CrudViewContainers.Dialog,
+                PrimayEditViewContainer = Framework.Models.CrudViewContainers.Dialog,
+
+                ShowItemButtons = true,
+                CanGotoDashboard = false,
+            };
+
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -36,6 +79,9 @@ namespace Elmah.MvcWebApp.Models
                 {
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
+
+                    PrimaryPagedViewOption = PagedViewOptions.Table,
+
                     PrimayCreateViewContainer = Framework.Models.CrudViewContainers.Dialog,
                     PrimayDeleteViewContainer = Framework.Models.CrudViewContainers.Dialog,
                     PrimayDetailsViewContainer = Framework.Models.CrudViewContainers.Dialog,

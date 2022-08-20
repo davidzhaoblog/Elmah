@@ -5,6 +5,9 @@ namespace Framework.Models
         public bool HasPageSizeList { get; set; } = true;
         public bool HasOrderByList { get; set; } = true;
         public bool HasPagination { get; set; } = true;
+
+        public Framework.Models.PagedViewOptions PrimaryPagedViewOption { get; set; } = Framework.Models.PagedViewOptions.Table;
+
         /// <summary>
         /// PrimayCreateViewContainer must be Inline when EditableList
         /// </summary>

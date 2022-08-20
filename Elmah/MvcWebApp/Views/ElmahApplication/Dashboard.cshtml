@@ -8,6 +8,7 @@
 @{
     ViewData["Title"] = localizor.Get("Dashboard");
     var routeId = Model.__Master__.Application;
+    var masterVM = dashboardViewModelHelper.GetElmahApplicationMvcItemViewModel(Model.__Master__, Model.Get(Elmah.Models.ElmahApplicationCompositeModel.__DataOptions__.__Master__));
 }
 <div class="row">
     <div class="col-12 col-md-8 col-lg-9 nopadding">
@@ -62,14 +63,7 @@
              data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahApplication")"
              data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahApplication")">
             <div class="nt-listitem" data-nt-route-id="@routeId">
-                @await Html.PartialAsync("~/Views/ElmahApplication/_TileDetailsItem.cshtml",
-                new Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahApplicationModel>
-                {
-                Model = Model.__Master__,
-                Status = Model!.Responses[ElmahApplicationCompositeModel.__DataOptions__.__Master__].Status,
-                Template = Framework.Models.ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = viewFeatureManager.GetDefaultReadonlyUIItemFeatures(Framework.Models.CrudViewContainers.Dialog)
-                })
+                @await Html.PartialAsync("~/Views/ElmahApplication/_TileDetailsItem.cshtml", masterVM)
                 <!-- ElmahApplicationCompositeModel.__DataOptions__.__Master__ -->
             </div>
         </div>

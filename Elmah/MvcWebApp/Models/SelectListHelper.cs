@@ -91,7 +91,7 @@ namespace Elmah.MvcWebApp.Models
         {
             if (nameValuePairs == null)
                 return new SelectList(Enumerable.Empty<Framework.Models.NameValuePair>());
-            return new SelectList(nameValuePairs, nameof(NameValuePair.Value), nameof(NameValuePair.Name));
+            return new SelectList(nameValuePairs, nameof(Framework.Models.NameValuePair.Value), nameof(Framework.Models.NameValuePair.Name));
         }
     }
 }

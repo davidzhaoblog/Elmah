@@ -1,10 +1,5 @@
 using Elmah.Models;
-using Elmah.Resx;
-using Elmah.ServiceContracts;
 using Framework.Models;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Elmah.MvcWebApp.Models
 {
@@ -13,21 +8,35 @@ namespace Elmah.MvcWebApp.Models
         private readonly Elmah.ServiceContracts.IDropDownListService _dropDownListService;
         private readonly Elmah.MvcWebApp.Models.SelectListHelper _selectListHelper;
         private readonly Elmah.MvcWebApp.Models.ViewFeaturesManager _viewFeaturesManager;
-        private readonly IUIStrings _localizor;
-        private readonly ILogger<ViewFeaturesManager> _logger;
+        private readonly Elmah.Resx.IUIStrings _localizor;
+        private readonly ILogger<DashboardViewModelHelper> _logger;
 
         public DashboardViewModelHelper(
             Elmah.ServiceContracts.IDropDownListService dropDownListService,
             Elmah.MvcWebApp.Models.SelectListHelper selectListHelper,
             Elmah.MvcWebApp.Models.ViewFeaturesManager viewFeaturesManager,
-            IUIStrings localizor,
-            ILogger<ViewFeaturesManager> logger)
+            Elmah.Resx.IUIStrings localizor,
+            ILogger<DashboardViewModelHelper> logger)
         {
             _dropDownListService = dropDownListService;
             _selectListHelper = selectListHelper;
             _viewFeaturesManager = viewFeaturesManager;
             _localizor = localizor;
             _logger = logger;
+        }
+
+        public async Task<Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahApplicationModel>> GetElmahApplicationMvcItemViewModel(
+            Elmah.Models.ElmahApplicationModel responseBody,
+            Framework.Models.CompositeItemModel compositeItem)
+        {
+            return new Elmah.MvcWebApp.Models.MvcItemViewModel<Elmah.Models.ElmahApplicationModel>
+            {
+                Model = responseBody,
+                Status = compositeItem.Response.Status,
+                StatusMessage = compositeItem.Response.StatusMessage,
+                Template = compositeItem.UIParams.Template.HasValue ? compositeItem.UIParams.Template.ToString() : Framework.Models.ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahApplicationUIItemFeatures(),
+            };
         }
 
         public async Task<Framework.Models.PagedSearchViewModel<Elmah.Models.ElmahErrorAdvancedQuery, Elmah.Models.ElmahErrorModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
@@ -58,7 +67,7 @@ namespace Elmah.MvcWebApp.Models
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 OrderByList = orderByList,
             };
-            if(compositeItem.UIParams.Template == ViewItemTemplateNames.Create || compositeItem.UIParams.Template == ViewItemTemplateNames.Edit)
+            if(compositeItem.UIParams.Template == Framework.Models.ViewItemTemplateNames.Create || compositeItem.UIParams.Template == Framework.Models.ViewItemTemplateNames.Edit)
             {
                 result.TopLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
             }

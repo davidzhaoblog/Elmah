@@ -67,6 +67,9 @@ builder.Services.AddScoped<SelectListHelper>();
 builder.Services.AddScoped<UIAvailableFeaturesManager>();
 builder.Services.AddScoped<ViewFeaturesManager>();
 builder.Services.AddScoped<Elmah.MvcWebApp.Models.DashboardViewModelHelper>();
+builder.Services.AddScoped<Elmah.MvcWebApp.Models.OrderBysListHelper>();
+builder.Services.AddScoped<Elmah.MvcWebApp.Models.MvcItemViewModelHelper>();
+builder.Services.AddScoped<Elmah.MvcWebApp.Models.PagedSearchViewModelHelper>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => { x.UseNetTopologySuite(); x.UseBulk(); }),  ServiceLifetime.Scoped);

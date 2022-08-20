@@ -4,9 +4,9 @@ namespace Framework.Models
     {
         public string Key { get; set; } = null!;
 
-        public Response Response { get; set; } = null!;
+        public Framework.Models.Response Response { get; set; } = null!;
 
-        public Framework.Models.UIParams UIParams { get; set; } = null;
+        public Framework.Models.UIParams UIParams { get; set; } = null!;
     }
 }
 

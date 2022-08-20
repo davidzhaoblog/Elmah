@@ -27,7 +27,7 @@ namespace Elmah.Services
         public async Task<Dictionary<string, List<NameValuePair>>> GetElmahErrorTopLevelDropDownListsFromDatabase()
         {
             var  _topLevelDropDownLists =
-                new TopLevelDropDownLists[] {
+                new Elmah.Models.Definitions.TopLevelDropDownLists[] {
                     TopLevelDropDownLists.ElmahApplication,
                     TopLevelDropDownLists.ElmahHost,
                     TopLevelDropDownLists.ElmahSource,
