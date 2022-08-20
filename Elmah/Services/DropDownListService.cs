@@ -24,6 +24,21 @@ namespace Elmah.Services
             _logger = logger;
         }
 
+        public async Task<Dictionary<string, List<NameValuePair>>> GetElmahErrorTopLevelDropDownListsFromDatabase()
+        {
+            var  _topLevelDropDownLists =
+                new TopLevelDropDownLists[]
+                {
+                    TopLevelDropDownLists.ElmahApplication,
+                    TopLevelDropDownLists.ElmahHost,
+                    TopLevelDropDownLists.ElmahSource,
+                    TopLevelDropDownLists.ElmahStatusCode,
+                    TopLevelDropDownLists.ElmahType,
+                    TopLevelDropDownLists.ElmahUser,
+                };
+            return await GetTopLevelDropDownListsFromDatabase(_topLevelDropDownLists);
+        }
+
         /// <summary>
         /// This method will be used to get top level dropdownlists from database for Search and Editing, to minimize roundtrip.
         /// the Key comes from {SolutionName}.Models.Definitions.TopLevelDropDownLists

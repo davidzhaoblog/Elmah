@@ -1,7 +1,7 @@
 ﻿TABLE_SCHEMA,TABLE_NAME,EntityReferenceSimpleFullPath,PKTypeDeclarationContextName,DuplicateIDPropertyFullPath,IsLeftJoin,InLinqJoin,IDInCriteria,IDInDefaultDataView,UniqueConstraintInDefaultDataView,PropertiesInDefaultDataView,CreatedDate
-dbo,ElmahError,\Application,ElmahApplication,,False,True,True,True,True,,8/18/2022 12:00:00 AM
-dbo,ElmahError,\Host,ElmahHost,,False,True,True,True,True,,8/18/2022 12:00:00 AM
-dbo,ElmahError,\Source,ElmahSource,,False,True,True,True,True,,8/18/2022 12:00:00 AM
-dbo,ElmahError,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,8/18/2022 12:00:00 AM
-dbo,ElmahError,\Type,ElmahType,,False,True,True,True,True,,8/18/2022 12:00:00 AM
-dbo,ElmahError,\User,ElmahUser,,False,True,True,True,True,,8/18/2022 12:00:00 AM
+dbo,ElmahError,\Application,ElmahApplication,,False,True,True,True,True,,8/20/2022 12:00:00 AM
+dbo,ElmahError,\Host,ElmahHost,,False,True,True,True,True,,8/20/2022 12:00:00 AM
+dbo,ElmahError,\Source,ElmahSource,,False,True,True,True,True,,8/20/2022 12:00:00 AM
+dbo,ElmahError,\StatusCode,ElmahStatusCode,,False,True,True,True,True,,8/20/2022 12:00:00 AM
+dbo,ElmahError,\Type,ElmahType,,False,True,True,True,True,,8/20/2022 12:00:00 AM
+dbo,ElmahError,\User,ElmahUser,,False,True,True,True,True,,8/20/2022 12:00:00 AM

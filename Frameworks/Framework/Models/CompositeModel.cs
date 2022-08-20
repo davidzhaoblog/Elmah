@@ -9,7 +9,18 @@ namespace Framework.Models
 
         public TMaster __Master__ { get; set; } = null!;
         public Dictionary<TPropertyEnum, Response> Responses { get; set; } = new Dictionary<TPropertyEnum, Response>();
-        public Dictionary<TPropertyEnum, UIListSettingModel> UIListSettings { get; set; } = new Dictionary<TPropertyEnum, UIListSettingModel>();
+        // this is for Mvc for now, wil be populated in Mvc Controller
+        public Dictionary<TPropertyEnum, UIParams> UIParamsList { get; set; } = new Dictionary<TPropertyEnum, UIParams>();
+
+        public CompositeItemModel Get(TPropertyEnum key)
+        {
+            return new CompositeItemModel
+            {
+                Key = key.ToString(),
+                Response = Responses[key],
+                UIParams = UIParamsList[key],
+            };
+        }
     }
 }
 

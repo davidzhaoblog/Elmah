@@ -23,7 +23,7 @@
         <div class="btn-group float-end mt-1" role="group" aria-label="View Options">
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-List" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
-                data-nt-value="List" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.Table ? "checked": "")>
+                data-nt-value="Table" data-nt-paginationoptionupdatevalue="Paged" @(Model!.UIListSetting.UIParams.PagedViewOption==PagedViewOptions.Table ? "checked": "")>
             <label class="btn btn-outline-primary" for="btnradio-List" title="List" aria-label="List"><i class="fa-solid fa-table-list"></i></label>
             <input type="radio" class="btn-check nt-radio-pagedviewoption" name="btnradio" id="btnradio-Tiles" autocomplete="off"
                 data-bs-toggle="modal" data-bs-target="#fullScreenLoading"
@@ -43,11 +43,11 @@
             <div class="btn-group float-end mt-1 ms-3 me-3">
                 @if (Model!.UIListSetting == null || Model.UIListSetting.UIListFeatures.HasPageSizeList)
                 {
-                    <select asp-for="Query.PageSize" asp-items="ViewBag.PageSizeList" role="button" class="form-control form-select nt-page-size-submit"></select>
+                    <select asp-for="Query.PageSize" asp-items="@selectListHelper.GetSelectList(Model.PageSizeList)" role="button" class="form-control form-select nt-page-size-submit"></select>
                 }
                 @if (Model!.UIListSetting == null || Model.UIListSetting.UIListFeatures.HasOrderByList)
                 {
-                    <select asp-for="Query.OrderBys" asp-items="ViewBag.OrderByList" role="button" class="form-control form-select nt-order-by-submit"></select>
+                    <select asp-for="Query.OrderBys" asp-items="@selectListHelper.GetSelectList(Model.OrderByList)" role="button" class="form-control form-select nt-order-by-submit"></select>
                 }
             </div>
         }

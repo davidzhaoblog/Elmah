@@ -41,7 +41,7 @@
     </div>
     <hr class="mt-1" />
     <div class="input-group">
-        <select asp-for="Query.TextSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+        <select asp-for="Query.TextSearchType" asp-items="@selectListHelper.GetSelectList(Model.TextSearchTypeList)" class="input-group-text text-start">
         </select>
         <input asp-for="Query.TextSearch" class="form-control" placeholder="@localizor.Get("SearchTextDescription")" aria-label="@localizor.Get("SearchTextDescription")" />
     </div>
@@ -49,7 +49,7 @@
         <div class="col-md-6">
             <div class="input-group">
                 <label class="input-group-text">@localizor.Get("User")</label>
-                <select asp-for="Query.UserSearchType" asp-items="ViewBag.TextSearchTypeList" class="input-group-text text-start">
+                <select asp-for="Query.UserSearchType" asp-items="@selectListHelper.GetSelectList(Model.TextSearchTypeList)" class="input-group-text text-start">
                 </select>
                 <input asp-for="Query.User" class="form-control" placeholder="@string.Format(@localizor.Get("Format_SearchTextDescription"), @localizor.Get("User"))" aria-label="@string.Format(@localizor.Get("Format_SearchTextDescription"), @localizor.Get("User"))" />
             </div>

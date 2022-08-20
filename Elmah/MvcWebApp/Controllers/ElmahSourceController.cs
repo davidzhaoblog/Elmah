@@ -16,6 +16,9 @@ namespace Elmah.MvcWebApp.Controllers
         private readonly SelectListHelper _selectListHelper;
         private readonly ViewFeaturesManager _viewFeatureManager;
         private readonly IDropDownListService _dropDownListService;
+        private readonly OrderBysListHelper _orderBysListHelper;
+        private readonly MvcItemViewModelHelper _mvcItemViewModelHelper;
+        private readonly PagedSearchViewModelHelper _pagedSearchViewModelHelper;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahSourceController> _logger;
 
@@ -24,6 +27,9 @@ namespace Elmah.MvcWebApp.Controllers
             SelectListHelper selectListHelper,
             ViewFeaturesManager viewFeatureManager,
             IDropDownListService dropDownListService,
+            OrderBysListHelper orderBysListHelper,
+            MvcItemViewModelHelper mvcItemViewModelHelper,
+            PagedSearchViewModelHelper pagedSearchViewModelHelper,
             IUIStrings localizor,
             ILogger<ElmahSourceController> logger)
         {
@@ -31,6 +37,9 @@ namespace Elmah.MvcWebApp.Controllers
             _selectListHelper = selectListHelper;
             _viewFeatureManager = viewFeatureManager;
             _dropDownListService = dropDownListService;
+            _orderBysListHelper = orderBysListHelper;
+            _mvcItemViewModelHelper = mvcItemViewModelHelper;
+            _pagedSearchViewModelHelper = pagedSearchViewModelHelper;
             _localizor = localizor;
             _logger = logger;
         }
@@ -40,48 +49,18 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]// form post formdata
         public async Task<IActionResult> Index(ElmahSourceAdvancedQuery query, UIParams uiParams)
         {
-            // Default PagedViewOption
-            if(!uiParams.PagedViewOption.HasValue)
+            _viewFeatureManager.DefaultUIParamsIfNeeds(uiParams, PagedViewOptions.EditableTable);
+            // UIParams.PagedViewOption is not null here
+            query.PaginationOption = _viewFeatureManager.HardCodePaginationOption(uiParams.PagedViewOption!.Value, query.PaginationOption);
+            if (string.IsNullOrEmpty(query.OrderBys))
             {
-                uiParams.PagedViewOption = PagedViewOptions.Table;
-                uiParams.Template = ViewItemTemplateNames.Details;
-            }
-
-            if (uiParams.PagedViewOption == PagedViewOptions.EditableTable)
-            {
-                uiParams.Template = ViewItemTemplateNames.Edit;
-            }
-
-            if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
-            {
-                query.PaginationOption = PaginationOptions.LoadMore;
-            }
-            else if (uiParams.PagedViewOption == PagedViewOptions.Table || uiParams.PagedViewOption == PagedViewOptions.EditableTable)
-            {
-                query.PaginationOption = PaginationOptions.Paged;
+                query.OrderBys = _orderBysListHelper.GetDefaultElmahSourceOrderBys();
             }
 
             var result = await _thisService.Search(query);
-            ViewBag.PageSizeList = _selectListHelper.GetDefaultPageSizeList();
 
-            ViewBag.OrderByList = new List<SelectListItem>(new[] {
-                new SelectListItem{ Text = String.Format("{0} A-Z", _localizor.Get("Source")), Value = "Source~ASC" },
-                new SelectListItem{ Text = String.Format("{0} Z-A", _localizor.Get("Source")), Value = "Source~DESC" },
-            });
-            if (string.IsNullOrEmpty(query.OrderBys))
-            {
-                query.OrderBys = ((List<SelectListItem>)ViewBag.OrderByList).First().Value;
-            }
-
-            ViewBag.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
-
-            return View(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
-            {
-                Query = query,
-                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
-
-                Result = result
-            });
+            var vm = await _pagedSearchViewModelHelper.GetElmahSourcePagedSearchViewModel("index", uiParams, query, result, true, true);
+            return View(vm);
         }
 
         // GET: ElmahSource/AjaxLoadItems
@@ -120,6 +99,11 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Dashboard([FromRoute]ElmahSourceIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
+
+            result.UIParamsList.Add(
+                ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source,
+                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details });
+
             return View(result);
         }
 
