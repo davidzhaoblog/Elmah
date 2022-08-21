@@ -108,6 +108,11 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Dashboard([FromRoute]ElmahApplicationIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
+
+            result.UIParamsList.Add(
+                Elmah.Models.ElmahApplicationCompositeModel.__DataOptions__.__Master__,
+                new Framework.Models.UIParams { PagedViewOption = Framework.Models.PagedViewOptions.Card, Template = Framework.Models.ViewItemTemplateNames.Details });
+
             result.UIParamsList.Add(
                 Elmah.Models.ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application, 
                 new UIParams { PagedViewOption = Framework.Models.PagedViewOptions.Table, Template = Framework.Models.ViewItemTemplateNames.Details });

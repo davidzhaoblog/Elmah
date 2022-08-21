@@ -101,7 +101,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahErrorModel.DefaultView[]>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
+                UIListSetting = _viewFeatureManager.GetElmahErrorUIListSetting(String.Empty, uiParams),
                 Result = result,
             };
 
@@ -129,6 +129,9 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Dashboard([FromRoute]ElmahErrorIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
+            result.UIParamsList.Add(
+                Elmah.Models.ElmahErrorCompositeModel.__DataOptions__.__Master__,
+                new Framework.Models.UIParams { PagedViewOption = Framework.Models.PagedViewOptions.Card, Template = Framework.Models.ViewItemTemplateNames.Details });
             return View(result);
         }
 
@@ -156,7 +159,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
-                UIItemFeatures = _viewFeatureManager.GetDefaultEditableList(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }).GetUIItemFeatures(),
+                UIItemFeatures = _viewFeatureManager.GetElmahErrorUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,

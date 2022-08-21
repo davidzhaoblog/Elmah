@@ -62,6 +62,23 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
+
+        public UIItemFeatures GetElmahErrorUIItemFeatures()
+        {
+            var result = new UIItemFeatures
+            {
+                PrimayCreateViewContainer = CrudViewContainers.Dialog,
+                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
+                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
+                PrimayEditViewContainer = CrudViewContainers.Dialog,
+
+                ShowItemButtons = true,
+                CanGotoDashboard = false,
+            };
+
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>

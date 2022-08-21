@@ -5,10 +5,11 @@
 @inject IUIStrings localizor;
 @inject Elmah.MvcWebApp.Models.ViewFeaturesManager viewFeatureManager;
 @inject Elmah.MvcWebApp.Models.DashboardViewModelHelper dashboardViewModelHelper;
+@inject Elmah.MvcWebApp.Models.MvcItemViewModelHelper mvcItemViewModelHelper;
 @{
     ViewData["Title"] = localizor.Get("Dashboard");
     var routeId = Model.__Master__.Application;
-    var masterVM = dashboardViewModelHelper.GetElmahApplicationMvcItemViewModel(Model.__Master__, Model.Get(Elmah.Models.ElmahApplicationCompositeModel.__DataOptions__.__Master__));
+    var masterVM = await dashboardViewModelHelper.GetElmahApplicationMvcItemViewModel(Model.__Master__, Model.Get(Elmah.Models.ElmahApplicationCompositeModel.__DataOptions__.__Master__));
 }
 <div class="row">
     <div class="col-12 col-md-8 col-lg-9 nopadding">
@@ -78,6 +79,6 @@
         const listWrapperId = "ElmahErrors_Via_ApplicationListWrapper";
         $(document).ready($(function () {
             documentReadyForSearchList(searchFormId, listWrapperId);
-            }))
+        }))
     </script>
 }
