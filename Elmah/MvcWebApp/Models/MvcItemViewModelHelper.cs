@@ -34,14 +34,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadTopLevelDropDownListsFromDatabase,
             Dictionary<string, List<NameValuePair>>? topLevelDropDownListsFromDatabase)
         {
-            var result = new MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahErrorModel.DefaultView>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahErrorUIItemFeatures(),
-            };
+            });
 
             if(loadTopLevelDropDownListsFromDatabase && (topLevelDropDownListsFromDatabase == null || !topLevelDropDownListsFromDatabase.Any()))
             {
@@ -56,14 +56,14 @@ namespace Elmah.MvcWebApp.Models
             Response response,
             ElmahApplicationModel responseBody)
         {
-            var result = new MvcItemViewModel<ElmahApplicationModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahApplicationModel>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahApplicationUIItemFeatures(),
-            };
+            });
 
             return result;
         }
@@ -73,14 +73,14 @@ namespace Elmah.MvcWebApp.Models
             Response response,
             ElmahHostModel responseBody)
         {
-            var result = new MvcItemViewModel<ElmahHostModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahHostModel>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahHostUIItemFeatures(),
-            };
+            });
 
             return result;
         }
@@ -90,14 +90,14 @@ namespace Elmah.MvcWebApp.Models
             Response response,
             ElmahSourceModel responseBody)
         {
-            var result = new MvcItemViewModel<ElmahSourceModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahSourceModel>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahSourceUIItemFeatures(),
-            };
+            });
 
             return result;
         }
@@ -107,14 +107,14 @@ namespace Elmah.MvcWebApp.Models
             Response response,
             ElmahStatusCodeModel responseBody)
         {
-            var result = new MvcItemViewModel<ElmahStatusCodeModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahStatusCodeModel>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahStatusCodeUIItemFeatures(),
-            };
+            });
 
             return result;
         }
@@ -124,14 +124,14 @@ namespace Elmah.MvcWebApp.Models
             Response response,
             ElmahTypeModel responseBody)
         {
-            var result = new MvcItemViewModel<ElmahTypeModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahTypeModel>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahTypeUIItemFeatures(),
-            };
+            });
 
             return result;
         }
@@ -141,14 +141,14 @@ namespace Elmah.MvcWebApp.Models
             Response response,
             ElmahUserModel responseBody)
         {
-            var result = new MvcItemViewModel<ElmahUserModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahUserModel>
             {
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
                 Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
                 UIItemFeatures = _viewFeaturesManager.GetElmahUserUIItemFeatures(),
-            };
+            });
 
             return result;
         }

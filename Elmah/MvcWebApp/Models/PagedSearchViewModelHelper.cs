@@ -60,14 +60,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahErrorOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahErrorUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
@@ -116,14 +116,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahApplicationOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahApplicationUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
@@ -167,14 +167,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostModel[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahHostOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahHostUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
@@ -218,14 +218,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahSourceOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahSourceUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
@@ -269,14 +269,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahStatusCodeOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahStatusCodeUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
@@ -320,14 +320,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeModel[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahTypeOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahTypeUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();
@@ -371,14 +371,14 @@ namespace Elmah.MvcWebApp.Models
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>
             {
                 Query = query,
                 Result = response,
                 OrderByList = _orderBysListHelper.GetElmahUserOrderBys(),
                 PageSizeList = _selectListHelper.GetDefaultPageSizeList(),
                 UIListSetting = _viewFeaturesManager.GetElmahUserUIListSetting(key, uiParams),
-            };
+            });
             if (loadSearchRelatedDropDownLists)
             {
                 result.TextSearchTypeList = _selectListHelper.GetTextSearchTypeList();

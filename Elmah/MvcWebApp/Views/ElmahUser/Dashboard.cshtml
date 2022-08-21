@@ -1,10 +1,16 @@
 @using Elmah.Models;
+@using Elmah.MvcWebApp.Models;
 @using Elmah.Resx;
 @using Framework.Models;
 @model ElmahUserCompositeModel;
+@inject ViewFeaturesManager viewFeatureManager;
+@inject DashboardViewModelHelper dashboardViewModelHelper;
+@inject MvcItemViewModelHelper mvcItemViewModelHelper;
 @inject IUIStrings localizor;
 @{
     ViewData["Title"] = localizor.Get("Dashboard");
+    var routeId = Model.__Master__.User;
+    var masterVM = await dashboardViewModelHelper.GetElmahUserMvcItemViewModel(Model.__Master__, Model.Get(ElmahUserCompositeModel.__DataOptions__.__Master__));
 }
 <div class="row">
     <div class="col-12 col-md-8 nopadding">
@@ -18,6 +24,7 @@
                 <div class="accordion" id="listsPanels">
                     @if (Model!.Responses.ContainsKey(ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User))
                     {
+                        var vm = await dashboardViewModelHelper.GetElmahErrorPagedSearchViewModel(new ElmahErrorAdvancedQuery { User = Model.__Master__.User }, Model.ElmahErrors_Via_User, Model.Get(ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User));
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-heading-elmahErrors_Via_User">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-elmahErrors_Via_User" aria-expanded="true" aria-controls="panelsStayOpen-elmahErrors_Via_User">
@@ -25,8 +32,21 @@
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapse-elmahErrors_Via_User" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading-elmahErrors_Via_User">
+                                <form id="@vm.UIListSetting.UIListFeatures.SearchFormId" method="post" class="nt-ajax-partial-load-post-formdata"
+                                    data-nt-partial-url="@Url.Action("AjaxLoadItems", "ElmahError")"
+                                    data-nt-updatetarget="#@vm.UIListSetting.UIListFeatures.ListWrapperId">
+                                    <input type="hidden" value="@vm.Query.PageIndex" class="nt-page-index" name="PageIndex" />
+                                    <input type="hidden" value="@vm.Query.PageSize" class="nt-page-size" name="PageSize" />
+                                    <input type="hidden" value="@vm.Query.OrderBys" class="nt-order-by" name="OrderBys" />
+                                    <input type="hidden" value="@vm.Query.PaginationOption" class="nt-pagination-option-field" name="PaginationOption" />
+                                    <input type="hidden" value="@vm.UIListSetting.UIParams.AdvancedQuery" class="nt-advanced-query" name="AdvancedQuery" />
+                                    <input type="hidden" value="@vm.UIListSetting.UIParams.PagedViewOption" class="nt-paged-view-option-field" name="PagedViewOption" />
+                                    <input type="hidden" value="@vm.UIListSetting.UIParams.Template" class="nt-template-field" name="Template" />
+                                    <!--this is the __Master__ Identifier-->
+                                    <input type="hidden" value="@Model.__Master__.User" name="User" />
+                                </form>
                                 <div class="accordion-body p-0">
-                                    @await Html.PartialAsync("~/Views/ElmahError/_Table.cshtml", new PagedResponse<ElmahErrorModel.DefaultView[]>{ ResponseBody = Model.ElmahErrors_Via_User, Status = Model.Responses[ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User].Status, StatusMessage= Model.Responses[ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User].StatusMessage })
+                                    @await Html.PartialAsync("~/Views/ElmahError/_ListViewsContainer.cshtml",vm)
                                 </div>
                             </div>
                         </div>
@@ -35,110 +55,31 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 col-lg-3">
         <!-- ElmahUserCompositeModel.__DataOptions__.__Master__ -->
-        <div class="card-group">
-            <div class="card">
-                <div class="card-header">
-                    <h3 style="display: inline;">
-                        @localizor.Get("ElmahUser")
-                    </h3>
-                </div>
-                @if (Model!.Responses[ElmahUserCompositeModel.__DataOptions__.__Master__].Status == System.Net.HttpStatusCode.OK && Model!.__Master__ != null)
-                { // Item
-                    <div class="card-header">
-                        <div class="btn-group">
-                            @if (Model!.UIListSetting.GetUIItemFeatures().PrimayEditViewContainer == CrudViewContainers.StandaloneView)
-                            {
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Edit" asp-route-user="@Model?.__Master__.User" class="btn btn-default" role="button" title="@localizor.Get("Edit")">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            }
-                            @if (Model!.UIListSetting.GetUIItemFeatures().PrimayEditViewContainer == CrudViewContainers.Dialog)
-                            {
-                                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Edit")"
-                                    data-nt-action="@HttpMethods.Put"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Edit.ToString()">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                            }
-                            @if (Model!.UIListSetting.GetUIItemFeatures().PrimayDetailsViewContainer == CrudViewContainers.StandaloneView)
-                            {
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Details" asp-route-user="@Model?.__Master__.User" class="btn btn-default" role="button" title="@localizor.Get("Details")">
-                                    <i class="fa fa-briefcase"></i>
-                                </a>
-                            }
-                            @if (Model!.UIListSetting.GetUIItemFeatures().PrimayDetailsViewContainer == CrudViewContainers.Dialog)
-                            {
-                                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Details")"
-                                    data-nt-action="@HttpMethods.Get"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Details.ToString()">
-                                    <i class="fa fa-briefcase"></i>
-                                </button>
-                            }
-                            @if (Model!.UIListSetting.GetUIItemFeatures().PrimayDeleteViewContainer == CrudViewContainers.StandaloneView)
-                            {
-                                <a asp-area="" asp-controller="ElmahUser" asp-action="Delete" asp-route-user="@Model?.__Master__.User" class="btn btn-default" role="button" title="@localizor.Get("Delete")">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            }
-                            @if (Model!.UIListSetting.GetUIItemFeatures().PrimayDeleteViewContainer == CrudViewContainers.Dialog)
-                            {
-                                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Delete")"
-                                    data-nt-action="@HttpMethods.Delete"
-                                    data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                    data-nt-template="@ViewItemTemplateNames.Delete.ToString()">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            }
-                            <a asp-area="" asp-controller="ElmahUser" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
-                                <span class="fa fa-search"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label asp-for="__Master__.User" class="control-label"></label>
-                            <input asp-for="__Master__.User" class="form-control" readonly />
-                        </div>
-                    </div>
-                    @*
-                    <div class="card-footer">
-                        <div class="btn-group">
-                        </div>
-                    </div>*@
-                }
-                else
-                {
-                    <div class="btn-group">
-                        @if (Model!.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.StandaloneView))
-                        {
-                            <a asp-area="" asp-controller="ElmahUser" asp-action="Create" class="btn btn-secondary" role="button" title="@localizor.Get("Create")">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        }
-                        @if (Model!.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Dialog))
-                        {
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudActionDialog" title="@localizor.Get("Create_New")"
-                                data-nt-action="@HttpMethods.Post"
-                                data-nt-route-id="@("_empty_")"
-                                data-nt-container="@CrudViewContainers.Dialog.ToString()"
-                                data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        }
-                        <a asp-area="" asp-controller="ElmahUser" asp-action="Index" class="btn btn-secondary" role="button" title="@localizor.Get("GotoSearch")">
-                            <span class="fa fa-search"></span>
-                        </a>
-                    </div>
-                    <div class="text-danger">@Model!.Responses[ElmahUserCompositeModel.__DataOptions__.__Master__]</div>
-                    <div class="btn-group">
-                    </div>
-                }
+        <div class="nt-list-wrapper"
+             id="master"
+             data-nt-bs-modalsize="Large"
+             data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahUser")"
+             data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahUser")"
+             data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahUser")"
+             data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahUser")">
+            <div class="nt-listitem" data-nt-route-id="@routeId">
+                @await Html.PartialAsync("~/Views/ElmahUser/_TileDetailsItem.cshtml", masterVM)
             </div>
         </div>
         <!-- ElmahUserCompositeModel.__DataOptions__.__Master__ -->
     </div>
 </div>
+<partial name="~/Views/Shared/_CrudActionDialog.cshtml" />
+<partial name="~/Views/Shared/_SimpleActionConfirmationDialog.cshtml" />
+@section Scripts
+    {
+    <script>
+        const searchFormId_ElmahErrors_Via_User = "ElmahErrors_Via_UserSearchForm";
+        const listWrapperId_ElmahErrors_Via_User = "ElmahErrors_Via_UserListWrapper";
+        $(document).ready($(function () {
+            documentReadyForSearchList(searchFormId_ElmahErrors_Via_User, listWrapperId_ElmahErrors_Via_User);
+        }))
+    </script>
+}

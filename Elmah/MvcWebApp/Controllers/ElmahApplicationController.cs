@@ -71,7 +71,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahApplicationModel[]>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
+                UIListSetting = _viewFeatureManager.GetElmahApplicationUIListSetting(String.Empty, uiParams),
                 Result = result,
             };
 
@@ -99,6 +99,10 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Dashboard([FromRoute]ElmahApplicationIdentifier id)
         {
             var result = await _thisService.GetCompositeModel(id);
+
+            result.UIParamsList.Add(
+                ElmahApplicationCompositeModel.__DataOptions__.__Master__,
+                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details });
 
             result.UIParamsList.Add(
                 ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application,
@@ -131,7 +135,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationModel>
             {
-                UIItemFeatures = _viewFeatureManager.GetDefaultEditableList(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }).GetUIItemFeatures(),
+                UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
@@ -470,13 +474,14 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahApplication/Create
         public async Task<IActionResult> Create()
         {
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationModel>
+            var itemViewModel = await Task.FromResult(new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationModel>
             {
                 Status = System.Net.HttpStatusCode.OK,
                 Template = ViewItemTemplateNames.Create.ToString(),
                 Model = _thisService.GetDefault(),
 
-            };
+            });
+
             return View(itemViewModel);
         }
 

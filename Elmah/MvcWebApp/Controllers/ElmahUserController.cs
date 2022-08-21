@@ -71,7 +71,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Search(query);
             var pagedViewModel = new PagedViewModel<ElmahUserModel[]>
             {
-                UIListSetting = _viewFeatureManager.GetDefaultEditableList(uiParams),
+                UIListSetting = _viewFeatureManager.GetElmahUserUIListSetting(String.Empty, uiParams),
                 Result = result,
             };
 
@@ -101,8 +101,12 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.GetCompositeModel(id);
 
             result.UIParamsList.Add(
-                ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User,
+                ElmahUserCompositeModel.__DataOptions__.__Master__,
                 new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details });
+
+            result.UIParamsList.Add(
+                ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User,
+                new UIParams { PagedViewOption = PagedViewOptions.Table, Template = ViewItemTemplateNames.Details });
 
             return View(result);
         }
@@ -131,7 +135,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserModel>
             {
-                UIItemFeatures = _viewFeatureManager.GetDefaultEditableList(new UIParams { PagedViewOption = view, Template = Enum.Parse<ViewItemTemplateNames> (template), IndexInArray = index ?? 0 }).GetUIItemFeatures(),
+                UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
@@ -470,13 +474,14 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahUser/Create
         public async Task<IActionResult> Create()
         {
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserModel>
+            var itemViewModel = await Task.FromResult(new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserModel>
             {
                 Status = System.Net.HttpStatusCode.OK,
                 Template = ViewItemTemplateNames.Create.ToString(),
                 Model = _thisService.GetDefault(),
 
-            };
+            });
+
             return View(itemViewModel);
         }
 

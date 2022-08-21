@@ -77,7 +77,7 @@
             </tfoot>
     </table>
     </form>
-    @if (Model != null && Model.UIListSetting.UIListFeatures.HasPagination && Model.Result != null && Model.Result.Pagination != null)
+    @if (Model != null && Model!.UIListSetting!.UIListFeatures.HasPagination && Model.Result != null && Model.Result.Pagination != null)
     {
         @await Html.PartialAsync("~/Views/Shared/_Pagination.cshtml", Model.Result.Pagination)
     }
