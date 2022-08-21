@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahStatusCodeModel[]>> Search(
+        public async Task<PagedResponse<ElmahStatusCodeDataModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -86,31 +86,31 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel> input)
         {
             return await _thisRepository.MultiItemsCUD(input);
         }
 
-        public async Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeModel input)
+        public async Task<Response<ElmahStatusCodeDataModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeDataModel input)
         {
             return await _thisRepository.Update(id, input);
         }
 
-        public async Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdentifier id)
+        public async Task<Response<ElmahStatusCodeDataModel>> Get(ElmahStatusCodeIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<ElmahStatusCodeModel>> Create(ElmahStatusCodeModel input)
+        public async Task<Response<ElmahStatusCodeDataModel>> Create(ElmahStatusCodeDataModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public ElmahStatusCodeModel GetDefault()
+        public ElmahStatusCodeDataModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahStatusCodeModel { ItemUIStatus______ = ItemUIStatus.New };
+            return new ElmahStatusCodeDataModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahStatusCodeIdentifier id)

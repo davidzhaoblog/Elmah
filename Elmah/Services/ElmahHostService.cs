@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahHostModel[]>> Search(
+        public async Task<PagedResponse<ElmahHostDataModel[]>> Search(
             ElmahHostAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -86,31 +86,31 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel> input)
         {
             return await _thisRepository.MultiItemsCUD(input);
         }
 
-        public async Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input)
+        public async Task<Response<ElmahHostDataModel>> Update(ElmahHostIdentifier id, ElmahHostDataModel input)
         {
             return await _thisRepository.Update(id, input);
         }
 
-        public async Task<Response<ElmahHostModel>> Get(ElmahHostIdentifier id)
+        public async Task<Response<ElmahHostDataModel>> Get(ElmahHostIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<ElmahHostModel>> Create(ElmahHostModel input)
+        public async Task<Response<ElmahHostDataModel>> Create(ElmahHostDataModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public ElmahHostModel GetDefault()
+        public ElmahHostDataModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahHostModel { ItemUIStatus______ = ItemUIStatus.New };
+            return new ElmahHostDataModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahHostIdentifier id)

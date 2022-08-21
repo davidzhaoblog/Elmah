@@ -29,7 +29,7 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahErrorModel.DefaultView[]>>> Search(
+        public async Task<ActionResult<PagedResponse<ElmahErrorDataModel.DefaultView[]>>> Search(
             ElmahErrorAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
@@ -54,7 +54,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<PagedResponse<ElmahErrorModel.DefaultView[]>>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        public async Task<ActionResult<PagedResponse<ElmahErrorDataModel.DefaultView[]>>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
         {
             var serviceResponse = await _thisService.BulkUpdate(data);
             return ReturnActionResult(serviceResponse);
@@ -62,8 +62,8 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> input)
+        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> input)
         {
             var serviceResponse = await _thisService.MultiItemsCUD(input);
             return ReturnActionResult(serviceResponse);
@@ -71,7 +71,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorModel input)
+        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -79,7 +79,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)
+        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -87,7 +87,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<ElmahErrorModel.DefaultView>> Put(ElmahErrorModel input)
+        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Put(ElmahErrorDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);

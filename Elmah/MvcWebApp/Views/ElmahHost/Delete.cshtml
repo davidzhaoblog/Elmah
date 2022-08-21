@@ -2,7 +2,7 @@
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model MvcItemViewModel<ElmahHostModel>
+@model MvcItemViewModel<ElmahHostDataModel>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -24,18 +24,18 @@
             }
             <div class="card-body">
                 <div class="form-group">
-                    <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostModel.Host))"></label>
+                    <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostDataModel.Host))"></label>
                     @Html.DisplayFor(m=>m.Model!.Host)
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.SpatialLocation" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostModel.SpatialLocation))"></label>
+                    <label asp-for="Model!.SpatialLocation" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostDataModel.SpatialLocation))"></label>
                     @Html.DisplayFor(m=>m.Model!.SpatialLocation)
                 </div>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="Model!.Host" id="@Model.HtmlId(nameof(ElmahHostModel.Host))" name="@Model.HtmlName(nameof(ElmahHostModel.Host))"/>
+                        <input type="hidden" asp-for="Model!.Host" id="@Model.HtmlId(nameof(ElmahHostDataModel.Host))" name="@Model.HtmlName(nameof(ElmahHostDataModel.Host))"/>
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>

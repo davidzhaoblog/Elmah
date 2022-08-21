@@ -3,7 +3,7 @@
 @using Elmah.Resx;
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models.Definitions;
-@model MvcItemViewModel<ElmahApplicationModel>
+@model MvcItemViewModel<ElmahApplicationDataModel>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -30,8 +30,8 @@
     </td>
 }
 <td class="form-group p-0">
-    <input asp-for="Model!.Application" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))" data-nt-value="@Model!.Model!.Application"/>
-    <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationModel.Application))"></span>
+    <input asp-for="Model!.Application" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahApplicationDataModel.Application))" name="@Model!.HtmlName(nameof(ElmahApplicationDataModel.Application))" data-nt-value="@Model!.Model!.Application"/>
+    <span asp-validation-for="Model!.Application" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahApplicationDataModel.Application))"></span>
 </td>
 @if (Model!.UIItemFeatures.ShowItemUIStatus)
 {
@@ -48,12 +48,12 @@
         {
                     <i class="fa-solid fa-circle text-danger"></i>
         }
-        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahApplicationModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.ItemUIStatus______))" type="hidden" />
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahApplicationDataModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahApplicationDataModel.ItemUIStatus______))" type="hidden" />
     </td>
 }
 @if (Model!.UIItemFeatures.ShowEditableListDeleteSelect)
 {
     <td class="form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahApplicationModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahApplicationModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahApplicationDataModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahApplicationDataModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
     </td>
 }

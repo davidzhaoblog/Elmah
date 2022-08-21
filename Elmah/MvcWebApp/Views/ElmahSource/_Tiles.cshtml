@@ -2,14 +2,14 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<ElmahSourceModel[]>
+@model PagedViewModel<ElmahSourceDataModel[]>
 @inject IUIStrings localizor;
 @if (Model != null && Model.Result != null && Model.Result.Status == System.Net.HttpStatusCode.OK && Model.Result.ResponseBody != null)
 {
     @for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
     {
         @await Html.PartialAsync("~/Views/ElmahSource/_Tile.cshtml",
-            new MvcItemViewModel<ElmahSourceModel>
+            new MvcItemViewModel<ElmahSourceDataModel>
             {
                 UIItemFeatures = Model.UIListSetting.GetUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,

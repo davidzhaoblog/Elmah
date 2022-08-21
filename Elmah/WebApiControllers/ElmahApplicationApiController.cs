@@ -29,7 +29,7 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahApplicationModel[]>>> Search(
+        public async Task<ActionResult<PagedResponse<ElmahApplicationDataModel[]>>> Search(
             ElmahApplicationAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
@@ -54,8 +54,8 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel> input)
+        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel> input)
         {
             var serviceResponse = await _thisService.MultiItemsCUD(input);
             return ReturnActionResult(serviceResponse);
@@ -63,7 +63,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<ElmahApplicationModel>> Post(ElmahApplicationIdentifier id, ElmahApplicationModel input)
+        public async Task<ActionResult<ElmahApplicationDataModel>> Post(ElmahApplicationIdentifier id, ElmahApplicationDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -71,7 +71,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahApplicationModel>> Get(ElmahApplicationIdentifier id)
+        public async Task<ActionResult<ElmahApplicationDataModel>> Get(ElmahApplicationIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -79,7 +79,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<ElmahApplicationModel>> Put(ElmahApplicationModel input)
+        public async Task<ActionResult<ElmahApplicationDataModel>> Put(ElmahApplicationDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);

@@ -1,10 +1,10 @@
 using Framework.Models;
 namespace Elmah.Models
 {
-    public partial class ElmahTypeCompositeModel : CompositeModel<ElmahTypeModel, ElmahTypeCompositeModel.__DataOptions__>
+    public partial class ElmahTypeCompositeModel : CompositeModel<ElmahTypeDataModel, ElmahTypeCompositeModel.__DataOptions__>
     {
         // 4. ListTable = 4,
-        public ElmahErrorModel.DefaultView[]? ElmahErrors_Via_Type { get; set; }
+        public ElmahErrorDataModel.DefaultView[]? ElmahErrors_Via_Type { get; set; }
 
         public enum __DataOptions__
         {

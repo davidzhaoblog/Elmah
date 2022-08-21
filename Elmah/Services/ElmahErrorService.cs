@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
+        public async Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -66,36 +66,36 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
-        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        public async Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
         {
             return await _thisRepository.BulkUpdate(data);
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> input)
         {
             return await _thisRepository.MultiItemsCUD(input);
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)
+        public async Task<Response<ElmahErrorDataModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorDataModel input)
         {
             return await _thisRepository.Update(id, input);
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)
+        public async Task<Response<ElmahErrorDataModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Create(ElmahErrorModel input)
+        public async Task<Response<ElmahErrorDataModel.DefaultView>> Create(ElmahErrorDataModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public ElmahErrorModel.DefaultView GetDefault()
+        public ElmahErrorDataModel.DefaultView GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahErrorModel.DefaultView { ItemUIStatus______ = ItemUIStatus.New };
+            return new ElmahErrorDataModel.DefaultView { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahErrorIdentifier id)

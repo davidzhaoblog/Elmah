@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahSourceModel[]>> Search(
+        public async Task<PagedResponse<ElmahSourceDataModel[]>> Search(
             ElmahSourceAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -86,31 +86,31 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceModel> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceDataModel> input)
         {
             return await _thisRepository.MultiItemsCUD(input);
         }
 
-        public async Task<Response<ElmahSourceModel>> Update(ElmahSourceIdentifier id, ElmahSourceModel input)
+        public async Task<Response<ElmahSourceDataModel>> Update(ElmahSourceIdentifier id, ElmahSourceDataModel input)
         {
             return await _thisRepository.Update(id, input);
         }
 
-        public async Task<Response<ElmahSourceModel>> Get(ElmahSourceIdentifier id)
+        public async Task<Response<ElmahSourceDataModel>> Get(ElmahSourceIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<ElmahSourceModel>> Create(ElmahSourceModel input)
+        public async Task<Response<ElmahSourceDataModel>> Create(ElmahSourceDataModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public ElmahSourceModel GetDefault()
+        public ElmahSourceDataModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahSourceModel { ItemUIStatus______ = ItemUIStatus.New };
+            return new ElmahSourceDataModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahSourceIdentifier id)

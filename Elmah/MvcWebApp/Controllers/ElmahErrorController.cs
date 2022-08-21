@@ -69,7 +69,7 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> AjaxLoadItems(ElmahErrorAdvancedQuery query, UIParams uiParams)
         {
             var result = await _thisService.Search(query);
-            var pagedViewModel = new PagedViewModel<ElmahErrorModel.DefaultView[]>
+            var pagedViewModel = new PagedViewModel<ElmahErrorDataModel.DefaultView[]>
             {
                 UIListSetting = _viewFeatureManager.GetElmahErrorUIListSetting(String.Empty, uiParams),
                 Result = result,
@@ -117,7 +117,7 @@ namespace Elmah.MvcWebApp.Controllers
             int? index, // for EditableList
             ElmahErrorIdentifier id)
         {
-            ElmahErrorModel.DefaultView? result;
+            ElmahErrorDataModel.DefaultView? result;
             if (template == ViewItemTemplateNames.Create.ToString())
             {
                 result = _thisService.GetDefault();
@@ -129,7 +129,7 @@ namespace Elmah.MvcWebApp.Controllers
                 result = response.ResponseBody;
             }
 
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 UIItemFeatures = _viewFeatureManager.GetElmahErrorUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,
@@ -178,7 +178,7 @@ namespace Elmah.MvcWebApp.Controllers
             PagedViewOptions view,
             CrudViewContainers container,
             ViewItemTemplateNames template,
-            [Bind("Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel input)
+            [Bind("Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorDataModel input)
         {
             if (ModelState.IsValid)
             {
@@ -194,7 +194,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                                 PartialViews = new List<Tuple<string, object>> {
                                 new Tuple<string, object>("~/Views/ElmahError/_TableItemTr.cshtml",
-                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>{
+                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>{
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
@@ -211,7 +211,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 PartialViews = new List<Tuple<string, object>>
                                 {
                                     new Tuple<string, object>("~/Views/ElmahError/_Tile.cshtml",
-                                        new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                                        new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                                         {
                                             Status = System.Net.HttpStatusCode.OK,
                                             Template = ViewItemTemplateNames.Details.ToString(),
@@ -255,7 +255,7 @@ namespace Elmah.MvcWebApp.Controllers
             CrudViewContainers container,
             ViewItemTemplateNames template,
             ElmahErrorIdentifier id,
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel.DefaultView input)
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorDataModel.DefaultView input)
         {
             if (!id.ErrorId.HasValue ||
                 id.ErrorId.HasValue && id.ErrorId != input.ErrorId)
@@ -278,7 +278,7 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahError/_TableDetailsItem.cshtml",
-                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
@@ -297,7 +297,7 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahError/_TileDetailsItem.cshtml",
-                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                                     {
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
@@ -333,10 +333,10 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> AjaxBulkUpdateStatusCode(
             [FromQuery] Framework.Models.PagedViewOptions view,
             [FromForm] List<ElmahErrorIdentifier> ids,
-            [Bind("StatusCode")] [FromForm] ElmahErrorModel.DefaultView data)
+            [Bind("StatusCode")] [FromForm] ElmahErrorDataModel.DefaultView data)
         {
             var result = await _thisService.BulkUpdate(
-                new BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>
+                new BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>
                 {
                     Ids = ids,
                     ActionName = "StatusCode",
@@ -357,7 +357,7 @@ namespace Elmah.MvcWebApp.Controllers
                                     ? "~/Views/ElmahError/_Tile.cshtml"
                                     : "~/Views/ElmahError/_TableItemTr.cshtml"
                                 ,
-                                new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                                new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                                 {
                                     Template = ViewItemTemplateNames.Details.ToString(),
                                     Model = t,
@@ -377,7 +377,7 @@ namespace Elmah.MvcWebApp.Controllers
         [Route("[controller]/[action]")]
         public async Task<IActionResult> AjaxMultiItemsCUDSubmit(
             [FromQuery] PagedViewOptions view,
-            [FromForm] List<ElmahErrorModel.DefaultView> data)
+            [FromForm] List<ElmahErrorDataModel.DefaultView> data)
         {
             if(data == null || !data.Any(t=> t.IsDeleted______ && t.ItemUIStatus______ != ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.Updated))
             {
@@ -390,7 +390,7 @@ namespace Elmah.MvcWebApp.Controllers
                     });
             }
 
-            var multiItemsCUDModel = new MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>
+            var multiItemsCUDModel = new MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>
             {
                 DeleteItems =
                     (from t in data
@@ -426,7 +426,7 @@ namespace Elmah.MvcWebApp.Controllers
         {
             if (!id.ErrorId.HasValue)
             {
-                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                 {
                     Status = System.Net.HttpStatusCode.NotFound,
                     StatusMessage = "Not Found",
@@ -438,7 +438,7 @@ namespace Elmah.MvcWebApp.Controllers
             var result = await _thisService.Get(id);
             var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = result.Status,
                 StatusMessage = result.StatusMessage,
@@ -458,14 +458,14 @@ namespace Elmah.MvcWebApp.Controllers
         // POST: ElmahError/Edit/{ErrorId}
         public async Task<IActionResult> Edit(
             [FromRoute]ElmahErrorIdentifier id,
-            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel.DefaultView input)
+            [Bind("ErrorId,Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorDataModel.DefaultView input)
         {
             var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             if (!id.ErrorId.HasValue ||
                 id.ErrorId.HasValue && id.ErrorId != input.ErrorId)
             {
-                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                 {
                     Status = System.Net.HttpStatusCode.NotFound,
                     StatusMessage = "Not Found",
@@ -478,7 +478,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             if (!ModelState.IsValid)
             {
-                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                 {
                     Status = System.Net.HttpStatusCode.BadRequest,
                     StatusMessage = "Bad Request",
@@ -490,7 +490,7 @@ namespace Elmah.MvcWebApp.Controllers
             }
 
             var result = await _thisService.Update(id, input);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = result.Status,
                 StatusMessage = result.StatusMessage,
@@ -506,7 +506,7 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Details([FromRoute]ElmahErrorIdentifier id)
         {
             var result = await _thisService.Get(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = result.Status,
                 StatusMessage = result.StatusMessage,
@@ -521,7 +521,7 @@ namespace Elmah.MvcWebApp.Controllers
         {
                 var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
-            var itemViewModel = await Task.FromResult(new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = await Task.FromResult(new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = System.Net.HttpStatusCode.OK,
                 Template = ViewItemTemplateNames.Create.ToString(),
@@ -540,14 +540,14 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorModel.DefaultView input)
+            [Bind("Application,Host,Type,Source,Message,User,StatusCode,TimeUtc,AllXml")] ElmahErrorDataModel.DefaultView input)
         {
                 var topLevelDropDownListsFromDatabase = await _dropDownListService.GetElmahErrorTopLevelDropDownListsFromDatabase();
 
             if (ModelState.IsValid)
             {
                 var result = await _thisService.Create(input);
-                var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+                var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
                 {
                     Status = result.Status,
                     StatusMessage = result.StatusMessage,
@@ -558,7 +558,7 @@ namespace Elmah.MvcWebApp.Controllers
                 return View(itemViewModel);
             }
 
-            var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = System.Net.HttpStatusCode.BadRequest,
                 StatusMessage = "Bad Request",
@@ -574,7 +574,7 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> Delete([FromRoute]ElmahErrorIdentifier id)
         {
             var result = await _thisService.Get(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = result.Status,
                 StatusMessage = result.StatusMessage,
@@ -593,7 +593,7 @@ namespace Elmah.MvcWebApp.Controllers
         {
             var result1 = await _thisService.Get(id);
             var result = await _thisService.Delete(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Status = result.Status,
                 StatusMessage = result.StatusMessage,

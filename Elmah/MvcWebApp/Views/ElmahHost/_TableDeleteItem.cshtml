@@ -1,7 +1,7 @@
 @using Framework.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model MvcItemViewModel<ElmahHostModel>
+@model MvcItemViewModel<ElmahHostDataModel>
 @inject IUIStrings localizor;
 @if (Model!.UIItemFeatures.ShowListBulkSelectCheckbox)
 {
@@ -44,12 +44,12 @@
         {
                     <i class="fa-solid fa-circle text-danger"></i>
         }
-        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahHostModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahHostModel.ItemUIStatus______))" type="hidden" />
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahHostDataModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahHostDataModel.ItemUIStatus______))" type="hidden" />
     </td>
 }
 @if (Model!.UIItemFeatures.ShowEditableListDeleteSelect)
 {
     <td class="form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahHostDataModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahHostDataModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
     </td>
 }

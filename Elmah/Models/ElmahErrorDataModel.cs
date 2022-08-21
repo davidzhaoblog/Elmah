@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
-    public partial class ElmahErrorModel
+    public partial class ElmahErrorDataModel
     {
         public ItemUIStatus ItemUIStatus______ { get; set; } = ItemUIStatus.NoChange;
         public bool IsDeleted______ { get; set; } = false;
@@ -52,7 +52,7 @@ namespace Elmah.Models
         [Display(Name = "AllXml", ResourceType = typeof(UIStrings))]
         public string AllXml { get; set; } = null!;
 
-        public partial class DefaultView: ElmahErrorModel
+        public partial class DefaultView: ElmahErrorDataModel
         {
             [Display(Name = "Application", ResourceType = typeof(UIStrings))]
             public string? Application_Name { get; set; }

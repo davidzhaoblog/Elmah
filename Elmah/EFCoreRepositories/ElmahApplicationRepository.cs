@@ -22,7 +22,7 @@ namespace Elmah.EFCoreRepositories
             _logger = logger;
         }
 
-        private IQueryable<ElmahApplicationModel> SearchQuery(
+        private IQueryable<ElmahApplicationDataModel> SearchQuery(
             ElmahApplicationAdvancedQuery query, bool withPagingAndOrderBy)
         {
 
@@ -42,7 +42,7 @@ namespace Elmah.EFCoreRepositories
                             query.ApplicationSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.Application!, query.Application + "%") ||
                             query.ApplicationSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.Application!, "%" + query.Application))
 
-                select new ElmahApplicationModel
+                select new ElmahApplicationDataModel
                 {
 
                         Application = t.Application,
@@ -64,7 +64,7 @@ namespace Elmah.EFCoreRepositories
             return queryable;
         }
 
-        public async Task<PagedResponse<ElmahApplicationModel[]>> Search(
+        public async Task<PagedResponse<ElmahApplicationDataModel[]>> Search(
             ElmahApplicationAdvancedQuery query)
         {
             try
@@ -73,8 +73,8 @@ namespace Elmah.EFCoreRepositories
                 var totalCount = queryableOfTotalCount.Count();
 
                 var queryable = SearchQuery(query, true);
-                var result = await queryable.ToDynamicArrayAsync<ElmahApplicationModel>();
-                return new PagedResponse<ElmahApplicationModel[]>
+                var result = await queryable.ToDynamicArrayAsync<ElmahApplicationDataModel>();
+                return new PagedResponse<ElmahApplicationDataModel[]>
                 {
                     Status = HttpStatusCode.OK,
                     Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
@@ -83,7 +83,7 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<PagedResponse<ElmahApplicationModel[]>>.FromResult(new PagedResponse<ElmahApplicationModel[]>
+                return await Task<PagedResponse<ElmahApplicationDataModel[]>>.FromResult(new PagedResponse<ElmahApplicationDataModel[]>
                 {
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
@@ -122,8 +122,8 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel> input)
         {
             // 1. DeleteItems, return if Failed
             if (input.DeleteItems != null)
@@ -131,7 +131,7 @@ namespace Elmah.EFCoreRepositories
                 var responseOfDeleteItems = await this.BulkDelete(input.DeleteItems);
                 if (responseOfDeleteItems != null && responseOfDeleteItems.Status != HttpStatusCode.OK)
                 {
-                    return new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
+                    return new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
                 }
             }
 
@@ -139,7 +139,7 @@ namespace Elmah.EFCoreRepositories
             if (!(input.NewItems != null && input.NewItems.Count > 0 ||
                 input.UpdateItems != null && input.UpdateItems.Count > 0))
             {
-                return new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>> { Status = HttpStatusCode.OK };
+                return new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>> { Status = HttpStatusCode.OK };
             }
 
             // 3. NewItems and UpdateItems
@@ -201,7 +201,7 @@ namespace Elmah.EFCoreRepositories
                     (from t in _dbcontext.ElmahApplication
                     where identifierListToloadResponseItems.Contains(t.Application)
 
-                    select new ElmahApplicationModel
+                    select new ElmahApplicationDataModel
                     {
 
                         Application = t.Application,
@@ -209,10 +209,10 @@ namespace Elmah.EFCoreRepositories
                     }).ToList();
 
                 // 3.3. Final Response
-                var response = new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>
+                var response = new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>
                 {
                     Status = HttpStatusCode.OK,
-                    ResponseBody = new MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>
+                    ResponseBody = new MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>
                     {
                         NewItems =
                             input.NewItems != null && input.NewItems.Count > 0
@@ -228,7 +228,7 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>
+                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>
                 {
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = "Create And/Or Update Failed. " + ex.Message
@@ -236,10 +236,10 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<Response<ElmahApplicationModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationModel input)
+        public async Task<Response<ElmahApplicationDataModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationDataModel input)
         {
             if (input == null)
-                return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.BadRequest });
 
             try
             {
@@ -252,17 +252,17 @@ namespace Elmah.EFCoreRepositories
 
                 // TODO: can create a new record here.
                 if (existing == null)
-                    return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.NotFound });
 
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.Application = input.Application;
                 await _dbcontext.SaveChangesAsync();
 
-                return await Task<Response<ElmahApplicationModel>>.FromResult(
-                    new Response<ElmahApplicationModel>
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(
+                    new Response<ElmahApplicationDataModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahApplicationModel
+                        ResponseBody = new ElmahApplicationDataModel
                         {
                             Application = existing.Application,
                         }
@@ -271,14 +271,14 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdentifier id)
+        public async Task<Response<ElmahApplicationDataModel>> Get(ElmahApplicationIdentifier id)
         {
             if (id == null)
-                return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.BadRequest });
 
             try
             {
@@ -289,13 +289,13 @@ namespace Elmah.EFCoreRepositories
                 );
 
                 if (existing == null)
-                    return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.NotFound });
 
-                return await Task<Response<ElmahApplicationModel>>.FromResult(
-                    new Response<ElmahApplicationModel>
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(
+                    new Response<ElmahApplicationDataModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahApplicationModel
+                        ResponseBody = new ElmahApplicationDataModel
                         {
                             Application = existing.Application,
                         }
@@ -304,14 +304,14 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<ElmahApplicationModel>> Create(ElmahApplicationModel input)
+        public async Task<Response<ElmahApplicationDataModel>> Create(ElmahApplicationDataModel input)
         {
             if (input == null)
-                return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.BadRequest });
             try
             {
                 var toInsert = new ElmahApplication
@@ -321,11 +321,11 @@ namespace Elmah.EFCoreRepositories
                 await _dbcontext.ElmahApplication.AddAsync(toInsert);
                 await _dbcontext.SaveChangesAsync();
 
-                return await Task<Response<ElmahApplicationModel>>.FromResult(
-                    new Response<ElmahApplicationModel>
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(
+                    new Response<ElmahApplicationDataModel>
                     {
                         Status = HttpStatusCode.OK,
-                        ResponseBody = new ElmahApplicationModel
+                        ResponseBody = new ElmahApplicationDataModel
                         {
                             Application = toInsert.Application,
                         }
@@ -334,7 +334,7 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahApplicationModel>>.FromResult(new Response<ElmahApplicationModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahApplicationDataModel>>.FromResult(new Response<ElmahApplicationDataModel> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 

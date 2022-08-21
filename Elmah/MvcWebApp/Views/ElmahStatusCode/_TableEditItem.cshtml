@@ -3,7 +3,7 @@
 @using Elmah.Resx;
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models.Definitions;
-@model MvcItemViewModel<ElmahStatusCodeModel>
+@model MvcItemViewModel<ElmahStatusCodeDataModel>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -30,12 +30,12 @@
     </td>
 }
 <td class="form-group p-0">
-    <input asp-for="Model!.StatusCode" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.StatusCode))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))" data-nt-value="@Model!.Model!.StatusCode"/>
-    <span asp-validation-for="Model!.StatusCode" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeModel.StatusCode))"></span>
+    <input asp-for="Model!.StatusCode" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.StatusCode))" name="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.StatusCode))" data-nt-value="@Model!.Model!.StatusCode"/>
+    <span asp-validation-for="Model!.StatusCode" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.StatusCode))"></span>
 </td>
 <td class="form-group p-0">
-    <input asp-for="Model!.Name" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.Name))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.Name))" data-nt-value="@Model!.Model!.Name"/>
-    <span asp-validation-for="Model!.Name" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeModel.Name))"></span>
+    <input asp-for="Model!.Name" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.Name))" name="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.Name))" data-nt-value="@Model!.Model!.Name"/>
+    <span asp-validation-for="Model!.Name" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.Name))"></span>
 </td>
 @if (Model!.UIItemFeatures.ShowItemUIStatus)
 {
@@ -52,12 +52,12 @@
         {
                     <i class="fa-solid fa-circle text-danger"></i>
         }
-        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.ItemUIStatus______))" type="hidden" />
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.ItemUIStatus______))" type="hidden" />
     </td>
 }
 @if (Model!.UIItemFeatures.ShowEditableListDeleteSelect)
 {
     <td class="form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahStatusCodeModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
     </td>
 }

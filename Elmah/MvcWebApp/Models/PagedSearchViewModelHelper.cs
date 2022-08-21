@@ -29,12 +29,12 @@ namespace Elmah.MvcWebApp.Models
             _logger = logger;
         }
 
-        public async Task<PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorDataModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahErrorAdvancedQuery query,
             Response response,
-            ElmahErrorModel.DefaultView[]? responseBody,
+            ElmahErrorDataModel.DefaultView[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -42,7 +42,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahErrorModel.DefaultView[]>
+                new PagedResponse<ElmahErrorDataModel.DefaultView[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -52,15 +52,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorDataModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahErrorAdvancedQuery query,
-            PagedResponse<ElmahErrorModel.DefaultView[]> response,
+            PagedResponse<ElmahErrorDataModel.DefaultView[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorModel.DefaultView[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorDataModel.DefaultView[]>
             {
                 Query = query,
                 Result = response,
@@ -85,12 +85,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]>> GetElmahApplicationPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationDataModel[]>> GetElmahApplicationPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahApplicationAdvancedQuery query,
             Response response,
-            ElmahApplicationModel[]? responseBody,
+            ElmahApplicationDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -98,7 +98,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahApplicationModel[]>
+                new PagedResponse<ElmahApplicationDataModel[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -108,15 +108,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]>> GetElmahApplicationPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationDataModel[]>> GetElmahApplicationPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahApplicationAdvancedQuery query,
-            PagedResponse<ElmahApplicationModel[]> response,
+            PagedResponse<ElmahApplicationDataModel[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationDataModel[]>
             {
                 Query = query,
                 Result = response,
@@ -136,12 +136,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostModel[]>> GetElmahHostPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostDataModel[]>> GetElmahHostPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahHostAdvancedQuery query,
             Response response,
-            ElmahHostModel[]? responseBody,
+            ElmahHostDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -149,7 +149,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahHostModel[]>
+                new PagedResponse<ElmahHostDataModel[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -159,15 +159,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostModel[]>> GetElmahHostPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostDataModel[]>> GetElmahHostPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahHostAdvancedQuery query,
-            PagedResponse<ElmahHostModel[]> response,
+            PagedResponse<ElmahHostDataModel[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostDataModel[]>
             {
                 Query = query,
                 Result = response,
@@ -187,12 +187,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>> GetElmahSourcePagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceDataModel[]>> GetElmahSourcePagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahSourceAdvancedQuery query,
             Response response,
-            ElmahSourceModel[]? responseBody,
+            ElmahSourceDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -200,7 +200,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahSourceModel[]>
+                new PagedResponse<ElmahSourceDataModel[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -210,15 +210,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>> GetElmahSourcePagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceDataModel[]>> GetElmahSourcePagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahSourceAdvancedQuery query,
-            PagedResponse<ElmahSourceModel[]> response,
+            PagedResponse<ElmahSourceDataModel[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceDataModel[]>
             {
                 Query = query,
                 Result = response,
@@ -238,12 +238,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>> GetElmahStatusCodePagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeDataModel[]>> GetElmahStatusCodePagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahStatusCodeAdvancedQuery query,
             Response response,
-            ElmahStatusCodeModel[]? responseBody,
+            ElmahStatusCodeDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -251,7 +251,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahStatusCodeModel[]>
+                new PagedResponse<ElmahStatusCodeDataModel[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -261,15 +261,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>> GetElmahStatusCodePagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeDataModel[]>> GetElmahStatusCodePagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahStatusCodeAdvancedQuery query,
-            PagedResponse<ElmahStatusCodeModel[]> response,
+            PagedResponse<ElmahStatusCodeDataModel[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeDataModel[]>
             {
                 Query = query,
                 Result = response,
@@ -289,12 +289,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeModel[]>> GetElmahTypePagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>> GetElmahTypePagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahTypeAdvancedQuery query,
             Response response,
-            ElmahTypeModel[]? responseBody,
+            ElmahTypeDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -302,7 +302,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahTypeModel[]>
+                new PagedResponse<ElmahTypeDataModel[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -312,15 +312,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeModel[]>> GetElmahTypePagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>> GetElmahTypePagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahTypeAdvancedQuery query,
-            PagedResponse<ElmahTypeModel[]> response,
+            PagedResponse<ElmahTypeDataModel[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>
             {
                 Query = query,
                 Result = response,
@@ -340,12 +340,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>> GetElmahUserPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserDataModel[]>> GetElmahUserPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahUserAdvancedQuery query,
             Response response,
-            ElmahUserModel[]? responseBody,
+            ElmahUserDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
@@ -353,7 +353,7 @@ namespace Elmah.MvcWebApp.Models
                 key,
                 uiParams,
                 query,
-                new PagedResponse<ElmahUserModel[]>
+                new PagedResponse<ElmahUserDataModel[]>
                 {
                     Status = response.Status,
                     StatusMessage = response.StatusMessage,
@@ -363,15 +363,15 @@ namespace Elmah.MvcWebApp.Models
                 loadTopLevelDropDownListsFromDatabase);
         }
 
-        public async Task<PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>> GetElmahUserPagedSearchViewModel(
+        public async Task<PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserDataModel[]>> GetElmahUserPagedSearchViewModel(
             string key,
             UIParams uiParams,
             ElmahUserAdvancedQuery query,
-            PagedResponse<ElmahUserModel[]> response,
+            PagedResponse<ElmahUserDataModel[]> response,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserModel[]>
+            var result = await Task.FromResult(new PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserDataModel[]>
             {
                 Query = query,
                 Result = response,

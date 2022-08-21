@@ -5,7 +5,7 @@ namespace Elmah.ServiceContracts
     public interface IElmahHostService
     {
 
-        Task<PagedResponse<ElmahHostModel[]>> Search(
+        Task<PagedResponse<ElmahHostDataModel[]>> Search(
             ElmahHostAdvancedQuery query);
 
         Task<ElmahHostCompositeModel> GetCompositeModel(
@@ -13,15 +13,15 @@ namespace Elmah.ServiceContracts
 
         Task<Response> BulkDelete(List<ElmahHostIdentifier> ids);
 
-        Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel> input);
+        Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel> input);
 
-        Task<Response<ElmahHostModel>> Update(ElmahHostIdentifier id, ElmahHostModel input);
+        Task<Response<ElmahHostDataModel>> Update(ElmahHostIdentifier id, ElmahHostDataModel input);
 
-        Task<Response<ElmahHostModel>> Get(ElmahHostIdentifier id);
+        Task<Response<ElmahHostDataModel>> Get(ElmahHostIdentifier id);
 
-        Task<Response<ElmahHostModel>> Create(ElmahHostModel input);
-        ElmahHostModel GetDefault();
+        Task<Response<ElmahHostDataModel>> Create(ElmahHostDataModel input);
+        ElmahHostDataModel GetDefault();
 
         Task<Response> Delete(ElmahHostIdentifier id);
 

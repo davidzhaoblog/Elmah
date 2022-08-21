@@ -3,7 +3,7 @@
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model MvcItemViewModel<ElmahApplicationModel>
+@model MvcItemViewModel<ElmahApplicationDataModel>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -19,7 +19,7 @@ else
 {
     <input class="hidden-modal-title" value="@Model!.Model!.Application" type="hidden" />
     <div class="form-group">
-        <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))"></label>
+        <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationDataModel.Application))"></label>
         @Html.DisplayFor(m=>m.Model!.Application)
     </div>
 }

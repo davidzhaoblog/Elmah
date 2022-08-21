@@ -3,7 +3,7 @@
 @using Elmah.Resx;
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models.Definitions;
-@model MvcItemViewModel<ElmahSourceModel>
+@model MvcItemViewModel<ElmahSourceDataModel>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -30,8 +30,8 @@
     </td>
 }
 <td class="form-group p-0">
-    <input asp-for="Model!.Source" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahSourceModel.Source))" name="@Model!.HtmlName(nameof(ElmahSourceModel.Source))" data-nt-value="@Model!.Model!.Source"/>
-    <span asp-validation-for="Model!.Source" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahSourceModel.Source))"></span>
+    <input asp-for="Model!.Source" class="form-control nt-form-data" id="@Model!.HtmlId(nameof(ElmahSourceDataModel.Source))" name="@Model!.HtmlName(nameof(ElmahSourceDataModel.Source))" data-nt-value="@Model!.Model!.Source"/>
+    <span asp-validation-for="Model!.Source" class="text-danger" data-valmsg-for="@Model!.HtmlName(nameof(ElmahSourceDataModel.Source))"></span>
 </td>
 @if (Model!.UIItemFeatures.ShowItemUIStatus)
 {
@@ -48,12 +48,12 @@
         {
                     <i class="fa-solid fa-circle text-danger"></i>
         }
-        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahSourceModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahSourceModel.ItemUIStatus______))" type="hidden" />
+        <input asp-for="Model!.ItemUIStatus______" class="form-control" data-nt-value="@Model!.Model!.ItemUIStatus______" id="@Model!.HtmlId(nameof(ElmahSourceDataModel.ItemUIStatus______))" name="@Model!.HtmlName(nameof(ElmahSourceDataModel.ItemUIStatus______))" type="hidden" />
     </td>
 }
 @if (Model!.UIItemFeatures.ShowEditableListDeleteSelect)
 {
     <td class="form-group nt-editablelist-delete-select text-center" style="width: 1% !important;">
-        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahSourceModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahSourceModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
+        <input asp-for="Model!.IsDeleted______" class="form-check-input nt-form-check ms-1" type="checkbox"  id="@Model!.HtmlId(nameof(ElmahSourceDataModel.IsDeleted______))" name="@Model!.HtmlName(nameof(ElmahSourceDataModel.IsDeleted______))" data-nt-value="@Model!.Model!.IsDeleted______"/>
     </td>
 }

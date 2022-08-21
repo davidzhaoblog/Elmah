@@ -2,7 +2,7 @@
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model MvcItemViewModel<ElmahErrorModel.DefaultView>
+@model MvcItemViewModel<ElmahErrorDataModel.DefaultView>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -24,54 +24,54 @@
             }
             <div class="card-body">
                 <div class="form-group">
-                    <label asp-for="Model!.ErrorId" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))"></label>
+                    <label asp-for="Model!.ErrorId" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.ErrorId))"></label>
                     @Html.DisplayFor(m=>m.Model!.ErrorId)
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Application))"></label>
+                    <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.Application))"></label>
                     <a asp-area="" asp-controller="ElmahApplication" asp-action="Dashboard" asp-route-application="@Model!.Model!.Application">@Model!.Model!.Application_Name</a>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Host))"></label>
+                    <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.Host))"></label>
                     <a asp-area="" asp-controller="ElmahHost" asp-action="Dashboard" asp-route-host="@Model!.Model!.Host">@Model!.Model!.Host_Name</a>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.Type" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Type))"></label>
+                    <label asp-for="Model!.Type" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.Type))"></label>
                     <a asp-area="" asp-controller="ElmahType" asp-action="Dashboard" asp-route-type="@Model!.Model!.Type">@Model!.Model!.Type_Name</a>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Source))"></label>
+                    <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.Source))"></label>
                     <a asp-area="" asp-controller="ElmahSource" asp-action="Dashboard" asp-route-source="@Model!.Model!.Source">@Model!.Model!.Source_Name</a>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.Message" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Message))"></label>
+                    <label asp-for="Model!.Message" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.Message))"></label>
                     @Html.DisplayFor(m=>m.Model!.Message)
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.User" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.User))"></label>
+                    <label asp-for="Model!.User" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.User))"></label>
                     <a asp-area="" asp-controller="ElmahUser" asp-action="Dashboard" asp-route-user="@Model!.Model!.User">@Model!.Model!.User_Name</a>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.StatusCode" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.StatusCode))"></label>
+                    <label asp-for="Model!.StatusCode" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.StatusCode))"></label>
                     <a asp-area="" asp-controller="ElmahStatusCode" asp-action="Dashboard" asp-route-statuscode="@Model!.Model!.StatusCode">@Model!.Model!.StatusCode_Name</a>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.TimeUtc" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.TimeUtc))"></label>
+                    <label asp-for="Model!.TimeUtc" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.TimeUtc))"></label>
                     @Html.DisplayFor(m=>m.Model!.TimeUtc)
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.Sequence" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.Sequence))"></label>
+                    <label asp-for="Model!.Sequence" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.Sequence))"></label>
                     @Html.DisplayFor(m=>m.Model!.Sequence)
                 </div>
                 <div class="form-group">
-                    <label asp-for="Model!.AllXml" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorModel.DefaultView.AllXml))"></label>
+                    <label asp-for="Model!.AllXml" class="control-label" for="@Model!.HtmlId(nameof(ElmahErrorDataModel.DefaultView.AllXml))"></label>
                     @Html.DisplayFor(m=>m.Model!.AllXml)
                 </div>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="Model!.ErrorId" id="@Model.HtmlId(nameof(ElmahErrorModel.DefaultView.ErrorId))" name="@Model.HtmlName(nameof(ElmahErrorModel.DefaultView.ErrorId))"/>
+                        <input type="hidden" asp-for="Model!.ErrorId" id="@Model.HtmlId(nameof(ElmahErrorDataModel.DefaultView.ErrorId))" name="@Model.HtmlName(nameof(ElmahErrorDataModel.DefaultView.ErrorId))"/>
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>

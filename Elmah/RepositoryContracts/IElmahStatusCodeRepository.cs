@@ -5,19 +5,19 @@ namespace Elmah.RepositoryContracts
     public interface IElmahStatusCodeRepository
     {
 
-        Task<PagedResponse<ElmahStatusCodeModel[]>> Search(
+        Task<PagedResponse<ElmahStatusCodeDataModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query);
 
         Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids);
 
-        Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeModel> input);
+        Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel> input);
 
-        Task<Response<ElmahStatusCodeModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeModel input);
+        Task<Response<ElmahStatusCodeDataModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeDataModel input);
 
-        Task<Response<ElmahStatusCodeModel>> Get(ElmahStatusCodeIdentifier id);
+        Task<Response<ElmahStatusCodeDataModel>> Get(ElmahStatusCodeIdentifier id);
 
-        Task<Response<ElmahStatusCodeModel>> Create(ElmahStatusCodeModel input);
+        Task<Response<ElmahStatusCodeDataModel>> Create(ElmahStatusCodeDataModel input);
 
         Task<Response> Delete(ElmahStatusCodeIdentifier id);
 

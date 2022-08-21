@@ -2,7 +2,7 @@
 @using Elmah.Resx;
 @using Framework.Models;
 @using Elmah.MvcWebApp.Models;
-@model PagedViewModel<ElmahStatusCodeModel[]>
+@model PagedViewModel<ElmahStatusCodeDataModel[]>
 @inject IUIStrings localizor;
 <!--for EditableList "Create New" for now, can copy to Tiles -->
 <input type="hidden" class="nt-list-count" value="@Model!.Result!.ResponseBody!.Count()" />
@@ -37,7 +37,7 @@
                 for (var i = 0; i < Model.Result.ResponseBody.Length; i++)
                 {
                     @await Html.PartialAsync("~/Views/ElmahStatusCode/_TableItemTr.cshtml",
-                        new MvcItemViewModel<ElmahStatusCodeModel>
+                        new MvcItemViewModel<ElmahStatusCodeDataModel>
                         {
                             UIItemFeatures = Model.UIListSetting.GetUIItemFeatures(),
                             Status = System.Net.HttpStatusCode.OK,

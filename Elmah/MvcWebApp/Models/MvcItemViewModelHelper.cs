@@ -27,14 +27,14 @@ namespace Elmah.MvcWebApp.Models
             _logger = logger;
         }
 
-        public async Task<MvcItemViewModel<ElmahErrorModel.DefaultView>> GetElmahErrorMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahErrorDataModel.DefaultView>> GetElmahErrorMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahErrorModel.DefaultView responseBody,
+            ElmahErrorDataModel.DefaultView responseBody,
             bool loadTopLevelDropDownListsFromDatabase,
             Dictionary<string, List<NameValuePair>>? topLevelDropDownListsFromDatabase)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahErrorModel.DefaultView>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahErrorDataModel.DefaultView>
             {
                 Model = responseBody,
                 Status = response.Status,
@@ -51,12 +51,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<MvcItemViewModel<ElmahApplicationModel>> GetElmahApplicationMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahApplicationDataModel>> GetElmahApplicationMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahApplicationModel responseBody)
+            ElmahApplicationDataModel responseBody)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahApplicationModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahApplicationDataModel>
             {
                 Model = responseBody,
                 Status = response.Status,
@@ -68,12 +68,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<MvcItemViewModel<ElmahHostModel>> GetElmahHostMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahHostDataModel>> GetElmahHostMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahHostModel responseBody)
+            ElmahHostDataModel responseBody)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahHostModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahHostDataModel>
             {
                 Model = responseBody,
                 Status = response.Status,
@@ -85,12 +85,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<MvcItemViewModel<ElmahSourceModel>> GetElmahSourceMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahSourceDataModel>> GetElmahSourceMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahSourceModel responseBody)
+            ElmahSourceDataModel responseBody)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahSourceModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahSourceDataModel>
             {
                 Model = responseBody,
                 Status = response.Status,
@@ -102,12 +102,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<MvcItemViewModel<ElmahStatusCodeModel>> GetElmahStatusCodeMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahStatusCodeDataModel>> GetElmahStatusCodeMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahStatusCodeModel responseBody)
+            ElmahStatusCodeDataModel responseBody)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahStatusCodeModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahStatusCodeDataModel>
             {
                 Model = responseBody,
                 Status = response.Status,
@@ -119,12 +119,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<MvcItemViewModel<ElmahTypeModel>> GetElmahTypeMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahTypeDataModel>> GetElmahTypeMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahTypeModel responseBody)
+            ElmahTypeDataModel responseBody)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahTypeModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahTypeDataModel>
             {
                 Model = responseBody,
                 Status = response.Status,
@@ -136,12 +136,12 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public async Task<MvcItemViewModel<ElmahUserModel>> GetElmahUserMvcItemViewModel(
+        public async Task<MvcItemViewModel<ElmahUserDataModel>> GetElmahUserMvcItemViewModel(
             UIParams uiParams,
             Response response,
-            ElmahUserModel responseBody)
+            ElmahUserDataModel responseBody)
         {
-            var result = await Task.FromResult(new MvcItemViewModel<ElmahUserModel>
+            var result = await Task.FromResult(new MvcItemViewModel<ElmahUserDataModel>
             {
                 Model = responseBody,
                 Status = response.Status,

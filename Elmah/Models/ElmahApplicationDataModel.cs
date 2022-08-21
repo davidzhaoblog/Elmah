@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Elmah.Models
 {
-    public partial class ElmahApplicationModel
+    public partial class ElmahApplicationDataModel
     {
         public ItemUIStatus ItemUIStatus______ { get; set; } = ItemUIStatus.NoChange;
         public bool IsDeleted______ { get; set; } = false;

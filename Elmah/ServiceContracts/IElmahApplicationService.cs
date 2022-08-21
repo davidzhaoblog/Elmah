@@ -5,7 +5,7 @@ namespace Elmah.ServiceContracts
     public interface IElmahApplicationService
     {
 
-        Task<PagedResponse<ElmahApplicationModel[]>> Search(
+        Task<PagedResponse<ElmahApplicationDataModel[]>> Search(
             ElmahApplicationAdvancedQuery query);
 
         Task<ElmahApplicationCompositeModel> GetCompositeModel(
@@ -13,15 +13,15 @@ namespace Elmah.ServiceContracts
 
         Task<Response> BulkDelete(List<ElmahApplicationIdentifier> ids);
 
-        Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel> input);
+        Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel> input);
 
-        Task<Response<ElmahApplicationModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationModel input);
+        Task<Response<ElmahApplicationDataModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationDataModel input);
 
-        Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdentifier id);
+        Task<Response<ElmahApplicationDataModel>> Get(ElmahApplicationIdentifier id);
 
-        Task<Response<ElmahApplicationModel>> Create(ElmahApplicationModel input);
-        ElmahApplicationModel GetDefault();
+        Task<Response<ElmahApplicationDataModel>> Create(ElmahApplicationDataModel input);
+        ElmahApplicationDataModel GetDefault();
 
         Task<Response> Delete(ElmahApplicationIdentifier id);
 

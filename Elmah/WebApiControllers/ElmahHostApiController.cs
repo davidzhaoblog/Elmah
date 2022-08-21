@@ -29,7 +29,7 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahHostModel[]>>> Search(
+        public async Task<ActionResult<PagedResponse<ElmahHostDataModel[]>>> Search(
             ElmahHostAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
@@ -54,8 +54,8 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostModel> input)
+        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel>>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel> input)
         {
             var serviceResponse = await _thisService.MultiItemsCUD(input);
             return ReturnActionResult(serviceResponse);
@@ -63,7 +63,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPost]
-        public async Task<ActionResult<ElmahHostModel>> Post(ElmahHostIdentifier id, ElmahHostModel input)
+        public async Task<ActionResult<ElmahHostDataModel>> Post(ElmahHostIdentifier id, ElmahHostDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -71,7 +71,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpGet]
-        public async Task<ActionResult<ElmahHostModel>> Get(ElmahHostIdentifier id)
+        public async Task<ActionResult<ElmahHostDataModel>> Get(ElmahHostIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
@@ -79,7 +79,7 @@ namespace Elmah.WebApiControllers
 
         // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<ElmahHostModel>> Put(ElmahHostModel input)
+        public async Task<ActionResult<ElmahHostDataModel>> Put(ElmahHostDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);

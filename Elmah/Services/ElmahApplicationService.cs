@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahApplicationModel[]>> Search(
+        public async Task<PagedResponse<ElmahApplicationDataModel[]>> Search(
             ElmahApplicationAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -86,31 +86,31 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationModel> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel> input)
         {
             return await _thisRepository.MultiItemsCUD(input);
         }
 
-        public async Task<Response<ElmahApplicationModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationModel input)
+        public async Task<Response<ElmahApplicationDataModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationDataModel input)
         {
             return await _thisRepository.Update(id, input);
         }
 
-        public async Task<Response<ElmahApplicationModel>> Get(ElmahApplicationIdentifier id)
+        public async Task<Response<ElmahApplicationDataModel>> Get(ElmahApplicationIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<ElmahApplicationModel>> Create(ElmahApplicationModel input)
+        public async Task<Response<ElmahApplicationDataModel>> Create(ElmahApplicationDataModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public ElmahApplicationModel GetDefault()
+        public ElmahApplicationDataModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahApplicationModel { ItemUIStatus______ = ItemUIStatus.New };
+            return new ElmahApplicationDataModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahApplicationIdentifier id)

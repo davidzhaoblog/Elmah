@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahTypeModel[]>> Search(
+        public async Task<PagedResponse<ElmahTypeDataModel[]>> Search(
             ElmahTypeAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -86,31 +86,31 @@ namespace Elmah.Services
             return await _thisRepository.BulkDelete(ids);
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeModel> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeDataModel>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahTypeIdentifier, ElmahTypeDataModel> input)
         {
             return await _thisRepository.MultiItemsCUD(input);
         }
 
-        public async Task<Response<ElmahTypeModel>> Update(ElmahTypeIdentifier id, ElmahTypeModel input)
+        public async Task<Response<ElmahTypeDataModel>> Update(ElmahTypeIdentifier id, ElmahTypeDataModel input)
         {
             return await _thisRepository.Update(id, input);
         }
 
-        public async Task<Response<ElmahTypeModel>> Get(ElmahTypeIdentifier id)
+        public async Task<Response<ElmahTypeDataModel>> Get(ElmahTypeIdentifier id)
         {
             return await _thisRepository.Get(id);
         }
 
-        public async Task<Response<ElmahTypeModel>> Create(ElmahTypeModel input)
+        public async Task<Response<ElmahTypeDataModel>> Create(ElmahTypeDataModel input)
         {
             return await _thisRepository.Create(input);
         }
 
-        public ElmahTypeModel GetDefault()
+        public ElmahTypeDataModel GetDefault()
         {
             // TODO: please set default value here
-            return new ElmahTypeModel { ItemUIStatus______ = ItemUIStatus.New };
+            return new ElmahTypeDataModel { ItemUIStatus______ = ItemUIStatus.New };
         }
 
         public async Task<Response> Delete(ElmahTypeIdentifier id)

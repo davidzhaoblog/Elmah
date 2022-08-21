@@ -22,7 +22,7 @@ namespace Elmah.EFCoreRepositories
             _logger = logger;
         }
 
-        private IQueryable<ElmahErrorModel.DefaultView> SearchQuery(
+        private IQueryable<ElmahErrorDataModel.DefaultView> SearchQuery(
             ElmahErrorAdvancedQuery query, bool withPagingAndOrderBy)
         {
 
@@ -69,7 +69,7 @@ namespace Elmah.EFCoreRepositories
                             query.AllXmlSearchType == TextSearchTypes.StartsWith && EF.Functions.Like(t.AllXml!, query.AllXml + "%") ||
                             query.AllXmlSearchType == TextSearchTypes.EndsWith && EF.Functions.Like(t.AllXml!, "%" + query.AllXml))
 
-                select new ElmahErrorModel.DefaultView
+                select new ElmahErrorDataModel.DefaultView
                 {
 
                         ErrorId = t.ErrorId,
@@ -107,7 +107,7 @@ namespace Elmah.EFCoreRepositories
             return queryable;
         }
 
-        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
+        public async Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query)
         {
             try
@@ -116,8 +116,8 @@ namespace Elmah.EFCoreRepositories
                 var totalCount = queryableOfTotalCount.Count();
 
                 var queryable = SearchQuery(query, true);
-                var result = await queryable.ToDynamicArrayAsync<ElmahErrorModel.DefaultView>();
-                return new PagedResponse<ElmahErrorModel.DefaultView[]>
+                var result = await queryable.ToDynamicArrayAsync<ElmahErrorDataModel.DefaultView>();
+                return new PagedResponse<ElmahErrorDataModel.DefaultView[]>
                 {
                     Status = HttpStatusCode.OK,
                     Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
@@ -126,7 +126,7 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(new PagedResponse<ElmahErrorModel.DefaultView[]>
+                return await Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>>.FromResult(new PagedResponse<ElmahErrorDataModel.DefaultView[]>
                 {
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
@@ -165,13 +165,13 @@ namespace Elmah.EFCoreRepositories
             }
         }
 
-        public async Task<PagedResponse<ElmahErrorModel.DefaultView[]>> BulkUpdate(
-            BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data)
+        public async Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> BulkUpdate(
+            BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
         {
             if (data.ActionData == null)
             {
-                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
-                    new PagedResponse<ElmahErrorModel.DefaultView[]> { Status = HttpStatusCode.BadRequest });
+                return await Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>>.FromResult(
+                    new PagedResponse<ElmahErrorDataModel.DefaultView[]> { Status = HttpStatusCode.BadRequest });
             }
             try
             {
@@ -185,24 +185,24 @@ namespace Elmah.EFCoreRepositories
                             StatusCode = data.ActionData.StatusCode,
                         });
                     var responseBody = GetIQueryableAsBulkUpdateResponse(data.Ids);
-                    return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
-                        new PagedResponse<ElmahErrorModel.DefaultView[]> {
+                    return await Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>>.FromResult(
+                        new PagedResponse<ElmahErrorDataModel.DefaultView[]> {
                             Status = HttpStatusCode.OK,
                             ResponseBody = responseBody.ToArray(),
                         });
                 }
 
-                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
-                    new PagedResponse<ElmahErrorModel.DefaultView[]> { Status = HttpStatusCode.BadRequest });
+                return await Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>>.FromResult(
+                    new PagedResponse<ElmahErrorDataModel.DefaultView[]> { Status = HttpStatusCode.BadRequest });
             }
             catch (Exception ex)
             {
-                return await Task<PagedResponse<ElmahErrorModel.DefaultView[]>>.FromResult(
-                    new PagedResponse<ElmahErrorModel.DefaultView[]> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>>.FromResult(
+                    new PagedResponse<ElmahErrorDataModel.DefaultView[]> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateResponse(
+private IQueryable<ElmahErrorDataModel.DefaultView> GetIQueryableAsBulkUpdateResponse(
             List<ElmahErrorIdentifier> ids)
         {
             var idList = ids.Select(t => t.ErrorId).ToList();
@@ -216,7 +216,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                 where idList.Contains(t.ErrorId)
 
-                select new ElmahErrorModel.DefaultView
+                select new ElmahErrorDataModel.DefaultView
                 {
                         ErrorId = t.ErrorId,
                         Application = t.Application,
@@ -240,8 +240,8 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             return queryable;
         }
 
-        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> input)
+        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> input)
         {
             // 1. DeleteItems, return if Failed
             if (input.DeleteItems != null)
@@ -249,7 +249,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                 var responseOfDeleteItems = await this.BulkDelete(input.DeleteItems);
                 if (responseOfDeleteItems != null && responseOfDeleteItems.Status != HttpStatusCode.OK)
                 {
-                    return new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
+                    return new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
                 }
             }
 
@@ -257,7 +257,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             if (!(input.NewItems != null && input.NewItems.Count > 0 ||
                 input.UpdateItems != null && input.UpdateItems.Count > 0))
             {
-                return new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>> { Status = HttpStatusCode.OK };
+                return new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>> { Status = HttpStatusCode.OK };
             }
 
             // 3. NewItems and UpdateItems
@@ -341,7 +341,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                     where identifierListToloadResponseItems.Contains(t.ErrorId)
 
-                    select new ElmahErrorModel.DefaultView
+                    select new ElmahErrorDataModel.DefaultView
                     {
 
                         ErrorId = t.ErrorId,
@@ -365,10 +365,10 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     }).ToList();
 
                 // 3.3. Final Response
-                var response = new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>
+                var response = new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>
                 {
                     Status = HttpStatusCode.OK,
-                    ResponseBody = new MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>
+                    ResponseBody = new MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>
                     {
                         NewItems =
                             input.NewItems != null && input.NewItems.Count > 0
@@ -384,7 +384,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>
+                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>
                 {
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = "Create And/Or Update Failed. " + ex.Message
@@ -392,10 +392,10 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             }
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input)
+        public async Task<Response<ElmahErrorDataModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorDataModel input)
         {
             if (input == null)
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.BadRequest });
 
             try
             {
@@ -408,7 +408,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
 
                 // TODO: can create a new record here.
                 if (existing == null)
-                    return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.NotFound });
+                    return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.NotFound });
 
                 // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
                 existing.Application = input.Application;
@@ -434,7 +434,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                     where t.ErrorId == existing.ErrorId
 
-                    select new ElmahErrorModel.DefaultView
+                    select new ElmahErrorDataModel.DefaultView
                     {
 
                         ErrorId = t.ErrorId,
@@ -457,8 +457,8 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
 
                     }).First();
 
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
-                    new Response<ElmahErrorModel.DefaultView>
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(
+                    new Response<ElmahErrorDataModel.DefaultView>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = responseBody
@@ -467,14 +467,14 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id)
+        public async Task<Response<ElmahErrorDataModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             if (id == null)
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.BadRequest });
 
             try
             {
@@ -493,7 +493,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
 
                     t.ErrorId == id.ErrorId
 
-                    select new ElmahErrorModel.DefaultView
+                    select new ElmahErrorDataModel.DefaultView
                     {
 
                         ErrorId = t.ErrorId,
@@ -516,9 +516,9 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
 
                     }).First();
                 if (responseBody == null)
-                    return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.NotFound });
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
-                    new Response<ElmahErrorModel.DefaultView>
+                    return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.NotFound });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(
+                    new Response<ElmahErrorDataModel.DefaultView>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = responseBody
@@ -527,14 +527,14 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 
-        public async Task<Response<ElmahErrorModel.DefaultView>> Create(ElmahErrorModel input)
+        public async Task<Response<ElmahErrorDataModel.DefaultView>> Create(ElmahErrorDataModel input)
         {
             if (input == null)
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.BadRequest });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.BadRequest });
             try
             {
                 var toInsert = new ElmahError
@@ -564,7 +564,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
                     join User in _dbcontext.ElmahUser on t.User equals User.User// \User
                     where t.ErrorId == toInsert.ErrorId
 
-                    select new ElmahErrorModel.DefaultView
+                    select new ElmahErrorDataModel.DefaultView
                     {
 
                         ErrorId = t.ErrorId,
@@ -587,8 +587,8 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
 
                     }).First();
 
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(
-                    new Response<ElmahErrorModel.DefaultView>
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(
+                    new Response<ElmahErrorDataModel.DefaultView>
                     {
                         Status = HttpStatusCode.OK,
                         ResponseBody = responseBody
@@ -597,7 +597,7 @@ private IQueryable<ElmahErrorModel.DefaultView> GetIQueryableAsBulkUpdateRespons
             }
             catch (Exception ex)
             {
-                return await Task<Response<ElmahErrorModel.DefaultView>>.FromResult(new Response<ElmahErrorModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
+                return await Task<Response<ElmahErrorDataModel.DefaultView>>.FromResult(new Response<ElmahErrorDataModel.DefaultView> { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
             }
         }
 

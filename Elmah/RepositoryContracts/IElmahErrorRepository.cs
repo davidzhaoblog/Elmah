@@ -5,21 +5,21 @@ namespace Elmah.RepositoryContracts
     public interface IElmahErrorRepository
     {
 
-        Task<PagedResponse<ElmahErrorModel.DefaultView[]>> Search(
+        Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query);
 
         Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids);
 
-        Task<PagedResponse<ElmahErrorModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> data);
+        Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data);
 
-        Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorModel.DefaultView> input);
+        Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>> MultiItemsCUD(
+            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> input);
 
-        Task<Response<ElmahErrorModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorModel input);
+        Task<Response<ElmahErrorDataModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorDataModel input);
 
-        Task<Response<ElmahErrorModel.DefaultView>> Get(ElmahErrorIdentifier id);
+        Task<Response<ElmahErrorDataModel.DefaultView>> Get(ElmahErrorIdentifier id);
 
-        Task<Response<ElmahErrorModel.DefaultView>> Create(ElmahErrorModel input);
+        Task<Response<ElmahErrorDataModel.DefaultView>> Create(ElmahErrorDataModel input);
 
         Task<Response> Delete(ElmahErrorIdentifier id);
 

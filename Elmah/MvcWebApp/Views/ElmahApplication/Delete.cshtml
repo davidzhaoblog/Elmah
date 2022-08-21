@@ -2,7 +2,7 @@
 @using Elmah.MvcWebApp.Models;
 @using Elmah.Models;
 @using Elmah.Resx;
-@model MvcItemViewModel<ElmahApplicationModel>
+@model MvcItemViewModel<ElmahApplicationDataModel>
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
 @{
@@ -24,14 +24,14 @@
             }
             <div class="card-body">
                 <div class="form-group">
-                    <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationModel.Application))"></label>
+                    <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationDataModel.Application))"></label>
                     @Html.DisplayFor(m=>m.Model!.Application)
                 </div>
             </div>
             <div class="card-footer">
                 <div class="btn-group" role="group" aria-label="...">
                     <form asp-action="Delete">
-                        <input type="hidden" asp-for="Model!.Application" id="@Model.HtmlId(nameof(ElmahApplicationModel.Application))" name="@Model.HtmlName(nameof(ElmahApplicationModel.Application))"/>
+                        <input type="hidden" asp-for="Model!.Application" id="@Model.HtmlId(nameof(ElmahApplicationDataModel.Application))" name="@Model.HtmlName(nameof(ElmahApplicationDataModel.Application))"/>
                         <button class="btn btn-primary" role="button" type="submit" title="@localizor.Get("Delete")">
                             <span class="fa-solid fa-trash"></span><span class="nt-submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Delete")</span>
                         </button>
