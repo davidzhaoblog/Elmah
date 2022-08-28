@@ -9,7 +9,9 @@ namespace Elmah.ServiceContracts
             ElmahApplicationAdvancedQuery query);
 
         Task<ElmahApplicationCompositeModel> GetCompositeModel(
-            ElmahApplicationIdentifier id, ElmahApplicationCompositeModel.__DataOptions__[]? dataOptions = null);
+            ElmahApplicationIdentifier id,
+            Dictionary<ElmahApplicationCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahApplicationCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response> BulkDelete(List<ElmahApplicationIdentifier> ids);
 

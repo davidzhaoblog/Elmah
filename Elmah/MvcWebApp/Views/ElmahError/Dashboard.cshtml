@@ -13,7 +13,7 @@
     var masterVM = await dashboardViewModelHelper.GetElmahErrorMvcItemViewModel(Model.__Master__, Model.Get(ElmahErrorCompositeModel.__DataOptions__.__Master__));
 }
 <div class="row">
-    <div class="col-12 col-md-8 nopadding">
+    <div class="col-12 col-md-8 col-lg-9 nopadding">
         <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
         </ul>
         <div class="tab-content" id="dashboardTabContent">
@@ -41,6 +41,7 @@
     {
     <script>
         $(document).ready($(function () {
+            documentReadyForPopups(true, true, true);
         }))
     </script>
 }

@@ -6,7 +6,7 @@
 @inject IUIStrings localizor;
 <div class="card w-100@(Model.IsCurrentItem ? " border-warning border-3": "")">
     <div class="card-header">
-        <h5 class="card-title">@Model.Model?.Host</h5>
+        <h5 class="card-title">@Model!.Model!.Host</h5>
         @*<p class="card-text">Please Customize sub-title</p>*@
     </div>
     <form>

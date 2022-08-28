@@ -17,9 +17,9 @@
 }
 else
 {
-    <input class="hidden-modal-title" value="@Model!.Model!.Application" type="hidden" />
+    <input class="nt-hidden-modal-title" value="@Model!.Model!.Application" type="hidden" />
     <div class="form-group">
         <label asp-for="Model!.Application" class="control-label" for="@Model!.HtmlId(nameof(ElmahApplicationDataModel.Application))"></label>
-        @Html.DisplayFor(m=>m.Model!.Application)
+        <input asp-for="Model!.Application" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahApplicationDataModel.Application))" name="@Model!.HtmlName(nameof(ElmahApplicationDataModel.Application))" data-nt-value="@Model!.Model!.Application"/>
     </div>
 }

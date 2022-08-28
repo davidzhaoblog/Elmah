@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label asp-for="Model!.Source" class="control-label" for="@Model!.HtmlId(nameof(ElmahSourceDataModel.Source))"></label>
-                        @Html.DisplayFor(m=>m.Model!.Source)
+                        <input asp-for="Model!.Source" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahSourceDataModel.Source))" name="@Model!.HtmlName(nameof(ElmahSourceDataModel.Source))" data-nt-value="@Model!.Model!.Source"/>
                     </div>
                 </div>
             }

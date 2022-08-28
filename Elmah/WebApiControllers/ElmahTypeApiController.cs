@@ -37,6 +37,7 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [Route("{Type}")]
         [HttpGet]
         public async Task<ActionResult<ElmahTypeCompositeModel>> GetCompositeModel(ElmahTypeIdentifier id)
         {
@@ -62,32 +63,35 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahTypeDataModel>> Post(ElmahTypeIdentifier id, ElmahTypeDataModel input)
+        [Route("{Type}")]
+        [HttpPut]
+        public async Task<ActionResult<ElmahTypeDataModel>> Put([FromRoute]ElmahTypeIdentifier id, [FromBody]ElmahTypeDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{Type}")]
         [HttpGet]
-        public async Task<ActionResult<ElmahTypeDataModel>> Get(ElmahTypeIdentifier id)
+        public async Task<ActionResult<ElmahTypeDataModel>> Get([FromRoute]ElmahTypeIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<ElmahTypeDataModel>> Put(ElmahTypeDataModel input)
+        [HttpPost]
+        public async Task<ActionResult<ElmahTypeDataModel>> Post(ElmahTypeDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{Type}")]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahTypeIdentifier id)
+        public async Task<ActionResult> Delete([FromRoute]ElmahTypeIdentifier id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);

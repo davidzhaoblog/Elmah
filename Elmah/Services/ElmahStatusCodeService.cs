@@ -32,19 +32,22 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
-        public async Task<ElmahStatusCodeCompositeModel> GetCompositeModel(ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null)
+        public async Task<ElmahStatusCodeCompositeModel> GetCompositeModel(
+            ElmahStatusCodeIdentifier id,
+            Dictionary<ElmahStatusCodeCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null)
         {
             var masterResponse = await this._thisRepository.Get(id);
             if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
             {
                 var failedResponse = new ElmahStatusCodeCompositeModel();
-                failedResponse.Responses.Add(ElmahStatusCodeCompositeModel.__DataOptions__.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
+                failedResponse.Responses.Add(ElmahStatusCodeCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
                 return failedResponse;
             }
 
             var successResponse = new ElmahStatusCodeCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahStatusCodeCompositeModel.__DataOptions__, Response>();
-            responses.TryAdd(ElmahStatusCodeCompositeModel.__DataOptions__.__Master__, new Response { Status = HttpStatusCode.OK });
+            var responses = new ConcurrentDictionary<ElmahStatusCodeCompositeModel.__DataOptions__, Response<PaginationResponse>>();
+            responses.TryAdd(ElmahStatusCodeCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = HttpStatusCode.OK });
 
             var tasks = new List<Task>();
 
@@ -57,9 +60,16 @@ namespace Elmah.Services
                     using (var scope = _serviceScopeFactor.CreateScope())
                     {
                         var _elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
-                        var query = new ElmahErrorAdvancedQuery { StatusCode = id.StatusCode, PageIndex = 1, PageSize = 5, OrderBys="TimeUtc~DESC" };
+                        var query = new ElmahErrorAdvancedQuery
+                        {
+                            StatusCode = id.StatusCode,
+                            PageIndex = 1,
+                            PageSize = listItemRequest[ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors_Via_StatusCode].PageSize,
+                            OrderBys= listItemRequest[ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors_Via_StatusCode].OrderBys,
+                            PaginationOption = listItemRequest[ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors_Via_StatusCode].PaginationOption,
+                        };
                         var response = await _elmahErrorRepository.Search(query);
-                        responses.TryAdd(ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors_Via_StatusCode, new Response { Status = response.Status, StatusMessage = response.StatusMessage });
+                        responses.TryAdd(ElmahStatusCodeCompositeModel.__DataOptions__.ElmahErrors_Via_StatusCode, new Response<PaginationResponse> { Status = response.Status, StatusMessage = response.StatusMessage, ResponseBody = response.Pagination });
                         if (response.Status == HttpStatusCode.OK)
                         {
                             successResponse.ElmahErrors_Via_StatusCode = response.ResponseBody;
@@ -77,7 +87,7 @@ namespace Elmah.Services
                 }
                 catch { }
             }
-            successResponse.Responses = new Dictionary<ElmahStatusCodeCompositeModel.__DataOptions__, Response>(responses);
+            successResponse.Responses = new Dictionary<ElmahStatusCodeCompositeModel.__DataOptions__, Response<PaginationResponse>>(responses);
             return successResponse;
         }
 

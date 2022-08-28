@@ -1,4 +1,4 @@
-﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,EntityTypeCategory,UniqueConstraint,EnumDefinition,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,AddressProperties,DerivedTables,UIPrimaryRouteId,CompositeQueryIdentifiers,CreatedDate,DownwardListTableOfListTable
+﻿TABLE_SCHEMA,TABLE_NAME,Enabled,Table_Category,TableKnownName,UniqueConstraint,EnumDefinition,NameDefinition,AbstractTable,GlobalMapItem,BaseTables,AddressProperties,DerivedTables,UIPrimaryRouteId,CompositeQueryIdentifiers,CreatedDate,DownwardListTableOfListTable
 dbo,ELMAH_Error,TRUE,CrossReferenceTable,,,,,FALSE,,,,,,,7/2/2022 9:40,
 dbo,ElmahApplication,TRUE,DetailsTable,,,,,FALSE,,,,,,,7/2/2022 9:40,
 dbo,ElmahHost,TRUE,DetailsTable,,,,,FALSE,,,,,,,7/2/2022 9:40,

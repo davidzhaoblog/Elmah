@@ -37,6 +37,7 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [Route("{Source}")]
         [HttpGet]
         public async Task<ActionResult<ElmahSourceCompositeModel>> GetCompositeModel(ElmahSourceIdentifier id)
         {
@@ -62,32 +63,35 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahSourceDataModel>> Post(ElmahSourceIdentifier id, ElmahSourceDataModel input)
+        [Route("{Source}")]
+        [HttpPut]
+        public async Task<ActionResult<ElmahSourceDataModel>> Put([FromRoute]ElmahSourceIdentifier id, [FromBody]ElmahSourceDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{Source}")]
         [HttpGet]
-        public async Task<ActionResult<ElmahSourceDataModel>> Get(ElmahSourceIdentifier id)
+        public async Task<ActionResult<ElmahSourceDataModel>> Get([FromRoute]ElmahSourceIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<ElmahSourceDataModel>> Put(ElmahSourceDataModel input)
+        [HttpPost]
+        public async Task<ActionResult<ElmahSourceDataModel>> Post(ElmahSourceDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{Source}")]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahSourceIdentifier id)
+        public async Task<ActionResult> Delete([FromRoute]ElmahSourceIdentifier id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);

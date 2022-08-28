@@ -44,7 +44,7 @@ namespace Elmah.Models
         [Display(Name = "TimeUtc", ResourceType = typeof(UIStrings))]
         [DataType(DataType.DateTime)]
         [Required(ErrorMessageResourceType = typeof(UIStrings), ErrorMessageResourceName="TimeUtc_is_required")]
-        public System.DateTime TimeUtc { get; set; }
+        public System.DateTime TimeUtc { get; set; } = DateTime.Now;
 
         [Display(Name = "Sequence", ResourceType = typeof(UIStrings))]
         public int Sequence { get; set; }

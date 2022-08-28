@@ -75,7 +75,7 @@ namespace Elmah.MvcWebApp.Controllers
                 Result = result,
             };
 
-            if(uiParams.Template == ViewItemTemplateNames.Create || uiParams.Template == ViewItemTemplateNames.Edit)
+            if(uiParams.Template == ViewItemTemplateNames.Create.ToString() || uiParams.Template == ViewItemTemplateNames.Edit.ToString())
             {
             }
 
@@ -98,15 +98,25 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahHost/Dashboard/{Host}
         public async Task<IActionResult> Dashboard([FromRoute]ElmahHostIdentifier id)
         {
-            var result = await _thisService.GetCompositeModel(id);
+            var listItemRequests = new Dictionary<ElmahHostCompositeModel.__DataOptions__, CompositeListItemRequest>();
+
+            listItemRequests.Add(ElmahHostCompositeModel.__DataOptions__.ElmahErrors_Via_Host,
+                new CompositeListItemRequest()
+                {
+                    PageSize = 10,
+                    OrderBys = _orderBysListHelper.GetDefaultElmahErrorOrderBys(),
+                    PaginationOption = PaginationOptions.PageIndexesAndAllButtons,
+                });
+
+            var result = await _thisService.GetCompositeModel(id, listItemRequests);
 
             result.UIParamsList.Add(
                 ElmahHostCompositeModel.__DataOptions__.__Master__,
-                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details });
+                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details.ToString() });
 
             result.UIParamsList.Add(
                 ElmahHostCompositeModel.__DataOptions__.ElmahErrors_Via_Host,
-                new UIParams { PagedViewOption = PagedViewOptions.Table, Template = ViewItemTemplateNames.Details });
+                new UIParams { PagedViewOption = PagedViewOptions.EditableTable, Template = ViewItemTemplateNames.Edit.ToString() });
 
             return View(result);
         }
@@ -135,7 +145,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahHostDataModel>
             {
-                UIItemFeatures = _viewFeatureManager.GetElmahHostUIItemFeatures(),
+                UIItemFeatures = _viewFeatureManager.GetElmahHostUIItemFeatures(view),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
@@ -199,6 +209,8 @@ namespace Elmah.MvcWebApp.Controllers
                                 PartialViews = new List<Tuple<string, object>> {
                                 new Tuple<string, object>("~/Views/ElmahHost/_TableItemTr.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahHostDataModel>{
+                                        UIItemFeatures = _viewFeatureManager.GetElmahHostUIItemFeatures(view),
+                                        Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
@@ -217,6 +229,7 @@ namespace Elmah.MvcWebApp.Controllers
                                     new Tuple<string, object>("~/Views/ElmahHost/_Tile.cshtml",
                                         new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahHostDataModel>
                                         {
+                                            UIItemFeatures = _viewFeatureManager.GetElmahHostUIItemFeatures(view),
                                             Status = System.Net.HttpStatusCode.OK,
                                             Template = ViewItemTemplateNames.Details.ToString(),
                                             IsCurrentItem = true,
@@ -284,6 +297,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 new Tuple<string, object>("~/Views/ElmahHost/_TableDetailsItem.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahHostDataModel>
                                     {
+                                        UIItemFeatures = _viewFeatureManager.GetElmahHostUIItemFeatures(view),
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
@@ -303,6 +317,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 new Tuple<string, object>("~/Views/ElmahHost/_TileDetailsItem.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahHostDataModel>
                                     {
+                                        UIItemFeatures = _viewFeatureManager.GetElmahHostUIItemFeatures(view),
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,

@@ -25,11 +25,11 @@
             <div class="card-body">
                 <div class="form-group">
                     <label asp-for="Model!.StatusCode" class="control-label" for="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.StatusCode))"></label>
-                    @Html.DisplayFor(m=>m.Model!.StatusCode)
+                    <input asp-for="Model!.StatusCode" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.StatusCode))" name="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.StatusCode))" data-nt-value="@Model!.Model!.StatusCode"/>
                 </div>
                 <div class="form-group">
                     <label asp-for="Model!.Name" class="control-label" for="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.Name))"></label>
-                    @Html.DisplayFor(m=>m.Model!.Name)
+                    <input asp-for="Model!.Name" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahStatusCodeDataModel.Name))" name="@Model!.HtmlName(nameof(ElmahStatusCodeDataModel.Name))" data-nt-value="@Model!.Model!.Name"/>
                 </div>
             </div>
             <div class="card-footer">

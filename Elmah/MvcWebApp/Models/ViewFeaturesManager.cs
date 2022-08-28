@@ -27,11 +27,11 @@ namespace Elmah.MvcWebApp.Models
             }
             if (uiParams.PagedViewOption == PagedViewOptions.EditableTable)
             {
-                uiParams.Template = ViewItemTemplateNames.Edit;
+                uiParams.Template = ViewItemTemplateNames.Edit.ToString();
             }
-            else if(!uiParams.Template.HasValue)
+            else if(string.IsNullOrEmpty(uiParams.Template))
             {
-                uiParams.Template = ViewItemTemplateNames.Delete;
+                uiParams.Template = ViewItemTemplateNames.Delete.ToString();
             }
         }
 
@@ -40,7 +40,7 @@ namespace Elmah.MvcWebApp.Models
             if (original == PaginationOptions.NoPagination)
                 return PaginationOptions.NoPagination;
             else if (pagedViewOption == PagedViewOptions.Table || pagedViewOption == PagedViewOptions.EditableTable)
-                return PaginationOptions.Paged;
+                return PaginationOptions.PageIndexesAndAllButtons;
             return original;
         }
 
@@ -51,12 +51,12 @@ namespace Elmah.MvcWebApp.Models
                 AdvancedQuery = false, //
                 PagedViewOption = defaultPagedViewOption,
                 Template = defaultPagedViewOption == PagedViewOptions.EditableTable
-                        ? ViewItemTemplateNames.Edit
-                        : ViewItemTemplateNames.Details,
+                        ? ViewItemTemplateNames.Edit.ToString()
+                        : ViewItemTemplateNames.Details.ToString(),
             };
         }
 
-        public UIItemFeatures GetElmahErrorUIItemFeatures()
+        public UIItemFeatures GetElmahErrorUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -65,8 +65,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;
@@ -84,7 +85,7 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.Card,
+                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
 
                     PrimayCreateViewContainer = CrudViewContainers.Dialog,
                     PrimayDeleteViewContainer = CrudViewContainers.Dialog,
@@ -110,7 +111,7 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public UIItemFeatures GetElmahApplicationUIItemFeatures()
+        public UIItemFeatures GetElmahApplicationUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -119,8 +120,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;
@@ -164,7 +166,7 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public UIItemFeatures GetElmahHostUIItemFeatures()
+        public UIItemFeatures GetElmahHostUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -173,8 +175,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;
@@ -218,7 +221,7 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public UIItemFeatures GetElmahSourceUIItemFeatures()
+        public UIItemFeatures GetElmahSourceUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -227,8 +230,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;
@@ -272,7 +276,7 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public UIItemFeatures GetElmahStatusCodeUIItemFeatures()
+        public UIItemFeatures GetElmahStatusCodeUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -281,8 +285,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;
@@ -326,7 +331,7 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public UIItemFeatures GetElmahTypeUIItemFeatures()
+        public UIItemFeatures GetElmahTypeUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -335,8 +340,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;
@@ -380,7 +386,7 @@ namespace Elmah.MvcWebApp.Models
             return result;
         }
 
-        public UIItemFeatures GetElmahUserUIItemFeatures()
+        public UIItemFeatures GetElmahUserUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
@@ -389,8 +395,9 @@ namespace Elmah.MvcWebApp.Models
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
                 PrimayEditViewContainer = CrudViewContainers.Dialog,
 
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = false,
+                CanGotoDashboard = true,
             };
 
             return result;

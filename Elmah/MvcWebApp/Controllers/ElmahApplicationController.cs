@@ -75,7 +75,7 @@ namespace Elmah.MvcWebApp.Controllers
                 Result = result,
             };
 
-            if(uiParams.Template == ViewItemTemplateNames.Create || uiParams.Template == ViewItemTemplateNames.Edit)
+            if(uiParams.Template == ViewItemTemplateNames.Create.ToString() || uiParams.Template == ViewItemTemplateNames.Edit.ToString())
             {
             }
 
@@ -98,15 +98,25 @@ namespace Elmah.MvcWebApp.Controllers
         // GET: ElmahApplication/Dashboard/{Application}
         public async Task<IActionResult> Dashboard([FromRoute]ElmahApplicationIdentifier id)
         {
-            var result = await _thisService.GetCompositeModel(id);
+            var listItemRequests = new Dictionary<ElmahApplicationCompositeModel.__DataOptions__, CompositeListItemRequest>();
+
+            listItemRequests.Add(ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application,
+                new CompositeListItemRequest()
+                {
+                    PageSize = 10,
+                    OrderBys = _orderBysListHelper.GetDefaultElmahErrorOrderBys(),
+                    PaginationOption = PaginationOptions.PageIndexesAndAllButtons,
+                });
+
+            var result = await _thisService.GetCompositeModel(id, listItemRequests);
 
             result.UIParamsList.Add(
                 ElmahApplicationCompositeModel.__DataOptions__.__Master__,
-                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details });
+                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details.ToString() });
 
             result.UIParamsList.Add(
                 ElmahApplicationCompositeModel.__DataOptions__.ElmahErrors_Via_Application,
-                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details });
+                new UIParams { PagedViewOption = PagedViewOptions.EditableTable, Template = ViewItemTemplateNames.Edit.ToString() });
 
             return View(result);
         }
@@ -135,7 +145,7 @@ namespace Elmah.MvcWebApp.Controllers
 
             var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationDataModel>
             {
-                UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(),
+                UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(view),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
@@ -199,6 +209,8 @@ namespace Elmah.MvcWebApp.Controllers
                                 PartialViews = new List<Tuple<string, object>> {
                                 new Tuple<string, object>("~/Views/ElmahApplication/_TableItemTr.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationDataModel>{
+                                        UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(view),
+                                        Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
@@ -217,6 +229,7 @@ namespace Elmah.MvcWebApp.Controllers
                                     new Tuple<string, object>("~/Views/ElmahApplication/_Tile.cshtml",
                                         new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationDataModel>
                                         {
+                                            UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(view),
                                             Status = System.Net.HttpStatusCode.OK,
                                             Template = ViewItemTemplateNames.Details.ToString(),
                                             IsCurrentItem = true,
@@ -284,6 +297,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 new Tuple<string, object>("~/Views/ElmahApplication/_TableDetailsItem.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationDataModel>
                                     {
+                                        UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(view),
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,
@@ -303,6 +317,7 @@ namespace Elmah.MvcWebApp.Controllers
                                 new Tuple<string, object>("~/Views/ElmahApplication/_TileDetailsItem.cshtml",
                                     new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahApplicationDataModel>
                                     {
+                                        UIItemFeatures = _viewFeatureManager.GetElmahApplicationUIItemFeatures(view),
                                         Status = System.Net.HttpStatusCode.OK,
                                         Template = ViewItemTemplateNames.Details.ToString(),
                                         IsCurrentItem = true,

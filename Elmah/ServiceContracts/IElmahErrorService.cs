@@ -9,7 +9,9 @@ namespace Elmah.ServiceContracts
             ElmahErrorAdvancedQuery query);
 
         Task<ElmahErrorCompositeModel> GetCompositeModel(
-            ElmahErrorIdentifier id, ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null);
+            ElmahErrorIdentifier id,
+            Dictionary<ElmahErrorCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids);
 

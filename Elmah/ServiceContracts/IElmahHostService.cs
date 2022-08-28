@@ -9,7 +9,9 @@ namespace Elmah.ServiceContracts
             ElmahHostAdvancedQuery query);
 
         Task<ElmahHostCompositeModel> GetCompositeModel(
-            ElmahHostIdentifier id, ElmahHostCompositeModel.__DataOptions__[]? dataOptions = null);
+            ElmahHostIdentifier id,
+            Dictionary<ElmahHostCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahHostCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response> BulkDelete(List<ElmahHostIdentifier> ids);
 

@@ -25,11 +25,28 @@ $(document).ready($(function () {
  * .btn-nt-load-more
  *
  */
+function attachListRefreshButtonClickEvent(selector) {
+    $(selector).click(function (e) {
+        let button = e.currentTarget;
+        const submitTarget = $(button).closest(".nt-list-wrapper").data("nt-submittarget");
+        ajaxLoadItemsSubmit($(submitTarget))
+    });
+}
 
 function attachAjaxLoadItemsSubmit(selector) {
     $(selector).submit(function (e) {
+        $(this).find(".nt-page-index").val(1);
         ajaxLoadItemsSubmit(this);
     });
+}
+
+function attachEventHandlersWhenAjaxLoadItemsSubmitSuccess(toAppend, updateTarget) {
+    attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
+    attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
+    attachFormDataChanged($(toAppend).find("form"));
+    attachMultiItemsDeleteCheckboxEvent($(toAppend).find("form"));
+    attatchPageLinkClicked($(toAppend).find(".page-link"));
+    resetBulkSelectStatus($(updateTarget).closest(".nt-list-wrapper"));
 }
 
 function ajaxLoadItemsSubmit(theForm) {
@@ -55,10 +72,8 @@ function ajaxLoadItemsSubmit(theForm) {
                 $(updateTarget).children(".btn-nt-load-more").remove();
                 $(updateTarget).append(toAppend);
             }
-            attachInlineEditingLaunchButtonClickEvent($(toAppend).find(".btn-nt-inline-editing"));
-            attachIndividualSelectCheckboxClickEventHandler($(toAppend).find(".nt-list-bulk-select .form-check-input"));
-            attachFormDataChanged($(toAppend).find("form"));
-            attachMultiItemsDeleteCheckboxEvent($(toAppend).find("form"));
+            attachEventHandlersWhenAjaxLoadItemsSubmitSuccess(toAppend, updateTarget);
+
             setTimeout(() => {
                 bootstrap.Modal.getOrCreateInstance(document.getElementById('fullScreenLoading')).hide();
             }, 1000);
@@ -77,4 +92,5 @@ function ajaxLoadItemsSubmit(theForm) {
         }
     });
 }
+
 // 5.end form ajax-submit

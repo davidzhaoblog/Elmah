@@ -17,7 +17,7 @@
     }
     if (string.IsNullOrEmpty(currentView))
     {
-        currentView = (Model.UIListSetting.UIParams.PagedViewOption ?? PagedViewOptions.Card).ToString();
+        currentView = (Model.UIListSetting.UIParams.PagedViewOption ?? PagedViewOptions.EditableTable).ToString();
     }
 }
 <form id="@Model!.UIListSetting.UIListFeatures.SearchFormId" method="post" class="nt-ajax-partial-load-post-formdata"
@@ -58,49 +58,9 @@
     <div class="row pt-1">
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="input-group">
-                <label class="input-group-text">@localizor.Get("ElmahUser")</label>
-                <select asp-for="Query.User" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahUser.ToString()])">
-                    <option value="" selected>@string.Format(format_All, localizor.Get("ElmahUser"))</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="input-group">
-                <label class="input-group-text">@localizor.Get("ElmahType")</label>
-                <select asp-for="Query.Type" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahType.ToString()])">
-                    <option value="" selected>@string.Format(format_All, localizor.Get("ElmahType"))</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="input-group">
                 <label class="input-group-text">@localizor.Get("ElmahStatusCode")</label>
                 <select asp-for="Query.StatusCode" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahStatusCode.ToString()])">
                     <option value="" selected>@string.Format(format_All, localizor.Get("ElmahStatusCode"))</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="input-group">
-                <label class="input-group-text">@localizor.Get("ElmahSource")</label>
-                <select asp-for="Query.Source" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahSource.ToString()])">
-                    <option value="" selected>@string.Format(format_All, localizor.Get("ElmahSource"))</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="input-group">
-                <label class="input-group-text">@localizor.Get("ElmahHost")</label>
-                <select asp-for="Query.Host" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahHost.ToString()])">
-                    <option value="" selected>@string.Format(format_All, localizor.Get("ElmahHost"))</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="input-group">
-                <label class="input-group-text">@localizor.Get("ElmahApplication")</label>
-                <select asp-for="Query.Application" class="form-control form-select" asp-items="@selectListHelper.GetSelectList(Model?.TopLevelDropDownListsFromDatabase?[TopLevelDropDownLists.ElmahApplication.ToString()])">
-                    <option value="" selected>@string.Format(format_All, localizor.Get("ElmahApplication"))</option>
                 </select>
             </div>
         </div>
@@ -144,6 +104,7 @@
         const listWrapperId = "@Model.UIListSetting.UIListFeatures.ListWrapperId";
         $(document).ready($(function() {
             documentReadyForSearchList(searchFormId, listWrapperId);
+            documentReadyForPopups(true, true, true);
         }))
     </script>
 }

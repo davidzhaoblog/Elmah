@@ -37,6 +37,7 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [Route("{ErrorId}")]
         [HttpGet]
         public async Task<ActionResult<ElmahErrorCompositeModel>> GetCompositeModel(ElmahErrorIdentifier id)
         {
@@ -70,32 +71,35 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Post(ElmahErrorIdentifier id, ElmahErrorDataModel input)
+        [Route("{ErrorId}")]
+        [HttpPut]
+        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Put([FromRoute]ElmahErrorIdentifier id, [FromBody]ElmahErrorDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{ErrorId}")]
         [HttpGet]
-        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Get(ElmahErrorIdentifier id)
+        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Get([FromRoute]ElmahErrorIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Put(ElmahErrorDataModel input)
+        [HttpPost]
+        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Post(ElmahErrorDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{ErrorId}")]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahErrorIdentifier id)
+        public async Task<ActionResult> Delete([FromRoute]ElmahErrorIdentifier id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);

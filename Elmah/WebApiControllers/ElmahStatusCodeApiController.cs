@@ -37,6 +37,7 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
+        [Route("{StatusCode}")]
         [HttpGet]
         public async Task<ActionResult<ElmahStatusCodeCompositeModel>> GetCompositeModel(ElmahStatusCodeIdentifier id)
         {
@@ -62,32 +63,35 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahStatusCodeDataModel>> Post(ElmahStatusCodeIdentifier id, ElmahStatusCodeDataModel input)
+        [Route("{StatusCode}")]
+        [HttpPut]
+        public async Task<ActionResult<ElmahStatusCodeDataModel>> Put([FromRoute]ElmahStatusCodeIdentifier id, [FromBody]ElmahStatusCodeDataModel input)
         {
             var serviceResponse = await _thisService.Update(id, input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{StatusCode}")]
         [HttpGet]
-        public async Task<ActionResult<ElmahStatusCodeDataModel>> Get(ElmahStatusCodeIdentifier id)
+        public async Task<ActionResult<ElmahStatusCodeDataModel>> Get([FromRoute]ElmahStatusCodeIdentifier id)
         {
             var serviceResponse = await _thisService.Get(id);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<ElmahStatusCodeDataModel>> Put(ElmahStatusCodeDataModel input)
+        [HttpPost]
+        public async Task<ActionResult<ElmahStatusCodeDataModel>> Post(ElmahStatusCodeDataModel input)
         {
             var serviceResponse = await _thisService.Create(input);
             return ReturnResultOnlyActionResult(serviceResponse);
         }
 
         // [Authorize]
+        [Route("{StatusCode}")]
         [HttpDelete]
-        public async Task<ActionResult> Delete(ElmahStatusCodeIdentifier id)
+        public async Task<ActionResult> Delete([FromRoute]ElmahStatusCodeIdentifier id)
         {
             var serviceResponse = await _thisService.Delete(id);
             return ReturnWithoutBodyActionResult(serviceResponse);

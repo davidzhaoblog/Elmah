@@ -33,7 +33,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahErrorAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahErrorDataModel.DefaultView[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
@@ -89,7 +89,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahApplicationAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahApplicationDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
@@ -140,7 +140,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahHostAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahHostDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
@@ -191,7 +191,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahSourceAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahSourceDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
@@ -242,7 +242,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahStatusCodeAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahStatusCodeDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
@@ -293,7 +293,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahTypeAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahTypeDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)
@@ -344,7 +344,7 @@ namespace Elmah.MvcWebApp.Models
             string key,
             UIParams uiParams,
             ElmahUserAdvancedQuery query,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahUserDataModel[]? responseBody,
             bool loadSearchRelatedDropDownLists,
             bool loadTopLevelDropDownListsFromDatabase)

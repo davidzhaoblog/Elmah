@@ -32,19 +32,22 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
-        public async Task<ElmahErrorCompositeModel> GetCompositeModel(ElmahErrorIdentifier id, ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null)
+        public async Task<ElmahErrorCompositeModel> GetCompositeModel(
+            ElmahErrorIdentifier id,
+            Dictionary<ElmahErrorCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null)
         {
             var masterResponse = await this._thisRepository.Get(id);
             if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
             {
                 var failedResponse = new ElmahErrorCompositeModel();
-                failedResponse.Responses.Add(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
+                failedResponse.Responses.Add(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
                 return failedResponse;
             }
 
             var successResponse = new ElmahErrorCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahErrorCompositeModel.__DataOptions__, Response>();
-            responses.TryAdd(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response { Status = HttpStatusCode.OK });
+            var responses = new ConcurrentDictionary<ElmahErrorCompositeModel.__DataOptions__, Response<PaginationResponse>>();
+            responses.TryAdd(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = HttpStatusCode.OK });
 
             var tasks = new List<Task>();
 
@@ -57,7 +60,7 @@ namespace Elmah.Services
                 }
                 catch { }
             }
-            successResponse.Responses = new Dictionary<ElmahErrorCompositeModel.__DataOptions__, Response>(responses);
+            successResponse.Responses = new Dictionary<ElmahErrorCompositeModel.__DataOptions__, Response<PaginationResponse>>(responses);
             return successResponse;
         }
 

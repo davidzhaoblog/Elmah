@@ -27,11 +27,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label asp-for="Model!.Host" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostDataModel.Host))"></label>
-                        @Html.DisplayFor(m=>m.Model!.Host)
+                        <input asp-for="Model!.Host" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahHostDataModel.Host))" name="@Model!.HtmlName(nameof(ElmahHostDataModel.Host))" data-nt-value="@Model!.Model!.Host"/>
                     </div>
                     <div class="form-group">
                         <label asp-for="Model!.SpatialLocation" class="control-label" for="@Model!.HtmlId(nameof(ElmahHostDataModel.SpatialLocation))"></label>
-                        @Html.DisplayFor(m=>m.Model!.SpatialLocation)
+                        <input asp-for="Model!.SpatialLocation" readonly class="form-control " id="@Model!.HtmlId(nameof(ElmahHostDataModel.SpatialLocation))" name="@Model!.HtmlName(nameof(ElmahHostDataModel.SpatialLocation))" data-nt-value="@Model!.Model!.SpatialLocation"/>
                     </div>
                 </div>
             }

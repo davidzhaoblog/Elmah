@@ -9,7 +9,9 @@ namespace Elmah.ServiceContracts
             ElmahStatusCodeAdvancedQuery query);
 
         Task<ElmahStatusCodeCompositeModel> GetCompositeModel(
-            ElmahStatusCodeIdentifier id, ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null);
+            ElmahStatusCodeIdentifier id,
+            Dictionary<ElmahStatusCodeCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null);
 
         Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids);
 

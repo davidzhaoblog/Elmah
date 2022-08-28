@@ -15,8 +15,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahErrorOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("TimeUtc")), Value = "TimeUtc~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("TimeUtc")), Value = "TimeUtc~DESC" },
             });
         }
         public string GetDefaultElmahErrorOrderBys()
@@ -27,8 +27,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahApplicationOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("Application")), Value = "Application~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("Application")), Value = "Application~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("Application")), Value = "Application~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("Application")), Value = "Application~DESC" },
             });
         }
         public string GetDefaultElmahApplicationOrderBys()
@@ -39,8 +39,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahHostOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("Host")), Value = "Host~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("Host")), Value = "Host~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("Host")), Value = "Host~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("Host")), Value = "Host~DESC" },
             });
         }
         public string GetDefaultElmahHostOrderBys()
@@ -51,8 +51,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahSourceOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("Source")), Value = "Source~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("Source")), Value = "Source~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("Source")), Value = "Source~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("Source")), Value = "Source~DESC" },
             });
         }
         public string GetDefaultElmahSourceOrderBys()
@@ -63,8 +63,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahStatusCodeOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("Name")), Value = "Name~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("Name")), Value = "Name~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("Name")), Value = "Name~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("Name")), Value = "Name~DESC" },
             });
         }
         public string GetDefaultElmahStatusCodeOrderBys()
@@ -75,8 +75,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahTypeOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("Type")), Value = "Type~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("Type")), Value = "Type~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("Type")), Value = "Type~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("Type")), Value = "Type~DESC" },
             });
         }
         public string GetDefaultElmahTypeOrderBys()
@@ -87,8 +87,8 @@ namespace Elmah.MvcWebApp.Models
         public List<NameValuePair> GetElmahUserOrderBys()
         {
             return new List<NameValuePair>(new[] {
-                new NameValuePair { Name = string.Format("{0} A-Z", _localizor.Get("User")), Value = "User~ASC" },
-                new NameValuePair { Name = string.Format("{0} Z-A", _localizor.Get("User")), Value = "User~DESC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-down-long pe-1'></i>", _localizor.Get("User")), Value = "User~ASC" },
+                new NameValuePair { Name = string.Format("{0} a-Z <i class='fa-solid fa-up-long pe-1'></i>", _localizor.Get("User")), Value = "User~DESC" },
             });
         }
         public string GetDefaultElmahUserOrderBys()

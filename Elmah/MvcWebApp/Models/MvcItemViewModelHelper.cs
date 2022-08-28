@@ -29,7 +29,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahErrorDataModel.DefaultView>> GetElmahErrorMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahErrorDataModel.DefaultView responseBody,
             bool loadTopLevelDropDownListsFromDatabase,
             Dictionary<string, List<NameValuePair>>? topLevelDropDownListsFromDatabase)
@@ -39,8 +39,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahErrorUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahErrorUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             if(loadTopLevelDropDownListsFromDatabase && (topLevelDropDownListsFromDatabase == null || !topLevelDropDownListsFromDatabase.Any()))
@@ -53,7 +53,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahApplicationDataModel>> GetElmahApplicationMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahApplicationDataModel responseBody)
         {
             var result = await Task.FromResult(new MvcItemViewModel<ElmahApplicationDataModel>
@@ -61,8 +61,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahApplicationUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahApplicationUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             return result;
@@ -70,7 +70,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahHostDataModel>> GetElmahHostMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahHostDataModel responseBody)
         {
             var result = await Task.FromResult(new MvcItemViewModel<ElmahHostDataModel>
@@ -78,8 +78,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahHostUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahHostUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             return result;
@@ -87,7 +87,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahSourceDataModel>> GetElmahSourceMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahSourceDataModel responseBody)
         {
             var result = await Task.FromResult(new MvcItemViewModel<ElmahSourceDataModel>
@@ -95,8 +95,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahSourceUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahSourceUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             return result;
@@ -104,7 +104,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahStatusCodeDataModel>> GetElmahStatusCodeMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahStatusCodeDataModel responseBody)
         {
             var result = await Task.FromResult(new MvcItemViewModel<ElmahStatusCodeDataModel>
@@ -112,8 +112,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahStatusCodeUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahStatusCodeUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             return result;
@@ -121,7 +121,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahTypeDataModel>> GetElmahTypeMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahTypeDataModel responseBody)
         {
             var result = await Task.FromResult(new MvcItemViewModel<ElmahTypeDataModel>
@@ -129,8 +129,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahTypeUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahTypeUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             return result;
@@ -138,7 +138,7 @@ namespace Elmah.MvcWebApp.Models
 
         public async Task<MvcItemViewModel<ElmahUserDataModel>> GetElmahUserMvcItemViewModel(
             UIParams uiParams,
-            Response response,
+            Response<PaginationResponse> response,
             ElmahUserDataModel responseBody)
         {
             var result = await Task.FromResult(new MvcItemViewModel<ElmahUserDataModel>
@@ -146,8 +146,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template.HasValue ? uiParams.Template.ToString() : ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahUserUIItemFeatures(),
+                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahUserUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
             });
 
             return result;

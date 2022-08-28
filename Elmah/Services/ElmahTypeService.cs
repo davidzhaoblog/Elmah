@@ -32,19 +32,22 @@ namespace Elmah.Services
             return await _thisRepository.Search(query);
         }
 
-        public async Task<ElmahTypeCompositeModel> GetCompositeModel(ElmahTypeIdentifier id, ElmahTypeCompositeModel.__DataOptions__[]? dataOptions = null)
+        public async Task<ElmahTypeCompositeModel> GetCompositeModel(
+            ElmahTypeIdentifier id,
+            Dictionary<ElmahTypeCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
+            ElmahTypeCompositeModel.__DataOptions__[]? dataOptions = null)
         {
             var masterResponse = await this._thisRepository.Get(id);
             if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
             {
                 var failedResponse = new ElmahTypeCompositeModel();
-                failedResponse.Responses.Add(ElmahTypeCompositeModel.__DataOptions__.__Master__, new Response { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
+                failedResponse.Responses.Add(ElmahTypeCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
                 return failedResponse;
             }
 
             var successResponse = new ElmahTypeCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahTypeCompositeModel.__DataOptions__, Response>();
-            responses.TryAdd(ElmahTypeCompositeModel.__DataOptions__.__Master__, new Response { Status = HttpStatusCode.OK });
+            var responses = new ConcurrentDictionary<ElmahTypeCompositeModel.__DataOptions__, Response<PaginationResponse>>();
+            responses.TryAdd(ElmahTypeCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = HttpStatusCode.OK });
 
             var tasks = new List<Task>();
 
@@ -57,9 +60,16 @@ namespace Elmah.Services
                     using (var scope = _serviceScopeFactor.CreateScope())
                     {
                         var _elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
-                        var query = new ElmahErrorAdvancedQuery { Type = id.Type, PageIndex = 1, PageSize = 5, OrderBys="TimeUtc~DESC" };
+                        var query = new ElmahErrorAdvancedQuery
+                        {
+                            Type = id.Type,
+                            PageIndex = 1,
+                            PageSize = listItemRequest[ElmahTypeCompositeModel.__DataOptions__.ElmahErrors_Via_Type].PageSize,
+                            OrderBys= listItemRequest[ElmahTypeCompositeModel.__DataOptions__.ElmahErrors_Via_Type].OrderBys,
+                            PaginationOption = listItemRequest[ElmahTypeCompositeModel.__DataOptions__.ElmahErrors_Via_Type].PaginationOption,
+                        };
                         var response = await _elmahErrorRepository.Search(query);
-                        responses.TryAdd(ElmahTypeCompositeModel.__DataOptions__.ElmahErrors_Via_Type, new Response { Status = response.Status, StatusMessage = response.StatusMessage });
+                        responses.TryAdd(ElmahTypeCompositeModel.__DataOptions__.ElmahErrors_Via_Type, new Response<PaginationResponse> { Status = response.Status, StatusMessage = response.StatusMessage, ResponseBody = response.Pagination });
                         if (response.Status == HttpStatusCode.OK)
                         {
                             successResponse.ElmahErrors_Via_Type = response.ResponseBody;
@@ -77,7 +87,7 @@ namespace Elmah.Services
                 }
                 catch { }
             }
-            successResponse.Responses = new Dictionary<ElmahTypeCompositeModel.__DataOptions__, Response>(responses);
+            successResponse.Responses = new Dictionary<ElmahTypeCompositeModel.__DataOptions__, Response<PaginationResponse>>(responses);
             return successResponse;
         }
 
