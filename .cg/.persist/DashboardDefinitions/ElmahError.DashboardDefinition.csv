@@ -3,4 +3,5 @@ dbo,ELMAH_Error,False,AncestorTable,1,Application,,,,\Application,,UpdateCacheWh
 dbo,ELMAH_Error,False,AncestorTable,2,Host,,,,\Host,,UpdateCacheWhenViewLoaded,False,False,False,MoreDetails,False,False,0
 dbo,ELMAH_Error,False,AncestorTable,3,Source,,,,\Source,,UpdateCacheWhenViewLoaded,False,False,False,MoreDetails,False,False,0
 dbo,ELMAH_Error,False,AncestorTable,4,Type,,,,\Type,,UpdateCacheWhenViewLoaded,False,False,False,MoreDetails,False,False,0
+dbo,ELMAH_Error,False,AncestorTable,4,StatusCode,,,,\StatusCode,,UpdateCacheWhenViewLoaded,False,False,False,MoreDetails,False,False,0
 dbo,ELMAH_Error,False,AncestorTable,5,User,,,,\User,,UpdateCacheWhenViewLoaded,False,False,False,MoreDetails,False,False,0
