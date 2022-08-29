@@ -26,7 +26,7 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahStatusCodeDataModel[]>> Search(
+        public async Task<ListResponse<ElmahStatusCodeDataModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
@@ -91,17 +91,6 @@ namespace Elmah.Services
             return successResponse;
         }
 
-        public async Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids)
-        {
-            return await _thisRepository.BulkDelete(ids);
-        }
-
-        public async Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel> input)
-        {
-            return await _thisRepository.MultiItemsCUD(input);
-        }
-
         public async Task<Response<ElmahStatusCodeDataModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeDataModel input)
         {
             return await _thisRepository.Update(id, input);
@@ -128,7 +117,7 @@ namespace Elmah.Services
             return await _thisRepository.Delete(id);
         }
 
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        public async Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahStatusCodeAdvancedQuery query)
         {
             return await _thisRepository.GetCodeList(query);

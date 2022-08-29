@@ -26,80 +26,10 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahSourceDataModel[]>> Search(
+        public async Task<ListResponse<ElmahSourceDataModel[]>> Search(
             ElmahSourceAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
-        }
-
-        public async Task<ElmahSourceCompositeModel> GetCompositeModel(
-            ElmahSourceIdentifier id,
-            Dictionary<ElmahSourceCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
-            ElmahSourceCompositeModel.__DataOptions__[]? dataOptions = null)
-        {
-            var masterResponse = await this._thisRepository.Get(id);
-            if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
-            {
-                var failedResponse = new ElmahSourceCompositeModel();
-                failedResponse.Responses.Add(ElmahSourceCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
-                return failedResponse;
-            }
-
-            var successResponse = new ElmahSourceCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahSourceCompositeModel.__DataOptions__, Response<PaginationResponse>>();
-            responses.TryAdd(ElmahSourceCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = HttpStatusCode.OK });
-
-            var tasks = new List<Task>();
-
-            // 4. ListTable = 4,
-
-            if (dataOptions == null || dataOptions.Contains(ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source))
-            {
-                tasks.Add(Task.Run(async () =>
-                {
-                    using (var scope = _serviceScopeFactor.CreateScope())
-                    {
-                        var _elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
-                        var query = new ElmahErrorAdvancedQuery
-                        {
-                            Source = id.Source,
-                            PageIndex = 1,
-                            PageSize = listItemRequest[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source].PageSize,
-                            OrderBys= listItemRequest[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source].OrderBys,
-                            PaginationOption = listItemRequest[ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source].PaginationOption,
-                        };
-                        var response = await _elmahErrorRepository.Search(query);
-                        responses.TryAdd(ElmahSourceCompositeModel.__DataOptions__.ElmahErrors_Via_Source, new Response<PaginationResponse> { Status = response.Status, StatusMessage = response.StatusMessage, ResponseBody = response.Pagination });
-                        if (response.Status == HttpStatusCode.OK)
-                        {
-                            successResponse.ElmahErrors_Via_Source = response.ResponseBody;
-                        }
-                    }
-                }));
-            }
-
-            if (tasks.Count > 0)
-            {
-                Task t = Task.WhenAll(tasks.ToArray());
-                try
-                {
-                    await t;
-                }
-                catch { }
-            }
-            successResponse.Responses = new Dictionary<ElmahSourceCompositeModel.__DataOptions__, Response<PaginationResponse>>(responses);
-            return successResponse;
-        }
-
-        public async Task<Response> BulkDelete(List<ElmahSourceIdentifier> ids)
-        {
-            return await _thisRepository.BulkDelete(ids);
-        }
-
-        public async Task<Response<MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceDataModel> input)
-        {
-            return await _thisRepository.MultiItemsCUD(input);
         }
 
         public async Task<Response<ElmahSourceDataModel>> Update(ElmahSourceIdentifier id, ElmahSourceDataModel input)
@@ -128,7 +58,7 @@ namespace Elmah.Services
             return await _thisRepository.Delete(id);
         }
 
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        public async Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahSourceAdvancedQuery query)
         {
             return await _thisRepository.GetCodeList(query);

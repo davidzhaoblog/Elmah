@@ -1,4 +1,5 @@
 using Elmah.ServiceContracts;
+using Framework.Mvc;
 using Elmah.Models;
 using Framework.Models;
 
@@ -29,72 +30,11 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahUserDataModel[]>>> Search(
+        public async Task<ActionResult<ListResponse<ElmahUserDataModel[]>>> Search(
             ElmahUserAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
             return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{User}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahUserCompositeModel>> GetCompositeModel(ElmahUserIdentifier id)
-        {
-            var serviceResponse = await _thisService.GetCompositeModel(id, null);
-            return Ok(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> BulkDelete(List<ElmahUserIdentifier> ids)
-        {
-            var serviceResponse = await _thisService.BulkDelete(ids);
-            return ReturnWithoutBodyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahUserIdentifier, ElmahUserDataModel>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahUserIdentifier, ElmahUserDataModel> input)
-        {
-            var serviceResponse = await _thisService.MultiItemsCUD(input);
-            return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{User}")]
-        [HttpPut]
-        public async Task<ActionResult<ElmahUserDataModel>> Put([FromRoute]ElmahUserIdentifier id, [FromBody]ElmahUserDataModel input)
-        {
-            var serviceResponse = await _thisService.Update(id, input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{User}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahUserDataModel>> Get([FromRoute]ElmahUserIdentifier id)
-        {
-            var serviceResponse = await _thisService.Get(id);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahUserDataModel>> Post(ElmahUserDataModel input)
-        {
-            var serviceResponse = await _thisService.Create(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{User}")]
-        [HttpDelete]
-        public async Task<ActionResult> Delete([FromRoute]ElmahUserIdentifier id)
-        {
-            var serviceResponse = await _thisService.Delete(id);
-            return ReturnWithoutBodyActionResult(serviceResponse);
         }
 
         /*

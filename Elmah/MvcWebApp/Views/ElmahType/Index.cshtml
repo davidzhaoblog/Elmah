@@ -1,9 +1,10 @@
 @using Elmah.Models;
 @using Elmah.Resx;
+@using Framework.Mvc.Models;
 @using Framework.Models;
 @using Elmah.Models.Definitions;
 @using Elmah.MvcWebApp.Models;
-@model PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>
+@model ListSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>
 @inject IHttpContextAccessor Accessor
 @inject SelectListHelper selectListHelper;
 @inject IUIStrings localizor;
@@ -17,7 +18,7 @@
     }
     if (string.IsNullOrEmpty(currentView))
     {
-        currentView = (Model.UIListSetting.UIParams.PagedViewOption ?? PagedViewOptions.EditableTable).ToString();
+        currentView = (Model.UIListSetting.UIParams.PagedViewOption ?? ListViewOptions.Table).ToString();
     }
 }
 <form id="@Model!.UIListSetting.UIListFeatures.SearchFormId" method="post" class="nt-ajax-partial-load-post-formdata"

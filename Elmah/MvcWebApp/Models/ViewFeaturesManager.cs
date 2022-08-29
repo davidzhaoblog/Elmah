@@ -19,55 +19,55 @@ namespace Elmah.MvcWebApp.Models
             _logger = logger;
         }
 
-        public void DefaultUIParamsIfNeeds(UIParams uiParams, PagedViewOptions defaultPagedViewOption)
+        public void DefaultUIParamsIfNeeds(UIParams uiParams, ListViewOptions defaultPagedViewOption)
         {
             if (!uiParams.PagedViewOption.HasValue)
             {
                 uiParams.PagedViewOption = defaultPagedViewOption;
             }
-            if (uiParams.PagedViewOption == PagedViewOptions.EditableTable)
+            if (uiParams.PagedViewOption == ListViewOptions.EditableTable)
             {
-                uiParams.Template = ViewItemTemplateNames.Edit.ToString();
+                uiParams.Template = ViewItemTemplates.Edit.ToString();
             }
             else if(string.IsNullOrEmpty(uiParams.Template))
             {
-                uiParams.Template = ViewItemTemplateNames.Delete.ToString();
+                uiParams.Template = ViewItemTemplates.Delete.ToString();
             }
         }
 
-        public PaginationOptions HardCodePaginationOption(PagedViewOptions pagedViewOption, PaginationOptions original)
+        public PaginationOptions HardCodePaginationOption(ListViewOptions pagedViewOption, PaginationOptions original)
         {
             if (original == PaginationOptions.NoPagination)
                 return PaginationOptions.NoPagination;
-            else if (pagedViewOption == PagedViewOptions.Table || pagedViewOption == PagedViewOptions.EditableTable)
+            else if (pagedViewOption == ListViewOptions.Table || pagedViewOption == ListViewOptions.EditableTable)
                 return PaginationOptions.PageIndexesAndAllButtons;
             return original;
         }
 
-        private static UIParams DefaultUIParams(PagedViewOptions defaultPagedViewOption)
+        private static UIParams DefaultUIParams(ListViewOptions defaultPagedViewOption)
         {
             return new UIParams
             {
                 AdvancedQuery = false, //
                 PagedViewOption = defaultPagedViewOption,
-                Template = defaultPagedViewOption == PagedViewOptions.EditableTable
-                        ? ViewItemTemplateNames.Edit.ToString()
-                        : ViewItemTemplateNames.Details.ToString(),
+                Template = defaultPagedViewOption == ListViewOptions.EditableTable
+                        ? ViewItemTemplates.Edit.ToString()
+                        : ViewItemTemplates.Details.ToString(),
             };
         }
 
-        public UIItemFeatures GetElmahErrorUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahErrorUIItemFeatures(ListViewOptions pagedViewOptionForBulkSelectCheckBox)
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.None,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
                 PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayEditViewContainer = CrudViewContainers.None,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
+                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != ListViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = true,
+                CanGotoDashboard = false,
             };
 
             return result;
@@ -85,44 +85,40 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.None,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
                     PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayEditViewContainer = CrudViewContainers.None,
 
-                    CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanGotoDashboard = false,
+                    CanBulkDelete = false,
                     CanBulkActions = true,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
 
-        public UIItemFeatures GetElmahApplicationUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahApplicationUIItemFeatures()
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.Inline,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
+                PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = true,
+                CanGotoDashboard = false,
             };
 
             return result;
@@ -140,44 +136,40 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                    PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.Inline,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
+                    PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                    PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                    CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanGotoDashboard = false,
+                    CanBulkDelete = false,
                     CanBulkActions = false,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
 
-        public UIItemFeatures GetElmahHostUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahHostUIItemFeatures()
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.Inline,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
+                PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = true,
+                CanGotoDashboard = false,
             };
 
             return result;
@@ -195,44 +187,40 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                    PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.Inline,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
+                    PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                    PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                    CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanGotoDashboard = false,
+                    CanBulkDelete = false,
                     CanBulkActions = false,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
 
-        public UIItemFeatures GetElmahSourceUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahSourceUIItemFeatures()
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.Inline,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
+                PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = true,
+                CanGotoDashboard = false,
             };
 
             return result;
@@ -250,42 +238,38 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                    PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.Inline,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
+                    PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                    PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                    CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanGotoDashboard = false,
+                    CanBulkDelete = false,
                     CanBulkActions = false,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
 
-        public UIItemFeatures GetElmahStatusCodeUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahStatusCodeUIItemFeatures()
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.Inline,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
+                PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
                 CanGotoDashboard = true,
             };
@@ -305,44 +289,40 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                    PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.Inline,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
+                    PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                    PrimayEditViewContainer = CrudViewContainers.Inline,
 
                     CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanBulkDelete = false,
                     CanBulkActions = false,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
 
-        public UIItemFeatures GetElmahTypeUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahTypeUIItemFeatures()
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.Inline,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
+                PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = true,
+                CanGotoDashboard = false,
             };
 
             return result;
@@ -360,44 +340,40 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                    PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.Inline,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
+                    PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                    PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                    CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanGotoDashboard = false,
+                    CanBulkDelete = false,
                     CanBulkActions = false,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
 
-        public UIItemFeatures GetElmahUserUIItemFeatures(PagedViewOptions pagedViewOptionForBulkSelectCheckBox)
+        public UIItemFeatures GetElmahUserUIItemFeatures()
         {
             var result = new UIItemFeatures
             {
-                PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                PrimayEditViewContainer = CrudViewContainers.Dialog,
+                PrimayCreateViewContainer = CrudViewContainers.Inline,
+                PrimayDeleteViewContainer = CrudViewContainers.None,
+                PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                ShowListBulkSelectCheckbox = pagedViewOptionForBulkSelectCheckBox != PagedViewOptions.Card,
                 ShowItemButtons = true,
-                CanGotoDashboard = true,
+                CanGotoDashboard = false,
             };
 
             return result;
@@ -415,29 +391,26 @@ namespace Elmah.MvcWebApp.Models
                     ListWrapperId = key + "ListWrapper",
                     SearchFormId = key + "SearchForm",
 
-                    PrimaryPagedViewOption = PagedViewOptions.EditableTable,
+                    PrimaryPagedViewOption = ListViewOptions.Table,
 
-                    PrimayCreateViewContainer = CrudViewContainers.Dialog,
-                    PrimayDeleteViewContainer = CrudViewContainers.Dialog,
-                    PrimayDetailsViewContainer = CrudViewContainers.Dialog,
-                    PrimayEditViewContainer = CrudViewContainers.Dialog,
+                    PrimayCreateViewContainer = CrudViewContainers.Inline,
+                    PrimayDeleteViewContainer = CrudViewContainers.None,
+                    PrimayDetailsViewContainer = CrudViewContainers.Inline,
+                    PrimayEditViewContainer = CrudViewContainers.Inline,
 
-                    CanGotoDashboard = true,
-                    CanBulkDelete = true,
+                    CanGotoDashboard = false,
+                    CanBulkDelete = false,
                     CanBulkActions = false,
 
-                    AvailableListViews = new List<PagedViewOptions>
+                    AvailableListViews = new List<ListViewOptions>
                     {
-                        PagedViewOptions.Table,
-                        PagedViewOptions.Tiles,
-                        PagedViewOptions.SlideShow,
-                        PagedViewOptions.EditableTable
+                        ListViewOptions.Table
                     },
                 },
             };
 
             result.UIParams = uiParams ?? DefaultUIParams(result.UIListFeatures.PrimaryPagedViewOption);
-            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == PagedViewOptions.EditableTable;
+            result.UIListFeatures.IsArrayBinding = result.UIParams.PagedViewOption == ListViewOptions.EditableTable;
             return result;
         }
     }

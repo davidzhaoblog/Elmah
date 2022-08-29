@@ -1,8 +1,8 @@
 @using Elmah.Models;
 @using Elmah.Resx;
+@using Framework.Mvc.Models;
 @using Framework.Models;
-@using Elmah.MvcWebApp.Models;
-@model PagedViewModel<ElmahErrorDataModel.DefaultView[]>
+@model ListViewModel<ElmahErrorDataModel.DefaultView[]>
 @inject IUIStrings localizor;
 <!--for EditableList "Create New" for now, can copy to Tiles -->
 <input type="hidden" class="nt-list-count" value="@Model!.Result!.ResponseBody!.Count()" />
@@ -51,7 +51,7 @@
                             UIItemFeatures = Model.UIListSetting.GetUIItemFeatures(),
                             Status = System.Net.HttpStatusCode.OK,
                             StatusMessage = Model.Result.StatusMessage,
-                            Template = Model!.UIListSetting.UIParams.PagedViewOption != PagedViewOptions.EditableTable ? ViewItemTemplateNames.Details.ToString() : ViewItemTemplateNames.Edit.ToString(),
+                            Template = Model!.UIListSetting.UIParams.PagedViewOption != ListViewOptions.EditableTable ? ViewItemTemplates.Details.ToString() : ViewItemTemplates.Edit.ToString(),
                             IndexInArray = i,
                             Model = Model.Result.ResponseBody[i],
                             TopLevelDropDownListsFromDatabase = Model.TopLevelDropDownListsFromDatabase,
@@ -67,23 +67,6 @@
                 </tr>
             }
         </tbody>
-            <!--only for inline editing-->
-            <tfoot>
-                @if (Model!.UIListSetting == null || Model!.UIListSetting.CanGotoCreate(@CrudViewContainers.Inline))
-                {
-                    <tr class="pt-0 pb-0 nt-listitem nt-new">
-                        <td class="nt-createnew-button-container" colspan="100">
-                        <button type="button" class="btn btn-primary btn-nt-inline-editing w-100 h-100" title="@localizor.Get("Create_New")"
-                            data-nt-action="@HttpMethods.Post"
-                            data-nt-route-id="@(default(System.Guid))"
-                            data-nt-container="@CrudViewContainers.Inline.ToString()"
-                            data-nt-template="@ViewItemTemplateNames.Create.ToString()">
-                            <i class="fa fa-plus"></i><span class="submit-text hidden-xs hidden-sm visible-md-inline visible-lg-inline ms-1">@localizor.Get("Create_New")</span>
-                        </button>
-                        </td>
-                    </tr>
-                }
-            </tfoot>
     </table>
     </form>
     @if (Model != null && Model!.UIListSetting!.UIListFeatures.HasPagination && Model.Result != null && Model.Result.Pagination != null)

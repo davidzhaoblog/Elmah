@@ -1,4 +1,5 @@
 using Elmah.ServiceContracts;
+using Framework.Mvc.Models;
 using Framework.Models;
 using Elmah.Resx;
 using Elmah.Models;
@@ -39,8 +40,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahErrorUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahErrorUIItemFeatures(uiParams.PagedViewOption ?? ListViewOptions.Table),
             });
 
             if(loadTopLevelDropDownListsFromDatabase && (topLevelDropDownListsFromDatabase == null || !topLevelDropDownListsFromDatabase.Any()))
@@ -61,8 +62,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahApplicationUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahApplicationUIItemFeatures(),
             });
 
             return result;
@@ -78,8 +79,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahHostUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahHostUIItemFeatures(),
             });
 
             return result;
@@ -95,8 +96,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahSourceUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahSourceUIItemFeatures(),
             });
 
             return result;
@@ -112,8 +113,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahStatusCodeUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahStatusCodeUIItemFeatures(),
             });
 
             return result;
@@ -129,8 +130,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahTypeUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahTypeUIItemFeatures(),
             });
 
             return result;
@@ -146,8 +147,8 @@ namespace Elmah.MvcWebApp.Models
                 Model = responseBody,
                 Status = response.Status,
                 StatusMessage = response.StatusMessage,
-                Template = uiParams.Template ?? ViewItemTemplateNames.Details.ToString(),
-                UIItemFeatures = _viewFeaturesManager.GetElmahUserUIItemFeatures(uiParams.PagedViewOption ?? PagedViewOptions.Table),
+                Template = uiParams.Template ?? ViewItemTemplates.Details.ToString(),
+                UIItemFeatures = _viewFeaturesManager.GetElmahUserUIItemFeatures(),
             });
 
             return result;

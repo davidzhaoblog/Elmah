@@ -1,4 +1,5 @@
 using Elmah.ServiceContracts;
+using Framework.Mvc;
 using Elmah.Models;
 using Framework.Models;
 
@@ -29,72 +30,11 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahHostDataModel[]>>> Search(
+        public async Task<ActionResult<ListResponse<ElmahHostDataModel[]>>> Search(
             ElmahHostAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
             return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{Host}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahHostCompositeModel>> GetCompositeModel(ElmahHostIdentifier id)
-        {
-            var serviceResponse = await _thisService.GetCompositeModel(id, null);
-            return Ok(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> BulkDelete(List<ElmahHostIdentifier> ids)
-        {
-            var serviceResponse = await _thisService.BulkDelete(ids);
-            return ReturnWithoutBodyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel> input)
-        {
-            var serviceResponse = await _thisService.MultiItemsCUD(input);
-            return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{Host}")]
-        [HttpPut]
-        public async Task<ActionResult<ElmahHostDataModel>> Put([FromRoute]ElmahHostIdentifier id, [FromBody]ElmahHostDataModel input)
-        {
-            var serviceResponse = await _thisService.Update(id, input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{Host}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahHostDataModel>> Get([FromRoute]ElmahHostIdentifier id)
-        {
-            var serviceResponse = await _thisService.Get(id);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahHostDataModel>> Post(ElmahHostDataModel input)
-        {
-            var serviceResponse = await _thisService.Create(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{Host}")]
-        [HttpDelete]
-        public async Task<ActionResult> Delete([FromRoute]ElmahHostIdentifier id)
-        {
-            var serviceResponse = await _thisService.Delete(id);
-            return ReturnWithoutBodyActionResult(serviceResponse);
         }
 
         /*

@@ -20,7 +20,8 @@
 </ItemGroup>
 <ItemGroup>
     <ProjectReference Include="..\EFCoreContext\Elmah.EFCoreContext.csproj" />
-    <ProjectReference Include="..\..\Frameworks\Framework\Framework.csproj" />
+    <ProjectReference Include="..\..\Shared\Framework\Framework.csproj" />
+    <ProjectReference Include="..\..\Shared\Framework.Mvc\Framework.Mvc.csproj" />
     <ProjectReference Include="..\Models\Elmah.Models.csproj" />
     <ProjectReference Include="..\RepositoryContracts\Elmah.RepositoryContracts.csproj" />
 </ItemGroup>

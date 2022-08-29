@@ -69,7 +69,7 @@ builder.Services.AddScoped<ViewFeaturesManager>();
 builder.Services.AddScoped<DashboardViewModelHelper>();
 builder.Services.AddScoped<OrderBysListHelper>();
 builder.Services.AddScoped<MvcItemViewModelHelper>();
-builder.Services.AddScoped<PagedSearchViewModelHelper>();
+builder.Services.AddScoped<ListSearchViewModelHelper>();
 
 builder.Services.AddDbContext<EFDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Elmah"), x => { x.UseNetTopologySuite(); x.UseBulk(); }),  ServiceLifetime.Scoped);

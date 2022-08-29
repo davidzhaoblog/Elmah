@@ -1,4 +1,5 @@
 using Elmah.ServiceContracts;
+using Framework.Mvc;
 using Elmah.Models;
 using Framework.Models;
 
@@ -29,7 +30,7 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahStatusCodeDataModel[]>>> Search(
+        public async Task<ActionResult<ListResponse<ElmahStatusCodeDataModel[]>>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
@@ -43,58 +44,6 @@ namespace Elmah.WebApiControllers
         {
             var serviceResponse = await _thisService.GetCompositeModel(id, null);
             return Ok(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> BulkDelete(List<ElmahStatusCodeIdentifier> ids)
-        {
-            var serviceResponse = await _thisService.BulkDelete(ids);
-            return ReturnWithoutBodyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel> input)
-        {
-            var serviceResponse = await _thisService.MultiItemsCUD(input);
-            return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{StatusCode}")]
-        [HttpPut]
-        public async Task<ActionResult<ElmahStatusCodeDataModel>> Put([FromRoute]ElmahStatusCodeIdentifier id, [FromBody]ElmahStatusCodeDataModel input)
-        {
-            var serviceResponse = await _thisService.Update(id, input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{StatusCode}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahStatusCodeDataModel>> Get([FromRoute]ElmahStatusCodeIdentifier id)
-        {
-            var serviceResponse = await _thisService.Get(id);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahStatusCodeDataModel>> Post(ElmahStatusCodeDataModel input)
-        {
-            var serviceResponse = await _thisService.Create(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{StatusCode}")]
-        [HttpDelete]
-        public async Task<ActionResult> Delete([FromRoute]ElmahStatusCodeIdentifier id)
-        {
-            var serviceResponse = await _thisService.Delete(id);
-            return ReturnWithoutBodyActionResult(serviceResponse);
         }
 
         /*

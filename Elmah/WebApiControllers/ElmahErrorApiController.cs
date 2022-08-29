@@ -1,4 +1,5 @@
 using Elmah.ServiceContracts;
+using Framework.Mvc;
 using Elmah.Models;
 using Framework.Models;
 
@@ -29,7 +30,7 @@ namespace Elmah.WebApiControllers
         // [Authorize]
         [HttpGet]
         [HttpPost]
-        public async Task<ActionResult<PagedResponse<ElmahErrorDataModel.DefaultView[]>>> Search(
+        public async Task<ActionResult<ListResponse<ElmahErrorDataModel.DefaultView[]>>> Search(
             ElmahErrorAdvancedQuery query)
         {
             var serviceResponse = await _thisService.Search(query);
@@ -37,72 +38,11 @@ namespace Elmah.WebApiControllers
         }
 
         // [Authorize]
-        [Route("{ErrorId}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahErrorCompositeModel>> GetCompositeModel(ElmahErrorIdentifier id)
-        {
-            var serviceResponse = await _thisService.GetCompositeModel(id, null);
-            return Ok(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> BulkDelete(List<ElmahErrorIdentifier> ids)
-        {
-            var serviceResponse = await _thisService.BulkDelete(ids);
-            return ReturnWithoutBodyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
         [HttpPut]
-        public async Task<ActionResult<PagedResponse<ElmahErrorDataModel.DefaultView[]>>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
+        public async Task<ActionResult<ListResponse<ElmahErrorDataModel.DefaultView[]>>> BulkUpdate(BatchActionRequest<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
         {
             var serviceResponse = await _thisService.BulkUpdate(data);
             return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPut]
-        public async Task<ActionResult<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> input)
-        {
-            var serviceResponse = await _thisService.MultiItemsCUD(input);
-            return ReturnActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{ErrorId}")]
-        [HttpPut]
-        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Put([FromRoute]ElmahErrorIdentifier id, [FromBody]ElmahErrorDataModel input)
-        {
-            var serviceResponse = await _thisService.Update(id, input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{ErrorId}")]
-        [HttpGet]
-        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Get([FromRoute]ElmahErrorIdentifier id)
-        {
-            var serviceResponse = await _thisService.Get(id);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<ElmahErrorDataModel.DefaultView>> Post(ElmahErrorDataModel input)
-        {
-            var serviceResponse = await _thisService.Create(input);
-            return ReturnResultOnlyActionResult(serviceResponse);
-        }
-
-        // [Authorize]
-        [Route("{ErrorId}")]
-        [HttpDelete]
-        public async Task<ActionResult> Delete([FromRoute]ElmahErrorIdentifier id)
-        {
-            var serviceResponse = await _thisService.Delete(id);
-            return ReturnWithoutBodyActionResult(serviceResponse);
         }
 
         /*

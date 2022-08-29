@@ -1,5 +1,6 @@
 using Elmah.ServiceContracts;
 using Framework.Models;
+using Framework.Mvc.Models;
 using Elmah.Models;
 using Elmah.Resx;
 namespace Elmah.MvcWebApp.Models
@@ -10,7 +11,7 @@ namespace Elmah.MvcWebApp.Models
         private readonly SelectListHelper _selectListHelper;
         private readonly ViewFeaturesManager _viewFeaturesManager;
         private readonly MvcItemViewModelHelper _mvcItemViewModelHelper;
-        private readonly PagedSearchViewModelHelper _pagedSearchViewModelHelper;
+        private readonly ListSearchViewModelHelper _pagedSearchViewModelHelper;
         private readonly IUIStrings _localizor;
         private readonly ILogger<DashboardViewModelHelper> _logger;
 
@@ -19,7 +20,7 @@ namespace Elmah.MvcWebApp.Models
             SelectListHelper selectListHelper,
             ViewFeaturesManager viewFeaturesManager,
             MvcItemViewModelHelper mvcItemViewModelHelper,
-            PagedSearchViewModelHelper pagedSearchViewModelHelper,
+            ListSearchViewModelHelper pagedSearchViewModelHelper,
             IUIStrings localizor,
             ILogger<DashboardViewModelHelper> logger)
         {
@@ -40,7 +41,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahErrorMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody, loadTopLevelDropDownListsFromDatabase, topLevelDropDownListsFromDatabase);
         }
-        public async Task<PagedSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorDataModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahErrorAdvancedQuery, ElmahErrorDataModel.DefaultView[]>> GetElmahErrorPagedSearchViewModel(
             ElmahErrorAdvancedQuery query,
             ElmahErrorDataModel.DefaultView[]? responseBody,
             CompositeItemModel compositeItem)
@@ -54,7 +55,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahApplicationMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody);
         }
-        public async Task<PagedSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationDataModel[]>> GetElmahApplicationPagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahApplicationAdvancedQuery, ElmahApplicationDataModel[]>> GetElmahApplicationPagedSearchViewModel(
             ElmahApplicationAdvancedQuery query,
             ElmahApplicationDataModel[]? responseBody,
             CompositeItemModel compositeItem)
@@ -68,7 +69,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahHostMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody);
         }
-        public async Task<PagedSearchViewModel<ElmahHostAdvancedQuery, ElmahHostDataModel[]>> GetElmahHostPagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahHostAdvancedQuery, ElmahHostDataModel[]>> GetElmahHostPagedSearchViewModel(
             ElmahHostAdvancedQuery query,
             ElmahHostDataModel[]? responseBody,
             CompositeItemModel compositeItem)
@@ -82,7 +83,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahSourceMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody);
         }
-        public async Task<PagedSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceDataModel[]>> GetElmahSourcePagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahSourceAdvancedQuery, ElmahSourceDataModel[]>> GetElmahSourcePagedSearchViewModel(
             ElmahSourceAdvancedQuery query,
             ElmahSourceDataModel[]? responseBody,
             CompositeItemModel compositeItem)
@@ -96,7 +97,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahStatusCodeMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody);
         }
-        public async Task<PagedSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeDataModel[]>> GetElmahStatusCodePagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahStatusCodeAdvancedQuery, ElmahStatusCodeDataModel[]>> GetElmahStatusCodePagedSearchViewModel(
             ElmahStatusCodeAdvancedQuery query,
             ElmahStatusCodeDataModel[]? responseBody,
             CompositeItemModel compositeItem)
@@ -110,7 +111,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahTypeMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody);
         }
-        public async Task<PagedSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>> GetElmahTypePagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahTypeAdvancedQuery, ElmahTypeDataModel[]>> GetElmahTypePagedSearchViewModel(
             ElmahTypeAdvancedQuery query,
             ElmahTypeDataModel[]? responseBody,
             CompositeItemModel compositeItem)
@@ -124,7 +125,7 @@ namespace Elmah.MvcWebApp.Models
         {
             return await _mvcItemViewModelHelper.GetElmahUserMvcItemViewModel(compositeItem.UIParams, compositeItem.Response, responseBody);
         }
-        public async Task<PagedSearchViewModel<ElmahUserAdvancedQuery, ElmahUserDataModel[]>> GetElmahUserPagedSearchViewModel(
+        public async Task<ListSearchViewModel<ElmahUserAdvancedQuery, ElmahUserDataModel[]>> GetElmahUserPagedSearchViewModel(
             ElmahUserAdvancedQuery query,
             ElmahUserDataModel[]? responseBody,
             CompositeItemModel compositeItem)

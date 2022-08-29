@@ -26,90 +26,20 @@ namespace Elmah.Services
             _logger = logger;
         }
 
-        public async Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> Search(
+        public async Task<ListResponse<ElmahErrorDataModel.DefaultView[]>> Search(
             ElmahErrorAdvancedQuery query)
         {
             return await _thisRepository.Search(query);
         }
 
-        public async Task<ElmahErrorCompositeModel> GetCompositeModel(
-            ElmahErrorIdentifier id,
-            Dictionary<ElmahErrorCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
-            ElmahErrorCompositeModel.__DataOptions__[]? dataOptions = null)
-        {
-            var masterResponse = await this._thisRepository.Get(id);
-            if (masterResponse.Status != HttpStatusCode.OK || masterResponse.ResponseBody == null)
-            {
-                var failedResponse = new ElmahErrorCompositeModel();
-                failedResponse.Responses.Add(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = masterResponse.Status, StatusMessage = masterResponse.StatusMessage });
-                return failedResponse;
-            }
-
-            var successResponse = new ElmahErrorCompositeModel { __Master__ = masterResponse.ResponseBody };
-            var responses = new ConcurrentDictionary<ElmahErrorCompositeModel.__DataOptions__, Response<PaginationResponse>>();
-            responses.TryAdd(ElmahErrorCompositeModel.__DataOptions__.__Master__, new Response<PaginationResponse> { Status = HttpStatusCode.OK });
-
-            var tasks = new List<Task>();
-
-            if (tasks.Count > 0)
-            {
-                Task t = Task.WhenAll(tasks.ToArray());
-                try
-                {
-                    await t;
-                }
-                catch { }
-            }
-            successResponse.Responses = new Dictionary<ElmahErrorCompositeModel.__DataOptions__, Response<PaginationResponse>>(responses);
-            return successResponse;
-        }
-
-        public async Task<Response> BulkDelete(List<ElmahErrorIdentifier> ids)
-        {
-            return await _thisRepository.BulkDelete(ids);
-        }
-
-        public async Task<PagedResponse<ElmahErrorDataModel.DefaultView[]>> BulkUpdate(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
+        public async Task<ListResponse<ElmahErrorDataModel.DefaultView[]>> BulkUpdate(BatchActionRequest<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> data)
         {
             return await _thisRepository.BulkUpdate(data);
-        }
-
-        public async Task<Response<MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView> input)
-        {
-            return await _thisRepository.MultiItemsCUD(input);
-        }
-
-        public async Task<Response<ElmahErrorDataModel.DefaultView>> Update(ElmahErrorIdentifier id, ElmahErrorDataModel input)
-        {
-            return await _thisRepository.Update(id, input);
         }
 
         public async Task<Response<ElmahErrorDataModel.DefaultView>> Get(ElmahErrorIdentifier id)
         {
             return await _thisRepository.Get(id);
-        }
-
-        public async Task<Response<ElmahErrorDataModel.DefaultView>> Create(ElmahErrorDataModel input)
-        {
-            return await _thisRepository.Create(input);
-        }
-
-        public ElmahErrorDataModel.DefaultView GetDefault()
-        {
-            // TODO: please set default value here
-            return new ElmahErrorDataModel.DefaultView { ItemUIStatus______ = ItemUIStatus.New };
-        }
-
-        public async Task<Response> Delete(ElmahErrorIdentifier id)
-        {
-            return await _thisRepository.Delete(id);
-        }
-
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
-            ElmahErrorAdvancedQuery query)
-        {
-            return await _thisRepository.GetCodeList(query);
         }
     }
 }

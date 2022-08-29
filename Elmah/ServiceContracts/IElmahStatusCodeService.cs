@@ -5,18 +5,13 @@ namespace Elmah.ServiceContracts
     public interface IElmahStatusCodeService
     {
 
-        Task<PagedResponse<ElmahStatusCodeDataModel[]>> Search(
+        Task<ListResponse<ElmahStatusCodeDataModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query);
 
         Task<ElmahStatusCodeCompositeModel> GetCompositeModel(
             ElmahStatusCodeIdentifier id,
             Dictionary<ElmahStatusCodeCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
             ElmahStatusCodeCompositeModel.__DataOptions__[]? dataOptions = null);
-
-        Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids);
-
-        Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel> input);
 
         Task<Response<ElmahStatusCodeDataModel>> Update(ElmahStatusCodeIdentifier id, ElmahStatusCodeDataModel input);
 
@@ -27,7 +22,7 @@ namespace Elmah.ServiceContracts
 
         Task<Response> Delete(ElmahStatusCodeIdentifier id);
 
-        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahStatusCodeAdvancedQuery query);
     }
 }

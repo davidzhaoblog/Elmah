@@ -5,18 +5,8 @@ namespace Elmah.ServiceContracts
     public interface IElmahApplicationService
     {
 
-        Task<PagedResponse<ElmahApplicationDataModel[]>> Search(
+        Task<ListResponse<ElmahApplicationDataModel[]>> Search(
             ElmahApplicationAdvancedQuery query);
-
-        Task<ElmahApplicationCompositeModel> GetCompositeModel(
-            ElmahApplicationIdentifier id,
-            Dictionary<ElmahApplicationCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
-            ElmahApplicationCompositeModel.__DataOptions__[]? dataOptions = null);
-
-        Task<Response> BulkDelete(List<ElmahApplicationIdentifier> ids);
-
-        Task<Response<MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahApplicationIdentifier, ElmahApplicationDataModel> input);
 
         Task<Response<ElmahApplicationDataModel>> Update(ElmahApplicationIdentifier id, ElmahApplicationDataModel input);
 
@@ -27,7 +17,7 @@ namespace Elmah.ServiceContracts
 
         Task<Response> Delete(ElmahApplicationIdentifier id);
 
-        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahApplicationAdvancedQuery query);
     }
 }

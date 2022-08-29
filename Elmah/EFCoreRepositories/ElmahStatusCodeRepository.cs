@@ -65,7 +65,7 @@ namespace Elmah.EFCoreRepositories
             return queryable;
         }
 
-        public async Task<PagedResponse<ElmahStatusCodeDataModel[]>> Search(
+        public async Task<ListResponse<ElmahStatusCodeDataModel[]>> Search(
             ElmahStatusCodeAdvancedQuery query)
         {
             try
@@ -75,7 +75,7 @@ namespace Elmah.EFCoreRepositories
 
                 var queryable = SearchQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<ElmahStatusCodeDataModel>();
-                return new PagedResponse<ElmahStatusCodeDataModel[]>
+                return new ListResponse<ElmahStatusCodeDataModel[]>
                 {
                     Status = HttpStatusCode.OK,
                     Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
@@ -84,158 +84,10 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<PagedResponse<ElmahStatusCodeDataModel[]>>.FromResult(new PagedResponse<ElmahStatusCodeDataModel[]>
+                return await Task<ListResponse<ElmahStatusCodeDataModel[]>>.FromResult(new ListResponse<ElmahStatusCodeDataModel[]>
                 {
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message
-                });
-            }
-        }
-
-        private IQueryable<ElmahStatusCode> GetIQueryableByPrimaryIdentifierList(
-            List<ElmahStatusCodeIdentifier> ids)
-        {
-            var idList = ids.Select(t => t.StatusCode).ToList();
-            var queryable =
-                from t in _dbcontext.ElmahStatusCode
-                where idList.Contains(t.StatusCode)
-                select t;
-
-            return queryable;
-        }
-
-        public async Task<Response> BulkDelete(List<ElmahStatusCodeIdentifier> ids)
-        {
-            try
-            {
-                var queryable = GetIQueryableByPrimaryIdentifierList(ids);
-                var result = await queryable.BatchDeleteAsync();
-
-                return await Task<Response>.FromResult(
-                    new Response
-                    {
-                        Status = HttpStatusCode.OK,
-                    });
-            }
-            catch (Exception ex)
-            {
-                return await Task<Response>.FromResult(new Response { Status = HttpStatusCode.InternalServerError, StatusMessage = ex.Message });
-            }
-        }
-
-        public async Task<Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel> input)
-        {
-            // 1. DeleteItems, return if Failed
-            if (input.DeleteItems != null)
-            {
-                var responseOfDeleteItems = await this.BulkDelete(input.DeleteItems);
-                if (responseOfDeleteItems != null && responseOfDeleteItems.Status != HttpStatusCode.OK)
-                {
-                    return new Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>> { Status = responseOfDeleteItems.Status, StatusMessage = "Deletion Failed. " + responseOfDeleteItems.StatusMessage };
-                }
-            }
-
-            // 2. return OK, if no more NewItems and UpdateItems
-            if (!(input.NewItems != null && input.NewItems.Count > 0 ||
-                input.UpdateItems != null && input.UpdateItems.Count > 0))
-            {
-                return new Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>> { Status = HttpStatusCode.OK };
-            }
-
-            // 3. NewItems and UpdateItems
-            try
-            {
-                // 3.1.1. NewItems if any
-                List<ElmahStatusCode> newEFItems = new List<ElmahStatusCode>();
-                if (input.NewItems != null && input.NewItems.Count > 0)
-                {
-                    foreach (var item in input.NewItems)
-                    {
-                        var toInsert = new ElmahStatusCode
-                        {
-                            StatusCode = item.StatusCode,
-                            Name = item.Name,
-                        };
-                        _dbcontext.ElmahStatusCode.Add(toInsert);
-                        newEFItems.Add(toInsert);
-                    }
-                }
-
-                // 3.1.2. UpdateItems if any
-                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
-                {
-                    foreach (var item in input.UpdateItems)
-                    {
-                        var existing =
-                            (from t in _dbcontext.ElmahStatusCode
-                             where
-
-                             t.StatusCode == item.StatusCode
-                             select t).SingleOrDefault();
-
-                        if (existing != null)
-                        {
-                            // TODO: the .CopyTo<> method may modified because some properties may should not be copied.
-                existing.StatusCode = item.StatusCode;
-                existing.Name = item.Name;
-                        }
-                    }
-                }
-                await _dbcontext.SaveChangesAsync();
-
-                // 3.2 Load Response
-                var identifierListToloadResponseItems = new List<int>();
-
-                if (input.NewItems != null && input.NewItems.Count > 0)
-                {
-                    identifierListToloadResponseItems.AddRange(
-                        from t in newEFItems
-                        select t.StatusCode);
-                }
-                if (input.UpdateItems != null && input.UpdateItems.Count > 0)
-                {
-                    identifierListToloadResponseItems.AddRange(
-                        from t in input.UpdateItems
-                        select t.StatusCode);
-                }
-
-                var responseBodyWithNewAndUpdatedItems =
-                    (from t in _dbcontext.ElmahStatusCode
-                    where identifierListToloadResponseItems.Contains(t.StatusCode)
-
-                    select new ElmahStatusCodeDataModel
-                    {
-
-                        StatusCode = t.StatusCode,
-                        Name = t.Name,
-
-                    }).ToList();
-
-                // 3.3. Final Response
-                var response = new Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>
-                {
-                    Status = HttpStatusCode.OK,
-                    ResponseBody = new MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>
-                    {
-                        NewItems =
-                            input.NewItems != null && input.NewItems.Count > 0
-                                ? responseBodyWithNewAndUpdatedItems.Where(t => newEFItems.Any(t1 => t1.StatusCode == t.StatusCode)).ToList()
-                                : null,
-                        UpdateItems =
-                            input.UpdateItems != null && input.UpdateItems.Count > 0
-                                ? responseBodyWithNewAndUpdatedItems.Where(t => input.UpdateItems.Any(t1 => t1.StatusCode == t.StatusCode)).ToList()
-                                : null,
-                    }
-                };
-                return response;
-            }
-            catch (Exception ex)
-            {
-                return await Task.FromResult(new Response<MultiItemsCUDModel<ElmahStatusCodeIdentifier, ElmahStatusCodeDataModel>>
-                {
-                    Status = HttpStatusCode.InternalServerError,
-                    StatusMessage = "Create And/Or Update Failed. " + ex.Message
                 });
             }
         }
@@ -422,7 +274,7 @@ namespace Elmah.EFCoreRepositories
             return queryable;
         }
 
-        public async Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        public async Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahStatusCodeAdvancedQuery query)
         {
             try
@@ -432,7 +284,7 @@ namespace Elmah.EFCoreRepositories
 
                 var queryable = GetCodeListQuery(query, true);
                 var result = await queryable.ToDynamicArrayAsync<NameValuePair>();
-                return new PagedResponse<NameValuePair[]>
+                return new ListResponse<NameValuePair[]>
                 {
                     Status = HttpStatusCode.OK,
                     Pagination = new PaginationResponse (totalCount, result?.Length ?? 0, query.PageIndex, query.PageSize, query.PaginationOption),
@@ -441,7 +293,7 @@ namespace Elmah.EFCoreRepositories
             }
             catch (Exception ex)
             {
-                return await Task<PagedResponse<NameValuePair[]>>.FromResult(new PagedResponse<NameValuePair[]>
+                return await Task<ListResponse<NameValuePair[]>>.FromResult(new ListResponse<NameValuePair[]>
                 {
                     Status = HttpStatusCode.InternalServerError,
                     StatusMessage = ex.Message

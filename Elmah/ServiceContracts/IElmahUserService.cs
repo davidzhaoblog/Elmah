@@ -5,18 +5,8 @@ namespace Elmah.ServiceContracts
     public interface IElmahUserService
     {
 
-        Task<PagedResponse<ElmahUserDataModel[]>> Search(
+        Task<ListResponse<ElmahUserDataModel[]>> Search(
             ElmahUserAdvancedQuery query);
-
-        Task<ElmahUserCompositeModel> GetCompositeModel(
-            ElmahUserIdentifier id,
-            Dictionary<ElmahUserCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
-            ElmahUserCompositeModel.__DataOptions__[]? dataOptions = null);
-
-        Task<Response> BulkDelete(List<ElmahUserIdentifier> ids);
-
-        Task<Response<MultiItemsCUDModel<ElmahUserIdentifier, ElmahUserDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahUserIdentifier, ElmahUserDataModel> input);
 
         Task<Response<ElmahUserDataModel>> Update(ElmahUserIdentifier id, ElmahUserDataModel input);
 
@@ -27,7 +17,7 @@ namespace Elmah.ServiceContracts
 
         Task<Response> Delete(ElmahUserIdentifier id);
 
-        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahUserAdvancedQuery query);
     }
 }

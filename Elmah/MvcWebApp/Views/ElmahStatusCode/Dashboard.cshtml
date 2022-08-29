@@ -62,8 +62,7 @@
              data-nt-bs-modalsize="Large"
              data-nt-loaditem-url="@Url.Action("AjaxLoadItem", "ElmahStatusCode")"
              data-nt-createitem-url="@Url.Action("AjaxCreate", "ElmahStatusCode")"
-             data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahStatusCode")"
-             data-nt-deleteitem-url="@Url.Action("AjaxDelete", "ElmahStatusCode")">
+             data-nt-updateitem-url="@Url.Action("AjaxEdit", "ElmahStatusCode")">
             <div class="nt-listitem" data-nt-route-id="@routeId">
                 @await Html.PartialAsync("~/Views/ElmahStatusCode/_TileDetailsItem.cshtml", masterVM)
             </div>

@@ -1,4 +1,5 @@
 using Elmah.MvcWebApp.Models;
+using Framework.Mvc.Models;
 using Elmah.ServiceContracts;
 using Elmah.Resx;
 using Elmah.Models.Definitions;
@@ -18,7 +19,7 @@ namespace Elmah.MvcWebApp.Controllers
         private readonly IDropDownListService _dropDownListService;
         private readonly OrderBysListHelper _orderBysListHelper;
         private readonly MvcItemViewModelHelper _mvcItemViewModelHelper;
-        private readonly PagedSearchViewModelHelper _pagedSearchViewModelHelper;
+        private readonly ListSearchViewModelHelper _pagedSearchViewModelHelper;
         private readonly IUIStrings _localizor;
         private readonly ILogger<ElmahUserController> _logger;
 
@@ -29,7 +30,7 @@ namespace Elmah.MvcWebApp.Controllers
             IDropDownListService dropDownListService,
             OrderBysListHelper orderBysListHelper,
             MvcItemViewModelHelper mvcItemViewModelHelper,
-            PagedSearchViewModelHelper pagedSearchViewModelHelper,
+            ListSearchViewModelHelper pagedSearchViewModelHelper,
             IUIStrings localizor,
             ILogger<ElmahUserController> logger)
         {
@@ -49,7 +50,7 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost]// form post formdata
         public async Task<IActionResult> Index(ElmahUserAdvancedQuery query, UIParams uiParams)
         {
-            _viewFeatureManager.DefaultUIParamsIfNeeds(uiParams, PagedViewOptions.EditableTable);
+            _viewFeatureManager.DefaultUIParamsIfNeeds(uiParams, ListViewOptions.Table);
             // UIParams.PagedViewOption is not null here
             query.PaginationOption = _viewFeatureManager.HardCodePaginationOption(uiParams.PagedViewOption!.Value, query.PaginationOption);
             if (string.IsNullOrEmpty(query.OrderBys))
@@ -69,70 +70,42 @@ namespace Elmah.MvcWebApp.Controllers
         public async Task<IActionResult> AjaxLoadItems(ElmahUserAdvancedQuery query, UIParams uiParams)
         {
             var result = await _thisService.Search(query);
-            var pagedViewModel = new PagedViewModel<ElmahUserDataModel[]>
+            var pagedViewModel = new ListViewModel<ElmahUserDataModel[]>
             {
                 UIListSetting = _viewFeatureManager.GetElmahUserUIListSetting(String.Empty, uiParams),
                 Result = result,
             };
 
-            if(uiParams.Template == ViewItemTemplateNames.Create.ToString() || uiParams.Template == ViewItemTemplateNames.Edit.ToString())
+            if(uiParams.Template == ViewItemTemplates.Create.ToString() || uiParams.Template == ViewItemTemplates.Edit.ToString())
             {
             }
 
-            if (uiParams.PagedViewOption == PagedViewOptions.Table || uiParams.PagedViewOption == PagedViewOptions.EditableTable)
+            if (uiParams.PagedViewOption == ListViewOptions.Table || uiParams.PagedViewOption == ListViewOptions.EditableTable)
             {
                 return PartialView("~/Views/ElmahUser/_Table.cshtml", pagedViewModel);
             }
-            else if (uiParams.PagedViewOption == PagedViewOptions.Tiles)
+            else if (uiParams.PagedViewOption == ListViewOptions.Tiles)
             {
                 return PartialView("~/Views/ElmahUser/_Tiles.cshtml", pagedViewModel);
             }
-            //else // if (uiParams.PagedViewOption == PagedViewOptions.SlideShow)
+            //else // if (uiParams.PagedViewOption == ListViewOptions.SlideShow)
             // SlideShow
             return PartialView("~/Views/ElmahUser/_SlideShow.cshtml", pagedViewModel);
 
         }
 
         [Route("[controller]/[action]/{User}")] // Primary
-        [HttpGet, ActionName("Dashboard")]
-        // GET: ElmahUser/Dashboard/{User}
-        public async Task<IActionResult> Dashboard([FromRoute]ElmahUserIdentifier id)
-        {
-            var listItemRequests = new Dictionary<ElmahUserCompositeModel.__DataOptions__, CompositeListItemRequest>();
-
-            listItemRequests.Add(ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User,
-                new CompositeListItemRequest()
-                {
-                    PageSize = 10,
-                    OrderBys = _orderBysListHelper.GetDefaultElmahErrorOrderBys(),
-                    PaginationOption = PaginationOptions.PageIndexesAndAllButtons,
-                });
-
-            var result = await _thisService.GetCompositeModel(id, listItemRequests);
-
-            result.UIParamsList.Add(
-                ElmahUserCompositeModel.__DataOptions__.__Master__,
-                new UIParams { PagedViewOption = PagedViewOptions.Card, Template = ViewItemTemplateNames.Details.ToString() });
-
-            result.UIParamsList.Add(
-                ElmahUserCompositeModel.__DataOptions__.ElmahErrors_Via_User,
-                new UIParams { PagedViewOption = PagedViewOptions.EditableTable, Template = ViewItemTemplateNames.Edit.ToString() });
-
-            return View(result);
-        }
-
-        [Route("[controller]/[action]/{User}")] // Primary
         // GET: ElmahUser/AjaxLoadItem/{User}
         [HttpGet, ActionName("AjaxLoadItem")]
         public async Task<IActionResult> AjaxLoadItem(
-            PagedViewOptions view,
+            ListViewOptions view,
             CrudViewContainers container,
             string template,
             int? index, // for EditableList
             ElmahUserIdentifier id)
         {
             ElmahUserDataModel? result;
-            if (template == ViewItemTemplateNames.Create.ToString())
+            if (template == ViewItemTemplates.Create.ToString())
             {
                 result = _thisService.GetDefault();
                 ViewBag.Status = System.Net.HttpStatusCode.OK;
@@ -143,9 +116,9 @@ namespace Elmah.MvcWebApp.Controllers
                 result = response.ResponseBody;
             }
 
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
+            var itemViewModel = new Framework.Mvc.Models.MvcItemViewModel<ElmahUserDataModel>
             {
-                UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(view),
+                UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(),
                 Status = System.Net.HttpStatusCode.OK,
                 Template = template,
                 IsCurrentItem = true,
@@ -154,14 +127,14 @@ namespace Elmah.MvcWebApp.Controllers
             };
 
             // TODO: Maybe some special for Edit/Create
-            if (template == ViewItemTemplateNames.Edit.ToString() || template == ViewItemTemplateNames.Create.ToString())
+            if (template == ViewItemTemplates.Edit.ToString() || template == ViewItemTemplates.Create.ToString())
             {
 
             }
 
-            if ((view == PagedViewOptions.Table || view == PagedViewOptions.EditableTable) && container == CrudViewContainers.Inline)
+            if ((view == ListViewOptions.Table || view == ListViewOptions.EditableTable) && container == CrudViewContainers.Inline)
             {
-                if (template == ViewItemTemplateNames.Create.ToString())
+                if (template == ViewItemTemplates.Create.ToString())
                 {
                     return PartialView($"_TableItemTr", itemViewModel);
                 }
@@ -172,7 +145,7 @@ namespace Elmah.MvcWebApp.Controllers
                     return PartialView($"_Table{template}Item", itemViewModel);
                 }
             }
-            if (view == PagedViewOptions.Tiles && container == CrudViewContainers.Inline)
+            if (view == ListViewOptions.Tiles && container == CrudViewContainers.Inline)
             {
                 // By Default: _List{template}Item.cshtml
                 // Developer can customize template name
@@ -189,9 +162,9 @@ namespace Elmah.MvcWebApp.Controllers
         [HttpPost, ActionName("AjaxCreate")]
         [Route("[controller]/[action]")]
         public async Task<IActionResult> AjaxCreate(
-            PagedViewOptions view,
+            ListViewOptions view,
             CrudViewContainers container,
-            ViewItemTemplateNames template,
+            ViewItemTemplates template,
             [Bind("User")] ElmahUserDataModel input)
         {
             if (ModelState.IsValid)
@@ -200,7 +173,7 @@ namespace Elmah.MvcWebApp.Controllers
 
                 if (result.Status == System.Net.HttpStatusCode.OK)
                 {
-                    if (view == PagedViewOptions.Table) // Html Table
+                    if (view == ListViewOptions.Table) // Html Table
                     {
                         return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
                             new AjaxResponseViewModel
@@ -208,10 +181,10 @@ namespace Elmah.MvcWebApp.Controllers
                                 Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
                                 PartialViews = new List<Tuple<string, object>> {
                                 new Tuple<string, object>("~/Views/ElmahUser/_TableItemTr.cshtml",
-                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>{
-                                        UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(view),
+                                    new Framework.Mvc.Models.MvcItemViewModel<ElmahUserDataModel>{
+                                        UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(),
                                         Status = System.Net.HttpStatusCode.OK,
-                                        Template = ViewItemTemplateNames.Details.ToString(),
+                                        Template = ViewItemTemplates.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
                                     })
@@ -227,11 +200,11 @@ namespace Elmah.MvcWebApp.Controllers
                                 PartialViews = new List<Tuple<string, object>>
                                 {
                                     new Tuple<string, object>("~/Views/ElmahUser/_Tile.cshtml",
-                                        new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
+                                        new Framework.Mvc.Models.MvcItemViewModel<ElmahUserDataModel>
                                         {
-                                            UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(view),
+                                            UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(),
                                             Status = System.Net.HttpStatusCode.OK,
-                                            Template = ViewItemTemplateNames.Details.ToString(),
+                                            Template = ViewItemTemplates.Details.ToString(),
                                             IsCurrentItem = true,
                                             Model = result.ResponseBody!
                                         })
@@ -245,21 +218,6 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Route("[controller]/[action]/{User}")] // Primary
-        [HttpPost, ActionName("AjaxDelete")]
-        // POST: ElmahUser/AjaxDelete/{User}
-        public async Task<IActionResult> AjaxDelete(
-            PagedViewOptions view,
-            CrudViewContainers container,
-            ViewItemTemplateNames template,
-            [FromRoute] ElmahUserIdentifier id)
-        {
-            var result = await _thisService.Delete(id);
-            if (result.Status == System.Net.HttpStatusCode.OK)
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
@@ -268,9 +226,9 @@ namespace Elmah.MvcWebApp.Controllers
         // POST: ElmahUser/AjaxEdit/{User}
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> AjaxEdit(
-            PagedViewOptions view,
+            ListViewOptions view,
             CrudViewContainers container,
-            ViewItemTemplateNames template,
+            ViewItemTemplates template,
             ElmahUserIdentifier id,
             [Bind("User")] ElmahUserDataModel input)
         {
@@ -286,7 +244,7 @@ namespace Elmah.MvcWebApp.Controllers
                 var result = await _thisService.Update(id, input);
                 if (result.Status == System.Net.HttpStatusCode.OK)
                 {
-                    if (view == PagedViewOptions.Table) // Html Table
+                    if (view == ListViewOptions.Table) // Html Table
                     {
                         return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel
                         {
@@ -295,11 +253,11 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahUser/_TableDetailsItem.cshtml",
-                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
+                                    new Framework.Mvc.Models.MvcItemViewModel<ElmahUserDataModel>
                                     {
-                                        UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(view),
+                                        UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(),
                                         Status = System.Net.HttpStatusCode.OK,
-                                        Template = ViewItemTemplateNames.Details.ToString(),
+                                        Template = ViewItemTemplates.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
                                     })
@@ -315,11 +273,11 @@ namespace Elmah.MvcWebApp.Controllers
                             PartialViews = new List<Tuple<string, object>>
                             {
                                 new Tuple<string, object>("~/Views/ElmahUser/_TileDetailsItem.cshtml",
-                                    new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
+                                    new Framework.Mvc.Models.MvcItemViewModel<ElmahUserDataModel>
                                     {
-                                        UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(view),
+                                        UIItemFeatures = _viewFeatureManager.GetElmahUserUIItemFeatures(),
                                         Status = System.Net.HttpStatusCode.OK,
-                                        Template = ViewItemTemplateNames.Details.ToString(),
+                                        Template = ViewItemTemplates.Details.ToString(),
                                         IsCurrentItem = true,
                                         Model = result.ResponseBody!
                                     })
@@ -334,238 +292,6 @@ namespace Elmah.MvcWebApp.Controllers
             return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.BadRequest, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: ElmahUser//AjaxBulkDelete
-        [HttpPost, ActionName("AjaxBulkDelete")]
-        [Route("[controller]/[action]")]
-        public async Task<IActionResult> AjaxBulkDelete(
-            [FromForm] BatchActionViewModel<ElmahUserIdentifier> data)
-        {
-            var result = await _thisService.BulkDelete(data.Ids);
-            if (result.Status == System.Net.HttpStatusCode.OK)
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = System.Net.HttpStatusCode.OK, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            return PartialView("~/Views/Shared/_AjaxResponse.cshtml", new AjaxResponseViewModel { Status = result.Status, Message = result.StatusMessage, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        // POST: ElmahUser/AjaxMultiItemsCUDSubmit
-        [HttpPost, ActionName("AjaxMultiItemsCUDSubmit")]
-        [Route("[controller]/[action]")]
-        public async Task<IActionResult> AjaxMultiItemsCUDSubmit(
-            [FromQuery] PagedViewOptions view,
-            [FromForm] List<ElmahUserDataModel> data)
-        {
-            if(data == null || !data.Any(t=> t.IsDeleted______ && t.ItemUIStatus______ != ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.New || !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.Updated))
-            {
-                return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
-                    new AjaxResponseViewModel
-                    {
-                        Status = System.Net.HttpStatusCode.NoContent,
-                        Message = "NoContent",
-                        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-                    });
-            }
-
-            var multiItemsCUDModel = new MultiItemsCUDModel<ElmahUserIdentifier, ElmahUserDataModel>
-            {
-                DeleteItems =
-                    (from t in data
-                    where t.IsDeleted______ && t.ItemUIStatus______ != ItemUIStatus.New
-                    select new ElmahUserIdentifier { User = t.User }).ToList(),
-                NewItems =
-                    (from t in data
-                     where !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.New
-                     select t).ToList(),
-                UpdateItems =
-                    (from t in data
-                     where !t.IsDeleted______ && t.ItemUIStatus______ == ItemUIStatus.Updated
-                     select t).ToList(),
-            };
-
-            // although we have the NewItems and UpdatedITems in result, but we have to Mvc Core JQuery/Ajax refresh the whole list because array binding.
-            var result = await _thisService.MultiItemsCUD(multiItemsCUDModel);
-
-            return PartialView("~/Views/Shared/_AjaxResponse.cshtml",
-                new AjaxResponseViewModel
-                {
-                    Status = result.Status,
-                    ShowMessage = result.Status == System.Net.HttpStatusCode.OK,
-                    Message = result.Status == System.Net.HttpStatusCode.OK ? _localizor.Get("Click Close To Reload this List") : result.StatusMessage,
-                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-                });
-        }
-
-        [Route("[controller]/[action]/{User}")] // Primary
-        //[HttpGet, ActionName("Edit")]
-        // GET: ElmahUser/Edit/{User}
-        public async Task<IActionResult> Edit([FromRoute]ElmahUserIdentifier id)
-        {
-            if (string.IsNullOrEmpty(id.User))
-            {
-                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-                {
-                    Status = System.Net.HttpStatusCode.NotFound,
-                    StatusMessage = "Not Found",
-                    Template = ViewItemTemplateNames.Edit.ToString(),
-                };
-                return View(itemViewModel1);
-            }
-
-            var result = await _thisService.Get(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = result.Status,
-                StatusMessage = result.StatusMessage,
-                Template = ViewItemTemplateNames.Edit.ToString(),
-
-                Model = result.ResponseBody
-            };
-            return View(itemViewModel);
-        }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-
-        [Route("[controller]/[action]/{User}")] // Primary
-        // POST: ElmahUser/Edit/{User}
-        public async Task<IActionResult> Edit(
-            [FromRoute]ElmahUserIdentifier id,
-            [Bind("User")] ElmahUserDataModel input)
-        {
-            if (string.IsNullOrEmpty(id.User) ||
-                !string.IsNullOrEmpty(id.User) && id.User != input.User)
-            {
-                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-                {
-                    Status = System.Net.HttpStatusCode.NotFound,
-                    StatusMessage = "Not Found",
-                    Template = ViewItemTemplateNames.Edit.ToString(),
-
-                    Model = input, // should GetbyId again and merge content not in postback
-                };
-                return View(itemViewModel1);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-                {
-                    Status = System.Net.HttpStatusCode.BadRequest,
-                    StatusMessage = "Bad Request",
-                    Template = ViewItemTemplateNames.Edit.ToString(),
-
-                    Model = input, // should GetbyId again and merge content not in postback
-                };
-                return View(itemViewModel1);
-            }
-
-            var result = await _thisService.Update(id, input);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = result.Status,
-                StatusMessage = result.StatusMessage,
-                Template = ViewItemTemplateNames.Edit.ToString(),
-
-                Model = result.ResponseBody,
-            };
-            return View(itemViewModel);
-        }
-
-        [Route("[controller]/[action]/{User}")] // Primary
-        // GET: ElmahUser/Details/{User}
-        public async Task<IActionResult> Details([FromRoute]ElmahUserIdentifier id)
-        {
-            var result = await _thisService.Get(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = result.Status,
-                StatusMessage = result.StatusMessage,
-                Template = ViewItemTemplateNames.Details.ToString(),
-                Model = result.ResponseBody,
-            };
-            return View(itemViewModel);
-        }
-
-        // GET: ElmahUser/Create
-        public async Task<IActionResult> Create()
-        {
-            var itemViewModel = await Task.FromResult(new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = System.Net.HttpStatusCode.OK,
-                Template = ViewItemTemplateNames.Create.ToString(),
-                Model = _thisService.GetDefault(),
-
-            });
-
-            return View(itemViewModel);
-        }
-
-        // POST: ElmahUser/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-            [Bind("User")] ElmahUserDataModel input)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _thisService.Create(input);
-                var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-                {
-                    Status = result.Status,
-                    StatusMessage = result.StatusMessage,
-                    Template = ViewItemTemplateNames.Create.ToString(),
-                    Model = result.ResponseBody,
-
-                };
-                return View(itemViewModel);
-            }
-
-            var itemViewModel1 = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = System.Net.HttpStatusCode.BadRequest,
-                StatusMessage = "Bad Request",
-                Template = ViewItemTemplateNames.Create.ToString(),
-                Model = input, // should GetbyId again and merge content not in postback
-
-            };
-            return View(itemViewModel1);
-        }
-
-        [Route("[controller]/[action]/{User}")] // Primary
-        // GET: ElmahUser/Delete/{User}
-        public async Task<IActionResult> Delete([FromRoute]ElmahUserIdentifier id)
-        {
-            var result = await _thisService.Get(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = result.Status,
-                StatusMessage = result.StatusMessage,
-                Template = ViewItemTemplateNames.Delete.ToString(),
-                Model = result.ResponseBody,
-            };
-            return View(itemViewModel);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-
-        [Route("[controller]/[action]/{User}")] // Primary
-        // POST: ElmahUser/Delete/{User}
-        public async Task<IActionResult> DeleteConfirmed([FromRoute]ElmahUserIdentifier id)
-        {
-            var result1 = await _thisService.Get(id);
-            var result = await _thisService.Delete(id);
-            var itemViewModel = new Elmah.MvcWebApp.Models.MvcItemViewModel<ElmahUserDataModel>
-            {
-                Status = result.Status,
-                StatusMessage = result.StatusMessage,
-                Template = ViewItemTemplateNames.Delete.ToString(),
-                Model = result1.ResponseBody,
-            };
-            return View(itemViewModel);
-        }
     }
 }
 

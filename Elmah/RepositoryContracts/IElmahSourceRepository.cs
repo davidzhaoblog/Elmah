@@ -5,13 +5,8 @@ namespace Elmah.RepositoryContracts
     public interface IElmahSourceRepository
     {
 
-        Task<PagedResponse<ElmahSourceDataModel[]>> Search(
+        Task<ListResponse<ElmahSourceDataModel[]>> Search(
             ElmahSourceAdvancedQuery query);
-
-        Task<Response> BulkDelete(List<ElmahSourceIdentifier> ids);
-
-        Task<Response<MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahSourceIdentifier, ElmahSourceDataModel> input);
 
         Task<Response<ElmahSourceDataModel>> Update(ElmahSourceIdentifier id, ElmahSourceDataModel input);
 
@@ -21,7 +16,7 @@ namespace Elmah.RepositoryContracts
 
         Task<Response> Delete(ElmahSourceIdentifier id);
 
-        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahSourceAdvancedQuery query);
     }
 }

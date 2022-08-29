@@ -5,18 +5,8 @@ namespace Elmah.ServiceContracts
     public interface IElmahHostService
     {
 
-        Task<PagedResponse<ElmahHostDataModel[]>> Search(
+        Task<ListResponse<ElmahHostDataModel[]>> Search(
             ElmahHostAdvancedQuery query);
-
-        Task<ElmahHostCompositeModel> GetCompositeModel(
-            ElmahHostIdentifier id,
-            Dictionary<ElmahHostCompositeModel.__DataOptions__, CompositeListItemRequest> listItemRequest,
-            ElmahHostCompositeModel.__DataOptions__[]? dataOptions = null);
-
-        Task<Response> BulkDelete(List<ElmahHostIdentifier> ids);
-
-        Task<Response<MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel>>> MultiItemsCUD(
-            MultiItemsCUDModel<ElmahHostIdentifier, ElmahHostDataModel> input);
 
         Task<Response<ElmahHostDataModel>> Update(ElmahHostIdentifier id, ElmahHostDataModel input);
 
@@ -27,7 +17,7 @@ namespace Elmah.ServiceContracts
 
         Task<Response> Delete(ElmahHostIdentifier id);
 
-        Task<PagedResponse<NameValuePair[]>> GetCodeList(
+        Task<ListResponse<NameValuePair[]>> GetCodeList(
             ElmahHostAdvancedQuery query);
     }
 }

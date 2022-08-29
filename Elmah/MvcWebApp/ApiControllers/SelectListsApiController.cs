@@ -22,19 +22,7 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahErrorCodeList(
-            [FromQuery]ElmahErrorAdvancedQuery query)
-        {
-            using (var scope = _serviceScopeFactor.CreateScope())
-            {
-                var elmahErrorRepository = scope.ServiceProvider.GetRequiredService<IElmahErrorRepository>();
-                var serviceResponse = await elmahErrorRepository.GetCodeList(query);
-                return serviceResponse;
-            }
-        }
-
-        // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahApplicationCodeList(
+        public async Task<ActionResult<ListResponse<NameValuePair[]>>> GetElmahApplicationCodeList(
             [FromQuery]ElmahApplicationAdvancedQuery query)
         {
             using (var scope = _serviceScopeFactor.CreateScope())
@@ -46,7 +34,7 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahHostCodeList(
+        public async Task<ActionResult<ListResponse<NameValuePair[]>>> GetElmahHostCodeList(
             [FromQuery]ElmahHostAdvancedQuery query)
         {
             using (var scope = _serviceScopeFactor.CreateScope())
@@ -58,7 +46,7 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahSourceCodeList(
+        public async Task<ActionResult<ListResponse<NameValuePair[]>>> GetElmahSourceCodeList(
             [FromQuery]ElmahSourceAdvancedQuery query)
         {
             using (var scope = _serviceScopeFactor.CreateScope())
@@ -70,7 +58,7 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahStatusCodeCodeList(
+        public async Task<ActionResult<ListResponse<NameValuePair[]>>> GetElmahStatusCodeCodeList(
             [FromQuery]ElmahStatusCodeAdvancedQuery query)
         {
             using (var scope = _serviceScopeFactor.CreateScope())
@@ -82,7 +70,7 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahTypeCodeList(
+        public async Task<ActionResult<ListResponse<NameValuePair[]>>> GetElmahTypeCodeList(
             [FromQuery]ElmahTypeAdvancedQuery query)
         {
             using (var scope = _serviceScopeFactor.CreateScope())
@@ -94,7 +82,7 @@ namespace Elmah.MvcWebApp.ApiControllers
         }
 
         // [Authorize]
-        public async Task<ActionResult<PagedResponse<NameValuePair[]>>> GetElmahUserCodeList(
+        public async Task<ActionResult<ListResponse<NameValuePair[]>>> GetElmahUserCodeList(
             [FromQuery]ElmahUserAdvancedQuery query)
         {
             using (var scope = _serviceScopeFactor.CreateScope())

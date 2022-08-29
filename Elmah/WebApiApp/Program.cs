@@ -102,81 +102,45 @@ static string GetSwaggerCustomizedSchemaId(Type x)
         }
         // 2. Customized PagedResponse SchemaIds
 
-        if (x == typeof(PagedResponse<ElmahErrorDataModel.DefaultView[]>))
+        if (x == typeof(ListResponse<ElmahErrorDataModel.DefaultView[]>))
         {
-            return "Elmah.Models.ElmahErrorPagedResponse";
+            return "Elmah.Models.ElmahErrorListResponse";
         }
 
-        if (x == typeof(PagedResponse<ElmahApplicationDataModel[]>))
+        if (x == typeof(ListResponse<ElmahApplicationDataModel[]>))
         {
-            return "Elmah.Models.ElmahApplicationPagedResponse";
+            return "Elmah.Models.ElmahApplicationListResponse";
         }
 
-        if (x == typeof(PagedResponse<ElmahHostDataModel[]>))
+        if (x == typeof(ListResponse<ElmahHostDataModel[]>))
         {
-            return "Elmah.Models.ElmahHostPagedResponse";
+            return "Elmah.Models.ElmahHostListResponse";
         }
 
-        if (x == typeof(PagedResponse<ElmahSourceDataModel[]>))
+        if (x == typeof(ListResponse<ElmahSourceDataModel[]>))
         {
-            return "Elmah.Models.ElmahSourcePagedResponse";
+            return "Elmah.Models.ElmahSourceListResponse";
         }
 
-        if (x == typeof(PagedResponse<ElmahStatusCodeDataModel[]>))
+        if (x == typeof(ListResponse<ElmahStatusCodeDataModel[]>))
         {
-            return "Elmah.Models.ElmahStatusCodePagedResponse";
+            return "Elmah.Models.ElmahStatusCodeListResponse";
         }
 
-        if (x == typeof(PagedResponse<ElmahTypeDataModel[]>))
+        if (x == typeof(ListResponse<ElmahTypeDataModel[]>))
         {
-            return "Elmah.Models.ElmahTypePagedResponse";
+            return "Elmah.Models.ElmahTypeListResponse";
         }
 
-        if (x == typeof(PagedResponse<ElmahUserDataModel[]>))
+        if (x == typeof(ListResponse<ElmahUserDataModel[]>))
         {
-            return "Elmah.Models.ElmahUserPagedResponse";
+            return "Elmah.Models.ElmahUserListResponse";
         }
         // 3. Customized BulkActionDynamicParamsRequests SchemaIds
 
-        if (x == typeof(BatchActionViewModel<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>))
+        if (x == typeof(BatchActionRequest<ElmahErrorIdentifier, ElmahErrorDataModel.DefaultView>))
         {
             return "Elmah.Models.ElmahErrorBulkActionDynamicParamsRequest";
-        }
-        // 4. Customized BulkActionNoParamRequests SchemaIds
-
-        if (x == typeof(BatchActionViewModel<ElmahErrorIdentifier>))
-        {
-            return "Elmah.Models.ElmahErrorBulkActionNoParamsRequest";
-        }
-
-        if (x == typeof(BatchActionViewModel<ElmahApplicationIdentifier>))
-        {
-            return "Elmah.Models.ElmahApplicationBulkActionNoParamsRequest";
-        }
-
-        if (x == typeof(BatchActionViewModel<ElmahHostIdentifier>))
-        {
-            return "Elmah.Models.ElmahHostBulkActionNoParamsRequest";
-        }
-
-        if (x == typeof(BatchActionViewModel<ElmahSourceIdentifier>))
-        {
-            return "Elmah.Models.ElmahSourceBulkActionNoParamsRequest";
-        }
-
-        if (x == typeof(BatchActionViewModel<ElmahStatusCodeIdentifier>))
-        {
-            return "Elmah.Models.ElmahStatusCodeBulkActionNoParamsRequest";
-        }
-
-        if (x == typeof(BatchActionViewModel<ElmahTypeIdentifier>))
-        {
-            return "Elmah.Models.ElmahTypeBulkActionNoParamsRequest";
-        }
-
-        if (x == typeof(BatchActionViewModel<ElmahUserIdentifier>))
-        {
-            return "Elmah.Models.ElmahUserBulkActionNoParamsRequest";
         }
     return x?.FullName;
 }
