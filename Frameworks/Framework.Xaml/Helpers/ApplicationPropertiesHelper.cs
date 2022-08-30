@@ -158,7 +158,7 @@ namespace Framework.Xaml
                     {
                         if (!string.IsNullOrEmpty(s))
                         {
-                            return Enum.Parse<Framework.Themes.Theme>(s);
+                            return (Framework.Themes.Theme)Enum.Parse(typeof(Framework.Themes.Theme), s);
                         }
                     }
                 }

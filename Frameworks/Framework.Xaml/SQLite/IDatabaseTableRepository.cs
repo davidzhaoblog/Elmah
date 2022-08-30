@@ -14,7 +14,7 @@ namespace Framework.Xaml.SQLite
 
         Task<List<T>> GetItemsFromTableAsync(Expression<Func<T, bool>> predicate);
 
-        public Task<List<T>> GetItemRangeFromTableAsync<U>(Expression<Func<T, bool>> predicate, int limit, Expression<Func<T, U>> orderExp, string orderType);
+        Task<List<T>> GetItemRangeFromTableAsync<U>(Expression<Func<T, bool>> predicate, int limit, Expression<Func<T, U>> orderExp, string orderType);
 
         Task<int> InsertItemIntoTableAsync(T item);
 

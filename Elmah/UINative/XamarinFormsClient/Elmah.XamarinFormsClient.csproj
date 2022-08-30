@@ -3,7 +3,7 @@
   <PropertyGroup>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Elmah.XamarinForms</RootNamespace>
     <AssemblyName>Elmah.XamarinFormsClient</AssemblyName>
   </PropertyGroup>
@@ -236,14 +236,11 @@
       <Project>{e5302713-0022-4657-85d8-9620818071df}</Project>
       <Name>Framework.Xaml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MVVMLightViewModels\Elmah.MVVMLightViewModels.csproj">
-      <Project>{c3b6c186-4bd5-4ccb-8d89-dffe435638d7}</Project>
-      <Name>Elmah.MVVMLightViewModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Contracts\Resx\Elmah.Resx.csproj">
       <Project>{57e586a4-7e99-4c52-b22b-a41f78a40f2a}</Project>
       <Name>Elmah.Resx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MVVMLightViewModels\Elmah.MVVMLightViewModels.csproj" />
     <ProjectReference Include="..\SQLite\Elmah.SQLite.csproj">
       <Project>{138ec5cc-62a8-4706-82da-346622976eed}</Project>
       <Name>Elmah.SQLite</Name>

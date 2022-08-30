@@ -233,10 +233,6 @@
       <Project>{c3b6c186-4bd5-4ccb-8d89-dffe435638d7}</Project>
       <Name>Elmah.MVVMLightViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UINative\XamarinFormsClient\Elmah.XamarinFormsClient.csproj">
-      <Project>{6aa2f565-f8c9-4a28-afb9-1ab85682ab18}</Project>
-      <Name>Elmah.XamarinFormsClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Contracts\Resx\Elmah.Resx.csproj">
       <Project>{57e586a4-7e99-4c52-b22b-a41f78a40f2a}</Project>
       <Name>Elmah.Resx</Name>
@@ -248,6 +244,10 @@
     <ProjectReference Include="..\UINative\WebApiClient\Elmah.WebApiClient.csproj">
       <Project>{a301a867-9c5d-4757-b806-27b2332476ea}</Project>
       <Name>Elmah.WebApiClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UINative\XamarinFormsClient\Elmah.XamarinFormsClient.csproj">
+      <Project>{6aa2f565-f8c9-4a28-afb9-1ab85682ab18}</Project>
+      <Name>Elmah.XamarinFormsClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

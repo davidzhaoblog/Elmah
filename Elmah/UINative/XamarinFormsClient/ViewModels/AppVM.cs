@@ -163,7 +163,7 @@ namespace Elmah.XamarinForms.ViewModels
         {
             // Add instances of all Framework.Xamariner.Interfaces.IDomainManager types to register domains and routes.
             var typeOfIDomainManager = typeof(Framework.Xamariner.Interfaces.IDomainManager);
-            var concreteTypesOfIDomainManager = AppDomain.CurrentDomain.GetAssemblies()
+            var concreteTypesOfIDomainManager = AppDomain.CurrentDomain.GetAssemblies().Where(t=>t.FullName.StartsWith("Framework") || t.FullName.StartsWith("Elmah"))
                 .SelectMany(s => s.GetTypes())
                 .Where(p => typeOfIDomainManager.IsAssignableFrom(p) && (p.IsClass && !p.IsAbstract));
 
